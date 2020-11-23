@@ -3,14 +3,14 @@ import { StyleSheet, Text, View, FlatListSlider, TouchableOpacity, Modal, Toucha
 import { globalStyles } from '../styles/global'
 // import { Card, Paragraph, Surface } from 'react-native-paper';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
-import AddDream from '../components/addDream'
+import AddVision from '../components/addVision'
 import ImagePic from '../components/imagePicker';
 import SlideList from '../components/slideList';
 
-export default function Dreams({ navigation }) {
+export default function Visions({ navigation }) {
     const [modalOpen, setModalOpen] = useState(false);
 
-    // const [dreams, setDreams] = useState([
+    // const [visions, setVisions] = useState([
     //     { image:'https://images.unsplash.com/photo-1567226475328-9d6baaf565cf?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=400&q=60',
     //       title: 'Silent Waters in the mountains in midst of Himilayas',
     //       body: 'lorem ipsum', 
@@ -28,28 +28,28 @@ export default function Dreams({ navigation }) {
     //     },
     //   ]);
 
-    const addNewDream = (dream) => {
-      dream.key = Math.random().toString();
-      setDreams((currentDreams) => {
-        return [dreams, ...currentDreams];
+    const addNewVision = (vision) => {
+      vision.key = Math.random().toString();
+      setVisions((currentVisions) => {
+        return [visions, ...currentVisions];
       });
       setModalOpen(false);
     }
 
 
     return (
-        <View style={globalStyles.dreamPage}>
+        <View style={globalStyles.visionPage}>
           <Modal visible={modalOpen} animationType='slide'>
             <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
               <View style={styles.modalContent}>
-                <Text Text='Add Dream'>Add A Dream</Text>
+                <Text Text='Add Vision'>Add A Vision</Text>
                 <MaterialCommunityIcons
                   name='close'
                   size={24}
                   style={{...styles.modalToggle, ...styles.modalClose}}
                   onPress={() => setModalOpen(false)}
                 />  
-                <AddDream addNewDream={addNewDream}/>
+                <AddVision addNewVision={addNewVision}/>
               </View>
               </TouchableWithoutFeedback>
           </Modal>
@@ -64,7 +64,7 @@ export default function Dreams({ navigation }) {
 
 
           <SlideList
-            onPress={() => navigation.navigate('DreamDetails', item)}   
+            onPress={() => navigation.navigate('VisionDetails', item)}   
           />
           
         </View>

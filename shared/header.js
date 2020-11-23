@@ -25,12 +25,13 @@ const styles = StyleSheet.create({
        height: '100%',
        flexDirection: 'row',
        alignItems: 'center',
-       justifyContent: 'center',
+       justifyContent: 'flex-start',
     },
     headerText: {
         fontWeight: 'bold',
+        marginLeft: 10,
         fontSize: 20,
-        color: '#333',
+        color: 'slategrey',
         letterSpacing: 1,
     },
     icon: {

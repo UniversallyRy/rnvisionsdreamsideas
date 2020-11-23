@@ -8,15 +8,16 @@ export const globalStyles = StyleSheet.create({
         padding: 20,
         backgroundColor: "darkgrey",
     },
-    dreamPage:{
+    visionPage:{
         backgroundColor: 'slategrey',
     },
     titleText: {
         fontFamily: 'nunito-black',
         fontSize: 18,
-        // color: 'skyblue',
+        color: 'skyblue',
     },
     paragraph: {
+        marginTop: 50,
         marginVertical: 8,
         lineHeight: 20,
     },

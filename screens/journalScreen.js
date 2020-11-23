@@ -9,9 +9,9 @@ export default function JournalList({ navigation }) {
     const [modalOpen, setModalOpen] = useState(false);
 
     const [todos, setTodos] = useState([
-        { title: 'Journal Entry 1', key: '1' },
-        { title: 'Journal Entry 2', key: '2' },
-        { title: 'Journal Entry 3', key: '3' },
+        { title: 'Journal Entry 1', text:'This is Body 1', key: '1' },
+        { title: 'Journal Entry 2', text:'This is Body 2', key: '2' },
+        { title: 'Journal Entry 3', text:'This is Body 3', key: '3' },
       ]);
 
     const addNewTodo = (todo) => {
@@ -50,7 +50,8 @@ export default function JournalList({ navigation }) {
               renderItem={({ item }) => (
                 <Card style={globalStyles.card} onPress={() => navigation.navigate('JournalDetails', item)}>
                     <Card.Content>
-                      <Paragraph style={styles.cardContent}>{item.title}</Paragraph>
+                      <Paragraph style={globalStyles.titleText}>{item.title}</Paragraph>
+                      <Paragraph style={globalStyles.paragraph}>{item.text}</Paragraph>
                     </Card.Content>
                 </Card>
               )}

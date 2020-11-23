@@ -1,29 +1,29 @@
 import { createStackNavigator } from 'react-navigation-stack';
 import { createAppContainer } from 'react-navigation';
-import Dreams from '../screens/dreamScreen';
-import DreamDetails from '../components/dreamDetails'
+import Visions from '../screens/visionScreen';
+import VisionDetails from '../components/visionDetails'
 import Header from '../shared/header';
 import React from 'react';
 
 const screens = {
-    Dreams: {
-        screen: Dreams,
+    Visions: {
+        screen: Visions,
         navigationOptions: ( {navigation} ) => {
             return {
-                headerTitle: () => <Header navigation={navigation} title='Dreams'/>   
+                headerTitle: () => <Header navigation={navigation} title='Visions'/>   
             }
         }
     },
-    DreamDetails: {
-        screen: DreamDetails,
+    VisionDetails: {
+        screen: VisionDetails,
         navigationOptions: {
-            title: 'Dream Details',
+            title: 'Vision Details',
             
         }
     }
 }
 
-const DreamStack = createStackNavigator(screens, {
+const VisionStack = createStackNavigator(screens, {
     defaultNavigationOptions: {
         headerTintColor: '#444',
         headerStyle: { 
@@ -34,4 +34,4 @@ const DreamStack = createStackNavigator(screens, {
 });
 
 
-export default DreamStack;
+export default VisionStack;

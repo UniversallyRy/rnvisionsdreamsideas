@@ -7,28 +7,28 @@ import * as yup from 'yup'
 import FlatButton from '../shared/button'
 import { TextInput, Text, useTheme } from 'react-native-paper';
 
-const dreamSchema = yup.object({
+const visionSchema = yup.object({
     title: yup.string().required().min(4),
     body: yup.string().required().min(8),
 })
 
-export default function AddDream({ addDream }) {
+export default function AddVision({ addVision }) {
     const {colors} = useTheme();
     return (
         <View>
             <Formik
                 initialValues={{ title:'', body: ''}}
-                validationSchema={dreamSchema}
+                validationSchema={visionSchema}
                 onSubmit={(values, actions) => {
                     actions.resetForm();
-                    addDream(values);
+                    addVision(values);
                 }}
             >
                 {(formikProps) => (
                     <View>
                         <TextInput
                             mode='outlined'
-                            placeholder='Dream Title'
+                            placeholder='Vision Title'
                             onChangeText={formikProps.handleChange('title')}
                             value={formikProps.values.title}
                             onBlur={formikProps.handleBlur('title')}
@@ -39,7 +39,7 @@ export default function AddDream({ addDream }) {
                                 {formikProps.touched.title && formikProps.errors.title}
                         </Text>
                         <TextInput
-                            placeholder='Dream Body'
+                            placeholder='Vision Body'
                             onChangeText={formikProps.handleChange('body')}
                             value={formikProps.values.body}
                             onBlur={formikProps.handleBlur('body')}

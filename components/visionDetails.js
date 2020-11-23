@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { globalStyles } from '../styles/global';
 import { Button, Text, Card }  from 'react-native-paper';
 
-export default function DreamDetails({ navigation }) {
+export default function VisionDetails({ navigation }) {
 
     const handlePress = () => {
         navigation.goBack();
