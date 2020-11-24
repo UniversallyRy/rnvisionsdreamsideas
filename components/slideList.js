@@ -13,7 +13,7 @@ const { width: windowWidth } = Dimensions.get("window");
 const slideList = Array.from({ length:5 }).map((_, i) => {
   return {
     id: i,
-    image: `https://picsum.photos/300${i}`,
+    image: `https://picsum.photos/200${i}`,
     title: `This is the title ${i + 1}!`,
     subtitle: `This is the subtitle ${i + 1}!`,
   };
@@ -98,7 +98,7 @@ export default function SlideList() {
     <>
       <FlatList
         data={slideList}
-        style={globalStyles.carousel}
+        style={globalStyles.slideCarousel}
         renderItem={renderList}
         pagingEnabled
         horizontal

@@ -14,7 +14,8 @@ export const globalStyles = StyleSheet.create({
         backgroundColor: "#A2AAAD",
     },
     visionPage:{
-        backgroundColor: '#002C5F',
+        backgroundColor: '#A2AAAD',
+        opacity: 1,
         flex: 1,
     },
     uploadButton:{
@@ -74,12 +75,13 @@ export const globalStyles = StyleSheet.create({
         width: windowWidth,
         justifyContent: "center",
         alignItems: "center",
-        marginBottom: 40,
+        marginBottom:1,
         backgroundColor: "#002C5F",
+        opacity: 1,
     },
-    slideImage: { width: windowWidth * 0.9, height: windowHeight * 0.7 },
+    slideImage: { width: windowWidth * .97, height: windowHeight * 0.5, marginTop: 6 },
     slideTitle: { fontSize: 24, color:'#002C5F', marginBottom: 10 },
-    slideSubtitle: { fontSize: 18, marginBottom: 30 },
+    slideSubtitle: { fontSize: 18, marginBottom: 1 },
     
     pagination: {
         position: "absolute",
@@ -95,12 +97,12 @@ export const globalStyles = StyleSheet.create({
         marginHorizontal: 2,
         marginTop: 10,
     },
-    paginationDotActive: { backgroundColor: "#A2AAAD" },
+    paginationDotActive: { backgroundColor: "#002C5F" },
     paginationDotInactive: { backgroundColor: "gray" },
     
-    carousel: {
+    slideCarousel: {
         marginBottom: 25,
-        backgroundColor: "#002C5F",
+        backgroundColor: "#A2AAAD",
     },
     modalToggle: {
         marginTop:10,
