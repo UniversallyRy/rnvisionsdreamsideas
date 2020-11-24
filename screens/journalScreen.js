@@ -1,17 +1,18 @@
 import React, {useState} from 'react'
-import { FlatList, StyleSheet, Text, View, Modal, TouchableWithoutFeedback, Keyboard} from 'react-native'
+import { FlatList, View } from 'react-native'
 import { globalStyles } from '../styles/global'
-import { Card, Paragraph } from 'react-native-paper';
+import { Card, Paragraph, Text, Modal, Portal, Provider, Button, } from 'react-native-paper';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import AddTodo from '../components/addTodo'
+import lorem from '../shared/lorem'
 
 export default function JournalList({ navigation }) {
     const [modalOpen, setModalOpen] = useState(false);
 
     const [todos, setTodos] = useState([
-        { title: 'Journal Entry 1', text:'This is Body 1', key: '1' },
-        { title: 'Journal Entry 2', text:'This is Body 2', key: '2' },
-        { title: 'Journal Entry 3', text:'This is Body 3', key: '3' },
+        { title: 'Journal Entry 1', text: lorem, key: '1' },
+        { title: 'Journal Entry 2', text: lorem, key: '2' },
+        { title: 'Journal Entry 3', text: lorem, key: '3' },
       ]);
 
     const addNewTodo = (todo) => {
@@ -22,30 +23,38 @@ export default function JournalList({ navigation }) {
       setModalOpen(false);
     }
 
+    const containerStyle = {flex: .9, backgroundColor: '#A2AAAD', padding: 20};
+
+  
     return (
-        <View>
-            <Modal visible={modalOpen} animationType='slide'>
-                <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-                    <View style={styles.modalContent}>
-                        <Text stlye={globalStyles.input}Text='Add Todo'>Add A Journal Entry</Text>
-                        <MaterialCommunityIcons
-                        name='close'
-                        size={24}
-                        style={{...styles.modalToggle, ...styles.modalClose}}
-                        onPress={() => setModalOpen(false)}
-                        />  
+        // <View style={{backgroundColor: 'slategrey'}}>
+
+         <Provider >
+            <Portal>
+              <Modal visible={modalOpen} onDismiss={() => setModalOpen(false)} contentContainerStyle={containerStyle}>
+                      
+                          <Text style={globalStyles.input}Text='Add Todo'>Add A Journal Entry</Text>
+                          <Button
+                          icon='close'
+                          size={24}
+                          style={{...globalStyles.modalToggle, ...globalStyles.modalClose}}
+                          onPress={() => setModalOpen(false)}
+                          />  
                         <AddTodo addNewTodo={addNewTodo}/>
-                    </View>
-                </TouchableWithoutFeedback>
-            </Modal>
-            <MaterialCommunityIcons
-            name='plus'
-            size={24}
-            style={styles.modalToggle}
-            onPress={() => setModalOpen(true)}
-          />
+                    
+              </Modal>
+            </Portal>
+              <View style={{backgroundColor: '#A2AAAD'}}>
+              <MaterialCommunityIcons
+              name='plus'
+              size={24}
+              style={globalStyles.modalToggle}
+              onPress={() => setModalOpen(true)}
+            />
+            </View>
 
           <FlatList
+              style={{backgroundColor: '#A2AAAD'}}
               data={todos}
               renderItem={({ item }) => (
                 <Card style={globalStyles.card} onPress={() => navigation.navigate('JournalDetails', item)}>
@@ -56,25 +65,7 @@ export default function JournalList({ navigation }) {
                 </Card>
               )}
           />
-        </View>
+            </Provider>
+        // </View>
     )
 }
-
-const styles = StyleSheet.create({
-    modalToggle: {
-      marginBottom: 10,   
-      borderWidth: 1,
-      borderColor: '#f2f2f2',
-      padding: 10,
-      borderRadius: 10,
-      alignSelf: 'center',
-    },
-    modalClose: {
-      marginTop: 25,
-      marginBottom: 0,
-    },
-    modalContent: {
-      flex: 1,
-      backgroundColor: 'darkgrey'
-    }
-  })

@@ -35,9 +35,9 @@ export default function App() {
 
   if(fontsLoaded){
     return (
-        <PaperProvider theme={CombinedDarkTheme}>
-          <NavigationContainer style={globalStyles.container}theme={CombinedDarkTheme}>
-            <Navigator/>
+        <PaperProvider>
+          <NavigationContainer style={globalStyles.container}>
+            <Navigator style={globalStyles.navbar}/>
             <StatusBar style="auto" />
           </NavigationContainer>
         </PaperProvider>

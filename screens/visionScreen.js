@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
-import { StyleSheet, Text, View, FlatListSlider, TouchableOpacity, Modal, TouchableWithoutFeedback, Keyboard } from 'react-native';
+import { Modal, View, TouchableWithoutFeedback, Keyboard } from 'react-native';
+import { Text} from 'react-native-paper'
 import { globalStyles } from '../styles/global'
 // import { Card, Paragraph, Surface } from 'react-native-paper';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import AddVision from '../components/addVision'
-import ImagePic from '../components/imagePicker';
 import SlideList from '../components/slideList';
 
 export default function Visions({ navigation }) {
@@ -39,16 +39,17 @@ export default function Visions({ navigation }) {
 
     return (
         <View style={globalStyles.visionPage}>
-          <Modal visible={modalOpen} animationType='slide'>
+          <Modal style={{margin:10}}visible={modalOpen} animationType='slide'>
             <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-              <View style={styles.modalContent}>
+              <View style={globalStyles.modalContent}>
                 <Text Text='Add Vision'>Add A Vision</Text>
                 <MaterialCommunityIcons
                   name='close'
                   size={24}
-                  style={{...styles.modalToggle, ...styles.modalClose}}
+                  style={{...globalStyles.modalToggle, ...globalStyles.modalClose}}
                   onPress={() => setModalOpen(false)}
                 />  
+                  {/* <ImagePic/> */}
                 <AddVision addNewVision={addNewVision}/>
               </View>
               </TouchableWithoutFeedback>
@@ -57,10 +58,9 @@ export default function Visions({ navigation }) {
           <MaterialCommunityIcons
             name='plus'
             size={24}
-            style={styles.modalToggle}
+            style={globalStyles.modalToggle}
             onPress={() => setModalOpen(true)}
           />
-          <ImagePic/>
 
 
           <SlideList
@@ -70,22 +70,3 @@ export default function Visions({ navigation }) {
         </View>
     )
 }
-
-const styles = StyleSheet.create({
-  modalToggle: {
-    marginBottom: 10,   
-    borderWidth: 1,
-    borderColor: '#f2f2f2',
-    padding: 10,
-    borderRadius: 10,
-    alignSelf: 'center',
-  },
-  modalClose: {
-    marginTop: 25,
-    marginBottom: 0,
-  },
-  modalContent: {
-    flex: 1,
-    backgroundColor: 'darkgrey'
-  }
-})

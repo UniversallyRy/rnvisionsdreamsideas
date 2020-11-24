@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Button, Image, View, Platform } from 'react-native';
+// import {  } from 'react-native-paper';
 import * as ImagePicker from 'expo-image-picker';
+import { globalStyles } from '../styles/global'
 // import Constants from 'expo-constants';
 
 export default function ImagePic() {
@@ -33,7 +35,7 @@ export default function ImagePic() {
   };
 
   return (
-    <View style={{ alignItems: 'center', justifyContent: 'center' }}>
+    <View style={globalStyles.uploadButton}>
       <Button title="Pick an image from camera roll" onPress={pickImage} />
       {image && <Image source={{ uri: image }} style={{ width: 200, height: 200 }} />}
     </View>

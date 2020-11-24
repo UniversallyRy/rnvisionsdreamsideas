@@ -5,6 +5,7 @@ import { Formik } from 'formik'
 // import { TextInput } from 'react-native-gesture-handler'
 import * as yup from 'yup'
 import FlatButton from '../shared/button'
+import ImagePic from '../components/imagePicker';
 import { TextInput, Text, useTheme } from 'react-native-paper';
 
 const visionSchema = yup.object({
@@ -54,6 +55,7 @@ export default function AddVision({ addVision }) {
                         >
                                 {formikProps.touched.rating && formikProps.errors.rating}
                         </Text>
+                        <ImagePic/>
                         <FlatButton text='submit' onPress={formikProps.handleSubmit}/>
                     </View>
                 )}    

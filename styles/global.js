@@ -2,24 +2,43 @@
 import { StyleSheet, Dimensions } from 'react-native'
 const { width: windowWidth, height: windowHeight } = Dimensions.get("window");
 
+// Colts colors
+// SPEED BLUE - HEX COLOR: #002C5F
+// GRAY - HEX COLOR: #A2AAAD;
+
+// RAIDERS SILVER - HEX COLOR: #A5ACAF;
+
 export const globalStyles = StyleSheet.create({
     container: {
         flex: 1,
-        padding: 20,
-        backgroundColor: "darkgrey",
+        backgroundColor: "#A2AAAD",
     },
     visionPage:{
-        backgroundColor: 'slategrey',
+        backgroundColor: '#002C5F',
+        flex: 1,
+    },
+    uploadButton:{
+        alignItems: 'center',
+        justifyContent: 'center',
+        padding: 25,
+        marginBottom: 10,
     },
     titleText: {
         fontFamily: 'nunito-black',
         fontSize: 18,
-        color: 'skyblue',
+        color: '#A5ACAF',
+        padding: 10,
+    },
+    navbar: {
+        color: '#002C5F',
+        fontSize: 20,
     },
     paragraph: {
+        padding: 7,
         marginTop: 50,
-        marginVertical: 8,
+        marginVertical: 18,
         lineHeight: 20,
+        color: '#A2AAAD',
     },
     input: {
         borderWidth: 1,
@@ -38,6 +57,7 @@ export const globalStyles = StyleSheet.create({
     card: {
         borderRadius: 8,
         elevation: 3,
+        backgroundColor: '#002C5F',
         shadowOffset: { width :1, height: 1},
         shadowColor: '#333',
         shadowOpacity: 0.3,
@@ -55,9 +75,10 @@ export const globalStyles = StyleSheet.create({
         justifyContent: "center",
         alignItems: "center",
         marginBottom: 40,
+        backgroundColor: "#002C5F",
     },
     slideImage: { width: windowWidth * 0.9, height: windowHeight * 0.7 },
-    slideTitle: { fontSize: 24, color:'blue', marginBottom: 10 },
+    slideTitle: { fontSize: 24, color:'#002C5F', marginBottom: 10 },
     slideSubtitle: { fontSize: 18, marginBottom: 30 },
     
     pagination: {
@@ -74,10 +95,28 @@ export const globalStyles = StyleSheet.create({
         marginHorizontal: 2,
         marginTop: 10,
     },
-    paginationDotActive: { backgroundColor: "lightblue" },
+    paginationDotActive: { backgroundColor: "#A2AAAD" },
     paginationDotInactive: { backgroundColor: "gray" },
     
     carousel: {
         marginBottom: 25,
+        backgroundColor: "#002C5F",
     },
+    modalToggle: {
+        marginTop:10,
+        marginBottom: 10,   
+        borderWidth: 1,
+        borderColor: '#002C5F',
+        padding: 10,
+        borderRadius: 10,
+        alignSelf: 'center',
+    },
+    modalClose: {
+        marginTop: 25,
+        marginBottom: 20,
+    },
+    modalContent: {
+        flex: 1,
+        backgroundColor: '#A2AAAD'
+    }
 })

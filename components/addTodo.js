@@ -26,7 +26,8 @@ export default function AddTodo ({ addTodo }) {
                 {(formikProps) => (
                     <View>
                         <TextInput
-                            mode='outlined'
+                            style={colors}
+                            mode='flat'
                             placeholder='Todo Title'
                             onChangeText={formikProps.handleChange('title')}
                             value={formikProps.values.title}

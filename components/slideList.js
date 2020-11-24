@@ -3,10 +3,10 @@ import {
   FlatList,
   View,
   Dimensions,
-  Text,
   Image,
 } from "react-native";
 import { globalStyles } from "../styles/global";
+import { Button, Text, Card }  from 'react-native-paper';
 
 const { width: windowWidth } = Dimensions.get("window");
 
@@ -21,11 +21,14 @@ const slideList = Array.from({ length:5 }).map((_, i) => {
 
 const Slide = memo(function Slide({ data }) {
   return (
-    <View style={globalStyles.slide}>
-      <Image source={{ uri: data.image }} style={globalStyles.slideImage}></Image>
-      <Text style={globalStyles.slideTitle}>{data.title}</Text>
-      <Text style={globalStyles.slideSubtitle}>{data.subtitle}</Text>
-    </View>
+    <Card style={globalStyles.slide}>
+      <Card.Cover source={{ uri: data.image }} style={globalStyles.slideImage}></Card.Cover>
+      <Card.Title 
+        style={globalStyles.slideSubtitle}
+        title={data.title}
+        subtitle={data.subtitle}
+      />
+    </Card>
   );
 });
 

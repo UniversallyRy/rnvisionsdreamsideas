@@ -1,6 +1,6 @@
 import React from 'react';
-import { StyleSheet } from 'react-native';
-import { Surface, Text } from 'react-native-paper';
+import { StyleSheet, View } from 'react-native';
+import { Card, Text } from 'react-native-paper';
 import { globalStyles } from '../styles/global'
 
 // export default function About() {
@@ -13,9 +13,11 @@ import { globalStyles } from '../styles/global'
 
 export default function About() {
     return (
-        <Surface style={styles.surface}>
-            <Text> About Screen </Text>
-        </Surface>
+        <View style={{backgroundColor: '#A2AAAD', flex: 1}}>
+            <Card style={{backgroundColor: '#002C5F'}}>
+                <Text style={styles.surface}> About Screen </Text>
+            </Card>
+        </View>    
     )
 }
 
@@ -27,6 +29,7 @@ const styles = StyleSheet.create({
       alignItems: 'center',
       justifyContent: 'center',
       elevation: 4,
+      backgroundColor: '#002C5F',
     },
   });
   

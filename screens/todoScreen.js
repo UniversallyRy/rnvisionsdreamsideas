@@ -1,5 +1,5 @@
 import React, {useState} from 'react'
-import { FlatList, StyleSheet, Text, View, Modal, TouchableWithoutFeedback, Keyboard} from 'react-native'
+import { FlatList, Text, View, Modal, TouchableWithoutFeedback, Keyboard} from 'react-native'
 import { globalStyles } from '../styles/global'
 import { Card, Paragraph } from 'react-native-paper';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
@@ -23,15 +23,15 @@ export default function TodoList({ navigation }) {
     }
 
     return (
-        <View>
+        <View style={globalStyles.container}>
             <Modal visible={modalOpen} animationType='slide'>
                 <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-                    <View style={styles.modalContent}>
+                    <View style={globalStyles.modalContent}>
                         <Text Text='Add Todo'>Add A Todo</Text>
                         <MaterialCommunityIcons
                         name='close'
                         size={24}
-                        style={{...styles.modalToggle, ...styles.modalClose}}
+                        style={{...globalStyles.modalToggle, ...globalStyles.modalClose}}
                         onPress={() => setModalOpen(false)}
                         />  
                         <AddTodo addNewTodo={addNewTodo}/>
@@ -41,7 +41,7 @@ export default function TodoList({ navigation }) {
             <MaterialCommunityIcons
             name='plus'
             size={24}
-            style={styles.modalToggle}
+            style={globalStyles.modalToggle}
             onPress={() => setModalOpen(true)}
           />
 
@@ -50,7 +50,7 @@ export default function TodoList({ navigation }) {
               renderItem={({ item }) => (
                 <Card style={globalStyles.card} onPress={() => navigation.navigate('TodoDetails', item)}>
                     <Card.Content>
-                      <Paragraph style={styles.cardContent}>{item.title}</Paragraph>
+                      <Paragraph style={globalStyles.cardContent}>{item.title}</Paragraph>
                     </Card.Content>
                 </Card>
               )}
@@ -59,21 +59,3 @@ export default function TodoList({ navigation }) {
     )
 }
 
-const styles = StyleSheet.create({
-    modalToggle: {
-      marginBottom: 10,   
-      borderWidth: 1,
-      borderColor: '#f2f2f2',
-      padding: 10,
-      borderRadius: 10,
-      alignSelf: 'center',
-    },
-    modalClose: {
-      marginTop: 25,
-      marginBottom: 0,
-    },
-    modalContent: {
-      flex: 1,
-      backgroundColor: 'darkgrey'
-    }
-  })
