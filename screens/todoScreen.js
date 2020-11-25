@@ -4,20 +4,21 @@ import { globalStyles } from '../styles/global'
 import { Card, Paragraph } from 'react-native-paper';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import AddTodo from '../components/addTodo'
+import { v4 as uuidv4 } from 'uuid';
 
 export default function TodoList({ navigation }) {
     const [modalOpen, setModalOpen] = useState(false);
 
     const [todos, setTodos] = useState([
-        { title: 'Todo 1', key: '1' },
-        { title: 'Todo dos', key: '2' },
-        { title: 'killme', key: '3' },
+        { title: 'Todo 1', id: '1' },
+        { title: 'Todo dos', id: '2' },
+        { title: 'killme', id: '3' },
       ]);
 
     const addNewTodo = (todo) => {
-      todo.key = Math.random().toString();
+      todo.id = uuidv4();
       setTodos((currentTodos) => {
-        return [todos, ...currentTodos];
+        return [todo, ...currentTodos];
       });
       setModalOpen(false);
     }
@@ -34,7 +35,7 @@ export default function TodoList({ navigation }) {
                         style={{...globalStyles.modalToggle, ...globalStyles.modalClose}}
                         onPress={() => setModalOpen(false)}
                         />  
-                        <AddTodo addNewTodo={addNewTodo}/>
+                        <AddTodo addTodo={addNewTodo}/>
                     </View>
                 </TouchableWithoutFeedback>
             </Modal>
@@ -47,6 +48,7 @@ export default function TodoList({ navigation }) {
 
           <FlatList
               data={todos}
+              keyExtractor={(item) => item.id} 
               renderItem={({ item }) => (
                 <Card style={globalStyles.card} onPress={() => navigation.navigate('TodoDetails', item)}>
                     <Card.Content>

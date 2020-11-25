@@ -8,6 +8,7 @@ import {
   DefaultTheme as PaperDefaultTheme,
   Provider as PaperProvider,
 } from 'react-native-paper';
+import 'react-native-get-random-values'
 import 'react-native-gesture-handler';
 import { AppRegistry } from 'react-native'
 import { StatusBar } from 'expo-status-bar';

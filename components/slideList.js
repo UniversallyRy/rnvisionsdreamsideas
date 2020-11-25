@@ -6,29 +6,28 @@ import {
   Image,
 } from "react-native";
 import { globalStyles } from "../styles/global";
-import { Button, Text, Card }  from 'react-native-paper';
+import { Card }  from 'react-native-paper';
 
 const { width: windowWidth } = Dimensions.get("window");
 
-const slideList = Array.from({ length:5 }).map((_, i) => {
+const slideList = Array.from({ length:8 }).map((_, i) => {
   return {
-    id: i,
-    image: `https://picsum.photos/200${i}`,
+    uri: `https://picsum.photos/200${i}`,
     title: `This is the title ${i + 1}!`,
-    subtitle: `This is the subtitle ${i + 1}!`,
+    id: i,
   };
 });
 
-const Slide = memo(function Slide({ data }) {
+
+const Slide = memo(function Slide({ data, navigation }) {
   return (
-    <Card style={globalStyles.slide}>
-      <Card.Cover source={{ uri: data.image }} style={globalStyles.slideImage}></Card.Cover>
+    <Card style={globalStyles.slide} >
+      <Card.Cover source={{ uri: data.uri }} style={globalStyles.slideImage}></Card.Cover>
       <Card.Title 
         style={globalStyles.slideSubtitle}
         title={data.title}
-        subtitle={data.subtitle}
       />
-    </Card>
+    </Card> 
   );
 });
 
@@ -52,7 +51,7 @@ function Pagination({ index }) {
   );
 }
 
-export default function SlideList() {
+export default function SlideList( visionState, storeStateForParent) {
   const [index, setIndex] = useState(0);
   const indexRef = useRef(index);
   indexRef.current = index;
@@ -90,8 +89,8 @@ export default function SlideList() {
     ),
   };
 
-  const renderList = useCallback(function renderList({ item }) {
-    return <Slide data={item} />;
+  const renderList = useCallback(function renderList({ item, navigation }) {
+    return <Slide data={item} onPress={() => navigation.navigate('VisionDetails', item)}/>;
   }, []);
 
   return (
@@ -106,6 +105,8 @@ export default function SlideList() {
         bounces={false}
         onScroll={onScroll}
         {...flatListOptimizationProps}
+        visionState={visionState}
+
       />
       <Pagination index={index}></Pagination>
     </>

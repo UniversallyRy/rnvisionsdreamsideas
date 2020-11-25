@@ -1,12 +1,14 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Button, Image, View, Platform } from 'react-native';
 // import {  } from 'react-native-paper';
 import * as ImagePicker from 'expo-image-picker';
 import { globalStyles } from '../styles/global'
-// import Constants from 'expo-constants';
+import Constants from 'expo-constants';
+import * as Permissions from 'expo-permissions'
 
 export default function ImagePic() {
   const [image, setImage] = useState(null);
+  const refImage = useRef(null)
 
   useEffect(() => {
     (async () => {
@@ -21,7 +23,7 @@ export default function ImagePic() {
 
   const pickImage = async () => {
     let result = await ImagePicker.launchImageLibraryAsync({
-      mediaTypes: ImagePicker.MediaTypeOptions.All,
+      mediaTypes: ImagePicker.MediaTypeOptions.Images,
       allowsEditing: true,
       aspect: [4, 3],
       quality: 1,

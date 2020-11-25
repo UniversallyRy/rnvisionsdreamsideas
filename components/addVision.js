@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useState} from 'react'
 import { View } from 'react-native'
 import { globalStyles } from '../styles/global'
 import { Formik } from 'formik'
@@ -10,19 +10,20 @@ import { TextInput, Text, useTheme } from 'react-native-paper';
 
 const visionSchema = yup.object({
     title: yup.string().required().min(4),
-    body: yup.string().required().min(8),
 })
 
 export default function AddVision({ addVision }) {
-    const {colors} = useTheme();
+    const [imageState, getImageState] =  useState('')
+    console.log(ImagePic.setImage);
     return (
         <View>
             <Formik
-                initialValues={{ title:'', body: ''}}
+                initialValues={{ uri: ImagePic.value, title:'', id:''}}
                 validationSchema={visionSchema}
                 onSubmit={(values, actions) => {
                     actions.resetForm();
                     addVision(values);
+                    console.log(values)
                 }}
             >
                 {(formikProps) => (
@@ -39,23 +40,7 @@ export default function AddVision({ addVision }) {
                         >
                                 {formikProps.touched.title && formikProps.errors.title}
                         </Text>
-                        <TextInput
-                            placeholder='Vision Body'
-                            onChangeText={formikProps.handleChange('body')}
-                            value={formikProps.values.body}
-                            onBlur={formikProps.handleBlur('body')}
-                        />
-                        <Text 
-                            style={globalStyles.errorText}
-                        >
-                                {formikProps.touched.body && formikProps.errors.body}
-                        </Text>
-                        <Text 
-                            style={globalStyles.errorText}
-                        >
-                                {formikProps.touched.rating && formikProps.errors.rating}
-                        </Text>
-                        <ImagePic/>
+                        <ImagePic value={formikProps.handleChange('uri')}/>
                         <FlatButton text='submit' onPress={formikProps.handleSubmit}/>
                     </View>
                 )}    

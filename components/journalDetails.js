@@ -11,8 +11,8 @@ export default function JournalDetails({ navigation }) {
     return (
         <Card style={{backgroundColor:'slategrey', flex:1}} id ={Math.random() * 92}>
             <Card style={globalStyles.card}>
-                <Text style={globalStyles.titleText}> {navigation.getParam('title', 'text')} </Text>
-                <Text style={globalStyles.paragraph}> {navigation.getParam('text')} </Text>
+                <Text style={globalStyles.titleText}> {navigation.getParam('title', 'body')} </Text>
+                <Text style={globalStyles.paragraph}> {navigation.getParam('body')} </Text>
                 <Button icon='arrow-left' mode='contained' dark={true} title={'back to home'} onPress={handlePress}>
                     Go Back
                 </Button>
