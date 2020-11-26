@@ -5,19 +5,19 @@ import { Formik } from 'formik'
 // import { TextInput } from 'react-native-gesture-handler'
 import * as yup from 'yup'
 import FlatButton from '../shared/button'
-import { TextInput, Text, useTheme } from 'react-native-paper';
+import { TextInput, Text } from 'react-native-paper';
 
 const todoSchema = yup.object({
     title: yup.string().required().min(4),
 })
 
-export default function AddTodo ({ addTodo }) {
+export default function AddTodo ({ key, addTodo }) {
     return (
             <Formik
-                initialValues={{ title:'', key:''}}
+                initialValues={{ title:'', item:[{key:'', id: ''}]}}
                 validationSchema={todoSchema}
                 onSubmit={(values, actions) => {
-                    addTodo(values);
+                    addTodo(key = "@save_todo", values);
                     actions.resetForm();
                 }}
             >
