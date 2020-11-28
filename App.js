@@ -13,6 +13,8 @@ import 'react-native-gesture-handler';
 import { AppRegistry } from 'react-native'
 import { StatusBar } from 'expo-status-bar';
 import React, { useState } from 'react';
+import { Provider } from 'react-redux';
+import store from './redux/store';
 import * as Font from 'expo-font';
 import { AppLoading } from 'expo';
 import Navigator from './routes/drawer';
@@ -36,12 +38,14 @@ export default function App() {
 
   if( fontsLoaded ){
     return (
+      <Provider store={store}>
         <PaperProvider>
           <NavigationContainer style={ globalStyles.container }>
             <Navigator style={ globalStyles.navbar }/>
             <StatusBar style="auto" />
           </NavigationContainer>
         </PaperProvider>
+        </Provider>
     );
   } else {
     return (

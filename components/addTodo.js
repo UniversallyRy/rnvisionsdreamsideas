@@ -1,24 +1,30 @@
 import React from 'react'
 import { View } from 'react-native'
 import { globalStyles } from '../styles/global'
-import { Formik } from 'formik'
+import { Formik , withFormik} from 'formik'
 import * as yup from 'yup'
 import FlatButton from '../shared/button'
 import { TextInput, Text } from 'react-native-paper';
+import { connect } from 'react-redux';
+import { addTodo, deleteTodo } from '../redux/actions';
+import uuidv4 from 'uuid';
 
 const todoSchema = yup.object({
     title: yup.string().required().min(4),
 })
 
-export default function AddTodo ({ key, addTodo }) {
+const onSubmit = (values, actions) => {
+    addTodo(values)
+    actions.resetForm();
+}
+
+export  function AddTodo ({ props, addTodo, state}) {
     return (
             <Formik
-                initialValues={{ title:'', item:[{ key:'', id: '' }]}}
+                enableReinitialize={true}
+                initialValues={ state }
                 validationSchema={ todoSchema }
-                onSubmit={( values, actions ) => {
-                    addTodo( key = "@save_todo", values );
-                    actions.resetForm();
-                }}
+                onSubmit={onSubmit}
             >
                 { ( formikProps ) => (
                     <View>
@@ -40,3 +46,16 @@ export default function AddTodo ({ key, addTodo }) {
             </Formik>
     )
 }
+
+const mapStateToProps = (state, ownProps) => {
+      return {
+          state:state
+      }
+  }
+  
+  const mapDispatchToProps = { addTodo, deleteTodo }
+
+  export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )(AddTodo)
