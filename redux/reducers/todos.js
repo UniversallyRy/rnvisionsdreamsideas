@@ -1,24 +1,35 @@
-import { ADD_TODO, DELETE_TODO } from "../actionTypes";
+import { ADD_TODO, TOGGLE_TODO } from "../actionTypes";
+import { v4 as uuidv4 } from 'uuid';
 
-const initialState = [
-    { item: 'Learn about reducers', completed: false, id: 1 },
-    { item: 'review material from last week', completed: false, id: 2 },
-    { item: 'complete reducer todo project', completed: false, id: 3 }
-]
-export default function(state = initialState, action) {
+const initialTodos = [
+  {
+    id: uuidv4(),
+    task: "Add Task 1",
+    complete: false
+  },
+  {
+    id: uuidv4(),
+    task: "Add Task 2",
+    complete: false
+  }
+]; 
+export default function(state = initialTodos, action) {
   switch (action.type) {
-    case ADD_TODO: {
-      return [
+    case ADD_TODO:
+          return state.map(todo => {
+            if (todo.id === action.id) {
+              return { ...todo, complete: false };
+            } else {
+              return todo;
+            }
+          });
+    case TOGGLE_TODO: {
+      return {
         ...state,
-          {
-            item: action.payload,
-            completed: false, 
-            id: Date.now()
-          }
-        ];
-    }
-    case DELETE_TODO: {
-      return state.filter( item => !item.completed)
+        todo_list: state.todo_list.filter(
+          (todo) => todo.id !=payload.id
+        )
+      };
     }
     default:
       return state;

@@ -1,44 +1,43 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { View } from 'react-native'
 import { globalStyles } from '../styles/global'
-import { Formik , withFormik} from 'formik'
+import { Formik } from 'formik'
 import * as yup from 'yup'
 import FlatButton from '../shared/button'
-import { TextInput, Text } from 'react-native-paper';
 import { connect } from 'react-redux';
+import { TextInput, Text } from 'react-native-paper';
 import { addTodo, deleteTodo } from '../redux/actions';
-import uuidv4 from 'uuid';
+import { v4 as uuidv4 } from 'uuid';
 
 const todoSchema = yup.object({
-    title: yup.string().required().min(4),
+    task: yup.string().required().min(4),
 })
 
-const onSubmit = (values, actions) => {
-    addTodo(values)
-    actions.resetForm();
-}
+export function AddTodo ({ addTodo, todoList}) {
 
-export  function AddTodo ({ props, addTodo, state}) {
+
     return (
             <Formik
-                enableReinitialize={true}
-                initialValues={ state }
+                initialValues={{ id: uuidv4(), task: '', complete: false}}
                 validationSchema={ todoSchema }
-                onSubmit={onSubmit}
+                onSubmit={( values, actions ) => {
+                    addTodo( values );
+                    actions.resetForm();
+                }}
             >
                 { ( formikProps ) => (
                     <View>
                         <TextInput
                             mode='flat'
-                            placeholder='Todo Title'
-                            onChangeText={ formikProps.handleChange( 'title' ) }
-                            value={ formikProps.values.title }
-                            onBlur={ formikProps.handleBlur( 'title' ) }
+                            placeholder='Enter Todo . . .'
+                            onChangeText={ formikProps.handleChange( 'task' ) }
+                            value={ formikProps.values.task }
+                            onBlur={ formikProps.handleBlur( 'task' ) }
                         />
                         <Text 
                             style={ globalStyles.errorText }
                         >
-                                { formikProps.touched.title && formikProps.errors.title }
+                                { formikProps.touched.task && formikProps.errors.task }
                         </Text>
                         <FlatButton text='submit' onPress={ formikProps.handleSubmit }/>
                     </View>
@@ -46,11 +45,10 @@ export  function AddTodo ({ props, addTodo, state}) {
             </Formik>
     )
 }
-
 const mapStateToProps = (state, ownProps) => {
-      return {
-          state:state
-      }
+    return {
+      todoList: state.todos,
+    }
   }
   
   const mapDispatchToProps = { addTodo, deleteTodo }

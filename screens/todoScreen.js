@@ -4,14 +4,16 @@ import { globalStyles } from '../styles/global'
 import { Card, Paragraph } from 'react-native-paper';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import AddTodo from '../components/addTodo'
-import { connect } from 'react-redux';
+import { connect, useSelector, useDispatch} from 'react-redux';
 import { addTodo, deleteTodo } from '../redux/actions';
 import { v4 as uuidv4 } from 'uuid';
+import { getTodosByVisibilityFilter } from "../redux/reducers/selectors";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 //test
-export  function TodoList({ navigation, state }) {
+
+export  function TodoList({ navigation, addTodo, todoList }) {
   const STORAGE_KEY = '@save_todo'
-  const [ todos, setTodos ] = useState(state);
+  const [ todos, setTodos ] = useState(todoList);
 
 
   // const saveData = async ( storageKey, value ) => {
@@ -84,30 +86,32 @@ export  function TodoList({ navigation, state }) {
   //   }
   // }, [])
 
-      const handleNewTodo = () => {
-        addTodo(todos);
-        setTodos()
-      }
+      // const handleNewTodo = () => {
+      //   addTodo(todo);
+      //   setTodos('');
+      // };
 
-
+    const listTodos = useSelector(state => state)  
+    const dispatch = useDispatch();
+    const addNewTodo = todo => dispatch(addTodo(todo))
     return (
         <View style={ globalStyles.container }>
             
                     <View style={ globalStyles.modalContent }>
                         
-                        <AddTodo addTodo={handleNewTodo}/>
+                        <AddTodo addTodo={addNewTodo}/>
                     </View>
             
             
 
           <FlatList
-          extraData={state}
-              data={ state } 
-              keyExtractor={( item ) => item.id }
+              extraData={ listTodos }
+              data={ todoList } 
+              keyExtractor={( item ) => item.id.toString() }
               renderItem={({ item }) => (
                 <Card style={ globalStyles.card } onPress={ () => navigation.navigate( 'TodoDetails', item ) }>
                     <Card.Content>
-                      <Paragraph style={ globalStyles.cardContent }>{ state }</Paragraph>
+                      <Paragraph style={ globalStyles.cardContent }>{ item.task }</Paragraph>
                     </Card.Content>
                 </Card>
               )}
@@ -118,7 +122,7 @@ export  function TodoList({ navigation, state }) {
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    todos: state, 
+    todoList: state.todos,
   }
 }
 
