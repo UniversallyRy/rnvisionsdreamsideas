@@ -1,4 +1,4 @@
-reformimport { StyleSheet, Dimensions } from 'react-native'
+import { StyleSheet, Dimensions } from 'react-native';
 
 const { width: windowWidth, height: windowHeight } = Dimensions.get("window");
 // COLTS SPEED BLUE - HEX COLOR: #002C5F
