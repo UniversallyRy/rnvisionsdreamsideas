@@ -7,15 +7,15 @@ import Constants from 'expo-constants';
 import * as Permissions from 'expo-permissions'
 
 export default function ImagePic() {
-  const [image, setImage] = useState(null);
-  const refImage = useRef(null)
+  const [ image, setImage ] = useState( null );
+  const refImage = useRef( null )
 
   useEffect(() => {
-    (async () => {
-      if (Platform.OS !== 'web') {
+    ( async () => {
+      if ( Platform.OS !== 'web' ) {
         const { status } = await ImagePicker.requestCameraRollPermissionsAsync();
-        if (status !== 'granted') {
-          alert('Sorry, we need camera roll permissions to make this work!');
+        if ( status !== 'granted' ) {
+          alert( 'Sorry, we need camera roll permissions to make this work!' );
         }
       }
     })();
@@ -25,21 +25,21 @@ export default function ImagePic() {
     let result = await ImagePicker.launchImageLibraryAsync({
       mediaTypes: ImagePicker.MediaTypeOptions.Images,
       allowsEditing: true,
-      aspect: [4, 3],
+      aspect: [ 4, 3 ],
       quality: 1,
     });
 
-    console.log(result);
+    console.log( result );
 
-    if (!result.cancelled) {
-      setImage(result.uri);
+    if ( !result.cancelled ) {
+      setImage( result.uri );
     }
   };
 
   return (
-    <View style={globalStyles.uploadButton}>
-      <Button title="Pick an image from camera roll" onPress={pickImage} />
-      {image && <Image source={{ uri: image }} style={{ width: 200, height: 200 }} />}
+    <View style={ globalStyles.uploadButton }>
+      <Button title="Pick an image from camera roll" onPress={ pickImage } />
+      { image && <Image source={{ uri: image }} style={{ width: 200, height: 200 }} /> }
     </View>
   );
 }

@@ -4,8 +4,8 @@ import { Button, Text } from 'react-native-paper'
 
 export default function FlatButton( { text, onPress }) {
     return (
-            <Button raised theme={{roundness: 4}} onPress={onPress} dark={true} mode='contained' >
-                <Text style={styles.buttonText}> {text} </Text>
+            <Button raised theme={{ roundness: 4 }} onPress={ onPress } dark={ true } mode='contained' >
+                <Text style={ styles.buttonText }> { text } </Text>
             </Button>
     )
 }

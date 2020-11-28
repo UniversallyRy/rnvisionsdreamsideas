@@ -6,15 +6,15 @@ import React from 'react';
 const screens = {
     About: {
         screen: About,
-        navigationOptions: ( {navigation} ) => {
+        navigationOptions: ( { navigation } ) => {
             return {
-                headerTitle: () => <Header navigation={navigation} title='About'/>,   
+                headerTitle: () => <Header navigation={ navigation } title='About'/>,   
             }
         }
     },
 }
 
-const AboutStack = createStackNavigator(screens, {
+const AboutStack = createStackNavigator( screens, {
     defaultNavigationOptions: {
         headerTintColor: '#444',
         headerStyle: { 

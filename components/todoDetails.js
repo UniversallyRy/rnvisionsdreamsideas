@@ -9,10 +9,10 @@ export default function TodoDetails({ navigation }) {
     }
 
     return (
-        <Card id ={Math.random() * 92} style={globalStyles.cardContent}>
+        <Card id ={ Math.random() * 92 } style={ globalStyles.cardContent }>
             <Card.Content>
-                <Text> {navigation.getParam('title')} </Text>
-                <Button icon='arrow-left' mode='contained' dark={true} title={'back to home'} onPress={handlePress}>
+                <Text> { navigation.getParam( 'title' ) } </Text>
+                <Button icon='arrow-left' mode='contained' dark={ true } title={ 'back to home' } onPress={ handlePress }>
                     Go Back
                 </Button>
             </Card.Content>

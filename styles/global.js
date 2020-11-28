@@ -1,11 +1,8 @@
+reformimport { StyleSheet, Dimensions } from 'react-native'
 
-import { StyleSheet, Dimensions } from 'react-native'
 const { width: windowWidth, height: windowHeight } = Dimensions.get("window");
-
-// Colts colors
-// SPEED BLUE - HEX COLOR: #002C5F
-// GRAY - HEX COLOR: #A2AAAD;
-
+// COLTS SPEED BLUE - HEX COLOR: #002C5F
+// COLTS GRAY - HEX COLOR: #A2AAAD;
 // RAIDERS SILVER - HEX COLOR: #A5ACAF;
 
 export const globalStyles = StyleSheet.create({

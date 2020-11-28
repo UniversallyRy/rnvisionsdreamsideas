@@ -1,4 +1,4 @@
-import {createDrawerNavigator} from 'react-navigation-drawer';
+import { createDrawerNavigator } from 'react-navigation-drawer';
 import { createAppContainer } from 'react-navigation';
 import VisionStack from './visionStack';
 import AboutStack from './aboutStack';
@@ -20,4 +20,4 @@ const RootDrawerNavigator = createDrawerNavigator({
     },
 })
 
-export default createAppContainer(RootDrawerNavigator);
+export default createAppContainer( RootDrawerNavigator );

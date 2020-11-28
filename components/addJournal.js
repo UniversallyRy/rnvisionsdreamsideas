@@ -12,47 +12,47 @@ const JournalSchema = yup.object({
 })
 
 export default function AddJournal ({ addJournal }) {
-    const {colors} = useTheme();
+    const { colors } = useTheme();
     return (
             <Formik
                 initialValues={{ title:'', body:'', key:''}}
-                validationSchema={JournalSchema}
-                onSubmit={(values, actions) => {
+                validationSchema={ JournalSchema }
+                onSubmit={( values, actions ) => {
                     actions.resetForm();
-                    addJournal(values);
-                    console.log(values)
+                    addJournal( values );
+                    console.log( values )
                 }}
             >
-                {(formikProps) => (
+                {( formikProps ) => (
                     <View>
                         <TextInput
-                            style={colors}
+                            style={ colors }
                             mode='flat'
                             placeholder='Journal Title'
-                            onChangeText={formikProps.handleChange('title')}
-                            value={formikProps.values.title}
-                            onBlur={formikProps.handleBlur('title')}
+                            onChangeText={ formikProps.handleChange( 'title' ) }
+                            value={ formikProps.values.title }
+                            onBlur={ formikProps.handleBlur( 'title' ) }
                         />
                         <Text 
-                            style={globalStyles.errorText}
+                            style={ globalStyles.errorText } 
                         >
-                                {formikProps.touched.title && formikProps.errors.title}
+                                { formikProps.touched.title && formikProps.errors.title }
                         </Text>
                         <TextInput
                             multiline
-                            style={colors}
+                            style={ colors }
                             mode='flat'
                             placeholder='Journal Body'
-                            onChangeText={formikProps.handleChange('body')}
-                            value={formikProps.values.body}
-                            onBlur={formikProps.handleBlur('body')}
+                            onChangeText={ formikProps.handleChange( 'body' ) }
+                            value={ formikProps.values.body }
+                            onBlur={ formikProps.handleBlur( 'body' ) }
                         />
                         <Text 
-                            style={globalStyles.errorText}
+                            style={ globalStyles.errorText }
                         >
-                            {formikProps.touched.body && formikProps.errors.body}
+                            { formikProps.touched.body && formikProps.errors.body }
                         </Text>
-                        <FlatButton text='submit' onPress={formikProps.handleSubmit}/>
+                        <FlatButton text='submit' onPress={ formikProps.handleSubmit }/>
                     </View>
                 )}    
             </Formik>

@@ -7,9 +7,9 @@ import React from 'react';
 const screens = {
     TodoList: {
         screen: TodoList,
-        navigationOptions: ( {navigation} ) => {
+        navigationOptions: ( { navigation } ) => {
             return {
-                headerTitle: () => <Header navigation={navigation} title='Todos'/>   
+                headerTitle: () => <Header navigation={ navigation } title='Todos'/>   
             }
         }
     },
@@ -21,7 +21,7 @@ const screens = {
     }
 }
 
-const TodoStack = createStackNavigator(screens, {
+const TodoStack = createStackNavigator( screens, {
     defaultNavigationOptions: {
         headerTintColor: 'skyblue',
         headerStyle: { 

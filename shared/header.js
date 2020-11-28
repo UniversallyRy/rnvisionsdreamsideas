@@ -2,7 +2,7 @@ import React from 'react'
 import { StyleSheet, Text, View, SafeAreaView } from 'react-native'
 import { MaterialIcons } from '@expo/vector-icons';
 
-export default function Header({navigation, title}) {
+export default function Header({ navigation, title }) {
 
     const openMenu = () => {
         navigation.openDrawer();
@@ -10,10 +10,10 @@ export default function Header({navigation, title}) {
 
     return (
         <SafeAreaView >
-            <View style={styles.headerContainer}>
-            <MaterialIcons name='menu' size={36} onPress={openMenu} styles={styles.icon}/>
+            <View style={ styles.headerContainer }>
+            <MaterialIcons name='menu' size={ 36 } onPress={ openMenu } styles={ styles.icon }/>
                 {/* <Image source={require('../assets/favicon.png')}/> */}
-            <Text style={styles.headerText}>{title}</Text>
+            <Text style={ styles.headerText }>{ title }</Text>
             </View>    
         </SafeAreaView>
     )

@@ -13,28 +13,28 @@ const todoSchema = yup.object({
 export default function AddTodo ({ key, addTodo }) {
     return (
             <Formik
-                initialValues={{ title:'', item:[{key:'', id: ''}]}}
-                validationSchema={todoSchema}
-                onSubmit={(values, actions) => {
-                    addTodo(key = "@save_todo", values);
+                initialValues={{ title:'', item:[{ key:'', id: '' }]}}
+                validationSchema={ todoSchema }
+                onSubmit={( values, actions ) => {
+                    addTodo( key = "@save_todo", values );
                     actions.resetForm();
                 }}
             >
-                {(formikProps) => (
+                { ( formikProps ) => (
                     <View>
                         <TextInput
                             mode='flat'
                             placeholder='Todo Title'
-                            onChangeText={formikProps.handleChange('title')}
-                            value={formikProps.values.title}
-                            onBlur={formikProps.handleBlur('title')}
+                            onChangeText={ formikProps.handleChange( 'title' ) }
+                            value={ formikProps.values.title }
+                            onBlur={ formikProps.handleBlur( 'title' ) }
                         />
                         <Text 
-                            style={globalStyles.errorText}
+                            style={ globalStyles.errorText }
                         >
-                                {formikProps.touched.title && formikProps.errors.title}
+                                { formikProps.touched.title && formikProps.errors.title }
                         </Text>
-                        <FlatButton text='submit' onPress={formikProps.handleSubmit}/>
+                        <FlatButton text='submit' onPress={ formikProps.handleSubmit }/>
                     </View>
                 )}    
             </Formik>

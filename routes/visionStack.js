@@ -10,7 +10,7 @@ const screens = {
         screen: Visions,
         navigationOptions: ( {navigation} ) => {
             return {
-                headerTitle: () => <Header navigation={navigation} title='Visions'/>   
+                headerTitle: () => <Header navigation={ navigation } title='Visions'/>   
             }
         }
     },
@@ -23,7 +23,7 @@ const screens = {
     }
 }
 
-const VisionStack = createStackNavigator(screens, {
+const VisionStack = createStackNavigator( screens, {
     defaultNavigationOptions: {
         headerTintColor: '#444',
         headerStyle: { 
@@ -31,7 +31,7 @@ const VisionStack = createStackNavigator(screens, {
             height: 60
         }
     }
-});
+} );
 
 
 export default VisionStack;

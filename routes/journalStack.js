@@ -7,9 +7,9 @@ import React from 'react';
 const screens = {
     JournalList: {
         screen: JournalList,
-        navigationOptions: ( {navigation} ) => {
+        navigationOptions: ( { navigation } ) => {
             return {
-                headerTitle: () => <Header navigation={navigation} title='Journal'/>   
+                headerTitle: () => <Header navigation={ navigation } title='Journal'/>   
             }
         }
     },
@@ -22,7 +22,7 @@ const screens = {
     }
 }
 
-const JournalStack = createStackNavigator(screens, {
+const JournalStack = createStackNavigator( screens, {
     defaultNavigationOptions: {
         headerTintColor: '#444',
         headerStyle: { 
