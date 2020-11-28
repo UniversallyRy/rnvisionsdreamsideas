@@ -2,7 +2,6 @@ import React from 'react'
 import { View } from 'react-native'
 import { globalStyles } from '../styles/global'
 import { Formik } from 'formik'
-// import { TextInput } from 'react-native-gesture-handler'
 import * as yup from 'yup'
 import FlatButton from '../shared/button'
 import { TextInput, Text, useTheme } from 'react-native-paper';

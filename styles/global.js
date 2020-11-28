@@ -10,16 +10,31 @@ export const globalStyles = StyleSheet.create({
         flex: 1,
         backgroundColor: "#A2AAAD",
     },
-    visionPage:{
+    visionPage: {
         backgroundColor: '#A2AAAD',
         opacity: 1,
         flex: 1,
     },
-    uploadButton:{
+    uploadButton: {
+        flex: .5,
         alignItems: 'center',
         justifyContent: 'center',
         padding: 25,
-        marginBottom: 10,
+        margin: 20,
+    },
+    backButton: {
+        fontSize: 40,    
+        backgroundColor: '#A2AAAD',
+        color:'blue' ,
+        shadowColor: "#002C5F",
+        shadowOffset: {
+            width: 0,
+            height: 2,
+        },
+        shadowOpacity: 0.25,
+        shadowRadius: 1.84,
+
+        elevation: 1,
     },
     titleText: {
         fontFamily: 'nunito-black',
@@ -64,8 +79,8 @@ export const globalStyles = StyleSheet.create({
         marginVertical: 6,
     },
     cardContent: {
-        marginHorizontal: 18,
-        marginVertical: 12,
+        backgroundColor:'#A2AAAD',
+        flex: 1,
     },
     slide: {
         height: windowHeight*0.7,

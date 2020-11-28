@@ -37,8 +37,8 @@ export default function ImagePic() {
   };
 
   return (
-    <View style={ globalStyles.uploadButton }>
-      <Button title="Pick an image from camera roll" onPress={ pickImage } />
+    <View>
+      <Button style={ globalStyles.uploadButton } title="Pick an image from camera roll" onPress={ pickImage } />
       { image && <Image source={{ uri: image }} style={{ width: 200, height: 200 }} /> }
     </View>
   );

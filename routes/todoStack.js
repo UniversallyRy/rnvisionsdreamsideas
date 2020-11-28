@@ -23,10 +23,10 @@ const screens = {
 
 const TodoStack = createStackNavigator( screens, {
     defaultNavigationOptions: {
-        headerTintColor: 'skyblue',
+        headerTintColor: '#002C5F',
         headerStyle: { 
-            backgroundColor: '#eee',
-            height: 60
+            backgroundColor: '#A2AAAD',
+            height: 80,
         }
     }
 });

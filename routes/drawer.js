@@ -5,19 +5,27 @@ import AboutStack from './aboutStack';
 import TodoStack from './todoStack'
 import JournalStack from './journalStack';
 
-const RootDrawerNavigator = createDrawerNavigator({
-    Visions: {
-        screen: VisionStack
+const RootDrawerNavigator = createDrawerNavigator(
+    {
+        Visions: {
+            screen: VisionStack
+        },
+        Journals: {
+            screen: JournalStack
+        },
+        Todos: {
+            screen: TodoStack
+        },
+        About: {
+            screen: AboutStack
+        }
     },
-    Journals: {
-        screen: JournalStack
+    {
+        headerMode: 'screen'
     },
-    Todos: {
-        screen: TodoStack
-    },
-    About: {
-        screen: AboutStack
-    },
-})
+    {
+        drawerType: 'front',
+    }
+)
 
 export default createAppContainer( RootDrawerNavigator );

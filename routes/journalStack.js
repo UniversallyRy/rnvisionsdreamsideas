@@ -24,10 +24,10 @@ const screens = {
 
 const JournalStack = createStackNavigator( screens, {
     defaultNavigationOptions: {
-        headerTintColor: '#444',
+        headerTintColor: '#002C5F',
         headerStyle: { 
-            backgroundColor: '#eee',
-            height: 60
+            backgroundColor: '#A2AAAD',
+            height: 80,
         }
     }
 });

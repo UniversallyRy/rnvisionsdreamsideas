@@ -8,7 +8,7 @@ import React from 'react';
 const screens = {
     Visions: {
         screen: Visions,
-        navigationOptions: ( {navigation} ) => {
+        navigationOptions: ( { navigation } ) => {
             return {
                 headerTitle: () => <Header navigation={ navigation } title='Visions'/>   
             }
@@ -25,10 +25,10 @@ const screens = {
 
 const VisionStack = createStackNavigator( screens, {
     defaultNavigationOptions: {
-        headerTintColor: '#444',
+        headerTintColor: '#002C5F',
         headerStyle: { 
-            backgroundColor: '#eee',
-            height: 60
+            backgroundColor: '#A2AAAD',
+            height: 80,
         }
     }
 } );
