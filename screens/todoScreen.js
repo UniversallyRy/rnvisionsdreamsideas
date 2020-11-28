@@ -6,7 +6,7 @@ import { MaterialCommunityIcons } from '@expo/vector-icons';
 import AddTodo from '../components/addTodo'
 import { v4 as uuidv4 } from 'uuid';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-
+//test
 export default function TodoList({ navigation }) {
   const STORAGE_KEY = '@save_todo'
   const [todos, setTodos] = useState({title:'', item:[{key:'', id: ''}]});
