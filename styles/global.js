@@ -1,17 +1,17 @@
 import { StyleSheet, Dimensions } from 'react-native';
 
 const { width: windowWidth, height: windowHeight } = Dimensions.get("window");
-// COLTS SPEED BLUE - HEX COLOR: #002C5F
-// COLTS GRAY - HEX COLOR: #A2AAAD;
-// RAIDERS SILVER - HEX COLOR: #A5ACAF;
+const coltsBlue = '#002C5F';
+const coltsGray = '#A2AAAD';
+const raidSilver = '#A5ACAF';
 
 export const globalStyles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: "#A2AAAD",
+        backgroundColor: coltsGray,
     },
     visionPage: {
-        backgroundColor: '#A2AAAD',
+        backgroundColor: coltsGray,
         opacity: 1,
         flex: 1,
     },
@@ -24,9 +24,9 @@ export const globalStyles = StyleSheet.create({
     },
     backButton: {
         fontSize: 40,    
-        backgroundColor: '#A2AAAD',
+        backgroundColor: coltsGray,
         color:'blue' ,
-        shadowColor: "#002C5F",
+        shadowColor: coltsBlue,
         shadowOffset: {
             width: 0,
             height: 2,
@@ -36,14 +36,20 @@ export const globalStyles = StyleSheet.create({
 
         elevation: 1,
     },
+    todoDetails:{
+        fontSize: 20,
+        alignSelf: 'center',
+        paddingBottom: 30,
+        fontWeight: 'bold',
+    },
     titleText: {
         fontFamily: 'nunito-black',
         fontSize: 18,
-        color: '#A5ACAF',
+        color: raidSilver,
         padding: 10,
     },
     navbar: {
-        color: '#002C5F',
+        color: coltsBlue,
         fontSize: 20,
     },
     paragraph: {
@@ -51,7 +57,7 @@ export const globalStyles = StyleSheet.create({
         marginTop: 50,
         marginVertical: 18,
         lineHeight: 20,
-        color: '#A2AAAD',
+        color: coltsGray,
     },
     input: {
         borderWidth: 1,
@@ -68,19 +74,21 @@ export const globalStyles = StyleSheet.create({
         textAlign: 'center',
     },
     card: {
-        borderRadius: 8,
+        alignItems: 'center',
+        borderRadius: 1,
         elevation: 3,
-        backgroundColor: '#002C5F',
+        padding: 25,
+        color: coltsGray,
+        backgroundColor: coltsBlue,
         shadowOffset: { width :1, height: 1},
         shadowColor: '#333',
         shadowOpacity: 0.3,
         shadowRadius: 2,
-        marginHorizontal: 4,
+        marginHorizontal: 0,
         marginVertical: 6,
     },
-    cardContent: {
-        backgroundColor:'#A2AAAD',
-        flex: 1,
+    todoList: {
+        color: coltsGray,
     },
     slide: {
         height: windowHeight*0.7,
@@ -88,11 +96,11 @@ export const globalStyles = StyleSheet.create({
         justifyContent: "center",
         alignItems: "center",
         marginBottom:1,
-        backgroundColor: "#002C5F",
+        backgroundColor: coltsBlue,
         opacity: 1,
     },
     slideImage: { width: windowWidth * .97, height: windowHeight * 0.5, marginTop: 6 },
-    slideTitle: { fontSize: 24, color:'#002C5F', marginBottom: 10 },
+    slideTitle: { fontSize: 24, color:coltsBlue, marginBottom: 10 },
     slideSubtitle: { fontSize: 18, marginBottom: 1 },
     
     pagination: {
@@ -109,18 +117,18 @@ export const globalStyles = StyleSheet.create({
         marginHorizontal: 2,
         marginTop: 10,
     },
-    paginationDotActive: { backgroundColor: "#002C5F" },
+    paginationDotActive: { backgroundColor: coltsBlue },
     paginationDotInactive: { backgroundColor: "gray" },
     
     slideCarousel: {
         marginBottom: 25,
-        backgroundColor: "#A2AAAD",
+        backgroundColor: coltsGray,
     },
     modalToggle: {
         marginTop:10,
         marginBottom: 10,   
         borderWidth: 1,
-        borderColor: '#002C5F',
+        borderColor: coltsBlue,
         padding: 10,
         borderRadius: 10,
         alignSelf: 'center',
@@ -129,7 +137,7 @@ export const globalStyles = StyleSheet.create({
         marginTop: 25,
         marginBottom: 20,
     },
-    todoSubButton: {
-        backgroundColor: '#A2AAAD'
+    todoFormContainer: {
+        backgroundColor: coltsGray
     }
 })

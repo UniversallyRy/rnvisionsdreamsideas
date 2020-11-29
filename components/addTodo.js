@@ -6,7 +6,7 @@ import * as yup from 'yup'
 import FlatButton from '../shared/button'
 import { connect } from 'react-redux';
 import { TextInput, Text } from 'react-native-paper';
-import { addTodo, deleteTodo } from '../redux/actions';
+import { addTodo } from '../redux/actions';
 
 const todoSchema = yup.object({
     task: yup.string().required().min(4),
@@ -50,9 +50,9 @@ const mapStateToProps = ( state, ownProps ) => {
     }
   }
   
-  const mapDispatchToProps = { addTodo, deleteTodo }
+  const mapDispatchToProps = { addTodo }
 
   export default connect(
     mapStateToProps,
     mapDispatchToProps
-  )( AddTodo )
+  )(AddTodo )

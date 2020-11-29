@@ -4,24 +4,10 @@ import { globalStyles } from '../styles/global'
 import { Card, Paragraph, Text, Modal, Portal, Provider,Button as PaperButton} from 'react-native-paper';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import AddJournal from '../components/addJournal'
-import lorem from '../shared/lorem'
+import { connect } from 'react-redux';
 
-export default function JournalList({ navigation }) {
+export function JournalList({ navigation, state }) {
     const [ modalOpen, setModalOpen ] = useState( false );
-
-    const [ journals, setJournals ] = useState([
-        { title: 'Journal Entry 1', body: lorem, key: '1' },
-        { title: 'Journal Entry 3', body: lorem, key: '3' },
-        { title: 'Journal Entry 2', body: lorem, key: '2' },
-      ]);
-
-    const addNewJournal = ( journal ) => {
-      journal.key = Math.random().toString();
-      setJournals(( currentJournals ) => {
-        return [ journal, ...currentJournals ];
-      });
-      setModalOpen( false );
-    }
 
     const containerStyle ={ flex: .9, backgroundColor: '#A2AAAD', padding: 20 };
 
@@ -38,7 +24,7 @@ export default function JournalList({ navigation }) {
                           style={{ ...globalStyles.modalToggle, ...globalStyles.modalClose }}
                           onPress={ () => setModalOpen( false ) }
                           />  
-                        <AddJournal addJournal={ addNewJournal }/>
+                        <AddJournal />
                     
               </Modal>
             </Portal>
@@ -53,7 +39,8 @@ export default function JournalList({ navigation }) {
 
           <FlatList
               style={{ backgroundColor: '#A2AAAD' }}
-              data={ journals }
+              data={ state }
+              keyExtractor={( item, index) => index.toString() }
               renderItem={({ item }) => (
                 <View>
                 <Card style={ globalStyles.card } onPress={ () => navigation.navigate( 'JournalDetails', item ) }>
@@ -69,9 +56,7 @@ export default function JournalList({ navigation }) {
                     </View>
               )}
           />
-            </Provider>
-
-            
+            </Provider>            
     )
 }
 
@@ -99,3 +84,11 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.25
   }
 })
+
+const mapStateToProps = (state, ownProps) => {
+  return {
+    state: state.journals,
+  }
+}
+
+export default connect(mapStateToProps)(JournalList)

@@ -5,21 +5,23 @@ import { Formik } from 'formik'
 import * as yup from 'yup'
 import FlatButton from '../shared/button'
 import { TextInput, Text, useTheme } from 'react-native-paper';
+import { connect } from 'react-redux';
+import { addJournal } from '../redux/actions';
 
 const JournalSchema = yup.object({
     title: yup.string().required().min(4),
+    body: yup.string().required().min(4),
 })
 
-export default function AddJournal ({ addJournal }) {
+export function AddJournal ({ addJournal }) {
     const { colors } = useTheme();
     return (
             <Formik
-                initialValues={{ title:'', body:'', key:''}}
+                initialValues={{ title:'', body:'', id:''}}
                 validationSchema={ JournalSchema }
                 onSubmit={( values, actions ) => {
+                    addJournal( values);
                     actions.resetForm();
-                    addJournal( values );
-                    console.log( values )
                 }}
             >
                 {( formikProps ) => (
@@ -57,3 +59,16 @@ export default function AddJournal ({ addJournal }) {
             </Formik>
     )
 }
+
+const mapStateToProps = ( state, ownProps ) => {
+    return {
+      state: state.journals,
+    }
+  }
+  
+  const mapDispatchToProps = { addJournal }
+
+  export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )(AddJournal)

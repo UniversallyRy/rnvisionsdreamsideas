@@ -88,17 +88,18 @@ export  function TodoList({ navigation, addTodo, state }) {
     
     return (
         <View style={ globalStyles.container }>            
-          <View style={ globalStyles.todoSubButton }>
+          <View style={ globalStyles.todoFormContainer }>
             <AddTodo />
           </View>
             
           <FlatList
+              style={globalStyles.todoList}
               data={ state } 
               keyExtractor={( item, index) => index.toString() }
               renderItem={({ item }) => (
                 <Card style={ globalStyles.card } onPress={ () => navigation.navigate( 'TodoDetails', item ) }>
                     <Card.Content>
-                      <Paragraph style={ globalStyles.cardContent }>{ item.task }</Paragraph>
+                      <Paragraph>{ item.task }</Paragraph>
                     </Card.Content>
                 </Card>
               )}

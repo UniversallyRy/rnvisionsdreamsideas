@@ -12,13 +12,26 @@ export default function FlatButton( { text, onPress }) {
 
 const styles = StyleSheet.create({
     button: {
-        borderRadius: 3,
-        paddingVertical: 14,
-        paddingHorizontal: 10,
-        backgroundColor: '#002C5F',
+        alignSelf:'center',
+        width: 200,
+        borderRadius: 20,
+        paddingVertical: 24,
+        marginBottom: 10,
+        borderColor: 'black',
+
+        backgroundColor: '#A2AAAD',
+        shadowColor: "black",
+        shadowOffset: {
+            width: 3,
+            height: 2,
+        },
+        shadowOpacity: 7.25,
+        shadowRadius: 4.84,
+
+        elevation: 5,
     },
     buttonText: {
-        color: '#A2AAAD',
+        color: '#002C5F',
         fontWeight: 'bold',
         textTransform: 'uppercase',
         fontSize: 16,
