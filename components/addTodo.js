@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { View } from 'react-native'
 import { globalStyles } from '../styles/global'
 import { Formik } from 'formik'
@@ -7,22 +7,21 @@ import FlatButton from '../shared/button'
 import { connect } from 'react-redux';
 import { TextInput, Text } from 'react-native-paper';
 import { addTodo, deleteTodo } from '../redux/actions';
-import { v4 as uuidv4 } from 'uuid';
 
 const todoSchema = yup.object({
     task: yup.string().required().min(4),
 })
 
-export function AddTodo ({ addTodo, todoList}) {
-
+export function AddTodo ({ addTodo }) {
 
     return (
             <Formik
-                initialValues={{ id: uuidv4(), task: '', complete: false}}
+                initialValues={{ task: '', id: '', complete: false}}
                 validationSchema={ todoSchema }
                 onSubmit={( values, actions ) => {
-                    addTodo( values );
+                    addTodo( values.task );
                     actions.resetForm();
+                    
                 }}
             >
                 { ( formikProps ) => (
@@ -45,9 +44,9 @@ export function AddTodo ({ addTodo, todoList}) {
             </Formik>
     )
 }
-const mapStateToProps = (state, ownProps) => {
+const mapStateToProps = ( state, ownProps ) => {
     return {
-      todoList: state.todos,
+      state: state.todos,
     }
   }
   
@@ -56,4 +55,4 @@ const mapStateToProps = (state, ownProps) => {
   export default connect(
     mapStateToProps,
     mapDispatchToProps
-  )(AddTodo)
+  )( AddTodo )

@@ -1,19 +1,14 @@
-import React, { useState, useEffect } from 'react'
-import { FlatList, Text, View, Modal, TouchableWithoutFeedback, Keyboard } from 'react-native'
+import React from 'react'
+import { FlatList, View } from 'react-native'
 import { globalStyles } from '../styles/global'
 import { Card, Paragraph } from 'react-native-paper';
-import { MaterialCommunityIcons } from '@expo/vector-icons';
 import AddTodo from '../components/addTodo'
-import { connect, useSelector, useDispatch} from 'react-redux';
-import { addTodo, deleteTodo } from '../redux/actions';
-import { v4 as uuidv4 } from 'uuid';
+import { connect } from 'react-redux';
 import { getTodosByVisibilityFilter } from "../redux/reducers/selectors";
 import AsyncStorage from '@react-native-async-storage/async-storage';
-//test
 
-export  function TodoList({ navigation, addTodo, todoList }) {
+export  function TodoList({ navigation, addTodo, state }) {
   const STORAGE_KEY = '@save_todo'
-  const [ todos, setTodos ] = useState(todoList);
 
 
   // const saveData = async ( storageKey, value ) => {
@@ -90,24 +85,16 @@ export  function TodoList({ navigation, addTodo, todoList }) {
       //   addTodo(todo);
       //   setTodos('');
       // };
-
-    const listTodos = useSelector(state => state)  
-    const dispatch = useDispatch();
-    const addNewTodo = todo => dispatch(addTodo(todo))
+    
     return (
-        <View style={ globalStyles.container }>
+        <View style={ globalStyles.container }>            
+          <View style={ globalStyles.todoSubButton }>
+            <AddTodo />
+          </View>
             
-                    <View style={ globalStyles.modalContent }>
-                        
-                        <AddTodo addTodo={addNewTodo}/>
-                    </View>
-            
-            
-
           <FlatList
-              extraData={ listTodos }
-              data={ todoList } 
-              keyExtractor={( item ) => item.id.toString() }
+              data={ state } 
+              keyExtractor={( item, index) => index.toString() }
               renderItem={({ item }) => (
                 <Card style={ globalStyles.card } onPress={ () => navigation.navigate( 'TodoDetails', item ) }>
                     <Card.Content>
@@ -115,20 +102,15 @@ export  function TodoList({ navigation, addTodo, todoList }) {
                     </Card.Content>
                 </Card>
               )}
-          />
+            />
         </View>
     )
 }
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    todoList: state.todos,
+    state: state.todos,
   }
 }
 
-const mapDispatchToProps = { addTodo, deleteTodo }
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(TodoList)
+export default connect(mapStateToProps)(TodoList)

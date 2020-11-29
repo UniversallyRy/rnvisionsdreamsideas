@@ -3,31 +3,33 @@ import { v4 as uuidv4 } from 'uuid';
 
 const initialTodos = [
   {
-    id: uuidv4(),
     task: "Add Task 1",
+    id: uuidv4(),
     complete: false
   },
   {
-    id: uuidv4(),
     task: "Add Task 2",
+    id: uuidv4(),
     complete: false
   }
 ]; 
-export default function(state = initialTodos, action) {
-  switch (action.type) {
+export default function( state = initialTodos, action ) {
+  switch ( action.type ) {
     case ADD_TODO:
-          return state.map(todo => {
-            if (todo.id === action.id) {
-              return { ...todo, complete: false };
-            } else {
-              return todo;
-            }
-          });
+          return [
+            { 
+            task:action.payload.task,
+            id: uuidv4(),
+            complete: false
+            },
+            ...state,
+          ]
+  
     case TOGGLE_TODO: {
       return {
         ...state,
         todo_list: state.todo_list.filter(
-          (todo) => todo.id !=payload.id
+          ( todo ) => todo.id !=payload.id
         )
       };
     }

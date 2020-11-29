@@ -129,8 +129,7 @@ export const globalStyles = StyleSheet.create({
         marginTop: 25,
         marginBottom: 20,
     },
-    modalContent: {
-        flex: 1,
+    todoSubButton: {
         backgroundColor: '#A2AAAD'
     }
 })
