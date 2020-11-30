@@ -1,4 +1,4 @@
-import { ADD_JOURNAL, TOGGLE_JOURNAL } from "../actionTypes";
+import { ADD_JOURNAL, TOGGLE_JOURNAL, DELETE_JOURNAL } from "../actionTypes";
 import { v4 as uuidv4 } from 'uuid';
 import lorem from '../../shared/lorem';
 
@@ -35,6 +35,9 @@ export default function( state = initialJournals, action ) {
       return {
         ...state,
       };
+    }
+    case DELETE_JOURNAL: {
+      return state.filter(todo => todo.id !==action.payload.id);
     }
     default:
       return state;

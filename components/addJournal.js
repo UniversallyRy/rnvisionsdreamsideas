@@ -13,14 +13,14 @@ const JournalSchema = yup.object({
     body: yup.string().required().min(4),
 })
 
-export function AddJournal ({ addJournal }) {
+export function AddJournal ({ addJournal, state }) {
     const { colors } = useTheme();
     return (
             <Formik
                 initialValues={{ title:'', body:'', id:''}}
                 validationSchema={ JournalSchema }
                 onSubmit={( values, actions ) => {
-                    addJournal( values);
+                    addJournal( values );
                     actions.resetForm();
                 }}
             >
@@ -62,7 +62,7 @@ export function AddJournal ({ addJournal }) {
 
 const mapStateToProps = ( state, ownProps ) => {
     return {
-      state: state.journals,
+      state: state.journals
     }
   }
   

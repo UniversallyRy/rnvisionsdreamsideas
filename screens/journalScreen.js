@@ -5,6 +5,7 @@ import { Card, Paragraph, Text, Modal, Portal, Provider,Button as PaperButton} f
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import AddJournal from '../components/addJournal'
 import { connect } from 'react-redux';
+import DeleteJournal from '../components/deleteJournal'
 
 export function JournalList({ navigation, state }) {
     const [ modalOpen, setModalOpen ] = useState( false );
@@ -50,8 +51,7 @@ export function JournalList({ navigation, state }) {
                     </Card.Content>
                 </Card>
                     <View style={styles.container}>
-                        <Button style={styles.buttonContainer}title='Edit'/>
-                        <Button style={styles.buttonContainer}title='Delete'/>
+                        <DeleteJournal item={item.id}/>
                     </View>
                     </View>
               )}
