@@ -1,4 +1,6 @@
-// For Todos
+export const ADD_VISION = "ADD_VISION";
+export const TOGGLE_VISION = "TOGGLE_VISION";
+export const DELETE_VISION = "DELETE_VISION";
 export const ADD_TODO = "ADD_TODO";
 export const ADD_JOURNAL = "ADD_JOURNAL";
 export const TOGGLE_TODO = "TOGGLE_TODO";

@@ -3,23 +3,15 @@ import {
   FlatList,
   View,
   Dimensions,
-  Image,
 } from "react-native";
 import { globalStyles } from "../styles/global";
 import { Card }  from 'react-native-paper';
+import { connect } from 'react-redux';
+import { DeleteVision } from "./deleteVision";
 
 const { width: windowWidth } = Dimensions.get( "window" );
 
-const slideList = Array.from({ length:8 }).map((_, i) => {
-  return {
-    uri: `https://picsum.photos/200${ i }`,
-    title: `This is the title ${ i + 1 }!`,
-    id: i,
-  };
-});
-
-
-const Slide = memo( function Slide( { data, navigation } ) {
+const Slide = memo( function Slide( { data } ) {
   return (
     <Card style={ globalStyles.slide } >
       <Card.Cover source={{ uri: data.uri }} style={ globalStyles.slideImage }></Card.Cover>
@@ -27,14 +19,15 @@ const Slide = memo( function Slide( { data, navigation } ) {
         style={ globalStyles.slideSubtitle }
         title={ data.title }
       />
+      <DeleteVision item={ data.id }/>
     </Card> 
   );
 });
 
-function Pagination({ index }) {
+function Pagination( { state, index }) {
   return (
     <View style={ globalStyles.pagination } pointerEvents="none">
-      { slideList.map((_, i) => {
+      { state.map((_, i) => {
           return (
             <View
               key={ i }
@@ -51,7 +44,7 @@ function Pagination({ index }) {
   );
 }
 
-export default function SlideList( visionState, storeStateForParent ) {
+export function SlideList({ state }) {
   const [ index, setIndex ] = useState(0);
   const indexRef = useRef( index );
   indexRef.current = index;
@@ -96,7 +89,7 @@ export default function SlideList( visionState, storeStateForParent ) {
   return (
     <>
       <FlatList
-        data={ slideList }
+        data={ state }
         style={ globalStyles.slideCarousel }
         renderItem={ renderList }
         pagingEnabled
@@ -105,10 +98,16 @@ export default function SlideList( visionState, storeStateForParent ) {
         bounces={ false } 
         onScroll={ onScroll }
         { ...flatListOptimizationProps }
-        visionState={ visionState }
-
       />
-      <Pagination index={ index }></Pagination>
+      <Pagination state={ state } index={ index }></Pagination>
     </>
   );
 }
+
+const mapStateToProps = ( state, ownProps ) => {
+  return {
+    state: state.visions,
+  }
+}
+
+export default connect( mapStateToProps )( SlideList )

@@ -1,4 +1,24 @@
-import { ADD_TODO, TOGGLE_TODO, DELETE_TODO, SET_FILTER, TOGGLE_JOURNAL, ADD_JOURNAL, DELETE_JOURNAL } from "./actionTypes";
+import { ADD_VISION, TOGGLE_VISION, DELETE_VISION, ADD_TODO, TOGGLE_TODO, DELETE_TODO, SET_FILTER, TOGGLE_JOURNAL, ADD_JOURNAL, DELETE_JOURNAL } from "./actionTypes";
+
+export const addVision = uri  => ({
+  type: ADD_VISION,
+  payload: {
+    uri,
+    title,
+    id
+}
+});
+
+export const toggleVision = id => ({
+type: TOGGLE_VISION,
+payload: { id }
+});
+
+export const deleteVision = id => ({
+type: DELETE_VISION,
+payload: { id }
+});
+
 
 export const addTodo = task  => ({
     type: ADD_TODO,
