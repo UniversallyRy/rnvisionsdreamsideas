@@ -14,12 +14,13 @@ import { AppRegistry } from 'react-native'
 import { StatusBar } from 'expo-status-bar';
 import React, { useState } from 'react';
 import { Provider } from 'react-redux';
-import store from './redux/store';
+import {store, persistor} from './redux/store';
 import * as Font from 'expo-font';
 import { AppLoading } from 'expo';
 import Navigator from './routes/drawer';
 import merge from 'deepmerge';
 import { globalStyles } from './styles/global';
+import { PersistGate } from 'redux-persist/integration/react'
 
 
 const getFonts = () => 
@@ -38,13 +39,15 @@ export default function App() {
 
   if( fontsLoaded ){
     return (
-      <Provider store={store}>
-        <PaperProvider>
-          <NavigationContainer style={ globalStyles.container }>
-            <Navigator style={ globalStyles.navbar }/>
-            <StatusBar style="auto" />
-          </NavigationContainer>
-        </PaperProvider>
+      <Provider store={ store }>
+        <PersistGate loading={ null } persistor={ persistor }>
+          <PaperProvider>
+            <NavigationContainer style={ globalStyles.container }>
+              <Navigator style={ globalStyles.navbar }/>
+              <StatusBar style="auto" />
+            </NavigationContainer>
+          </PaperProvider>
+        </PersistGate>
         </Provider>
     );
   } else {

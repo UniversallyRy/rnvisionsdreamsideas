@@ -2,11 +2,10 @@ import React, { useState } from 'react';
 import { Modal, View, TouchableWithoutFeedback, Keyboard } from 'react-native';
 import { Text } from 'react-native-paper'
 import { MaterialCommunityIcons } from '@expo/vector-icons';
-import { v4 as uuidv4 } from 'uuid';
 import { globalStyles } from '../styles/global'
 import { connect } from 'react-redux';
 import AddVision from '../components/addVision'
-import SlideList, { defaultSlides } from '../components/slideList';
+import SlideList from '../components/slideList';
 
 
 export function Visions({ navigation, state }) {

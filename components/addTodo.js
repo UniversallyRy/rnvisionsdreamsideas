@@ -7,6 +7,8 @@ import FlatButton from '../shared/button'
 import { connect } from 'react-redux';
 import { TextInput, Text } from 'react-native-paper';
 import { addTodo } from '../redux/actions';
+import { v4 as uuidv4} from 'uuid'
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const todoSchema = yup.object({
     task: yup.string().required().min(4),
@@ -16,9 +18,10 @@ export function AddTodo ({ addTodo }) {
 
     return (
             <Formik
-                initialValues={{ task: '', id: '', complete: false}}
+                initialValues={{ task: '', id: uuidv4(), complete: false}}
                 validationSchema={ todoSchema }
                 onSubmit={( values, actions ) => {
+                    // storeData('@todo', values);
                     addTodo( values.task );
                     actions.resetForm();
                     

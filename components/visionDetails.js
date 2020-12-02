@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { globalStyles } from '../styles/global';
 import { Button, Text, Card }  from 'react-native-paper';
 
