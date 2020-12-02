@@ -3,12 +3,10 @@ import { Button, Image, View, Platform } from 'react-native';
 // import {  } from 'react-native-paper';
 import * as ImagePicker from 'expo-image-picker';
 import { globalStyles } from '../styles/global'
-import Constants from 'expo-constants';
-import * as Permissions from 'expo-permissions'
 import { connect } from 'react-redux';
 import { addPic } from '../redux/actions';
 
-export function ImagePic( { addPic}, newPic ) {
+export function ImagePic({ addPic }) {
   const [ image, setImage ] = useState( null );
   const refImage = useRef( null )
 

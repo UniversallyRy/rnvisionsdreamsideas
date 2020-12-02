@@ -17,6 +17,7 @@ export function AddVision({ addVision, stateUri}) {
     return (
         <View>
             <Formik
+                enableReinitialize={true}
                 initialValues={{ uri: stateUri, title:'', id:null }}
                 validationSchema={ visionSchema }
                 onSubmit={ ( values, actions ) => {
@@ -39,7 +40,7 @@ export function AddVision({ addVision, stateUri}) {
                         >
                                 { formikProps.touched.title && formikProps.errors.title }
                         </Text>
-                        <ImagePic newPic={ formikProps.handleChange('uri') }/>
+                        <ImagePic />
                         <FlatButton text='submit' onPress={ formikProps.handleSubmit }/>
                     </View>
                 )}    

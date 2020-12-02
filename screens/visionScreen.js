@@ -9,7 +9,7 @@ import AddVision from '../components/addVision'
 import SlideList, { defaultSlides } from '../components/slideList';
 
 
-export function Visions({ navigation, state,  }, stateUri) {
+export function Visions({ navigation, state }) {
     const [ modalOpen, setModalOpen ] = useState( false );
    
     return (
@@ -24,7 +24,7 @@ export function Visions({ navigation, state,  }, stateUri) {
                   style={{ ...globalStyles.modalToggle, ...globalStyles.modalClose }}
                   onPress={ () => setModalOpen(false) }
                 />  
-                <AddVision stateUri={stateUri}/>
+                <AddVision/>
               </View>
               </TouchableWithoutFeedback>
           </Modal>
