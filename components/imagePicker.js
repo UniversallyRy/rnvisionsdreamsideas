@@ -5,8 +5,10 @@ import * as ImagePicker from 'expo-image-picker';
 import { globalStyles } from '../styles/global'
 import Constants from 'expo-constants';
 import * as Permissions from 'expo-permissions'
+import { connect } from 'react-redux';
+import { addPic } from '../redux/actions';
 
-export default function ImagePic( newPic ) {
+export function ImagePic( { addPic}, newPic ) {
   const [ image, setImage ] = useState( null );
   const refImage = useRef( null )
 
@@ -33,7 +35,7 @@ export default function ImagePic( newPic ) {
 
     if ( !result.cancelled ) {
       setImage( result.uri );
-      newPic= result.uri;
+      addPic( result.uri );
     }
   };
 
@@ -44,3 +46,16 @@ export default function ImagePic( newPic ) {
     </View>
   );
 }
+
+const mapStateToProps = ( state, ownProps ) => {
+  return {
+    state: state.pic,
+  }
+}
+
+const mapDispatchToProps = { addPic }
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(ImagePic )

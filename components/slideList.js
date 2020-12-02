@@ -3,6 +3,7 @@ import {
   FlatList,
   View,
   Dimensions,
+  Image,
 } from "react-native";
 import { globalStyles } from "../styles/global";
 import { Card }  from 'react-native-paper';
@@ -14,9 +15,9 @@ const { width: windowWidth } = Dimensions.get( "window" );
 const Slide = memo( function Slide( { data } ) {
   return (
     <Card style={ globalStyles.slide } >
-      <Card.Cover source={{ uri: data.uri }} style={ globalStyles.slideImage }></Card.Cover>
+      <Image source={{ uri: data.uri }} style={ globalStyles.slideImage }></Image>
       <Card.Title 
-        style={ globalStyles.slideSubtitle }
+        style={ globalStyles.slideTitle }
         title={ data.title }
       />
       <DeleteVision item={ data.id }/>
@@ -93,6 +94,7 @@ export function SlideList({ state }) {
         style={ globalStyles.slideCarousel }
         renderItem={ renderList }
         pagingEnabled
+        enableReinitialize={ true }
         horizontal
         showsHorizontalScrollIndicator={ false }
         bounces={ false } 

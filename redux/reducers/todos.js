@@ -19,7 +19,7 @@ export default function( state = initialTodos, action ) {
     case ADD_TODO:
           return [
             { 
-            task:action.payload.task,
+            task: action.payload.task,
             id: uuidv4(),
             complete: false
             },

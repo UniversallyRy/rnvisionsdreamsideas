@@ -1,4 +1,4 @@
-import { ADD_VISION, TOGGLE_VISION, DELETE_VISION, ADD_TODO, TOGGLE_TODO, DELETE_TODO, SET_FILTER, TOGGLE_JOURNAL, ADD_JOURNAL, DELETE_JOURNAL } from "./actionTypes";
+import { ADD_PIC, ADD_VISION, TOGGLE_VISION, DELETE_VISION, ADD_TODO, TOGGLE_TODO, DELETE_TODO, SET_FILTER, TOGGLE_JOURNAL, ADD_JOURNAL, DELETE_JOURNAL } from "./actionTypes";
 
 export const addVision = ({uri, title, id})  => ({
   type: ADD_VISION,
@@ -55,5 +55,12 @@ export const deleteJournal = id => ({
   type: DELETE_JOURNAL,
   payload: { id }
 })
+
+export const addPic = uri  => ({
+  type: ADD_PIC,
+  payload: {
+    uri
+}
+});
 
 export const setFilter = filter => ({ type: SET_FILTER, payload: { filter } });

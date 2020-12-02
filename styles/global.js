@@ -100,8 +100,7 @@ export const globalStyles = StyleSheet.create({
         opacity: 1,
     },
     slideImage: { width: windowWidth * .97, height: windowHeight * 0.5, marginTop: 6 },
-    slideTitle: { fontSize: 24, color:coltsBlue, marginBottom: 10 },
-    slideSubtitle: { fontSize: 18, marginBottom: 1 },
+    slideTitle: { fontSize: 32, color:coltsBlue, marginBottom: 10,marginTop: 20 },
     
     pagination: {
         position: "absolute",

@@ -9,22 +9,9 @@ import AddVision from '../components/addVision'
 import SlideList, { defaultSlides } from '../components/slideList';
 
 
-export function Visions({ navigation, state }) {
+export function Visions({ navigation, state,  }, stateUri) {
     const [ modalOpen, setModalOpen ] = useState( false );
-    const [ visions, setVisions ] = useState( state );
    
-
-
-    const addNewVision = ( vision ) => {
-      vision.id = uuidv4();
-      setVisions(( currentVisions ) => {
-        return [ vision, ...currentVisions ];
-      });
-      console.log( SlideList.data )
-      setModalOpen( false );
-    }
-
-
     return (
         <View style={ globalStyles.visionPage }>
           <Modal style={{ margin:10 }}visible={ modalOpen } animationType='slide'>
@@ -37,7 +24,7 @@ export function Visions({ navigation, state }) {
                   style={{ ...globalStyles.modalToggle, ...globalStyles.modalClose }}
                   onPress={ () => setModalOpen(false) }
                 />  
-                <AddVision addVision={ addNewVision }/>
+                <AddVision stateUri={stateUri}/>
               </View>
               </TouchableWithoutFeedback>
           </Modal>
@@ -61,7 +48,8 @@ export function Visions({ navigation, state }) {
 
 const mapStateToProps = ( state, ownProps ) => {
   return {
-    state: state.journals,
+    state: state.visions,
+    stateUri: state.pic
   }
 }
 

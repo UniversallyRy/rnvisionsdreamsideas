@@ -2,7 +2,6 @@ import React, { useState } from 'react'
 import { View } from 'react-native'
 import { globalStyles } from '../styles/global'
 import { Formik } from 'formik'
-// import { TextInput } from 'react-native-gesture-handler'
 import * as yup from 'yup'
 import FlatButton from '../shared/button'
 import ImagePic from '../components/imagePicker';
@@ -14,17 +13,16 @@ const visionSchema = yup.object({
     title: yup.string().required().min( 4 ),
 })
 
-export function AddVision({ addVision }) {
-    console.log( ImagePic.setImage );
+export function AddVision({ addVision, stateUri}) {
     return (
         <View>
             <Formik
-                initialValues={{ uri: ImagePic.value, title:'', id:'' }}
+                initialValues={{ uri: null, title:'', id:null }}
                 validationSchema={ visionSchema }
                 onSubmit={ ( values, actions ) => {
-                    actions.resetForm();
+                    console.log( stateUri )
                     addVision( values );
-                    console.log( values )
+                    actions.resetForm();
                 }}
             >
                 {( formikProps ) => (
@@ -52,7 +50,7 @@ export function AddVision({ addVision }) {
 
 const mapStateToProps = ( state, ownProps ) => {
     return {
-      state: state.todos,
+      state: state.visions,
     }
   }
   

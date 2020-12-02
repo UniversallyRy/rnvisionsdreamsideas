@@ -9,18 +9,6 @@ const initialVisions = Array.from({ length:8 }).map((_, i) => {
     };
   });
 
-// const initialVisions = [
-//   {
-//     task: "Add Task 1",
-//     id: uuidv4(),
-//     complete: false
-//   },
-//   {
-//     task: "Add Task 2",
-//     id: uuidv4(),
-//     complete: false
-//   }
-// ]; 
 export default function( state = initialVisions, action ) {
   switch ( action.type ) {
     case ADD_VISION:
@@ -28,16 +16,13 @@ export default function( state = initialVisions, action ) {
             { 
             uri: action.payload.uri,
             title: action.payload.title,
-            id: uuidv4()
+            id: uuidv4(),
             },
             ...state,
           ]
     case TOGGLE_VISION: {
       return {
-        ...state,
-        todo_list: state.todo_list.filter(
-          ( todo ) => todo.id !=payload.id
-        )
+        ...state
       };
     }
     case DELETE_VISION: {
