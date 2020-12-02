@@ -42,6 +42,12 @@ export const globalStyles = StyleSheet.create({
         paddingBottom: 30,
         fontWeight: 'bold',
     },
+    todoButtons: {
+        alignContent: 'center',
+        flexDirection: 'row',
+        margin: 10,
+        fontSize: 30,
+    },
     titleText: {
         fontFamily: 'nunito-black',
         fontSize: 18,

@@ -16,7 +16,7 @@ export function DeleteVision({ deleteVision, item }) {
 
     return (
         <View>
-            <Button onPress={() => removeVision()}>
+            <Button style={styles.deleteButton} color="red" icon="close-outline" mode="contained" onPress={() => removeVision()}>
                 <Text>Delete</Text>
             </Button>
         </View>
@@ -24,7 +24,9 @@ export function DeleteVision({ deleteVision, item }) {
 }
 
 const styles = StyleSheet.create({
+    deleteButton: {
 
+    }
 })
 
 const mapStateToProps = ( state, ownProps ) => {

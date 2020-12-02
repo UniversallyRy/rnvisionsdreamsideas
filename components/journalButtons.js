@@ -3,6 +3,7 @@ import { StyleSheet, View } from 'react-native'
 import { Button } from 'react-native-paper'
 import { deleteJournal } from '../redux/actions';
 import { connect } from 'react-redux';
+import { globalStyles } from '.././styles/global'
 
 export function JournalButtons( {deleteJournal, item}) {
 
@@ -15,8 +16,8 @@ export function JournalButtons( {deleteJournal, item}) {
 
     return (
         <View style={styles.buttonsContainer}>
-            <Button style={styles.buttons}>Edit</Button>
-            <Button onPress={() => removeJournal()} style={styles.buttons}>Delete</Button>
+            <Button style={styles.editButton} color='#002C5F' icon="lead-pencil" mode="contained" >Edit</Button>
+            <Button style={styles.deleteButton} color='red' icon="close-outline" mode="contained" onPress={() => removeJournal()} style={styles.buttons}>Delete</Button>
         </View>
     )
 }
@@ -24,13 +25,15 @@ export function JournalButtons( {deleteJournal, item}) {
 const styles = StyleSheet.create({
         buttonsContainer: {
             flexDirection: 'row',
-            backgroundColor: 'green',
             alignContent: 'center',
-            alignSelf: 'center',
+            margin: 15,
+            fontSize: 30,
         },
-        buttons: {
-            alignContent:'center',
-            alignSelf: 'center',
+        editButton: {
+            margin:  1,
+        },
+        deleteButton: {
+            margin: 3,
         }
 })
 
