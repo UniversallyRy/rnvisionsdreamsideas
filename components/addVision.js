@@ -17,7 +17,7 @@ export function AddVision({ addVision, stateUri}) {
     return (
         <View>
             <Formik
-                initialValues={{ uri: null, title:'', id:null }}
+                initialValues={{ uri: stateUri, title:'', id:null }}
                 validationSchema={ visionSchema }
                 onSubmit={ ( values, actions ) => {
                     console.log( stateUri )
@@ -51,6 +51,7 @@ export function AddVision({ addVision, stateUri}) {
 const mapStateToProps = ( state, ownProps ) => {
     return {
       state: state.visions,
+      stateUri: state.pic
     }
   }
   
