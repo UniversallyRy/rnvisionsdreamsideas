@@ -4,22 +4,14 @@ import { Text } from 'react-native-paper'
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { v4 as uuidv4 } from 'uuid';
 import { globalStyles } from '../styles/global'
+import { connect } from 'react-redux';
 import AddVision from '../components/addVision'
 import SlideList, { defaultSlides } from '../components/slideList';
 
-const slideList = Array.from({ length:8 }).map((_, i) => {
-  return {
-    uri: `https://picsum.photos/200${ i }`,
-    title: `This is the title ${ i + 1 }!`,
-    id: i,
-  };
-});
-console.log( slideList );
 
-
-export default function Visions({ navigation }) {
+export function Visions({ navigation, state }) {
     const [ modalOpen, setModalOpen ] = useState( false );
-    const [ visions, setVisions ] = useState( slideList );
+    const [ visions, setVisions ] = useState( state );
    
 
 
@@ -59,10 +51,18 @@ export default function Visions({ navigation }) {
 
 
           <SlideList
-            data={ slideList }
+            data={ state }
             onPress={ () => navigation.navigate( 'VisionDetails', item ) }   
           />
           
         </View>
     )
 }
+
+const mapStateToProps = (state, ownProps) => {
+  return {
+    state: state.journals,
+  }
+}
+
+export default connect(mapStateToProps)(Visions)

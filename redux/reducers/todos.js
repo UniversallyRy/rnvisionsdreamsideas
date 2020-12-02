@@ -1,18 +1,26 @@
 import { ADD_TODO, TOGGLE_TODO, DELETE_TODO} from "../actionTypes";
 import { v4 as uuidv4 } from 'uuid';
 
-const initialTodos = [
-  {
-    task: "Add Task 1",
-    id: uuidv4(),
-    complete: false
-  },
-  {
-    task: "Add Task 2",
-    id: uuidv4(),
-    complete: false
-  }
-]; 
+const initialTodos = Array.from({ length:8 }).map((_, i) => {
+  return {
+    uri: `https://picsum.photos/200${ i }`,
+    title: `This is the title ${ i + 1 }!`,
+    id: i,
+  };
+});
+
+// const initialTodos = [
+//   {
+//     task: "Add Task 1",
+//     id: uuidv4(),
+//     complete: false
+//   },
+//   {
+//     task: "Add Task 2",
+//     id: uuidv4(),
+//     complete: false
+//   }
+// ]; 
 export default function( state = initialTodos, action ) {
   switch ( action.type ) {
     case ADD_TODO:
