@@ -3,6 +3,7 @@ import { FlatList, View } from 'react-native'
 import { globalStyles } from '../styles/global'
 import { Card, Paragraph } from 'react-native-paper';
 import AddTodo from '../components/addTodo'
+import DeleteTodo from '../components/deleteTodo'
 import { connect } from 'react-redux';
 import { getTodosByVisibilityFilter } from "../redux/reducers/selectors";
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -101,6 +102,7 @@ export  function TodoList({ navigation, addTodo, state }) {
                     <Card.Content>
                       <Paragraph>{ item.task }</Paragraph>
                     </Card.Content>
+                      <DeleteTodo item={item.id}/>
                 </Card>
               )}
             />

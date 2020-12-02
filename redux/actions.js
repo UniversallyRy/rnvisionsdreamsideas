@@ -1,4 +1,4 @@
-import { ADD_TODO, TOGGLE_TODO, SET_FILTER, TOGGLE_JOURNAL, ADD_JOURNAL, DELETE_JOURNAL } from "./actionTypes";
+import { ADD_TODO, TOGGLE_TODO, DELETE_TODO, SET_FILTER, TOGGLE_JOURNAL, ADD_JOURNAL, DELETE_JOURNAL } from "./actionTypes";
 
 export const addTodo = task  => ({
     type: ADD_TODO,
@@ -12,7 +12,12 @@ export const toggleTodo = id => ({
   payload: { id }
 });
 
-export const addJournal = ({title, body})  => ({
+export const deleteTodo = id => ({
+  type: DELETE_TODO,
+  payload: { id }
+});
+
+export const addJournal = ({title, body, id})  => ({
   type: ADD_JOURNAL,
   payload: {
     title,
@@ -28,9 +33,7 @@ export const toggleJournal = id => ({
 
 export const deleteJournal = id => ({
   type: DELETE_JOURNAL,
-  payload: {
-    id
-  }
+  payload: { id }
 })
 
 export const setFilter = filter => ({ type: SET_FILTER, payload: { filter } });

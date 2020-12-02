@@ -1,4 +1,4 @@
-import { ADD_TODO, TOGGLE_TODO } from "../actionTypes";
+import { ADD_TODO, TOGGLE_TODO, DELETE_TODO} from "../actionTypes";
 import { v4 as uuidv4 } from 'uuid';
 
 const initialTodos = [
@@ -24,7 +24,6 @@ export default function( state = initialTodos, action ) {
             },
             ...state,
           ]
-  
     case TOGGLE_TODO: {
       return {
         ...state,
@@ -33,6 +32,9 @@ export default function( state = initialTodos, action ) {
         )
       };
     }
+    case DELETE_TODO: {
+      return state.filter(( todo ) => todo.id != action.payload.id)
+    };
     default:
       return state;
   }

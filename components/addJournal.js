@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useState} from 'react'
 import { View } from 'react-native'
 import { globalStyles } from '../styles/global'
 import { Formik } from 'formik'
@@ -13,8 +13,9 @@ const JournalSchema = yup.object({
     body: yup.string().required().min(4),
 })
 
-export function AddJournal ({ addJournal, state }) {
+export function AddJournal ({ addJournal }) {
     const { colors } = useTheme();
+    const [ modalOpen, setModalOpen ] = useState( true );
     return (
             <Formik
                 initialValues={{ title:'', body:'', id:''}}
@@ -22,6 +23,7 @@ export function AddJournal ({ addJournal, state }) {
                 onSubmit={( values, actions ) => {
                     addJournal( values );
                     actions.resetForm();
+                    setModalOpen(false);
                 }}
             >
                 {( formikProps ) => (
