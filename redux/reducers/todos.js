@@ -1,4 +1,5 @@
 import { ADD_TODO, TOGGLE_TODO, DELETE_TODO} from "../actionTypes";
+import { v4 as uuidv4 } from 'uuid';
 
 export default function( state = [], action ) {
   switch ( action.type ) {
@@ -6,7 +7,7 @@ export default function( state = [], action ) {
           return [
             { 
             task: action.payload.task,
-            id: action.payload.id,
+            id: uuidv4(),
             complete: false
             },
             ...state,

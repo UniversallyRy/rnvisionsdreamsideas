@@ -7,21 +7,32 @@ import FlatButton from '../shared/button'
 import { connect } from 'react-redux';
 import { TextInput, Text } from 'react-native-paper';
 import { addTodo } from '../redux/actions';
-import { v4 as uuidv4} from 'uuid'
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const todoSchema = yup.object({
     task: yup.string().required().min(4),
 })
 
+
+export const storeData = async ( value ) => {
+    try {
+      const jsonValue = JSON.stringify( value )
+      await AsyncStorage.setItem( '@todos', jsonValue )
+      alert( 'Data successfully saved' )
+      setModalOpen( false );
+      console.log( 'storageKey' )
+    } catch (e) {
+      alert( 'Failed to save the data to the storage' )
+    }
+  }
+
 export function AddTodo ({ addTodo }) {
 
     return (
             <Formik
-                initialValues={{ task: '', id: uuidv4(), complete: false}}
+                initialValues={{ task: '', id: '', complete: false}}
                 validationSchema={ todoSchema }
                 onSubmit={( values, actions ) => {
-                    // storeData('@todo', values);
                     addTodo( values.task );
                     actions.resetForm();
                     
