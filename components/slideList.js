@@ -7,7 +7,7 @@ import {
 import { globalStyles } from "../styles/global";
 import { Card }  from 'react-native-paper';
 import { connect } from 'react-redux';
-import { DeleteVision } from "./deleteVision";
+import DeleteVision from "./deleteVision";
 
 const { width: windowWidth } = Dimensions.get( "window" );
 

@@ -37,7 +37,7 @@ export default function( state = initialJournals, action ) {
       };
     }
     case DELETE_JOURNAL: {
-      return state.filter(todo => todo.id !==action.payload.id);
+      return state.filter(todo => todo.id !== action.payload.id);
     }
     default:
       return state;

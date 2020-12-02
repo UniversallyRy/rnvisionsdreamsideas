@@ -6,14 +6,15 @@ import { Formik } from 'formik'
 import * as yup from 'yup'
 import FlatButton from '../shared/button'
 import ImagePic from '../components/imagePicker';
-import { TextInput, Text, useTheme } from 'react-native-paper';
+import { TextInput, Text } from 'react-native-paper';
+import { connect } from 'react-redux';
+import { addVision } from '../redux/actions';
 
 const visionSchema = yup.object({
     title: yup.string().required().min( 4 ),
 })
 
-export default function AddVision({ addVision }) {
-    const [ imageState, getImageState ] =  useState('')
+export function AddVision({ addVision }) {
     console.log( ImagePic.setImage );
     return (
         <View>
@@ -40,7 +41,7 @@ export default function AddVision({ addVision }) {
                         >
                                 { formikProps.touched.title && formikProps.errors.title }
                         </Text>
-                        <ImagePic value={ formikProps.handleChange('uri') }/>
+                        <ImagePic newPic={ formikProps.handleChange('uri') }/>
                         <FlatButton text='submit' onPress={ formikProps.handleSubmit }/>
                     </View>
                 )}    
@@ -48,3 +49,16 @@ export default function AddVision({ addVision }) {
         </View>
     )
 }
+
+const mapStateToProps = ( state, ownProps ) => {
+    return {
+      state: state.todos,
+    }
+  }
+  
+  const mapDispatchToProps = { addVision }
+
+  export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )(AddVision )

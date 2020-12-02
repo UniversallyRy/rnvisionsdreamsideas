@@ -6,7 +6,7 @@ import { globalStyles } from '../styles/global'
 import Constants from 'expo-constants';
 import * as Permissions from 'expo-permissions'
 
-export default function ImagePic() {
+export default function ImagePic( newPic ) {
   const [ image, setImage ] = useState( null );
   const refImage = useRef( null )
 
@@ -33,6 +33,7 @@ export default function ImagePic() {
 
     if ( !result.cancelled ) {
       setImage( result.uri );
+      newPic= result.uri;
     }
   };
 

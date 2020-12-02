@@ -1,6 +1,6 @@
 import { ADD_VISION, TOGGLE_VISION, DELETE_VISION, ADD_TODO, TOGGLE_TODO, DELETE_TODO, SET_FILTER, TOGGLE_JOURNAL, ADD_JOURNAL, DELETE_JOURNAL } from "./actionTypes";
 
-export const addVision = uri  => ({
+export const addVision = ({uri, title, id})  => ({
   type: ADD_VISION,
   payload: {
     uri,

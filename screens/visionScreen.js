@@ -59,10 +59,10 @@ export function Visions({ navigation, state }) {
     )
 }
 
-const mapStateToProps = (state, ownProps) => {
+const mapStateToProps = ( state, ownProps ) => {
   return {
     state: state.journals,
   }
 }
 
-export default connect(mapStateToProps)(Visions)
+export default connect( mapStateToProps )( Visions )

@@ -5,12 +5,15 @@ import { connect } from 'react-redux';
 import { deleteVision } from '../redux/actions';
 
 export function DeleteVision({ deleteVision, item }) {
+
+    
     const removeVision = () => {
         // save item.id from props to buttonId
-        var buttonId = item
+        var buttonId = item;
         //calls redux action on stored todoss
         deleteVision(buttonId);
     }
+
     return (
         <View>
             <Button onPress={() => removeVision()}>
