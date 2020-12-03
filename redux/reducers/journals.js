@@ -1,4 +1,4 @@
-import { ADD_JOURNAL, TOGGLE_JOURNAL, DELETE_JOURNAL } from "../actionTypes";
+import { ADD_JOURNAL, EDIT_JOURNAL, DELETE_JOURNAL } from "../actionTypes";
 import { v4 as uuidv4 } from 'uuid';
 import lorem from '../../shared/lorem';
 
@@ -31,7 +31,7 @@ export default function( state = initialJournals, action ) {
             ...state,
           ]
   
-    case TOGGLE_JOURNAL: {
+    case EDIT_JOURNAL: {
       return {
         ...state,
       };

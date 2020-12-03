@@ -97,17 +97,23 @@ export const globalStyles = StyleSheet.create({
         color: coltsGray,
     },
     slide: {
-        height: windowHeight*0.7,
-        width: windowWidth,
         justifyContent: "center",
         alignItems: "center",
-        marginBottom:1,
+        marginBottom: 30,
         backgroundColor: coltsBlue,
         opacity: 1,
     },
-    slideImage: { width: windowWidth * .97, height: windowHeight * 0.5, marginTop: 6 },
+    slideImage: { borderRadius: 10 , width: windowWidth * 0.9, height: windowHeight * 0.5, marginTop: 6 },
     slideTitle: { fontSize: 32, color:coltsBlue, marginBottom: 10,marginTop: 20 },
     
+    slideCarousel: {
+        borderRadius: 10,
+        alignSelf: 'center',
+        height: windowHeight * 0.9,
+        width: windowWidth *0.9,
+        marginBottom: 20,
+        backgroundColor: coltsGray,
+    },
     pagination: {
         position: "absolute",
         bottom: 8,
@@ -125,10 +131,6 @@ export const globalStyles = StyleSheet.create({
     paginationDotActive: { backgroundColor: coltsBlue },
     paginationDotInactive: { backgroundColor: "gray" },
     
-    slideCarousel: {
-        marginBottom: 25,
-        backgroundColor: coltsGray,
-    },
     modalToggle: {
         marginTop:10,
         marginBottom: 10,   

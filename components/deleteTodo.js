@@ -5,10 +5,10 @@ import { connect } from 'react-redux';
 import { deleteTodo } from '../redux/actions';
 import { globalStyles } from '.././styles/global'
 
-export function DeleteTodo({ deleteTodo, item }) {
+export function DeleteTodo({ deleteTodo, item, showMod }) {
     const removeTodo = () => {
         // save item.id from props to buttonId
-        var buttonId = item
+        var buttonId = item.id
         //calls redux action on stored todoss
         deleteTodo(buttonId);
     }
@@ -22,7 +22,7 @@ export function DeleteTodo({ deleteTodo, item }) {
 
     return (
         <View style={globalStyles.todoButtons}>
-            <Button style={styles.editButton} color="#A2AAAD" icon="lead-pencil" mode="contained" onPress={() => editedTodo()}>
+            <Button style={styles.editButton} color="#A2AAAD" icon="lead-pencil" mode="contained" onPress={()=> showMod()}>
                 <Text>Edit</Text>
             </Button>
             <Button style={styles.deleteButton} color="red" icon="close-outline" mode="contained" onPress={() => removeTodo()}>

@@ -95,7 +95,7 @@ export function SlideList({ state }) {
         renderItem={ renderList }
         pagingEnabled
         enableReinitialize={ true }
-        horizontal
+        vertical
         showsHorizontalScrollIndicator={ false }
         bounces={ false } 
         onScroll={ onScroll }

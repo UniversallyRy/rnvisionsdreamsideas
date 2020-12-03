@@ -1,4 +1,9 @@
-import { ADD_PIC, ADD_VISION, TOGGLE_VISION, DELETE_VISION, ADD_TODO, TOGGLE_TODO, DELETE_TODO, SET_FILTER, TOGGLE_JOURNAL, ADD_JOURNAL, DELETE_JOURNAL } from "./actionTypes";
+import { ADD_PIC, ADD_VISION, EDIT_VISION, DELETE_VISION, ADD_TODO, EDIT_TODO, DELETE_TODO, SET_FILTER, EDIT_JOURNAL, ADD_JOURNAL, DELETE_JOURNAL } from "./actionTypes";
+
+export const addText = value => ({
+  type: "ADD_TEXT",
+  payload: value
+})
 
 export const addVision = ({uri, title, id})  => ({
   type: ADD_VISION,
@@ -6,12 +11,12 @@ export const addVision = ({uri, title, id})  => ({
     uri,
     title,
     id
-}
+  }
 });
 
-export const toggleVision = id => ({
-type: TOGGLE_VISION,
-payload: { id }
+export const editVision = ({task, id, complete}) => ({
+type: EDIT_VISION,
+payload: { task, id, complete }
 });
 
 export const deleteVision = id => ({
@@ -27,8 +32,8 @@ export const addTodo = task  => ({
   }
 });
 
-export const toggleTodo = id => ({
-  type: TOGGLE_TODO,
+export const editTodo = id => ({
+  type: EDIT_TODO,
   payload: { id }
 });
 
@@ -46,8 +51,8 @@ export const addJournal = ({title, body, id})  => ({
 }
 });
 
-export const toggleJournal = id => ({
-  type: TOGGLE_JOURNAL,
+export const editJournal = id => ({
+  type: EDIT_JOURNAL,
   payload: { id }
 });
 

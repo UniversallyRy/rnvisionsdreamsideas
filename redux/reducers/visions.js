@@ -1,4 +1,4 @@
-import { ADD_VISION, TOGGLE_VISION, DELETE_VISION} from "../actionTypes";
+import { ADD_VISION, EDIT_VISION, DELETE_VISION} from "../actionTypes";
 import { v4 as uuidv4 } from 'uuid';
 
 const initialVisions = Array.from({ length:8 }).map((_, i) => {
@@ -20,7 +20,7 @@ export default function( state = initialVisions, action ) {
             },
             ...state,
           ]
-    case TOGGLE_VISION: {
+    case EDIT_VISION: {
       return {
         ...state
       };

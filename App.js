@@ -10,8 +10,8 @@ import {
 } from 'react-native-paper';
 import 'react-native-get-random-values'
 import 'react-native-gesture-handler';
-import { AppRegistry } from 'react-native'
-import { StatusBar } from 'expo-status-bar';
+import { AppRegistry, StatusBar } from 'react-native'
+import { StatusBa } from 'expo-status-bar';
 import React, { useState } from 'react';
 import { Provider } from 'react-redux';
 import {store, persistor} from './redux/store';
@@ -44,7 +44,7 @@ export default function App() {
           <PaperProvider>
             <NavigationContainer style={ globalStyles.container }>
               <Navigator style={ globalStyles.navbar }/>
-              <StatusBar style="auto" />
+              <StatusBar animated={true} style="auto" />
             </NavigationContainer>
           </PaperProvider>
         </PersistGate>

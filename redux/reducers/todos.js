@@ -1,4 +1,4 @@
-import { ADD_TODO, TOGGLE_TODO, DELETE_TODO} from "../actionTypes";
+import { ADD_TODO, EDIT_TODO, DELETE_TODO} from "../actionTypes";
 import { v4 as uuidv4 } from 'uuid';
 
 export default function( state = [], action ) {
@@ -12,17 +12,27 @@ export default function( state = [], action ) {
             },
             ...state,
           ]
-    case TOGGLE_TODO: {
+    case EDIT_TODO: {
+      const { payload } = action;
       return {
         ...state,
-        todo_list: state.todo_list.filter(
-          ( todo ) => todo.id !=payload.id
-        )
-      };
+        todoList: state.todoList.map(item => {
+          if (item.id === payload.id) {
+            return {
+              ...item,
+              task:payload.task,
+              complete: payload.complete
+            }
+          }
+        })
+      }
     }
     case DELETE_TODO: {
       return state.filter(( todo ) => todo.id != action.payload.id)
-    };
+    }
+    case "ADD_TEXT": {
+      return {...state, task: action.payload.value}
+    }
     default:
       return state;
   }

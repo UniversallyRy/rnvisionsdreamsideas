@@ -1,10 +1,10 @@
 export const ADD_VISION = "ADD_VISION";
-export const TOGGLE_VISION = "TOGGLE_VISION";
+export const EDIT_VISION = "EDIT_VISION";
 export const DELETE_VISION = "DELETE_VISION";
 export const ADD_TODO = "ADD_TODO";
 export const ADD_JOURNAL = "ADD_JOURNAL";
-export const TOGGLE_TODO = "TOGGLE_TODO";
-export const TOGGLE_JOURNAL = 'TOGGLE_JOURNAL';
+export const EDIT_TODO = "EDIT_TODO";
+export const EDIT_JOURNAL = 'EDIT_JOURNAL';
 export const DELETE_JOURNAL = 'DELETE_JOURNAL';
 export const DELETE_TODO = 'DELETE_TODO';
 export const ADD_PIC = "ADD_PIC";
