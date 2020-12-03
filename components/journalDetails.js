@@ -9,11 +9,11 @@ export default function JournalDetails({ navigation }) {
     }
 
     return (
-        <Card style={globalStyles.cardContent} id ={ Math.random() * 92 }>
-            <Card style={ globalStyles.card }>
-                <Text style={ globalStyles.titleText }> { navigation.getParam( 'title', 'body' ) } </Text>
-                <Text style={ globalStyles.paragraph }> { navigation.getParam( 'body' ) } </Text>
-                <Button style={globalStyles.backButton} icon='arrow-left' mode='contained' dark={ true } title={ 'back to home' } onPress={ handlePress }>
+        <Card style={globalStyles.jDetailsContainer} id ={ Math.random() * 92 }>
+            <Card style={ globalStyles.jDetailsCard }>
+                <Text style={ globalStyles.jDetailsTitle }> { navigation.getParam( 'title', 'body' ) } </Text>
+                <Text style={ globalStyles.jDetailsText }> { navigation.getParam( 'body' ) } </Text>
+                <Button style={globalStyles.jDetailsButton} icon='arrow-left' mode='contained' dark={ true } title={ 'back to home' } onPress={ handlePress }>
                     Go Back
                 </Button>
             </Card>

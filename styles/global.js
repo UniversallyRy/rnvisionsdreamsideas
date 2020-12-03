@@ -12,7 +12,6 @@ export const globalStyles = StyleSheet.create({
     },
     visionPage: {
         backgroundColor: coltsGray,
-        opacity: 1,
         flex: 1,
     },
     uploadButton: {
@@ -22,7 +21,92 @@ export const globalStyles = StyleSheet.create({
         padding: 25,
         margin: 20,
     },
-    backButton: {
+    tDetailsButton : {
+        backgroundColor: coltsGray,
+        margin: 20,
+    },
+    tDetailsContainer: {
+        flex: 1,
+        alignItems: 'center',
+        flexDirection: 'row',
+        height: windowHeight,
+        backgroundColor: coltsGray,
+    },
+    todoDetails:{
+        flex: .4,
+        alignContent: 'center',
+        fontSize: 20,
+        height: windowHeight * .3,
+        width: windowWidth * .97,
+        alignSelf: 'center',
+        fontWeight: 'bold',
+        backgroundColor: coltsBlue,
+    },
+    todoButtons: {
+        alignContent: 'center',
+        flexDirection: 'row',
+        margin: 10,
+        fontSize: 30,
+    },
+    navbar: {
+        color: coltsBlue,
+        fontSize: 20,
+    },
+    errorText: {
+        color: 'crimson',
+        fontWeight: 'bold',
+        marginBottom: 10,
+        marginTop: 6,
+        textAlign: 'center',
+    },
+    todoInput: {
+        width: windowWidth * .97,
+        padding: 4,
+        marginLeft: 4,
+
+    },
+    todoCard: {
+        alignSelf: 'center',
+        alignItems: 'center',
+        width: windowWidth * .99,
+        borderRadius: 3,
+        elevation: 5,
+        padding: 15,
+        backgroundColor: coltsBlue,
+        shadowOffset: { width :1, height: 1},
+        shadowColor: '#333',
+        shadowOpacity: 0.3,
+        shadowRadius: 2,
+        marginHorizontal: 0,
+        marginVertical: 6,
+    },
+    todoText: {
+        color: coltsGray,
+        fontFamily: 'nunito-black',
+        padding: 5,
+    },
+    todoList: {
+        color: coltsGray,
+    },
+    todoContainer: {
+        color: 'red',
+        padding: 10,
+        alignItems: 'center',
+    },
+    jDetailsText: {
+        padding: 7,
+        marginTop: 50,
+        marginVertical: 18,
+        lineHeight: 20,
+        color: coltsGray,
+    },
+    jDetailsTitle: {
+        fontFamily: 'nunito-black',
+        fontSize: 18,
+        color: raidSilver,
+        padding: 10,
+    },
+    jDetailsButton: {
         fontSize: 40,    
         backgroundColor: coltsGray,
         color:'blue' ,
@@ -33,87 +117,68 @@ export const globalStyles = StyleSheet.create({
         },
         shadowOpacity: 0.25,
         shadowRadius: 1.84,
-
         elevation: 1,
     },
-    todoDetails:{
-        fontSize: 20,
-        alignSelf: 'center',
-        paddingBottom: 30,
-        fontWeight: 'bold',
-    },
-    todoButtons: {
-        alignContent: 'center',
+    jDetailsContainer: {
         flexDirection: 'row',
-        margin: 10,
-        fontSize: 30,
-    },
-    titleText: {
-        fontFamily: 'nunito-black',
-        fontSize: 18,
-        color: raidSilver,
-        padding: 10,
-    },
-    navbar: {
-        color: coltsBlue,
-        fontSize: 20,
-    },
-    paragraph: {
-        padding: 7,
-        marginTop: 50,
-        marginVertical: 18,
-        lineHeight: 20,
-        color: coltsGray,
-    },
-    input: {
-        borderWidth: 1,
-        borderColor: '#ddd',
-        padding: 10,
-        fontSize: 18,
-        borderRadius: 6,
-    },
-    errorText: {
-        color: 'crimson',
-        fontWeight: 'bold',
-        marginBottom: 10,
-        marginTop: 6,
-        textAlign: 'center',
-    },
-    card: {
+        width: windowWidth,
+        height: windowHeight,
         alignItems: 'center',
-        borderRadius: 1,
-        elevation: 3,
-        padding: 25,
-        color: coltsGray,
+        backgroundColor: coltsGray,
+        
+    },
+    jDetailsCard: {
+        alignSelf: 'center',
         backgroundColor: coltsBlue,
-        shadowOffset: { width :1, height: 1},
-        shadowColor: '#333',
-        shadowOpacity: 0.3,
-        shadowRadius: 2,
-        marginHorizontal: 0,
-        marginVertical: 6,
+        width: windowWidth * .99,
     },
-    todoList: {
+    journalCard: {
+        alignSelf: 'center',
+        backgroundColor: coltsBlue,
+        width: windowWidth * .99,
+    },
+    journalTitle: {
+        fontFamily: 'nunito-black',
+        color: coltsGray,
+        marginBottom: 10,
+    },
+    journalText:{
+        fontFamily: 'nunito-black',
         color: coltsGray,
     },
-    slide: {
+    addJournalContainer: {
+        flex: .92, 
+        backgroundColor: '#A2AAAD', 
+        padding: 10, 
+    },
+    addJournalForm: {
+
+    },
+    addJournalTitle: {
+        alignSelf: 'center',
+        borderWidth: 1,
+        borderColor: coltsBlue,
+        padding: 20,
+        fontSize: 18,
+        borderRadius: 2,
+    },
+    slideContainer: {
+        backgroundColor: 'transparent',
+        height: windowHeight*0.7,
+        width: windowWidth ,
+        alignSelf: 'center',
         justifyContent: "center",
         alignItems: "center",
         marginBottom: 30,
-        backgroundColor: coltsBlue,
-        opacity: 1,
     },
-    slideImage: { borderRadius: 10 , width: windowWidth * 0.9, height: windowHeight * 0.5, marginTop: 6 },
-    slideTitle: { fontSize: 32, color:coltsBlue, marginBottom: 10,marginTop: 20 },
-    
+
     slideCarousel: {
-        borderRadius: 10,
-        alignSelf: 'center',
-        height: windowHeight * 0.9,
-        width: windowWidth *0.9,
-        marginBottom: 20,
-        backgroundColor: coltsGray,
+        marginBottom: 25,
     },
+
+    slideImage: { width: windowWidth * 0.98, height: windowHeight * 0.55, marginTop: 6 },
+    slideTitle: { alignContent: 'center', fontSize: 32, color:coltsBlue, marginBottom: 10,marginTop: 20 },
+    
     pagination: {
         position: "absolute",
         bottom: 8,
@@ -130,7 +195,6 @@ export const globalStyles = StyleSheet.create({
     },
     paginationDotActive: { backgroundColor: coltsBlue },
     paginationDotInactive: { backgroundColor: "gray" },
-    
     modalToggle: {
         marginTop:10,
         marginBottom: 10,   
@@ -139,10 +203,13 @@ export const globalStyles = StyleSheet.create({
         padding: 10,
         borderRadius: 10,
         alignSelf: 'center',
+        alignItems: 'center',
     },
     modalClose: {
         marginTop: 25,
         marginBottom: 20,
+        alignSelf: 'center',
+        alignItems: 'center',
     },
     todoFormContainer: {
         backgroundColor: coltsGray

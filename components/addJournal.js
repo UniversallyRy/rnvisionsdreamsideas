@@ -18,6 +18,7 @@ export function AddJournal ({ addJournal }) {
     const [ modalOpen, setModalOpen ] = useState( true );
     return (
             <Formik
+                style={globalStyles.addJournalForm}
                 enableReinitialize
                 initialValues={{ title:'', body:'', id:''}}
                 validationSchema={ JournalSchema }

@@ -1,9 +1,11 @@
 import React from 'react'
-import { StyleSheet, View } from 'react-native'
+import { StyleSheet, View, Dimensions } from 'react-native'
 import { Button } from 'react-native-paper'
 import { deleteJournal } from '../redux/actions';
 import { connect } from 'react-redux';
 import { globalStyles } from '.././styles/global'
+
+const { width: windowWidth, height: windowHeight } = Dimensions.get("window");
 
 export function JournalButtons( {deleteJournal, item}) {
 
@@ -17,7 +19,7 @@ export function JournalButtons( {deleteJournal, item}) {
     return (
         <View style={styles.buttonsContainer}>
             <Button style={styles.editButton} color='#002C5F' icon="lead-pencil" mode="contained" >Edit</Button>
-            <Button style={styles.deleteButton} color='red' icon="close-outline" mode="contained" onPress={() => removeJournal()} style={styles.buttons}>Delete</Button>
+            <Button style={styles.deleteButton} color='red' icon="close-outline" mode="contained" onPress={() => removeJournal()}>Delete</Button>
         </View>
     )
 }
@@ -26,15 +28,19 @@ const styles = StyleSheet.create({
         buttonsContainer: {
             flexDirection: 'row',
             alignContent: 'center',
-            margin: 15,
-            fontSize: 30,
+            margin: 2,
+            fontSize: 20,
         },
         editButton: {
-            margin:  1,
+            alignContent: 'center',
+            width: windowWidth * .49,
+            marginRight: 2,
         },
         deleteButton: {
-            margin: 3,
-        }
+            alignContent: 'center',
+            width: windowWidth * .49,
+            marginLeft: 1,
+        },
 })
 
 const mapStateToProps = ( state, ownProps ) => {

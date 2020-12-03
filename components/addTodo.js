@@ -41,7 +41,8 @@ export function AddTodo ({ addTodo }) {
                 { ( formikProps ) => (
                     <View>
                         <TextInput
-                            mode='flat'
+                            style={globalStyles.todoInput}
+                            multiline
                             placeholder='Enter Todo . . .'
                             onChangeText={ formikProps.handleChange( 'task' ) }
                             value={ formikProps.values.task }
@@ -52,7 +53,7 @@ export function AddTodo ({ addTodo }) {
                         >
                                 { formikProps.touched.task && formikProps.errors.task }
                         </Text>
-                        <FlatButton text='submit' onPress={ formikProps.handleSubmit }/>
+                        <FlatButton text='new' onPress={ formikProps.handleSubmit }/>
                     </View>
                 )}    
             </Formik>

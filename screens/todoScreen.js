@@ -33,9 +33,9 @@ export  function TodoList({ navigation, state }) {
                 data={ state } 
                 keyExtractor={( item, index) => index.toString() }
                 renderItem={({ item }) => (
-                  <Card style={ globalStyles.card } onPress={ () => navigation.navigate( 'TodoDetails', item ) }>
-                      <Card.Content>
-                        <Paragraph>{ item.task }</Paragraph>
+                  <Card style={ globalStyles.todoCard } onPress={ () => navigation.navigate( 'TodoDetails', item ) }>
+                      <Card.Content style={globalStyles.todoContainer}>
+                        <Text style={globalStyles.todoText}> { item.task } </Text>
                       </Card.Content>
                         <DeleteTodo showMod={showModal} item={item}/>
                   </Card>

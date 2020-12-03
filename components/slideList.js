@@ -14,7 +14,7 @@ const { width: windowWidth } = Dimensions.get( "window" );
 
 const Slide = memo( function Slide( { data } ) {
   return (
-    <Card style={ globalStyles.slide } >
+    <Card style={ globalStyles.slideContainer } >
       <Image source={{ uri: data.uri }} style={ globalStyles.slideImage }></Image>
       <Card.Title 
         style={ globalStyles.slideTitle }
@@ -95,7 +95,7 @@ export function SlideList({ state }) {
         renderItem={ renderList }
         pagingEnabled
         enableReinitialize={ true }
-        vertical
+        horizontal
         showsHorizontalScrollIndicator={ false }
         bounces={ false } 
         onScroll={ onScroll }

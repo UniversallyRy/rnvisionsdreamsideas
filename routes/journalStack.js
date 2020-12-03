@@ -9,7 +9,7 @@ const screens = {
         screen: JournalList,
         navigationOptions: ( { navigation } ) => {
             return {
-                headerTitle: () => <Header navigation={ navigation } title='Journal'/>   
+                headerTitle: () => <Header navigation={ navigation } title='Journals'/>   
             }
         }
     },
