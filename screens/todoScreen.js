@@ -1,49 +1,43 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { FlatList, View } from 'react-native'
 import { globalStyles } from '../styles/global'
 import { Card, Paragraph,  Modal, Provider, Portal, Text, Button } from 'react-native-paper';
 import AddTodo from '../components/addTodo'
 import DeleteTodo from '../components/deleteTodo'
-import EditTodo from '../components/editTodo'
 import { connect } from 'react-redux';
 import { getTodosByVisibilityFilter } from "../redux/reducers/selectors";
 
+
 export  function TodoList({ navigation, state }) {
 
-  const [visible, setVisible] = React.useState(false);
-
-  const showModal = () => setVisible(true);
-  const hideModal = () => setVisible(false);
-  const containerStyle = {alignSelf: 'center', width: 500, height: 500, backgroundColor: '#A2AAAD', padding: 20};
+  const test = []
+  const [visible, setVisible] = useState(false);
+  const [input, setInput] = useState('');
+  const [edited, setEdited] = useState(false);
+    console.log(state);
 
     return (
-      <Provider>
-          <View style={ globalStyles.container }>            
-            <View style={ globalStyles.todoFormContainer }>
-              <AddTodo />
-            </View>
-            <Portal>
-              <Modal visible={visible} onDismiss={hideModal} contentContainerStyle={containerStyle}>
-                <Text>Example Modal.  Click outside this area to dismiss.</Text>
-                <EditTodo item={state[2]}/>
-              </Modal>
-            </Portal> 
+      
+          <View style={ globalStyles.todoScreenContainer }>            
+            <AddTodo />
+            <View style={ globalStyles.todoListContainer }>
             <FlatList
                 style={globalStyles.todoList}
                 data={ state } 
                 keyExtractor={( item, index) => index.toString() }
                 renderItem={({ item }) => (
-                  <Card style={ globalStyles.todoCard } onPress={ () => navigation.navigate( 'TodoDetails', item ) }>
+                  <Card style={ item.complete ? globalStyles.todoContainer : globalStyles.todoCard  } onPress={ () => navigation.navigate( 'TodoDetails', item ) }>
                       <Card.Content style={globalStyles.todoContainer}>
                         <Text style={globalStyles.todoText}> { item.task } </Text>
                       </Card.Content>
-                        <DeleteTodo showMod={showModal} item={item}/>
+                        <DeleteTodo item={item}/>
                   </Card>
                 )}
               />
-              <Button onPress={showModal}>Click</Button>
           </View>
-      </Provider>
+          
+          </View>
+      
     )
 }
 

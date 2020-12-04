@@ -6,10 +6,6 @@ const coltsGray = '#A2AAAD';
 const raidSilver = '#A5ACAF';
 
 export const globalStyles = StyleSheet.create({
-    container: {
-        flex: 1,
-        backgroundColor: coltsGray,
-    },
     visionPage: {
         backgroundColor: coltsGray,
         flex: 1,
@@ -59,14 +55,63 @@ export const globalStyles = StyleSheet.create({
         marginTop: 6,
         textAlign: 'center',
     },
+    // CSS for Todos
+    todoScreenContainer: {
+        flex: 1,
+        backgroundColor: coltsGray,
+    },
+    todoListContainer: {
+        flex: 7,
+        marginTop: 10,
+        alignSelf: 'center',
+        backgroundColor: coltsGray
+    },
+    addTodoForm: {
+        flex: 1,
+        margin: 10,
+        flexDirection: 'row',
+        flexWrap: 'wrap',
+    },
     todoInput: {
-        width: windowWidth * .97,
+        height: 35,
+        width: windowWidth * .75,
         padding: 4,
         marginLeft: 4,
 
     },
+    todoErrorText:{
+        width: windowWidth * .75,
+        color: 'crimson',
+        fontWeight: 'bold',
+        marginBottom: 10,
+        marginTop: 6,
+        textAlign: 'center', 
+    },
+    addTodoButton: {
+        width: windowWidth * .2,
+        borderRadius: 2,
+        borderColor: 'black',
+        backgroundColor: '#A2AAAD',
+        shadowColor: "black",
+        shadowOffset: {
+            width: 3,
+            height: 2,
+        },
+        shadowOpacity: 7.25,
+        shadowRadius: 4.84,
+        elevation: 5,
+    },
+    addTodoButtonText: {
+        color: '#002C5F',
+        fontWeight: 'bold',
+        textTransform: 'uppercase',
+        fontSize: 16,
+        textAlign: 'center',
+    },
+    todoList: {
+        color: coltsGray,
+    },
     todoCard: {
-        alignSelf: 'center',
         alignItems: 'center',
         width: windowWidth * .99,
         borderRadius: 3,
@@ -85,11 +130,7 @@ export const globalStyles = StyleSheet.create({
         fontFamily: 'nunito-black',
         padding: 5,
     },
-    todoList: {
-        color: coltsGray,
-    },
     todoContainer: {
-        color: 'red',
         padding: 10,
         alignItems: 'center',
     },
@@ -211,7 +252,4 @@ export const globalStyles = StyleSheet.create({
         alignSelf: 'center',
         alignItems: 'center',
     },
-    todoFormContainer: {
-        backgroundColor: coltsGray
-    }
 })

@@ -1,11 +1,10 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { View } from 'react-native'
 import { globalStyles } from '../styles/global'
 import { Formik } from 'formik'
 import * as yup from 'yup'
-import FlatButton from '../shared/button'
 import { connect } from 'react-redux';
-import { TextInput, Text } from 'react-native-paper';
+import { TextInput, Text, Button } from 'react-native-paper';
 import { addTodo } from '../redux/actions';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
@@ -13,23 +12,14 @@ const todoSchema = yup.object({
     task: yup.string().required().min(4),
 })
 
-
-export const storeData = async ( value ) => {
-    try {
-      const jsonValue = JSON.stringify( value )
-      await AsyncStorage.setItem( '@todos', jsonValue )
-      alert( 'Data successfully saved' )
-      setModalOpen( false );
-      console.log( 'storageKey' )
-    } catch (e) {
-      alert( 'Failed to save the data to the storage' )
-    }
-  }
-
 export function AddTodo ({ addTodo }) {
+  const [text, setText] = useState({
+    id:null, 
+    task:'',
+  });
 
     return (
-            <Formik
+            <Formik 
                 initialValues={{ task: '', id: '', complete: false}}
                 validationSchema={ todoSchema }
                 onSubmit={( values, actions ) => {
@@ -39,7 +29,7 @@ export function AddTodo ({ addTodo }) {
                 }}
             >
                 { ( formikProps ) => (
-                    <View>
+                    <View style={globalStyles.addTodoForm}>
                         <TextInput
                             style={globalStyles.todoInput}
                             multiline
@@ -48,12 +38,14 @@ export function AddTodo ({ addTodo }) {
                             value={ formikProps.values.task }
                             onBlur={ formikProps.handleBlur( 'task' ) }
                         />
+                        <Button icon='plus' style={globalStyles.addTodoButton} text='new' onPress={ formikProps.handleSubmit }>
+                        <Text style={ globalStyles.addTodoButtonText }> Add Todo </Text>
+                        </Button>
                         <Text 
-                            style={ globalStyles.errorText }
+                            style={ globalStyles.todoErrorText }
                         >
                                 { formikProps.touched.task && formikProps.errors.task }
                         </Text>
-                        <FlatButton text='new' onPress={ formikProps.handleSubmit }/>
                     </View>
                 )}    
             </Formik>
