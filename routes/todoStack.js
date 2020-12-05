@@ -1,12 +1,12 @@
 import { createStackNavigator } from 'react-navigation-stack';
-import TodoList from '../screens/todoScreen';
-import TodoDetails from '../components/todoDetails';
+import TodoScreen from '../screens/todoScreen';
+import TodoDetails from '../components/todos/todoDetails';
 import Header from '../shared/header';
 import React from 'react';
 
 const screens = {
-    TodoList: {
-        screen: TodoList,
+    TodoScreen: {
+        screen: TodoScreen,
         navigationOptions: ( { navigation } ) => {
             return {
                 headerTitle: () => <Header navigation={ navigation } title='Todos'/>   
@@ -16,10 +16,10 @@ const screens = {
     TodoDetails: {
         screen: TodoDetails,
         navigationOptions: {
-            title: 'Todo Details',
+            title: 'TodoDetails',
         }
     }
-}
+};
 
 const TodoStack = createStackNavigator( screens, {
     defaultNavigationOptions: {

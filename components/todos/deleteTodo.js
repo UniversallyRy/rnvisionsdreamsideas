@@ -2,8 +2,8 @@ import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { Button } from 'react-native-paper';
 import { connect } from 'react-redux';
-import { deleteTodo, toggleTodo } from '../redux/actions';
-import { globalStyles } from '.././styles/global';
+import { deleteTodo, toggleTodo } from '../../redux/actions';
+import { globalStyles } from '../../styles/global';
 
 export function DeleteTodo({ deleteTodo, item, toggleTodo }) {
     const removeTodo = () => {
@@ -11,13 +11,13 @@ export function DeleteTodo({ deleteTodo, item, toggleTodo }) {
         var buttonId = item.id;
         //calls redux action on stored todoss
         deleteTodo(buttonId);
-    }
+    };
 
     const togTodo = () => {
         var buttonId = item.id;
         toggleTodo(buttonId, item);
-        console.log(item)
-    }
+        console.log(item);
+    };
 
     return (
         <View style={globalStyles.todoButtons}>

@@ -1,9 +1,9 @@
 import React from 'react';
 import { StyleSheet, View, Dimensions } from 'react-native';
 import { Button } from 'react-native-paper';
-import { deleteJournal } from '../redux/actions';
+import { deleteJournal } from '../../redux/actions';
 import { connect } from 'react-redux';
-import { globalStyles } from '.././styles/global';
+import { globalStyles } from '../../styles/global';
 
 const { width: windowWidth, height: windowHeight } = Dimensions.get("window");
 

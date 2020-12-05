@@ -1,7 +1,7 @@
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
 import { Button } from 'react-native-paper';
-import { deleteJournal } from '../redux/actions';
+import { deleteJournal } from '../../redux/actions';
 import { connect } from 'react-redux';
 
 export function DeleteJournal( {state, deleteJournal, item}) {

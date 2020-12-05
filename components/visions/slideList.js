@@ -5,7 +5,7 @@ import {
   Dimensions,
   Image,
 } from "react-native";
-import { globalStyles } from "../styles/global";
+import { globalStyles } from "../../styles/global";
 import { Card }  from 'react-native-paper';
 import { connect } from 'react-redux';
 import DeleteVision from "./deleteVision";

@@ -1,6 +1,6 @@
 import { createStackNavigator } from 'react-navigation-stack';
 import JournalList from '../screens/journalScreen';
-import JournalDetails from '../components/journalDetails';
+import JournalDetails from '../components/journals/journalDetails';
 import Header from '../shared/header';
 import React from 'react';
 

@@ -4,8 +4,8 @@ import { Text } from 'react-native-paper';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { globalStyles } from '../styles/global';
 import { connect } from 'react-redux';
-import AddVision from '../components/addVision';
-import SlideList from '../components/slideList';
+import AddVision from '../components/visions/addVision';
+import SlideList from '../components/visions/slideList';
 
 
 export function Visions({ navigation, state }) {

@@ -1,39 +1,18 @@
 import React, { useState } from 'react';
 import { FlatList, View } from 'react-native';
 import { globalStyles } from '../styles/global';
-import { Card, Text } from 'react-native-paper';
-import AddTodo from '../components/addTodo';
-import DeleteTodo from '../components/deleteTodo';
+import AddTodo from '../components/todos/addTodo';
 import { connect } from 'react-redux';
 import { getTodosByVisibilityFilter } from "../redux/reducers/selectors";
+import  TodoList  from '../components/todos/todoList';
 
-export  function TodoList({ navigation, state }) {
-
-  const [visible, setVisible] = useState(false);
-  const [input, setInput] = useState('');
-  const [edited, setEdited] = useState(false);
-    console.log(state);
+export  function TodoScreen({navigation}) {
 
     return (
       
           <View style={ globalStyles.todoScreenContainer }>            
             <AddTodo />
-            <View style={ globalStyles.todoListContainer }>
-            <FlatList
-                style={globalStyles.todoList}
-                data={ state } 
-                keyExtractor={( item, index) => index.toString() }
-                renderItem={({ item }) => (
-                  <Card style={ item.complete ? globalStyles.todoContainer : globalStyles.todoCard  } onPress={ () => navigation.navigate( 'TodoDetails', item ) }>
-                      <Card.Content style={globalStyles.todoContainer}>
-                        <Text style={globalStyles.todoText}> { item.task } </Text>
-                      </Card.Content>
-                        <DeleteTodo item={item}/>
-                  </Card>
-                )}
-              />
-          </View>
-          
+            <TodoList/>
           </View>
       
     )
@@ -45,4 +24,4 @@ const mapStateToProps = (state, ownProps) => {
   }
 }
 
-export default connect(mapStateToProps)(TodoList)
+export default connect(mapStateToProps)(TodoScreen)

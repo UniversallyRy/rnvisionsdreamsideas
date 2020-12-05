@@ -1,13 +1,13 @@
 import React from 'react';
 import { View } from 'react-native';
-import { globalStyles } from '../styles/global';
+import { globalStyles } from '../../styles/global';
 import { Formik } from 'formik';
 import * as yup from 'yup';
-import FlatButton from '../shared/button';
-import ImagePic from '../components/imagePicker';
+import FlatButton from '../../shared/button';
+import ImagePic from './imagePicker';
 import { TextInput, Text } from 'react-native-paper';
 import { connect } from 'react-redux';
-import { addVision } from '../redux/actions';
+import { addVision } from '../../redux/actions';
 
 const visionSchema = yup.object({
     title: yup.string().required().min( 4 ),
