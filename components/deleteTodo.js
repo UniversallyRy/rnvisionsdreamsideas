@@ -14,9 +14,7 @@ export function DeleteTodo({ deleteTodo, item, toggleTodo }) {
     }
 
     const togTodo = () => {
-        // save item.id from props to buttonId
         var buttonId = item.id
-        //calls redux action on stored todoss
         toggleTodo(buttonId, item);
         console.log(item)
     }

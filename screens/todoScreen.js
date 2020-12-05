@@ -7,10 +7,8 @@ import DeleteTodo from '../components/deleteTodo'
 import { connect } from 'react-redux';
 import { getTodosByVisibilityFilter } from "../redux/reducers/selectors";
 
-
 export  function TodoList({ navigation, state }) {
 
-  const test = []
   const [visible, setVisible] = useState(false);
   const [input, setInput] = useState('');
   const [edited, setEdited] = useState(false);

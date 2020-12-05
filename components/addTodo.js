@@ -6,7 +6,6 @@ import * as yup from 'yup'
 import { connect } from 'react-redux';
 import { TextInput, Text, Button } from 'react-native-paper';
 import { addTodo } from '../redux/actions';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const todoSchema = yup.object({
     task: yup.string().required().min(4),
