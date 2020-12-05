@@ -1,7 +1,9 @@
 import { ADD_TODO, EDIT_TODO, DELETE_TODO, TOGGLE_TODO } from "../actionTypes";
 import { v4 as uuidv4 } from 'uuid';
 
-export default function( action, state = [] ) {
+const initialValue = [];
+
+export default function( state = initialValue, action ) {
   switch ( action.type ) {
     case ADD_TODO: 
         //can be used to quickly reset a reducers todo

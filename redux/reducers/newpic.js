@@ -2,7 +2,7 @@ import { ADD_PIC } from "../actionTypes";
 
 const initialPic = 'test';
 
-export default function( action, state = initialPic ) {
+export default function( state = initialPic, action ) {
   switch ( action.type ) {
     case ADD_PIC:
         var uri = '';
