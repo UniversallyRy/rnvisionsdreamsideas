@@ -73,12 +73,14 @@ export const globalStyles = StyleSheet.create({
         flexWrap: 'wrap',
     },
     todoInput: {
-        height: 35,
         width: windowWidth * 0.75,
-        padding: 4,
+        paddingLeft: 14,
+        paddingTop: 32,
+        paddingRight: 14,
+        paddingBottom: 16,
         marginLeft: 4,
-
     },
+    
     textInput: {
         width:100,
         height: 100,
@@ -92,6 +94,7 @@ export const globalStyles = StyleSheet.create({
         textAlign: 'center', 
     },
     addTodoButton: {
+        padding: 16,
         width: windowWidth * 0.2,
         borderRadius: 2,
         borderColor: 'black',
@@ -134,6 +137,10 @@ export const globalStyles = StyleSheet.create({
         fontFamily: 'nunito-black',
         padding: 5,
     },
+    todoCompleted: {
+        textDecorationLine: 'line-through',
+        opacity: 0.4,
+      },
     todoContainer: {
         padding: 10,
         alignItems: 'center',

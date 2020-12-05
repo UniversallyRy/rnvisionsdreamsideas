@@ -34,6 +34,7 @@ export function AddTodo ({ addTodo }) {
                             autoCorrect={true}
                             style={globalStyles.todoInput}
                             placeholder='Enter Todo . . .'
+                            placeholderTextColor={'#002C5F'}
                             onChangeText={ formikProps.handleChange( 'task' ) }
                             value={ formikProps.values.task }
                             onBlur={ formikProps.handleBlur( 'task' ) }

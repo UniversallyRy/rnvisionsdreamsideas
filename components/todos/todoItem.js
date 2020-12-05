@@ -8,32 +8,34 @@ import { getTodosByVisibilityFilter } from "../../redux/reducers/selectors";
 import { deleteTodo, editTodo } from '../../redux/actions';
 
 export  function TodoItem({ navigation, state, item, deleteTodo, editTodo }) {
- const buttonId = item.id;
-  const [input, setInput] = useState(item.task);
+  const [input, setInput] = useState('');
   const [edited, setEdited] = useState(false);
 
   const removeTodo = () => {
     //calls redux action on stored todos
-    deleteTodo(buttonId);
+    deleteTodo(item.id);
     setEdited(false);
 };
 
-  const handleEdit = () => {
+  const editButtonHandler = () => {
+    //event handler to make sure input edited input text consistently matches
+    setInput(item.task);
+    setEdited(true);
+  };
+console.log(state);
+  const saveEdit = () => {
     // map through state, grab todo by id and change task value
     const newState = state.map((todo) => {
-
+        //checks useState item ids with State props
         if (todo.id === item.id) {
             todo.task = input;
             return todo;
         } 
       });
-
+    // redux function, may not be needed  
     editTodo(newState);
     setEdited(false);
   };
-  
-    console.log(state);
-  
   
     return (
             <View style={ globalStyles.todoListContainer }>
@@ -50,7 +52,7 @@ export  function TodoItem({ navigation, state, item, deleteTodo, editTodo }) {
                         {edited
 
                           ? <View style={globalStyles.todoButtons}>
-                            <Button style={styles.editButton} color="#A2AAAD" icon="lead-pencil" mode="contained" onPress={() => handleEdit()}>
+                            <Button style={styles.editButton} color="#A2AAAD" icon="lead-pencil" mode="contained" onPress={() => saveEdit()}>
                                 <Text>Save</Text>
                             </Button>
                             <Button style={styles.deleteButton} color="red" icon="close-outline" mode="contained" onPress={() => setEdited(false)}>
@@ -59,7 +61,7 @@ export  function TodoItem({ navigation, state, item, deleteTodo, editTodo }) {
                             </View>
                           :
                           <View style={globalStyles.todoButtons}>
-                          <Button style={styles.editButton} color="#A2AAAD" icon="lead-pencil" mode="contained" onPress={()=> setEdited(true)}>
+                          <Button style={styles.editButton} color="#A2AAAD" icon="lead-pencil" mode="contained" onPress={() => editButtonHandler()}>
                                 <Text>Edit</Text>
                             </Button>
                             <Button style={styles.deleteButton} color="red" icon="close-outline" mode="contained" onPress={() => removeTodo()}>

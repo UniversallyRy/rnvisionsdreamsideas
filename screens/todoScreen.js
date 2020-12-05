@@ -11,8 +11,8 @@ export  function TodoScreen({navigation}) {
     return (
       
           <View style={ globalStyles.todoScreenContainer }>            
-            <AddTodo />
             <TodoList/>
+            <AddTodo />
           </View>
       
     )

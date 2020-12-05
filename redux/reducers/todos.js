@@ -7,7 +7,7 @@ const initialValue = [];
 export default function( state = initialValue, action ) {
   switch ( action.type ) {
     case ADD_TODO: 
-        //can be used to quickly reset a reducers todo
+      // state = [] ; //can be used to quickly reset a reducers todo
       // return state 
           return [
             { 
@@ -25,15 +25,11 @@ export default function( state = initialValue, action ) {
     const { payload } = action;
     let { items } = state;
     
-    return state;
-    
+    return state; 
     }
       // return { todos, ...state }
     case DELETE_TODO: {
       return state.filter(( todo ) => todo.id != action.payload.id);
-    }
-    case "ADD_TEXT": {
-      return {...state, task: action.payload.value};
     }
     default:
       return state;
