@@ -19,7 +19,7 @@ const initialJournals = [
     id: uuidv4(),
   }
 ]; 
-export default function( state = initialJournals, action ) {
+export default function( action, state = initialJournals ) {
   switch ( action.type ) {
     case ADD_JOURNAL:
           return [
@@ -29,7 +29,7 @@ export default function( state = initialJournals, action ) {
             id: uuidv4(),
             },
             ...state,
-          ]
+          ];
   
     case EDIT_JOURNAL: {
       return {

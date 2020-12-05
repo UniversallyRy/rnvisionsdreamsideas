@@ -1,12 +1,12 @@
-import React from 'react'
-import { StyleSheet, Text, View, SafeAreaView } from 'react-native'
+import React from 'react';
+import { StyleSheet, Text, View, SafeAreaView } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
 
 export default function Header({ navigation, title }) {
 
     const openMenu = () => {
         navigation.openDrawer();
-    }
+    };
 
     return (
         <SafeAreaView >

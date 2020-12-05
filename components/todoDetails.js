@@ -6,7 +6,7 @@ export default function TodoDetails({ navigation }) {
 
     const handlePress = () => {
         navigation.goBack();
-    }
+    };
 
     return (
             <Card id ={ Math.random() * 92 } style={ globalStyles.tDetailsContainer }>

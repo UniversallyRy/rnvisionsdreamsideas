@@ -1,11 +1,11 @@
-import React, { useState } from 'react'
-import { FlatList, View, StyleSheet } from 'react-native'
-import { globalStyles } from '../styles/global'
+import React, { useState } from 'react';
+import { FlatList, View, StyleSheet } from 'react-native';
+import { globalStyles } from '../styles/global';
 import { Card, Paragraph, Text, Modal, Portal, Provider,Button as PaperButton} from 'react-native-paper';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
-import AddJournal from '../components/addJournal'
+import AddJournal from '../components/addJournal';
 import { connect } from 'react-redux';
-import JournalButtons from '../components/journalButtons'
+import JournalButtons from '../components/journalButtons';
 
 export function JournalList({ navigation, state }) {
     const [ modalOpen, setModalOpen ] = useState( false );

@@ -1,9 +1,9 @@
-import React from 'react'
-import { View } from 'react-native'
-import { globalStyles } from '../styles/global'
-import { Formik } from 'formik'
-import * as yup from 'yup'
-import FlatButton from '../shared/button'
+import React from 'react';
+import { View } from 'react-native';
+import { globalStyles } from '../styles/global';
+import { Formik } from 'formik';
+import * as yup from 'yup';
+import FlatButton from '../shared/button';
 import ImagePic from '../components/imagePicker';
 import { TextInput, Text } from 'react-native-paper';
 import { connect } from 'react-redux';

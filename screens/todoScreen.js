@@ -1,9 +1,9 @@
-import React, { useState } from 'react'
-import { FlatList, View } from 'react-native'
-import { globalStyles } from '../styles/global'
-import { Card, Paragraph,  Modal, Provider, Portal, Text, Button } from 'react-native-paper';
-import AddTodo from '../components/addTodo'
-import DeleteTodo from '../components/deleteTodo'
+import React, { useState } from 'react';
+import { FlatList, View } from 'react-native';
+import { globalStyles } from '../styles/global';
+import { Card, Text } from 'react-native-paper';
+import AddTodo from '../components/addTodo';
+import DeleteTodo from '../components/deleteTodo';
 import { connect } from 'react-redux';
 import { getTodosByVisibilityFilter } from "../redux/reducers/selectors";
 

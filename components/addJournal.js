@@ -1,9 +1,9 @@
-import React, {useState} from 'react'
-import { View } from 'react-native'
-import { globalStyles } from '../styles/global'
-import { Formik } from 'formik'
-import * as yup from 'yup'
-import FlatButton from '../shared/button'
+import React, {useState} from 'react';
+import { View } from 'react-native';
+import { globalStyles } from '../styles/global';
+import { Formik } from 'formik';
+import * as yup from 'yup';
+import FlatButton from '../shared/button';
 import { TextInput, Text, useTheme } from 'react-native-paper';
 import { connect } from 'react-redux';
 import { addJournal } from '../redux/actions';

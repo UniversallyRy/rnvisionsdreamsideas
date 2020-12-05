@@ -1,6 +1,6 @@
-import React from 'react'
-import { StyleSheet } from 'react-native'
-import { Button, Text } from 'react-native-paper'
+import React from 'react';
+import { StyleSheet } from 'react-native';
+import { Button, Text } from 'react-native-paper';
 
 export default function FlatButton( { text, onPress }) {
     return (

@@ -1,6 +1,6 @@
-import React from 'react'
-import { StyleSheet, Text, View } from 'react-native'
-import { Button } from 'react-native-paper'
+import React from 'react';
+import { StyleSheet, Text, View } from 'react-native';
+import { Button } from 'react-native-paper';
 import { connect } from 'react-redux';
 import { deleteVision } from '../redux/actions';
 

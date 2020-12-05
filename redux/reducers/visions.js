@@ -9,7 +9,7 @@ const initialVisions = Array.from({ length:8 }).map((_, i) => {
     };
   });
 
-export default function( state = initialVisions, action ) {
+export default function( action, state = initialVisions ) {
   switch ( action.type ) {
     case ADD_VISION:
           return [
@@ -19,15 +19,15 @@ export default function( state = initialVisions, action ) {
             id: uuidv4(),
             },
             ...state,
-          ]
+          ];
     case EDIT_VISION: {
       return {
         ...state
       };
     }
     case DELETE_VISION: {
-      return state.filter(vision => vision.id !== action.payload.id)
-    };
+      return state.filter(vision => vision.id !== action.payload.id);
+    }
     default:
       return state;
   }

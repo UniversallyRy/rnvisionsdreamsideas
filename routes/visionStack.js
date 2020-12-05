@@ -1,7 +1,7 @@
 import { createStackNavigator } from 'react-navigation-stack';
 import { createAppContainer } from 'react-navigation';
 import Visions from '../screens/visionScreen';
-import VisionDetails from '../components/visionDetails'
+import VisionDetails from '../components/visionDetails';
 import Header from '../shared/header';
 import React from 'react';
 

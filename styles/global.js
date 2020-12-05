@@ -11,7 +11,7 @@ export const globalStyles = StyleSheet.create({
         flex: 1,
     },
     uploadButton: {
-        flex: .5,
+        flex: 0.5,
         alignItems: 'center',
         justifyContent: 'center',
         padding: 25,
@@ -29,11 +29,11 @@ export const globalStyles = StyleSheet.create({
         backgroundColor: coltsGray,
     },
     todoDetails:{
-        flex: .4,
+        flex: 0.4,
         alignContent: 'center',
         fontSize: 20,
-        height: windowHeight * .3,
-        width: windowWidth * .97,
+        height: windowHeight * 0.3,
+        width: windowWidth * 0.97,
         alignSelf: 'center',
         fontWeight: 'bold',
         backgroundColor: coltsBlue,
@@ -74,13 +74,13 @@ export const globalStyles = StyleSheet.create({
     },
     todoInput: {
         height: 35,
-        width: windowWidth * .75,
+        width: windowWidth * 0.75,
         padding: 4,
         marginLeft: 4,
 
     },
     todoErrorText:{
-        width: windowWidth * .75,
+        width: windowWidth * 0.75,
         color: 'crimson',
         fontWeight: 'bold',
         marginBottom: 10,
@@ -88,7 +88,7 @@ export const globalStyles = StyleSheet.create({
         textAlign: 'center', 
     },
     addTodoButton: {
-        width: windowWidth * .2,
+        width: windowWidth * 0.2,
         borderRadius: 2,
         borderColor: 'black',
         backgroundColor: '#A2AAAD',
@@ -113,7 +113,7 @@ export const globalStyles = StyleSheet.create({
     },
     todoCard: {
         alignItems: 'center',
-        width: windowWidth * .99,
+        width: windowWidth * 0.99,
         borderRadius: 3,
         elevation: 5,
         padding: 15,
@@ -171,12 +171,12 @@ export const globalStyles = StyleSheet.create({
     jDetailsCard: {
         alignSelf: 'center',
         backgroundColor: coltsBlue,
-        width: windowWidth * .99,
+        width: windowWidth * 0.99,
     },
     journalCard: {
         alignSelf: 'center',
         backgroundColor: coltsBlue,
-        width: windowWidth * .99,
+        width: windowWidth * 0.99,
     },
     journalTitle: {
         fontFamily: 'nunito-black',
@@ -188,7 +188,7 @@ export const globalStyles = StyleSheet.create({
         color: coltsGray,
     },
     addJournalContainer: {
-        flex: .92, 
+        flex: 0.92, 
         backgroundColor: '#A2AAAD', 
         padding: 10, 
     },
@@ -252,4 +252,4 @@ export const globalStyles = StyleSheet.create({
         alignSelf: 'center',
         alignItems: 'center',
     },
-})
+});

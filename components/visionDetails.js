@@ -6,7 +6,7 @@ export default function VisionDetails({ navigation }) {
 
     const handlePress = () => {
         navigation.goBack();
-    }
+    };
 
     return (
         <Card style={ globalStyles.cardContent }>

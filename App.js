@@ -8,9 +8,9 @@ import {
   DefaultTheme as PaperDefaultTheme,
   Provider as PaperProvider,
 } from 'react-native-paper';
-import 'react-native-get-random-values'
+import 'react-native-get-random-values';
 import 'react-native-gesture-handler';
-import { AppRegistry, StatusBar } from 'react-native'
+import { AppRegistry, StatusBar } from 'react-native';
 import { StatusBa } from 'expo-status-bar';
 import React, { useState } from 'react';
 import { Provider } from 'react-redux';
@@ -20,7 +20,7 @@ import { AppLoading } from 'expo';
 import Navigator from './routes/drawer';
 import merge from 'deepmerge';
 import { globalStyles } from './styles/global';
-import { PersistGate } from 'redux-persist/integration/react'
+import { PersistGate } from 'redux-persist/integration/react';
 
 
 const getFonts = () => 

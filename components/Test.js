@@ -1,7 +1,7 @@
 import React from "react";
 import { PURGE } from 'redux-persist';
 import { connect } from 'react-redux';
-import { Card, Paragraph,  Modal, Provider, Portal, Text, Button } from 'react-native-paper';
+import { Button } from 'react-native-paper';
 
 // Generate <TestComponent /> with a button that will purge the persisted store
 const Test = (state) => { 

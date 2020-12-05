@@ -1,9 +1,7 @@
 import { ADD_TODO, EDIT_TODO, DELETE_TODO, TOGGLE_TODO } from "../actionTypes";
 import { v4 as uuidv4 } from 'uuid';
 
-
-
-export default function( state = [], action ) {
+export default function( action, state = [] ) {
   switch ( action.type ) {
     case ADD_TODO: 
         //can be used to quickly reset a reducers todo
@@ -15,7 +13,7 @@ export default function( state = [], action ) {
             complete: false
             },
             ...state,
-          ]
+          ];
     case EDIT_TODO: {
       const { payload } = action;
       return (
@@ -25,10 +23,10 @@ export default function( state = [], action ) {
               ...item,
               task:payload.task,
               complete: !complete
-            }
+            };
           }
         })
-      )
+      );
     }
     case TOGGLE_TODO: 
     const { payload } = action;
@@ -46,10 +44,10 @@ export default function( state = [], action ) {
     };
       // return { todos, ...state }
     case DELETE_TODO: {
-      return state.filter(( todo ) => todo.id != action.payload.id)
+      return state.filter(( todo ) => todo.id != action.payload.id);
     }
     case "ADD_TEXT": {
-      return {...state, task: action.payload.value}
+      return {...state, task: action.payload.value};
     }
     default:
       return state;

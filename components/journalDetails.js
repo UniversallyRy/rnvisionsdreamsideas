@@ -6,7 +6,7 @@ export default function JournalDetails({ navigation }) {
 
     const handlePress = () => {
         navigation.goBack();
-    }
+    };
 
     return (
         <Card style={globalStyles.jDetailsContainer} id ={ Math.random() * 92 }>

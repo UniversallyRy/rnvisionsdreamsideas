@@ -3,7 +3,7 @@ import { ADD_PIC, TOGGLE_TODO, ADD_VISION, EDIT_VISION, DELETE_VISION, ADD_TODO,
 export const addText = value => ({
   type: "ADD_TEXT",
   payload: value
-})
+});
 
 export const addVision = ({uri, title, id})  => ({
   type: ADD_VISION,
@@ -64,7 +64,7 @@ export const editJournal = id => ({
 export const deleteJournal = id => ({
   type: DELETE_JOURNAL,
   payload: { id }
-})
+});
 
 export const addPic = uri  => ({
   type: ADD_PIC,

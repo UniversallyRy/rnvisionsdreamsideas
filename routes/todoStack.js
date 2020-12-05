@@ -1,6 +1,6 @@
 import { createStackNavigator } from 'react-navigation-stack';
-import TodoList from '../screens/todoScreen'
-import TodoDetails from '../components/todoDetails'
+import TodoList from '../screens/todoScreen';
+import TodoDetails from '../components/todoDetails';
 import Header from '../shared/header';
 import React from 'react';
 
