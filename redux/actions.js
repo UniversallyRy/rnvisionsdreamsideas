@@ -37,14 +37,14 @@ export const toggleTodo = ({ id, todo}) => ({
   payload: { id , todo}
 });
 
-export const editTodo = id => ({
+export const editTodo = state => ({
   type: EDIT_TODO,
-  payload: { id }
+  payload: { state }
 });
 
 export const deleteTodo = id => ({
   type: DELETE_TODO,
-  payload: { id }
+  payload: { id, }
 });
 
 export const addJournal = ({title, body, id})  => ({

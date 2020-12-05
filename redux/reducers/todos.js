@@ -1,5 +1,6 @@
 import { ADD_TODO, EDIT_TODO, DELETE_TODO, TOGGLE_TODO } from "../actionTypes";
 import { v4 as uuidv4 } from 'uuid';
+import { editTodo } from "../actions";
 
 const initialValue = [];
 
@@ -7,7 +8,7 @@ export default function( state = initialValue, action ) {
   switch ( action.type ) {
     case ADD_TODO: 
         //can be used to quickly reset a reducers todo
-      // return intiialstate 
+      // return state 
           return [
             { 
             task: action.payload.task,
@@ -17,33 +18,16 @@ export default function( state = initialValue, action ) {
             ...state,
           ];
     case EDIT_TODO: {
-      const { payload } = action;
-      return (
-        state.map(item => {
-          if (item.id === payload.id) {
-            return {
-              ...item,
-              task:payload.task,
-              complete: !complete
-            };
-          }
-        })
-      );
+      const newState= action.payload.state;
+      return newState;
     }
-    case TOGGLE_TODO: 
+    case TOGGLE_TODO: {
     const { payload } = action;
     let { items } = state;
-    let index = items.indexOf(payload.todo);
-    let toggledTodo = Object.assign({}, items[index]);
-    toggledTodo.complete = !toggledTodo.complete;
-    return {
-      ...state,
-      items: {
-        ...items.slice(0, index),
-        toggledTodo,
-        ...items.slice(index + 1),
-      },
-    };
+    
+    return state;
+    
+    }
       // return { todos, ...state }
     case DELETE_TODO: {
       return state.filter(( todo ) => todo.id != action.payload.id);

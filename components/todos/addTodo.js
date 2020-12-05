@@ -6,7 +6,7 @@ import * as yup from 'yup';
 import { connect } from 'react-redux';
 import { TextInput, Text, Button } from 'react-native-paper';
 import { addTodo } from '../../redux/actions';
-
+addTodo([])
 const todoSchema = yup.object({
     task: yup.string().required().min(4),
 });
@@ -30,8 +30,9 @@ export function AddTodo ({ addTodo }) {
                 { ( formikProps ) => (
                     <View style={globalStyles.addTodoForm}>
                         <TextInput
+                            enablesReturnKeyAutomatically={true}
+                            autoCorrect={true}
                             style={globalStyles.todoInput}
-                            multiline
                             placeholder='Enter Todo . . .'
                             onChangeText={ formikProps.handleChange( 'task' ) }
                             value={ formikProps.values.task }

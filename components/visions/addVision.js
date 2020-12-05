@@ -11,7 +11,7 @@ import { addVision } from '../../redux/actions';
 
 const visionSchema = yup.object({
     title: yup.string().required().min( 4 ),
-})
+});
 
 export function AddVision({ addVision, stateUri}) {
     return (

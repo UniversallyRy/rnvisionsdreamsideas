@@ -26,6 +26,6 @@ const RootDrawerNavigator = createDrawerNavigator(
     {
         drawerType: 'front',
     }
-)
+);
 
 export default createAppContainer( RootDrawerNavigator );

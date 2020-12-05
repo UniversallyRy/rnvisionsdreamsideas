@@ -79,6 +79,10 @@ export const globalStyles = StyleSheet.create({
         marginLeft: 4,
 
     },
+    textInput: {
+        width:100,
+        height: 100,
+    },
     todoErrorText:{
         width: windowWidth * 0.75,
         color: 'crimson',
