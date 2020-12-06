@@ -59,6 +59,8 @@ export const globalStyles = StyleSheet.create({
     todoScreenContainer: {
         flex: 1,
         backgroundColor: coltsGray,
+        alignItems: 'center',
+        justifyContent: 'center',
     },
     todoListContainer: {
         flex: 7,

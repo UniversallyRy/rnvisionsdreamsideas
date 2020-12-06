@@ -6,16 +6,14 @@ import * as yup from 'yup';
 import FlatButton from '../../shared/button';
 import { TextInput, Text, useTheme } from 'react-native-paper';
 import { connect } from 'react-redux';
-import { addJournal, addTodo } from '../../redux/actions';
-
-
+import { addJournal } from '../../redux/actions';
 
 const JournalSchema = yup.object({
     title: yup.string().required().min(4),
     body: yup.string().required().min(4),
 })
 
-export function AddJournal ({ addTodo }) {
+export function AddJournal ({ addJournal }) {
     const { colors } = useTheme();
     const [ modalOpen, setModalOpen ] = useState( true );
     return (
@@ -25,7 +23,7 @@ export function AddJournal ({ addTodo }) {
                 initialValues={{ title:'', body:'', id:''}}
                 validationSchema={ JournalSchema }
                 onSubmit={( values, actions ) => {
-                    addTodo( values );
+                    addJournal( values );
                     actions.resetForm();
                     setModalOpen(false);
                 }}
@@ -72,7 +70,7 @@ const mapStateToProps = ( state, ownProps ) => {
     }
   }
   
-  const mapDispatchToProps = { addJournal , addTodo}
+  const mapDispatchToProps = { addJournal }
 
   export default connect(
     mapStateToProps,
