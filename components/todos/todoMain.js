@@ -31,35 +31,29 @@ export default function TodoMain() {
                 onRequestClose={() => toggleModal()}>
                     <AddListModal closeModal={() => toggleModal()} addList={addList}/>
                 </Modal>
-                <View style={{flexDirection: 'row'}}>
+                <View style={styles.titleStyle}>
                     <View style={styles.divider} />
                     <Text style={styles.title} >
                         Todo <Text style={{fontWeight: '300', color:'blue'}}>App</Text>
                     </Text>
-                    <View style={styles.divider}/>
-                    </View>
-                    <View style={{marginVertical: 48}}>
-                        <TouchableOpacity onPress={() => toggleModal()} style={styles.addList}>
-                            <AntDesign name='plus' size={16}/>
-                        </TouchableOpacity>
-
-                        <Text style={styles.add}>Add List</Text>
-                    </View>
-
-                    <View style={{height: 275, paddingLeft: 32}}>
-                        <FlatList 
-                            data= {lists}
-                            keyExtractor={item => item.id.toString()}
-                            horizontal={true}
-                            showsHorizontalScrollIndicator={false}
-                            renderItem={({item}) => renderList(item)}
-                            keyboardShouldPersistTaps="always"
-                        />
+                <View style={styles.divider}/>
                 </View>
-
-
-            
-            
+                <View style={{marginVertical: 48}}>
+                    <TouchableOpacity onPress={() => toggleModal()} style={styles.addList}>
+                        <AntDesign name='plus' size={16}/>
+                    </TouchableOpacity>
+                    <Text style={styles.add}>Add List</Text>
+                </View>
+                <View style={{height: 275, paddingLeft: 32}}>
+                    <FlatList 
+                        data= {lists}
+                        keyExtractor={item => item.id.toString()}
+                        horizontal={true}
+                        showsHorizontalScrollIndicator={false}
+                        renderItem={({item}) => renderList(item)}
+                        keyboardShouldPersistTaps="always"
+                    />
+                </View>
             </View>
 
         
@@ -72,18 +66,23 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
     },
+    titleStyle: {
+        flexDirection: 'row',
+        flex: 1,
+        
+    },
     divider: {
         backgroundColor: 'skyblue',
         height: 1,
         flex: 1,
-        alignSelf: 'center',
+        marginTop: 40
         
     },
     title: {
         fontSize: 38,
         fontWeight: '800',
         color: 'black',
-        paddingHorizontal: 64,
+        paddingHorizontal: 20,
     },
     addList: {
         borderWidth: 2,
