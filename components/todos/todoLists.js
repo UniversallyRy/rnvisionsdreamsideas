@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Modal, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import TodosModal from './todosModal';
 
-export default function TodoLists({list,}) {
+export default function TodoLists({list}) {
     const completedCount = list.todos.filter(todo => todo.completed).length;
     const remainingCount = list.todos.length - completedCount;
     const [visible, setVisible] = useState(false);

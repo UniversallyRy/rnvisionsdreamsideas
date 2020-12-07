@@ -1,6 +1,53 @@
 import { ADD_TODO, EDIT_TODO, DELETE_TODO, TOGGLE_TODO, ADD_LIST } from "../actionTypes";
 import { v4 as uuidv4 } from 'uuid';
 
+const convertToObject = (array) => {
+  let items = {};
+
+  array.map((item) => {
+    items[item.id] = item;
+  });
+
+  return items;
+}; 
+
+const initialValu = [
+  {
+    Lists: {
+      byId: {
+        'list1': {  
+          name: 'Plan A Trip',
+          id: uuidv4(),
+          color: '#FE1F14', 
+          todos: []
+        },
+        'list2': {  
+          name: 'Errands',
+          id: uuidv4(),
+          color: '#000000', 
+          todos: []
+        },
+        'list3': {  
+          name: 'Plan A Trip',
+          id: uuidv4(),
+          color: '#FE1F14', 
+          todos: []
+        },
+      },
+      allIds : ['list1', 'list2', 'list3']
+    
+    },
+    Todos: {
+      byId: {
+        
+      }
+    }
+  },
+];
+
+
+
+
 const initialValue = [
   {
       name: 'Plan A Trip',
@@ -85,16 +132,9 @@ const initialValue = [
 export default function( state = initialValue, action ) {
   switch ( action.type ) {
     case ADD_TODO: 
-       state = initialValue ; //can be used to quickly reset a reducers todo
-      return state;
-          // return [
-          //   { 
-          //   task: action.payload.task,
-          //   id: uuidv4(),
-          //   complete: false,
-          //   },
-          //   ...state.todos,
-          // ];
+       //state = initialValue ; //can be used to quickly reset a reducers todo
+      //return state;
+      return
     case ADD_LIST: 
           return [
             

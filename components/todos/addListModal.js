@@ -28,18 +28,7 @@ export  function AddListModal({closeModal, addList}) {
             );
         });
     };
-    const newColor = bgColor;
 
-    const createTodo = () => {
-        const name = newName;
-        const color = bgColor; 
-        const lists = { name, color }
-        addList(lists)
-        setName('');
-        closeModal();
-    }
-    
-    
     return (
         <KeyboardAvoidingView style={styles.container} behavior={"padding"}> 
          

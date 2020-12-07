@@ -1,29 +1,32 @@
 import React, { useState } from 'react';
-import { TouchableOpacity, StyleSheet, Text, View, KeyboardAvoidingView, Keyboard, Animated } from 'react-native';
+import { TouchableOpacity, Button, StyleSheet, Text, View, KeyboardAvoidingView, Keyboard, Animated } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { AntDesign, Ionicons } from '@expo/vector-icons';
-import { FlatList, RectButton, TextInput} from 'react-native-gesture-handler';
+import { FlatList, RectButton, TextInput,} from 'react-native-gesture-handler';
 import Swipeable from 'react-native-gesture-handler/Swipeable';
+import { connect } from 'react-redux';
+import { addTodo } from '../../redux/actions';
+import { globalStyles } from '../../styles/global';
+import { Formik } from 'formik';
+import * as yup from 'yup';
 
-export default function TodosModal({list, closeModal, updateList}) {
-    const [newName, setName] = useState(list.name);
-    const [newText, setText] = useState('');
+const todoSchema = yup.object({
+    title: yup.string().required().min(4),
+});
+
+export  function TodosModal({state, list, closeModal, addTodo}) {
     const [completedTodo, setCompleted] = useState(false);
-    const [newTodos, setTodos] = useState(list.todos);
+    const newTodos = list.todos;
     const taskCount = newTodos.length;
     const completedCount = newTodos.filter(todo => todo.completed).length;
-    const [newTodo, setTodo] = useState('');
     
     const toggleTodoCompleted = index => {
-        let nList =list;
-        
-        setCompleted(nList.todos[index].completed = !nList.todos[index].completed);
-        // updateList(nList);
+      setCompleted(newTodos[index].completed = !newTodos[index].completed);
     };
     
     const renderTodo = (todo, index) => {
         return (
-            <Swipeable renderRightActions={(_, dragX) => rightActions(dragX, index)}>
+            <View renderRightActions={(_, dragX) => rightActions(dragX, index)}>
             <View style={styles.todoContainer}>
                 <TouchableOpacity onPress={() => toggleTodoCompleted(index)}>
                     <Ionicons name={todo.completed ? 'ios-square' : 'ios-square-outline'} size={24} color='gray' style={{width: 32}}/>
@@ -32,17 +35,9 @@ export default function TodosModal({list, closeModal, updateList}) {
                     {todo.title}
                 </Text>
             </View>
-            </Swipeable>
+            </View>
         )
     }
-
-    const addTodo = () => {
-        const nList = list
-        nList.todos.push({ title: newText, completed: false})
-        setText('');
-        Keyboard.dismiss();
-
-    };
 
     const rightActions = (dragX, index) => {
         const trans = dragX.interpolate({
@@ -69,13 +64,13 @@ export default function TodosModal({list, closeModal, updateList}) {
             >
                 <AntDesign name='close' size={24} color='black' onPress={closeModal}/>
             </TouchableOpacity>
-            <View style={[styles.section, styles.header, {borderBottomColor: list.color}]}>
-                <Text style={styles.title}>{newName}</Text>
+            <View style={[styles.section, styles.header, {borderBottomColor: newTodos.color}]}>
+                <Text style={styles.title}>{newTodos.name}</Text>
                 <Text style={styles.taskCount}>Completed {completedCount} of {taskCount} tasks</Text>
             </View>
             <View style={[styles.section, {flex: 3}]}>
             <FlatList
-                data={list.todos}
+                data={newTodos}
                 keyExtractor={(_, index) => index.toString()}
                 contentContainerStyle={{paddingHorizontal: 32, paddingVertical: 64}}
                 showsVerticalScrollIndicator={false}
@@ -83,17 +78,40 @@ export default function TodosModal({list, closeModal, updateList}) {
                     ({item, index}) => renderTodo(item, index)
                 )}
             />
-
-            </View>
-            <View style={[styles.section, styles.footer]}>
-                <TextInput 
-                    style={[styles.input, {borderColor: list.color}]} 
-                    onChangeText={text => setText(text)}
-                    value={newText}
-                />
-                <TouchableOpacity style={[styles.addTodo, {backgroundColor: list.color}]} onPress={() => addTodo()}>
-                    <AntDesign name='plus' size={16} color='white'/>
-                </TouchableOpacity>
+            <Formik 
+                initialValues={{ title: '', id: '', completed: false}}
+                validationSchema={ todoSchema }
+                onSubmit={( values, actions ) => {
+                    addTodo( newTodos, values.title );
+                    actions.resetForm();
+                    Keyboard.dismiss();
+                    
+                }}
+            >
+                { ( formikProps ) => (
+                    <View style={[styles.section, styles.footer]}>
+                        <TextInput
+                            style={[styles.input, {borderColor: newTodos.color}]} 
+                            enablesReturnKeyAutomatically={true}
+                            autoCorrect={true}
+                            style={globalStyles.todoInput}
+                            placeholder='Enter Todo . . .'
+                            placeholderTextColor={'#002C5F'}
+                            onChangeText={ formikProps.handleChange( 'title' ) }
+                            value={ formikProps.values.title }
+                            onBlur={ formikProps.handleBlur( 'title' ) }
+                        />
+                        <TouchableOpacity style={[styles.addTodo, {backgroundColor: 'red'}]} onPress={() => addTodo()}>
+                            <AntDesign name='plus' size={16} color='white'/>
+                        </TouchableOpacity>
+                        <Text 
+                            style={ globalStyles.todoErrorText }
+                        >
+                                { formikProps.touched.title && formikProps.errors.title }
+                        </Text>
+                    </View>
+                )}    
+            </Formik>
             </View>
         </SafeAreaView>
         </KeyboardAvoidingView>
@@ -163,3 +181,16 @@ const styles = StyleSheet.create({
         width: 80
     },
 });
+
+const mapStateToProps = ( state, ownProps ) => {
+    return {
+      state: state.todos,
+    }
+  }
+  
+  const mapDispatchToProps = { addTodo }
+
+  export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )(TodosModal )

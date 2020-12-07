@@ -1,5 +1,7 @@
 import { ADD_PIC, TOGGLE_TODO, ADD_VISION, EDIT_VISION, DELETE_VISION, ADD_TODO, EDIT_TODO, DELETE_TODO, SET_FILTER, EDIT_JOURNAL, ADD_JOURNAL, DELETE_JOURNAL, ADD_LIST } from "./actionTypes";
 
+function updateObject(oldObject, newValues) {}
+
 export const addText = value => ({
   type: "ADD_TEXT",
   payload: value
@@ -31,12 +33,15 @@ payload: { id }
 });
 
 
-export const addTodo = task  => ({
-    type: ADD_TODO,
-    payload: {
-      task
-  }
-});
+export const addTodo = (state, action)  => {
+    const newTodos = state.todos.concat({
+    id: action.id,
+    text: action.text,
+    completed: false
+  });
+
+  return updateObject(state, { todos: newTodos });
+};
 
 export const toggleTodo = ({ id, todo}) => ({
   type: TOGGLE_TODO,
