@@ -2,15 +2,14 @@ import React, { useState } from 'react';
 import { Modal, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import TodosModal from './todosModal';
 
-export default function TodoLists({list, updateList}) {
+export default function TodoLists({list,}) {
     const completedCount = list.todos.filter(todo => todo.completed).length;
     const remainingCount = list.todos.length - completedCount;
     const [visible, setVisible] = useState(false);
 
     const toggleListModal = () => {
         setVisible(!visible);
-    }
-
+    };
 
     return (
         <View>
@@ -19,7 +18,7 @@ export default function TodoLists({list, updateList}) {
                 visible={visible}
                 onRequestClose={() => toggleListModal()}
             >
-                <TodosModal list={list} closeModal= {() => toggleListModal()} updateList={updateList}/>
+                <TodosModal list={list} closeModal= {() => toggleListModal()} />
             </Modal>
             <TouchableOpacity style={[styles.listContainer, {backgroundColor: list.color}]} onPress={() => toggleListModal()}>
                 <Text style={styles.listTitle} numberOfLines={1}>
@@ -65,4 +64,4 @@ const styles = StyleSheet.create({
         fontWeight: '700',
         color: 'white', 
     }
-})
+});

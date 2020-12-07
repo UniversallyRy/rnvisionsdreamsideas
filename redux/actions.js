@@ -1,8 +1,17 @@
-import { ADD_PIC, TOGGLE_TODO, ADD_VISION, EDIT_VISION, DELETE_VISION, ADD_TODO, EDIT_TODO, DELETE_TODO, SET_FILTER, EDIT_JOURNAL, ADD_JOURNAL, DELETE_JOURNAL } from "./actionTypes";
+import { ADD_PIC, TOGGLE_TODO, ADD_VISION, EDIT_VISION, DELETE_VISION, ADD_TODO, EDIT_TODO, DELETE_TODO, SET_FILTER, EDIT_JOURNAL, ADD_JOURNAL, DELETE_JOURNAL, ADD_LIST } from "./actionTypes";
 
 export const addText = value => ({
   type: "ADD_TEXT",
   payload: value
+});
+
+export const addList = ({name, color , id}) => ({
+  type: ADD_LIST,
+  payload: {
+    name,
+    color,
+    id
+  }
 });
 
 export const addVision = ({uri, title, id})  => ({

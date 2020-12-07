@@ -5,14 +5,14 @@ import AddTodo from '../components/todos/addTodo';
 import { connect } from 'react-redux';
 import { getTodosByVisibilityFilter } from "../redux/reducers/selectors";
 import  TodoList  from '../components/todos/todoList';
-import  TodoMain  from '../components/todos/todoMain';
+import  ListMain  from '../components/todos/listMain';
 
 export  function TodoScreen({navigation}) {
 
     return (
       
           <View style={ globalStyles.todoScreenContainer }>            
-            <TodoMain/>
+            <ListMain/>
             {/* <TodoList/> */}
             {/* <AddTodo /> */}
           </View>

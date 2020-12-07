@@ -1,14 +1,14 @@
 import React, { useState } from 'react';
 import { StyleSheet, Text, View, TouchableOpacity, FlatList, Modal} from 'react-native';
 import {AntDesign} from '@expo/vector-icons';
-import testData from './testData';
+import { connect } from 'react-redux';
 import TodoLists from './todoLists';
 import AddListModal from './addListModal';
 
-export default function TodoMain() {
+export function ListMain({state}) {
    const [modal, setModal]= useState(false); 
-   const [lists, setLists]= useState(testData); 
-
+   const [lists, setLists]= useState(state); 
+    console.log(state);
 
    const toggleModal = () => {
     setModal(!modal);
@@ -29,30 +29,30 @@ export default function TodoMain() {
                 animationType='slide' 
                 visible={modal} 
                 onRequestClose={() => toggleModal()}>
-                    <AddListModal closeModal={() => toggleModal()} addList={addList}/>
+                    <AddListModal closeModal={() => toggleModal()} />
                 </Modal>
                 <View style={styles.titleStyle}>
                     <View style={styles.divider} />
                     <Text style={styles.title} >
-                        Todo <Text style={{fontWeight: '300', color:'blue'}}>App</Text>
+                        Some <Text style={{fontWeight: '300', color:'#002C5F'}}>Checklists</Text>
                     </Text>
                 <View style={styles.divider}/>
                 </View>
-                <View style={{marginVertical: 48}}>
-                    <TouchableOpacity onPress={() => toggleModal()} style={styles.addList}>
-                        <AntDesign name='plus' size={16}/>
-                    </TouchableOpacity>
-                    <Text style={styles.add}>Add List</Text>
-                </View>
-                <View style={{height: 275, paddingLeft: 32}}>
+                <View style={{height: 425, paddingLeft: 22}}>
                     <FlatList 
-                        data= {lists}
+                        data= {state}
                         keyExtractor={item => item.id.toString()}
                         horizontal={true}
                         showsHorizontalScrollIndicator={false}
                         renderItem={({item}) => renderList(item)}
                         keyboardShouldPersistTaps="always"
-                    />
+                        />
+                </View>
+                <View style={{marginVertical: 48, paddingBottom: 24}}>
+                    <TouchableOpacity onPress={() => toggleModal()} style={styles.addList}>
+                        <AntDesign name='plus' size={30}/>
+                    </TouchableOpacity>
+                    <Text style={styles.add}>Add New List</Text>
                 </View>
             </View>
 
@@ -72,10 +72,10 @@ const styles = StyleSheet.create({
         
     },
     divider: {
-        backgroundColor: 'skyblue',
+        backgroundColor: '#002C5F',
         height: 1,
         flex: 1,
-        marginTop: 40
+        marginTop: 40,
         
     },
     title: {
@@ -86,17 +86,27 @@ const styles = StyleSheet.create({
     },
     addList: {
         borderWidth: 2,
-        borderColor: 'skyblue',
+        borderColor: '#002C5F',
         borderRadius: 4,
         padding: 16,
         alignItems: 'center',
         justifyContent: 'center',
     },
     add: {
-        color: 'blue',
+        color: '#002C5F',
         fontWeight: '600',
         fontSize: 14,
         marginTop: 6,
     }
 
 })
+
+const mapStateToProps = (state, ownProps) => {
+    return {
+      state: state.todos,
+    }
+  }
+  
+  const mapDispatchToProps = { addList }
+  
+  export default connect(mapStateToProps)(ListMain)

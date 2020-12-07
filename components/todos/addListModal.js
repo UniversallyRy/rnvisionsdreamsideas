@@ -2,13 +2,19 @@ import React, { useState } from 'react';
 import { KeyboardAvoidingView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { AntDesign } from '@expo/vector-icons';
 import { TextInput } from 'react-native-paper';
-import testData from './testData';
+import { Formik } from 'formik';
+import * as yup from 'yup';
+import { addList } from '../../redux/actions';
+import {globalStyles} from '../../styles/global';
 
+const listSchema = yup.object({
+    name: yup.string().required().min(4),
+});
 
-export default function AddListModal({closeModal, addList}) {
-    const bgColors = ['#5CD859', '#24A6D9', '#595BD9', '#0022D9', '#D159D8', '#D85963', '#D88559'];
+// red, slate blue, black, dark gray, blueish gray, teal, tan
+export default function AddListModal({closeModal}) {
+    const bgColors = ['#FE1F14', '#B9D3EE', '#000000', '#57575E', '#2E4045', '#83ADB5', '#BFB5B2'];
     const [bgColor, setColor] = useState(bgColors[0]);
-    const [newName, setName] = useState(''); 
 
     const renderColors = () => {
         return bgColors.map(color => {
@@ -22,31 +28,53 @@ export default function AddListModal({closeModal, addList}) {
         });
     };
 
-    const createTodo = () => {
-        const name = newName;
-        const color = bgColor; 
-        const key = Math.random()* 93932;   
-        const lists = { name, color, key }
-        addList(lists)
-        setName('');
-        closeModal();
-    }
     
     return (
         <KeyboardAvoidingView style={styles.container} behavior={"padding"}> 
+         
             <TouchableOpacity style={{position: 'absolute', top: 64, right:32}} onPress={closeModal}>
             <AntDesign name='close' size={24} color='black' />
             </TouchableOpacity>
 
             <View style={{alignSelf: 'stretch', marginHorizontal: 32}}>
                 <Text style={styles.title}>Create Todo List</Text>
-                <TextInput style={styles.input} placeholder='List Items' onChangeText={(text => setName(text))}/>
-                <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginTop: 12}}>
-                    {renderColors()}
-                </View>
-                <TouchableOpacity style={[styles.create, {backgroundColor: bgColor}]} onPress={createTodo}>
-                    <Text style={{color: 'white', fontWeight: '600'}}>Create</Text>
-                </TouchableOpacity>
+                <Formik 
+                initialValues={{ name: '', id: '', color: bgColor}}
+                validationSchema={ listSchema }
+                onSubmit={( values, actions ) => {
+                    addList( values );
+                    actions.resetForm();
+                    closeModal();
+                    
+                }}
+                >
+                { ( formikProps ) => (
+                    <View >
+                        <TextInput
+                            enablesReturnKeyAutomatically={true}
+                            autoCorrect={true}
+                            style={styles.input}
+                            placeholder='Enter A New List . . .'
+                            placeholderTextColor={'#002C5F'}
+                            onChangeText={ formikProps.handleChange( 'name' ) }
+                            value={ formikProps.values.name }
+                            onBlur={ formikProps.handleBlur( 'name' ) }
+                        />
+                        
+                        <Text 
+                            style={ globalStyles.todoErrorText }
+                        >
+                                { formikProps.touched.name && formikProps.errors.name }
+                        </Text>
+                        <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginTop: 12}}>
+                            {renderColors()}
+                        </View>
+                        <TouchableOpacity style={[styles.create, {backgroundColor: bgColor}]} onPress={formikProps.handleSubmit}>
+                            <Text style={{color: 'white', fontWeight: '600'}}>Create</Text>
+                        </TouchableOpacity>
+                    </View>
+                )}    
+                </Formik> 
             </View>
         </KeyboardAvoidingView>
     )

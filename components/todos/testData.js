@@ -2,7 +2,7 @@ export default testData = [
     {
         name: 'Plan A Trip',
         id: 1,
-        color: '#24a609', 
+        color: '#FE1F14', 
         todos: [
             {
                 title: "Book Flight",
@@ -25,7 +25,7 @@ export default testData = [
     {
         name: 'Errands',
         id: 2,
-        color: '#8022d9', 
+        color: '#000000', 
         todos: [
             {
                 title: "Store",
@@ -48,7 +48,7 @@ export default testData = [
     {
         name: 'Party',
         id: 3,
-        color: '#595bd9', 
+        color: '#2E4045', 
         todos: [
             {
                 title: "Ballons",
