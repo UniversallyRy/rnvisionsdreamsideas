@@ -7,7 +7,6 @@ import AddListModal from './addListModal';
 
 export function ListMain({state}) {
    const [modal, setModal]= useState(false); 
-   const [lists, setLists]= useState(state); 
     console.log(state);
 
    const toggleModal = () => {
@@ -18,9 +17,7 @@ export function ListMain({state}) {
        return <TodoLists list={list} />
    };
 
-   const addList = list => {
-       setLists([...lists, {...list, id: lists.length + 1, todos: [] }]);
-   };
+   
 
     return (
         
@@ -106,7 +103,5 @@ const mapStateToProps = (state, ownProps) => {
       state: state.todos,
     }
   }
-  
-  const mapDispatchToProps = { addList }
   
   export default connect(mapStateToProps)(ListMain)

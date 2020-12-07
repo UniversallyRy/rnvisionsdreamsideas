@@ -5,13 +5,10 @@ export const addText = value => ({
   payload: value
 });
 
-export const addList = ({name, color , id}) => ({
+export const addList = ({name, color}) => ({
   type: ADD_LIST,
-  payload: {
-    name,
-    color,
-    id
-  }
+  payload: {name, color},
+        
 });
 
 export const addVision = ({uri, title, id})  => ({

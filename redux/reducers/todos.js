@@ -85,16 +85,16 @@ const initialValue = [
 export default function( state = initialValue, action ) {
   switch ( action.type ) {
     case ADD_TODO: 
-       //state = initialValue ; //can be used to quickly reset a reducers todo
-      //return state;
-          return [
-            { 
-            task: action.payload.task,
-            id: uuidv4(),
-            complete: false,
-            },
-            ...state.todos,
-          ];
+       state = initialValue ; //can be used to quickly reset a reducers todo
+      return state;
+          // return [
+          //   { 
+          //   task: action.payload.task,
+          //   id: uuidv4(),
+          //   complete: false,
+          //   },
+          //   ...state.todos,
+          // ];
     case ADD_LIST: 
           return [
             

@@ -6,13 +6,14 @@ import { Formik } from 'formik';
 import * as yup from 'yup';
 import { addList } from '../../redux/actions';
 import {globalStyles} from '../../styles/global';
+import { connect } from 'react-redux';
 
 const listSchema = yup.object({
     name: yup.string().required().min(4),
 });
 
 // red, slate blue, black, dark gray, blueish gray, teal, tan
-export default function AddListModal({closeModal}) {
+export  function AddListModal({closeModal, addList}) {
     const bgColors = ['#FE1F14', '#B9D3EE', '#000000', '#57575E', '#2E4045', '#83ADB5', '#BFB5B2'];
     const [bgColor, setColor] = useState(bgColors[0]);
 
@@ -27,7 +28,17 @@ export default function AddListModal({closeModal}) {
             );
         });
     };
+    const newColor = bgColor;
 
+    const createTodo = () => {
+        const name = newName;
+        const color = bgColor; 
+        const lists = { name, color }
+        addList(lists)
+        setName('');
+        closeModal();
+    }
+    
     
     return (
         <KeyboardAvoidingView style={styles.container} behavior={"padding"}> 
@@ -39,9 +50,11 @@ export default function AddListModal({closeModal}) {
             <View style={{alignSelf: 'stretch', marginHorizontal: 32}}>
                 <Text style={styles.title}>Create Todo List</Text>
                 <Formik 
-                initialValues={{ name: '', id: '', color: bgColor}}
+                initialValues={{ name: '', color: ''}}
                 validationSchema={ listSchema }
                 onSubmit={( values, actions ) => {
+                    let color=bgColor
+                    values.color = color;
                     addList( values );
                     actions.resetForm();
                     closeModal();
@@ -115,3 +128,13 @@ const styles = StyleSheet.create({
         borderRadius: 4,
     }
 })
+
+const mapStateToProps = (state, ownProps) => {
+    return {
+      state: state.todos,
+    }
+  }
+  
+  const mapDispatchToProps = { addList }
+  
+  export default connect(mapStateToProps, mapDispatchToProps)(AddListModal)
