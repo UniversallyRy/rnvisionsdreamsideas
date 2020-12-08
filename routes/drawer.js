@@ -21,10 +21,23 @@ const RootDrawerNavigator = createDrawerNavigator(
         }
     },
     {
-        headerMode: 'screen'
-    },
-    {
-        drawerType: 'front',
+        headerMode: 'screen',
+        drawerType: 'slide',
+        drawerBackgroundColor: '#A2AAAD',
+        contentOptions: {
+            // tab container styling
+            activeTintColor: '#002C5F',
+            inactiveTintColor: 'black',
+            itemsContainerStyle: {
+              marginVertical: 1,
+            },
+            //tab titles styling
+            itemStyle: {
+                marginHorizontal: 1,
+                marginVertical: 50,
+                alignSelf: 'center',
+              },
+          },
     }
 );
 

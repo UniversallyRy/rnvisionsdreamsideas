@@ -28,7 +28,7 @@ const VisionStack = createStackNavigator( screens, {
         headerTintColor: '#002C5F',
         headerStyle: { 
             backgroundColor: '#A2AAAD',
-            height: 80,
+            height: 100,
         }
     }
 } );

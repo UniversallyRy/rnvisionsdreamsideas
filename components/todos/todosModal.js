@@ -82,7 +82,7 @@ export  function TodosModal({state, list, closeModal, addTodo}) {
                 initialValues={{ title: '', id: '', completed: false}}
                 validationSchema={ todoSchema }
                 onSubmit={( values, actions ) => {
-                    addTodo( newTodos, values.title );
+                    addTodo( values.title, values.id );
                     actions.resetForm();
                     Keyboard.dismiss();
                     
