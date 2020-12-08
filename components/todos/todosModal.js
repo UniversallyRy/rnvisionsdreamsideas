@@ -3,7 +3,6 @@ import { TouchableOpacity, Button, StyleSheet, Text, View, KeyboardAvoidingView,
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { AntDesign, Ionicons } from '@expo/vector-icons';
 import { FlatList, RectButton, TextInput,} from 'react-native-gesture-handler';
-import Swipeable from 'react-native-gesture-handler/Swipeable';
 import { connect } from 'react-redux';
 import { addTodo } from '../../redux/actions';
 import { globalStyles } from '../../styles/global';
@@ -14,7 +13,7 @@ const todoSchema = yup.object({
     title: yup.string().required().min(4),
 });
 
-export  function TodosModal({state, list, closeModal, addTodo}) {
+export  function TodosModal({ list, closeModal, addTodo}) {
     const [completedTodo, setCompleted] = useState(false);
     const newTodos = list.todos;
     const taskCount = newTodos.length;
@@ -90,18 +89,17 @@ export  function TodosModal({state, list, closeModal, addTodo}) {
             >
                 { ( formikProps ) => (
                     <View style={[styles.section, styles.footer]}>
-                        <TextInput
-                            style={[styles.input, {borderColor: newTodos.color}]} 
+                        <TextInput          
                             enablesReturnKeyAutomatically={true}
                             autoCorrect={true}
-                            style={globalStyles.todoInput}
+                            style={[globalStyles.todoInput, {borderColor: 'red'}]}
                             placeholder='Enter Todo . . .'
                             placeholderTextColor={'#002C5F'}
                             onChangeText={ formikProps.handleChange( 'title' ) }
                             value={ formikProps.values.title }
                             onBlur={ formikProps.handleBlur( 'title' ) }
                         />
-                        <TouchableOpacity style={[styles.addTodo, {backgroundColor: 'red'}]} onPress={() => addTodo()}>
+                        <TouchableOpacity style={[styles.todoStyle, {backgroundColor: 'red'}]} onPress={() => addTodo()}>
                             <AntDesign name='plus' size={16} color='white'/>
                         </TouchableOpacity>
                         <Text 
@@ -157,7 +155,7 @@ const styles = StyleSheet.create({
         marginRight:8,
         paddingHorizontal: 8, 
     },
-    addTodo: {
+    todoStyle: {
         borderRadius: 4,
         padding: 16,
         alignItems: 'center',

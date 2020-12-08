@@ -1,5 +1,6 @@
 import { ADD_TODO, EDIT_TODO, DELETE_TODO, TOGGLE_TODO, ADD_LIST } from "../actionTypes";
 import { v4 as uuidv4 } from 'uuid';
+import produce from 'immer';
 
 const initialValue = [
   {
@@ -83,52 +84,55 @@ const initialValue = [
 ];
 
 export default function( state = initialValue, action ) {
-  switch ( action.type ) {
-    case ADD_TODO: 
-       //state = initialValue ; //can be used to quickly reset a reducers todo
-      //return state;
-      let i = 0;
-      return state.map((item, index = i) => {
-        let newItem =  item.todos[index];
-        if(newItem.id === action.payload.id) {
+    produce(state, draft => {
+      switch ( action.type ) {
+        case ADD_TODO: 
+          //state = initialValue ; //can be used to quickly reset
+          //return state;
           
-          newItem = {
-            title: action.payload.title,
-            id: uuidv4(),
-            completed: false
-          };
-          
-          return newItem;
+          return draft.map((item, i = 0) => {
+                let newItem =  item.todos[i];
+
+                if(newItem.id === action.payload.id) {
+                    let newerItem = {
+                      title: action.payload.title,
+                      id: uuidv4(),
+                      completed: false
+                    };               
+                    return newerItem;
+                }
+
+                i++;
+                return newItem;
+          });
+        case ADD_LIST: 
+              return [
+                {
+                  name: action.payload.name,
+                  id: uuidv4(),
+                  color: action.payload.color, 
+                  todos: []
+                },
+                ...draft
+              ];
+              
+        case EDIT_TODO: {
+          const newState= action.payload.draft;
+          return newState;
         }
-        return newItem;
-        i++;
-    });
-    case ADD_LIST: 
-          return [
-            
-            {
-              name: action.payload.name,
-              id: uuidv4(),
-              color: action.payload.color, 
-              todos: []
-          },
-          ...state,
-          ];
-    case EDIT_TODO: {
-      const newState= action.payload.state;
-      return newState;
+        case TOGGLE_TODO: {
+        const { payload } = action;
+        let { items } = draft;
+        
+        return draft; 
+        }
+          // return { todos, ...draft }
+        case DELETE_TODO: {
+          return draft.filter(( list ) => list.todos.id != action.payload.id);
+        }
+        default:
+          return state;
     }
-    case TOGGLE_TODO: {
-    const { payload } = action;
-    let { items } = state;
-    
-    return state; 
-    }
-      // return { todos, ...state }
-    case DELETE_TODO: {
-      return state.filter(( list ) => list.todos.id != action.payload.id);
-    }
-    default:
-      return state;
-  }
-};
+  });
+  return state;
+}
