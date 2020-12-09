@@ -230,9 +230,19 @@ export const globalStyles = StyleSheet.create({
         marginBottom: 25,
     },
 
-    slideImage: { width: windowWidth * 0.98, height: windowHeight * 0.55, marginTop: 6 },
-    slideTitle: { alignContent: 'center', fontSize: 32, color:coltsBlue, marginBottom: 10,marginTop: 20 },
-    
+    slideImage: { 
+        width: windowWidth * 0.98, 
+        height: windowHeight * 0.55, 
+        marginTop: 6 
+    },
+    slideTitle: { 
+        alignSelf: 'center',
+        justifyContent: 'center', 
+        fontSize: 32, 
+        color:coltsBlue, 
+        marginBottom: 20,
+        marginTop: 20 
+    },
     pagination: {
         position: "absolute",
         bottom: 8,

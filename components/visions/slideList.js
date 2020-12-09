@@ -1,6 +1,6 @@
 import React, { useCallback, memo, useRef, useState } from "react";
 import { FlatList, View, Dimensions, Image } from "react-native";
-import { Card }  from 'react-native-paper';
+import { Card, Text }  from 'react-native-paper';
 import { connect } from 'react-redux';
 import DeleteVision from "./deleteVision";
 import { globalStyles } from "../../styles/global";
@@ -12,10 +12,9 @@ const Slide = memo( function Slide( { data } ) {
   return (
     <Card style={ globalStyles.slideContainer } >
       <Image source={{ uri: data.uri }} style={ globalStyles.slideImage }></Image>
-      <Card.Title 
-        style={ globalStyles.slideTitle }
-        title={ data.title }
-      />
+
+        <Text style={ globalStyles.slideTitle }>{ data.title}</Text>
+
       <DeleteVision item={ data.id }/>
     </Card> 
   );

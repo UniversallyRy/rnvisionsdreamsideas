@@ -1,7 +1,7 @@
 import React from 'react';
 import { StyleSheet, Text, View, SafeAreaView } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
-import { raidSilver } from '../styles/global';
+import { coltsBlue, raidSilver } from '../styles/global';
 
 export default function Header({ navigation, title }) {
 
@@ -34,7 +34,7 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
         marginTop: 8,
         marginLeft:20,
-        color: raidSilver,
+        color: coltsBlue,
         letterSpacing: 7,
     },
     headerContainer: {

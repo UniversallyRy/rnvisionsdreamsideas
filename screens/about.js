@@ -20,7 +20,7 @@ const styles = StyleSheet.create({
       padding: 8,
       margin: 30,
       alignSelf: 'center',
-      color: 'skyblue',
+      color: coltsGray,
     },
     aboutContent: {
         backgroundColor: coltsBlue,
