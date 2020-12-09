@@ -6,17 +6,6 @@ export const coltsGray = '#A2AAAD';
 export const raidSilver = '#A5ACAF';
 
 export const globalStyles = StyleSheet.create({
-    visionPage: {
-        backgroundColor: coltsGray,
-        flex: 1,
-    },
-    uploadButton: {
-        flex: 0.5,
-        alignItems: 'center',
-        justifyContent: 'center',
-        padding: 25,
-        margin: 20,
-    },
     tDetailsButton : {
         backgroundColor: coltsGray,
         margin: 20,
@@ -216,10 +205,29 @@ export const globalStyles = StyleSheet.create({
         fontSize: 18,
         borderRadius: 2,
     },
+    visionPage: {
+        backgroundColor: coltsGray,
+        flex: 1,
+    },
+    visionButtonContainer:{
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'center',
+        marginBottom: 7,
+    },
+    uploadButton: {
+        alignSelf:'center',
+        alignItems: 'center',
+        justifyContent: 'center',
+        backgroundColor: coltsBlue,
+        width: 225,
+        height: 70,
+        margin: 5,
+    },
     slideContainer: {
-        backgroundColor: 'transparent',
-        height: windowHeight*0.7,
         width: windowWidth ,
+        height: windowHeight * .88,
+        backgroundColor: 'transparent',
         alignSelf: 'center',
         justifyContent: "center",
         alignItems: "center",
@@ -227,12 +235,13 @@ export const globalStyles = StyleSheet.create({
     },
 
     slideCarousel: {
+        width: windowWidth ,
         marginBottom: 25,
     },
 
     slideImage: { 
         width: windowWidth * 0.98, 
-        height: windowHeight * 0.63,  
+        height: windowHeight * 0.6,  
     },
     slideTitle: { 
         alignSelf: 'center',
@@ -256,11 +265,15 @@ export const globalStyles = StyleSheet.create({
         marginHorizontal: 2,
         marginTop: 10,
     },
-    paginationDotActive: { backgroundColor: coltsBlue },
-    paginationDotInactive: { backgroundColor: "gray" },
+    paginationDotActive: {
+         backgroundColor: coltsBlue
+    },
+    paginationDotInactive: {
+         backgroundColor: "gray" 
+    },
     modalToggle: {
-        marginTop:10,
-        marginBottom: 10,   
+        marginTop:25,
+        marginBottom: 30,   
         borderWidth: 1,
         borderColor: coltsBlue,
         padding: 10,
@@ -269,9 +282,10 @@ export const globalStyles = StyleSheet.create({
         alignItems: 'center',
     },
     modalClose: {
-        marginTop: 25,
-        marginBottom: 20,
-        alignSelf: 'center',
-        alignItems: 'center',
+        marginTop: 95,
     },
+    modalContent:{
+        backgroundColor: coltsGray,
+        height: windowHeight, 
+    }
 });
