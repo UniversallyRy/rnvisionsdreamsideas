@@ -232,8 +232,7 @@ export const globalStyles = StyleSheet.create({
 
     slideImage: { 
         width: windowWidth * 0.98, 
-        height: windowHeight * 0.55, 
-        marginTop: 6 
+        height: windowHeight * 0.63,  
     },
     slideTitle: { 
         alignSelf: 'center',

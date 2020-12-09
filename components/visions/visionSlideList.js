@@ -8,14 +8,15 @@ import { globalStyles } from "../../styles/global";
 // react native's Dimensions import to grab mobile screens dimensions
 const { width: windowWidth } = Dimensions.get( "window" );
 
-const Slide = memo( function Slide( { data } ) {
+// As long as data props are the same between renderings React reuses the memoized content. 
+const VisionImageList = memo( function VisionImage( { data } ) {
   return (
     <Card style={ globalStyles.slideContainer } >
-      <Image source={{ uri: data.uri }} style={ globalStyles.slideImage }></Image>
-
-        <Text style={ globalStyles.slideTitle }>{ data.title}</Text>
-
-      <DeleteVision item={ data.id }/>
+      <Card.Content style={{margin: 1}}>
+        <Image source={{ uri: data.uri }} style={ globalStyles.slideImage }></Image>
+          <Text style={ globalStyles.slideTitle }>{ data.title}</Text>
+        <DeleteVision item={ data.id }/>
+      </Card.Content>
     </Card> 
   );
 });
@@ -40,7 +41,7 @@ function Pagination( { state, index }) {
   );
 }
 
-export function SlideList({ state }) {
+export function ListAndPaginationLink({ state }) {
   const [ index, setIndex ] = useState(0);
   const indexRef = useRef( index );
   indexRef.current = index;
@@ -79,7 +80,7 @@ export function SlideList({ state }) {
   };
 
   const renderList = useCallback( function renderList( { item, navigation } ) {
-    return <Slide data={ item } onPress={ () => navigation.navigate( 'VisionDetails', item ) }/>;
+    return <VisionImageList data={ item } onPress={ () => navigation.navigate( 'VisionDetails', item ) }/>;
   }, []);
 
   return (
@@ -107,4 +108,4 @@ const mapStateToProps = ( state, ownProps ) => {
   }
 }
 
-export default connect( mapStateToProps )( SlideList )
+export default connect( mapStateToProps )( ListAndPaginationLink )

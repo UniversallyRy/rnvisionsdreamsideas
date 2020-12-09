@@ -4,7 +4,7 @@ import { Text } from 'react-native-paper';
 import { connect } from 'react-redux';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import AddVision from '../components/visions/addVision';
-import SlideList from '../components/visions/slideList';
+import VisionImageList from '../components/visions/visionSlideList';
 import { globalStyles } from '../styles/global';
 
 
@@ -37,7 +37,7 @@ export function Visions({ navigation, state }) {
           />
 
 
-          <SlideList
+          <VisionImageList
             data={ state }
             onPress={ () => navigation.navigate( 'VisionDetails', item ) }   
           />
