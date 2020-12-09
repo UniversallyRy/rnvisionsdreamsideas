@@ -1,14 +1,13 @@
 import React, { useState } from 'react';
 import { Modal, View, TouchableWithoutFeedback, Keyboard } from 'react-native';
 import { Text } from 'react-native-paper';
-import { connect } from 'react-redux';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import AddVision from '../components/visions/addVision';
 import VisionImageList from '../components/visions/visionSlideList';
 import { coltsGray, globalStyles } from '../styles/global';
 
 
-export function Visions({ navigation, state }) {
+export function Visions({ navigation }) {
     const [ modalOpen, setModalOpen ] = useState( false );
    
     return (
@@ -35,19 +34,10 @@ export function Visions({ navigation, state }) {
             style={ globalStyles.modalToggle }
             onPress={ () => setModalOpen(true) }
           />
-          <VisionImageList
-            data={ state }
-            onPress={ () => navigation.navigate( 'VisionDetails', item ) }   
-          />
+          <VisionImageList />
         </View>
     )
 }
 
-const mapStateToProps = ( state, ownProps ) => {
-  return {
-    state: state.visions,
-    stateUri: state.pic
-  }
-}
 
-export default connect( mapStateToProps )( Visions )
+export default Visions;

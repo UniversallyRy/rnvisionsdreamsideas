@@ -41,7 +41,7 @@ export default function App() {
       <Provider store={ store }>
         <PersistGate loading={ null } persistor={ persistor }>
           <PaperProvider>
-            <NavigationContainer style={ globalStyles.container }>
+            <NavigationContainer>
               <Navigator style={ globalStyles.navbar }/>
               <StatusBar animated={true} style="auto" />
             </NavigationContainer>
