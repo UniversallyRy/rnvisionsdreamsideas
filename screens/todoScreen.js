@@ -1,13 +1,12 @@
-import React, { useState } from 'react';
-import { FlatList, View } from 'react-native';
+import React from 'react';
+import { View } from 'react-native';
 import { globalStyles } from '../styles/global';
 import AddTodo from '../components/todos/addTodo';
 import { connect } from 'react-redux';
-import { getTodosByVisibilityFilter } from "../redux/reducers/selectors";
 import  TodoList  from '../components/todos/todoList';
 import  ListMain  from '../components/todos/listMain';
 
-export  function TodoScreen({navigation}) {
+export  function TodoScreen({ navigation }) {
 
     return (
       
@@ -20,10 +19,10 @@ export  function TodoScreen({navigation}) {
     )
 }
 
-const mapStateToProps = (state, ownProps) => {
+const mapStateToProps = ( state, ownProps ) => {
   return {
     state: state.todos,
   }
 }
 
-export default connect(mapStateToProps)(TodoScreen)
+export default connect( mapStateToProps )( TodoScreen )

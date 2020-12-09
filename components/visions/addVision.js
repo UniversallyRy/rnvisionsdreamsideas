@@ -1,23 +1,23 @@
 import React from 'react';
 import { View } from 'react-native';
-import { globalStyles } from '../../styles/global';
+import { TextInput, Text } from 'react-native-paper';
+import { connect } from 'react-redux';
 import { Formik } from 'formik';
 import * as yup from 'yup';
 import FlatButton from '../../shared/button';
 import ImagePic from './imagePicker';
-import { TextInput, Text } from 'react-native-paper';
-import { connect } from 'react-redux';
 import { addVision } from '../../redux/actions';
+import { globalStyles } from '../../styles/global';
 
 const visionSchema = yup.object({
     title: yup.string().required().min( 4 ),
 });
 
-export function AddVision({ addVision, stateUri}) {
+export function AddVision({ addVision, stateUri }) {
     return (
         <View>
             <Formik
-                enableReinitialize={true}
+                enableReinitialize={ true }
                 initialValues={{ uri: stateUri, title:'', id:null }}
                 validationSchema={ visionSchema }
                 onSubmit={ ( values, actions ) => {
@@ -51,7 +51,9 @@ export function AddVision({ addVision, stateUri}) {
 
 const mapStateToProps = ( state, ownProps ) => {
     return {
+            // reducers/visions.js
       state: state.visions,
+            // reducers/pic.js
       stateUri: state.pic
     }
   }

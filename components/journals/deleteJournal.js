@@ -1,14 +1,13 @@
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
 import { Button } from 'react-native-paper';
-import { deleteJournal } from '../../redux/actions';
 import { connect } from 'react-redux';
+import { deleteJournal } from '../../redux/actions';
 
-export function DeleteJournal( {state, deleteJournal, item}) {
-    var journals = state;
+export function DeleteJournal( {deleteJournal, item}) {
     const removeJournal = () => {
+        //prop item = item.id
         var buttonId = item;
-        console.log('press' + buttonId);
         deleteJournal(buttonId);
     }
 

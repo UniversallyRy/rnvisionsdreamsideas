@@ -1,6 +1,6 @@
 import React from 'react';
-import { globalStyles } from '../../styles/global';
 import { Button, Text, Card }  from 'react-native-paper';
+import { globalStyles } from '../../styles/global';
 
 export default function JournalDetails({ navigation }) {
 

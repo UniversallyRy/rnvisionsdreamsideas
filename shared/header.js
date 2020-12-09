@@ -1,6 +1,7 @@
 import React from 'react';
 import { StyleSheet, Text, View, SafeAreaView } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
+import { raidSilver } from '../styles/global';
 
 export default function Header({ navigation, title }) {
 
@@ -27,13 +28,13 @@ const styles = StyleSheet.create({
        flexDirection: 'row',
        alignItems: 'center',
        justifyContent: 'flex-start',
-       backgroundColor: '#002C5F',
+       backgroundColor: raidSilver,
     },
     headerText: {
         fontWeight: 'bold',
         marginTop: 8,
         marginLeft:20,
-        color: '#002C5F',
+        color: raidSilver,
         letterSpacing: 7,
     },
     headerContainer: {

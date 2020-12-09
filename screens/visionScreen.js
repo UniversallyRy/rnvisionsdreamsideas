@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import { Modal, View, TouchableWithoutFeedback, Keyboard } from 'react-native';
 import { Text } from 'react-native-paper';
-import { MaterialCommunityIcons } from '@expo/vector-icons';
-import { globalStyles } from '../styles/global';
 import { connect } from 'react-redux';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 import AddVision from '../components/visions/addVision';
 import SlideList from '../components/visions/slideList';
+import { globalStyles } from '../styles/global';
 
 
 export function Visions({ navigation, state }) {
@@ -20,8 +20,9 @@ export function Visions({ navigation, state }) {
                 <MaterialCommunityIcons
                   name='close'
                   size={ 24 }
+                        // rest/spread operator to grab modaltoggle props and adds any new modalcloses props  
                   style={{ ...globalStyles.modalToggle, ...globalStyles.modalClose }}
-                  onPress={ () => setModalOpen(false) }
+                  onPress={ () => setModalOpen( false ) }
                 />  
                 <AddVision/>
               </View>

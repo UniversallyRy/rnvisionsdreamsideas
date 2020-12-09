@@ -1,26 +1,25 @@
 import React, { useState } from 'react';
 import { StyleSheet, View, Keyboard } from 'react-native';
-import { globalStyles } from '../../styles/global';
 import { Card, Text, TextInput, Button } from 'react-native-paper';
 import { withNavigation } from 'react-navigation';
 import { connect } from 'react-redux';
-import { getTodosByVisibilityFilter } from "../../redux/reducers/selectors";
 import { deleteTodo, editTodo } from '../../redux/actions';
+import { globalStyles } from '../../styles/global';
 
 export  function TodoItem({ navigation, state, item, deleteTodo, editTodo }) {
-  const [input, setInput] = useState('');
-  const [edited, setEdited] = useState(false);
+  const [ input, setInput ] = useState( '' );
+  const [ edited, setEdited ] = useState( false );
 
   const removeTodo = () => {
     //calls redux action on stored todos
-    deleteTodo(item.id);
-    setEdited(false);
+    deleteTodo( item.id );
+    setEdited( false );
 };
 
   const editButtonHandler = () => {
     //event handler to make sure input edited input text consistently matches
-    setInput(item.task);
-    setEdited(true);
+    setInput( item.task );
+    setEdited( true );
   };
 console.log(state);
   const saveEdit = () => {
@@ -33,38 +32,39 @@ console.log(state);
         } 
       });
     // redux function, may not be needed  
-    editTodo(newState);
-    setEdited(false);
+    editTodo( newState );
+    setEdited( false );
   };
   
     return (
             <View style={ globalStyles.todoListContainer }>
                   <Card style={ globalStyles.todoCard } onPress={ () => navigation.navigate( 'TodoDetails', item ) }>
+                      {/* logic to toggle single item rendering' */}
                       {edited
-                      ? <Card.Content style={globalStyles.todoContainer}>
-                            <TextInput onSubmitEditing={Keyboard.dismiss} style={globalStyles.todoInput} defaultValue={input} onChangeText={setInput}/>
+                      ? <Card.Content style={ globalStyles.todoContainer }>
+                            <TextInput onSubmitEditing={ Keyboard.dismiss } style={ globalStyles.todoInput } defaultValue={ input } onChangeText={ setInput }/>
                         </Card.Content>
-                      : <Card.Content style={globalStyles.todoContainer}>
-                            <Text style={globalStyles.todoText}> { item.task } </Text>
+                      : <Card.Content style={ globalStyles.todoContainer }>
+                            <Text style={ globalStyles.todoText }> { item.task } </Text>
                         </Card.Content>  
                       }
-                        <View style={globalStyles.todoButtons}>
+                        <View style={ globalStyles.todoButtons }>
                         {edited
 
-                          ? <View style={globalStyles.todoButtons}>
-                            <Button style={styles.editButton} color="#A2AAAD" icon="lead-pencil" mode="contained" onPress={() => saveEdit()}>
+                          ? <View style={ globalStyles.todoButtons }>
+                            <Button style={ styles.editButton } color="#A2AAAD" icon="lead-pencil" mode="contained" onPress={ () => saveEdit() }>
                                 <Text>Save</Text>
                             </Button>
-                            <Button style={styles.deleteButton} color="red" icon="close-outline" mode="contained" onPress={() => setEdited(false)}>
+                            <Button style={ styles.deleteButton } color="red" icon="close-outline" mode="contained" onPress={ () => setEdited( false )}>
                                 <Text>Cancel</Text>
                             </Button>
                             </View>
                           :
-                          <View style={globalStyles.todoButtons}>
-                          <Button style={styles.editButton} color="#A2AAAD" icon="lead-pencil" mode="contained" onPress={() => editButtonHandler()}>
+                          <View style={ globalStyles.todoButtons }>
+                          <Button style={ styles.editButton } color="#A2AAAD" icon="lead-pencil" mode="contained" onPress={ () => editButtonHandler() }>
                                 <Text>Edit</Text>
                             </Button>
-                            <Button style={styles.deleteButton} color="red" icon="close-outline" mode="contained" onPress={() => removeTodo()}>
+                            <Button style={ styles.deleteButton } color="red" icon="close-outline" mode="contained" onPress={ () => removeTodo() }>
                                 <Text>Delete</Text>
                             </Button>
                             </View>
@@ -92,6 +92,6 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = { deleteTodo, editTodo }
 
-const TodoItemtWithNavigation = withNavigation(TodoItem)
+const TodoItemtWithNavigation = withNavigation( TodoItem )
 
-export default connect(mapStateToProps, mapDispatchToProps)(TodoItemtWithNavigation)
+export default connect( mapStateToProps, mapDispatchToProps )( TodoItemtWithNavigation )

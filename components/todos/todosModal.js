@@ -1,52 +1,52 @@
 import React, { useState } from 'react';
-import { TouchableOpacity, Button, StyleSheet, Text, View, KeyboardAvoidingView, Keyboard, Animated } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
-import { AntDesign, Ionicons } from '@expo/vector-icons';
-import { FlatList, RectButton, TextInput,} from 'react-native-gesture-handler';
+import { TouchableOpacity, StyleSheet, Text, View, KeyboardAvoidingView, Keyboard, Animated } from 'react-native';
 import { connect } from 'react-redux';
-import { addTodo } from '../../redux/actions';
-import { globalStyles } from '../../styles/global';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import { FlatList, RectButton, TextInput,} from 'react-native-gesture-handler';
+import { AntDesign, Ionicons } from '@expo/vector-icons';
 import { Formik } from 'formik';
 import * as yup from 'yup';
+import { addTodo } from '../../redux/actions';
+import { globalStyles } from '../../styles/global';
 
 const todoSchema = yup.object({
     title: yup.string().required().min(4),
 });
 
-export  function TodosModal({ list, closeModal, addTodo}) {
-    const [completedTodo, setCompleted] = useState(false);
+export  function TodosModal({ list, closeModal, addTodo }) {
+    const [ completedTodo, setCompleted ] = useState( false );
     const newTodos = list.todos;
     const taskCount = newTodos.length;
-    const completedCount = newTodos.filter(todo => todo.completed).length;
+    const completedCount = newTodos.filter( todo => todo.completed ).length;
     
     const toggleTodoCompleted = index => {
       setCompleted(newTodos[index].completed = !newTodos[index].completed);
     };
     
-    const renderTodo = (todo, index) => {
+    const renderTodo = ( todo, index ) => {
         return (
-            <View renderRightActions={(_, dragX) => rightActions(dragX, index)}>
-            <View style={styles.todoContainer}>
-                <TouchableOpacity onPress={() => toggleTodoCompleted(index)}>
-                    <Ionicons name={todo.completed ? 'ios-square' : 'ios-square-outline'} size={24} color='gray' style={{width: 32}}/>
+            <View renderRightActions={( _, dragX ) => rightActions( dragX, index )}>
+            <View style={ styles.todoContainer }>
+                <TouchableOpacity onPress={ () => toggleTodoCompleted( index ) }>
+                    <Ionicons name={ todo.completed ? 'ios-square' : 'ios-square-outline' } size={24} color='gray' style={{ width: 32 }}/>
                 </TouchableOpacity>
-                <Text style={[styles.todo, { textDecorationLine: todo.completed ? 'line-through' : 'none', color: todo.completed ? 'gray' : 'black'}]}>
-                    {todo.title}
+                <Text style={[ styles.todo, { textDecorationLine: todo.completed ? 'line-through' : 'none', color: todo.completed ? 'gray' : 'black' } ]}>
+                    { todo.title }
                 </Text>
             </View>
             </View>
         )
     }
 
-    const rightActions = (dragX, index) => {
+    const rightActions = ( dragX, index ) => {
         const trans = dragX.interpolate({
-            inputRange: [0, 50, 100, 101],
-            outputRange: [-20, 0, 0, 1],
+            inputRange: [ 0, 50, 100, 101 ],
+            outputRange: [ -20, 0, 0, 1 ],
           });
         return(
             <RectButton>
-                <Animated.View style={styles.deleteButton}>
-                    <Animated.Text style={{color: 'white', fontWeight: '700', transform: [{translateX: trans}]}}>
+                <Animated.View style={ styles.deleteButton }>
+                    <Animated.Text style={{ color: 'white', fontWeight: '700', transform: [{ translateX: trans }] }}>
                         Delete
                     </Animated.Text>
                 </Animated.View>

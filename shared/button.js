@@ -1,6 +1,9 @@
 import React from 'react';
 import { StyleSheet } from 'react-native';
 import { Button, Text } from 'react-native-paper';
+import { raidSilver, coltsBlue } from '../styles/global';
+
+// Custom button made for Flat styling
 
 export default function FlatButton( { text, onPress }) {
     return (
@@ -18,7 +21,7 @@ const styles = StyleSheet.create({
         paddingVertical: 24,
         marginBottom: 10,
         borderColor: 'black',
-        backgroundColor: '#A2AAAD',
+        backgroundColor: raidSilver,
         shadowColor: "black",
         shadowOffset: {
             width: 3,
@@ -30,7 +33,7 @@ const styles = StyleSheet.create({
         elevation: 5,
     },
     buttonText: {
-        color: '#002C5F',
+        color: coltsBlue,
         fontWeight: 'bold',
         textTransform: 'uppercase',
         fontSize: 16,

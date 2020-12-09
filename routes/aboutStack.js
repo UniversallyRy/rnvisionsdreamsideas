@@ -1,7 +1,8 @@
+import React from 'react';
 import { createStackNavigator } from 'react-navigation-stack';
 import About from '../screens/about';
 import Header from '../shared/header';
-import React from 'react';
+import { coltsGray, coltsBlue } from '../styles/global';
 
 const screens = {
     About: {
@@ -16,9 +17,9 @@ const screens = {
 
 const AboutStack = createStackNavigator( screens, {
     defaultNavigationOptions: {
-        headerTintColor: '#002C5F',
+        headerTintColor: coltsBlue,
         headerStyle: { 
-            backgroundColor: '#A2AAAD',
+            backgroundColor: coltsGray,
             height: 100,
         }
     }

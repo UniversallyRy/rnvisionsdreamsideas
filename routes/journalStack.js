@@ -1,8 +1,9 @@
+import React from 'react';
 import { createStackNavigator } from 'react-navigation-stack';
 import JournalList from '../screens/journalScreen';
 import JournalDetails from '../components/journals/journalDetails';
 import Header from '../shared/header';
-import React from 'react';
+import { coltsGray, coltsBlue } from '../styles/global';
 
 const screens = {
     JournalList: {
@@ -24,9 +25,9 @@ const screens = {
 
 const JournalStack = createStackNavigator( screens, {
     defaultNavigationOptions: {
-        headerTintColor: '#002C5F',
+        headerTintColor: coltsBlue,
         headerStyle: { 
-            backgroundColor: '#A2AAAD',
+            backgroundColor: coltsGray,
             height: 100,
         }
     }

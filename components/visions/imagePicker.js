@@ -1,8 +1,8 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Button, Image, View, Platform } from 'react-native';
+import { connect } from 'react-redux';
 import * as ImagePicker from 'expo-image-picker';
 import { globalStyles } from '../../styles/global';
-import { connect } from 'react-redux';
 import { addPic } from '../../redux/actions';
 
 export function ImagePic({ addPic }) {
@@ -20,13 +20,14 @@ export function ImagePic({ addPic }) {
   }, []);
 
   const pickImage = async () => {
+    // result variable saves image you pick from phone's gallery
     let result = await ImagePicker.launchImageLibraryAsync({
       mediaTypes: ImagePicker.MediaTypeOptions.Images,
       allowsEditing: true,
       aspect: [ 4, 3 ],
       quality: 1,
     });
-
+    // .canccelled prop from ImagePicker import
     if ( !result.cancelled ) {
       setImage( result.uri );
       addPic( result.uri );

@@ -1,3 +1,4 @@
+// Action constants
 export const ADD_VISION = "ADD_VISION";
 export const EDIT_VISION = "EDIT_VISION";
 export const DELETE_VISION = "DELETE_VISION";

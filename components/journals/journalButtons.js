@@ -1,13 +1,12 @@
 import React from 'react';
 import { StyleSheet, View, Dimensions } from 'react-native';
 import { Button } from 'react-native-paper';
-import { deleteJournal } from '../../redux/actions';
 import { connect } from 'react-redux';
-import { globalStyles } from '../../styles/global';
+import { deleteJournal } from '../../redux/actions';
 
-const { width: windowWidth, height: windowHeight } = Dimensions.get("window");
+const { width: windowWidth } = Dimensions.get("window");
 
-export function JournalButtons( {deleteJournal, item}) {
+export function JournalButtons({ deleteJournal, item }) {
 
     const removeJournal = () => {
         // saves prop item.id 
@@ -45,6 +44,7 @@ const styles = StyleSheet.create({
 
 const mapStateToProps = ( state, ownProps ) => {
     return {
+            // reducers/journals.js 
       state: state.journals
     }
   }

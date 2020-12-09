@@ -1,9 +1,9 @@
+import React from 'react';
 import { createStackNavigator } from 'react-navigation-stack';
-import { createAppContainer } from 'react-navigation';
 import Visions from '../screens/visionScreen';
 import VisionDetails from '../components/visions/visionDetails';
 import Header from '../shared/header';
-import React from 'react';
+import { coltsGray, coltsBlue } from '../styles/global';
 
 const screens = {
     Visions: {
@@ -25,9 +25,9 @@ const screens = {
 
 const VisionStack = createStackNavigator( screens, {
     defaultNavigationOptions: {
-        headerTintColor: '#002C5F',
+        headerTintColor: coltsBlue,
         headerStyle: { 
-            backgroundColor: '#A2AAAD',
+            backgroundColor: coltsGray,
             height: 100,
         }
     }

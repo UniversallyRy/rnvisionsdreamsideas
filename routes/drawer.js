@@ -4,7 +4,9 @@ import VisionStack from './visionStack';
 import AboutStack from './aboutStack';
 import TodoStack from './todoStack';
 import JournalStack from './journalStack';
+import { coltsGray, coltsBlue } from '../styles/global';
 
+// creates a navigation bar from react-navigation-stack imports
 const RootDrawerNavigator = createDrawerNavigator(
     {
         Visions: {
@@ -23,15 +25,15 @@ const RootDrawerNavigator = createDrawerNavigator(
     {
         headerMode: 'screen',
         drawerType: 'slide',
-        drawerBackgroundColor: '#A2AAAD',
+        drawerBackgroundColor: coltsGray,
         contentOptions: {
-            // tab container styling
-            activeTintColor: '#002C5F',
+            // stack screens container styling
+            activeTintColor: coltsBlue,
             inactiveTintColor: 'black',
             itemsContainerStyle: {
               marginVertical: 1,
             },
-            //tab titles styling
+            //single stack screen styling
             itemStyle: {
                 marginHorizontal: 1,
                 marginVertical: 50,

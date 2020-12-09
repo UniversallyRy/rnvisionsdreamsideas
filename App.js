@@ -11,7 +11,6 @@ import {
 import 'react-native-get-random-values';
 import 'react-native-gesture-handler';
 import { AppRegistry, StatusBar } from 'react-native';
-import { StatusBa } from 'expo-status-bar';
 import React, { useState } from 'react';
 import { Provider } from 'react-redux';
 import {store, persistor} from './redux/store';
@@ -57,8 +56,7 @@ export default function App() {
         onFinish={() => setFontsLoaded( true )}
       />
     )
-  }
-  
+  }  
 }
 
 AppRegistry.registerComponent( App, () => App );

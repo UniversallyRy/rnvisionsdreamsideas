@@ -1,25 +1,21 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { View } from 'react-native';
-import { globalStyles } from '../../styles/global';
+import { TextInput, Text, Button } from 'react-native-paper';
+import { connect } from 'react-redux';
 import { Formik } from 'formik';
 import * as yup from 'yup';
-import { connect } from 'react-redux';
-import { TextInput, Text, Button } from 'react-native-paper';
 import { addTodo } from '../../redux/actions';
+import { globalStyles } from '../../styles/global';
 
 const todoSchema = yup.object({
-    task: yup.string().required().min(4),
+    task: yup.string().required().min( 4 ),
 });
 
 export function AddTodo ({ addTodo }) {
-  const [text, setText] = useState({
-    id:null, 
-    task:'',
-  });
-
+  
     return (
             <Formik 
-                initialValues={{ task: '', id: '', complete: false}}
+                initialValues={{ task: '', id: '', complete: false }}
                 validationSchema={ todoSchema }
                 onSubmit={( values, actions ) => {
                     addTodo( values.task );
@@ -30,17 +26,17 @@ export function AddTodo ({ addTodo }) {
                 { ( formikProps ) => (
                     <View style={globalStyles.addTodoForm}>
                         <TextInput
-                            enablesReturnKeyAutomatically={true}
-                            autoCorrect={true}
-                            style={globalStyles.todoInput}
+                            enablesReturnKeyAutomatically={ true }
+                            autoCorrect={ true }
+                            style={ globalStyles.todoInput }
                             placeholder='Enter Todo . . .'
-                            placeholderTextColor={'#002C5F'}
+                            placeholderTextColor={ '#002C5F' }
                             onChangeText={ formikProps.handleChange( 'task' ) }
                             value={ formikProps.values.task }
                             onBlur={ formikProps.handleBlur( 'task' ) }
                         />
-                        <Button icon='plus' style={globalStyles.addTodoButton} text='new' onPress={ formikProps.handleSubmit }>
-                        <Text style={ globalStyles.addTodoButtonText }> Add Todo </Text>
+                        <Button icon='plus' style={ globalStyles.addTodoButton } text='new' onPress={ formikProps.handleSubmit }>
+                        <Text style={ globalStyles.addTodoButtonText }>Add Todo</Text>
                         </Button>
                         <Text 
                             style={ globalStyles.todoErrorText }
@@ -63,4 +59,4 @@ const mapStateToProps = ( state, ownProps ) => {
   export default connect(
     mapStateToProps,
     mapDispatchToProps
-  )(AddTodo )
+  )( AddTodo )

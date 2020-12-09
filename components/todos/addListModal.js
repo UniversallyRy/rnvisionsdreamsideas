@@ -1,43 +1,43 @@
 import React, { useState } from 'react';
 import { KeyboardAvoidingView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-import { AntDesign } from '@expo/vector-icons';
 import { TextInput } from 'react-native-paper';
+import { connect } from 'react-redux';
+import { AntDesign } from '@expo/vector-icons';
 import { Formik } from 'formik';
 import * as yup from 'yup';
 import { addList } from '../../redux/actions';
 import {globalStyles} from '../../styles/global';
-import { connect } from 'react-redux';
 
 const listSchema = yup.object({
     name: yup.string().required().min(4),
 });
 
 // red, slate blue, black, dark gray, blueish gray, teal, tan
-export  function AddListModal({closeModal, addList}) {
-    const bgColors = ['#FE1F14', '#B9D3EE', '#000000', '#57575E', '#2E4045', '#83ADB5', '#BFB5B2'];
-    const [bgColor, setColor] = useState(bgColors[0]);
+export  function AddListModal({ closeModal, addList }) {
+    const bgColors = [ '#FE1F14', '#B9D3EE', '#000000', '#57575E', '#2E4045', '#83ADB5', '#BFB5B2' ];
+    const [ bgColor, setColor ] = useState( bgColors[0] );
 
     const renderColors = () => {
         return bgColors.map(color => {
             return (
                 <TouchableOpacity 
                     key={color} 
-                    style={[styles.colorSelect, {backgroundColor: color}]}
-                    onPress={()=> setColor(color)}
+                    style={[ styles.colorSelect, { backgroundColor: color } ]}
+                    onPress={ ()=> setColor( color ) }
             />
             );
         });
     };
 
     return (
-        <KeyboardAvoidingView style={styles.container} behavior={"padding"}> 
+        <KeyboardAvoidingView style={ styles.container } behavior={ "padding" }> 
          
-            <TouchableOpacity style={{position: 'absolute', top: 64, right:32}} onPress={closeModal}>
-            <AntDesign name='close' size={24} color='black' />
+            <TouchableOpacity style={{ position: 'absolute', top: 64, right:32 }} onPress={closeModal}>
+            <AntDesign name='close' size={ 24 } color='black' />
             </TouchableOpacity>
 
-            <View style={{alignSelf: 'stretch', marginHorizontal: 32}}>
-                <Text style={styles.title}>Create Todo List</Text>
+            <View style={{ alignSelf: 'stretch', marginHorizontal: 32 }}>
+                <Text style={ styles.title }>Create Todo List</Text>
                 <Formik 
                 initialValues={{ name: '', color: ''}}
                 validationSchema={ listSchema }
@@ -53,11 +53,11 @@ export  function AddListModal({closeModal, addList}) {
                 { ( formikProps ) => (
                     <View >
                         <TextInput
-                            enablesReturnKeyAutomatically={true}
-                            autoCorrect={true}
-                            style={styles.input}
+                            enablesReturnKeyAutomatically={ true }
+                            autoCorrect={ true }
+                            style={ styles.input }
                             placeholder='Enter A New List . . .'
-                            placeholderTextColor={'#002C5F'}
+                            placeholderTextColor={ '#002C5F' }
                             onChangeText={ formikProps.handleChange( 'name' ) }
                             value={ formikProps.values.name }
                             onBlur={ formikProps.handleBlur( 'name' ) }
@@ -68,11 +68,11 @@ export  function AddListModal({closeModal, addList}) {
                         >
                                 { formikProps.touched.name && formikProps.errors.name }
                         </Text>
-                        <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginTop: 12}}>
-                            {renderColors()}
+                        <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginTop: 12 }}>
+                            { renderColors() }
                         </View>
-                        <TouchableOpacity style={[styles.create, {backgroundColor: bgColor}]} onPress={formikProps.handleSubmit}>
-                            <Text style={{color: 'white', fontWeight: '600'}}>Create</Text>
+                        <TouchableOpacity style={[ styles.create, { backgroundColor: bgColor }]} onPress={ formikProps.handleSubmit }>
+                            <Text style={{ color: 'white', fontWeight: '600' }}>Create</Text>
                         </TouchableOpacity>
                     </View>
                 )}    
@@ -118,7 +118,7 @@ const styles = StyleSheet.create({
     }
 })
 
-const mapStateToProps = (state, ownProps) => {
+const mapStateToProps = ( state, ownProps ) => {
     return {
       state: state.todos,
     }
@@ -126,4 +126,4 @@ const mapStateToProps = (state, ownProps) => {
   
   const mapDispatchToProps = { addList }
   
-  export default connect(mapStateToProps, mapDispatchToProps)(AddListModal)
+  export default connect( mapStateToProps, mapDispatchToProps )( AddListModal )

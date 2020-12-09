@@ -1,55 +1,55 @@
 import React, { useState } from 'react';
 import { StyleSheet, Text, View, TouchableOpacity, FlatList, Modal} from 'react-native';
-import {AntDesign} from '@expo/vector-icons';
+import { AntDesign } from '@expo/vector-icons';
 import { connect } from 'react-redux';
 import TodoLists from './todoLists';
 import AddListModal from './addListModal';
 
-export function ListMain({state}) {
-   const [modal, setModal]= useState(false); 
-    console.log(state);
+export function ListMain({ state }) {
+   const [ modal, setModal ]= useState( false ); 
+    console.log( state );
 
    const toggleModal = () => {
-    setModal(!modal);
+    setModal( !modal );
    };
 
    const renderList = list => {
-       return <TodoLists list={list} />
+       return <TodoLists list={ list } />
    };
 
    
 
     return (
         
-            <View style={styles.container}>
+            <View style={ styles.container }>
                 <Modal 
                 animationType='slide' 
-                visible={modal} 
-                onRequestClose={() => toggleModal()}>
-                    <AddListModal closeModal={() => toggleModal()} />
+                visible={ modal } 
+                onRequestClose={ () => toggleModal() }>
+                    <AddListModal closeModal={ () => toggleModal() } />
                 </Modal>
-                <View style={styles.titleStyle}>
-                    <View style={styles.divider} />
-                    <Text style={styles.title} >
-                        Some <Text style={{fontWeight: '300', color:'#002C5F'}}>Checklists</Text>
+                <View style={ styles.titleStyle }>
+                    <View style={ styles.divider } />
+                    <Text style={ styles.title } >
+                        Some <Text style={{ fontWeight: '300', color:'#002C5F' }}>Checklists</Text>
                     </Text>
-                <View style={styles.divider}/>
+                <View style={ styles.divider }/>
                 </View>
-                <View style={{height: 425, paddingLeft: 22}}>
+                <View style={{ height: 425, paddingLeft: 22 }}>
                     <FlatList 
-                        data= {state}
-                        keyExtractor={item => item.id.toString()}
-                        horizontal={true}
-                        showsHorizontalScrollIndicator={false}
-                        renderItem={({item}) => renderList(item)}
+                        data= { state }
+                        keyExtractor={ item => item.id.toString() }
+                        horizontal={ true }
+                        showsHorizontalScrollIndicator={ false }
+                        renderItem={({ item }) => renderList( item )}
                         keyboardShouldPersistTaps="always"
                         />
                 </View>
-                <View style={{marginVertical: 48, paddingBottom: 24}}>
-                    <TouchableOpacity onPress={() => toggleModal()} style={styles.addList}>
+                <View style={{ marginVertical: 48, paddingBottom: 24 }}>
+                    <TouchableOpacity onPress={ () => toggleModal() } style={ styles.addList }>
                         <AntDesign name='plus' size={30}/>
                     </TouchableOpacity>
-                    <Text style={styles.add}>Add New List</Text>
+                    <Text style={ styles.add }>Add New List</Text>
                 </View>
             </View>
 
@@ -98,7 +98,7 @@ const styles = StyleSheet.create({
 
 })
 
-const mapStateToProps = (state, ownProps) => {
+const mapStateToProps = ( state, ownProps ) => {
     return {
       state: state.todos,
     }

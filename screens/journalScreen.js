@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import { FlatList, View, StyleSheet } from 'react-native';
-import { globalStyles } from '../styles/global';
 import { Card, Paragraph, Text, Modal, Portal, Provider,Button as PaperButton} from 'react-native-paper';
+import { connect } from 'react-redux';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import AddJournal from '../components/journals/addJournal';
-import { connect } from 'react-redux';
 import JournalButtons from '../components/journals/journalButtons';
+import { globalStyles, coltsGray } from '../styles/global';
 
 export function JournalList({ navigation, state }) {
     const [ modalOpen, setModalOpen ] = useState( false );
@@ -13,8 +13,7 @@ export function JournalList({ navigation, state }) {
     return (
          <Provider >
             <Portal>
-              <Modal visible={ modalOpen } onDismiss={ () => setModalOpen( false ) } contentContainerStyle={ globalStyles.addJournalContainer }>
-                      
+              <Modal visible={ modalOpen } onDismiss={ () => setModalOpen( false ) } contentContainerStyle={ globalStyles.addJournalContainer }>                     
                           <Text style={ globalStyles.addJournalTitle }>Add A Journal Entry</Text>
                           <PaperButton
                           icon='close'
@@ -26,17 +25,17 @@ export function JournalList({ navigation, state }) {
                     
               </Modal>
             </Portal>
-              <View style={{ backgroundColor: '#A2AAAD' }}>
+            <View style={{ backgroundColor: coltsGray }}>
               <MaterialCommunityIcons
               name='plus'
               size={ 24 }
               style={ globalStyles.modalToggle }
               onPress={ () => setModalOpen(true) }
-            />
+              />
             </View>
 
           <FlatList
-              style={{ backgroundColor: '#A2AAAD' }}
+              style={{ backgroundColor: coltsGray }}
               data={ state }
               keyExtractor={( item, index) => index.toString() }
               renderItem={({ item }) => (
@@ -47,8 +46,8 @@ export function JournalList({ navigation, state }) {
                       <Paragraph style={ globalStyles.journalText }>{ item.body }</Paragraph>
                     </Card.Content>
                   </Card>
-                  <View style={styles.container}>
-                        <JournalButtons item={item.id}/>
+                  <View style={ styles.container }>
+                        <JournalButtons item={ item.id }/>
                   </View>
                 </View>
               )}
@@ -63,14 +62,14 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#A2AAAD',
+    backgroundColor: coltsGray,
   }
 })
 
-const mapStateToProps = (state, ownProps) => {
+const mapStateToProps = ( state, ownProps ) => {
   return {
     state: state.journals,
   }
 }
 
-export default connect(mapStateToProps)(JournalList)
+export default connect( mapStateToProps )( JournalList )

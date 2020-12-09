@@ -1,7 +1,7 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-import { Button } from 'react-native-paper';
 import { connect } from 'react-redux';
+import { Button } from 'react-native-paper';
 import { deleteVision } from '../../redux/actions';
 
 export function DeleteVision({ deleteVision, item }) {
@@ -10,7 +10,7 @@ export function DeleteVision({ deleteVision, item }) {
     const removeVision = () => {
         // save item.id from props to buttonId
         var buttonId = item;
-        //calls redux action on stored todoss
+        //calls redux action on stored visions
         deleteVision(buttonId);
     }
 

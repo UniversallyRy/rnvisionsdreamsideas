@@ -1,8 +1,9 @@
+import React from 'react';
 import { createStackNavigator } from 'react-navigation-stack';
 import TodoScreen from '../screens/todoScreen';
 import TodoDetails from '../components/todos/todoDetails';
 import Header from '../shared/header';
-import React from 'react';
+import { coltsGray, coltsBlue } from '../styles/global';
 
 const screens = {
     TodoScreen: {
@@ -23,9 +24,9 @@ const screens = {
 
 const TodoStack = createStackNavigator( screens, {
     defaultNavigationOptions: {
-        headerTintColor: '#002C5F',
+        headerTintColor: coltsBlue,
         headerStyle: { 
-            backgroundColor: '#A2AAAD',
+            backgroundColor: coltsGray,
             height: 100,
         }
     }

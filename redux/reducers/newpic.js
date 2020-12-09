@@ -6,7 +6,7 @@ export default function( state = initialPic, action ) {
   switch ( action.type ) {
     case ADD_PIC:
         var uri = '';
-        var newUri = (uri == action.payload.uri) ? '' : action.payload.uri;
+        var newUri = ( uri == action.payload.uri ) ? '' : action.payload.uri;
         
         return newUri;
     default:

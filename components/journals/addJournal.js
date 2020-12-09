@@ -1,31 +1,33 @@
 import React, {useState} from 'react';
 import { View } from 'react-native';
-import { globalStyles } from '../../styles/global';
+import { TextInput, Text, useTheme } from 'react-native-paper';
+import { connect } from 'react-redux';
 import { Formik } from 'formik';
 import * as yup from 'yup';
 import FlatButton from '../../shared/button';
-import { TextInput, Text, useTheme } from 'react-native-paper';
-import { connect } from 'react-redux';
 import { addJournal, addTodo } from '../../redux/actions';
+import { globalStyles } from '../../styles/global';
 
+// require an entry into form input that's at least 4 letters
 const JournalSchema = yup.object({
     title: yup.string().required().min(4),
     body: yup.string().required().min(4),
-})
+});
 
 export function AddJournal ({ addJournal, addTodo }) {
     const { colors } = useTheme();
     const [ modalOpen, setModalOpen ] = useState( true );
     return (
             <Formik
-                style={globalStyles.addJournalForm}
+                style={ globalStyles.addJournalForm }
+                // Control whether Formik should reset the form if initialValues changes
                 enableReinitialize
                 initialValues={{ title:'', body:'', id:''}}
                 validationSchema={ JournalSchema }
                 onSubmit={( values, actions ) => {
                     addTodo( values );
                     actions.resetForm();
-                    setModalOpen(false);
+                    setModalOpen( false );
                 }}
             >
                 {( formikProps ) => (
@@ -41,7 +43,8 @@ export function AddJournal ({ addJournal, addTodo }) {
                         <Text 
                             style={ globalStyles.errorText } 
                         >
-                                { formikProps.touched.title && formikProps.errors.title }
+                            {/* Text ^ shows up only when input is focused and exited without requirements */}
+                            { formikProps.touched.title && formikProps.errors.title }
                         </Text>
                         <TextInput
                             multiline
@@ -64,13 +67,16 @@ export function AddJournal ({ addJournal, addTodo }) {
     )
 }
 
+
 const mapStateToProps = ( state, ownProps ) => {
     return {
+            // combinedReducers use so point to journals.js 
       state: state.journals
     }
   }
   
-  const mapDispatchToProps = { addTodo,addJournal }
+  // actions from redux to save entry to store 
+  const mapDispatchToProps = { addTodo, addJournal }
 
   export default connect(
     mapStateToProps,

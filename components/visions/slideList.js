@@ -1,15 +1,11 @@
 import React, { useCallback, memo, useRef, useState } from "react";
-import {
-  FlatList,
-  View,
-  Dimensions,
-  Image,
-} from "react-native";
-import { globalStyles } from "../../styles/global";
+import { FlatList, View, Dimensions, Image } from "react-native";
 import { Card }  from 'react-native-paper';
 import { connect } from 'react-redux';
 import DeleteVision from "./deleteVision";
+import { globalStyles } from "../../styles/global";
 
+// react native's Dimensions import to grab mobile screens dimensions
 const { width: windowWidth } = Dimensions.get( "window" );
 
 const Slide = memo( function Slide( { data } ) {
@@ -72,9 +68,9 @@ export function SlideList({ state }) {
     removeClippedSubviews: true,
     scrollEventThrottle: 16,
     windowSize: 2,
-    keyExtractor: useCallback( s => String(s.id), [] ),
+    keyExtractor: useCallback( s => String( s.id ), [] ),
     getItemLayout: useCallback(
-      (_, index) => ({
+      ( _, index ) => ({
         index,
         length: windowWidth,
         offset: index * windowWidth,
