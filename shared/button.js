@@ -7,7 +7,7 @@ import { raidSilver, coltsBlue } from '../styles/global';
 
 export default function FlatButton( { text, onPress }) {
     return (
-            <Button icon = 'plus'style={ styles.button } onPress={ onPress } dark={ true } >
+            <Button color={coltsBlue} icon= 'plus'style={ styles.button } onPress={ onPress } dark={ true } >
                 <Text style={ styles.buttonText }> { text } </Text>
             </Button>
     )
