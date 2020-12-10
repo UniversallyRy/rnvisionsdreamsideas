@@ -236,7 +236,7 @@ export const globalStyles = StyleSheet.create({
 
     slideCarousel: {
         width: windowWidth ,
-        marginBottom: 25,
+        flex: 1,
     },
 
     slideImage: { 

@@ -1,111 +1,121 @@
-import React, { useCallback, memo, useRef, useState } from "react";
-import { FlatList, View, Dimensions, Image } from "react-native";
+import React, { useCallback, memo, useRef, useState, useEffect } from "react";
+import { FlatList,StyleSheet, View, Dimensions, Image, Animated } from "react-native";
 import { Card, Text }  from 'react-native-paper';
-import { connect } from 'react-redux';
 import DeleteVision from "./deleteVision";
 import { globalStyles } from "../../styles/global";
+import {Directions, FlingGestureHandler, State} from 'react-native-gesture-handler';
+import addVision from "./addVision";
 
 // react native's Dimensions import to grab mobile screens dimensions
 const { width: windowWidth } = Dimensions.get( "window" );
+const OVERFLOW_HEIGHT = 70;
+const SPACING = 10;
+const ITEM_WIDTH = windowWidth * 0.88;
+const ITEM_HEIGHT = ITEM_WIDTH * 1.7;
+const VISIBLE_ITEMS = 3;
 
-// As long as data props are the same between renderings React reuses the memoized content. 
-const VisionImageList = memo( function VisionImage( { data } ) {
-  return (
-    <Card style={ globalStyles.slideContainer } >
-      <Card.Content style={{margin: 1}}>
-        <Image source={{ uri: data.uri }} style={ globalStyles.slideImage }></Image>
-          <Text style={ globalStyles.slideTitle }>{ data.title}</Text>
-        <DeleteVision item={ data.id }/>
-      </Card.Content>
-    </Card> 
-  );
-});
+export function VisionsContainer({ state, scrollXAnimated}) {
+  
+  const VisionImageList = memo( function VisionImage( { data, index } ) {
+  
+    const inputRange = [index - 1, index, index + 1];
+                const translateX = scrollXAnimated.interpolate({
+                  inputRange,
+                  outputRange: [50, 0, -100],
+                });
+                const scale = scrollXAnimated.interpolate({
+                  inputRange,
+                  outputRange: [0.8, 1, 1.3],
+                });
+                const opacity = scrollXAnimated.interpolate({
+                  inputRange,
+                  outputRange: [1 - 1 / VISIBLE_ITEMS, 1, 0],
+                });
+  
+    return (
 
-function Pagination( { state, index }) {
-  return (
-    <View style={ globalStyles.pagination } pointerEvents="none">
-      { state.map((_, i) => {
-          return (
-            <View
-              key={ i }
-              style={[
-                globalStyles.paginationDot,
-                index === i
-                  ? globalStyles.paginationDotActive
-                  : globalStyles.paginationDotInactive,
-              ]}
-            />
-          );
-      })}
-    </View>
-  );
-}
+          <Animated.View 
+            pointerEvents='none'
+            style={{
+              position: 'absolute', 
+              left: -ITEM_WIDTH/2,
+              opacity,
+              transform: [{translateX}, {scale}]            
+            }}
+          >
+            
+              <Image source={{ uri: data.uri }} style={{borderRadius: 14, width: ITEM_WIDTH, height: ITEM_HEIGHT}}></Image>
+                {/* <Text style={ globalStyles.slideTitle }>{ data.title}</Text>
+              <DeleteVision item={ data.id }/> */}
+        
+          </Animated.View> 
+    );
+  });
 
-export function ListAndPaginationLink({ state }) {
-  const [ index, setIndex ] = useState(0);
-  const indexRef = useRef( index );
-  indexRef.current = index;
-  const onScroll = useCallback(( event ) => {
-    const slideSize = event.nativeEvent.layoutMeasurement.width;
-    const index = event.nativeEvent.contentOffset.x / slideSize;
-    const roundIndex = Math.round( index );
-
-    const distance = Math.abs( roundIndex - index );
-
-    // Prevent one pixel triggering setIndex in the middle
-    // of the transition. With this we have to scroll a bit
-    // more to trigger the index change.
-    const isNoMansLand = 0.4 < distance;
-
-    if ( roundIndex !== indexRef.current && !isNoMansLand ) {
-      setIndex( roundIndex );
-    }
-  }, []);
-
-  const flatListOptimizationProps = {
-    initialNumToRender: 0,
-    maxToRenderPerBatch: 1,
-    removeClippedSubviews: true,
-    scrollEventThrottle: 16,
-    windowSize: 2,
-    keyExtractor: useCallback( s => String( s.id ), [] ),
-    getItemLayout: useCallback(
-      ( _, index ) => ({
-        index,
-        length: windowWidth,
-        offset: index * windowWidth,
-      }),
-      []
-    ),
-  };
-
-  const renderList = useCallback( function renderList( { item, navigation } ) {
-    return <VisionImageList data={ item } onPress={ () => navigation.navigate( 'VisionDetails', item ) }/>;
+  const renderList = useCallback( function renderList( { item, navigation, index } ) {
+    return <VisionImageList index={index} data={ item } />;
   }, []);
 
   return (
     <>
       <FlatList
         data={ state }
-        style={ globalStyles.slideCarousel }
+        keyExtractor={(_, index) => String(index)}
         renderItem={ renderList }
-        pagingEnabled
-        enableReinitialize={ true }
         horizontal
-        showsHorizontalScrollIndicator={ false }
-        bounces={ false } 
-        onScroll={ onScroll }
-        { ...flatListOptimizationProps }
+        inverted
+        contentContainerStyle={{
+          flex: 1,
+          justifyContent: 'center',
+          padding: SPACING * 2,
+        }}
+        CellRendererComponent={({item, index, children, style, ...props}) => {
+          const newStyle = [ style,
+            {zIndex: state.length - index}
+          ]
+          return <View style={newStyle} index={index} {...props}>
+            {children}
+          </View>
+        }}
+        scrollEnabled={false}
+        removeClippedSubviews={false}
       />
-      <Pagination state={ state } index={ index }></Pagination>
     </>
   );
 }
 
-const mapStateToProps = ( state, ownProps ) => {
-  return {
-    state: state.visions,
-  }
-}
 
-export default connect( mapStateToProps )( ListAndPaginationLink )
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    backgroundColor: '#fff',
+  },
+  title: {
+    fontSize: 28,
+    fontWeight: '900',
+    textTransform: 'uppercase',
+    letterSpacing: -1,
+  },
+  location: {
+    fontSize: 16,
+  },
+  date: {
+    fontSize: 12,
+  },
+  itemContainer: {
+    height: OVERFLOW_HEIGHT,
+    padding: SPACING * 2,
+  },
+  itemContainerRow: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  },
+  overflowContainer: {
+    height: OVERFLOW_HEIGHT,
+    overflow: 'hidden',
+  },
+});
+
+export default VisionsContainer;
