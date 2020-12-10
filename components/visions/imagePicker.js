@@ -58,10 +58,10 @@ export function ImagePic({ addPic }) {
   return (
     <View style={{alignSelf: 'center'}}>
         <View style={globalStyles.visionButtonContainer}>
-          <Button mode= 'contained' color={coltsGray} style={ globalStyles.uploadButton } title="Add Image From Gallery" onPress={ pickImage }>
+          <Button color={coltsGray} style={ globalStyles.uploadButton } title="Add Image From Gallery" onPress={ pickImage }>
             Add from gallery
           </Button>
-          <Button mode= 'outlined' icon= 'plus' color={coltsGray} style={ globalStyles.uploadButton } title="Take A Picture" onPress={ CameraImage }>
+          <Button icon= 'plus' color={coltsGray} style={ globalStyles.uploadButton } title="Take A Picture" onPress={ CameraImage }>
            Take a Picture
           </Button>
         </View>
