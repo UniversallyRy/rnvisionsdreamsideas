@@ -275,7 +275,8 @@ export const globalStyles = StyleSheet.create({
         marginTop:25,
         marginBottom: 30,   
         borderWidth: 1,
-        borderColor: coltsBlue,
+        borderColor: coltsGray,
+        color: coltsGray,
         padding: 10,
         borderRadius: 10,
         alignSelf: 'center',
@@ -283,6 +284,8 @@ export const globalStyles = StyleSheet.create({
     },
     modalClose: {
         marginTop: 95,
+        borderColor: coltsBlue,
+        color: coltsBlue,
     },
     modalContent:{
         backgroundColor: coltsGray,

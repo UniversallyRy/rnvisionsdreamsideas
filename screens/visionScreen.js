@@ -23,7 +23,7 @@ export function Visions({ navigation, state }) {
     return (
           <View style={ styles.container }>
             <StatusBar hidden/>
-            {/* <Modal style={{ margin:10 }}visible={ modalOpen } animationType='slide'>
+            <Modal style={{ margin:10 }}visible={ modalOpen } animationType='slide'>
               <TouchableWithoutFeedback onPress={ Keyboard.dismiss }>
                 <View style={ globalStyles.modalContent }>
                   <Text Text='Add Vision'> Add A Vision </Text>
@@ -44,7 +44,7 @@ export function Visions({ navigation, state }) {
               size={ 24 }
               style={ globalStyles.modalToggle }
               onPress={ () => setModalOpen(true) }
-            /> */}
+            />
             
             <VisionImageList state={state} scrollX={scrollX}/>
             <VisionTitles data={state} scrollXAnimated={scrollX}/>
