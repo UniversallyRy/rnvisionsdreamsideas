@@ -1,6 +1,7 @@
 import React from 'react';
 import { StyleSheet, Text, View, Animated} from 'react-native';
 import { EvilIcons } from '@expo/vector-icons';
+import { coltsBlue, coltsGray } from '../../styles/global';
 
 const OVERFLOW_HEIGHT = 70;
 const SPACING = 10;
@@ -11,7 +12,7 @@ const VisionTitles = ({ data, scrollXAnimated}) => {
         inputRange,
         outputRange: [OVERFLOW_HEIGHT, 0, -OVERFLOW_HEIGHT],
       });
-      
+
     return (
       <View style={styles.overflowContainer}>
         <Animated.View style={{
@@ -47,9 +48,10 @@ const VisionTitles = ({ data, scrollXAnimated}) => {
     container: {
       flex: 1,
       justifyContent: 'center',
-      backgroundColor: '#fff',
+      backgroundColor: coltsBlue,
     },
     title: {
+        color: coltsBlue,
       fontSize: 28,
       fontWeight: '900',
       textTransform: 'uppercase',

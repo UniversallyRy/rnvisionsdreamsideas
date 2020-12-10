@@ -7,57 +7,21 @@ import AddVision from '../components/visions/addVision';
 import VisionImageList from '../components/visions/visionImageList';
 import VisionTitles from '../components/visions/visionTitles';
 import { Directions, FlingGestureHandler, State } from 'react-native-gesture-handler';
-import { coltsGray, globalStyles } from '../styles/global';
+import { coltsBlue, coltsGray, globalStyles } from '../styles/global';
 import { setIn } from 'formik';
 
 const VISIBLE_ITEMS = 3;
 
 
 export function Visions({ navigation, state }) {
-  const scrollXAnimated = useRef(new Animated.Value(0)).current;
+  const scrollX = useRef(new Animated.Value(0)).current;
   const scrollXIndex = useRef(new Animated.Value(0)).current;
     const [ modalOpen, setModalOpen ] = useState( false );
     const [index, setIndex] = useState(0); 
-    const setActiveIndex = useCallback((activeIndex) => {
-      scrollXIndex.setValue(activeIndex);
-      setIndex(activeIndex);
-    });
-
-    useEffect(() => {
-      Animated.spring(scrollXAnimated, {
-        toValue: scrollXIndex,
-        useNativeDriver: true,
-      }).start();
- 
-    });
 
    
     return (
-      <FlingGestureHandler
-        key='left'
-        direction={Directions.LEFT}
-        onHandlerStateChange={ev => {
-          if(ev.nativeEvent.state === State.END) {
-            if( index === state.length - 1){
-              return;
-            }
-            setActiveIndex(index + 1);
-          }
-        }}
-      >
-        <FlingGestureHandler
-        key='right'
-        direction={Directions.RIGHT}
-        onHandlerStateChange={ev => {
-          if(ev.nativeEvent.state === State.END) {
-            if( index === 0){
-              return;
-            }
-            setActiveIndex(index - 1);
-          }
-        }}
-        >
-          <SafeAreaView style={ styles.container }>
+          <View style={ styles.container }>
             <StatusBar hidden/>
             {/* <Modal style={{ margin:10 }}visible={ modalOpen } animationType='slide'>
               <TouchableWithoutFeedback onPress={ Keyboard.dismiss }>
@@ -82,36 +46,18 @@ export function Visions({ navigation, state }) {
               onPress={ () => setModalOpen(true) }
             /> */}
             
-            <VisionImageList scrollXAnimated={scrollXAnimated} state={state} />
-            <VisionTitles scrollXAnimated={scrollXAnimated} data={state} />
-          </SafeAreaView>
-        </FlingGestureHandler>
-      </FlingGestureHandler>
+            <VisionImageList state={state} scrollX={scrollX}/>
+            <VisionTitles data={state} scrollXAnimated={scrollX}/>
+          </View>
     )
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
-    backgroundColor: coltsGray,
-  },
-  title: {
-    fontSize: 28,
-    fontWeight: '900',
-    textTransform: 'uppercase',
-    letterSpacing: -1,
-  },
-  location: {
-    fontSize: 16,
-  },
-  date: {
-    fontSize: 12,
-  },
-  itemContainerRow: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
     alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: coltsBlue,
   },
 });
 
