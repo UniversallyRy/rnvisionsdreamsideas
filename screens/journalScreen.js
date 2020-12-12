@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import AddJournal from '../components/journals/addJournal';
 import JournalButtons from '../components/journals/journalButtons';
-import { globalStyles, coltsGray } from '../styles/global';
+import { globalStyles, coltsGray, coltsBlue } from '../styles/global';
 
 export function JournalList({ navigation, state }) {
     const [ modalOpen, setModalOpen ] = useState( false );
@@ -25,7 +25,7 @@ export function JournalList({ navigation, state }) {
                     
               </Modal>
             </Portal>
-            <View style={{ backgroundColor: coltsGray }}>
+            <View style={{ backgroundColor: coltsBlue }}>
               <MaterialCommunityIcons
               name='plus'
               size={ 24 }
@@ -35,11 +35,11 @@ export function JournalList({ navigation, state }) {
             </View>
 
           <FlatList
-              style={{ backgroundColor: coltsGray }}
+              style={{ backgroundColor: coltsBlue }}
               data={ state }
               keyExtractor={( item, index) => index.toString() }
               renderItem={({ item }) => (
-                <View>
+                <View style={ globalStyles.journalBorder }>
                   <Card style={ globalStyles.journalCard } onPress={ () => navigation.navigate( 'JournalDetails', item ) }>
                     <Card.Content>
                       <Paragraph style={ globalStyles.journalTitle }>{ item.title }</Paragraph>

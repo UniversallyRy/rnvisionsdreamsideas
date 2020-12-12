@@ -175,10 +175,25 @@ export const globalStyles = StyleSheet.create({
         backgroundColor: coltsBlue,
         width: windowWidth * 0.99,
     },
-    journalCard: {
+    journalBorder: {
         alignSelf: 'center',
+        borderRadius: 18,
+        borderWidth: 10,
+        borderColor: coltsGray,
+        shadowColor: 'black',
+        shadowOpacity: 0.6,
+        shadowRadius: 350,
+        shadowOffset: {
+          width: 0,
+          height: 0,
+        },   
+        width: windowWidth * 0.92,
+    },
+    journalCard: {   
         backgroundColor: coltsBlue,
-        width: windowWidth * 0.99,
+        alignSelf: 'center',
+        width: windowWidth * 0.85,
+        marginBottom: 1,
     },
     journalTitle: {
         fontFamily: 'nunito-black',

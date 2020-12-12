@@ -27,18 +27,15 @@ const styles = StyleSheet.create({
         buttonsContainer: {
             flexDirection: 'row',
             alignContent: 'center',
-            margin: 2,
             fontSize: 20,
+            marginTop: 4,
         },
         editButton: {
-            alignContent: 'center',
-            width: windowWidth * .49,
-            marginRight: 2,
+            flex: .51,
         },
         deleteButton: {
-            alignContent: 'center',
-            width: windowWidth * .49,
-            marginLeft: 1,
+            flex: .51,
+            marginLeft: 2,
         },
 })
 
