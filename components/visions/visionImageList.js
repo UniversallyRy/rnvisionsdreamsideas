@@ -1,10 +1,8 @@
-import React, { useCallback, memo, useRef, useState, useEffect } from "react";
-import { FlatList,StyleSheet, View, Dimensions, Image, Animated } from "react-native";
-import { Card, Text }  from 'react-native-paper';
+import React, { useCallback } from "react";
+import { StyleSheet, View, Dimensions, Animated } from "react-native";
+// import { Card, Text }  from 'react-native-paper';
 import DeleteVision from "./deleteVision";
-import { coltsBlue, coltsGray, globalStyles } from "../../styles/global";
-import {Directions, FlingGestureHandler, State} from 'react-native-gesture-handler';
-import addVision from "./addVision";
+import { coltsGray } from "../../styles/global";
 
 // react native's Dimensions import to grab mobile screens dimensions
 const { width: width } = Dimensions.get( "window" );
@@ -14,7 +12,7 @@ const ITEM_HEIGHT = ITEM_WIDTH * 1.47;
 
 export function VisionsContainer({ state, scrollX }) {
   
-  const VisionImageList = memo( function VisionImage( { data, index } ) {
+  const VisionImageList = ( { data, index } ) => {
       const inputRange= [
         (index -1) * width,
         index * width,
@@ -23,7 +21,7 @@ export function VisionsContainer({ state, scrollX }) {
       const translateX = scrollX.interpolate({
         inputRange,
         outputRange: [-width * 0.7, 0, width * 0.7]
-      })
+      });
 
     return (
 
@@ -67,7 +65,7 @@ export function VisionsContainer({ state, scrollX }) {
               
           </View> 
     );
-  });
+  };
 
   const renderList = useCallback( function renderList( { item, navigation, index } ) {
     return <VisionImageList index={index} data={ item } />;

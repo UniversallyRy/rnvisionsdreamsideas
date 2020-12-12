@@ -194,6 +194,7 @@ export const globalStyles = StyleSheet.create({
         alignSelf: 'center',
         width: windowWidth * 0.85,
         marginBottom: 1,
+        borderRadius: 7,
     },
     journalTitle: {
         fontFamily: 'nunito-black',
