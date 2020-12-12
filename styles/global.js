@@ -47,7 +47,7 @@ export const globalStyles = StyleSheet.create({
     // CSS for Todos
     todoScreenContainer: {
         flex: 1,
-        backgroundColor: coltsGray,
+        backgroundColor: coltsBlue,
         alignItems: 'center',
         justifyContent: 'center',
     },

@@ -4,6 +4,7 @@ import { AntDesign } from '@expo/vector-icons';
 import { connect } from 'react-redux';
 import TodoLists from './todoLists';
 import AddListModal from './addListModal';
+import { coltsGray } from '../../styles/global';
 
 export function ListMain({ state }) {
    const [ modal, setModal ]= useState( false ); 
@@ -31,7 +32,7 @@ export function ListMain({ state }) {
                 <View style={ styles.titleStyle }>
                     <View style={ styles.divider } />
                     <Text style={ styles.title } >
-                        Some <Text style={{ fontWeight: '300', color:'#002C5F' }}>Checklists</Text>
+                        Some <Text style={{ fontWeight: '300', color:coltsGray }}>Checklists</Text>
                     </Text>
                 <View style={ styles.divider }/>
                 </View>
@@ -47,7 +48,7 @@ export function ListMain({ state }) {
                 </View>
                 <View style={{ marginVertical: 48, paddingBottom: 24 }}>
                     <TouchableOpacity onPress={ () => toggleModal() } style={ styles.addList }>
-                        <AntDesign name='plus' size={30}/>
+                        <AntDesign color={coltsGray} name='plus' size={30}/>
                     </TouchableOpacity>
                     <Text style={ styles.add }>Add New List</Text>
                 </View>
@@ -69,7 +70,7 @@ const styles = StyleSheet.create({
         
     },
     divider: {
-        backgroundColor: '#002C5F',
+        backgroundColor: coltsGray,
         height: 1,
         flex: 1,
         marginTop: 40,
@@ -83,14 +84,14 @@ const styles = StyleSheet.create({
     },
     addList: {
         borderWidth: 2,
-        borderColor: '#002C5F',
+        borderColor: coltsGray,
         borderRadius: 4,
         padding: 16,
         alignItems: 'center',
         justifyContent: 'center',
     },
     add: {
-        color: '#002C5F',
+        color: coltsGray,
         fontWeight: '600',
         fontSize: 14,
         marginTop: 6,
