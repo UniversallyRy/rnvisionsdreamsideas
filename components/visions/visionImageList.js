@@ -1,23 +1,25 @@
-import React, { useCallback } from "react";
+import React, { useCallback, memo } from "react";
 import { StyleSheet, View, Dimensions, Animated } from "react-native";
 // import { Card, Text }  from 'react-native-paper';
 import DeleteVision from "./deleteVision";
 import { coltsGray } from "../../styles/global";
+import addVision from "./addVision";
 
 // react native's Dimensions import to grab mobile screens dimensions
 const { width: width } = Dimensions.get( "window" );
 const ITEM_WIDTH = width * 0.79;
 const ITEM_HEIGHT = ITEM_WIDTH * 1.47;
 
-
 export function VisionsContainer({ state, scrollX }) {
   
-  const VisionImageList = ( { data, index } ) => {
+  const VisionImageList = memo( function VisionImage( { data, index } ) {
+
       const inputRange= [
         (index -1) * width,
         index * width,
         (index + 1) * width
       ];
+
       const translateX = scrollX.interpolate({
         inputRange,
         outputRange: [-width * 0.7, 0, width * 0.7]
@@ -30,18 +32,17 @@ export function VisionsContainer({ state, scrollX }) {
             style={{ width, justifyContent: 'center', alignItems: 'center'}}
           >
             <View style={{
+              backgroundColor: coltsGray,
               borderRadius: 18,
-                borderWidth: 10,
-                borderColor: coltsGray,
-                shadowColor: 'black',
-                shadowOpacity: 0.6,
-                shadowRadius: 350,
-                shadowOffset: {
-                  width: 0,
-                  height: 0,
-                },      
-                backgroundColor: coltsGray
-              
+              borderWidth: 10,
+              borderColor: coltsGray,
+              shadowColor: 'black',
+              shadowOpacity: 0.6,
+              shadowRadius: 350,
+              shadowOffset: {
+                width: 0,
+                height: 0,
+              },      
             }}>
               <View 
                 style={{
@@ -65,7 +66,7 @@ export function VisionsContainer({ state, scrollX }) {
               
           </View> 
     );
-  };
+  });
 
   const renderList = useCallback( function renderList( { item, navigation, index } ) {
     return <VisionImageList index={index} data={ item } />;
@@ -75,7 +76,7 @@ export function VisionsContainer({ state, scrollX }) {
     <>
       <Animated.FlatList
         onScroll={Animated.event(
-          [{nativeEvent: {contentOffset: { x: scrollX}}}],
+            [{nativeEvent: { contentOffset: { x: scrollX } }}],
             {useNativeDriver: true}
         )}
         data={ state }
@@ -110,15 +111,13 @@ const styles = StyleSheet.create({
     fontSize: 12,
   },
   itemContainer: {
-
-
   },
   itemContainerRow: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
   },
-  
+
 });
 
 export default VisionsContainer;

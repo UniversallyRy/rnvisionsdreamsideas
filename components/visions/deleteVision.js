@@ -6,13 +6,12 @@ import { deleteVision } from '../../redux/actions';
 
 export function DeleteVision({ deleteVision, item }) {
 
-    
     const removeVision = () => {
         // save item.id from props to buttonId
         var buttonId = item;
         //calls redux action on stored visions
         deleteVision(buttonId);
-    }
+    };
 
     return (
         <View>
@@ -25,9 +24,8 @@ export function DeleteVision({ deleteVision, item }) {
 
 const styles = StyleSheet.create({
     deleteButton: {
-
     }
-})
+});
 
 const mapStateToProps = ( state, ownProps ) => {
     return {
@@ -35,8 +33,7 @@ const mapStateToProps = ( state, ownProps ) => {
     }
   }
   
-  const mapDispatchToProps = { deleteVision }
-
+const mapDispatchToProps = { deleteVision }
 
 export default connect(
     mapStateToProps,
