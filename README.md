@@ -1,4 +1,4 @@
-# Vision Board made for React Native
+# Vision Board made with React Native
 
 ## Built With
 
