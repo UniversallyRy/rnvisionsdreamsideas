@@ -35,7 +35,7 @@ export const globalStyles = StyleSheet.create({
     },
     navbar: {
         color: coltsBlue,
-        fontSize: 20,
+        fontSize: 40,
     },
     errorText: {
         color: 'crimson',
