@@ -34,7 +34,7 @@ export function JournalList({ navigation, state }) {
               />
             </View>
 
-          <FlatList
+            <FlatList
               style={{ backgroundColor: coltsBlue }}
               data={ state }
               keyExtractor={( item, index) => index.toString() }
@@ -51,8 +51,8 @@ export function JournalList({ navigation, state }) {
                   </View>
                 </View>
               )}
-          />
-            </Provider>            
+            />
+        </Provider>            
     )
 }
 

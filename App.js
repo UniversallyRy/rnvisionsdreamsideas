@@ -17,7 +17,6 @@ import {store, persistor} from './redux/store';
 import * as Font from 'expo-font';
 import { AppLoading } from 'expo';
 import Navigator from './routes/drawer';
-import merge from 'deepmerge';
 import { globalStyles } from './styles/global';
 import { PersistGate } from 'redux-persist/integration/react';
 
@@ -29,8 +28,8 @@ const getFonts = () =>
   });
 
   //customize theme colors
-  const CombinedDefaultTheme = merge( PaperDefaultTheme, NavigationDefaultTheme );
-  const CombinedDarkTheme = merge( PaperDarkTheme, NavigationDarkTheme );
+  // const CombinedDefaultTheme = merge( PaperDefaultTheme, NavigationDefaultTheme );
+  // const CombinedDarkTheme = merge( PaperDarkTheme, NavigationDarkTheme );
 
 
 export default function App() {

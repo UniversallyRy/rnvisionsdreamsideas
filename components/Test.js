@@ -17,7 +17,7 @@ const Test = (state) => {
                   key: "todos",    // Whatever you chose for the "key" value when initialising redux-persist in the **persistCombineReducers** method - e.g. "root"
                  result: () => null              // Func expected on the submitted action. 
               });        
-       } 
+      }; 
              return(
              <Button mode='contained'onPress={() => onPurgeStoredState(state)}></Button>
              );

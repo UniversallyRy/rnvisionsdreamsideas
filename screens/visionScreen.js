@@ -16,8 +16,8 @@ const VISIBLE_ITEMS = 3;
 export function Visions({ navigation, state }) {
   const scrollX = useRef(new Animated.Value(0)).current;
   const scrollXIndex = useRef(new Animated.Value(0)).current;
-    const [ modalOpen, setModalOpen ] = useState( false );
-    const [index, setIndex] = useState(0); 
+  const [ modalOpen, setModalOpen ] = useState( false );
+  const [index, setIndex] = useState(0); 
 
    
     return (

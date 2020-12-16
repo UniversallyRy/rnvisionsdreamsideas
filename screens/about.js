@@ -23,13 +23,13 @@ const styles = StyleSheet.create({
       color: coltsGray,
     },
     aboutContent: {
-        backgroundColor: coltsBlue,
-        flex: .4,
-        flexDirection: "row",
-        alignSelf: 'center',
-        alignItems: 'center',
-        justifyContent: 'center',
-        elevation: 4,
+      backgroundColor: coltsBlue,
+      flex: .4,
+      flexDirection: "row",
+      alignSelf: 'center',
+      alignItems: 'center',
+      justifyContent: 'center',
+      elevation: 4,
     }
   });
   

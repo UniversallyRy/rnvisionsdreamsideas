@@ -13,7 +13,7 @@ const screens = {
             }
         }
     },
-}
+};
 
 const AboutStack = createStackNavigator( screens, {
     defaultNavigationOptions: {
@@ -24,6 +24,5 @@ const AboutStack = createStackNavigator( screens, {
         }
     }
 });
-
 
 export default AboutStack;

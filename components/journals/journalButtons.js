@@ -13,7 +13,7 @@ export function JournalButtons({ deleteJournal, item }) {
         var journalId = item;
         // calls redux action on item.id
         deleteJournal(journalId);
-    }
+    };
 
     return (
         <View style={styles.buttonsContainer}>

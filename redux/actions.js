@@ -8,7 +8,6 @@ export const addText = value => ({
 export const addList = ({name, color}) => ({
   type: ADD_LIST,
   payload: {name, color},
-        
 });
 
 export const addVision = ({uri, title, id})  => ({
@@ -29,7 +28,6 @@ export const deleteVision = id => ({
 type: DELETE_VISION,
 payload: { id }
 });
-
 
 export const addTodo = (title, id )  => ({
     type: ADD_TODO,
@@ -60,7 +58,7 @@ export const addJournal = ({title, body, id})  => ({
     title,
     body,
     id
-}
+  }
 });
 
 export const editJournal = id => ({
@@ -77,7 +75,7 @@ export const addPic = uri  => ({
   type: ADD_PIC,
   payload: {
     uri
-}
+  }
 });
 
 export const setFilter = filter => ({ type: SET_FILTER, payload: { filter } });
