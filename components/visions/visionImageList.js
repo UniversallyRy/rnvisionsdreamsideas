@@ -1,4 +1,4 @@
-import React, { useCallback, memo } from "react";
+import React, { useCallback, memo, useEffect, useState} from "react";
 import { StyleSheet, View, Dimensions, Animated } from "react-native";
 // import { Card, Text }  from 'react-native-paper';
 import DeleteVision from "./deleteVision";
@@ -11,6 +11,7 @@ const ITEM_WIDTH = width * 0.79;
 const ITEM_HEIGHT = ITEM_WIDTH * 1.47;
 
 export function VisionsContainer({ state, scrollX }) {
+
   
   const VisionImageList = memo( function VisionImage( { data, index } ) {
 
@@ -31,9 +32,9 @@ export function VisionsContainer({ state, scrollX }) {
             style={{ width, justifyContent: 'center', alignItems: 'center'}}
           >
             <View style={{
-              backgroundColor: coltsGray,
               borderRadius: 18,
-              borderWidth: 10,
+              borderWidth: 2,
+              overflow: 'hidden',
               borderColor: coltsGray,
               shadowColor: 'black',
               shadowOpacity: 0.6,

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import { View } from 'react-native';
 import { TextInput, Text } from 'react-native-paper';
 import { connect } from 'react-redux';
@@ -13,7 +13,7 @@ const visionSchema = yup.object({
     title: yup.string().required().min( 4 ),
 });
 
-export function AddVision({ addVision, stateUri }) {
+export function AddVision({ addVision, stateUri, setModalOpen }) {
     return (
         <View style={{margin: 15, marginTop: 100}}>
             <Formik
@@ -23,7 +23,8 @@ export function AddVision({ addVision, stateUri }) {
                 onSubmit={ ( values, actions ) => {
                     console.log( stateUri )
                     addVision( values );
-                    actions.resetForm();
+                    setModalOpen ( false )
+                    actions.resetForm()
                 }}
             >
                 {( formikProps ) => (

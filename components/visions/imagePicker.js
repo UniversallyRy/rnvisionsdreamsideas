@@ -3,7 +3,7 @@ import { View, Platform, Dimensions, Image } from 'react-native';
 import { Button, Text} from 'react-native-paper';
 import { connect } from 'react-redux';
 import * as ImagePicker from 'expo-image-picker';
-import { coltsGray, globalStyles } from '../../styles/global';
+import { coltsBlue, globalStyles } from '../../styles/global';
 import { addPic } from '../../redux/actions';
 
 
@@ -58,10 +58,10 @@ export function ImagePic({ addPic }) {
   return (
     <View style={{alignSelf: 'center'}}>
         <View style={globalStyles.visionButtonContainer}>
-          <Button color={coltsGray} style={ globalStyles.uploadButton } title="Add Image From Gallery" onPress={ pickImage }>
+          <Button color={coltsBlue} style={ globalStyles.uploadButton } title="Add Image From Gallery" onPress={ pickImage }>
             Add from gallery
           </Button>
-          <Button icon= 'plus' color={coltsGray} style={ globalStyles.uploadButton } title="Take A Picture" onPress={ CameraImage }>
+          <Button icon= 'plus' color={coltsBlue} style={ globalStyles.uploadButton } title="Take A Picture" onPress={ CameraImage }>
            Take a Picture
           </Button>
         </View>

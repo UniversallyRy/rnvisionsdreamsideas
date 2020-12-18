@@ -1,6 +1,6 @@
 import React, { useState, memo } from 'react';
 import { FlatList, View, StyleSheet } from 'react-native';
-import { Card, Paragraph, Text, Modal, Portal, Provider,Button as PaperButton} from 'react-native-paper';
+import { Card, Paragraph, Text, Modal, Portal, Provider } from 'react-native-paper';
 import { connect } from 'react-redux';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import AddJournal from '../components/journals/addJournal';
@@ -15,13 +15,16 @@ const JournalList = memo( function Journals( { navigation, state } ) {
             <Portal>
               <Modal visible={ modalOpen } onDismiss={ () => setModalOpen( false ) } contentContainerStyle={ globalStyles.addJournalContainer }>                     
                           <Text style={ globalStyles.addJournalTitle }>Add A Journal Entry</Text>
-                          <AddJournal />
-                          <PaperButton
-                          icon='close'
-                          size={ 24 }
-                          style={{ ...globalStyles.modalToggle, ...globalStyles.modalClose }}
-                          onPress={ () => setModalOpen( false ) }
-                          />  
+                          <AddJournal setModalOpen = {setModalOpen}/>
+                          <View style={globalStyles.closeModalContainer}>
+                            <MaterialCommunityIcons
+                              name='close'
+                              size={ 24 }
+                                    // rest/spread operator to grab modaltoggle props and adds any new modalcloses props  
+                              style={{ ...globalStyles.modalToggle, ...globalStyles.modalClose }}
+                              onPress={ () => setModalOpen( false ) }
+                            />
+                          </View>  
                     
               </Modal>
             </Portal>

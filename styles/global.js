@@ -178,8 +178,9 @@ export const globalStyles = StyleSheet.create({
     journalBorder: {
         margin: 10,
         alignSelf: 'center',
+        overflow: 'hidden',
         borderRadius: 18,
-        borderWidth: 10,
+        borderWidth: 2,
         borderColor: coltsGray,
         shadowColor: 'black',
         shadowOpacity: 0.6,
@@ -214,7 +215,8 @@ export const globalStyles = StyleSheet.create({
     },
     addJournalContainer: {
         flex: 1,
-        backgroundColor: '#A2AAAD',  
+        backgroundColor: coltsBlue,  
+        fontFamily: 'nunito-black',
     },
     addJournalForm: {
         margin: 15,
@@ -249,7 +251,7 @@ export const globalStyles = StyleSheet.create({
         alignSelf:'center',
         alignItems: 'center',
         justifyContent: 'center',
-        backgroundColor: coltsBlue,
+        backgroundColor: coltsGray,
         width: 225,
         height: 70,
         margin: 5,
@@ -309,6 +311,7 @@ export const globalStyles = StyleSheet.create({
         color: coltsGray,
         padding: 10,
         borderRadius: 10,
+        justifyContent: 'center',
         alignSelf: 'center',
         alignItems: 'center',
     },
@@ -322,12 +325,10 @@ export const globalStyles = StyleSheet.create({
     },
     modalClose: {    
         position: 'absolute',
-        borderColor: coltsBlue,
-        color: coltsBlue,
     },
     modalContent: {
         flex: 1,
-        backgroundColor: coltsGray,
+        backgroundColor: coltsBlue,
         height: windowHeight, 
     }
 });

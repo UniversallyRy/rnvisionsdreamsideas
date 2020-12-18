@@ -14,9 +14,8 @@ const JournalSchema = yup.object({
     body: yup.string().required().min(4),
 });
 
-export function AddJournal ({ addJournal }) {
+export function AddJournal ({ addJournal, setModalOpen }) {
     const { colors } = useTheme();
-    const [ modalOpen, setModalOpen ] = useState( true );
     return (
             <Formik
                 style={ globalStyles.addJournalForm }

@@ -1,51 +1,84 @@
-import React, { useState, useRef } from 'react';
-import { Animated, Modal,StyleSheet, StatusBar, View, TouchableWithoutFeedback, Keyboard } from 'react-native';
+import React, { useState, useRef, useEffect } from 'react';
+import { Animated, Modal, StyleSheet, StatusBar, View, TouchableWithoutFeedback, Keyboard } from 'react-native';
 import { Text } from 'react-native-paper';
 import { connect } from 'react-redux';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import AddVision from '../components/visions/addVision';
-import VisionImageList from '../components/visions/visionImageList';
-import VisionTitles from '../components/visions/visionTitles';
+import VisionsContainer from '../components/visions/visionImageList';
+import VisionGridContainer from '../components/visions/visionImageGrid';
 import { coltsBlue, globalStyles } from '../styles/global';
 
 const VISIBLE_ITEMS = 3;
 
 
-export function Visions({ navigation, state }) {
+export function Visions({  state, navigation }) {
   const scrollX = useRef(new Animated.Value(0)).current;
   const scrollXIndex = useRef(new Animated.Value(0)).current;
   const [ modalOpen, setModalOpen ] = useState( false );
-  const [index, setIndex] = useState(0); 
+  const [gridView, setGridView] = useState(false); 
 
-   
+
+  useEffect(() => {
+    let isCancelled = false;
+
+      if (!isCancelled) {
+       
+      }
+
+    return () => {
+      isCancelled = true;
+    };
+  }, []);
+
+  const toggleGrid = () => { 
+    setGridView(!gridView);
+    console.log(gridView);
+  } 
+    if(gridView){
+      return( 
+        <VisionGridContainer
+          state={state}
+          navigation={navigation}
+          toggleGrid={() => toggleGrid()}
+        />
+      )
+    }
     return (
           <View style={ styles.container }>
-            <StatusBar hidden/>
+            {/* <StatusBar hidden/> */}
             <Modal style={{ margin:10 }}visible={ modalOpen } animationType='slide'>
               <TouchableWithoutFeedback onPress={ Keyboard.dismiss }>
                 <View style={ globalStyles.modalContent }>
                   <Text Text='Add Vision'> Add A Vision </Text>
-                  <AddVision/>
+                  <AddVision setModalOpen={setModalOpen}/>
                   <View style={globalStyles.closeModalContainer}>
                     <MaterialCommunityIcons
                       name='close'
                       size={ 24 }
                             // rest/spread operator to grab modaltoggle props and adds any new modalcloses props  
                       style={{ ...globalStyles.modalToggle, ...globalStyles.modalClose }}
-                      onPress={ () => setModalOpen( false ) }
+                      onPress={ () => setModalOpen(false) }
                     />
+                    
+                    
                   </View>  
                 </View>
                 </TouchableWithoutFeedback>
             </Modal>
 
-            <VisionImageList state={state} scrollX={scrollX}/>
+            <VisionsContainer state={state} scrollX={scrollX}/>
             {/* <VisionTitles data={state} scrollXAnimated={scrollX}/> */}
             <MaterialCommunityIcons
               name='plus'
               size={ 24 }
               style={ globalStyles.modalToggle }
               onPress={ () => setModalOpen(true) }
+            />
+            <MaterialCommunityIcons
+              name='circle'
+              size={ 24 }
+              style={ globalStyles.modalToggle }
+              onPress={ () => toggleGrid() }
             />
           </View>
     )
