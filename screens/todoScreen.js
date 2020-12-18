@@ -9,13 +9,11 @@ import  ListMain  from '../components/todos/listMain';
 export  function TodoScreen({ navigation }) {
 
     return (
-      
           <View style={ globalStyles.todoScreenContainer }>            
             <ListMain/>
             {/* <TodoList/> */}
             {/* <AddTodo /> */}
           </View>
-      
     )
 }
 

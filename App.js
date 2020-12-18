@@ -30,8 +30,6 @@ const getFonts = () =>
   //customize theme colors
   // const CombinedDefaultTheme = merge( PaperDefaultTheme, NavigationDefaultTheme );
   // const CombinedDarkTheme = merge( PaperDarkTheme, NavigationDarkTheme );
-
-
 export default function App() {
   const [ fontsLoaded, setFontsLoaded ] = useState( false );
 

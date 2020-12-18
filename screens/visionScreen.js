@@ -1,14 +1,12 @@
-import React, { useState, useRef, useEffect, useCallback } from 'react';
-import { Animated, Modal,StyleSheet, StatusBar, SafeAreaView, View, TouchableWithoutFeedback, Keyboard } from 'react-native';
+import React, { useState, useRef } from 'react';
+import { Animated, Modal,StyleSheet, StatusBar, View, TouchableWithoutFeedback, Keyboard } from 'react-native';
 import { Text } from 'react-native-paper';
 import { connect } from 'react-redux';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import AddVision from '../components/visions/addVision';
 import VisionImageList from '../components/visions/visionImageList';
 import VisionTitles from '../components/visions/visionTitles';
-import { Directions, FlingGestureHandler, State } from 'react-native-gesture-handler';
-import { coltsBlue, coltsGray, globalStyles } from '../styles/global';
-import { setIn } from 'formik';
+import { coltsBlue, globalStyles } from '../styles/global';
 
 const VISIBLE_ITEMS = 3;
 

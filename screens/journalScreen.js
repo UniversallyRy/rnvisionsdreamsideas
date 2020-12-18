@@ -47,7 +47,7 @@ export function JournalList({ navigation, state }) {
                     </Card.Content>
                   </Card>
                   <View style={ styles.container }>
-                        <JournalButtons item={ item.id }/>
+                    <JournalButtons item={ item.id }/>
                   </View>
                 </View>
               )}
@@ -64,7 +64,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: coltsGray,
   }
-})
+});
 
 const mapStateToProps = ( state, ownProps ) => {
   return {
