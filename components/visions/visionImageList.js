@@ -28,7 +28,6 @@ export function VisionsContainer({ state, scrollX }) {
     return (
 
           <View 
-            pointerEvents='none'
             style={{ width, justifyContent: 'center', alignItems: 'center'}}
           >
             <View style={{
@@ -63,12 +62,12 @@ export function VisionsContainer({ state, scrollX }) {
                 <DeleteVision item={ data.id }/> */}
               </View>
             </View>
-              
+            <DeleteVision item={ data.id }/>       
           </View> 
     );
   });
 
-  const renderList = useCallback( function renderList( { item, navigation, index } ) {
+  const renderList = useCallback( function renderList( { item, index } ) {
     return <VisionImageList index={index} data={ item } />;
   }, []);
 

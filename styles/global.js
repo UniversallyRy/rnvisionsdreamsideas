@@ -116,7 +116,7 @@ export const globalStyles = StyleSheet.create({
         elevation: 5,
         padding: 15,
         backgroundColor: coltsBlue,
-        shadowOffset: { width :1, height: 1},
+        shadowOffset: { width :1, height: 1 },
         shadowColor: '#333',
         shadowOpacity: 0.3,
         shadowRadius: 2,
@@ -231,6 +231,14 @@ export const globalStyles = StyleSheet.create({
         justifyContent: 'center',
         marginBottom: 7,
     },
+    visionDeleteButton: {
+        borderRadius: 13,
+        justifyContent: 'center',
+        backgroundColor: coltsGray,
+        margin: 4,
+        height: 50,
+        width: 400,
+    },
     uploadButton: {
         alignSelf:'center',
         alignItems: 'center',
@@ -242,7 +250,7 @@ export const globalStyles = StyleSheet.create({
     },
     slideContainer: {
         width: windowWidth ,
-        height: windowHeight * .88,
+        height: windowHeight * 0.88,
         backgroundColor: 'transparent',
         alignSelf: 'center',
         justifyContent: "center",
@@ -298,12 +306,21 @@ export const globalStyles = StyleSheet.create({
         alignSelf: 'center',
         alignItems: 'center',
     },
-    modalClose: {
+    closeModalContainer:{
+        flex: 1,
         marginTop: 95,
+        marginBottom: 30,
+        justifyContent: 'flex-end',
+        borderColor: coltsBlue,
+        color: coltsBlue,
+    },
+    modalClose: {    
+        position: 'absolute',
         borderColor: coltsBlue,
         color: coltsBlue,
     },
     modalContent:{
+        flex: 1,
         backgroundColor: coltsGray,
         height: windowHeight, 
     }

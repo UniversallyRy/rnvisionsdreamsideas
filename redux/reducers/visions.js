@@ -19,14 +19,14 @@ export default function( state = initialVisions, action ) {
             id: uuidv4(),
             },
             ...state,
-          ]
+          ];
     case EDIT_VISION: {
       return {
         ...state
       };
     }
     case DELETE_VISION: {
-      return state.filter(vision => vision.id !== action.payload.id)
+      return state.filter(vision => vision.id !== action.payload.id);
     }
     default:
       return state;

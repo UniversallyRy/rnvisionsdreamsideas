@@ -25,20 +25,22 @@ export function Visions({ navigation, state }) {
               <TouchableWithoutFeedback onPress={ Keyboard.dismiss }>
                 <View style={ globalStyles.modalContent }>
                   <Text Text='Add Vision'> Add A Vision </Text>
-                  <MaterialCommunityIcons
-                    name='close'
-                    size={ 24 }
-                          // rest/spread operator to grab modaltoggle props and adds any new modalcloses props  
-                    style={{ ...globalStyles.modalToggle, ...globalStyles.modalClose }}
-                    onPress={ () => setModalOpen( false ) }
-                  />  
                   <AddVision/>
+                  <View style={globalStyles.closeModalContainer}>
+                    <MaterialCommunityIcons
+                      name='close'
+                      size={ 24 }
+                            // rest/spread operator to grab modaltoggle props and adds any new modalcloses props  
+                      style={{ ...globalStyles.modalToggle, ...globalStyles.modalClose }}
+                      onPress={ () => setModalOpen( false ) }
+                    />
+                  </View>  
                 </View>
                 </TouchableWithoutFeedback>
             </Modal>
 
             <VisionImageList state={state} scrollX={scrollX}/>
-            <VisionTitles data={state} scrollXAnimated={scrollX}/>
+            {/* <VisionTitles data={state} scrollXAnimated={scrollX}/> */}
             <MaterialCommunityIcons
               name='plus'
               size={ 24 }

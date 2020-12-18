@@ -15,7 +15,7 @@ const visionSchema = yup.object({
 
 export function AddVision({ addVision, stateUri }) {
     return (
-        <View>
+        <View style={{margin: 15, marginTop: 100}}>
             <Formik
                 enableReinitialize={ true }
                 initialValues={{ uri: stateUri, title:'', id:null }}

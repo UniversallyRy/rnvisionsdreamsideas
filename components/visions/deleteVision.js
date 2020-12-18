@@ -1,31 +1,27 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { Text, View } from 'react-native';
 import { connect } from 'react-redux';
 import { Button } from 'react-native-paper';
 import { deleteVision } from '../../redux/actions';
+import { globalStyles, coltsBlue } from '../../styles/global';
 
 export function DeleteVision({ deleteVision, item }) {
 
-    const removeVision = () => {
+    const removeVision = id => {
         // save item.id from props to buttonId
-        var buttonId = item;
+        var buttonId = id;
         //calls redux action on stored visions
         deleteVision(buttonId);
     };
 
     return (
         <View>
-            <Button style={styles.deleteButton} color="red" icon="close-outline" mode="contained" onPress={() => removeVision()}>
+            <Button style={globalStyles.visionDeleteButton} color={coltsBlue} icon="close-outline" onPress={() => removeVision(item)}>
                 <Text>Delete</Text>
             </Button>
         </View>
     )
 }
-
-const styles = StyleSheet.create({
-    deleteButton: {
-    }
-});
 
 const mapStateToProps = ( state, ownProps ) => {
     return {
