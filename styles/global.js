@@ -345,7 +345,7 @@ export const globalStyles = StyleSheet.create({
         height: windowHeight, 
     },
     visionAddToggle: {
-        flexDirection: 'row',
-        margin: 5,    
+        flexDirection: 'row',  
+        backgroundColor: coltsBlue,
     },
 });

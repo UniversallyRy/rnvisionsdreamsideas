@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import { View } from 'react-native';
 import { TextInput, Text, useTheme } from 'react-native-paper';
 import { connect } from 'react-redux';
