@@ -34,37 +34,32 @@ export function Visions({  state, navigation }) {
     setGridView(!gridView);
   } 
 
-    if(gridView){
-      return( 
-        <View style={ styles.container }>
-            {/* <StatusBar hidden/> */}
-            <Modal style={{ margin:10 }}visible={ modalOpen } animationType='slide'>
-              <TouchableWithoutFeedback onPress={ Keyboard.dismiss }>
-                <View style={ globalStyles.modalContent }>
-                  <Text Text='Add Vision'> Add A Vision </Text>
-                  <AddVision setModalOpen={setModalOpen}/>
-                  <View style={globalStyles.closeModalContainer}>
-                    <MaterialCommunityIcons
-                      name='close'
-                      size={ 24 }
-                            // rest/spread operator to grab modaltoggle props and adds any new modalcloses props  
-                      style={{ ...globalStyles.modalToggle, ...globalStyles.modalClose }}
-                      onPress={ () => setModalOpen(false) }
-                    />
+    // if(gridView){
+    //   return( 
+    //     <View style={ styles.container }>
+    //         {/* <StatusBar hidden/> */}
+    //         <Modal style={{ margin:10 }}visible={ modalOpen } animationType='slide'>
+    //           <TouchableWithoutFeedback onPress={ Keyboard.dismiss }>
+    //             <View style={ globalStyles.modalContent }>
+    //               <Text Text='Add Vision'> Add A Vision </Text>
+    //               <AddVision setModalOpen={setModalOpen}/>
+    //               <View style={globalStyles.closeModalContainer}>
+    //                 <MaterialCommunityIcons
+    //                   name='close'
+    //                   size={ 24 }
+    //                         // rest/spread operator to grab modaltoggle props and adds any new modalcloses props  
+    //                   style={{ ...globalStyles.modalToggle, ...globalStyles.modalClose }}
+    //                   onPress={ () => setModalOpen(false) }
+    //                 />
                                      
-                  </View>  
-                </View>
-                </TouchableWithoutFeedback>
-            </Modal>
-            <VisionGridContainer
-              state={state}
-              navigation={navigation}
-              toggleGrid={() => toggleGrid()}
-              setModalOpen={ () => setModalOpen(true) }
-            />
-        </View>
-      )
-    }
+    //               </View>  
+    //             </View>
+    //             </TouchableWithoutFeedback>
+    //         </Modal>
+            
+    //     </View>
+    //   )
+    // }
     return (
           <View style={ styles.container }>
             {/* <StatusBar hidden/> */}
@@ -86,8 +81,19 @@ export function Visions({  state, navigation }) {
                 </View>
                 </TouchableWithoutFeedback>
             </Modal>
-
-            <VisionsContainer navigation={navigation} state={state} scrollX={scrollX}/>
+            {gridView
+               ? <VisionGridContainer
+                    state={state}
+                    navigation={navigation}
+                    toggleGrid={() => toggleGrid()}
+                    setModalOpen={ () => setModalOpen(true) }
+                  />
+               : <VisionsContainer 
+                    navigation={navigation} 
+                    state={state} 
+                    scrollX={scrollX}                  
+                  />
+            }
             {/* <VisionTitles data={state} scrollXAnimated={scrollX}/> */}
             <View style={globalStyles.visionAddToggle}>
               <MaterialCommunityIcons

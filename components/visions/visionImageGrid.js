@@ -35,20 +35,6 @@ export function VisionGridContainer({ setModalOpen, state, navigation, toggleGri
               keyExtractor={( item, index) => index.toString() }
               renderItem={renderList}
             />
-            <View style={globalStyles.visionAddToggle}>
-                <MaterialCommunityIcons
-                    name='plus'
-                    size={ 24 }
-                    style={ globalStyles.modalToggle }
-                    onPress={ setModalOpen }
-                />
-                <MaterialCommunityIcons
-                    name='application'
-                    size={ 24 }
-                    style={ globalStyles.modalToggle }
-                    onPress={ toggleGrid }
-                />
-            </View>
         </View>
     )
 }
