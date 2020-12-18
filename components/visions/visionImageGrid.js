@@ -40,13 +40,13 @@ export function VisionGridContainer({ setModalOpen, state, navigation, toggleGri
                     name='plus'
                     size={ 24 }
                     style={ globalStyles.modalToggle }
-                    onPress={setModalOpen }
+                    onPress={ setModalOpen }
                 />
                 <MaterialCommunityIcons
-                name='application'
-                size={ 24 }
-                style={ globalStyles.modalToggle }
-                onPress={ toggleGrid}
+                    name='application'
+                    size={ 24 }
+                    style={ globalStyles.modalToggle }
+                    onPress={ toggleGrid }
                 />
             </View>
         </View>

@@ -33,14 +33,36 @@ export function Visions({  state, navigation }) {
   const toggleGrid = () => { 
     setGridView(!gridView);
   } 
+
     if(gridView){
       return( 
-        <VisionGridContainer
-          state={state}
-          navigation={navigation}
-          toggleGrid={() => toggleGrid()}
-          setModalOpen={ () => setModalOpen(true) }
-        />
+        <View style={ styles.container }>
+            {/* <StatusBar hidden/> */}
+            <Modal style={{ margin:10 }}visible={ modalOpen } animationType='slide'>
+              <TouchableWithoutFeedback onPress={ Keyboard.dismiss }>
+                <View style={ globalStyles.modalContent }>
+                  <Text Text='Add Vision'> Add A Vision </Text>
+                  <AddVision setModalOpen={setModalOpen}/>
+                  <View style={globalStyles.closeModalContainer}>
+                    <MaterialCommunityIcons
+                      name='close'
+                      size={ 24 }
+                            // rest/spread operator to grab modaltoggle props and adds any new modalcloses props  
+                      style={{ ...globalStyles.modalToggle, ...globalStyles.modalClose }}
+                      onPress={ () => setModalOpen(false) }
+                    />
+                                     
+                  </View>  
+                </View>
+                </TouchableWithoutFeedback>
+            </Modal>
+            <VisionGridContainer
+              state={state}
+              navigation={navigation}
+              toggleGrid={() => toggleGrid()}
+              setModalOpen={ () => setModalOpen(true) }
+            />
+        </View>
       )
     }
     return (
@@ -59,8 +81,7 @@ export function Visions({  state, navigation }) {
                       style={{ ...globalStyles.modalToggle, ...globalStyles.modalClose }}
                       onPress={ () => setModalOpen(false) }
                     />
-                    
-                    
+                                     
                   </View>  
                 </View>
                 </TouchableWithoutFeedback>
