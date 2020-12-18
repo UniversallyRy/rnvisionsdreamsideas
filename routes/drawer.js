@@ -24,14 +24,15 @@ const RootDrawerNavigator = createDrawerNavigator(
     },
     {
         headerMode: 'screen',
-        drawerType: 'slide',
+        drawerType: 'front',
+        drawerWidth: 150,
         drawerBackgroundColor: coltsGray,
         contentOptions: {
             // stack screens container styling
             activeTintColor: coltsBlue,
             inactiveTintColor: 'black',
             itemsContainerStyle: {
-              marginVertical: 1,
+              marginVertical: 10,
             },
             //single stack screen styling
             itemStyle: {

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, memo } from 'react';
 import { FlatList, View, StyleSheet } from 'react-native';
 import { Card, Paragraph, Text, Modal, Portal, Provider,Button as PaperButton} from 'react-native-paper';
 import { connect } from 'react-redux';
@@ -7,7 +7,7 @@ import AddJournal from '../components/journals/addJournal';
 import JournalButtons from '../components/journals/journalButtons';
 import { globalStyles, coltsGray, coltsBlue } from '../styles/global';
 
-export function JournalList({ navigation, state }) {
+const JournalList = memo( function Journals( { navigation, state } ) {
     const [ modalOpen, setModalOpen ] = useState( false );
   
     return (
@@ -15,13 +15,13 @@ export function JournalList({ navigation, state }) {
             <Portal>
               <Modal visible={ modalOpen } onDismiss={ () => setModalOpen( false ) } contentContainerStyle={ globalStyles.addJournalContainer }>                     
                           <Text style={ globalStyles.addJournalTitle }>Add A Journal Entry</Text>
+                          <AddJournal />
                           <PaperButton
                           icon='close'
                           size={ 24 }
                           style={{ ...globalStyles.modalToggle, ...globalStyles.modalClose }}
                           onPress={ () => setModalOpen( false ) }
                           />  
-                        <AddJournal />
                     
               </Modal>
             </Portal>
@@ -55,7 +55,7 @@ export function JournalList({ navigation, state }) {
             </View>
         </Provider>            
     )
-}
+});
 
 const styles = StyleSheet.create({
   container: {

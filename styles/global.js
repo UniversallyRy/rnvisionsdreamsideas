@@ -213,12 +213,11 @@ export const globalStyles = StyleSheet.create({
         color: coltsGray,
     },
     addJournalContainer: {
-        flex: 0.92, 
-        backgroundColor: '#A2AAAD', 
-        padding: 10, 
+        flex: 1,
+        backgroundColor: '#A2AAAD',  
     },
     addJournalForm: {
-
+        margin: 15,
     },
     addJournalTitle: {
         alignSelf: 'center',
