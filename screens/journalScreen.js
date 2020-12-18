@@ -21,7 +21,7 @@ export function JournalList({ navigation, state }) {
                           style={{ ...globalStyles.modalToggle, ...globalStyles.modalClose }}
                           onPress={ () => setModalOpen( false ) }
                           />  
-                        <AddJournal/>
+                        <AddJournal />
                     
               </Modal>
             </Portal>
@@ -36,6 +36,7 @@ export function JournalList({ navigation, state }) {
                     <Card.Content>
                       <Paragraph style={ globalStyles.journalTitle }>{ item.title }</Paragraph>
                       <Paragraph style={ globalStyles.journalText }>{ item.body }</Paragraph>
+                      <Paragraph style={ globalStyles.journalDate }>{ item.date}</Paragraph>
                     </Card.Content>
                   </Card>
                   <View style={ styles.container }>

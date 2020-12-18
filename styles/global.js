@@ -76,7 +76,7 @@ export const globalStyles = StyleSheet.create({
         width:100,
         height: 100,
     },
-    todoErrorText:{
+    todoErrorText: {
         width: windowWidth * 0.75,
         color: 'crimson',
         fontWeight: 'bold',
@@ -176,6 +176,7 @@ export const globalStyles = StyleSheet.create({
         width: windowWidth * 0.99,
     },
     journalBorder: {
+        margin: 10,
         alignSelf: 'center',
         borderRadius: 18,
         borderWidth: 10,
@@ -198,11 +199,17 @@ export const globalStyles = StyleSheet.create({
     },
     journalTitle: {
         fontFamily: 'nunito-black',
+        fontSize: 20,
         color: coltsGray,
         marginBottom: 10,
     },
-    journalText:{
+    journalText: {
         fontFamily: 'nunito-black',
+        color: coltsGray,
+    },
+    journalDate: {
+        marginTop: 35,
+        margin: 5,
         color: coltsGray,
     },
     addJournalContainer: {
@@ -225,7 +232,7 @@ export const globalStyles = StyleSheet.create({
         backgroundColor: coltsGray,
         flex: 1,
     },
-    visionButtonContainer:{
+    visionButtonContainer: {
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'center',
@@ -306,7 +313,7 @@ export const globalStyles = StyleSheet.create({
         alignSelf: 'center',
         alignItems: 'center',
     },
-    closeModalContainer:{
+    closeModalContainer: {
         flex: 1,
         marginTop: 95,
         marginBottom: 30,
@@ -319,7 +326,7 @@ export const globalStyles = StyleSheet.create({
         borderColor: coltsBlue,
         color: coltsBlue,
     },
-    modalContent:{
+    modalContent: {
         flex: 1,
         backgroundColor: coltsGray,
         height: windowHeight, 

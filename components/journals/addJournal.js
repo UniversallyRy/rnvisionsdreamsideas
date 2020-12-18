@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { Formik } from 'formik';
 import * as yup from 'yup';
 import FlatButton from '../../shared/button';
-import { addJournal, addTodo } from '../../redux/actions';
+import { addJournal } from '../../redux/actions';
 import { globalStyles } from '../../styles/global';
 
 // require an entry into form input that's at least 4 letters
@@ -14,7 +14,7 @@ const JournalSchema = yup.object({
     body: yup.string().required().min(4),
 });
 
-export function AddJournal ({ addJournal, addTodo }) {
+export function AddJournal ({ addJournal }) {
     const { colors } = useTheme();
     const [ modalOpen, setModalOpen ] = useState( true );
     return (
@@ -22,10 +22,10 @@ export function AddJournal ({ addJournal, addTodo }) {
                 style={ globalStyles.addJournalForm }
                 // Control whether Formik should reset the form if initialValues changes
                 enableReinitialize
-                initialValues={{ title:'', body:'', id:''}}
+                initialValues={{ title:'', body:'', id:'', date: ''}}
                 validationSchema={ JournalSchema }
                 onSubmit={( values, actions ) => {
-                    addTodo( values );
+                    addJournal( values );
                     actions.resetForm();
                     setModalOpen( false );
                 }}
@@ -76,7 +76,7 @@ const mapStateToProps = ( state, ownProps ) => {
   }
   
   // actions from redux to save entry to store 
-  const mapDispatchToProps = { addTodo, addJournal }
+  const mapDispatchToProps = { addJournal }
 
   export default connect(
     mapStateToProps,
