@@ -32,7 +32,6 @@ export function Visions({  state, navigation }) {
 
   const toggleGrid = () => { 
     setGridView(!gridView);
-    console.log(gridView);
   } 
     if(gridView){
       return( 
@@ -40,6 +39,7 @@ export function Visions({  state, navigation }) {
           state={state}
           navigation={navigation}
           toggleGrid={() => toggleGrid()}
+          setModalOpen={ () => setModalOpen(true) }
         />
       )
     }
@@ -66,20 +66,22 @@ export function Visions({  state, navigation }) {
                 </TouchableWithoutFeedback>
             </Modal>
 
-            <VisionsContainer state={state} scrollX={scrollX}/>
+            <VisionsContainer navigation={navigation} state={state} scrollX={scrollX}/>
             {/* <VisionTitles data={state} scrollXAnimated={scrollX}/> */}
-            <MaterialCommunityIcons
-              name='plus'
-              size={ 24 }
-              style={ globalStyles.modalToggle }
-              onPress={ () => setModalOpen(true) }
-            />
-            <MaterialCommunityIcons
-              name='circle'
-              size={ 24 }
-              style={ globalStyles.modalToggle }
-              onPress={ () => toggleGrid() }
-            />
+            <View style={globalStyles.visionAddToggle}>
+              <MaterialCommunityIcons
+                name='plus'
+                size={ 24 }
+                style={ globalStyles.modalToggle }
+                onPress={ () => setModalOpen(true) }
+              />
+              <MaterialCommunityIcons
+                name='grid'
+                size={ 24 }
+                style={ globalStyles.modalToggle }
+                onPress={ () => toggleGrid() }
+              />
+              </View>
           </View>
     )
 }

@@ -233,6 +233,18 @@ export const globalStyles = StyleSheet.create({
         backgroundColor: coltsGray,
         flex: 1,
     },
+    vDetailsContent: {
+        backgroundColor: coltsBlue,
+        flexDirection: 'row',
+        flex: 1,
+    },
+    vDetailsImage: {
+        resizeMode: 'contain',
+        alignSelf: 'center',
+        height: windowHeight * 0.55,
+        width: windowWidth * 1.3,
+        aspectRatio: 1,
+    },
     visionButtonContainer: {
         flexDirection: 'row',
         alignItems: 'center',
@@ -304,8 +316,9 @@ export const globalStyles = StyleSheet.create({
          backgroundColor: "gray" 
     },
     modalToggle: {
-        marginTop:25,
-        marginBottom: 30,   
+        marginTop:20,
+        marginBottom: 25,
+        marginHorizontal: 100,   
         borderWidth: 1,
         borderColor: coltsGray,
         color: coltsGray,
@@ -330,5 +343,9 @@ export const globalStyles = StyleSheet.create({
         flex: 1,
         backgroundColor: coltsBlue,
         height: windowHeight, 
-    }
+    },
+    visionAddToggle: {
+        flexDirection: 'row',
+        margin: 5,    
+    },
 });

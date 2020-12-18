@@ -3,14 +3,14 @@ import { StyleSheet, View, Dimensions, Animated } from "react-native";
 // import { Card, Text }  from 'react-native-paper';
 import DeleteVision from "./deleteVision";
 import { coltsGray } from "../../styles/global";
-import addVision from "./addVision";
+import { TouchableOpacity, TouchableWithoutFeedback } from "react-native-gesture-handler";
 
 // react native's Dimensions import to grab mobile screens dimensions
 const { width: width } = Dimensions.get( "window" );
-const ITEM_WIDTH = width * 0.79;
-const ITEM_HEIGHT = ITEM_WIDTH * 1.47;
+const ITEM_WIDTH = width * 0.94;
+const ITEM_HEIGHT = ITEM_WIDTH * 1.27;
 
-export function VisionsContainer({ state, scrollX }) {
+export function VisionsContainer({ navigation, state, scrollX }) {
 
   
   const VisionImageList = memo( function VisionImage( { data, index } ) {
@@ -31,7 +31,9 @@ export function VisionsContainer({ state, scrollX }) {
           <View 
             style={{ width, justifyContent: 'center', alignItems: 'center'}}
           >
-            <View style={{
+            <TouchableWithoutFeedback 
+              onLongPress={ () => navigation.navigate( 'VisionDetails', data )} 
+              style={{
               borderRadius: 18,
               borderWidth: 2,
               overflow: 'hidden',
@@ -54,15 +56,17 @@ export function VisionsContainer({ state, scrollX }) {
                 }}>
                 <Animated.Image 
                   source={{ uri: data.uri }} 
+                  resizeMode={'cover'}
                   style={{
-                    resizeMode: 'cover', 
-                    width: ITEM_WIDTH * 1.4, height: ITEM_HEIGHT,
+                    alignSelf: 'center',
+                    width: ITEM_WIDTH * 1.5,
+                    height: ITEM_HEIGHT ,
                     transform: [{translateX}]
                   }}/>
                   {/* <Text style={ globalStyles.slideTitle }>{ data.title}</Text>
                 <DeleteVision item={ data.id }/> */}
               </View>
-            </View>
+            </TouchableWithoutFeedback>
             <DeleteVision item={ data.id }/>       
           </View> 
     );

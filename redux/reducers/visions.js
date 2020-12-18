@@ -12,6 +12,8 @@ const initialVisions = Array.from({ length:8 }).map((_, i) => {
 export default function( state = initialVisions, action ) {
   switch ( action.type ) {
     case ADD_VISION:
+      // state=initialVisions;
+      // return state
           return [
             { 
             uri: action.payload.uri,

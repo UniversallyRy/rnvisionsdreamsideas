@@ -5,6 +5,8 @@ import { connect } from 'react-redux';
 import * as ImagePicker from 'expo-image-picker';
 import { coltsBlue, globalStyles } from '../../styles/global';
 import { addPic } from '../../redux/actions';
+import * as ImageManipulator from 'expo-image-manipulator';
+
 
 
 export function ImagePic({ addPic }) {
@@ -31,13 +33,18 @@ export function ImagePic({ addPic }) {
     let result = await ImagePicker.launchImageLibraryAsync({
       mediaTypes: ImagePicker.MediaTypeOptions.Images,
       allowsEditing: true,
-      aspect: [ 4, 3 ],
       quality: 1,
     });
+
+    const manipResult = await ImageManipulator.manipulateAsync(
+      result.uri,
+      [{ resize: { height: 800} }],
+      { compress: 1, format: ImageManipulator.SaveFormat.PNG}
+    ); 
     // .canccelled prop from ImagePicker import
     if ( !result.cancelled ) {
-      setImage( result.uri );
-      addPic( result.uri );
+      setImage( manipResult.uri );
+      addPic( manipResult.uri );
     }
   };
 
@@ -45,8 +52,6 @@ export function ImagePic({ addPic }) {
     let result = await ImagePicker.launchCameraAsync({
       mediaTypes: ImagePicker.MediaTypeOptions.Images,
       allowsEditing: true,
-      aspect: [ 4, 3 ],
-      quality: 1,
     });
     // .canccelled prop from ImagePicker import
     if ( !result.cancelled ) {
@@ -65,7 +70,7 @@ export function ImagePic({ addPic }) {
            Take a Picture
           </Button>
         </View>
-        { image && <Image source={{ uri: image }} style={{ width: windowWidth * .97, height: 400 }} /> }
+        { image && <Image source={{ uri: image }} style={{ width: windowWidth * 0.97, height: windowHeight * 0.40, resizeMode: 'cover', alignSelf: 'center'}} /> }
     </View>
   );
 }

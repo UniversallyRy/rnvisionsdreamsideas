@@ -21,7 +21,6 @@ export function AddVision({ addVision, stateUri, setModalOpen }) {
                 initialValues={{ uri: stateUri, title:'', id:null }}
                 validationSchema={ visionSchema }
                 onSubmit={ ( values, actions ) => {
-                    console.log( stateUri )
                     addVision( values );
                     setModalOpen ( false )
                     actions.resetForm()
