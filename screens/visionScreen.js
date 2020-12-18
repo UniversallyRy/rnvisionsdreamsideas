@@ -37,15 +37,14 @@ export function Visions({ navigation, state }) {
                 </TouchableWithoutFeedback>
             </Modal>
 
+            <VisionImageList state={state} scrollX={scrollX}/>
+            <VisionTitles data={state} scrollXAnimated={scrollX}/>
             <MaterialCommunityIcons
               name='plus'
               size={ 24 }
               style={ globalStyles.modalToggle }
               onPress={ () => setModalOpen(true) }
             />
-            
-            <VisionImageList state={state} scrollX={scrollX}/>
-            <VisionTitles data={state} scrollXAnimated={scrollX}/>
           </View>
     )
 }

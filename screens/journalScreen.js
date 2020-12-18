@@ -25,17 +25,9 @@ export function JournalList({ navigation, state }) {
                     
               </Modal>
             </Portal>
-            <View style={{ backgroundColor: coltsBlue }}>
-              <MaterialCommunityIcons
-              name='plus'
-              size={ 24 }
-              style={ globalStyles.modalToggle }
-              onPress={ () => setModalOpen(true) }
-              />
-            </View>
 
             <FlatList
-              style={{ backgroundColor: coltsBlue }}
+              style={{ paddingTop: 10, backgroundColor: coltsBlue }}
               data={ state }
               keyExtractor={( item, index) => index.toString() }
               renderItem={({ item }) => (
@@ -52,6 +44,14 @@ export function JournalList({ navigation, state }) {
                 </View>
               )}
             />
+            <View style={{ backgroundColor: coltsBlue }}>
+              <MaterialCommunityIcons
+              name='plus'
+              size={ 24 }
+              style={ globalStyles.modalToggle }
+              onPress={ () => setModalOpen(true) }
+              />
+            </View>
         </Provider>            
     )
 }
