@@ -2,7 +2,6 @@ import React, {useCallback, memo } from 'react';
 import { Text, StyleSheet, Dimensions, View } from 'react-native';
 import { FlatList } from 'react-native-gesture-handler';
 import { Card } from 'react-native-paper';
-import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { coltsBlue, coltsGray, globalStyles } from '../../styles/global';
 
 
@@ -28,7 +27,12 @@ export function JournalGridContainer({ state, navigation }) {
 
 
     return (
-        <View style={{flex: 1, backgroundColor: coltsBlue}}>
+        <View style={{
+                flex: 1, 
+                backgroundColor: coltsBlue, 
+                justifyContent: 'center',
+                alignItems: 'center',
+              }}>
             <FlatList
               numColumns={3}
               contentContainerStyle={styles.gridContainer}

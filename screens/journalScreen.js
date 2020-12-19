@@ -1,14 +1,14 @@
 import React, { useState, memo } from 'react';
-import { FlatList, View, StyleSheet } from 'react-native';
-import { Card, Paragraph, Text, Modal, Portal, Provider } from 'react-native-paper';
+import { View, StyleSheet } from 'react-native';
+import { Text, Modal, Portal, Provider } from 'react-native-paper';
 import { connect } from 'react-redux';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import AddJournal from '../components/journals/addJournal';
-import JournalButtons from '../components/journals/journalButtons';
+import JournalList from '../components/journals/journalList';
 import { globalStyles, coltsGray, coltsBlue } from '../styles/global';
 import JournalGridContainer from '../components/journals/journalGrid';
 
-const JournalList = memo( function Journals( { navigation, state } ) {
+const JournalScreen = memo( function Journals( { navigation, state } ) {
     const [ modalOpen, setModalOpen ] = useState( false );
     const [gridView, setGridView] = useState(true); 
 
@@ -17,7 +17,7 @@ const JournalList = memo( function Journals( { navigation, state } ) {
     }; 
   
     return (
-         <Provider>
+         <Provider style={{flex: 1}}>
             <Portal>
               <Modal visible={ modalOpen } onDismiss={ () => setModalOpen( false ) } contentContainerStyle={ globalStyles.addJournalContainer }>                     
                           <Text style={ globalStyles.addJournalTitle }>Add A Journal Entry</Text>
@@ -39,26 +39,11 @@ const JournalList = memo( function Journals( { navigation, state } ) {
                     state={state}
                     navigation={navigation}
                   />
-                
-                : <FlatList
-                    style={{ paddingTop: 10, backgroundColor: coltsBlue }}
-                    data={ state }
-                    keyExtractor={( item, index) => index.toString() }
-                    renderItem={({ item }) => (
-                      <View style={ globalStyles.journalBorder }>
-                        <Card style={ globalStyles.journalCard } onPress={ () => navigation.navigate( 'JournalDetails', item ) }>
-                          <Card.Content>
-                            <Paragraph style={ globalStyles.journalTitle }>{ item.title }</Paragraph>
-                            <Paragraph style={ globalStyles.journalText }>{ item.body }</Paragraph>
-                            <Paragraph style={ globalStyles.journalDate }>{ item.date}</Paragraph>
-                          </Card.Content>
-                        </Card>
-                        <View style={ styles.container }>
-                          <JournalButtons item={ item.id }/>
-                        </View>
-                      </View>
-                    )}
-                  />
+              
+                : <JournalList
+                    state={state}
+                    navigation={navigation}
+                />
             }
                 <View style={globalStyles.visionAddToggle}>
                     <MaterialCommunityIcons
@@ -73,7 +58,7 @@ const JournalList = memo( function Journals( { navigation, state } ) {
                       style={ globalStyles.modalToggle }
                       onPress={ () => toggleGrid() }
                     />
-                  </View>
+                </View>
         </Provider>            
     )
 });
@@ -85,7 +70,21 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: coltsGray,
-  }
+  },
+  buttonsContainer: {
+    flex: 1,
+    flexDirection: 'row',
+    alignContent: 'center',
+    fontSize: 20,
+    marginTop: 4,
+  },
+  editButton: {
+      flex: .51,
+  },
+  deleteButton: {
+      flex: .51,
+      marginLeft: 2,
+  },
 });
 
 const mapStateToProps = ( state, ownProps ) => {
@@ -94,4 +93,4 @@ const mapStateToProps = ( state, ownProps ) => {
   }
 }
 
-export default connect( mapStateToProps )( JournalList )
+export default connect( mapStateToProps )( JournalScreen )

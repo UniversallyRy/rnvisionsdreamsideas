@@ -180,7 +180,7 @@ export const globalStyles = StyleSheet.create({
         alignSelf: 'center',
         overflow: 'hidden',
         borderRadius: 18,
-        borderWidth: 2,
+        borderWidth: 3,
         borderColor: coltsGray,
         shadowColor: 'black',
         shadowOpacity: 0.6,
@@ -257,7 +257,7 @@ export const globalStyles = StyleSheet.create({
         backgroundColor: coltsGray,
         margin: 4,
         height: 50,
-        width: 400,
+        width: windowWidth * 0.95,
     },
     uploadButton: {
         alignSelf:'center',
@@ -345,7 +345,8 @@ export const globalStyles = StyleSheet.create({
         height: windowHeight, 
     },
     visionAddToggle: {
-        flexDirection: 'row',  
+        flexDirection: 'row',
+        alignSelf: 'center',  
         backgroundColor: coltsBlue,
     },
 });

@@ -67,7 +67,7 @@ export function Visions({  state, navigation }) {
                     scrollX={scrollX}                  
                   />
             }
-            {/* <VisionTitles data={state} scrollXAnimated={scrollX}/> */}
+            
             <View style={globalStyles.visionAddToggle}>
               <MaterialCommunityIcons
                 name='plus'
