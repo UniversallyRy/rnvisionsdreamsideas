@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Animated, Modal, StyleSheet, StatusBar, View, TouchableWithoutFeedback, Keyboard } from 'react-native';
-import { Text } from 'react-native-paper';
+import { Text, } from 'react-native-paper';
 import { connect } from 'react-redux';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import AddVision from '../components/visions/addVision';

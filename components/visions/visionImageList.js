@@ -1,8 +1,8 @@
 import React, { useCallback, memo, useEffect, useState} from "react";
-import { StyleSheet, View, Dimensions, Animated } from "react-native";
-// import { Card, Text }  from 'react-native-paper';
+import { StyleSheet, Dimensions, Animated } from "react-native";
+import { Surface, Card, Text }  from 'react-native-paper';
 import DeleteVision from "./deleteVision";
-import { coltsGray } from "../../styles/global";
+import { coltsGray, coltsBlue } from "../../styles/global";
 import { TouchableOpacity, TouchableWithoutFeedback } from "react-native-gesture-handler";
 
 // react native's Dimensions import to grab mobile screens dimensions
@@ -28,10 +28,10 @@ export function VisionsContainer({ navigation, state, scrollX }) {
 
     return (
 
-          <View 
-            style={{ width, justifyContent: 'center', alignItems: 'center'}}
+          <Surface 
+            style={{ backgroundColor: coltsBlue, width, justifyContent: 'center', alignItems: 'center'}}
           >
-            <TouchableWithoutFeedback 
+            <Surface 
               onLongPress={ () => navigation.navigate( 'VisionDetails', data )} 
               style={{
               borderRadius: 18,
@@ -46,29 +46,30 @@ export function VisionsContainer({ navigation, state, scrollX }) {
                 height: 0,
               },      
             }}>
-              <View 
+              <Surface 
                 style={{
                   width: ITEM_WIDTH, 
                   height: ITEM_HEIGHT, 
                   overflow:'hidden',
                   alignItems: 'center',
                   borderRadius: 8,
+                  elevation: 4,
                 }}>
                 <Animated.Image 
                   source={{ uri: data.uri }} 
                   resizeMode={'cover'}
                   style={{
                     alignSelf: 'center',
-                    width: ITEM_WIDTH * 1.5,
+                    width: ITEM_WIDTH * 1,
                     height: ITEM_HEIGHT ,
                     transform: [{translateX}]
                   }}/>
                   {/* <Text style={ globalStyles.slideTitle }>{ data.title}</Text>
                 <DeleteVision item={ data.id }/> */}
-              </View>
-            </TouchableWithoutFeedback>
+              </Surface>
+            </Surface>
             <DeleteVision item={ data.id }/>       
-          </View> 
+          </Surface> 
     );
   });
 
