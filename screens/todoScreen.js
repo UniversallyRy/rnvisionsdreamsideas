@@ -1,12 +1,12 @@
 import React from 'react';
 import { View } from 'react-native';
 import { globalStyles } from '../styles/global';
-import AddTodo from '../components/todos/addTodo';
+// import AddTodo from '../components/todos/addTodo';
 import { connect } from 'react-redux';
-import  TodoList  from '../components/todos/todoList';
+// import  TodoList  from '../components/todos/todoList';
 import  ListMain  from '../components/todos/listMain';
 
-export  function TodoScreen({ navigation }) {
+export  function TodoScreen() {
 
     return (
           <View style={ globalStyles.todoScreenContainer }>            

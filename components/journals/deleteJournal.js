@@ -4,17 +4,17 @@ import { Button } from 'react-native-paper';
 import { connect } from 'react-redux';
 import { deleteJournal } from '../../redux/actions';
 
-export function DeleteJournal( {deleteJournal, item}) {
+export function DeleteJournal({ deleteJournal, item }) {
     const removeJournal = () => {
         //prop item = item.id
         var buttonId = item;
-        deleteJournal(buttonId);
+        deleteJournal( buttonId );
     }
 
     return (
-        <View style={styles.buttonsContainer}>
-            <Button style={styles.buttons}>Edit</Button>
-            <Button id={id} onPress={() => removeJournal()} style={styles.buttons}>Delete</Button>
+        <View style={ styles.buttonsContainer }>
+            <Button style={ styles.buttons }>Edit</Button>
+            <Button id={ id } onPress={ () => removeJournal() } style={ styles.buttons }>Delete</Button>
         </View>
     )
 }
@@ -43,4 +43,4 @@ const mapStateToProps = ( state, ownProps ) => {
   export default connect(
     mapStateToProps,
     mapDispatchToProps
-  )(DeleteJournal)
+  )( DeleteJournal )

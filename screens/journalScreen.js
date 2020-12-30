@@ -5,24 +5,24 @@ import { connect } from 'react-redux';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import AddJournal from '../components/journals/addJournal';
 import JournalList from '../components/journals/journalList';
-import { globalStyles, coltsGray, coltsBlue } from '../styles/global';
+import { globalStyles, coltsGray } from '../styles/global';
 import JournalGridContainer from '../components/journals/journalGrid';
 
 const JournalScreen = memo( function Journals( { navigation, state } ) {
     const [ modalOpen, setModalOpen ] = useState( false );
-    const [gridView, setGridView] = useState(true); 
+    const [ gridView, setGridView ] = useState(true); 
 
     const toggleGrid = () => { 
-      setGridView(!gridView);
+      setGridView( !gridView );
     }; 
   
     return (
-         <Provider style={{flex: 1}}>
+         <Provider style={{ flex: 1 }}>
             <Portal>
               <Modal visible={ modalOpen } onDismiss={ () => setModalOpen( false ) } contentContainerStyle={ globalStyles.addJournalContainer }>                     
                           <Text style={ globalStyles.addJournalTitle }>Add A Journal Entry</Text>
-                          <AddJournal setModalOpen = {setModalOpen}/>
-                          <View style={globalStyles.closeModalContainer}>
+                          <AddJournal setModalOpen = { setModalOpen }/>
+                          <View style={ globalStyles.closeModalContainer }>
                             <MaterialCommunityIcons
                               name='close'
                               size={ 24 }
@@ -36,21 +36,21 @@ const JournalScreen = memo( function Journals( { navigation, state } ) {
             </Portal>
             {gridView
                 ? <JournalGridContainer
-                    state={state}
-                    navigation={navigation}
+                    state={ state }
+                    navigation={ navigation }
                   />
               
                 : <JournalList
-                    state={state}
-                    navigation={navigation}
+                    state={ state }
+                    navigation={ navigation }
                 />
             }
-                <View style={globalStyles.visionAddToggle}>
+                <View style={ globalStyles.visionAddToggle }>
                     <MaterialCommunityIcons
                     name='plus'
                     size={ 24 }
                     style={ globalStyles.modalToggle }
-                    onPress={ () => setModalOpen(true) }
+                    onPress={ () => setModalOpen( true ) }
                     />
                     <MaterialCommunityIcons
                       name='grid'
@@ -61,30 +61,6 @@ const JournalScreen = memo( function Journals( { navigation, state } ) {
                 </View>
         </Provider>            
     )
-});
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: coltsGray,
-  },
-  buttonsContainer: {
-    flex: 1,
-    flexDirection: 'row',
-    alignContent: 'center',
-    fontSize: 20,
-    marginTop: 4,
-  },
-  editButton: {
-      flex: .51,
-  },
-  deleteButton: {
-      flex: .51,
-      marginLeft: 2,
-  },
 });
 
 const mapStateToProps = ( state, ownProps ) => {

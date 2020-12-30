@@ -17,7 +17,7 @@ export default function Header({ navigation, title }) {
             <Text style={ styles.headerText }>{ title }</Text>
             </View>    
         </SafeAreaView>
-    )
+    );
 }
 
 const styles = StyleSheet.create({

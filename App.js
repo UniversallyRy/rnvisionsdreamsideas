@@ -26,7 +26,6 @@ const getFonts = () =>
     'nunito-regular': require( './assets/fonts/Nunito-Regular.ttf' ),
     'nunito-black': require( './assets/fonts/Nunito-Black.ttf' )
   });
-
   //customize theme colors
   // const CombinedDefaultTheme = merge( PaperDefaultTheme, NavigationDefaultTheme );
   // const CombinedDarkTheme = merge( PaperDarkTheme, NavigationDarkTheme );

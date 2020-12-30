@@ -19,4 +19,3 @@ const fontConfig = {
     },
   };
   export default fontConfig;
-  

@@ -5,12 +5,12 @@ export const addText = value => ({
   payload: value
 });
 
-export const addList = ({name, color}) => ({
+export const addList = ({ name, color }) => ({
   type: ADD_LIST,
   payload: {name, color},
 });
 
-export const addVision = ({uri, title, id})  => ({
+export const addVision = ({ uri, title, id })  => ({
   type: ADD_VISION,
   payload: {
     uri,
@@ -19,7 +19,7 @@ export const addVision = ({uri, title, id})  => ({
   }
 });
 
-export const editVision = ({task, id, complete}) => ({
+export const editVision = ({ task, id, complete }) => ({
 type: EDIT_VISION,
 payload: { task, id, complete }
 });
@@ -29,7 +29,7 @@ type: DELETE_VISION,
 payload: { id }
 });
 
-export const addTodo = (title, id )  => ({
+export const addTodo = ( title, id )  => ({
     type: ADD_TODO,
     payload: {
       title,
@@ -37,7 +37,7 @@ export const addTodo = (title, id )  => ({
   }
 });
 
-export const toggleTodo = ({ id, todo}) => ({
+export const toggleTodo = ({ id, todo }) => ({
   type: TOGGLE_TODO,
   payload: { id , todo}
 });
@@ -52,7 +52,7 @@ export const deleteTodo = id => ({
   payload: { id, }
 });
 
-export const addJournal = ({title, body, id})  => ({
+export const addJournal = ({ title, body, id })  => ({
   type: ADD_JOURNAL,
   payload: {
     title,

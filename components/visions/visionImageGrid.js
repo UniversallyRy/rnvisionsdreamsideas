@@ -12,34 +12,32 @@ export function VisionGridContainer({ setModalOpen, state, navigation, toggleGri
 
     const VisionGridList = memo(function GridImage({ data, index }){
         return (
-            <Card style={{backgroundColor: coltsBlue}} onPress={ () => navigation.navigate( 'VisionDetails', data )} >
+            <Card style={{ backgroundColor: coltsBlue }} onPress={ () => navigation.navigate( 'VisionDetails', data )} >
                 {/* <Card onPress={ () => navigation.navigate( 'Visions', item ) }> */}
-                <Image source={{ uri: data.uri }} style={{...styles.gridItem}}/>
+                <Image source={{ uri: data.uri }} style={{ ...styles.gridItem }}/>
             </Card>
         )
     })
 
     const renderList = useCallback( function renderList({ item, index }) {
-        return <VisionGridList index={index} data={ item } />;
+        return <VisionGridList index={ index } data={ item } />;
       }, []);
 
 
 
     return (
-        <View style={{flex: 1, backgroundColor: coltsBlue}}>
+        <View style={{ flex: 1, backgroundColor: coltsBlue }}>
             <FlatList
-              numColumns={3}
-              contentContainerStyle={styles.gridContainer}
+              numColumns={ 3 }
+              contentContainerStyle={ styles.gridContainer }
               scrollEnabled
               data={ state }
-              keyExtractor={( item, index) => index.toString() }
-              renderItem={renderList}
+              keyExtractor={( item, index ) => index.toString() }
+              renderItem={ renderList }
             />
         </View>
     )
 }
-
-
 
 const styles = StyleSheet.create({
     gridContainer: {

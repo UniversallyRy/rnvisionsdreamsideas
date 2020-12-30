@@ -9,7 +9,7 @@ import { addList } from '../../redux/actions';
 import {globalStyles} from '../../styles/global';
 
 const listSchema = yup.object({
-    name: yup.string().required().min(4),
+    name: yup.string().required().min( 4 ),
 });
 
 // red, slate blue, black, dark gray, blueish gray, teal, tan
@@ -21,7 +21,7 @@ export  function AddListModal({ closeModal, addList }) {
         return bgColors.map(color => {
             return (
                 <TouchableOpacity 
-                    key={color} 
+                    key={ color } 
                     style={[ styles.colorSelect, { backgroundColor: color } ]}
                     onPress={ ()=> setColor( color ) }
             />
@@ -32,7 +32,7 @@ export  function AddListModal({ closeModal, addList }) {
     return (
         <KeyboardAvoidingView style={ styles.container } behavior={ "padding" }> 
          
-            <TouchableOpacity style={{ position: 'absolute', top: 64, right:32 }} onPress={closeModal}>
+            <TouchableOpacity style={{ position: 'absolute', top: 64, right:32 }} onPress={ closeModal }>
             <AntDesign name='close' size={ 24 } color='black' />
             </TouchableOpacity>
 

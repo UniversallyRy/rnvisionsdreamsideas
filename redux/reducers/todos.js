@@ -84,16 +84,16 @@ const initialValue = [
 ];
 
 export default function( state = initialValue, action ) {
-    produce(state, draft => {
+    produce( state, draft => {
       switch ( action.type ) {
         case ADD_TODO: 
           //state = initialValue ; //can be used to quickly reset
           //return state;
           
-          return draft.map((item, i = 0) => {
+          return draft.map(( item, i = 0) => {
                 let newItem =  item.todos[i];
 
-                if(newItem.id === action.payload.id) {
+                if( newItem.id === action.payload.id ) {
                     let newerItem = {
                       title: action.payload.title,
                       id: uuidv4(),

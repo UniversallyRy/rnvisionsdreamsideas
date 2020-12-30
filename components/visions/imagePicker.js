@@ -11,7 +11,7 @@ import * as ImageManipulator from 'expo-image-manipulator';
 
 export function ImagePic({ addPic }) {
   const [ image, setImage ] = useState( null );
-  const { width: windowWidth, height: windowHeight } = Dimensions.get("window");
+  const { width: windowWidth, height: windowHeight } = Dimensions.get( "window" );
 
   useEffect(() => {
     ( async () => {
@@ -61,12 +61,12 @@ export function ImagePic({ addPic }) {
   };
 
   return (
-    <View style={{alignSelf: 'center'}}>
-        <View style={globalStyles.visionButtonContainer}>
-          <Button color={coltsBlue} style={ globalStyles.uploadButton } title="Add Image From Gallery" onPress={ pickImage }>
+    <View style={{ alignSelf: 'center' }}>
+        <View style={ globalStyles.visionButtonContainer }>
+          <Button color={ coltsBlue } style={ globalStyles.uploadButton } title="Add Image From Gallery" onPress={ pickImage }>
             Add from gallery
           </Button>
-          <Button icon= 'plus' color={coltsBlue} style={ globalStyles.uploadButton } title="Take A Picture" onPress={ CameraImage }>
+          <Button icon= 'plus' color={ coltsBlue } style={ globalStyles.uploadButton } title="Take A Picture" onPress={ CameraImage }>
            Take a Picture
           </Button>
         </View>
@@ -86,4 +86,4 @@ const mapDispatchToProps = { addPic }
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(ImagePic )
+)( ImagePic )

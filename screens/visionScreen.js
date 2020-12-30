@@ -12,16 +12,16 @@ const VISIBLE_ITEMS = 3;
 
 
 export function Visions({  state, navigation }) {
-  const scrollX = useRef(new Animated.Value(0)).current;
-  const scrollXIndex = useRef(new Animated.Value(0)).current;
+  const scrollX = useRef(new Animated.Value( 0 )).current;
+  const scrollXIndex = useRef(new Animated.Value( 0 )).current;
   const [ modalOpen, setModalOpen ] = useState( false );
-  const [gridView, setGridView] = useState(false); 
+  const [ gridView, setGridView ] = useState( false ); 
 
 
   useEffect(() => {
     let isCancelled = false;
 
-      if (!isCancelled) {
+      if ( !isCancelled ) {
        
       }
 
@@ -31,7 +31,7 @@ export function Visions({  state, navigation }) {
   }, []);
 
   const toggleGrid = () => { 
-    setGridView(!gridView);
+    setGridView( !gridView );
   }; 
 
     return (
@@ -41,14 +41,14 @@ export function Visions({  state, navigation }) {
               <TouchableWithoutFeedback onPress={ Keyboard.dismiss }>
                 <View style={ globalStyles.modalContent }>
                   <Text Text='Add Vision'> Add A Vision </Text>
-                  <AddVision setModalOpen={setModalOpen}/>
+                  <AddVision setModalOpen={ setModalOpen }/>
                   <View style={globalStyles.closeModalContainer}>
                     <MaterialCommunityIcons
                       name='close'
                       size={ 24 }
                             // rest/spread operator to grab modaltoggle props and adds any new modalcloses props  
                       style={{ ...globalStyles.modalToggle, ...globalStyles.modalClose }}
-                      onPress={ () => setModalOpen(false) }
+                      onPress={ () => setModalOpen( false ) }
                     />
                                      
                   </View>  
@@ -58,22 +58,22 @@ export function Visions({  state, navigation }) {
             {/* when gridview is toggled use gridContainer otherwise VisionsContainer */}
             {gridView
                ? <VisionGridContainer
-                    state={state}
-                    navigation={navigation}
+                    state={ state }
+                    navigation={ navigation }
                   />
                : <VisionsContainer 
-                    navigation={navigation} 
-                    state={state} 
-                    scrollX={scrollX}                  
+                    navigation={ navigation } 
+                    state={ state } 
+                    scrollX={ scrollX }                  
                   />
             }
             
-            <View style={globalStyles.visionAddToggle}>
+            <View style={ globalStyles.visionAddToggle }>
               <MaterialCommunityIcons
                 name='plus'
                 size={ 24 }
                 style={ globalStyles.modalToggle }
-                onPress={ () => setModalOpen(true) }
+                onPress={ () => setModalOpen( true ) }
               />
               <MaterialCommunityIcons
                 name='grid'

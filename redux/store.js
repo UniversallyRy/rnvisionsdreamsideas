@@ -6,7 +6,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 const persistConfig = { // configuration object for redux-persist
     key: 'root',
     storage: AsyncStorage, // define which storage to use
-    blacklist: ['navigation']
+    blacklist: [ 'navigation' ]
 };
 
 const persistedReducer = persistReducer( persistConfig, rootReducer ); // create a persisted reducer

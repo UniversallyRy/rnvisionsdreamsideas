@@ -48,7 +48,7 @@ export function ListMain({ state }) {
                 </View>
                 <View style={{ marginVertical: 48, paddingBottom: 24 }}>
                     <TouchableOpacity onPress={ () => toggleModal() } style={ styles.addList }>
-                        <AntDesign color={coltsGray} name='plus' size={30}/>
+                        <AntDesign color={ coltsGray } name='plus' size={30}/>
                     </TouchableOpacity>
                     <Text style={ styles.add }>Add New List</Text>
                 </View>

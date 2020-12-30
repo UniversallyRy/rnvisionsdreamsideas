@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { FlatList, View } from 'react-native';
 import { connect } from 'react-redux';
 import TodoItem from './todoItem';
 import { globalStyles } from '../../styles/global';
 
-export  function TodoList({ navigation, state }) {
+export  function TodoList({ state }) {
 
   // const [ visible, setVisible ] = useState(false);
   // const [input, setInput] = useState('');
@@ -25,7 +25,7 @@ export  function TodoList({ navigation, state }) {
             <FlatList
                 style={ globalStyles.todoList }
                 data={ state } 
-                keyExtractor={( item, index) => index.toString() }
+                keyExtractor={( item, index ) => index.toString() }
                 renderItem={({ item }) => (
                   <TodoItem item={ item }/>
                 )}

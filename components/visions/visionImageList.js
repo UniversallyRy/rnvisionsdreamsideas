@@ -1,6 +1,6 @@
-import React, { useCallback, memo, useEffect, useState} from "react";
+import React, { useCallback, memo } from "react";
 import { StyleSheet, Dimensions, Animated } from "react-native";
-import { Surface, Card, Text }  from 'react-native-paper';
+import { Surface }  from 'react-native-paper';
 import DeleteVision from "./deleteVision";
 import { coltsGray, coltsBlue } from "../../styles/global";
 import { TouchableOpacity, TouchableWithoutFeedback } from "react-native-gesture-handler";
@@ -16,20 +16,20 @@ export function VisionsContainer({ navigation, state, scrollX }) {
   const VisionImageList = memo( function VisionImage( { data, index } ) {
 
       const inputRange= [
-        (index -1) * width,
+        ( index -1 ) * width,
         index * width,
-        (index + 1) * width
+        ( index + 1 ) * width
       ];
 
       const translateX = scrollX.interpolate({
         inputRange,
-        outputRange: [-width * 0.7, 0, width * 0.7]
+        outputRange: [ -width * 0.7, 0, width * 0.7 ]
       });
 
     return (
 
           <Surface 
-            style={{ backgroundColor: coltsBlue, width, justifyContent: 'center', alignItems: 'center'}}
+            style={{ backgroundColor: coltsBlue, width, justifyContent: 'center', alignItems: 'center' }}
           >
             <Surface 
               onLongPress={ () => navigation.navigate( 'VisionDetails', data )} 
@@ -57,12 +57,12 @@ export function VisionsContainer({ navigation, state, scrollX }) {
                 }}>
                 <Animated.Image 
                   source={{ uri: data.uri }} 
-                  resizeMode={'cover'}
+                  resizeMode={ 'cover' }
                   style={{
                     alignSelf: 'center',
                     width: ITEM_WIDTH * 1,
                     height: ITEM_HEIGHT ,
-                    transform: [{translateX}]
+                    transform: [{ translateX }]
                   }}/>
                   {/* <Text style={ globalStyles.slideTitle }>{ data.title}</Text>
                 <DeleteVision item={ data.id }/> */}
@@ -74,55 +74,25 @@ export function VisionsContainer({ navigation, state, scrollX }) {
   });
 
   const renderList = useCallback( function renderList( { item, index } ) {
-    return <VisionImageList index={index} data={ item } />;
+    return <VisionImageList index={ index } data={ item } />;
   }, []);
 
   return (
     <>
       <Animated.FlatList
         onScroll={Animated.event(
-            [{nativeEvent: { contentOffset: { x: scrollX } }}],
-            {useNativeDriver: true}
+            [{ nativeEvent: { contentOffset: { x: scrollX } } }],
+            { useNativeDriver: true }
         )}
         data={ state }
-        keyExtractor={(_, index) => String(index)}
+        keyExtractor={( _, index ) => String( index )}
         renderItem={ renderList }
         horizontal
-        showsHorizontalScrollIndicator={false}
-        pagingEnabled={true}
+        showsHorizontalScrollIndicator={ false }
+        pagingEnabled={ true }
       />
     </>
   );
 }
-
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  title: {
-    fontSize: 28,
-    fontWeight: '900',
-    textTransform: 'uppercase',
-    letterSpacing: -1,
-  },
-  location: {
-    fontSize: 16,
-  },
-  date: {
-    fontSize: 12,
-  },
-  itemContainer: {
-  },
-  itemContainerRow: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-  },
-
-});
 
 export default VisionsContainer;

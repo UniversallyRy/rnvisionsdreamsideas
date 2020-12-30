@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { View } from 'react-native';
 import { TextInput, Text, useTheme } from 'react-native-paper';
 import { connect } from 'react-redux';
@@ -10,8 +10,8 @@ import { globalStyles } from '../../styles/global';
 
 // require an entry into form input that's at least 4 letters
 const JournalSchema = yup.object({
-    title: yup.string().required().min(4),
-    body: yup.string().required().min(4),
+    title: yup.string().required().min( 4 ),
+    body: yup.string().required().min( 4 ),
 });
 
 export function AddJournal ({ addJournal, setModalOpen }) {
@@ -80,4 +80,4 @@ const mapStateToProps = ( state, ownProps ) => {
   export default connect(
     mapStateToProps,
     mapDispatchToProps
-  )(AddJournal)
+  )( AddJournal )

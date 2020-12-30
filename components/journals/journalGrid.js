@@ -11,20 +11,18 @@ export function JournalGridContainer({ state, navigation }) {
 
     const JournalGridList = memo(function GridJournal({ data, index }){
         return (
-            <Card style={{backgroundColor: coltsBlue}} onPress={ () => navigation.navigate( 'JournalDetails', data )} >
-                <Card.Content style={styles.gridItem}>
-                    <Text style={{color: coltsGray}}>{ data.title }</Text>
-                    <Text style={{color: coltsGray, marginTop: 30, bottom: 0, position: 'absolute'}}>{ data.date}</Text>
+            <Card style={{ backgroundColor: coltsBlue }} onPress={ () => navigation.navigate( 'JournalDetails', data )} >
+                <Card.Content style={ styles.gridItem }>
+                    <Text style={{ color: coltsGray }}>{ data.title }</Text>
+                    <Text style={{ color: coltsGray, marginTop: 30, bottom: 0, position: 'absolute'}}>{ data.date }</Text>
                 </Card.Content>
             </Card>
         )
     })
 
     const renderList = useCallback( function renderList({ item, index }) {
-        return <JournalGridList index={index} data={ item } />;
+        return <JournalGridList index={ index } data={ item } />;
       }, []);
-
-
 
     return (
         <View style={{
@@ -34,12 +32,12 @@ export function JournalGridContainer({ state, navigation }) {
                 alignItems: 'center',
               }}>
             <FlatList
-              numColumns={3}
-              contentContainerStyle={styles.gridContainer}
+              numColumns={ 3 }
+              contentContainerStyle={ styles.gridContainer }
               scrollEnabled
               data={ state }
               keyExtractor={( item, index) => index.toString() }
-              renderItem={renderList}
+              renderItem={ renderList }
             />
         </View>
     )
@@ -51,7 +49,6 @@ const styles = StyleSheet.create({
     gridContainer: {
         paddingTop: 3, 
         backgroundColor: coltsBlue,
-
     },
     gridItem: {
         height: height * 0.25,

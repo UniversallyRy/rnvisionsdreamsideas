@@ -21,7 +21,7 @@ export  function TodoItem({ navigation, state, item, deleteTodo, editTodo }) {
     setInput( item.task );
     setEdited( true );
   };
-console.log(state);
+console.log( state );
   const saveEdit = () => {
     // map through state, grab todo by id and change task value
     const newState = state.map((todo) => {
@@ -84,7 +84,7 @@ const styles = StyleSheet.create({
     }
 })
 
-const mapStateToProps = (state, ownProps) => {
+const mapStateToProps = ( state, ownProps ) => {
   return {
     state: state.todos,
   }

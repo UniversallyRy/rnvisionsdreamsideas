@@ -1,7 +1,7 @@
 import React from 'react';
 import { createStackNavigator } from 'react-navigation-stack';
 import Visions from '../screens/visionScreen';
-import VisionImageGrid from '../components/visions/visionImageGrid';
+// import VisionImageGrid from '../components/visions/visionImageGrid';
 import VisionDetails from '../components/visions/visionDetails';
 import Header from '../shared/header';
 import { coltsGray, coltsBlue } from '../styles/global';

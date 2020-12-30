@@ -56,12 +56,10 @@ export const globalStyles = StyleSheet.create({
         alignItems: "center",
         marginBottom: 30,
     },
-
     slideCarousel: {
         width: windowWidth ,
         flex: 1,
     },
-
     slideImage: { 
         width: windowWidth * 0.98, 
         height: windowHeight * 0.6,  
@@ -310,7 +308,7 @@ export const globalStyles = StyleSheet.create({
     todoCompleted: {
         textDecorationLine: 'line-through',
         opacity: 0.4,
-      },
+    },
     todoContainer: {
         padding: 10,
         alignItems: 'center',

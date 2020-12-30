@@ -31,5 +31,5 @@ const styles = StyleSheet.create({
       justifyContent: 'center',
       elevation: 4,
     }
-  });
+});
   

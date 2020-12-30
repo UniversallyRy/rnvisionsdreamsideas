@@ -15,7 +15,7 @@ const visionSchema = yup.object({
 
 export function AddVision({ addVision, stateUri, setModalOpen }) {
     return (
-        <View style={{margin: 15, marginTop: 100}}>
+        <View style={{ margin: 15, marginTop: 100 }}>
             <Formik
                 enableReinitialize={ true }
                 initialValues={{ uri: stateUri, title:'', id:null }}
@@ -63,4 +63,4 @@ const mapStateToProps = ( state, ownProps ) => {
   export default connect(
     mapStateToProps,
     mapDispatchToProps
-  )(AddVision )
+  )( AddVision )

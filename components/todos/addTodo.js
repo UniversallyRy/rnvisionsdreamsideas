@@ -24,7 +24,7 @@ export function AddTodo ({ addTodo }) {
                 }}
             >
                 { ( formikProps ) => (
-                    <View style={globalStyles.addTodoForm}>
+                    <View style={ globalStyles.addTodoForm }>
                         <TextInput
                             enablesReturnKeyAutomatically={ true }
                             autoCorrect={ true }

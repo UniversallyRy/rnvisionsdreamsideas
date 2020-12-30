@@ -8,19 +8,19 @@ const initialJournals = [
     title: "Add Task 1",
     body: lorem,
     id: uuidv4(),
-    date: moment('2014-02-17').format('MMMM Do YYYY')	
+    date: moment( '2014-02-17' ).format( 'MMMM Do YYYY' )	
   },
   {
     title: "Add Task 2",
     body: lorem,
     id: uuidv4(),
-    date: moment('2017-11-07').format('MMMM Do YYYY')	
+    date: moment( '2017-11-07' ).format( 'MMMM Do YYYY' )	
   },
   {
     title: "Add Task 33",
     body: lorem,
     id: uuidv4(),
-    date: moment('2020-07-30').format('MMMM Do YYYY')	
+    date: moment( '2020-07-30' ).format( 'MMMM Do YYYY' )	
   }
 ]; 
 export default function( state = initialJournals, action ) {
@@ -31,7 +31,7 @@ export default function( state = initialJournals, action ) {
             title: action.payload.title,
             body: action.payload.body,
             id: uuidv4(),
-            date: moment().format('MMMM Do YYYY')
+            date: moment().format( 'MMMM Do YYYY' )
             },
             ...state,
           ];
@@ -42,7 +42,7 @@ export default function( state = initialJournals, action ) {
       };
     }
     case DELETE_JOURNAL: {
-      return state.filter(todo => todo.id !== action.payload.id);
+      return state.filter( todo => todo.id !== action.payload.id );
     }
     default:
       return state;

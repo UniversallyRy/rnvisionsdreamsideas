@@ -13,7 +13,7 @@ export default function TodoDetails({ navigation }) {
                 <Card style={ globalStyles.todoDetails }>
                     <Card.Content>
                         <Text> { navigation.getParam( 'task' ) } </Text>
-                        <Button style={globalStyles.tDetailsButton} icon='arrow-left' mode='contained' dark={ true } title={ 'back to home' } onPress={ handlePress }>
+                        <Button style={ globalStyles.tDetailsButton } icon='arrow-left' mode='contained' dark={ true } title={ 'back to home' } onPress={ handlePress }>
                             Go Back
                         </Button>
                     </Card.Content>

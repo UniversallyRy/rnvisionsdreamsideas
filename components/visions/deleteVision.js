@@ -10,12 +10,12 @@ export function DeleteVision({ deleteVision, item }) {
         // save item.id from props to buttonId
         var buttonId = id;
         //calls redux action on stored visions
-        deleteVision(buttonId);
+        deleteVision( buttonId );
     };
 
     return (
         <View>
-            <Button style={globalStyles.visionDeleteButton} color={coltsBlue} icon="close-outline" onPress={() => removeVision(item)}>
+            <Button style={ globalStyles.visionDeleteButton } color={ coltsBlue } icon="close-outline" onPress={ () => removeVision( item ) }>
                 <Text>Delete</Text>
             </Button>
         </View>
