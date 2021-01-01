@@ -61,7 +61,7 @@ export function ImagePic({ addPic }) {
   };
 
   return (
-    <View style={{ alignSelf: 'center' }}>
+    <>
         <View style={ globalStyles.visionButtonContainer }>
           <Button color={ coltsBlue } style={ globalStyles.uploadButton } title="Add Image From Gallery" onPress={ pickImage }>
             Add from gallery
@@ -71,7 +71,7 @@ export function ImagePic({ addPic }) {
           </Button>
         </View>
         { image && <Image source={{ uri: image }} style={{ width: windowWidth * 0.97, height: windowHeight * 0.40, resizeMode: 'cover', alignSelf: 'center'}} /> }
-    </View>
+    </>
   );
 }
 

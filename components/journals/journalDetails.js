@@ -11,7 +11,7 @@ export default function JournalDetails({ navigation }) {
 
     return (
         <Card style={globalStyles.jDetailsContainer} id ={ Math.random() * 92 }>
-            <Card style={ globalStyles.jDetailsCard }>
+            <Card.Content style={ globalStyles.jDetailsCard }>
                 <Text style={ globalStyles.jDetailsTitle }> { navigation.getParam( 'title' ) } </Text>
                 <View style={ styles.divider } />
                 <Text style={ globalStyles.jDetailsText }> { navigation.getParam( 'body' ) } </Text>
@@ -20,7 +20,7 @@ export default function JournalDetails({ navigation }) {
                 <Button style={globalStyles.jDetailsButton} icon='arrow-left' mode='contained' dark={ true } title={ 'back to home' } onPress={ handlePress }>
                     Go Back
                 </Button>
-            </Card>
+            </Card.Content>
         </Card>
     )
 }

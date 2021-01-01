@@ -48,13 +48,13 @@ export default function App() {
         </PersistGate>
         </Provider>
     );
-  } else {
-    return (
-      <AppLoading
-        startAsync={ getFonts }
-        onFinish={() => setFontsLoaded( true )}
-      />
-    )
+  }else {
+      return (
+        <AppLoading
+          startAsync={ getFonts }
+          onFinish={() => setFontsLoaded( true )}
+        />
+      )
   }  
 }
 

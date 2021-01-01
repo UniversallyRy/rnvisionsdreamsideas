@@ -4,7 +4,7 @@ import { Text, Modal, Portal, Provider } from 'react-native-paper';
 import { connect } from 'react-redux';
 import AddJournalModal from '../components/journals/addJournalModal';
 import JournalList from '../components/journals/journalList';
-import { globalStyles } from '../styles/global';
+import { coltsBlue, globalStyles } from '../styles/global';
 import JournalGridContainer from '../components/journals/journalGrid';
 import Icon from '../shared/icon';
 
@@ -17,42 +17,41 @@ const JournalScreen = memo( function Journals( { navigation, state } ) {
     }; 
   
     return (
-         <Provider style={{ flex: 1 }}>
+         <Provider style={{ flex: 1, backgroundColor: coltsBlue }}>
             <Portal>
               <Modal visible={ modalOpen } onDismiss={ () => setModalOpen( false ) } contentContainerStyle={ globalStyles.addJournalContainer }>                     
-                          <Text style={ globalStyles.addJournalTitle }>Add A Journal Entry</Text>
-                          <AddJournalModal setModalOpen = { setModalOpen }/>
-                          <View style={ globalStyles.closeModalContainer }>
-                            <Icon
-                              item='close'
-                              style={{ ...globalStyles.modalClose }}
-                              onPress={ () => setModalOpen( false ) }
-                            />
-                          </View>  
-                    
+                <Text style={ globalStyles.addJournalTitle }>Add A Journal Entry</Text>
+                <AddJournalModal setModalOpen = { setModalOpen }/>
+                <View style={ globalStyles.closeModalContainer }>
+                  <Icon
+                    item='close'
+                    style={{ ...globalStyles.modalClose }}
+                    onPress={ () => setModalOpen( false ) }
+                  />
+                </View>       
               </Modal>
             </Portal>
             {gridView
-                ? <JournalGridContainer
-                    state={ state }
-                    navigation={ navigation }
-                  />
-              
-                : <JournalList
-                    state={ state }
-                    navigation={ navigation }
+              ? <JournalGridContainer
+                  state={ state }
+                  navigation={ navigation }
                 />
+              
+              : <JournalList
+                  state={ state }
+                  navigation={ navigation }
+               />
             }
-                <View style={ globalStyles.visionAddToggle }>
-                    <Icon
-                    item='plus'
-                    onPress={ () => setModalOpen( true ) }
-                    />
-                    <Icon
-                      item='grid'
-                      onPress={ () => toggleGrid() }
-                    />
-                </View>
+            <View style={ globalStyles.visionAddToggle }>
+              <Icon
+                item='plus'
+                onPress={ () => setModalOpen( true ) }
+              />
+              <Icon
+                item='grid'
+                onPress={ () => toggleGrid() }
+              />
+            </View>
         </Provider>            
     )
 });

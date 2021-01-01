@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 import { globalStyles } from '../styles/global';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 
@@ -11,6 +11,6 @@ const Icon = ({item, onPress }) => {
                     onPress={onPress}
         />
     )
-}
+};
 
-export default Icon
+export default Icon;

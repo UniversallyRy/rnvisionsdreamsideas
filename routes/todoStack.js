@@ -32,5 +32,4 @@ const TodoStack = createStackNavigator( screens, {
     }
 });
 
-
 export default TodoStack;

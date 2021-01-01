@@ -1,7 +1,7 @@
 import React, {useCallback, memo } from 'react';
 import { Text, StyleSheet, Dimensions, View } from 'react-native';
 import { FlatList } from 'react-native-gesture-handler';
-import { Card } from 'react-native-paper';
+import { Card, Surface } from 'react-native-paper';
 import { coltsBlue, coltsGray, globalStyles } from '../../styles/global';
 
 
@@ -25,7 +25,7 @@ export function JournalGridContainer({ state, navigation }) {
       }, []);
 
     return (
-        <View style={{
+        <Surface style={{
                 flex: 1, 
                 backgroundColor: coltsBlue, 
                 justifyContent: 'center',
@@ -39,16 +39,13 @@ export function JournalGridContainer({ state, navigation }) {
               keyExtractor={( item, index) => index.toString() }
               renderItem={ renderList }
             />
-        </View>
+        </Surface>
     )
 }
-
-
 
 const styles = StyleSheet.create({
     gridContainer: {
         paddingTop: 3, 
-        backgroundColor: coltsBlue,
     },
     gridItem: {
         height: height * 0.25,

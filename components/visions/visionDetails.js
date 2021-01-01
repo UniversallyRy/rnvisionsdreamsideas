@@ -4,12 +4,11 @@ import { Button, Text, Card }  from 'react-native-paper';
 import { globalStyles } from '../../styles/global';
 
 export default function VisionDetails({ navigation }) {
-
     const handlePress = () => {
         navigation.goBack();
     };
-
     const imageUri = navigation.getParam( 'uri' );
+    
     return (
         <Card style={ globalStyles.vDetailsContent }>
             <Card.Content>

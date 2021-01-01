@@ -32,7 +32,6 @@ const VisionStack = createStackNavigator( screens, {
             height: 100,
         }
     }
-} );
-
+});
 
 export default VisionStack;

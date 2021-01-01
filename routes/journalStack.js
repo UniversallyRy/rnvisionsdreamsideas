@@ -17,8 +17,7 @@ const screens = {
     JournalDetails: {
         screen: JournalDetails,
         navigationOptions: {
-            title: 'Journal Details',
-            
+            title: 'Journal Details',  
         }
     }
 }

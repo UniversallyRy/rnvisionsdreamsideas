@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { Animated, Modal, StyleSheet, StatusBar, View, TouchableWithoutFeedback, Keyboard } from 'react-native';
-import { Text, } from 'react-native-paper';
+import { Animated, Modal, StyleSheet, View, TouchableWithoutFeedback, Keyboard } from 'react-native';
+import { Text } from 'react-native-paper';
 import { connect } from 'react-redux';
 import AddVision from '../components/visions/addVision';
 import VisionsContainer from '../components/visions/visionImageList';
@@ -11,7 +11,7 @@ import Icon from '../shared/icon';
 const VISIBLE_ITEMS = 3;
 
 
-export function Visions({  state, navigation }) {
+export function Visions({ state, navigation }) {
   const scrollX = useRef(new Animated.Value( 0 )).current;
   const scrollXIndex = useRef(new Animated.Value( 0 )).current;
   const [ modalOpen, setModalOpen ] = useState( false );
@@ -47,11 +47,10 @@ export function Visions({  state, navigation }) {
                       item='close'
                       style={{ ...globalStyles.modalClose }}
                       onPress={ () => setModalOpen( false ) }
-                    />
-                                     
+                    />                   
                   </View>  
                 </View>
-                </TouchableWithoutFeedback>
+              </TouchableWithoutFeedback>
             </Modal>
             {/* when gridview is toggled use gridContainer otherwise VisionsContainer */}
             {gridView
@@ -65,7 +64,6 @@ export function Visions({  state, navigation }) {
                     scrollX={ scrollX }                  
                   />
             }
-            
             <View style={ globalStyles.visionAddToggle }>
               <Icon
                 item='plus'

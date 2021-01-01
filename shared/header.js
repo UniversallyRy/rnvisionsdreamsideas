@@ -4,7 +4,6 @@ import { MaterialIcons } from '@expo/vector-icons';
 import { coltsBlue, raidSilver } from '../styles/global';
 
 export default function Header({ navigation, title }) {
-
     const openMenu = () => {
         navigation.openDrawer();
     };
@@ -48,4 +47,4 @@ const styles = StyleSheet.create({
         flex: 1,
         marginBottom: 10,
     }
-})
+});

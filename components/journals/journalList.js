@@ -6,12 +6,12 @@ import { globalStyles, coltsGray, coltsBlue } from '../../styles/global';
 import { deleteJournal } from '../../redux/actions';
 
 
-const JournalList = ({ state, navigation, deleteJournal}) => {
+const JournalList = ({ state, navigation, deleteJournal }) => {
     const removeJournal = id => {
       var buttonId = id;
       deleteJournal( buttonId );
     };
-    
+
     return ( 
             <FlatList
                 style={{ paddingTop: 10, backgroundColor: coltsBlue }}

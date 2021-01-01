@@ -27,7 +27,7 @@ export function AddVision({ addVision, stateUri, setModalOpen }) {
                 }}
             >
                 {( formikProps ) => (
-                    <View>
+                    <>
                         <TextInput
                             mode='outlined'
                             placeholder='Vision Title'
@@ -40,7 +40,7 @@ export function AddVision({ addVision, stateUri, setModalOpen }) {
                         </Text>
                         <ImagePic />
                         <FlatButton text='submit' onPress={ formikProps.handleSubmit }/>
-                    </View>
+                    </>
                 )}    
             </Formik>
         </View>
