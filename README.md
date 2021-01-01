@@ -6,25 +6,26 @@
 - [ReactJS](https://reactjs.org)
 - [React Redux](https://react-redux.js.org/)
 
-## Pre-requisites
+## Prerequisites
 
 - [NodeJS](https://nodejs.org)
-
+- [Expo](https://expo.io/)
 
 ## Usage
 
-If you want to build from source, make sure that NodeJS is installed and download dependencies by issuing:
+If you want to build from source, make sure that NodeJS and Expo are installed then download dependencies by issuing:
 
 ```bash
 expo install
 ```
-and
+
+or
 
 ```bash
 npm install
 ```
 
-And then, to run the project:
+And then to run the project:
 
 ```bash
 expo start
