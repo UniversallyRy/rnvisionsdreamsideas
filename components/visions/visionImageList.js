@@ -1,8 +1,9 @@
 import React, { useCallback, memo } from "react";
-import { StyleSheet, Dimensions, Animated } from "react-native";
-import { Surface }  from 'react-native-paper';
-import DeleteVision from "./deleteVision";
-import { coltsGray, coltsBlue } from "../../styles/global";
+import { Text, Dimensions, Animated } from "react-native";
+import { Surface, Button }  from 'react-native-paper';
+import { deleteVision } from '../../redux/actions';
+import { globalStyles, coltsGray, coltsBlue } from "../../styles/global";
+import { connect } from 'react-redux';
 import { TouchableOpacity, TouchableWithoutFeedback } from "react-native-gesture-handler";
 
 // react native's Dimensions import to grab mobile screens dimensions
@@ -10,21 +11,28 @@ const { width: width } = Dimensions.get( "window" );
 const ITEM_WIDTH = width * 0.94;
 const ITEM_HEIGHT = ITEM_WIDTH * 1.27;
 
-export function VisionsContainer({ navigation, state, scrollX }) {
+export function VisionsContainer({ navigation, state, scrollX, deleteVision }) {
 
   
   const VisionImageList = memo( function VisionImage( { data, index } ) {
-
-      const inputRange= [
+    
+    const removeVision = id => {
+      // save item.id from props to buttonId
+      var buttonId = id;
+      //calls redux action on stored visions
+      deleteVision( buttonId );
+    };
+      
+    const inputRange= [
         ( index -1 ) * width,
         index * width,
         ( index + 1 ) * width
-      ];
+    ];
 
-      const translateX = scrollX.interpolate({
+    const translateX = scrollX.interpolate({
         inputRange,
         outputRange: [ -width * 0.7, 0, width * 0.7 ]
-      });
+    });
 
     return (
 
@@ -68,7 +76,9 @@ export function VisionsContainer({ navigation, state, scrollX }) {
                 <DeleteVision item={ data.id }/> */}
               </Surface>
             </Surface>
-            <DeleteVision item={ data.id }/>       
+            <Button style={ globalStyles.visionDeleteButton } color={ coltsBlue } icon="close-outline" onPress={ () => removeVision( data.id ) }>
+                <Text>Delete</Text>
+            </Button>       
           </Surface> 
     );
   });
@@ -95,4 +105,6 @@ export function VisionsContainer({ navigation, state, scrollX }) {
   );
 }
 
-export default VisionsContainer;
+const mapDispatchToProps = { deleteVision }
+
+export default connect( null, mapDispatchToProps )( VisionsContainer);

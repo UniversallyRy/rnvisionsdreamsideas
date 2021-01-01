@@ -18,7 +18,7 @@ export function AddVision({ addVision, stateUri, setModalOpen }) {
         <View style={{ margin: 15, marginTop: 100 }}>
             <Formik
                 enableReinitialize={ true }
-                initialValues={{ uri: stateUri, title:'', id:null }}
+                initialValues={{ uri: stateUri, title: '', id: null }}
                 validationSchema={ visionSchema }
                 onSubmit={ ( values, actions ) => {
                     addVision( values );
@@ -35,9 +35,7 @@ export function AddVision({ addVision, stateUri, setModalOpen }) {
                             value={ formikProps.values.title }
                             onBlur={ formikProps.handleBlur( 'title' ) }
                         />
-                        <Text 
-                            style={ globalStyles.errorText }
-                        >
+                        <Text style={ globalStyles.errorText }>
                                 { formikProps.touched.title && formikProps.errors.title }
                         </Text>
                         <ImagePic />
@@ -51,9 +49,7 @@ export function AddVision({ addVision, stateUri, setModalOpen }) {
 
 const mapStateToProps = ( state, ownProps ) => {
     return {
-            // reducers/visions.js
       state: state.visions,
-            // reducers/pic.js
       stateUri: state.pic
     }
   }
