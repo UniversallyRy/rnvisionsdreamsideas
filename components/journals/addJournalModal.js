@@ -42,7 +42,7 @@ export function AddJournal ({ addJournal, setModalOpen }) {
                         <Text 
                             style={ globalStyles.errorText } 
                         >
-                            {/* Text ^ shows up only when input is focused and exited without requirements */}
+                            {/* Above <Text/> shows up only when input is focused and exited without requirements */}
                             { formikProps.touched.title && formikProps.errors.title }
                         </Text>
                         <TextInput

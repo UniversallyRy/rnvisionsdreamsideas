@@ -1,12 +1,12 @@
 import React, { useState, memo } from 'react';
-import { View, StyleSheet } from 'react-native';
+import { View } from 'react-native';
 import { Text, Modal, Portal, Provider } from 'react-native-paper';
 import { connect } from 'react-redux';
-import { MaterialCommunityIcons } from '@expo/vector-icons';
-import AddJournal from '../components/journals/addJournal';
+import AddJournalModal from '../components/journals/addJournalModal';
 import JournalList from '../components/journals/journalList';
-import { globalStyles, coltsGray } from '../styles/global';
+import { globalStyles } from '../styles/global';
 import JournalGridContainer from '../components/journals/journalGrid';
+import Icon from '../shared/icon';
 
 const JournalScreen = memo( function Journals( { navigation, state } ) {
     const [ modalOpen, setModalOpen ] = useState( false );
@@ -21,13 +21,11 @@ const JournalScreen = memo( function Journals( { navigation, state } ) {
             <Portal>
               <Modal visible={ modalOpen } onDismiss={ () => setModalOpen( false ) } contentContainerStyle={ globalStyles.addJournalContainer }>                     
                           <Text style={ globalStyles.addJournalTitle }>Add A Journal Entry</Text>
-                          <AddJournal setModalOpen = { setModalOpen }/>
+                          <AddJournalModal setModalOpen = { setModalOpen }/>
                           <View style={ globalStyles.closeModalContainer }>
-                            <MaterialCommunityIcons
-                              name='close'
-                              size={ 24 }
-                                    // rest/spread operator to grab modaltoggle props and adds any new modalcloses props  
-                              style={{ ...globalStyles.modalToggle, ...globalStyles.modalClose }}
+                            <Icon
+                              item='close'
+                              style={{ ...globalStyles.modalClose }}
                               onPress={ () => setModalOpen( false ) }
                             />
                           </View>  
@@ -46,16 +44,12 @@ const JournalScreen = memo( function Journals( { navigation, state } ) {
                 />
             }
                 <View style={ globalStyles.visionAddToggle }>
-                    <MaterialCommunityIcons
-                    name='plus'
-                    size={ 24 }
-                    style={ globalStyles.modalToggle }
+                    <Icon
+                    item='plus'
                     onPress={ () => setModalOpen( true ) }
                     />
-                    <MaterialCommunityIcons
-                      name='grid'
-                      size={ 24 }
-                      style={ globalStyles.modalToggle }
+                    <Icon
+                      item='grid'
                       onPress={ () => toggleGrid() }
                     />
                 </View>

@@ -2,11 +2,11 @@ import React, { useState, useRef, useEffect } from 'react';
 import { Animated, Modal, StyleSheet, StatusBar, View, TouchableWithoutFeedback, Keyboard } from 'react-native';
 import { Text, } from 'react-native-paper';
 import { connect } from 'react-redux';
-import { MaterialCommunityIcons } from '@expo/vector-icons';
 import AddVision from '../components/visions/addVision';
 import VisionsContainer from '../components/visions/visionImageList';
 import VisionGridContainer from '../components/visions/visionImageGrid';
 import { coltsBlue, globalStyles } from '../styles/global';
+import Icon from '../shared/icon';
 
 const VISIBLE_ITEMS = 3;
 
@@ -43,11 +43,9 @@ export function Visions({  state, navigation }) {
                   <Text Text='Add Vision'> Add A Vision </Text>
                   <AddVision setModalOpen={ setModalOpen }/>
                   <View style={globalStyles.closeModalContainer}>
-                    <MaterialCommunityIcons
-                      name='close'
-                      size={ 24 }
-                            // rest/spread operator to grab modaltoggle props and adds any new modalcloses props  
-                      style={{ ...globalStyles.modalToggle, ...globalStyles.modalClose }}
+                    <Icon
+                      item='close'
+                      style={{ ...globalStyles.modalClose }}
                       onPress={ () => setModalOpen( false ) }
                     />
                                      
@@ -69,16 +67,12 @@ export function Visions({  state, navigation }) {
             }
             
             <View style={ globalStyles.visionAddToggle }>
-              <MaterialCommunityIcons
-                name='plus'
-                size={ 24 }
-                style={ globalStyles.modalToggle }
+              <Icon
+                item='plus'
                 onPress={ () => setModalOpen( true ) }
               />
-              <MaterialCommunityIcons
-                name='grid'
-                size={ 24 }
-                style={ globalStyles.modalToggle }
+              <Icon
+                item='grid'
                 onPress={ () => toggleGrid() }
               />
               </View>

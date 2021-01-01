@@ -52,6 +52,6 @@ const styles = StyleSheet.create({
     marginBottom: 10,
     opacity: 0.7,
   },
-})
+});
 
 export default JournalList;
