@@ -9,6 +9,7 @@ export const globalStyles = StyleSheet.create({
     // Vision Styles
 
     visionPage: {
+        fontFamily: 'roboto-black',
         backgroundColor: coltsGray,
         flex: 1,
     },
@@ -152,16 +153,19 @@ export const globalStyles = StyleSheet.create({
         borderRadius: 7,
     },
     journalTitle: {
-        fontFamily: 'nunito-black',
+        fontFamily: 'roboto-black',
         fontSize: 20,
         color: coltsGray,
         marginBottom: 10,
     },
     journalText: {
-        fontFamily: 'nunito-black',
+        fontFamily: 'roboto-regular',
+        fontSize: 12,
         color: coltsGray,
     },
     journalDate: {
+        fontFamily: 'roboto-italic',
+        fontSize: 10,
         marginTop: 35,
         margin: 5,
         color: coltsGray,
@@ -169,7 +173,7 @@ export const globalStyles = StyleSheet.create({
     addJournalContainer: {
         flex: 1,
         backgroundColor: coltsBlue,  
-        fontFamily: 'nunito-black',
+        fontFamily: 'roboto-black',
     },
     addJournalForm: {
         margin: 15,
@@ -183,6 +187,8 @@ export const globalStyles = StyleSheet.create({
         borderRadius: 2,
     },
     jDetailsText: {
+        fontSize: 14,
+        fontFamily: 'roboto-regular',
         padding: 7,
         marginTop: 50,
         marginVertical: 18,
@@ -190,15 +196,21 @@ export const globalStyles = StyleSheet.create({
         color: coltsGray,
     },
     jDetailsTitle: {
-        fontFamily: 'nunito-black',
+        fontFamily: 'roboto-black',
         fontSize: 18,
+        color: raidSilver,
+        padding: 10,
+    },
+    jDetailsDate: {
+        fontFamily: 'roboto-italic',
+        fontSize: 10,
         color: raidSilver,
         padding: 10,
     },
     jDetailsButton: {
         fontSize: 40,    
+        fontFamily: 'roboto-black',
         backgroundColor: coltsGray,
-        color:'blue' ,
         shadowColor: coltsBlue,
         shadowOffset: {
             width: 0,
@@ -302,7 +314,7 @@ export const globalStyles = StyleSheet.create({
     },
     todoText: {
         color: coltsGray,
-        fontFamily: 'nunito-black',
+        fontFamily: 'roboto-black',
         padding: 5,
     },
     todoCompleted: {

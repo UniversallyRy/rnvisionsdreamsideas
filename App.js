@@ -23,8 +23,11 @@ import { PersistGate } from 'redux-persist/integration/react';
 
 const getFonts = () => 
    Font.loadAsync({
-    'nunito-regular': require( './assets/fonts/Nunito-Regular.ttf' ),
-    'nunito-black': require( './assets/fonts/Nunito-Black.ttf' )
+    'roboto-regular': require( './assets/fonts/Roboto-Regular.ttf' ),
+    'roboto-black': require( './assets/fonts/Roboto-Black.ttf' ),
+    'roboto-bold': require( './assets/fonts/Roboto-Bold.ttf' ),
+    'roboto-medium': require( './assets/fonts/Roboto-Medium.ttf' ),
+    'roboto-italic': require( './assets/fonts/Roboto-Italic.ttf' ),
   });
   //customize theme colors
   // const CombinedDefaultTheme = merge( PaperDefaultTheme, NavigationDefaultTheme );
