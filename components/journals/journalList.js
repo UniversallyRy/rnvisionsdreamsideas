@@ -1,9 +1,17 @@
 import React from 'react';
 import { StyleSheet, View, FlatList } from 'react-native';
 import { Button, Card, Paragraph } from 'react-native-paper';
+import { connect } from 'react-redux';
 import { globalStyles, coltsGray, coltsBlue } from '../../styles/global';
+import { deleteJournal } from '../../redux/actions';
 
-const JournalList = ({ state, navigation }) => {
+
+const JournalList = ({ state, navigation, deleteJournal}) => {
+    const removeJournal = id => {
+      var buttonId = id;
+      deleteJournal( buttonId );
+    };
+    
     return ( 
             <FlatList
                 style={{ paddingTop: 10, backgroundColor: coltsBlue }}
@@ -22,7 +30,7 @@ const JournalList = ({ state, navigation }) => {
                     </Card>                      
                     <View style={ styles.buttonsContainer }>
                       <Button style={ styles.editButton } color={ coltsGray } icon="lead-pencil" mode="contained" >Edit</Button>
-                      <Button style={ styles.deleteButton } color='red' icon="close-outline" mode="contained" onPress={ () => removeJournal() }>Delete</Button>
+                      <Button style={ styles.deleteButton } color='red' icon="close-outline" mode="contained" onPress={ () => removeJournal(item.id) }>Delete</Button>
                     </View>
                   </View>
                 )}
@@ -54,4 +62,6 @@ const styles = StyleSheet.create({
   },
 });
 
-export default JournalList;
+const mapDispatchToProps = { deleteJournal }
+
+export default connect( null, mapDispatchToProps )( JournalList );

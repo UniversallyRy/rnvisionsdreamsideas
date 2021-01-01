@@ -65,19 +65,11 @@ export function AddJournal ({ addJournal, setModalOpen }) {
             </Formik>
     )
 }
-
-
-const mapStateToProps = ( state, ownProps ) => {
-    return {
-            // combinedReducers use so point to journals.js 
-      state: state.journals
-    }
-  }
   
   // actions from redux to save entry to store 
   const mapDispatchToProps = { addJournal }
 
   export default connect(
-    mapStateToProps,
+    null,
     mapDispatchToProps
   )( AddJournal )
