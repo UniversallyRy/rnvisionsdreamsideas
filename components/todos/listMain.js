@@ -34,7 +34,7 @@ export function ListMain({ state }) {
                     <Text style={ styles.title } >
                         Some <Text style={{ fontWeight: '300', color:coltsGray }}>Checklists</Text>
                     </Text>
-                <View style={ styles.divider }/>
+                    <View style={ styles.divider }/>
                 </View>
                 <View style={{ height: 425, paddingLeft: 22 }}>
                     <FlatList 
@@ -67,14 +67,12 @@ const styles = StyleSheet.create({
     titleStyle: {
         flexDirection: 'row',
         flex: 1,
-        
     },
     divider: {
         backgroundColor: coltsGray,
         height: 1,
         flex: 1,
         marginTop: 40,
-        
     },
     title: {
         fontSize: 38,
@@ -90,13 +88,12 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
     },
-    add: {
+    add: { 
         color: coltsGray,
         fontWeight: '600',
         fontSize: 14,
         marginTop: 6,
     }
-
 })
 
 const mapStateToProps = ( state, ownProps ) => {

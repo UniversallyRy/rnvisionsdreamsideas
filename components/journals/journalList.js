@@ -14,11 +14,12 @@ const JournalList = ({ state, navigation }) => {
                     <Card style={ globalStyles.journalCard } onPress={ () => navigation.navigate( 'JournalDetails', item ) }>
                       <Card.Content>
                         <Paragraph style={ globalStyles.journalTitle }>{ item.title }</Paragraph>
+                        <View style={ styles.divider } />
                         <Paragraph style={ globalStyles.journalText }>{ item.body }</Paragraph>
+                        <View style={ styles.divider } />
                         <Paragraph style={ globalStyles.journalDate }>{ item.date }</Paragraph>
                       </Card.Content>
-                    </Card>
-                      
+                    </Card>                      
                     <View style={ styles.buttonsContainer }>
                       <Button style={ styles.editButton } color={ coltsGray } icon="lead-pencil" mode="contained" >Edit</Button>
                       <Button style={ styles.deleteButton } color='red' icon="close-outline" mode="contained" onPress={ () => removeJournal() }>Delete</Button>
@@ -26,7 +27,6 @@ const JournalList = ({ state, navigation }) => {
                   </View>
                 )}
             />
-   
     )
 }
 
@@ -36,14 +36,22 @@ const styles = StyleSheet.create({
     alignContent: 'center',
     fontSize: 20,
     marginTop: 4,
-},
-editButton: {
-    flex: .51,
-},
-deleteButton: {
-    flex: .51,
-    marginLeft: 2,
-},
+  },
+  editButton: {
+      flex: .51,
+  },
+  deleteButton: {
+      flex: .51,
+      marginLeft: 2,
+  },
+  divider: {
+    backgroundColor: coltsGray,
+    height: 0.3,
+    flex: 1,
+    marginTop: 10,
+    marginBottom: 10,
+    opacity: 0.7,
+  },
 })
 
 export default JournalList;
