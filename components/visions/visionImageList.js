@@ -35,7 +35,6 @@ export function VisionsContainer({ navigation, state, scrollX, deleteVision }) {
     });
 
     return (
-
           <Surface 
             style={{ backgroundColor: coltsBlue, width, justifyContent: 'center', alignItems: 'center' }}
           >
@@ -105,7 +104,7 @@ export function VisionsContainer({ navigation, state, scrollX, deleteVision }) {
   );
 }
 
-const mapStateToProps = (state, ownProps) => { 
+const mapStateToProps = ( state, ownProps ) => { 
   return {
     state: state.visions 
   }
@@ -113,4 +112,4 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = { deleteVision }
 
-export default connect( mapStateToProps, mapDispatchToProps )( VisionsContainer);
+export default connect( mapStateToProps, mapDispatchToProps )( VisionsContainer );
