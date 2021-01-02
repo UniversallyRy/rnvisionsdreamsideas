@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { Formik } from 'formik';
 import * as yup from 'yup';
 import FlatButton from '../../shared/button';
-import ImagePic from './imagePicker';
+import ImagePicker from './imagePicker';
 import { addVision } from '../../redux/actions';
 import { globalStyles } from '../../styles/global';
 
@@ -38,7 +38,7 @@ export function AddVision({ addVision, stateUri, setModalOpen }) {
                         <Text style={ globalStyles.errorText }>
                                 { formikProps.touched.title && formikProps.errors.title }
                         </Text>
-                        <ImagePic />
+                        <ImagePicker />
                         <FlatButton text='submit' onPress={ formikProps.handleSubmit }/>
                     </>
                 )}    
@@ -49,7 +49,6 @@ export function AddVision({ addVision, stateUri, setModalOpen }) {
 
 const mapStateToProps = ( state, ownProps ) => {
     return {
-      state: state.visions,
       stateUri: state.pic
     }
   }

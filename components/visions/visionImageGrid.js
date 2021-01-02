@@ -2,25 +2,25 @@ import React, {useCallback, memo } from 'react';
 import { Image, StyleSheet, Dimensions, View } from 'react-native';
 import { FlatList } from 'react-native-gesture-handler';
 import { Card } from 'react-native-paper';
-import { MaterialCommunityIcons } from '@expo/vector-icons';
+import { connect } from 'react-redux';
 import { coltsBlue, coltsGray, globalStyles } from '../../styles/global';
 
 
 const { width: width, height: height } = Dimensions.get( "window" );
 
-export function VisionGridContainer({ setModalOpen, state, navigation, toggleGrid }) {
+export function VisionGridContainer({ state, navigation }) {
 
-    const VisionGridList = memo(function GridImage({ data, index }){
+    const VisionGridList = memo(function GridImage({ data }){
         return (
             <Card style={{ backgroundColor: coltsBlue }} onPress={ () => navigation.navigate( 'VisionDetails', data )} >
                 {/* <Card onPress={ () => navigation.navigate( 'Visions', item ) }> */}
-                <Image source={{ uri: data.uri }} style={{ ...styles.gridItem }}/>
+                <Image source={{ uri: data.uri }} id={data.id} style={{ ...styles.gridItem }}/>
             </Card>
         )
     })
 
-    const renderList = useCallback( function renderList({ item, index }) {
-        return <VisionGridList index={ index } data={ item } />;
+    const renderList = useCallback( function renderList({ item }) {
+        return <VisionGridList data={ item } />;
       }, []);
 
 
@@ -64,4 +64,10 @@ const styles = StyleSheet.create({
     }
 })
 
-export default VisionGridContainer;
+const mapStateToProps = (state, ownProps) => { 
+    return {
+      state: state.visions 
+    }
+  };
+
+export default connect( mapStateToProps )( VisionGridContainer );

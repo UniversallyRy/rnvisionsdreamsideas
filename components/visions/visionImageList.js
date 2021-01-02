@@ -105,6 +105,12 @@ export function VisionsContainer({ navigation, state, scrollX, deleteVision }) {
   );
 }
 
+const mapStateToProps = (state, ownProps) => { 
+  return {
+    state: state.visions 
+  }
+};
+
 const mapDispatchToProps = { deleteVision }
 
-export default connect( null, mapDispatchToProps )( VisionsContainer);
+export default connect( mapStateToProps, mapDispatchToProps )( VisionsContainer);

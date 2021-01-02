@@ -2,6 +2,7 @@ import React, {useCallback, memo } from 'react';
 import { Text, StyleSheet, Dimensions, View } from 'react-native';
 import { FlatList } from 'react-native-gesture-handler';
 import { Card, Surface } from 'react-native-paper';
+import { connect } from 'react-redux';
 import { coltsBlue, coltsGray, globalStyles } from '../../styles/global';
 
 
@@ -65,6 +66,12 @@ const styles = StyleSheet.create({
           height: 0,
         }, 
     }
-})
+});
 
-export default JournalGridContainer;
+const mapStateToProps = ( state, ownProps ) => {
+    return {
+      state: state.journals,
+    }
+};
+
+export default connect( mapStateToProps)( JournalGridContainer );

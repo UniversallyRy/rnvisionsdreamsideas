@@ -64,4 +64,10 @@ const styles = StyleSheet.create({
 
 const mapDispatchToProps = { deleteJournal }
 
-export default connect( null, mapDispatchToProps )( JournalList );
+const mapStateToProps = ( state, ownProps ) => {
+  return {
+    state: state.journals,
+  }
+}
+
+export default connect( mapStateToProps, mapDispatchToProps )( JournalList );

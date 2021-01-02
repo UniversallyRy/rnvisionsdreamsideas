@@ -1,7 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Animated, Modal, StyleSheet, View, TouchableWithoutFeedback, Keyboard } from 'react-native';
 import { Text } from 'react-native-paper';
-import { connect } from 'react-redux';
 import AddVision from '../components/visions/addVision';
 import VisionsContainer from '../components/visions/visionImageList';
 import VisionGridContainer from '../components/visions/visionImageGrid';
@@ -11,7 +10,7 @@ import Icon from '../shared/icon';
 const VISIBLE_ITEMS = 3;
 
 
-export function Visions({ state, navigation }) {
+export function Visions({ navigation }) {
   const scrollX = useRef(new Animated.Value( 0 )).current;
   const scrollXIndex = useRef(new Animated.Value( 0 )).current;
   const [ modalOpen, setModalOpen ] = useState( false );
@@ -55,12 +54,10 @@ export function Visions({ state, navigation }) {
             {/* when gridview is toggled use gridContainer otherwise VisionsContainer */}
             {gridView
                ? <VisionGridContainer
-                    state={ state }
                     navigation={ navigation }
                   />
                : <VisionsContainer 
                     navigation={ navigation } 
-                    state={ state } 
                     scrollX={ scrollX }                  
                   />
             }
@@ -87,10 +84,4 @@ const styles = StyleSheet.create({
   },
 });
 
-const mapStateToProps = ( state, ownProps ) => {
-  return {
-    state: state.visions,
-  }
-}
-
-export default connect( mapStateToProps )( Visions )
+export default Visions;

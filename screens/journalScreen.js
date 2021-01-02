@@ -1,14 +1,13 @@
 import React, { useState, memo } from 'react';
 import { View } from 'react-native';
 import { Text, Modal, Portal, Provider } from 'react-native-paper';
-import { connect } from 'react-redux';
 import AddJournalModal from '../components/journals/addJournalModal';
 import JournalList from '../components/journals/journalList';
 import { coltsBlue, globalStyles } from '../styles/global';
 import JournalGridContainer from '../components/journals/journalGrid';
 import Icon from '../shared/icon';
 
-const JournalScreen = memo( function Journals( { navigation, state } ) {
+const JournalScreen = memo( function Journals({navigation}) {
     const [ modalOpen, setModalOpen ] = useState( false );
     const [ gridView, setGridView ] = useState(true); 
 
@@ -32,15 +31,8 @@ const JournalScreen = memo( function Journals( { navigation, state } ) {
               </Modal>
             </Portal>
             {gridView
-              ? <JournalGridContainer
-                  state={ state }
-                  navigation={ navigation }
-                />
-              
-              : <JournalList
-                  state={ state }
-                  navigation={ navigation }
-               />
+              ? <JournalGridContainer navigation={navigation}/>
+              : <JournalList navigation={navigation}/>
             }
             <View style={ globalStyles.visionAddToggle }>
               <Icon
@@ -56,10 +48,5 @@ const JournalScreen = memo( function Journals( { navigation, state } ) {
     )
 });
 
-const mapStateToProps = ( state, ownProps ) => {
-  return {
-    state: state.journals,
-  }
-}
 
-export default connect( mapStateToProps )( JournalScreen )
+export default JournalScreen;
