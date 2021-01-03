@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { View } from 'react-native';
 import { TextInput, Text } from 'react-native-paper';
 import { connect } from 'react-redux';
@@ -13,7 +13,12 @@ const visionSchema = yup.object({
     title: yup.string().required().min( 4 ),
 });
 
+const simulateSlowNetworkRequest = () =>
+  new Promise(resolve => setTimeout(resolve, 2500));
+
+
 export function AddVision({ addVision, stateUri, setModalOpen }) {
+
     return (
         <View style={{ margin: 15, marginTop: 100 }}>
             <Formik
@@ -22,8 +27,8 @@ export function AddVision({ addVision, stateUri, setModalOpen }) {
                 validationSchema={ visionSchema }
                 onSubmit={ ( values, actions ) => {
                     addVision( values );
+                    actions.resetForm();
                     setModalOpen ( false )
-                    actions.resetForm()
                 }}
             >
                 {( formikProps ) => (

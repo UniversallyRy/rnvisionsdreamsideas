@@ -1,4 +1,4 @@
-import React, { useCallback, memo } from "react";
+import React, { useCallback, memo, useRef, useEffect } from "react";
 import { Text, Dimensions, Animated } from "react-native";
 import { Surface, Button }  from 'react-native-paper';
 import { deleteVision } from '../../redux/actions';
@@ -15,6 +15,14 @@ export function VisionsContainer({ navigation, state, scrollX, deleteVision }) {
 
   
   const VisionImageList = memo( function VisionImage( { data, index } ) {
+
+    const _isMounted = useRef(true); // Initial value _isMounted = true
+
+    useEffect(() => {
+      return () => { // ComponentWillUnmount in Class Component
+          _isMounted.current = false;
+      }
+    }, []);
     
     const removeVision = id => {
       // save item.id from props to buttonId
@@ -71,8 +79,6 @@ export function VisionsContainer({ navigation, state, scrollX, deleteVision }) {
                     height: ITEM_HEIGHT ,
                     transform: [{ translateX }]
                   }}/>
-                  {/* <Text style={ globalStyles.slideTitle }>{ data.title}</Text>
-                <DeleteVision item={ data.id }/> */}
               </Surface>
             </Surface>
             <Button style={ globalStyles.visionDeleteButton } color={ coltsBlue } icon="close-outline" onPress={ () => removeVision( data.id ) }>

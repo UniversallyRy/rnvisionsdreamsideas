@@ -1,6 +1,6 @@
 import { ADD_PIC } from "../actionTypes";
 
-const initialPic = 'test';
+const initialPic = '';
 
 export default function( state = initialPic, action ) {
   switch ( action.type ) {
