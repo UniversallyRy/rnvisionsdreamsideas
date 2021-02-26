@@ -1,26 +1,25 @@
-import React from 'react';
-import { View } from 'react-native';
-import { globalStyles } from '../styles/global';
+import React from "react";
+import { View } from "react-native";
+import { globalStyles } from "../styles/global";
 // import AddTodo from '../components/todos/addTodo';
-import { connect } from 'react-redux';
+import { connect } from "react-redux";
 // import  TodoList  from '../components/todos/todoList';
-import  ListMain  from '../components/todos/listMain';
+import ListMain from "../components/todos/listMain";
 
-export  function TodoScreen() {
-
-    return (
-          <View style={ globalStyles.todoScreenContainer }>            
-            <ListMain/>
-            {/* <TodoList/> */}
-            {/* <AddTodo /> */}
-          </View>
-    )
+export function TodoScreen() {
+  return (
+    <View style={globalStyles.todoScreenContainer}>
+      <ListMain />
+      {/* <TodoList/> */}
+      {/* <AddTodo /> */}
+    </View>
+  );
 }
 
-const mapStateToProps = ( state, ownProps ) => {
+const mapStateToProps = (state, ownProps) => {
   return {
     state: state.todos,
-  }
-}
+  };
+};
 
-export default connect( mapStateToProps )( TodoScreen )
+export default connect(mapStateToProps)(TodoScreen);

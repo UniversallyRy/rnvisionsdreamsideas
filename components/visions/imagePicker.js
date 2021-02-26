@@ -1,12 +1,11 @@
-import React, { useState, useEffect } from 'react';
-import { View, Platform, Dimensions, Image } from 'react-native';
-import { Button } from 'react-native-paper';
-import { connect } from 'react-redux';
-import * as ImagePicker from 'expo-image-picker';
-import { coltsBlue, globalStyles } from '../../styles/global';
-import { addPic } from '../../redux/actions';
-import * as ImageManipulator from 'expo-image-manipulator';
-
+import React, { useState, useEffect } from "react";
+import { View, Platform, Dimensions, Image } from "react-native";
+import { Button } from "react-native-paper";
+import { connect } from "react-redux";
+import * as ImagePicker from "expo-image-picker";
+import { coltsBlue, globalStyles } from "../../styles/global";
+import { addPic } from "../../redux/actions";
+import * as ImageManipulator from "expo-image-manipulator";
 
 export function ImagePic({ addPic }) {
   const [image, setImage] = useState(null);
@@ -14,14 +13,18 @@ export function ImagePic({ addPic }) {
 
   useEffect(() => {
     (async () => {
-      if (Platform.OS !== 'web') {
-        const { status } = await ImagePicker.requestCameraRollPermissionsAsync();
+      if (Platform.OS !== "web") {
+        const {
+          status,
+        } = await ImagePicker.requestCameraRollPermissionsAsync();
         const { camStatus } = await ImagePicker.getCameraPermissionsAsync();
-        if (status !== 'granted') {
-          alert('Sorry, we need gallery permissions to make this work!');
+        if (status !== "granted") {
+          alert("Sorry, we need gallery permissions to make this work!");
         }
-        if (camStatus == 'granted') {
-          alert('Sorry, we need permissions from camera app to make this work!');
+        if (camStatus == "granted") {
+          alert(
+            "Sorry, we need permissions from camera app to make this work!"
+          );
         }
       }
     })();
@@ -62,21 +65,39 @@ export function ImagePic({ addPic }) {
   return (
     <>
       <View style={globalStyles.visionButtonContainer}>
-        <Button color={coltsBlue} style={globalStyles.uploadButton} title="Add Image From Gallery" onPress={pickImage}>
+        <Button
+          color={coltsBlue}
+          style={globalStyles.uploadButton}
+          title="Add Image From Gallery"
+          onPress={pickImage}
+        >
           Add from gallery
-          </Button>
-        <Button icon='plus' color={coltsBlue} style={globalStyles.uploadButton} title="Take A Picture" onPress={CameraImage}>
+        </Button>
+        <Button
+          icon="plus"
+          color={coltsBlue}
+          style={globalStyles.uploadButton}
+          title="Take A Picture"
+          onPress={CameraImage}
+        >
           Take a Picture
-          </Button>
+        </Button>
       </View>
-      { image && <Image source={{ uri: image }} style={{ width: windowWidth * 0.97, height: windowHeight * 0.40, resizeMode: 'cover', alignSelf: 'center' }} />}
+      {image && (
+        <Image
+          source={{ uri: image }}
+          style={{
+            width: windowWidth * 0.97,
+            height: windowHeight * 0.4,
+            resizeMode: "cover",
+            alignSelf: "center",
+          }}
+        />
+      )}
     </>
   );
 }
 
-const mapDispatchToProps = { addPic }
+const mapDispatchToProps = { addPic };
 
-export default connect(
-  null,
-  mapDispatchToProps
-)(ImagePic)
+export default connect(null, mapDispatchToProps)(ImagePic);

@@ -1,14 +1,14 @@
 import { ADD_PIC } from "../actionTypes";
 
-const initialPic = '';
+const initialPic = "";
 
-export default function( state = initialPic, action ) {
-  switch ( action.type ) {
+export default function (state = initialPic, action) {
+  switch (action.type) {
     case ADD_PIC:
-        var uri = '';
-        var newUri = ( uri == action.payload.uri ) ? '' : action.payload.uri;
-        
-        return newUri;
+      var uri = "";
+      var newUri = uri == action.payload.uri ? "" : action.payload.uri;
+
+      return newUri;
     default:
       return state;
   }
