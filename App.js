@@ -22,22 +22,23 @@ import { PersistGate } from "redux-persist/integration/react";
 
 const getFonts = () =>
   Font.loadAsync({
-    "roboto-regular": require("./assets/fonts/Roboto-Regular.ttf"),
     "roboto-black": require("./assets/fonts/Roboto-Black.ttf"),
     "roboto-bold": require("./assets/fonts/Roboto-Bold.ttf"),
-    "roboto-medium": require("./assets/fonts/Roboto-Medium.ttf"),
     "roboto-italic": require("./assets/fonts/Roboto-Italic.ttf"),
+    "roboto-medium": require("./assets/fonts/Roboto-Medium.ttf"),
+    "roboto-regular": require("./assets/fonts/Roboto-Regular.ttf"),
   });
 //customize theme colors
 // const CombinedDefaultTheme = merge( PaperDefaultTheme, NavigationDefaultTheme );
 // const CombinedDarkTheme = merge( PaperDarkTheme, NavigationDarkTheme );
 export default function App() {
   const [fontsLoaded, setFontsLoaded] = useState(false);
+  const [persistLoaded, setPersistLoaded] = useState(true);
 
   if (fontsLoaded) {
     return (
       <Provider store={store}>
-        <PersistGate loading={null} persistor={persistor}>
+        <PersistGate loading={persistLoaded} persistor={persistor}>
           <PaperProvider>
             <NavigationContainer>
               <Navigator style={globalStyles.navbar} />
@@ -49,7 +50,13 @@ export default function App() {
     );
   } else {
     return (
-      <AppLoading startAsync={getFonts} onFinish={() => setFontsLoaded(true)} />
+      <AppLoading
+        startAsync={getFonts}
+        onFinish={() => {
+          setFontsLoaded(true);
+          setPersistLoaded(false);
+        }}
+      />
     );
   }
 }

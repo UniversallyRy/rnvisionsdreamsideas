@@ -243,8 +243,7 @@ export const globalStyles = StyleSheet.create({
     justifyContent: "center",
   },
   todoListContainer: {
-    flex: 7,
-    marginTop: 10,
+    marginTop: 20,
     alignSelf: "center",
     backgroundColor: coltsGray,
   },
