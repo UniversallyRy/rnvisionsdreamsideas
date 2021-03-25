@@ -44,7 +44,7 @@ export function ListMain({ state }) {
         </Text>
         <View style={styles.divider} />
       </View>
-      <View style={{ height: 420, paddingLeft: 22 }}>
+      <View style={{ height: 420, paddingLeft: 22, marginTop: 40 }}>
         <FlatList
           data={state}
           keyExtractor={(item) => item.id.toString()}
@@ -72,7 +72,7 @@ const styles = StyleSheet.create({
   },
   titleStyle: {
     flexDirection: "row",
-    margin: "auto",
+    marginTop: 40,
   },
   divider: {
     backgroundColor: coltsGray,
