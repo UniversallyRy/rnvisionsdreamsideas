@@ -28,7 +28,6 @@ const getFonts = () =>
     "roboto-medium": require("./assets/fonts/Roboto-Medium.ttf"),
     "roboto-regular": require("./assets/fonts/Roboto-Regular.ttf"),
   });
-//customize theme colors
 // const CombinedDefaultTheme = merge( PaperDefaultTheme, NavigationDefaultTheme );
 // const CombinedDarkTheme = merge( PaperDarkTheme, NavigationDarkTheme );
 export default function App() {
