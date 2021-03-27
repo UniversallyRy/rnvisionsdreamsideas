@@ -30,6 +30,7 @@ const getFonts = () =>
   });
 // const CombinedDefaultTheme = merge( PaperDefaultTheme, NavigationDefaultTheme );
 // const CombinedDarkTheme = merge( PaperDarkTheme, NavigationDarkTheme );
+// todos: styling, todo page fixes
 export default function App() {
   const [fontsLoaded, setFontsLoaded] = useState(false);
   const [persistLoaded, setPersistLoaded] = useState(true);
