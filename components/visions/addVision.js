@@ -29,20 +29,27 @@ export function AddVision({ addVision, stateUri, setModalOpen }) {
           setModalOpen(false);
         }}
       >
-        {(formikProps) => (
+        {({
+          handleChange,
+          values,
+          handleBlur,
+          touched,
+          errors,
+          handleSubmit,
+        }) => (
           <>
             <TextInput
               mode="outlined"
               placeholder="Vision Title"
-              onChangeText={formikProps.handleChange("title")}
-              value={formikProps.values.title}
-              onBlur={formikProps.handleBlur("title")}
+              onChangeText={handleChange("title")}
+              value={values.title}
+              onBlur={handleBlur("title")}
             />
             <Text style={globalStyles.errorText}>
-              {formikProps.touched.title && formikProps.errors.title}
+              {touched.title && errors.title}
             </Text>
             <ImagePicker />
-            <FlatButton text="submit" onPress={formikProps.handleSubmit} />
+            <FlatButton text="submit" onPress={handleSubmit} />
           </>
         )}
       </Formik>

@@ -65,7 +65,14 @@ export function AddListModal({ closeModal, addList }) {
             closeModal();
           }}
         >
-          {(formikProps) => (
+          {({
+            handleChange,
+            values,
+            handleBlur,
+            handleSubmit,
+            touched,
+            errors,
+          }) => (
             <View>
               <TextInput
                 enablesReturnKeyAutomatically={true}
@@ -73,13 +80,13 @@ export function AddListModal({ closeModal, addList }) {
                 style={styles.input}
                 placeholder="Enter A New List . . ."
                 placeholderTextColor={"#002C5F"}
-                onChangeText={formikProps.handleChange("name")}
-                value={formikProps.values.name}
-                onBlur={formikProps.handleBlur("name")}
+                onChangeText={handleChange("name")}
+                value={values.name}
+                onBlur={handleBlur("name")}
               />
 
               <Text style={globalStyles.todoErrorText}>
-                {formikProps.touched.name && formikProps.errors.name}
+                {touched.name && errors.name}
               </Text>
               <View
                 style={{
@@ -92,7 +99,7 @@ export function AddListModal({ closeModal, addList }) {
               </View>
               <TouchableOpacity
                 style={[styles.create, { backgroundColor: bgColor }]}
-                onPress={formikProps.handleSubmit}
+                onPress={handleSubmit}
               >
                 <Text style={{ color: "white", fontWeight: "600" }}>
                   Create

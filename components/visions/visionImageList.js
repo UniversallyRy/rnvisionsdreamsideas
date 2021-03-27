@@ -26,9 +26,7 @@ export function VisionsContainer({ navigation, state, scrollX, deleteVision }) {
     }, []);
 
     const removeVision = (id) => {
-      // save item.id from props to buttonId
       var buttonId = id;
-      //calls redux action on stored visions
       deleteVision(buttonId);
     };
 

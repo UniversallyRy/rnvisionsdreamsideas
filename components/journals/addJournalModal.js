@@ -29,33 +29,40 @@ export function AddJournal({ addJournal, setModalOpen }) {
         setModalOpen(false);
       }}
     >
-      {(formikProps) => (
+      {({
+        handleChange,
+        values,
+        handleBlur,
+        handleSubmit,
+        touched,
+        errors,
+      }) => (
         <View>
           <TextInput
             style={colors}
             mode="flat"
             placeholder="Journal Title"
-            onChangeText={formikProps.handleChange("title")}
-            value={formikProps.values.title}
-            onBlur={formikProps.handleBlur("title")}
+            onChangeText={handleChange("title")}
+            value={values.title}
+            onBlur={handleBlur("title")}
           />
           <Text style={globalStyles.errorText}>
             {/* Above <Text/> shows up only when input is focused and exited without requirements */}
-            {formikProps.touched.title && formikProps.errors.title}
+            {touched.title && errors.title}
           </Text>
           <TextInput
             multiline
             style={colors}
             mode="flat"
             placeholder="Journal Body"
-            onChangeText={formikProps.handleChange("body")}
-            value={formikProps.values.body}
-            onBlur={formikProps.handleBlur("body")}
+            onChangeText={handleChange("body")}
+            value={values.body}
+            onBlur={handleBlur("body")}
           />
           <Text style={globalStyles.errorText}>
-            {formikProps.touched.body && formikProps.errors.body}
+            {touched.body && errors.body}
           </Text>
-          <FlatButton text="submit" onPress={formikProps.handleSubmit} />
+          <FlatButton text="submit" onPress={handleSubmit} />
         </View>
       )}
     </Formik>
