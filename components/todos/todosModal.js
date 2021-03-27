@@ -31,13 +31,13 @@ export function TodosModal({ list, closeModal, addTodo }) {
     setCompleted((newTodos[index].completed = !newTodos[index].completed));
   };
 
-  const renderTodo = (todo, index) => {
+  const renderTodo = ({ completed, title }, index) => {
     return (
       <View renderRightActions={(_, dragX) => rightActions(dragX, index)}>
         <View style={styles.todoContainer}>
           <TouchableOpacity onPress={() => toggleTodoCompleted(index)}>
             <Ionicons
-              name={todo.completed ? "ios-square" : "ios-square-outline"}
+              name={completed ? "ios-square" : "ios-square-outline"}
               size={24}
               color="gray"
               style={{ width: 32 }}
@@ -47,12 +47,12 @@ export function TodosModal({ list, closeModal, addTodo }) {
             style={[
               styles.todo,
               {
-                textDecorationLine: todo.completed ? "line-through" : "none",
-                color: todo.completed ? "gray" : "black",
+                textDecorationLine: completed ? "line-through" : "none",
+                color: completed ? "gray" : "black",
               },
             ]}
           >
-            {todo.title}
+            {title}
           </Text>
         </View>
       </View>
@@ -126,7 +126,7 @@ export function TodosModal({ list, closeModal, addTodo }) {
               Keyboard.dismiss();
             }}
           >
-            {(formikProps) => (
+            {({ handleChange, values, handleBlur, touched, errors }) => (
               <View style={[styles.section, styles.footer]}>
                 <TextInput
                   enablesReturnKeyAutomatically={true}
@@ -134,9 +134,9 @@ export function TodosModal({ list, closeModal, addTodo }) {
                   style={[globalStyles.todoInput, { borderColor: "red" }]}
                   placeholder="Enter Todo . . ."
                   placeholderTextColor={"#002C5F"}
-                  onChangeText={formikProps.handleChange("title")}
-                  value={formikProps.values.title}
-                  onBlur={formikProps.handleBlur("title")}
+                  onChangeText={handleChange("title")}
+                  value={values.title}
+                  onBlur={handleBlur("title")}
                 />
                 <TouchableOpacity
                   style={[styles.todoStyle, { backgroundColor: "red" }]}
@@ -145,7 +145,7 @@ export function TodosModal({ list, closeModal, addTodo }) {
                   <AntDesign name="plus" size={16} color="white" />
                 </TouchableOpacity>
                 <Text style={globalStyles.todoErrorText}>
-                  {formikProps.touched.title && formikProps.errors.title}
+                  {touched.title && errors.title}
                 </Text>
               </View>
             )}

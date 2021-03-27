@@ -2,7 +2,6 @@
   "expo": {
     "name": "affirmationBoard",
     "slug": "affirmationBoard",
-    "icon": "./src/assets/logo.png",
     "version": "1.0.0",
     "orientation": "portrait",
     "updates": {

@@ -21,7 +21,14 @@ export function AddTodo({ addTodo }) {
         actions.resetForm();
       }}
     >
-      {(formikProps) => (
+      {({
+        handleChange,
+        values,
+        handleBlur,
+        handleSubmit,
+        touched,
+        errors,
+      }) => (
         <View style={globalStyles.addTodoForm}>
           <TextInput
             enablesReturnKeyAutomatically={true}
@@ -29,20 +36,20 @@ export function AddTodo({ addTodo }) {
             style={globalStyles.todoInput}
             placeholder="Enter Todo . . ."
             placeholderTextColor={"#002C5F"}
-            onChangeText={formikProps.handleChange("task")}
-            value={formikProps.values.task}
-            onBlur={formikProps.handleBlur("task")}
+            onChangeText={handleChange("task")}
+            value={values.task}
+            onBlur={handleBlur("task")}
           />
           <Button
             icon="plus"
             style={globalStyles.addTodoButton}
             text="new"
-            onPress={formikProps.handleSubmit}
+            onPress={handleSubmit}
           >
             <Text style={globalStyles.addTodoButtonText}>Add Todo</Text>
           </Button>
           <Text style={globalStyles.todoErrorText}>
-            {formikProps.touched.task && formikProps.errors.task}
+            {touched.task && errors.task}
           </Text>
         </View>
       )}
