@@ -13,8 +13,6 @@
 
 ## Usage
 
-If you want to build from source, make sure that NodeJS and Expo are installed then download dependencies by issuing:
-
 ```bash
 expo install
 ```
