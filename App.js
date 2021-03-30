@@ -33,6 +33,7 @@ const getFonts = () =>
 // todos: styling, todo page fixes
 export default function App() {
   const [fontsLoaded, setFontsLoaded] = useState(false);
+  //persist state for loader
   const [persistLoaded, setPersistLoaded] = useState(true);
 
   if (fontsLoaded) {
