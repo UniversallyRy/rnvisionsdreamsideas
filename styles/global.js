@@ -24,8 +24,7 @@ export const globalStyles = StyleSheet.create({
     resizeMode: "contain",
     alignSelf: "center",
     height: windowHeight * 0.55,
-    width: windowWidth * 1.3,
-    aspectRatio: 1,
+    width: windowWidth * 0.95,
   },
   visionButtonContainer: {
     flexDirection: "row",
