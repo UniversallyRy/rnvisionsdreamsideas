@@ -3,31 +3,31 @@ import { Modal, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import TodosModal from "./todosModal";
 
 export default function TodoLists({ list }) {
+  const [visible, setVisible] = useState(false);
+  const toggleListModal = () => {
+    setVisible(!visible);
+  };
+
   Object.filter = function (obj, predicate) {
     let result = {},
-      key;
+    let key;
 
     for (key in obj) {
       if (obj.hasOwnProperty(key) && !predicate(obj[key])) {
         result[key] = obj[key];
       }
     }
-
     return result;
   };
 
   let completedCount = Object.filter(list.todos, (todo) => todo.completed);
   completedCount = Object.keys(completedCount).length;
+
   let remainingCount = Object.filter(list.todos, (todo) => {
     let count = 1;
     count++;
   });
   remainingCount = Object.keys(remainingCount).length - completedCount;
-  const [visible, setVisible] = useState(false);
-
-  const toggleListModal = () => {
-    setVisible(!visible);
-  };
 
   return (
     <View>

@@ -30,7 +30,7 @@ const getFonts = () =>
   });
 // const CombinedDefaultTheme = merge( PaperDefaultTheme, NavigationDefaultTheme );
 // const CombinedDarkTheme = merge( PaperDarkTheme, NavigationDarkTheme );
-// todos: styling, todo page fixes, vision fixes
+// todos: styling, addtodomodal fixes/keyboard pushes sizing, vision fixes
 export default function App() {
   const [fontsLoaded, setFontsLoaded] = useState(false);
   //persist state for loader
