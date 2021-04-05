@@ -19,11 +19,6 @@ export const addText = (value) => ({
   payload: value,
 });
 
-export const addList = ({ name, color }) => ({
-  type: ADD_LIST,
-  payload: { name, color },
-});
-
 export const addVision = ({ uri, title, id }) => ({
   type: ADD_VISION,
   payload: {
@@ -40,30 +35,51 @@ export const editVision = ({ task, id, complete }) => ({
 
 export const deleteVision = (id) => ({
   type: DELETE_VISION,
-  payload: { id },
+  payload: {
+    id,
+  },
 });
 
-export const addTodo = (title, id) => ({
+export const addList = ({ name, id, color, todos }) => ({
+  type: ADD_LIST,
+  payload: {
+    name,
+    id,
+    color,
+    todos,
+  },
+});
+
+export const addTodo = ({ title, id, completed, name }) => ({
   type: ADD_TODO,
   payload: {
     title,
     id,
+    completed,
+    name,
   },
 });
 
 export const toggleTodo = ({ id, todo }) => ({
   type: TOGGLE_TODO,
-  payload: { id, todo },
+  payload: {
+    id,
+    todo,
+  },
 });
 
 export const editTodo = (state) => ({
   type: EDIT_TODO,
-  payload: { state },
+  payload: {
+    state,
+  },
 });
 
 export const deleteTodo = (id) => ({
   type: DELETE_TODO,
-  payload: { id },
+  payload: {
+    id,
+  },
 });
 
 export const addJournal = ({ title, body, id }) => ({
@@ -77,12 +93,16 @@ export const addJournal = ({ title, body, id }) => ({
 
 export const editJournal = (id) => ({
   type: EDIT_JOURNAL,
-  payload: { id },
+  payload: {
+    id,
+  },
 });
 
 export const deleteJournal = (id) => ({
   type: DELETE_JOURNAL,
-  payload: { id },
+  payload: {
+    id,
+  },
 });
 
 export const addPic = (uri) => ({
@@ -94,5 +114,7 @@ export const addPic = (uri) => ({
 
 export const setFilter = (filter) => ({
   type: SET_FILTER,
-  payload: { filter },
+  payload: {
+    filter,
+  },
 });

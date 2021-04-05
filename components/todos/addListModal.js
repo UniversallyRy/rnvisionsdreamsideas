@@ -55,7 +55,7 @@ export function AddListModal({ closeModal, addList }) {
       <View style={{ alignSelf: "stretch", marginHorizontal: 32 }}>
         <Text style={styles.title}>Create Todo List</Text>
         <Formik
-          initialValues={{ name: "", color: "" }}
+          initialValues={{ name: "", id: 0, color: "", todos: [] }}
           validationSchema={listSchema}
           onSubmit={(values, actions) => {
             let color = bgColor;

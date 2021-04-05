@@ -63,6 +63,12 @@ export function ListMain({ state }) {
   );
 }
 
+const mapStateToProps = (state, ownProps) => {
+  return {
+    state: state.todos,
+  };
+};
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -100,11 +106,5 @@ const styles = StyleSheet.create({
     marginTop: 6,
   },
 });
-
-const mapStateToProps = (state, ownProps) => {
-  return {
-    state: state.todos,
-  };
-};
 
 export default connect(mapStateToProps)(ListMain);

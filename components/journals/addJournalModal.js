@@ -7,6 +7,7 @@ import * as yup from "yup";
 import FlatButton from "../../shared/button";
 import { addJournal } from "../../redux/actions";
 import { globalStyles } from "../../styles/global";
+import { addTodo } from "../../redux/actions";
 
 // require an entry into form input that's at least 4 letters
 const JournalSchema = yup.object({

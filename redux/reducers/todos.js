@@ -87,56 +87,49 @@ const initialValue = [
   },
 ];
 
-export default function (state = initialValue, action) {
-  produce(state, (draft) => {
-    switch (action.type) {
-      case ADD_TODO:
-        //state = initialValue ; //can be used to quickly reset
-        //return state;
+export default produce((draft, action) => {
+  switch (action.type) {
+    case ADD_TODO:
+      return (state = initialValue);
 
-        return draft.map((item, i = 0) => {
-          let newItem = item.todos[i];
+    // return draft.map((item) => {
+    //   if (newTodos.name === action.payload.name) {
+    //     return [
+    //       ...draft,
+    //       {
+    //         title: action.payload.title,
+    //         id: uuidv4(),
+    //         completed: false,
+    //       },
+    //     ];
+    //   }
+    //   i++;
+    // });
 
-          if (newItem.id === action.payload.id) {
-            let newerItem = {
-              title: action.payload.title,
-              id: uuidv4(),
-              completed: false,
-            };
-            return newerItem;
-          }
+    case ADD_LIST:
+      return [
+        {
+          name: action.payload.name,
+          id: uuidv4(),
+          color: action.payload.color,
+          todos: [],
+        },
+        ...draft,
+      ];
 
-          i++;
-          return newItem;
-        });
-      case ADD_LIST:
-        return [
-          {
-            name: action.payload.name,
-            id: uuidv4(),
-            color: action.payload.color,
-            todos: [],
-          },
-          ...draft,
-        ];
-
-      case EDIT_TODO: {
-        const newState = action.payload.draft;
-        return newState;
-      }
-      case TOGGLE_TODO: {
-        const { payload } = action;
-        let { items } = draft;
-
-        return draft;
-      }
-      // return { todos, ...draft }
-      case DELETE_TODO: {
-        return draft.filter((list) => list.todos.id != action.payload.id);
-      }
-      default:
-        return state;
+    case EDIT_TODO: {
+      const newState = action.payload.draft;
+      return newState;
     }
-  });
-  return state;
-}
+    case TOGGLE_TODO: {
+      const { payload } = action;
+      let { items } = draft;
+
+      return draft;
+    }
+    // return { todos, ...draft }
+    case DELETE_TODO: {
+      return draft.filter((list) => list.todos.id != action.payload.id);
+    }
+  }
+}, initialValue);

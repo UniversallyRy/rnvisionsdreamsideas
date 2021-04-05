@@ -21,7 +21,7 @@ const todoSchema = yup.object({
   title: yup.string().required().min(4),
 });
 
-export function TodosModal({ list, closeModal, addTodo }) {
+export function TodosModal({ list, closeModal }, addTodo) {
   const [completedTodo, setCompleted] = useState(false);
   const newTodos = list.todos;
   const taskCount = newTodos.length;
@@ -122,12 +122,19 @@ export function TodosModal({ list, closeModal, addTodo }) {
             initialValues={{ title: "", id: "", completed: false }}
             validationSchema={todoSchema}
             onSubmit={(values, actions) => {
-              addTodo(values.title, values.id);
+              addTodo(values);
               actions.resetForm();
               Keyboard.dismiss();
             }}
           >
-            {({ handleChange, values, handleBlur, touched, errors }) => (
+            {({
+              handleChange,
+              values,
+              handleBlur,
+              touched,
+              errors,
+              handleSubmit,
+            }) => (
               <View style={[styles.section, styles.footer]}>
                 <TextInput
                   enablesReturnKeyAutomatically={true}
@@ -141,7 +148,7 @@ export function TodosModal({ list, closeModal, addTodo }) {
                 />
                 <TouchableOpacity
                   style={[styles.todoStyle, { backgroundColor: "red" }]}
-                  onPress={() => addTodo()}
+                  onPress={handleSubmit}
                 >
                   <AntDesign name="plus" size={16} color="white" />
                 </TouchableOpacity>
