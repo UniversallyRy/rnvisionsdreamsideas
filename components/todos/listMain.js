@@ -15,7 +15,6 @@ import { coltsGray } from "../../styles/global";
 
 export function ListMain({ state }) {
   const [modal, setModal] = useState(false);
-  console.log(state);
 
   const toggleModal = () => {
     setModal(!modal);

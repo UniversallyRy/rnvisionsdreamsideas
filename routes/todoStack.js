@@ -1,7 +1,6 @@
 import React from "react";
 import { createStackNavigator } from "react-navigation-stack";
 import TodoScreen from "../screens/todoScreen";
-import TodoDetails from "../components/todos/todoDetails";
 import Header from "../shared/header";
 import { coltsGray, coltsBlue } from "../styles/global";
 
@@ -12,12 +11,6 @@ const screens = {
       return {
         headerTitle: () => <Header navigation={navigation} title="Todos" />,
       };
-    },
-  },
-  TodoDetails: {
-    screen: TodoDetails,
-    navigationOptions: {
-      title: "TodoDetails",
     },
   },
 };

@@ -34,15 +34,16 @@ export function TodosModal({ list, closeModal, addTodo }) {
   const renderTodo = (todo, index) => {
     return (
       <View renderRightActions={(_, dragX) => rightActions(dragX, index)}>
-        <View style={styles.todoContainer}>
-          <TouchableOpacity onPress={() => toggleTodoCompleted(index)}>
-            <Ionicons
-              name={todo.completed ? "ios-square" : "ios-square-outline"}
-              size={24}
-              color="gray"
-              style={{ width: 32 }}
-            />
-          </TouchableOpacity>
+        <TouchableOpacity
+          style={styles.todoContainer}
+          onPress={() => toggleTodoCompleted(index)}
+        >
+          <Ionicons
+            name={todo.completed ? "ios-square" : "ios-square-outline"}
+            size={24}
+            color="gray"
+            style={{ width: 32 }}
+          />
           <Text
             style={[
               styles.todo,
@@ -54,7 +55,7 @@ export function TodosModal({ list, closeModal, addTodo }) {
           >
             {todo.title}
           </Text>
-        </View>
+        </TouchableOpacity>
       </View>
     );
   };
