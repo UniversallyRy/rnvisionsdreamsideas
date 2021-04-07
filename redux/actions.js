@@ -12,6 +12,7 @@ import {
   ADD_JOURNAL,
   DELETE_JOURNAL,
   ADD_LIST,
+  DELETE_LIST,
 } from "./actionTypes";
 
 export const addText = (value) => ({
@@ -47,6 +48,13 @@ export const addList = ({ name, id, color, todos }) => ({
     id,
     color,
     todos,
+  },
+});
+
+export const deleteList = (id) => ({
+  type: DELETE_LIST,
+  payload: {
+    id,
   },
 });
 

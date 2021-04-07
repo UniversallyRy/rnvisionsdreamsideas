@@ -1,8 +1,12 @@
 import React, { useState } from "react";
 import { Modal, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { Button, Card, Paragraph } from "react-native-paper";
+import { connect } from "react-redux";
 import TodosModal from "./todosModal";
+import { coltsGray } from "../../styles/global";
+import { deleteList } from "../../redux/actions";
 
-export default function TodoLists({ list }) {
+export function TodoLists({ list, deleteList }) {
   const [visible, setVisible] = useState(false);
   const toggleListModal = () => {
     setVisible(!visible);
@@ -10,7 +14,7 @@ export default function TodoLists({ list }) {
 
   Object.filter = function (obj, predicate) {
     let result = {},
-    let key;
+      key;
 
     for (key in obj) {
       if (obj.hasOwnProperty(key) && !predicate(obj[key])) {
@@ -56,6 +60,15 @@ export default function TodoLists({ list }) {
           </View>
         </View>
       </TouchableOpacity>
+      <Button
+        style={styles.deleteButton}
+        color="white"
+        icon="close-outline"
+        mode="contained"
+        onPress={() => deleteList(list.id)}
+      >
+        Delete
+      </Button>
     </View>
   );
 }
@@ -85,4 +98,13 @@ const styles = StyleSheet.create({
     fontWeight: "700",
     color: "white",
   },
+  deleteButton: {
+    margin: 2,
+    width: 200,
+    alignSelf: "center",
+  },
 });
+
+const mapDispatchToProps = { deleteList };
+
+export default connect(null, mapDispatchToProps)(TodoLists);

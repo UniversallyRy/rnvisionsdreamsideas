@@ -4,6 +4,7 @@ import {
   DELETE_TODO,
   TOGGLE_TODO,
   ADD_LIST,
+  DELETE_LIST,
 } from "../actionTypes";
 import { v4 as uuidv4 } from "uuid";
 import produce from "immer";
@@ -117,19 +118,21 @@ export default produce((draft, action) => {
         ...draft,
       ];
 
-    case EDIT_TODO: {
+    case DELETE_LIST:
+      return draft.filter((list) => list.id != action.payload.id);
+
+    case EDIT_TODO:
       const newState = action.payload.draft;
       return newState;
-    }
-    case TOGGLE_TODO: {
+
+    case TOGGLE_TODO:
       const { payload } = action;
       let { items } = draft;
 
       return draft;
-    }
+
     // return { todos, ...draft }
-    case DELETE_TODO: {
+    case DELETE_TODO:
       return draft.filter((list) => list.todos.id != action.payload.id);
-    }
   }
 }, initialValue);
