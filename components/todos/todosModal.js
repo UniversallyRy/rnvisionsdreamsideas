@@ -9,19 +9,20 @@ import {
   Animated,
 } from "react-native";
 import { connect } from "react-redux";
+import { Button } from "react-native-paper";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { FlatList, RectButton, TextInput } from "react-native-gesture-handler";
 import { AntDesign, Ionicons } from "@expo/vector-icons";
 import { Formik } from "formik";
 import * as yup from "yup";
-import { addTodo } from "../../redux/actions";
+import { addTodo, deleteTodo } from "../../redux/actions";
 import { globalStyles } from "../../styles/global";
 
 const todoSchema = yup.object({
   title: yup.string().required().min(4),
 });
 
-export function TodosModal({ list, closeModal }, addTodo) {
+export function TodosModal({ list, closeModal, deleteTodo, addTodo }) {
   const [completedTodo, setCompleted] = useState(false);
   const newTodos = list.todos;
   const taskCount = newTodos.length;
@@ -31,18 +32,21 @@ export function TodosModal({ list, closeModal }, addTodo) {
     setCompleted((newTodos[index].completed = !newTodos[index].completed));
   };
 
+  const removeTodo = (id) => {
+    var todoId = id;
+    deleteTodo(todoId);
+  };
+
   const renderTodo = (todo, index) => {
     return (
       <View renderRightActions={(_, dragX) => rightActions(dragX, index)}>
-        <TouchableOpacity
-          style={styles.todoContainer}
-          onPress={() => toggleTodoCompleted(index)}
-        >
+        <TouchableOpacity style={styles.todoContainer}>
           <Ionicons
             name={todo.completed ? "ios-square" : "ios-square-outline"}
             size={24}
             color="gray"
             style={{ width: 32 }}
+            onPress={() => toggleTodoCompleted(index)}
           />
           <Text
             style={[
@@ -55,6 +59,12 @@ export function TodosModal({ list, closeModal }, addTodo) {
           >
             {todo.title}
           </Text>
+          <AntDesign
+            name="closecircle"
+            size={24}
+            style={styles.deleteTodoButton}
+            onPress={() => removeTodo(todo.id)}
+          />
         </TouchableOpacity>
       </View>
     );
@@ -200,19 +210,18 @@ const styles = StyleSheet.create({
     height: 48,
     borderWidth: StyleSheet.hairlineWidth,
     borderRadius: 6,
-    marginRight: 8,
+    margin: 8,
     paddingHorizontal: 8,
   },
   todoStyle: {
     borderRadius: 4,
     padding: 16,
-    alignItems: "center",
-    justifyContent: "center",
   },
   todoContainer: {
-    paddingVertical: 16,
+    display: "flex",
+    justifyContent: "flex-end",
     flexDirection: "row",
-    alignItems: "center",
+    paddingVertical: 16,
   },
   todo: {
     color: "black",
@@ -220,11 +229,14 @@ const styles = StyleSheet.create({
     fontSize: 16,
   },
   deleteButton: {
-    flex: 1,
     backgroundColor: "red",
     justifyContent: "center",
     alignItems: "center",
     width: 80,
+  },
+  deleteTodoButton: {
+    marginLeft: "auto",
+    color: "red",
   },
 });
 
@@ -234,6 +246,6 @@ const mapStateToProps = (state, ownProps) => {
   };
 };
 
-const mapDispatchToProps = { addTodo };
+const mapDispatchToProps = { addTodo, deleteTodo };
 
 export default connect(mapStateToProps, mapDispatchToProps)(TodosModal);

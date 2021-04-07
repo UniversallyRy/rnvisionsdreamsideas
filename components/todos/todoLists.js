@@ -62,7 +62,7 @@ export function TodoLists({ list, deleteList }) {
       </TouchableOpacity>
       <Button
         style={styles.deleteButton}
-        color="white"
+        color={coltsGray}
         icon="close-outline"
         mode="contained"
         onPress={() => deleteList(list.id)}
