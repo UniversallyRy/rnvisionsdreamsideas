@@ -36,14 +36,14 @@ export default function (state = initialJournals, action) {
         ...state,
       ];
 
-    case EDIT_JOURNAL: {
+    case EDIT_JOURNAL:
       return {
         ...state,
       };
-    }
-    case DELETE_JOURNAL: {
+
+    case DELETE_JOURNAL:
       return state.filter((todo) => todo.id !== action.payload.id);
-    }
+
     default:
       return state;
   }
