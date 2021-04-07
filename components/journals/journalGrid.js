@@ -8,28 +8,31 @@ import { coltsBlue, coltsGray, globalStyles } from "../../styles/global";
 const { width: width, height: height } = Dimensions.get("window");
 
 export function JournalGridContainer({ state, navigation }) {
-  const JournalGridList = memo(function GridJournal({ data, index }) {
-    return (
-      <Card
-        style={{ backgroundColor: coltsBlue }}
-        onPress={() => navigation.navigate("JournalDetails", data)}
-      >
-        <Card.Content style={styles.gridItem}>
-          <Text style={{ color: coltsGray }}>{data.title}</Text>
-          <Text
-            style={{
-              color: coltsGray,
-              marginTop: 30,
-              bottom: 0,
-              position: "absolute",
-            }}
-          >
-            {data.date}
-          </Text>
-        </Card.Content>
-      </Card>
-    );
-  });
+  const JournalGridList = memo(
+    function GridJournal({ data, index }) {
+      return (
+        <Card
+          style={{ backgroundColor: coltsBlue }}
+          onPress={() => navigation.navigate("JournalDetails", data)}
+        >
+          <Card.Content style={styles.gridItem}>
+            <Text style={{ color: coltsGray }}>{data.title}</Text>
+            <Text
+              style={{
+                color: coltsGray,
+                marginTop: 30,
+                bottom: 0,
+                position: "absolute",
+              }}
+            >
+              {data.date}
+            </Text>
+          </Card.Content>
+        </Card>
+      );
+    },
+    [state]
+  );
 
   const renderList = useCallback(function renderList({ item, index }) {
     return <JournalGridList index={index} data={item} />;

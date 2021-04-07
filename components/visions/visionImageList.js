@@ -15,94 +15,97 @@ const ITEM_WIDTH = width * 0.94;
 const ITEM_HEIGHT = ITEM_WIDTH * 1.27;
 
 export function VisionsContainer({ navigation, state, scrollX, deleteVision }) {
-  const VisionImageList = memo(function VisionImage({ data, index }) {
-    const _isMounted = useRef(true); // Initial value _isMounted = true
+  const VisionImageList = memo(
+    function VisionImage({ data, index }) {
+      const _isMounted = useRef(true); // Initial value _isMounted = true
 
-    useEffect(() => {
-      return () => {
-        // ComponentWillUnmount in Class Component
-        _isMounted.current = false;
+      useEffect(() => {
+        return () => {
+          // ComponentWillUnmount in Class Component
+          _isMounted.current = false;
+        };
+      }, []);
+
+      const removeVision = (id) => {
+        var buttonId = id;
+        deleteVision(buttonId);
       };
-    }, []);
 
-    const removeVision = (id) => {
-      var buttonId = id;
-      deleteVision(buttonId);
-    };
+      const inputRange = [
+        (index - 1) * width,
+        index * width,
+        (index + 1) * width,
+      ];
 
-    const inputRange = [
-      (index - 1) * width,
-      index * width,
-      (index + 1) * width,
-    ];
+      const translateX = scrollX.interpolate({
+        inputRange,
+        outputRange: [-width * 0.7, 0, width * 0.7],
+      });
 
-    const translateX = scrollX.interpolate({
-      inputRange,
-      outputRange: [-width * 0.7, 0, width * 0.7],
-    });
-
-    return (
-      <Surface
-        style={{
-          backgroundColor: coltsBlue,
-          width,
-          justifyContent: "center",
-          alignItems: "center",
-        }}
-      >
+      return (
         <Surface
-          onLongPress={() => navigation.navigate("VisionDetails", data)}
           style={{
-            borderRadius: 18,
-            borderWidth: 2,
-            overflow: "hidden",
-            borderColor: coltsGray,
-            shadowColor: "black",
-            shadowOpacity: 0.6,
-            shadowRadius: 350,
-            shadowOffset: {
-              width: 0,
-              height: 0,
-            },
+            backgroundColor: coltsBlue,
+            width,
+            justifyContent: "center",
+            alignItems: "center",
           }}
         >
           <Surface
+            onLongPress={() => navigation.navigate("VisionDetails", data)}
             style={{
-              width: ITEM_WIDTH,
-              height: ITEM_HEIGHT,
+              borderRadius: 18,
+              borderWidth: 2,
               overflow: "hidden",
-              alignItems: "center",
-              borderRadius: 8,
-              elevation: 4,
+              borderColor: coltsGray,
+              shadowColor: "black",
+              shadowOpacity: 0.6,
+              shadowRadius: 350,
+              shadowOffset: {
+                width: 0,
+                height: 0,
+              },
             }}
           >
-            <Animated.Image
-              source={{ uri: data.uri }}
-              resizeMode={"cover"}
+            <Surface
               style={{
-                alignSelf: "center",
-                width: ITEM_WIDTH * 1,
+                width: ITEM_WIDTH,
                 height: ITEM_HEIGHT,
-                transform: [{ translateX }],
+                overflow: "hidden",
+                alignItems: "center",
+                borderRadius: 8,
+                elevation: 4,
               }}
-            />
+            >
+              <Animated.Image
+                source={{ uri: data.uri }}
+                resizeMode={"cover"}
+                style={{
+                  alignSelf: "center",
+                  width: ITEM_WIDTH * 1,
+                  height: ITEM_HEIGHT,
+                  transform: [{ translateX }],
+                }}
+              />
+            </Surface>
           </Surface>
+          <Button
+            style={globalStyles.visionDeleteButton}
+            color={coltsBlue}
+            icon="close-outline"
+            onPress={() => removeVision(data.id)}
+          >
+            <Text>Delete</Text>
+          </Button>
         </Surface>
-        <Button
-          style={globalStyles.visionDeleteButton}
-          color={coltsBlue}
-          icon="close-outline"
-          onPress={() => removeVision(data.id)}
-        >
-          <Text>Delete</Text>
-        </Button>
-      </Surface>
-    );
-  });
+      );
+    },
+    [state]
+  );
 
   const renderList = useCallback(function renderList({ item, index }) {
     return <VisionImageList index={index} data={item} />;
-  }, []);
+  });
 
   return (
     <>
