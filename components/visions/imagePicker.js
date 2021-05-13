@@ -14,9 +14,8 @@ export function ImagePic({ addPic }) {
   useEffect(() => {
     (async () => {
       if (Platform.OS !== "web") {
-        const {
-          status,
-        } = await ImagePicker.requestCameraRollPermissionsAsync();
+        const { status } =
+          await ImagePicker.requestCameraRollPermissionsAsync();
         const { camStatus } = await ImagePicker.getCameraPermissionsAsync();
         if (status !== "granted") {
           alert("Sorry, we need gallery permissions to make this work!");
