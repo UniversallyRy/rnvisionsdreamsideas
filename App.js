@@ -33,7 +33,6 @@ const getFonts = () =>
 // todos: styling, addtodomodal fixes/keyboard pushes sizing, vision fixes, build dream journal out, fix todo containers
 export default function App() {
   const [fontsLoaded, setFontsLoaded] = useState(false);
-  //persist state for loader
   const [persistLoaded, setPersistLoaded] = useState(true);
 
   if (fontsLoaded) {
