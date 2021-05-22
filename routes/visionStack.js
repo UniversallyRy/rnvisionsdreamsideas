@@ -11,7 +11,9 @@ const screens = {
     screen: Visions,
     navigationOptions: ({ navigation }) => {
       return {
-        headerTitle: () => <Header navigation={navigation} title="Visions" />,
+        headerTitle: () => (
+          <Header navigation={navigation} title="Vision Board" />
+        ),
       };
     },
   },

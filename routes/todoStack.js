@@ -9,7 +9,9 @@ const screens = {
     screen: TodoScreen,
     navigationOptions: ({ navigation }) => {
       return {
-        headerTitle: () => <Header navigation={navigation} title="Todos" />,
+        headerTitle: () => (
+          <Header navigation={navigation} title="Todo Lists" />
+        ),
       };
     },
   },
