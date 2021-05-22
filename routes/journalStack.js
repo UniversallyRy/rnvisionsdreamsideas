@@ -10,7 +10,9 @@ const screens = {
     screen: JournalList,
     navigationOptions: ({ navigation }) => {
       return {
-        headerTitle: () => <Header navigation={navigation} title="Journals" />,
+        headerTitle: () => (
+          <Header navigation={navigation} title="Dream Journal" />
+        ),
       };
     },
   },
