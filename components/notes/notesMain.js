@@ -10,14 +10,19 @@ import {
 import { AntDesign } from "@expo/vector-icons";
 import { connect } from "react-redux";
 import TodoLists from "./todoLists";
-import AddListModal from "./addListModal";
+import AddTodoListModal from "./addTodoListModal";
+import AddNoteModal from "./addNoteModal";
 import { coltsGray } from "../../styles/global";
 
 export function NoteMain({ state }) {
-  const [modal, setModal] = useState(false);
+  const [todoModal, setTodoModal] = useState(false);
+  const [noteModal, setNoteModal] = useState(false);
 
-  const toggleModal = () => {
-    setModal(!modal);
+  const toggleTodoModal = () => {
+    setTodoModal(!todoModal);
+  };
+  const toggleNoteModal = () => {
+    setNoteModal(!noteModal);
   };
 
   const renderList = (list) => {
@@ -28,10 +33,17 @@ export function NoteMain({ state }) {
     <View style={styles.container}>
       <Modal
         animationType="slide"
-        visible={modal}
-        onRequestClose={() => toggleModal()}
+        visible={todoModal}
+        onRequestClose={() => toggleTodoModal()}
       >
-        <AddListModal closeModal={() => toggleModal()} />
+        <AddTodoListModal closeModal={() => toggleTodoModal()} />
+      </Modal>
+      <Modal
+        animationType="slide"
+        visible={noteModal}
+        onRequestClose={() => toggleNoteModal()}
+      >
+        <AddNoteModal closeModal={() => toggleNoteModal()} />
       </Modal>
       <View style={styles.titleStyle}>
         <View style={styles.divider} />
@@ -66,7 +78,7 @@ export function NoteMain({ state }) {
           }}
         >
           <TouchableOpacity
-            onPress={() => toggleModal()}
+            onPress={() => toggleNoteModal()}
             style={styles.addList}
           >
             <AntDesign color={coltsGray} name="plus" size={30} />
@@ -81,7 +93,7 @@ export function NoteMain({ state }) {
           }}
         >
           <TouchableOpacity
-            onPress={() => toggleModal()}
+            onPress={() => toggleTodoModal()}
             style={styles.addList}
           >
             <AntDesign color={coltsGray} name="plus" size={30} />

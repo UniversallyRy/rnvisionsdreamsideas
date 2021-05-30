@@ -1,12 +1,12 @@
 import {
   ADD_PIC,
-  TOGGLE_NOTE,
+  TOGGLE_TODO,
   ADD_VISION,
   EDIT_VISION,
   DELETE_VISION,
-  ADD_NOTE,
-  EDIT_NOTE,
-  DELETE_NOTE,
+  ADD_TODO,
+  EDIT_TODO,
+  DELETE_TODO,
   SET_FILTER,
   EDIT_JOURNAL,
   ADD_JOURNAL,
@@ -41,13 +41,13 @@ export const deleteVision = (id) => ({
   },
 });
 
-export const addList = ({ name, id, color, notes }) => ({
+export const addList = ({ name, id, color, todos }) => ({
   type: ADD_LIST,
   payload: {
     name,
     id,
     color,
-    notes,
+    todos,
   },
 });
 
@@ -58,8 +58,8 @@ export const deleteList = (id) => ({
   },
 });
 
-export const addNote = ({ title, id, completed, name }) => ({
-  type: ADD_NOTE,
+export const addTodo = ({ title, id, completed, name }) => ({
+  type: ADD_TODO,
   payload: {
     title,
     id,
@@ -68,23 +68,23 @@ export const addNote = ({ title, id, completed, name }) => ({
   },
 });
 
-export const toggleNote = ({ id, note }) => ({
-  type: TOGGLE_NOTE,
+export const toggleTodo = ({ id, todo }) => ({
+  type: TOGGLE_TODO,
   payload: {
     id,
-    note,
+    todo,
   },
 });
 
-export const editNote = (state) => ({
-  type: EDIT_NOTE,
+export const editTodo = (state) => ({
+  type: EDIT_TODO,
   payload: {
     state,
   },
 });
 
-export const deleteNote = (id) => ({
-  type: DELETE_NOTE,
+export const deleteTodo = (id) => ({
+  type: DELETE_TODO,
   payload: {
     id,
   },

@@ -15,55 +15,55 @@ import { FlatList, RectButton, TextInput } from "react-native-gesture-handler";
 import { AntDesign, Ionicons } from "@expo/vector-icons";
 import { Formik } from "formik";
 import * as yup from "yup";
-import { addNote, deleteNote } from "../../redux/actions";
+import { addTodo, deleteTodo } from "../../redux/actions";
 import { globalStyles } from "../../styles/global";
 
-const noteSchema = yup.object({
+const todoSchema = yup.object({
   title: yup.string().required().min(4),
 });
 
-export function NotesModal({ list, closeModal, deleteNote, addNote }) {
-  const [completedNote, setCompleted] = useState(false);
-  const newNotes = list.notes;
-  const taskCount = newNotes.length;
-  const completedCount = newNotes.filter((note) => note.completed).length;
+export function TodosModal({ list, closeModal, deleteTodo, addTodo }) {
+  const [completedTodo, setCompleted] = useState(false);
+  const newTodos = list.todos;
+  const taskCount = newTodos.length;
+  const completedCount = newTodos.filter((todo) => todo.completed).length;
 
-  const toggleNoteCompleted = (index) => {
-    setCompleted((newNotes[index].completed = !newNotes[index].completed));
+  const toggleTodoCompleted = (index) => {
+    setCompleted((newTodos[index].completed = !newTodos[index].completed));
   };
 
-  const removeNote = (id) => {
-    var noteId = id;
-    deleteNote(noteId);
+  const removeTodo = (id) => {
+    var todoId = id;
+    deleteTodo(todoId);
   };
 
-  const renderNote = (note, index) => {
+  const renderTodo = (todo, index) => {
     return (
       <View renderRightActions={(_, dragX) => rightActions(dragX, index)}>
-        <TouchableOpacity style={styles.noteContainer}>
+        <TouchableOpacity style={styles.todoContainer}>
           <Ionicons
-            name={note.completed ? "ios-square" : "ios-square-outline"}
+            name={todo.completed ? "ios-square" : "ios-square-outline"}
             size={24}
             color="gray"
             style={{ width: 32 }}
-            onPress={() => toggleNoteCompleted(index)}
+            onPress={() => toggleTodoCompleted(index)}
           />
           <Text
             style={[
-              styles.note,
+              styles.todo,
               {
-                textDecorationLine: note.completed ? "line-through" : "none",
-                color: note.completed ? "gray" : "black",
+                textDecorationLine: todo.completed ? "line-through" : "none",
+                color: todo.completed ? "gray" : "black",
               },
             ]}
           >
-            {note.title}
+            {todo.title}
           </Text>
           <AntDesign
             name="closecircle"
             size={24}
-            style={styles.deleteNoteButton}
-            onPress={() => removeNote(note.id)}
+            style={styles.deleteTodoButton}
+            onPress={() => removeTodo(todo.id)}
           />
         </TouchableOpacity>
       </View>
@@ -109,30 +109,30 @@ export function NotesModal({ list, closeModal, deleteNote, addNote }) {
           style={[
             styles.section,
             styles.header,
-            { borderBottomColor: newNotes.color },
+            { borderBottomColor: newTodos.color },
           ]}
         >
-          <Text style={styles.title}>{newNotes.name}</Text>
+          <Text style={styles.title}>{newTodos.name}</Text>
           <Text style={styles.taskCount}>
             Completed {completedCount} of {taskCount} tasks
           </Text>
         </View>
         <View style={[styles.section, { flex: 3 }]}>
           <FlatList
-            data={newNotes}
+            data={newTodos}
             keyExtractor={(_, index) => index.toString()}
             contentContainerStyle={{
               paddingHorizontal: 32,
               paddingVertical: 64,
             }}
             showsVerticalScrollIndicator={false}
-            renderItem={({ item, index }) => renderNote(item, index)}
+            renderItem={({ item, index }) => renderTodo(item, index)}
           />
           <Formik
             initialValues={{ title: "", id: "", completed: false }}
-            validationSchema={noteSchema}
+            validationSchema={todoSchema}
             onSubmit={(values, actions) => {
-              addNote(values);
+              addTodo(values);
               actions.resetForm();
               Keyboard.dismiss();
             }}
@@ -149,20 +149,20 @@ export function NotesModal({ list, closeModal, deleteNote, addNote }) {
                 <TextInput
                   enablesReturnKeyAutomatically={true}
                   autoCorrect={true}
-                  style={[globalStyles.noteInput, { borderColor: "red" }]}
-                  placeholder="Enter Note . . ."
+                  style={[globalStyles.todoInput, { borderColor: "red" }]}
+                  placeholder="Enter Todo . . ."
                   placeholderTextColor={"#002C5F"}
                   onChangeText={handleChange("title")}
                   value={values.title}
                   onBlur={handleBlur("title")}
                 />
                 <TouchableOpacity
-                  style={[styles.noteStyle, { backgroundColor: "red" }]}
+                  style={[styles.todoStyle, { backgroundColor: "red" }]}
                   onPress={handleSubmit}
                 >
                   <AntDesign name="plus" size={16} color="white" />
                 </TouchableOpacity>
-                <Text style={globalStyles.noteErrorText}>
+                <Text style={globalStyles.todoErrorText}>
                   {touched.title && errors.title}
                 </Text>
               </View>
@@ -213,17 +213,17 @@ const styles = StyleSheet.create({
     margin: 8,
     paddingHorizontal: 8,
   },
-  noteStyle: {
+  todoStyle: {
     borderRadius: 4,
     padding: 16,
   },
-  noteContainer: {
+  todoContainer: {
     display: "flex",
     justifyContent: "flex-end",
     flexDirection: "row",
     paddingVertical: 16,
   },
-  note: {
+  todo: {
     color: "black",
     fontWeight: "700",
     fontSize: 16,
@@ -234,7 +234,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     width: 80,
   },
-  deleteNoteButton: {
+  deleteTodoButton: {
     marginLeft: "auto",
     color: "red",
   },
@@ -242,10 +242,10 @@ const styles = StyleSheet.create({
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    state: state.notes,
+    state: state.todos,
   };
 };
 
-const mapDispatchToProps = { addNote, deleteNote };
+const mapDispatchToProps = { addTodo, deleteTodo };
 
-export default connect(mapStateToProps, mapDispatchToProps)(NotesModal);
+export default connect(mapStateToProps, mapDispatchToProps)(TodosModal);

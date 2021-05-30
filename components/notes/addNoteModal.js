@@ -19,7 +19,7 @@ const listSchema = yup.object({
 });
 
 // red, slate blue, black, dark gray, blueish gray, teal, tan
-export function AddListModal({ closeModal, addList }) {
+export function AddNoteModal({ closeModal, addList }) {
   const bgColors = [
     "#FE1F14",
     "#B9D3EE",
@@ -53,7 +53,7 @@ export function AddListModal({ closeModal, addList }) {
       </TouchableOpacity>
 
       <View style={{ alignSelf: "stretch", marginHorizontal: 32 }}>
-        <Text style={styles.title}>Create Todo List</Text>
+        <Text style={styles.title}>Create A New Note</Text>
         <Formik
           initialValues={{ name: "", id: 0, color: "", todos: [] }}
           validationSchema={listSchema}
@@ -78,7 +78,7 @@ export function AddListModal({ closeModal, addList }) {
                 enablesReturnKeyAutomatically={true}
                 autoCorrect={true}
                 style={styles.input}
-                placeholder="Enter A New List . . ."
+                placeholder="Enter A New Note . . ."
                 placeholderTextColor={"#002C5F"}
                 onChangeText={handleChange("name")}
                 value={values.name}
@@ -102,7 +102,7 @@ export function AddListModal({ closeModal, addList }) {
                 onPress={handleSubmit}
               >
                 <Text style={{ color: "white", fontWeight: "600" }}>
-                  Create
+                  Add Note
                 </Text>
               </TouchableOpacity>
             </View>
@@ -157,4 +157,4 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = { addList };
 
-export default connect(mapStateToProps, mapDispatchToProps)(AddListModal);
+export default connect(mapStateToProps, mapDispatchToProps)(AddNoteModal);
