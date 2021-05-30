@@ -2,11 +2,11 @@ import React, { useState } from "react";
 import { Modal, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { Button, Card, Paragraph } from "react-native-paper";
 import { connect } from "react-redux";
-import NotesModal from "./notesModal";
+import TodosModal from "./todosModal";
 import { coltsGray } from "../../styles/global";
 import { deleteList } from "../../redux/actions";
 
-export function NoteLists({ list, deleteList }) {
+export function TodoLists({ list, deleteList }) {
   const [visible, setVisible] = useState(false);
   const toggleListModal = () => {
     setVisible(!visible);
@@ -24,10 +24,10 @@ export function NoteLists({ list, deleteList }) {
     return result;
   };
 
-  let completedCount = Object.filter(list.notes, (note) => note.completed);
+  let completedCount = Object.filter(list.todos, (todo) => todo.completed);
   completedCount = Object.keys(completedCount).length;
 
-  let remainingCount = Object.filter(list.notes, (note) => {
+  let remainingCount = Object.filter(list.todos, (todo) => {
     let count = 1;
     count++;
   });
@@ -40,7 +40,7 @@ export function NoteLists({ list, deleteList }) {
         visible={visible}
         onRequestClose={() => toggleListModal()}
       >
-        <NotesModal list={list} closeModal={() => toggleListModal()} />
+        <TodosModal list={list} closeModal={() => toggleListModal()} />
       </Modal>
       <TouchableOpacity
         style={[styles.listContainer, { backgroundColor: list.color }]}
@@ -107,4 +107,4 @@ const styles = StyleSheet.create({
 
 const mapDispatchToProps = { deleteList };
 
-export default connect(null, mapDispatchToProps)(NoteLists);
+export default connect(null, mapDispatchToProps)(TodoLists);

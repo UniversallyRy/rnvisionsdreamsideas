@@ -53,9 +53,9 @@ export function AddListModal({ closeModal, addList }) {
       </TouchableOpacity>
 
       <View style={{ alignSelf: "stretch", marginHorizontal: 32 }}>
-        <Text style={styles.title}>Create Note List</Text>
+        <Text style={styles.title}>Create Todo List</Text>
         <Formik
-          initialValues={{ name: "", id: 0, color: "", notes: [] }}
+          initialValues={{ name: "", id: 0, color: "", todos: [] }}
           validationSchema={listSchema}
           onSubmit={(values, actions) => {
             let color = bgColor;
@@ -85,7 +85,7 @@ export function AddListModal({ closeModal, addList }) {
                 onBlur={handleBlur("name")}
               />
 
-              <Text style={globalStyles.noteErrorText}>
+              <Text style={globalStyles.todoErrorText}>
                 {touched.name && errors.name}
               </Text>
               <View
@@ -151,7 +151,7 @@ const styles = StyleSheet.create({
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    state: state.notes,
+    state: state.todos,
   };
 };
 

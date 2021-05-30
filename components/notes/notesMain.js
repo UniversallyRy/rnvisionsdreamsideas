@@ -9,11 +9,11 @@ import {
 } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
 import { connect } from "react-redux";
-import NoteLists from "./noteLists";
+import TodoLists from "./todoLists";
 import AddListModal from "./addListModal";
 import { coltsGray } from "../../styles/global";
 
-export function ListMain({ state }) {
+export function NoteMain({ state }) {
   const [modal, setModal] = useState(false);
 
   const toggleModal = () => {
@@ -21,7 +21,7 @@ export function ListMain({ state }) {
   };
 
   const renderList = (list) => {
-    return <NoteLists list={list} />;
+    return <TodoLists list={list} />;
   };
 
   return (
@@ -51,11 +51,43 @@ export function ListMain({ state }) {
           keyboardShouldPersistTaps="always"
         />
       </View>
-      <View style={{ marginVertical: 48, paddingBottom: 24 }}>
-        <TouchableOpacity onPress={() => toggleModal()} style={styles.addList}>
-          <AntDesign color={coltsGray} name="plus" size={30} />
-        </TouchableOpacity>
-        <Text style={styles.add}>Add New List</Text>
+      <View
+        style={{
+          marginVertical: 48,
+          paddingBottom: 24,
+          flexDirection: "row",
+        }}
+      >
+        <View
+          style={{
+            flexDirection: "column",
+            margin: 10,
+            alignItems: "center",
+          }}
+        >
+          <TouchableOpacity
+            onPress={() => toggleModal()}
+            style={styles.addList}
+          >
+            <AntDesign color={coltsGray} name="plus" size={30} />
+          </TouchableOpacity>
+          <Text style={styles.add}>Add New Note</Text>
+        </View>
+        <View
+          style={{
+            flexDirection: "column",
+            margin: 10,
+            alignItems: "center",
+          }}
+        >
+          <TouchableOpacity
+            onPress={() => toggleModal()}
+            style={styles.addList}
+          >
+            <AntDesign color={coltsGray} name="plus" size={30} />
+          </TouchableOpacity>
+          <Text style={styles.add}>Add New Todos</Text>
+        </View>
       </View>
     </View>
   );
@@ -63,7 +95,7 @@ export function ListMain({ state }) {
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    state: state.notes,
+    state: state.todos,
   };
 };
 
@@ -91,6 +123,7 @@ const styles = StyleSheet.create({
   },
   addList: {
     borderWidth: 2,
+    width: 100,
     borderColor: coltsGray,
     borderRadius: 4,
     padding: 16,
@@ -102,7 +135,8 @@ const styles = StyleSheet.create({
     fontWeight: "600",
     fontSize: 14,
     marginTop: 6,
+    alignSelf: "center",
   },
 });
 
-export default connect(mapStateToProps)(ListMain);
+export default connect(mapStateToProps)(NoteMain);

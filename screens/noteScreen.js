@@ -2,12 +2,12 @@ import React from "react";
 import { View } from "react-native";
 import { globalStyles } from "../styles/global";
 import { connect } from "react-redux";
-import ListMain from "../components/notes/listMain";
+import NoteMain from "../components/notes/notesMain";
 
 export function NoteScreen() {
   return (
     <View style={globalStyles.noteScreenContainer}>
-      <ListMain />
+      <NoteMain />
     </View>
   );
 }
