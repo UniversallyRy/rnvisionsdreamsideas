@@ -234,26 +234,26 @@ export const globalStyles = StyleSheet.create({
     backgroundColor: coltsBlue,
     width: windowWidth * 0.99,
   },
-  // Todo Styles
+  // Note Styles
 
-  todoScreenContainer: {
+  noteScreenContainer: {
     flex: 1,
     backgroundColor: coltsBlue,
     alignItems: "center",
     justifyContent: "center",
   },
-  todoListContainer: {
+  noteListContainer: {
     marginTop: 20,
     alignSelf: "center",
     backgroundColor: coltsGray,
   },
-  addTodoForm: {
+  addNoteForm: {
     flex: 1,
     margin: 10,
     flexDirection: "row",
     flexWrap: "wrap",
   },
-  todoInput: {
+  noteInput: {
     width: windowWidth * 0.75,
     paddingLeft: 14,
     paddingTop: 32,
@@ -265,7 +265,7 @@ export const globalStyles = StyleSheet.create({
     width: 100,
     height: 100,
   },
-  todoErrorText: {
+  noteErrorText: {
     width: windowWidth * 0.75,
     color: "crimson",
     fontWeight: "bold",
@@ -273,7 +273,7 @@ export const globalStyles = StyleSheet.create({
     marginTop: 6,
     textAlign: "center",
   },
-  addTodoButton: {
+  addNoteButton: {
     padding: 16,
     width: windowWidth * 0.2,
     borderRadius: 2,
@@ -288,17 +288,17 @@ export const globalStyles = StyleSheet.create({
     shadowRadius: 4.84,
     elevation: 5,
   },
-  addTodoButtonText: {
+  addNoteButtonText: {
     color: "#002C5F",
     fontWeight: "bold",
     textTransform: "uppercase",
     fontSize: 16,
     textAlign: "center",
   },
-  todoList: {
+  noteList: {
     color: coltsGray,
   },
-  todoCard: {
+  noteCard: {
     alignItems: "center",
     width: windowWidth * 0.99,
     borderRadius: 3,
@@ -312,16 +312,16 @@ export const globalStyles = StyleSheet.create({
     marginHorizontal: 0,
     marginVertical: 6,
   },
-  todoText: {
+  noteText: {
     color: coltsGray,
     fontFamily: "roboto-black",
     padding: 5,
   },
-  todoCompleted: {
+  noteCompleted: {
     textDecorationLine: "line-through",
     opacity: 0.4,
   },
-  todoContainer: {
+  noteContainer: {
     padding: 10,
     alignItems: "center",
   },
@@ -336,7 +336,7 @@ export const globalStyles = StyleSheet.create({
     height: windowHeight,
     backgroundColor: coltsGray,
   },
-  todoDetails: {
+  noteDetails: {
     flex: 0.4,
     alignContent: "center",
     fontSize: 20,
@@ -346,7 +346,7 @@ export const globalStyles = StyleSheet.create({
     fontWeight: "bold",
     backgroundColor: coltsBlue,
   },
-  todoButtons: {
+  noteButtons: {
     alignContent: "center",
     flexDirection: "row",
     margin: 10,

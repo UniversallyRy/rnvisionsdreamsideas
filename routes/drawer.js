@@ -2,7 +2,7 @@ import { createDrawerNavigator } from "react-navigation-drawer";
 import { createAppContainer } from "react-navigation";
 import VisionStack from "./visionStack";
 import AboutStack from "./aboutStack";
-import TodoStack from "./todoStack";
+import NoteStack from "./noteStack";
 import JournalStack from "./journalStack";
 import { coltsGray, coltsBlue } from "../styles/global";
 
@@ -15,8 +15,8 @@ const RootDrawerNavigator = createDrawerNavigator(
     Journals: {
       screen: JournalStack,
     },
-    Todos: {
-      screen: TodoStack,
+    Notes: {
+      screen: NoteStack,
     },
     About: {
       screen: AboutStack,

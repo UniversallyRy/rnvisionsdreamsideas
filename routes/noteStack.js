@@ -1,23 +1,23 @@
 import React from "react";
 import { createStackNavigator } from "react-navigation-stack";
-import TodoScreen from "../screens/todoScreen";
+import NoteScreen from "../screens/noteScreen";
 import Header from "../shared/header";
 import { coltsGray, coltsBlue } from "../styles/global";
 
 const screens = {
-  TodoScreen: {
-    screen: TodoScreen,
+  NoteScreen: {
+    screen: NoteScreen,
     navigationOptions: ({ navigation }) => {
       return {
         headerTitle: () => (
-          <Header navigation={navigation} title="Todo Lists" />
+          <Header navigation={navigation} title="Note Lists" />
         ),
       };
     },
   },
 };
 
-const TodoStack = createStackNavigator(screens, {
+const NoteStack = createStackNavigator(screens, {
   defaultNavigationOptions: {
     headerTintColor: coltsBlue,
     headerStyle: {
@@ -27,4 +27,4 @@ const TodoStack = createStackNavigator(screens, {
   },
 });
 
-export default TodoStack;
+export default NoteStack;

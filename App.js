@@ -30,7 +30,7 @@ const getFonts = () =>
   });
 // const CombinedDefaultTheme = merge( PaperDefaultTheme, NavigationDefaultTheme );
 // const CombinedDarkTheme = merge( PaperDarkTheme, NavigationDarkTheme );
-// todos: styling, addtodomodal fixes/keyboard pushes sizing, vision fixes, build dream journal out, fix todo containers
+// todos: styling, addNotemodal fixes/keyboard pushes sizing, vision fixes, build dream journal out, fix note containers
 export default function App() {
   const [fontsLoaded, setFontsLoaded] = useState(false);
   const [persistLoaded, setPersistLoaded] = useState(true);

@@ -2,11 +2,11 @@ import React from "react";
 import { View } from "react-native";
 import { globalStyles } from "../styles/global";
 import { connect } from "react-redux";
-import ListMain from "../components/todos/listMain";
+import ListMain from "../components/notes/listMain";
 
-export function TodoScreen() {
+export function NoteScreen() {
   return (
-    <View style={globalStyles.todoScreenContainer}>
+    <View style={globalStyles.noteScreenContainer}>
       <ListMain />
     </View>
   );
@@ -14,8 +14,8 @@ export function TodoScreen() {
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    state: state.todos,
+    state: state.notes,
   };
 };
 
-export default connect(mapStateToProps)(TodoScreen);
+export default connect(mapStateToProps)(NoteScreen);

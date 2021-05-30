@@ -13,7 +13,7 @@ const Test = (state) => {
     // Create and dispatch the action which will cause redux-persist to purge
     dispatch({
       type: PURGE,
-      key: "todos", // Whatever you chose for the "key" value when initialising redux-persist in the **persistCombineReducers** method - e.g. "root"
+      key: "notes", // Whatever you chose for the "key" value when initialising redux-persist in the **persistCombineReducers** method - e.g. "root"
       result: () => null, // Func expected on the submitted action.
     });
   };
@@ -24,7 +24,7 @@ const Test = (state) => {
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    state: state.todos,
+    state: state.notes,
   };
 };
 

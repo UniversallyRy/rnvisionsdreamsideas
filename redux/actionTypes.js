@@ -11,11 +11,11 @@ export const ADD_JOURNAL = "ADD_JOURNAL";
 export const EDIT_JOURNAL = "EDIT_JOURNAL";
 export const DELETE_JOURNAL = "DELETE_JOURNAL";
 
-//Todos
-export const ADD_TODO = "ADD_TODO";
-export const EDIT_TODO = "EDIT_TODO";
-export const DELETE_TODO = "DELETE_TODO";
+//Notes
+export const ADD_NOTE = "ADD_NOTE";
+export const EDIT_NOTE = "EDIT_NOTE";
+export const DELETE_NOTE = "DELETE_NOTE";
 export const SET_FILTER = "SET_FILTER";
-export const TOGGLE_TODO = "TOGGLE_TODO";
+export const TOGGLE_NOTE = "TOGGLE_NOTE";
 export const ADD_LIST = "ADD_LIST";
 export const DELETE_LIST = "DELETE_LIST";

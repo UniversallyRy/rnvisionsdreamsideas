@@ -41,11 +41,11 @@ npm start
   <tr>
     <td>Visions Screen</td>
     <td>Dream Journal Screen</td>
-    <td>Todos Screen</td>
+    <td>Notes Screen</td>
   </tr>
   <tr>
     <td valign="top"><img src="demo/visions.gif"></td>
     <td valign="top"><img src="demo/journal.gif"></td>
-    <td valign="top"><img src="demo/todos.gif"></td>
+    <td valign="top"><img src="demo/notes.gif"></td>
   </tr>
  </table>
