@@ -36,10 +36,8 @@ export function ListMain({ state }) {
       <View style={styles.titleStyle}>
         <View style={styles.divider} />
         <Text style={styles.title}>
-          Some{" "}
-          <Text style={{ fontWeight: "300", color: coltsGray }}>
-            Checklists
-          </Text>
+          Note{" "}
+          <Text style={{ fontWeight: "300", color: coltsGray }}>Lists</Text>
         </Text>
         <View style={styles.divider} />
       </View>

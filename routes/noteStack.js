@@ -9,9 +9,7 @@ const screens = {
     screen: NoteScreen,
     navigationOptions: ({ navigation }) => {
       return {
-        headerTitle: () => (
-          <Header navigation={navigation} title="Note Lists" />
-        ),
+        headerTitle: () => <Header navigation={navigation} title="Notes" />,
       };
     },
   },
