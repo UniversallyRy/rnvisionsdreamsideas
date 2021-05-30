@@ -4,7 +4,7 @@ import { Card, Text } from "react-native-paper";
 import { coltsGray, coltsBlue } from "../styles/global";
 
 const aboutText =
-  "This is an ongoing App based on charting any visions/dreams you may have.";
+  "This is an ongoing App based on charting any visions or dreams you may have. Notes tab for thoughts and todos.";
 
 export default function About() {
   return (
