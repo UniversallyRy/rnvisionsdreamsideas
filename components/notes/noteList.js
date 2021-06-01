@@ -6,32 +6,11 @@ import NotesModal from "./notesModal";
 import { coltsGray } from "../../styles/global";
 import { deleteNote } from "../../redux/actions";
 
-export function NoteList({ list, deleteNote }) {
+export function NoteList({ notes, deleteNote }) {
   const [visible, setVisible] = useState(false);
   const toggleListModal = () => {
     setVisible(!visible);
   };
-
-  Object.filter = function (obj, predicate) {
-    let result = {},
-      key;
-
-    for (key in obj) {
-      if (obj.hasOwnProperty(key) && !predicate(obj[key])) {
-        result[key] = obj[key];
-      }
-    }
-    return result;
-  };
-
-  let completedCount = Object.filter(list.notes, (note) => note.completed);
-  completedCount = Object.keys(completedCount).length;
-
-  let remainingCount = Object.filter(list.notes, (note) => {
-    let count = 1;
-    count++;
-  });
-  remainingCount = Object.keys(remainingCount).length - completedCount;
 
   return (
     <View>
@@ -40,32 +19,23 @@ export function NoteList({ list, deleteNote }) {
         visible={visible}
         onRequestClose={() => toggleListModal()}
       >
-        <NotesModal list={list} closeModal={() => toggleListModal()} />
+        <NotesModal notes={notes} closeModal={() => toggleListModal()} />
       </Modal>
       <TouchableOpacity
-        style={[styles.listContainer, { backgroundColor: list.color }]}
+        // style={[styles.listContainer, { backgroundColor: notes.color }]}
         onPress={() => toggleListModal()}
       >
         <Text style={styles.listTitle} numberOfLines={1}>
-          {list.name}
+          Notes
         </Text>
-        <View>
-          <View style={{ alignItems: "center" }}>
-            <Text style={styles.count}>{remainingCount}</Text>
-            <Text style={styles.subtitle}>Remaining</Text>
-          </View>
-          <View style={{ alignItems: "center" }}>
-            <Text style={styles.count}>{completedCount}</Text>
-            <Text style={styles.subtitle}>Completed</Text>
-          </View>
-        </View>
+        <View></View>
       </TouchableOpacity>
       <Button
         style={styles.deleteButton}
         color={coltsGray}
         icon="close-outline"
         mode="contained"
-        onPress={() => deleteList(list.id)}
+        onPress={() => deleteNote(notes.id)}
       >
         Delete
       </Button>

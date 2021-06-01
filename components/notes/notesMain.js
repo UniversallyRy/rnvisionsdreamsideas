@@ -30,8 +30,8 @@ export function NoteMain({ stateNotes, stateTodos }) {
     return <TodoLists list={list} />;
   };
 
-  const renderNotes = (list) => {
-    return <NoteList list={list} />;
+  const renderNotes = (notes) => {
+    return <NoteList notes={notes} />;
   };
 
   return (
