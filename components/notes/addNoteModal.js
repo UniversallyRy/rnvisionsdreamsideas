@@ -11,7 +11,7 @@ import { connect } from "react-redux";
 import { AntDesign } from "@expo/vector-icons";
 import { Formik } from "formik";
 import * as yup from "yup";
-import { addList } from "../../redux/actions";
+import { addNote } from "../../redux/actions";
 import { globalStyles } from "../../styles/global";
 
 const listSchema = yup.object({
@@ -19,7 +19,7 @@ const listSchema = yup.object({
 });
 
 // red, slate blue, black, dark gray, blueish gray, teal, tan
-export function AddNoteModal({ closeModal, addList }) {
+export function AddNoteModal({ closeModal, addNote }) {
   const bgColors = [
     "#FE1F14",
     "#B9D3EE",
@@ -55,12 +55,12 @@ export function AddNoteModal({ closeModal, addList }) {
       <View style={{ alignSelf: "stretch", marginHorizontal: 32 }}>
         <Text style={styles.title}>Create A New Note</Text>
         <Formik
-          initialValues={{ name: "", id: 0, color: "", todos: [] }}
+          initialValues={{ note: "", id: 0, color: "" }}
           validationSchema={listSchema}
           onSubmit={(values, actions) => {
             let color = bgColor;
             values.color = color;
-            addList(values);
+            addNote(values);
             actions.resetForm();
             closeModal();
           }}
@@ -80,9 +80,9 @@ export function AddNoteModal({ closeModal, addList }) {
                 style={styles.input}
                 placeholder="Enter A New Note . . ."
                 placeholderTextColor={"#002C5F"}
-                onChangeText={handleChange("name")}
+                onChangeText={handleChange("note")}
                 value={values.name}
-                onBlur={handleBlur("name")}
+                onBlur={handleBlur("note")}
               />
 
               <Text style={globalStyles.todoErrorText}>
@@ -155,6 +155,6 @@ const mapStateToProps = (state, ownProps) => {
   };
 };
 
-const mapDispatchToProps = { addList };
+const mapDispatchToProps = { addNote };
 
 export default connect(mapStateToProps, mapDispatchToProps)(AddNoteModal);

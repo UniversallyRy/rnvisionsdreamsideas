@@ -10,11 +10,12 @@ import {
 import { AntDesign } from "@expo/vector-icons";
 import { connect } from "react-redux";
 import TodoLists from "./todoLists";
+import NoteList from "./noteList";
 import AddTodoListModal from "./addTodoListModal";
 import AddNoteModal from "./addNoteModal";
 import { coltsGray } from "../../styles/global";
 
-export function NoteMain({ state }) {
+export function NoteMain({ stateNotes, stateTodos }) {
   const [todoModal, setTodoModal] = useState(false);
   const [noteModal, setNoteModal] = useState(false);
 
@@ -27,6 +28,10 @@ export function NoteMain({ state }) {
 
   const renderList = (list) => {
     return <TodoLists list={list} />;
+  };
+
+  const renderNotes = (list) => {
+    return <NoteList list={list} />;
   };
 
   return (
@@ -55,7 +60,15 @@ export function NoteMain({ state }) {
       </View>
       <View style={{ height: 420, paddingLeft: 22, marginTop: 40 }}>
         <FlatList
-          data={state}
+          data={stateNotes}
+          keyExtractor={(item) => item.id.toString()}
+          horizontal={true}
+          showsHorizontalScrollIndicator={false}
+          renderItem={({ item }) => renderNotes(item)}
+          keyboardShouldPersistTaps="always"
+        />
+        <FlatList
+          data={stateTodos}
           keyExtractor={(item) => item.id.toString()}
           horizontal={true}
           showsHorizontalScrollIndicator={false}
@@ -107,7 +120,8 @@ export function NoteMain({ state }) {
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    state: state.todos,
+    stateTodos: state.todos,
+    stateNotes: state.notes,
   };
 };
 
