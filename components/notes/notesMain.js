@@ -58,14 +58,19 @@ export function NoteMain({ stateNotes, stateTodos }) {
         </Text>
         <View style={styles.divider} />
       </View>
-      <View style={{ height: 420, paddingLeft: 22, marginTop: 40 }}>
+      <View
+        style={{
+          height: 450,
+          flexDirection: "row",
+          paddingLeft: 22,
+          marginTop: 40,
+        }}
+      >
         <FlatList
           data={stateNotes}
+          style={{ marginRight: 5 }}
           keyExtractor={(item) => item.id.toString()}
-          horizontal={true}
-          showsHorizontalScrollIndicator={false}
           renderItem={({ item }) => renderNotes(item)}
-          keyboardShouldPersistTaps="always"
         />
         <FlatList
           data={stateTodos}

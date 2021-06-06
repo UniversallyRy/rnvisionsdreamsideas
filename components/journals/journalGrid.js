@@ -73,6 +73,7 @@ const styles = StyleSheet.create({
     borderRadius: 3,
     borderWidth: 2,
     borderColor: coltsGray,
+    backgroundColor: "#000",
     shadowColor: "black",
     shadowOpacity: 0.6,
     shadowRadius: 350,

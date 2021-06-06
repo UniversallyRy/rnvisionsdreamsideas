@@ -63,10 +63,10 @@ const JournalList = ({ state, navigation, deleteJournal }) => {
 
 const styles = StyleSheet.create({
   buttonsContainer: {
+    backgroundColor: "#000",
     flexDirection: "row",
     alignContent: "center",
     fontSize: 20,
-    marginTop: 4,
   },
   editButton: {
     flex: 0.51,

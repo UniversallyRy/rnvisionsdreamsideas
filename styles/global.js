@@ -146,9 +146,9 @@ export const globalStyles = StyleSheet.create({
     width: windowWidth * 0.92,
   },
   journalCard: {
-    backgroundColor: coltsBlue,
+    backgroundColor: "#000",
     alignSelf: "center",
-    width: windowWidth * 0.85,
+    width: windowWidth * 0.92,
     marginBottom: 1,
     borderRadius: 7,
   },
