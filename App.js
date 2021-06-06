@@ -31,7 +31,7 @@ const getFonts = () =>
 // const CombinedDefaultTheme = merge( PaperDefaultTheme, NavigationDefaultTheme );
 // const CombinedDarkTheme = merge( PaperDarkTheme, NavigationDarkTheme );
 // todos: modal fixes/keyboard popup pushes content, visionboard fixes, build dream journal out, add separate note container and reducer
-export default function App() {
+const App = () => {
   const [fontsLoaded, setFontsLoaded] = useState(false);
   const [persistLoaded, setPersistLoaded] = useState(true);
 
@@ -59,6 +59,8 @@ export default function App() {
       />
     );
   }
-}
+};
 
 AppRegistry.registerComponent(App, () => App);
+
+export default App;
