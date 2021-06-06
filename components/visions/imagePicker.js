@@ -7,7 +7,7 @@ import { coltsBlue, globalStyles } from "../../styles/global";
 import { addPic } from "../../redux/actions";
 import * as ImageManipulator from "expo-image-manipulator";
 
-export function ImagePic({ addPic }) {
+const ImagePic = ({ addPic }) => {
   const [image, setImage] = useState(null);
   const { width: windowWidth, height: windowHeight } = Dimensions.get("window");
 
@@ -95,7 +95,7 @@ export function ImagePic({ addPic }) {
       )}
     </>
   );
-}
+};
 
 const mapDispatchToProps = { addPic };
 

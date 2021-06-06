@@ -14,7 +14,7 @@ const { width: width } = Dimensions.get("window");
 const ITEM_WIDTH = width * 0.94;
 const ITEM_HEIGHT = ITEM_WIDTH * 1.27;
 
-export function VisionsContainer({ navigation, state, scrollX, deleteVision }) {
+const VisionsContainer = ({ navigation, state, scrollX, deleteVision }) => {
   const VisionImageList = memo(
     function VisionImage({ data, index }) {
       const _isMounted = useRef(true); // Initial value _isMounted = true
@@ -123,7 +123,7 @@ export function VisionsContainer({ navigation, state, scrollX, deleteVision }) {
       />
     </>
   );
-}
+};
 
 const mapStateToProps = (state, ownProps) => {
   return {

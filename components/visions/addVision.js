@@ -16,7 +16,7 @@ const visionSchema = yup.object({
 const simulateSlowNetworkRequest = () =>
   new Promise((resolve) => setTimeout(resolve, 2500));
 
-export function AddVision({ addVision, stateUri, setModalOpen }) {
+const AddVision = ({ addVision, stateUri, setModalOpen }) => {
   return (
     <View style={{ margin: 15, marginTop: 100 }}>
       <Formik
@@ -55,7 +55,7 @@ export function AddVision({ addVision, stateUri, setModalOpen }) {
       </Formik>
     </View>
   );
-}
+};
 
 const mapStateToProps = (state, ownProps) => {
   return {

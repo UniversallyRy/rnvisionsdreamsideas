@@ -7,7 +7,7 @@ import { coltsBlue, coltsGray, globalStyles } from "../../styles/global";
 
 const { width: width, height: height } = Dimensions.get("window");
 
-export function VisionGridContainer({ state, navigation }) {
+const VisionGridContainer = ({ state, navigation }) => {
   const VisionGridList = memo(function GridImage({ data }) {
     return (
       <Card
@@ -40,7 +40,7 @@ export function VisionGridContainer({ state, navigation }) {
       />
     </View>
   );
-}
+};
 
 const styles = StyleSheet.create({
   gridContainer: {

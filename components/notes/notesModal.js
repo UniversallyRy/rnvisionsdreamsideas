@@ -22,7 +22,7 @@ const noteSchema = yup.object({
   title: yup.string().required().min(4),
 });
 
-export function NotesModal({ list, closeModal, deleteNote }) {
+const NotesModal = ({ list, closeModal, deleteNote }) => {
   const [completedNote, setCompleted] = useState(false);
   const newNotes = list.notes;
   const taskCount = newNotes.length;
@@ -171,7 +171,7 @@ export function NotesModal({ list, closeModal, deleteNote }) {
       </SafeAreaView>
     </KeyboardAvoidingView>
   );
-}
+};
 
 const styles = StyleSheet.create({
   container: {

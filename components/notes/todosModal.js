@@ -22,7 +22,7 @@ const todoSchema = yup.object({
   title: yup.string().required().min(4),
 });
 
-export function TodosModal({ list, closeModal, deleteTodo, addTodo }) {
+const TodosModal = ({ list, closeModal, deleteTodo, addTodo }) => {
   const [completedTodo, setCompleted] = useState(false);
   const newTodos = list.todos;
   const taskCount = newTodos.length;
@@ -172,7 +172,7 @@ export function TodosModal({ list, closeModal, deleteTodo, addTodo }) {
       </SafeAreaView>
     </KeyboardAvoidingView>
   );
-}
+};
 
 const styles = StyleSheet.create({
   container: {

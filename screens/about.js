@@ -6,7 +6,7 @@ import { coltsGray, coltsBlue } from "../styles/global";
 const aboutText =
   "This is an ongoing App based on charting any visions or dreams you may have. Notes tab for thoughts and todos.";
 
-export default function About() {
+const About = () => {
   return (
     <View style={{ backgroundColor: coltsGray, flex: 1 }}>
       <Card style={styles.aboutContent}>
@@ -17,7 +17,7 @@ export default function About() {
       </Card>
     </View>
   );
-}
+};
 
 const styles = StyleSheet.create({
   text: {
@@ -36,3 +36,5 @@ const styles = StyleSheet.create({
     elevation: 4,
   },
 });
+
+export default About;

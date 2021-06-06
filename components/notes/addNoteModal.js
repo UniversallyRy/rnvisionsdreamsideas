@@ -19,7 +19,7 @@ const listSchema = yup.object({
 });
 
 // red, slate blue, black, dark gray, blueish gray, teal, tan
-export function AddNoteModal({ closeModal, addNote }) {
+const AddNoteModal = ({ closeModal, addNote }) => {
   const bgColors = [
     "#FE1F14",
     "#B9D3EE",
@@ -111,7 +111,7 @@ export function AddNoteModal({ closeModal, addNote }) {
       </View>
     </KeyboardAvoidingView>
   );
-}
+};
 
 const styles = StyleSheet.create({
   container: {

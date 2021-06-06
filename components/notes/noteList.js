@@ -6,7 +6,7 @@ import NotesModal from "./notesModal";
 import { coltsGray } from "../../styles/global";
 import { deleteNote } from "../../redux/actions";
 
-export function NoteList({ notes, deleteNote }) {
+const NoteList = ({ notes, deleteNote }) => {
   const [visible, setVisible] = useState(false);
   const toggleListModal = () => {
     setVisible(!visible);
@@ -41,7 +41,7 @@ export function NoteList({ notes, deleteNote }) {
       </Button>
     </View>
   );
-}
+};
 
 const styles = StyleSheet.create({
   listContainer: {

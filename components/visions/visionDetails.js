@@ -3,7 +3,7 @@ import { Image } from "react-native";
 import { Button, Text, Card } from "react-native-paper";
 import { globalStyles } from "../../styles/global";
 
-export default function VisionDetails({ navigation }) {
+const VisionDetails = ({ navigation }) => {
   const handlePress = () => {
     navigation.goBack();
   };
@@ -30,4 +30,6 @@ export default function VisionDetails({ navigation }) {
       </Card.Content>
     </Card>
   );
-}
+};
+
+export default VisionDetails;

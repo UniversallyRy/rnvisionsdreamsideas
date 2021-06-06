@@ -6,7 +6,7 @@ import TodosModal from "./todosModal";
 import { coltsGray } from "../../styles/global";
 import { deleteList } from "../../redux/actions";
 
-export function TodoLists({ list, deleteList }) {
+const TodoLists = ({ list, deleteList }) => {
   const [visible, setVisible] = useState(false);
   const toggleListModal = () => {
     setVisible(!visible);
@@ -71,7 +71,7 @@ export function TodoLists({ list, deleteList }) {
       </Button>
     </View>
   );
-}
+};
 
 const styles = StyleSheet.create({
   listContainer: {

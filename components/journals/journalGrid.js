@@ -7,7 +7,7 @@ import { coltsBlue, coltsGray, globalStyles } from "../../styles/global";
 
 const { width: width, height: height } = Dimensions.get("window");
 
-export function JournalGridContainer({ state, navigation }) {
+const JournalGridContainer = ({ state, navigation }) => {
   const JournalGridList = memo(
     function GridJournal({ data, index }) {
       return (
@@ -57,7 +57,7 @@ export function JournalGridContainer({ state, navigation }) {
       />
     </Surface>
   );
-}
+};
 
 const styles = StyleSheet.create({
   gridContainer: {

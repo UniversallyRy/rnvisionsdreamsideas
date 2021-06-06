@@ -15,7 +15,7 @@ const JournalSchema = yup.object({
   body: yup.string().required().min(4),
 });
 
-export function AddJournal({ addJournal, setModalOpen }) {
+const AddJournal = ({ addJournal, setModalOpen }) => {
   const { colors } = useTheme();
   return (
     <Formik
@@ -68,7 +68,7 @@ export function AddJournal({ addJournal, setModalOpen }) {
       )}
     </Formik>
   );
-}
+};
 
 // actions from redux to save entry to store
 const mapDispatchToProps = { addJournal };

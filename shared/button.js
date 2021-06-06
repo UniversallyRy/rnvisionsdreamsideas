@@ -5,7 +5,7 @@ import { raidSilver, coltsBlue } from "../styles/global";
 
 // Custom button made for Flat styling
 
-export default function FlatButton({ text, onPress }) {
+const FlatButton = ({ text, onPress }) => {
   return (
     <Button
       color={coltsBlue}
@@ -16,7 +16,7 @@ export default function FlatButton({ text, onPress }) {
       <Text style={styles.buttonText}> {text} </Text>
     </Button>
   );
-}
+};
 
 const styles = StyleSheet.create({
   button: {
@@ -46,3 +46,5 @@ const styles = StyleSheet.create({
     textAlign: "center",
   },
 });
+
+export default FlatButton;

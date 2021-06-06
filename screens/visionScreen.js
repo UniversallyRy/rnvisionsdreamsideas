@@ -16,7 +16,7 @@ import Icon from "../shared/icon";
 
 const VISIBLE_ITEMS = 3;
 
-export function Visions({ navigation }) {
+const Visions = ({ navigation }) => {
   const scrollX = useRef(new Animated.Value(0)).current;
   const scrollXIndex = useRef(new Animated.Value(0)).current;
   const [modalOpen, setModalOpen] = useState(false);
@@ -67,7 +67,7 @@ export function Visions({ navigation }) {
       </View>
     </View>
   );
-}
+};
 
 const styles = StyleSheet.create({
   container: {

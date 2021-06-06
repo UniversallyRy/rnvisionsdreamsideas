@@ -19,7 +19,7 @@ const listSchema = yup.object({
 });
 
 // red, slate blue, black, dark gray, blueish gray, teal, tan
-export function AddTodoListModal({ closeModal, addList }) {
+const AddTodoListModal = ({ closeModal, addList }) => {
   const bgColors = [
     "#FE1F14",
     "#B9D3EE",
@@ -111,7 +111,7 @@ export function AddTodoListModal({ closeModal, addList }) {
       </View>
     </KeyboardAvoidingView>
   );
-}
+};
 
 const styles = StyleSheet.create({
   container: {

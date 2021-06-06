@@ -3,7 +3,7 @@ import { StyleSheet, Text, View, SafeAreaView } from "react-native";
 import { MaterialIcons } from "@expo/vector-icons";
 import { coltsBlue, raidSilver } from "../styles/global";
 
-export default function Header({ navigation, title }) {
+const Header = ({ navigation, title }) => {
   const openMenu = () => {
     navigation.openDrawer();
   };
@@ -22,7 +22,7 @@ export default function Header({ navigation, title }) {
       </View>
     </SafeAreaView>
   );
-}
+};
 
 const styles = StyleSheet.create({
   header: {
@@ -53,3 +53,5 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
 });
+
+export default Header;

@@ -15,7 +15,7 @@ import AddTodoListModal from "./addTodoListModal";
 import AddNoteModal from "./addNoteModal";
 import { coltsGray } from "../../styles/global";
 
-export function NoteMain({ stateNotes, stateTodos }) {
+const NoteMain = ({ stateNotes, stateTodos }) => {
   const [todoModal, setTodoModal] = useState(false);
   const [noteModal, setNoteModal] = useState(false);
 
@@ -121,7 +121,7 @@ export function NoteMain({ stateNotes, stateTodos }) {
       </View>
     </View>
   );
-}
+};
 
 const mapStateToProps = (state, ownProps) => {
   return {

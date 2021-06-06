@@ -7,7 +7,6 @@ const Tab = ({ icon, isSelected }) => (
     <Ionicons name={icon} color={isSelected ? "black" : "grey"} size={30} />
   </View>
 );
-export default Tab;
 
 const styles = StyleSheet.create({
   container: {
@@ -16,3 +15,5 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
 });
+
+export default Tab;

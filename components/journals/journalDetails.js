@@ -3,7 +3,7 @@ import { Button, Text, Card } from "react-native-paper";
 import { View, StyleSheet } from "react-native";
 import { globalStyles, coltsGray, windowWidth } from "../../styles/global";
 
-export default function JournalDetails({ navigation }) {
+const JournalDetails = ({ navigation }) => {
   const handlePress = () => {
     navigation.goBack();
   };
@@ -38,7 +38,7 @@ export default function JournalDetails({ navigation }) {
       </Card.Content>
     </Card>
   );
-}
+};
 
 const styles = StyleSheet.create({
   divider: {
@@ -51,3 +51,5 @@ const styles = StyleSheet.create({
     opacity: 0.7,
   },
 });
+
+export default JournalDetails;
