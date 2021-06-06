@@ -15,14 +15,11 @@
     },
     "android": {
       "versionCode": 1
- 
     },
     "splash": {
        "image": "./assets/splash.png",
        "resizeMode": "contain",
        "backgroundColor": "#222431"
-  
-  
      }
    }
  }
