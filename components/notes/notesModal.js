@@ -15,16 +15,16 @@ import { FlatList, RectButton, TextInput } from "react-native-gesture-handler";
 import { AntDesign, Ionicons } from "@expo/vector-icons";
 import { Formik } from "formik";
 import * as yup from "yup";
-import { deleteNote } from "../../redux/actions";
+import { deleteNote, addNote } from "../../redux/actions";
 import { globalStyles } from "../../styles/global";
 
 const noteSchema = yup.object({
-  title: yup.string().required().min(4),
+  name: yup.string().required().min(4),
 });
 
-const NotesModal = ({ list, closeModal, deleteNote }) => {
+const NotesModal = ({ notes, closeModal, deleteNote, addNote }) => {
   const [completedNote, setCompleted] = useState(false);
-  const newNotes = list.notes;
+  const newNotes = notes;
   const taskCount = newNotes.length;
   const completedCount = newNotes.filter((note) => note.completed).length;
 
@@ -41,24 +41,7 @@ const NotesModal = ({ list, closeModal, deleteNote }) => {
     return (
       <View renderRightActions={(_, dragX) => rightActions(dragX, index)}>
         <TouchableOpacity style={styles.noteContainer}>
-          <Ionicons
-            name={note.completed ? "ios-square" : "ios-square-outline"}
-            size={24}
-            color="gray"
-            style={{ width: 32 }}
-            onPress={() => toggleNoteCompleted(index)}
-          />
-          <Text
-            style={[
-              styles.note,
-              {
-                textDecorationLine: note.completed ? "line-through" : "none",
-                color: note.completed ? "gray" : "black",
-              },
-            ]}
-          >
-            {note.title}
-          </Text>
+          <Text>{note.name}</Text>
           <AntDesign
             name="closecircle"
             size={24}
@@ -113,9 +96,7 @@ const NotesModal = ({ list, closeModal, deleteNote }) => {
           ]}
         >
           <Text style={styles.title}>{newNotes.name}</Text>
-          <Text style={styles.taskCount}>
-            Completed {completedCount} of {taskCount} tasks
-          </Text>
+          <Text style={styles.taskCount}>There are {taskCount} Notes</Text>
         </View>
         <View style={[styles.section, { flex: 3 }]}>
           <FlatList
@@ -129,9 +110,10 @@ const NotesModal = ({ list, closeModal, deleteNote }) => {
             renderItem={({ item, index }) => renderNote(item, index)}
           />
           <Formik
-            initialValues={{ title: "", id: "", completed: false }}
+            initialValues={{ name: "", id: "" }}
             validationSchema={noteSchema}
             onSubmit={(values, actions) => {
+              addNote(values);
               actions.resetForm();
               Keyboard.dismiss();
             }}
@@ -151,9 +133,9 @@ const NotesModal = ({ list, closeModal, deleteNote }) => {
                   style={[globalStyles.noteInput, { borderColor: "red" }]}
                   placeholder="Enter Note . . ."
                   placeholderTextColor={"#002C5F"}
-                  onChangeText={handleChange("title")}
-                  value={values.title}
-                  onBlur={handleBlur("title")}
+                  onChangeText={handleChange("name")}
+                  value={values.name}
+                  onBlur={handleBlur("name")}
                 />
                 <TouchableOpacity
                   style={[styles.noteStyle, { backgroundColor: "red" }]}
@@ -162,7 +144,7 @@ const NotesModal = ({ list, closeModal, deleteNote }) => {
                   <AntDesign name="plus" size={16} color="white" />
                 </TouchableOpacity>
                 <Text style={globalStyles.noteErrorText}>
-                  {touched.title && errors.title}
+                  {touched.name && errors.name}
                 </Text>
               </View>
             )}
@@ -245,6 +227,6 @@ const mapStateToProps = (state, ownProps) => {
   };
 };
 
-const mapDispatchToProps = {};
+const mapDispatchToProps = { addNote, deleteNote };
 
 export default connect(mapStateToProps, mapDispatchToProps)(NotesModal);

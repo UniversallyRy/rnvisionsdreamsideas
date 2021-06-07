@@ -8,7 +8,6 @@ import {
   Modal,
 } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
-import { connect } from "react-redux";
 import TodoLists from "./todoLists";
 import NoteList from "./noteList";
 import AddTodoListModal from "./addTodoListModal";
@@ -28,10 +27,6 @@ const NoteMain = ({ stateNotes, stateTodos }) => {
 
   const renderList = (list) => {
     return <TodoLists list={list} />;
-  };
-
-  const renderNotes = (notes) => {
-    return <NoteList notes={notes} />;
   };
 
   return (
@@ -66,12 +61,7 @@ const NoteMain = ({ stateNotes, stateTodos }) => {
           marginTop: 40,
         }}
       >
-        <FlatList
-          data={stateNotes}
-          style={{ marginRight: 5 }}
-          keyExtractor={(item) => item.id.toString()}
-          renderItem={({ item }) => renderNotes(item)}
-        />
+        <NoteList notes={stateNotes} style={{ marginRight: 5 }} key={1} />
         <FlatList
           data={stateTodos}
           keyExtractor={(item) => item.id.toString()}
@@ -123,13 +113,6 @@ const NoteMain = ({ stateNotes, stateTodos }) => {
   );
 };
 
-const mapStateToProps = (state, ownProps) => {
-  return {
-    stateTodos: state.todos,
-    stateNotes: state.notes,
-  };
-};
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -170,4 +153,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default connect(mapStateToProps)(NoteMain);
+export default NoteMain;

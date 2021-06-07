@@ -2,22 +2,25 @@ import { ADD_NOTE, EDIT_NOTE, DELETE_NOTE } from "../actionTypes";
 import { v4 as uuidv4 } from "uuid";
 import produce from "immer";
 
-const initialValue = [
+const initialNotes = [
   {
     name: "This is a default note",
-    id: 2,
+    id: uuidv4(),
+  },
+  {
+    name: "This is a 2nd note",
+    id: uuidv4(),
   },
 ];
-
-export default produce((draft, action) => {
+export default function (state = initialNotes, action) {
   switch (action.type) {
     case ADD_NOTE:
       return [
+        ...state,
         {
           name: action.payload.name,
           id: uuidv4(),
         },
-        ...draft,
       ];
 
     case EDIT_NOTE:
@@ -26,6 +29,9 @@ export default produce((draft, action) => {
 
     // return { todos, ...draft }
     case DELETE_NOTE:
-      return draft.filter((list) => list.notes.id != action.payload.id);
+      return state.filter((note) => note.id != action.payload.id);
+
+    default:
+      return state;
   }
-}, initialValue);
+}

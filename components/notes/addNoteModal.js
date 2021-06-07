@@ -20,29 +20,6 @@ const listSchema = yup.object({
 
 // red, slate blue, black, dark gray, blueish gray, teal, tan
 const AddNoteModal = ({ closeModal, addNote }) => {
-  const bgColors = [
-    "#FE1F14",
-    "#B9D3EE",
-    "#000000",
-    "#57575E",
-    "#2E4045",
-    "#83ADB5",
-    "#BFB5B2",
-  ];
-  const [bgColor, setColor] = useState(bgColors[0]);
-
-  const renderColors = () => {
-    return bgColors.map((color) => {
-      return (
-        <TouchableOpacity
-          key={color}
-          style={[styles.colorSelect, { backgroundColor: color }]}
-          onPress={() => setColor(color)}
-        />
-      );
-    });
-  };
-
   return (
     <KeyboardAvoidingView style={styles.container} behavior={"padding"}>
       <TouchableOpacity
@@ -55,11 +32,9 @@ const AddNoteModal = ({ closeModal, addNote }) => {
       <View style={{ alignSelf: "stretch", marginHorizontal: 32 }}>
         <Text style={styles.title}>Create A New Note</Text>
         <Formik
-          initialValues={{ note: "", id: 0, color: "" }}
+          initialValues={{ name: "", id: 0 }}
           validationSchema={listSchema}
           onSubmit={(values, actions) => {
-            let color = bgColor;
-            values.color = color;
             addNote(values);
             actions.resetForm();
             closeModal();
@@ -94,11 +69,9 @@ const AddNoteModal = ({ closeModal, addNote }) => {
                   justifyContent: "space-between",
                   marginTop: 12,
                 }}
-              >
-                {renderColors()}
-              </View>
+              ></View>
               <TouchableOpacity
-                style={[styles.create, { backgroundColor: bgColor }]}
+                style={[styles.create, { backgroundColor: "#f30" }]}
                 onPress={handleSubmit}
               >
                 <Text style={{ color: "white", fontWeight: "600" }}>
@@ -151,7 +124,7 @@ const styles = StyleSheet.create({
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    state: state.todos,
+    state: state.notes,
   };
 };
 

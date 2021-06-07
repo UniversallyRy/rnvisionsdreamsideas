@@ -4,17 +4,18 @@ import { globalStyles } from "../styles/global";
 import { connect } from "react-redux";
 import NoteMain from "../components/notes/notesMain";
 
-const NoteScreen = () => {
+const NoteScreen = ({ stateNotes, stateTodos }) => {
   return (
     <View style={globalStyles.noteScreenContainer}>
-      <NoteMain />
+      <NoteMain stateNotes={stateNotes} stateTodos={stateTodos} />
     </View>
   );
 };
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    state: state.notes,
+    stateNotes: state.note,
+    stateTodos: state.todos,
   };
 };
 

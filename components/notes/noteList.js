@@ -12,6 +12,8 @@ const NoteList = ({ notes, deleteNote }) => {
     setVisible(!visible);
   };
 
+  const remainingCount = Object.keys(notes).length;
+
   return (
     <View>
       <Modal
@@ -26,16 +28,21 @@ const NoteList = ({ notes, deleteNote }) => {
         onPress={() => toggleListModal()}
       >
         <Text style={styles.listTitle} numberOfLines={1}>
-          Notes
+          List of Notes
         </Text>
-        <View></View>
+        <View>
+          <View style={{ alignItems: "center" }}>
+            <Text style={styles.count}>{remainingCount}</Text>
+            <Text style={styles.subtitle}>Notes</Text>
+          </View>
+        </View>
       </TouchableOpacity>
       <Button
         style={styles.deleteButton}
         color={coltsGray}
         icon="close-outline"
         mode="contained"
-        onPress={() => deleteNote(notes.id)}
+        onPress={() => deleteNote()}
       >
         Delete
       </Button>
@@ -53,6 +60,7 @@ const styles = StyleSheet.create({
     width: 200,
   },
   listTitle: {
+    alignSelf: "center",
     fontSize: 24,
     fontWeight: "700",
     color: "white",
