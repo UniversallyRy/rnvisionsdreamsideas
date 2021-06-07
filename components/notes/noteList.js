@@ -24,17 +24,15 @@ const NoteList = ({ notes, deleteNote }) => {
         <NotesModal notes={notes} closeModal={() => toggleListModal()} />
       </Modal>
       <TouchableOpacity
-        // style={[styles.listContainer, { backgroundColor: notes.color }]}
+        style={[styles.listContainer, { backgroundColor: "green" }]}
         onPress={() => toggleListModal()}
       >
         <Text style={styles.listTitle} numberOfLines={1}>
           List of Notes
         </Text>
-        <View>
-          <View style={{ alignItems: "center" }}>
-            <Text style={styles.count}>{remainingCount}</Text>
-            <Text style={styles.subtitle}>Notes</Text>
-          </View>
+        <View style={{ marginTop: "auto", alignItems: "center" }}>
+          <Text style={styles.count}>{remainingCount}</Text>
+          <Text style={styles.subtitle}>Notes</Text>
         </View>
       </TouchableOpacity>
       <Button
@@ -53,11 +51,13 @@ const NoteList = ({ notes, deleteNote }) => {
 const styles = StyleSheet.create({
   listContainer: {
     padding: 32,
+    flexDirection: "column",
     paddingHorizontal: 16,
     borderRadius: 6,
     marginHorizontal: 12,
     alignItems: "center",
     width: 200,
+    height: 302,
   },
   listTitle: {
     alignSelf: "center",
