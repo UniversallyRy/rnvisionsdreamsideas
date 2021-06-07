@@ -8,11 +8,11 @@ import { deleteNote } from "../../redux/actions";
 
 const NoteList = ({ notes, deleteNote }) => {
   const [visible, setVisible] = useState(false);
+  const noteCount = Object.keys(notes).length;
+
   const toggleListModal = () => {
     setVisible(!visible);
   };
-
-  const remainingCount = Object.keys(notes).length;
 
   return (
     <View>
@@ -24,32 +24,23 @@ const NoteList = ({ notes, deleteNote }) => {
         <NotesModal notes={notes} closeModal={() => toggleListModal()} />
       </Modal>
       <TouchableOpacity
-        style={[styles.listContainer, { backgroundColor: "green" }]}
+        style={[styles.noteContainer, { backgroundColor: "green" }]}
         onPress={() => toggleListModal()}
       >
-        <Text style={styles.listTitle} numberOfLines={1}>
+        <Text style={styles.noteTitle} numberOfLines={1}>
           List of Notes
         </Text>
         <View style={{ marginTop: "auto", alignItems: "center" }}>
-          <Text style={styles.count}>{remainingCount}</Text>
+          <Text style={styles.count}>{noteCount}</Text>
           <Text style={styles.subtitle}>Notes</Text>
         </View>
       </TouchableOpacity>
-      <Button
-        style={styles.deleteButton}
-        color={coltsGray}
-        icon="close-outline"
-        mode="contained"
-        onPress={() => deleteNote()}
-      >
-        Delete
-      </Button>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
-  listContainer: {
+  noteContainer: {
     padding: 32,
     flexDirection: "column",
     paddingHorizontal: 16,
@@ -57,9 +48,9 @@ const styles = StyleSheet.create({
     marginHorizontal: 12,
     alignItems: "center",
     width: 200,
-    height: 302,
+    height: 345,
   },
-  listTitle: {
+  noteTitle: {
     alignSelf: "center",
     fontSize: 24,
     fontWeight: "700",
