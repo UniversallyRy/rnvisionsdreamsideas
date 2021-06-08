@@ -1,51 +1,22 @@
 {
-  "verbose": true,
-  "testEnvironment": "node",
-  "moduleFileExtensions": ["js", "jsx", "ts", "tsx", "json"],
-  "testMatch": [
-    "<rootDir>/src/?(*.)+(spec|test).ts?(x)",
-    "<rootDir>/src/utils/?(*.)+(spec|test).ts?(x)"
-  ],
-  "transform": {
-    ".spec.(ts|tsx)": "dts-jest/transform",
-    ".(ts|tsx)": "ts-jest"
-  },
+  
     "compilerOptions": {
       "allowJs": true,
       "allowSyntheticDefaultImports": true,
       "esModuleInterop": true,
+      "skipLibCheck": false,
       "isolatedModules": true,
-      "jsx": "react",
-      "lib": ["es6", "dom"],
+      "lib": ["esnext", "dom"],
       "moduleResolution": "node",
       "noEmit": true,
       "strict": true,
-      "target": "esnext"
+      "target": "esnext",
+      "jsx": "react",
     },
     "exclude": [
       "node_modules",
       "babel.config.js",
       "metro.config.js",
       "jest.config.js"
-    ],
-    "globals": {
-      "window": {},
-      "ts-jest": {
-        "tsConfig": "./tsconfig.json",
-        "diagnostics": {
-          "ignoreCodes": [5023]
-        }
-      },
-      "_dts_jest_": {
-        "compiler_options": {
-          "module": "commonjs",
-          "strict": true,
-          "target": "es6"
-        },
-        "enclosing_declaration": true,
-        "test_value": true,
-        "transpile": true
-      }
-    },
-    "reporters": ["default", "dts-jest/reporter"],
+    ]
   }

@@ -14,11 +14,11 @@ import { AppRegistry, StatusBar } from "react-native";
 import React, { useState } from "react";
 import { Provider } from "react-redux";
 import { store, persistor } from "./redux/store";
-import * as Font from "expo-font";
 import { AppLoading } from "expo";
 import NavDrawer from "./routes/drawer";
 import { globalStyles } from "./styles/global";
 import { PersistGate } from "redux-persist/integration/react";
+import * as Font from "expo-font";
 
 const getFonts = () =>
   Font.loadAsync({

@@ -3,6 +3,10 @@ import { persistStore, persistReducer } from "redux-persist";
 import rootReducer from "./reducers"; // defaults to localStorage
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
+if (typeof window !== "object") {
+  global.window = global;
+  global.window.navigator = {};
+}
 const persistConfig = {
   // configuration object for redux-persist
   key: "root",
