@@ -3,7 +3,7 @@ import { StyleSheet, StyleProp, TextStyle, ViewStyle, View } from "react-native"
 import { Card, Text } from "react-native-paper";
 import { coltsGray, coltsBlue } from "../styles/global";
 
-interface StyleProps {
+interface AboutProps {
   aboutContainer: StyleProp<ViewStyle>;
   textContainer: StyleProp<ViewStyle>;
   text: StyleProp<TextStyle>;
@@ -18,7 +18,7 @@ interface Styles {
 const aboutText: string =
   "This is an ongoing App based on charting any visions or dreams you may have. Notes tab for thoughts and todos.";
 
-const About: React.FC<StyleProps> = () => {
+const About: React.FC<AboutProps> = () => {
   return (
     <View style={styles.aboutContainer}>
       <Card style={styles.textContainer}>

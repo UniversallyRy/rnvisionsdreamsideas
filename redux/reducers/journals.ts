@@ -1,9 +1,20 @@
 import { ADD_JOURNAL, EDIT_JOURNAL, DELETE_JOURNAL } from "../actionTypes";
+import { ActionType } from 'typesafe-actions';
+import * as journals from '../actions';
 import { v4 as uuidv4 } from "uuid";
 import moment from "moment";
 import lorem from "../../shared/lorem";
 
-const initialJournals = [
+export type JournalsAction = ActionType<typeof journals>;
+
+ export interface JournalState {
+    title: string;
+    body: string;
+    id: string;
+    date: string;
+}
+
+const initialJournals:JournalState[] = [
   {
     title: "Add Task 1",
     body: lorem,
@@ -23,7 +34,8 @@ const initialJournals = [
     date: moment("2020-07-30").format("MMMM Do YYYY"),
   },
 ];
-export default function (state = initialJournals, action) {
+
+export default function<JournalState, JournalAction>(state = initialJournals, action:any) {
   switch (action.type) {
     case ADD_JOURNAL:
       return [

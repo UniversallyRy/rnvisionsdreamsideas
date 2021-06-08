@@ -16,7 +16,7 @@ import { Provider } from "react-redux";
 import { store, persistor } from "./redux/store";
 import * as Font from "expo-font";
 import { AppLoading } from "expo";
-import Navigator from "./routes/drawer";
+import NavDrawer from "./routes/drawer";
 import { globalStyles } from "./styles/global";
 import { PersistGate } from "redux-persist/integration/react";
 
@@ -41,7 +41,7 @@ const App = () => {
         <PersistGate loading={persistLoaded} persistor={persistor}>
           <PaperProvider>
             <NavigationContainer>
-              <Navigator style={globalStyles.navbar} />
+              <NavDrawer style={globalStyles.navbar} />
               <StatusBar animated={true} style="auto" />
             </NavigationContainer>
           </PaperProvider>
@@ -61,6 +61,6 @@ const App = () => {
   }
 };
 
-AppRegistry.registerComponent(App, () => App);
+AppRegistry.registerComponent("App", () => App);
 
 export default App;

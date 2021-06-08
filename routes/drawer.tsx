@@ -1,13 +1,17 @@
+import { StyleProp, ViewStyle, TextStyle } from "react-native";
 import { createDrawerNavigator } from "react-navigation-drawer";
-import { createAppContainer } from "react-navigation";
+import { createAppContainer, NavigationNavigator, NavigationProp, NavigationState } from "react-navigation";
 import VisionStack from "./visionStack";
 import AboutStack from "./aboutStack";
 import NoteStack from "./noteStack";
 import JournalStack from "./journalStack";
 import { coltsGray, coltsBlue } from "../styles/global";
 
+interface DrawerProps {
+  style?: StyleProp<ViewStyle>
+}
 // creates a navigation bar from react-navigation-stack imports
-const RootDrawerNavigator = createDrawerNavigator(
+const RootDrawerNavigator:NavigationNavigator<DrawerProps, NavigationProp<NavigationState>> = createDrawerNavigator(
   {
     Visions: {
       screen: VisionStack,
@@ -23,7 +27,6 @@ const RootDrawerNavigator = createDrawerNavigator(
     },
   },
   {
-    headerMode: "screen",
     drawerType: "front",
     drawerWidth: 150,
     drawerBackgroundColor: coltsGray,

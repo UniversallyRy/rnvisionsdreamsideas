@@ -3,7 +3,12 @@ import { StyleSheet, Text, View, SafeAreaView } from "react-native";
 import { MaterialIcons } from "@expo/vector-icons";
 import { coltsBlue, raidSilver } from "../styles/global";
 
-const Header = ({ navigation, title }) => {
+type HeaderProps = {
+  navigation: any;
+  title: string;
+};
+
+const Header:React.FC<HeaderProps> = ({ navigation, title }) => {
   const openMenu = () => {
     navigation.openDrawer();
   };

@@ -1,5 +1,4 @@
 import { combineReducers } from "redux";
-import visibilityFilter from "./visibilityFilter";
 import visions from "./visions";
 import pic from "./newpic";
 import journals from "./journals";

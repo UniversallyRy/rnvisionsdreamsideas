@@ -1,14 +1,18 @@
 import React from "react";
-import { createStackNavigator } from "react-navigation-stack";
-import JournalList from "../screens/journalScreen";
+import { createStackNavigator, NavigationStackProp, NavigationStackOptions } from "react-navigation-stack";
+import JournalScreen from "../screens/journalScreen";
 import JournalDetails from "../components/journals/journalDetails";
 import Header from "../shared/header";
 import { coltsGray, coltsBlue } from "../styles/global";
 
+type NavProp = {
+  navigation: NavigationStackProp;
+};
+
 const screens = {
   JournalList: {
-    screen: JournalList,
-    navigationOptions: ({ navigation }) => {
+    screen: JournalScreen,
+    navigationOptions: ({ navigation }: NavProp) => {
       return {
         headerTitle: () => (
           <Header navigation={navigation} title="Dream Journal" />

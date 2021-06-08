@@ -1,11 +1,22 @@
 import React from "react";
-import { StyleSheet } from "react-native";
+import { StyleSheet, StyleProp, TextStyle, ViewStyle, GestureResponderEvent } from "react-native";
 import { Button, Text } from "react-native-paper";
-import { raidSilver, coltsBlue } from "../styles/global";
+import { coltsBlue, raidSilver } from "../styles/global";
+
+interface ButtonProps {
+  text: string;
+  onPress: () => void; //((event: GestureResponderEvent) => void);
+  button: StyleProp<ViewStyle>;
+  buttonText: StyleProp<TextStyle>;
+}
+
+interface Styles {
+  button: ViewStyle;
+  buttonText: TextStyle;
+}
 
 // Custom button made for Flat styling
-
-const FlatButton = ({ text, onPress }) => {
+const FlatButton:React.FC<ButtonProps> = ({ text, onPress }) => {
   return (
     <Button
       color={coltsBlue}
@@ -18,7 +29,7 @@ const FlatButton = ({ text, onPress }) => {
   );
 };
 
-const styles = StyleSheet.create({
+const styles = StyleSheet.create<Styles>({
   button: {
     alignSelf: "center",
     width: 200,
