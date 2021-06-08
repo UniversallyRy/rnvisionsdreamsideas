@@ -18,16 +18,14 @@ import {
 interface ImageProps {
   navigation: NavigationStackProp;
   state: any;
-  index: number;
-  scrollX: Object;
+  index: any;
+  scrollX: any;
   deleteVision: ((event: GestureResponderEvent) => void);
 }
 
 interface ListProps {
   item: any;
   index: number;
-  scrollX: Object;
-  deleteVision: ((event: GestureResponderEvent) => void);
 }
 
 
@@ -43,7 +41,7 @@ const VisionsContainer: React.FC<ImageProps> = ({
   deleteVision,
 }) => {
   const VisionImageList = memo(
-    function VisionImage({ data, index}) {
+    function VisionImage({ data, index }:any) {
       const _isMounted = useRef(true); // Initial value _isMounted = true
 
       useEffect(() => {
@@ -130,9 +128,10 @@ const VisionsContainer: React.FC<ImageProps> = ({
     [state]
   );
 
-  const renderList: React.FC<ListProps> = useCallback(function renderList({ item, index }) {
+  const renderList: React.FC<ListProps> = useCallback(
+    ({ item, index }:any) => {
     return <VisionImageList index={index} data={item} />;
-  });
+  }, []);
 
   return (
     <>

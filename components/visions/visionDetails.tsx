@@ -1,9 +1,18 @@
 import React from "react";
-import { Image } from "react-native";
+import { Image, StyleProp, TextStyle, ViewStyle, ImageStyle } from "react-native";
+import { NavigationStackProp } from 'react-navigation-stack';
 import { Button, Text, Card } from "react-native-paper";
 import { globalStyles } from "../../styles/global";
 
-const VisionDetails = ({ navigation }) => {
+interface VisionProps {
+  navigation: NavigationStackProp;
+  vDetailsContent: StyleProp<ViewStyle>;
+  journalTitle: StyleProp<TextStyle>;
+  vDetailsImage: StyleProp<ImageStyle>;
+  jDetailsButton: StyleProp<ViewStyle>;
+}
+
+const VisionDetails: React.FC<VisionProps> = ({ navigation }) => {
   const handlePress = () => {
     navigation.goBack();
   };
@@ -22,7 +31,7 @@ const VisionDetails = ({ navigation }) => {
           icon="arrow-left"
           mode="contained"
           dark={true}
-          title={"back to home"}
+          accessibilityLabel={"back to home"}
           onPress={handlePress}
         >
           Go Back

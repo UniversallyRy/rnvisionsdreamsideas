@@ -1,30 +1,46 @@
 import React, { useCallback, memo } from "react";
-import { Image, StyleSheet, Dimensions, View } from "react-native";
+import { Image, StyleSheet,  StyleProp, TextStyle, ViewStyle, Dimensions, View } from "react-native";
+import { NavigationStackProp } from 'react-navigation-stack';
 import { FlatList } from "react-native-gesture-handler";
 import { Card } from "react-native-paper";
 import { connect } from "react-redux";
-import { coltsBlue, coltsGray, globalStyles } from "../../styles/global";
+import { coltsBlue, coltsGray } from "../../styles/global";
+
+interface GridProps {
+  navigation: NavigationStackProp;
+  state: any;
+  gridContainer: StyleProp<ViewStyle>;
+  gridItem: StyleProp<ViewStyle>;
+}
+
+interface ListProps {
+  item: object;
+}
+
+interface Styles {
+  gridContainer: ViewStyle;
+  gridItem: ViewStyle;
+}
 
 const { width: width, height: height } = Dimensions.get("window");
 
-const VisionGridContainer = ({ state, navigation }) => {
-  const VisionGridList = memo(function GridImage({ data }) {
+const VisionGridContainer: React.FC<GridProps> = ({ state, navigation }) => {
+  const VisionGridList = memo(function GridImage({ data }:any) {
     return (
       <Card
-        style={{ backgroundColor: coltsBlue }}
+        style={{ ...styles.gridItem, backgroundColor: coltsBlue }}
         onPress={() => navigation.navigate("VisionDetails", data)}
       >
         {/* <Card onPress={ () => navigation.navigate( 'Visions', item ) }> */}
         <Image
           source={{ uri: data.uri }}
-          id={data.id}
-          style={{ ...styles.gridItem }}
+          testID={data.id}
         />
       </Card>
     );
   });
 
-  const renderList = useCallback(function renderList({ item }) {
+  const renderList: React.FC<ListProps> = useCallback(function renderList({ item }) {
     return <VisionGridList data={item} />;
   }, []);
 
@@ -42,7 +58,7 @@ const VisionGridContainer = ({ state, navigation }) => {
   );
 };
 
-const styles = StyleSheet.create({
+const styles = StyleSheet.create<Styles>({
   gridContainer: {
     paddingTop: 3,
     backgroundColor: coltsBlue,
@@ -66,7 +82,7 @@ const styles = StyleSheet.create({
   },
 });
 
-const mapStateToProps = (state, ownProps) => {
+const mapStateToProps = (state:any) => {
   return {
     state: state.visions,
   };

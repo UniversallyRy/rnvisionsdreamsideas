@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef } from "react";
-import { View } from "react-native";
+import { View, GestureResponderEvent } from "react-native";
 import { TextInput, Text } from "react-native-paper";
 import { connect } from "react-redux";
 import { Formik } from "formik";
@@ -9,6 +9,13 @@ import ImagePicker from "./imagePicker";
 import { addVision } from "../../redux/actions";
 import { globalStyles } from "../../styles/global";
 
+interface VisionProps {
+  addVision:((item: object) => void);
+  stateUri: string;
+  setModalOpen:((arg0:boolean) => void);
+}
+
+
 const visionSchema = yup.object({
   title: yup.string().required().min(4),
 });
@@ -16,7 +23,7 @@ const visionSchema = yup.object({
 const simulateSlowNetworkRequest = () =>
   new Promise((resolve) => setTimeout(resolve, 2500));
 
-const AddVision = ({ addVision, stateUri, setModalOpen }) => {
+const AddVision: React.FC<VisionProps> = ({ addVision, stateUri, setModalOpen }) => {
   return (
     <View style={{ margin: 15, marginTop: 100 }}>
       <Formik
@@ -57,7 +64,7 @@ const AddVision = ({ addVision, stateUri, setModalOpen }) => {
   );
 };
 
-const mapStateToProps = (state, ownProps) => {
+const mapStateToProps = (state:any) => {
   return {
     stateUri: state.pic,
   };

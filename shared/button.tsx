@@ -6,8 +6,8 @@ import { coltsBlue, raidSilver } from "../styles/global";
 interface ButtonProps {
   text: string;
   onPress: () => void; //((event: GestureResponderEvent) => void);
-  button: StyleProp<ViewStyle>;
-  buttonText: StyleProp<TextStyle>;
+  button?: StyleProp<ViewStyle>;
+  buttonText?: StyleProp<TextStyle>;
 }
 
 interface Styles {

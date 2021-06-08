@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { View, Platform, Dimensions, Image } from "react-native";
+import { View, StyleProp, ViewStyle, Platform, Dimensions, Image } from "react-native";
 import { Button } from "react-native-paper";
 import { connect } from "react-redux";
 import * as ImagePicker from "expo-image-picker";
@@ -7,8 +7,20 @@ import { coltsBlue, globalStyles } from "../../styles/global";
 import { addPic } from "../../redux/actions";
 import * as ImageManipulator from "expo-image-manipulator";
 
-const ImagePic = ({ addPic }) => {
-  const [image, setImage] = useState(null);
+interface ImageProps {
+  addPic: ((item:any) => void);
+  visionButtonContainer: StyleProp<ViewStyle>;
+  uploadButton: StyleProp<ViewStyle>;
+  coltsBlue: StyleProp<ViewStyle>;
+}
+
+interface ListProps {
+  item: object;
+}
+
+
+const ImagePic: React.FC<ImageProps> = ({ addPic }) => {
+  const [image, setImage] = useState('');
   const { width: windowWidth, height: windowHeight } = Dimensions.get("window");
 
   useEffect(() => {
@@ -16,7 +28,7 @@ const ImagePic = ({ addPic }) => {
       if (Platform.OS !== "web") {
         const { status } =
           await ImagePicker.requestCameraRollPermissionsAsync();
-        const { camStatus } = await ImagePicker.getCameraPermissionsAsync();
+        const { camStatus }:any = await ImagePicker.getCameraPermissionsAsync();
         if (status !== "granted") {
           alert("Sorry, we need gallery permissions to make this work!");
         }
@@ -67,7 +79,7 @@ const ImagePic = ({ addPic }) => {
         <Button
           color={coltsBlue}
           style={globalStyles.uploadButton}
-          title="Add Image From Gallery"
+          accessibilityLabel="Add Image From Gallery"
           onPress={pickImage}
         >
           Add from gallery
@@ -76,7 +88,7 @@ const ImagePic = ({ addPic }) => {
           icon="plus"
           color={coltsBlue}
           style={globalStyles.uploadButton}
-          title="Take A Picture"
+          accessibilityLabel="Take A Picture"
           onPress={CameraImage}
         >
           Take a Picture
