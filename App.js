@@ -19,10 +19,6 @@ import { AppLoading } from "expo";
 import Navigator from "./routes/drawer";
 import { globalStyles } from "./styles/global";
 import { PersistGate } from "redux-persist/integration/react";
-import LogRocket from "logrocket";
-
-// LogRocket stats to monitor app
-LogRocket.init("d3j5tz/visionsdreamsideas");
 
 const getFonts = () =>
   Font.loadAsync({
