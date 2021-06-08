@@ -1,15 +1,31 @@
 import React, { useCallback, memo } from "react";
-import { Text, StyleSheet, Dimensions, View } from "react-native";
+import { Text, StyleSheet, Dimensions, StyleProp, TextStyle, ViewStyle,} from "react-native";
+import { NavigationStackProp } from 'react-navigation-stack';
 import { FlatList } from "react-native-gesture-handler";
 import { Card, Surface } from "react-native-paper";
 import { connect } from "react-redux";
-import { coltsBlue, coltsGray, globalStyles } from "../../styles/global";
+import { coltsBlue, coltsGray } from "../../styles/global";
+
+interface GridProps {
+  navigation: NavigationStackProp;
+  state: [];
+  gridContainer: StyleProp<ViewStyle>;
+  gridItem: StyleProp<TextStyle>;
+  coltsBlue: StyleProp<TextStyle>;
+  coltsGray: StyleProp<TextStyle>;
+}
+
+interface Styles {
+  gridContainer: ViewStyle;
+  gridItem: TextStyle;
+}
 
 const { width: width, height: height } = Dimensions.get("window");
 
-const JournalGridContainer = ({ state, navigation }) => {
+const JournalGridContainer:React.FC<GridProps> = ({ state, navigation }) => {
+
   const JournalGridList = memo(
-    function GridJournal({ data, index }) {
+    function GridJournal({ data, index }:any) {
       return (
         <Card
           style={{ backgroundColor: coltsBlue }}
@@ -31,11 +47,10 @@ const JournalGridContainer = ({ state, navigation }) => {
         </Card>
       );
     },
-    [state]
   );
 
   const renderList = useCallback(function renderList({ item, index }) {
-    return <JournalGridList index={index} data={item} />;
+    return <JournalGridList data={item} />;
   }, []);
 
   return (
@@ -59,7 +74,7 @@ const JournalGridContainer = ({ state, navigation }) => {
   );
 };
 
-const styles = StyleSheet.create({
+const styles = StyleSheet.create<Styles>({
   gridContainer: {
     paddingTop: 3,
   },
@@ -84,7 +99,7 @@ const styles = StyleSheet.create({
   },
 });
 
-const mapStateToProps = (state, ownProps) => {
+const mapStateToProps = (state:any) => {
   return {
     state: state.journals,
   };

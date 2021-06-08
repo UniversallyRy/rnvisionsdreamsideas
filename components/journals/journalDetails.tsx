@@ -1,15 +1,31 @@
 import React from "react";
+import { View, StyleSheet, StyleProp, TextStyle, ViewStyle, } from "react-native";
+import { NavigationStackProp } from 'react-navigation-stack';
 import { Button, Text, Card } from "react-native-paper";
-import { View, StyleSheet } from "react-native";
 import { globalStyles, coltsGray, windowWidth } from "../../styles/global";
 
-const JournalDetails = ({ navigation }) => {
+interface JournalDProps {
+  navigation: NavigationStackProp;
+  jDetailsContainer: StyleProp<ViewStyle>;
+  jDetailsCard: StyleProp<ViewStyle>;
+  jDetailsTitle: StyleProp<ViewStyle>;
+  divider: StyleProp<ViewStyle>;
+  jDetailsText: StyleProp<TextStyle>;
+  jDetailsDate: StyleProp<TextStyle>;
+  jDetailsButton: StyleProp<TextStyle>;
+}
+
+interface Styles {
+  divider: ViewStyle;
+}
+
+const JournalDetails: React.FC<JournalDProps> = ({ navigation }) => {
   const handlePress = () => {
     navigation.goBack();
   };
 
   return (
-    <Card style={globalStyles.jDetailsContainer} id={Math.random() * 92}>
+    <Card style={globalStyles.jDetailsContainer}>
       <Card.Content style={globalStyles.jDetailsCard}>
         <Text style={globalStyles.jDetailsTitle}>
           {" "}
@@ -30,7 +46,7 @@ const JournalDetails = ({ navigation }) => {
           icon="arrow-left"
           mode="contained"
           dark={true}
-          title={"back to home"}
+          accessibilityLabel={"back to home"}
           onPress={handlePress}
         >
           Go Back
@@ -40,7 +56,7 @@ const JournalDetails = ({ navigation }) => {
   );
 };
 
-const styles = StyleSheet.create({
+const styles = StyleSheet.create<Styles>({
   divider: {
     backgroundColor: coltsGray,
     alignSelf: "center",

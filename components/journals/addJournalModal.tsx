@@ -1,13 +1,20 @@
 import React from "react";
-import { View } from "react-native";
-import { TextInput, Text, useTheme } from "react-native-paper";
+import { View, StyleProp, TextStyle, ViewStyle,} from "react-native";
+import { TextInput, Text } from "react-native-paper";
 import { connect } from "react-redux";
 import { Formik } from "formik";
 import * as yup from "yup";
 import FlatButton from "../../shared/button";
 import { addJournal } from "../../redux/actions";
 import { globalStyles } from "../../styles/global";
-import { addTodo } from "../../redux/actions";
+
+
+interface AddJournalProps {
+  addJournal: ((item: object) => void);
+  setModalOpen: ((i:boolean) => void);
+  addJournalForm: StyleProp<ViewStyle>;
+  errorText: StyleProp<TextStyle>;
+}
 
 // require an entry into form input that's at least 4 letters
 const JournalSchema = yup.object({
@@ -15,11 +22,10 @@ const JournalSchema = yup.object({
   body: yup.string().required().min(4),
 });
 
-const AddJournal = ({ addJournal, setModalOpen }) => {
-  const { colors } = useTheme();
+const AddJournal:React.FC<AddJournalProps> = ({ addJournal, setModalOpen }) => {
+
   return (
     <Formik
-      style={globalStyles.addJournalForm}
       // Control whether Formik should reset the form if initialValues changes
       enableReinitialize
       initialValues={{ title: "", body: "", id: "", date: "" }}
@@ -38,9 +44,8 @@ const AddJournal = ({ addJournal, setModalOpen }) => {
         touched,
         errors,
       }) => (
-        <View>
+        <View style={globalStyles.addJournalForm}>
           <TextInput
-            style={colors}
             mode="flat"
             placeholder="Journal Title"
             onChangeText={handleChange("title")}
@@ -53,7 +58,6 @@ const AddJournal = ({ addJournal, setModalOpen }) => {
           </Text>
           <TextInput
             multiline
-            style={colors}
             mode="flat"
             placeholder="Journal Body"
             onChangeText={handleChange("body")}

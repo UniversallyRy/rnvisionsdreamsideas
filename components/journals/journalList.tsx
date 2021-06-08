@@ -1,12 +1,32 @@
 import React from "react";
-import { StyleSheet, View, FlatList } from "react-native";
+import { StyleSheet, View, FlatList, StyleProp, TextStyle, ViewStyle,} from "react-native";
+import { NavigationStackProp } from 'react-navigation-stack';
 import { Button, Card, Paragraph } from "react-native-paper";
 import { connect } from "react-redux";
 import { globalStyles, coltsGray, coltsBlue } from "../../styles/global";
 import { deleteJournal } from "../../redux/actions";
 
-const JournalList = ({ state, navigation, deleteJournal }) => {
-  const removeJournal = (id) => {
+interface JournalListProps {
+  navigation: NavigationStackProp;
+  state: [];
+  deleteJournal: ((item: string) => void);
+  buttonsContainer: StyleProp<ViewStyle>;
+  editButton: StyleProp<ViewStyle>;
+  deleteButton: StyleProp<ViewStyle>;
+  divider: StyleProp<ViewStyle>;
+  coltsGray: StyleProp<TextStyle>;
+  coltsBlue: StyleProp<TextStyle>;
+}
+
+interface Styles {
+  buttonsContainer: ViewStyle;
+  editButton: ViewStyle;
+  deleteButton: ViewStyle;
+  divider: ViewStyle;
+}
+
+const JournalList: React.FC<JournalListProps> = ({ state, navigation, deleteJournal }) => {
+  const removeJournal = (id:string) => {
     var buttonId = id;
     deleteJournal(buttonId);
   };
@@ -15,8 +35,8 @@ const JournalList = ({ state, navigation, deleteJournal }) => {
     <FlatList
       style={{ paddingTop: 10, backgroundColor: coltsBlue }}
       data={state}
-      keyExtractor={(item, index) => index.toString()}
-      renderItem={({ item }) => (
+      keyExtractor={(item, index) => index.toString(item)}
+      renderItem={({ item }:any) => (
         <View style={globalStyles.journalBorder}>
           <Card
             style={globalStyles.journalCard}
@@ -61,7 +81,7 @@ const JournalList = ({ state, navigation, deleteJournal }) => {
   );
 };
 
-const styles = StyleSheet.create({
+const styles = StyleSheet.create<Styles>({
   buttonsContainer: {
     backgroundColor: "#000",
     flexDirection: "row",
@@ -87,7 +107,7 @@ const styles = StyleSheet.create({
 
 const mapDispatchToProps = { deleteJournal };
 
-const mapStateToProps = (state, ownProps) => {
+const mapStateToProps = (state:any) => {
   return {
     state: state.journals,
   };
