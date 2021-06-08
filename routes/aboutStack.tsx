@@ -1,13 +1,17 @@
 import React from "react";
-import { createStackNavigator } from "react-navigation-stack";
+import { createStackNavigator, NavigationStackProp } from "react-navigation-stack";
 import About from "../screens/about";
 import Header from "../shared/header";
 import { coltsGray, coltsBlue } from "../styles/global";
 
+type NavProp = {
+  navigation: NavigationStackProp;
+};
+
 const screens = {
   About: {
     screen: About,
-    navigationOptions: ({ navigation }) => {
+    navigationOptions: ({ navigation }: NavProp) => {
       return {
         headerTitle: () => <Header navigation={navigation} title="About" />,
       };

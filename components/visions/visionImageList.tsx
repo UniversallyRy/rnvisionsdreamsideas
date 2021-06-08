@@ -1,6 +1,12 @@
 import React, { useCallback, memo, useRef, useEffect } from "react";
-import { Text, Dimensions, Animated } from "react-native";
+import {
+  GestureResponderEvent,
+  Text,
+  Dimensions,
+  Animated,
+} from "react-native";
 import { Surface, Button } from "react-native-paper";
+import { NavigationStackProp } from 'react-navigation-stack';
 import { deleteVision } from "../../redux/actions";
 import { globalStyles, coltsGray, coltsBlue } from "../../styles/global";
 import { connect } from "react-redux";
@@ -9,14 +15,35 @@ import {
   TouchableWithoutFeedback,
 } from "react-native-gesture-handler";
 
+interface ImageProps {
+  navigation: NavigationStackProp;
+  state: any;
+  index: number;
+  scrollX: Object;
+  deleteVision: ((event: GestureResponderEvent) => void);
+}
+
+interface ListProps {
+  item: any;
+  index: number;
+  scrollX: Object;
+  deleteVision: ((event: GestureResponderEvent) => void);
+}
+
+
 // react native's Dimensions import to grab mobile screens dimensions
 const { width: width } = Dimensions.get("window");
 const ITEM_WIDTH = width * 0.94;
 const ITEM_HEIGHT = ITEM_WIDTH * 1.27;
 
-const VisionsContainer = ({ navigation, state, scrollX, deleteVision }) => {
+const VisionsContainer: React.FC<ImageProps> = ({
+  navigation,
+  state,
+  scrollX,
+  deleteVision,
+}) => {
   const VisionImageList = memo(
-    function VisionImage({ data, index }) {
+    function VisionImage({ data, index}) {
       const _isMounted = useRef(true); // Initial value _isMounted = true
 
       useEffect(() => {
@@ -26,7 +53,7 @@ const VisionsContainer = ({ navigation, state, scrollX, deleteVision }) => {
         };
       }, []);
 
-      const removeVision = (id) => {
+      const removeVision = (id: any) => {
         var buttonId = id;
         deleteVision(buttonId);
       };
@@ -43,7 +70,7 @@ const VisionsContainer = ({ navigation, state, scrollX, deleteVision }) => {
       });
 
       return (
-        <Surface
+        <TouchableOpacity
           style={{
             backgroundColor: coltsBlue,
             width,
@@ -51,7 +78,7 @@ const VisionsContainer = ({ navigation, state, scrollX, deleteVision }) => {
             alignItems: "center",
           }}
         >
-          <Surface
+          <TouchableOpacity
             onLongPress={() => navigation.navigate("VisionDetails", data)}
             style={{
               borderRadius: 18,
@@ -88,7 +115,7 @@ const VisionsContainer = ({ navigation, state, scrollX, deleteVision }) => {
                 }}
               />
             </Surface>
-          </Surface>
+          </TouchableOpacity>
           <Button
             style={globalStyles.visionDeleteButton}
             color={coltsBlue}
@@ -97,13 +124,13 @@ const VisionsContainer = ({ navigation, state, scrollX, deleteVision }) => {
           >
             <Text>Delete</Text>
           </Button>
-        </Surface>
+        </TouchableOpacity>
       );
     },
     [state]
   );
 
-  const renderList = useCallback(function renderList({ item, index }) {
+  const renderList: React.FC<ListProps> = useCallback(function renderList({ item, index }) {
     return <VisionImageList index={index} data={item} />;
   });
 
@@ -125,7 +152,7 @@ const VisionsContainer = ({ navigation, state, scrollX, deleteVision }) => {
   );
 };
 
-const mapStateToProps = (state, ownProps) => {
+const mapStateToProps = (state:any) => {
   return {
     state: state.visions,
   };

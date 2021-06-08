@@ -7,8 +7,6 @@ import {
 import { globalStyles } from "../styles/global";
 import { connect } from "react-redux";
 import NoteMain from "../components/notes/notesMain";
-import { StateType, ActionType } from 'typesafe-actions';
-
 interface NoteProps {
   noteScreenContainer?: StyleProp<ViewStyle>;
   stateNotes: any;

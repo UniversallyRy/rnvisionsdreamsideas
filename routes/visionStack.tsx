@@ -1,15 +1,22 @@
 import React from "react";
-import { createStackNavigator } from "react-navigation-stack";
+import {
+  createStackNavigator,
+  NavigationStackProp,
+} from "react-navigation-stack";
 import Visions from "../screens/visionScreen";
 // import VisionImageGrid from '../components/visions/visionImageGrid';
 import VisionDetails from "../components/visions/visionDetails";
 import Header from "../shared/header";
 import { coltsGray, coltsBlue } from "../styles/global";
 
+type NavProp = {
+  navigation: NavigationStackProp,
+};
+
 const screens = {
   VisionImageGrid: {
     screen: Visions,
-    navigationOptions: ({ navigation }) => {
+    navigationOptions: ({ navigation }: NavProp) => {
       return {
         headerTitle: () => (
           <Header navigation={navigation} title="Vision Board" />

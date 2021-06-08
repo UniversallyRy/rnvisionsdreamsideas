@@ -3,11 +3,15 @@ import {
   Animated,
   Modal,
   StyleSheet,
+  StyleProp,
+  TextStyle,
+  ViewStyle,
   View,
   TouchableWithoutFeedback,
   Keyboard,
 } from "react-native";
 import { Text } from "react-native-paper";
+import { NavigationStackProp } from 'react-navigation-stack';
 import AddVision from "../components/visions/addVision";
 import VisionsContainer from "../components/visions/visionImageList";
 import VisionGridContainer from "../components/visions/visionImageGrid";
@@ -16,11 +20,25 @@ import Icon from "../shared/icon";
 
 const VISIBLE_ITEMS = 3;
 
-const Visions = ({ navigation }) => {
+interface VisionProps {
+  navigation: NavigationStackProp;
+  container: StyleProp<ViewStyle>;
+  modalContent: StyleProp<TextStyle>;
+  modalClose: StyleProp<ViewStyle>;
+  visionAddToggle: StyleProp<ViewStyle>;
+}
+
+interface Styles {
+  container: ViewStyle;
+}
+
+
+const Visions: React.FC<VisionProps> = ({ navigation }) => {
   const scrollX = useRef(new Animated.Value(0)).current;
   const scrollXIndex = useRef(new Animated.Value(0)).current;
   const [modalOpen, setModalOpen] = useState(false);
   const [gridView, setGridView] = useState(false);
+
 
   useEffect(() => {
     let isCancelled = false;
@@ -40,10 +58,10 @@ const Visions = ({ navigation }) => {
   return (
     <View style={styles.container}>
       {/* <StatusBar hidden/> */}
-      <Modal style={{ margin: 10 }} visible={modalOpen} animationType="slide">
-        <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+      <Modal visible={modalOpen} animationType="slide">
+        <TouchableWithoutFeedback style={{ margin: 10 }} onPress={Keyboard.dismiss}>
           <View style={globalStyles.modalContent}>
-            <Text Text="Add Vision"> Add A Vision </Text>
+            <Text> Add A Vision </Text>
             <AddVision setModalOpen={setModalOpen} />
             <View style={globalStyles.closeModalContainer}>
               <Icon
@@ -69,7 +87,7 @@ const Visions = ({ navigation }) => {
   );
 };
 
-const styles = StyleSheet.create({
+const styles = StyleSheet.create<Styles>({
   container: {
     flex: 1,
     alignItems: "center",
