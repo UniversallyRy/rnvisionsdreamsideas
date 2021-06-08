@@ -3,12 +3,13 @@ import { StyleSheet, StyleProp, TextStyle, ViewStyle, View } from "react-native"
 import { Card, Text } from "react-native-paper";
 import { coltsGray, coltsBlue } from "../styles/global";
 
-interface AboutProps {
+interface StyleProps {
   aboutContainer: StyleProp<ViewStyle>;
   text: StyleProp<TextStyle>;
 }
 
 interface Styles {
+  textContainer: ViewStyle;
   aboutContainer: ViewStyle;
   text: TextStyle;
 }
@@ -16,10 +17,10 @@ interface Styles {
 const aboutText: string =
   "This is an ongoing App based on charting any visions or dreams you may have. Notes tab for thoughts and todos.";
 
-const About: React.FC<AboutProps> = () => {
+const About: React.FC<StyleProps> = () => {
   return (
-    <View style={{ backgroundColor: coltsGray, flex: 1 }}>
-      <Card style={styles.aboutContainer}>
+    <View style={styles.aboutContainer}>
+      <Card style={styles.textContainer}>
         <Text style={styles.text}>
           {" "}
           {aboutText}{" "}
@@ -30,13 +31,11 @@ const About: React.FC<AboutProps> = () => {
 };
 
 const styles = StyleSheet.create<Styles>({
-  text: {
-    padding: 8,
-    margin: 30,
-    alignSelf: "center",
-    color: coltsGray,
+  aboutContainer:{
+    backgroundColor: coltsGray, 
+    flex: 1
   },
-  aboutContainer: {
+  textContainer: {
     backgroundColor: coltsBlue,
     flex: 0.4,
     flexDirection: "row",
@@ -44,6 +43,12 @@ const styles = StyleSheet.create<Styles>({
     alignItems: "center",
     justifyContent: "center",
     elevation: 4,
+  },
+  text: {
+    padding: 8,
+    margin: 30,
+    alignSelf: "center",
+    color: coltsGray,
   },
 });
 
