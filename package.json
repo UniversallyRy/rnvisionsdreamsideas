@@ -20,7 +20,6 @@
     "fontsource-roboto": "^3.0.3",
     "formik": "^2.2.5",
     "immer": "^8.0.0",
-    "logrocket": "^1.2.3",
     "moment": "^2.29.1",
     "react": "16.13.1",
     "react-dom": "16.13.1",
