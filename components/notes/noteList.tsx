@@ -1,12 +1,29 @@
 import React, { useState } from "react";
-import { Modal, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { Modal, StyleSheet, StyleProp, TextStyle, ViewStyle, Text, TouchableOpacity, View } from "react-native";
 import { Button, Card, Paragraph } from "react-native-paper";
 import { connect } from "react-redux";
 import NotesModal from "./notesModal";
-import { coltsGray } from "../../styles/global";
 import { deleteNote } from "../../redux/actions";
 
-const NoteList = ({ notes, deleteNote }) => {
+interface NoteListProps {
+  notes: object;
+  deleteNote: ((item: object) => void);
+  noteContainer: StyleProp<ViewStyle>;
+  noteTitle: StyleProp<TextStyle>;
+  count: StyleProp<TextStyle>;
+  subtitle: StyleProp<ViewStyle>;
+  deleteButton: StyleProp<TextStyle>;
+}
+
+interface Styles {
+  noteContainer: ViewStyle;
+  noteTitle: TextStyle;
+  count: TextStyle;
+  subtitle: ViewStyle;
+  deleteButton: ViewStyle;
+}
+
+const NoteList: React.FC<NoteListProps> = ({ notes, deleteNote }) => {
   const [visible, setVisible] = useState(false);
   const noteCount = Object.keys(notes).length;
 
@@ -39,7 +56,7 @@ const NoteList = ({ notes, deleteNote }) => {
   );
 };
 
-const styles = StyleSheet.create({
+const styles = StyleSheet.create<Styles>({
   noteContainer: {
     padding: 32,
     flexDirection: "column",

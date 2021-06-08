@@ -5,44 +5,43 @@ import {
   Text,
   TouchableOpacity,
   View,
+  StyleProp,
+  TextStyle, 
+  ViewStyle,
 } from "react-native";
-import { TextInput } from "react-native-paper";
+import { TextInput, Button } from "react-native-paper";
 import { connect } from "react-redux";
 import { AntDesign } from "@expo/vector-icons";
 import { Formik } from "formik";
 import * as yup from "yup";
-import { addList } from "../../redux/actions";
+import { addNote } from "../../redux/actions";
 import { globalStyles } from "../../styles/global";
+
+interface ModalProps {
+  closeModal: (() => void);
+  addNote: ((item: object) => void);
+  container: StyleProp<ViewStyle>;
+  title: StyleProp<TextStyle>;
+  input: StyleProp<TextStyle>;
+  create: StyleProp<ViewStyle>;
+  colorSelect: StyleProp<ViewStyle>;
+  todoErrorText: StyleProp<TextStyle>;
+}
+
+interface Styles {
+  container: ViewStyle;
+  title: TextStyle;
+  input: TextStyle;
+  create: ViewStyle;
+  colorSelect: ViewStyle;
+}
 
 const listSchema = yup.object({
   name: yup.string().required().min(4),
 });
 
 // red, slate blue, black, dark gray, blueish gray, teal, tan
-const AddTodoListModal = ({ closeModal, addList }) => {
-  const bgColors = [
-    "#FE1F14",
-    "#B9D3EE",
-    "#000000",
-    "#57575E",
-    "#2E4045",
-    "#83ADB5",
-    "#BFB5B2",
-  ];
-  const [bgColor, setColor] = useState(bgColors[0]);
-
-  const renderColors = () => {
-    return bgColors.map((color) => {
-      return (
-        <TouchableOpacity
-          key={color}
-          style={[styles.colorSelect, { backgroundColor: color }]}
-          onPress={() => setColor(color)}
-        />
-      );
-    });
-  };
-
+const AddNoteModal: React.FC<ModalProps> = ({ closeModal, addNote }) => {
   return (
     <KeyboardAvoidingView style={styles.container} behavior={"padding"}>
       <TouchableOpacity
@@ -53,14 +52,12 @@ const AddTodoListModal = ({ closeModal, addList }) => {
       </TouchableOpacity>
 
       <View style={{ alignSelf: "stretch", marginHorizontal: 32 }}>
-        <Text style={styles.title}>Create Todo List</Text>
+        <Text style={styles.title}>Create A New Note</Text>
         <Formik
-          initialValues={{ name: "", id: 0, color: "", todos: [] }}
+          initialValues={{ name: "", id: 0 }}
           validationSchema={listSchema}
           onSubmit={(values, actions) => {
-            let color = bgColor;
-            values.color = color;
-            addList(values);
+            addNote(values);
             actions.resetForm();
             closeModal();
           }}
@@ -78,11 +75,11 @@ const AddTodoListModal = ({ closeModal, addList }) => {
                 enablesReturnKeyAutomatically={true}
                 autoCorrect={true}
                 style={styles.input}
-                placeholder="Enter A New List . . ."
+                placeholder="Enter A New Note . . ."
                 placeholderTextColor={"#002C5F"}
-                onChangeText={handleChange("name")}
+                onChangeText={handleChange("note")}
                 value={values.name}
-                onBlur={handleBlur("name")}
+                onBlur={handleBlur("note")}
               />
 
               <Text style={globalStyles.todoErrorText}>
@@ -94,16 +91,13 @@ const AddTodoListModal = ({ closeModal, addList }) => {
                   justifyContent: "space-between",
                   marginTop: 12,
                 }}
-              >
-                {renderColors()}
-              </View>
-              <TouchableOpacity
-                style={[styles.create, { backgroundColor: bgColor }]}
-                onPress={handleSubmit}
-              >
-                <Text style={{ color: "white", fontWeight: "600" }}>
-                  Create
-                </Text>
+              ></View>
+              <TouchableOpacity style={[styles.create, { backgroundColor: "#f30" }]}>
+                <Button onPress={handleSubmit}>
+                  <Text style={{ color: "white", fontWeight: "600" }}>
+                  Add Note
+                  </Text>
+                </Button>
               </TouchableOpacity>
             </View>
           )}
@@ -113,7 +107,7 @@ const AddTodoListModal = ({ closeModal, addList }) => {
   );
 };
 
-const styles = StyleSheet.create({
+const styles = StyleSheet.create<Styles>({
   container: {
     flex: 1,
     justifyContent: "center",
@@ -149,12 +143,12 @@ const styles = StyleSheet.create({
   },
 });
 
-const mapStateToProps = (state, ownProps) => {
+const mapStateToProps = (state:any) => {
   return {
-    state: state.todos,
+    state: state.notes,
   };
 };
 
-const mapDispatchToProps = { addList };
+const mapDispatchToProps = { addNote };
 
-export default connect(mapStateToProps, mapDispatchToProps)(AddTodoListModal);
+export default connect(mapStateToProps, mapDispatchToProps)(AddNoteModal);

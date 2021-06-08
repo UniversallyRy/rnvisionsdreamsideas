@@ -1,18 +1,38 @@
 import React, { useState } from "react";
-import { Modal, StyleSheet, Text, TouchableOpacity, View } from "react-native";
-import { Button, Card, Paragraph } from "react-native-paper";
+import { Modal, StyleProp, TextStyle, ViewStyle, StyleSheet, Text, TouchableOpacity, View, GestureResponderEvent} from "react-native";
+import { Button } from "react-native-paper";
 import { connect } from "react-redux";
 import TodosModal from "./todosModal";
 import { coltsGray } from "../../styles/global";
 import { deleteList } from "../../redux/actions";
 
-const TodoLists = ({ list, deleteList }) => {
+interface TodoListsProps {
+  list: any;
+  deleteList: ((event: GestureResponderEvent) => void);
+  listContainer: StyleProp<ViewStyle>;
+  listTitle: StyleProp<TextStyle>;
+  count: StyleProp<TextStyle>;
+  subtitle: StyleProp<TextStyle>;
+  deleteButton: StyleProp<ViewStyle>;
+}
+
+interface Styles {
+  listContainer: ViewStyle;
+  listTitle: TextStyle;
+  count: TextStyle;
+  subtitle: TextStyle;
+  deleteButton: ViewStyle;
+}
+
+
+
+const TodoLists: React.FC<TodoListsProps>= ({ list, deleteList }) => {
   const [visible, setVisible] = useState(false);
   const toggleListModal = () => {
     setVisible(!visible);
   };
 
-  Object.filter = function (obj, predicate) {
+  const filtered = (obj:object, predicate:any) => {
     let result = {},
       key;
 
@@ -24,10 +44,10 @@ const TodoLists = ({ list, deleteList }) => {
     return result;
   };
 
-  let completedCount = Object.filter(list.todos, (todo) => todo.completed);
+  let completedCount:object | number = filtered(list.todos, (todo:any) => todo.completed);
   completedCount = Object.keys(completedCount).length;
 
-  let remainingCount = Object.filter(list.todos, (todo) => {
+  let remainingCount = filtered(list.todos, (todo:any) => {
     let count = 1;
     count++;
   });
@@ -73,7 +93,7 @@ const TodoLists = ({ list, deleteList }) => {
   );
 };
 
-const styles = StyleSheet.create({
+const styles = StyleSheet.create<Styles>({
   listContainer: {
     padding: 32,
     paddingHorizontal: 16,

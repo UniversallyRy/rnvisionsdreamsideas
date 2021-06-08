@@ -2,6 +2,9 @@ import React, { useState } from "react";
 import {
   TouchableOpacity,
   StyleSheet,
+  StyleProp, 
+  TextStyle, 
+  ViewStyle,
   Text,
   View,
   KeyboardAvoidingView,
@@ -15,45 +18,102 @@ import { FlatList, RectButton, TextInput } from "react-native-gesture-handler";
 import { AntDesign, Ionicons } from "@expo/vector-icons";
 import { Formik } from "formik";
 import * as yup from "yup";
-import { deleteNote, addNote } from "../../redux/actions";
+import { addTodo, deleteTodo } from "../../redux/actions";
 import { globalStyles } from "../../styles/global";
 
-const noteSchema = yup.object({
-  name: yup.string().required().min(4),
+interface TodoModalProps {
+  list: any;
+  stateTodos: object;
+  closeModal: (() => void);
+  deleteTodo: ((item: string) => void);
+  addTodo: ((item: object) => void);
+  container: StyleProp<ViewStyle>;
+  section: StyleProp<ViewStyle>;
+  header: StyleProp<TextStyle>;
+  title: StyleProp<TextStyle>;
+  taskCount: StyleProp<TextStyle>;
+  footer: StyleProp<ViewStyle>;
+  input:StyleProp<TextStyle>;
+  todoStyle:StyleProp<ViewStyle>;
+  todonoteContainer:StyleProp<ViewStyle>;
+  todo:StyleProp<TextStyle>;
+  deleteButton:StyleProp<ViewStyle>;
+  deleteTodoButton:StyleProp<ViewStyle>;
+}
+
+interface RenderProps {
+  note?: any;
+}
+
+interface Styles {
+  container: ViewStyle;
+  section: ViewStyle;
+  header: TextStyle;
+  title: TextStyle;
+  taskCount: ViewStyle;
+  footer: ViewStyle;
+  input:TextStyle;
+  todoStyle:ViewStyle;
+  todoContainer:ViewStyle;
+  todo:TextStyle;
+  deleteButton:ViewStyle;
+  deleteTodoButton:ViewStyle;
+}
+
+
+const todoSchema = yup.object({
+  title: yup.string().required().min(4),
 });
 
-const NotesModal = ({ notes, closeModal, deleteNote, addNote }) => {
-  const [completedNote, setCompleted] = useState(false);
-  const newNotes = notes;
-  const taskCount = newNotes.length;
-  const completedCount = newNotes.filter((note) => note.completed).length;
+const TodosModal: React.FC<TodoModalProps> = ({ list, closeModal, deleteTodo, addTodo }) => {
+  const [completedTodo, setCompleted] = useState(false);
+  const newTodos = list.todos;
+  const taskCount = newTodos.length;
+  const completedCount = newTodos.filter((todo:any) => todo.completed).length;
 
-  const toggleNoteCompleted = (index) => {
-    setCompleted((newNotes[index].completed = !newNotes[index].completed));
+  const toggleTodoCompleted = (index:number) => {
+    setCompleted((newTodos[index].completed = !newTodos[index].completed));
   };
 
-  const removeNote = (id) => {
-    var noteId = id;
-    deleteNote(noteId);
+  const removeTodo = (id:string) => {
+    var todoId = id;
+    deleteTodo(todoId);
   };
 
-  const renderNote = (note, index) => {
+  const renderTodo = (todo:any, index:number) => {
     return (
-      <View renderRightActions={(_, dragX) => rightActions(dragX, index)}>
-        <TouchableOpacity style={styles.noteContainer}>
-          <Text>{note.name}</Text>
+      <View renderRightActions={(_:any, dragX:any) => rightActions(dragX, index)}>
+        <TouchableOpacity style={styles.todoContainer}>
+          <Ionicons
+            name={todo.completed ? "ios-square" : "ios-square-outline"}
+            size={24}
+            color="gray"
+            style={{ width: 32 }}
+            onPress={() => toggleTodoCompleted(index)}
+          />
+          <Text
+            style={[
+              styles.todo,
+              {
+                textDecorationLine: todo.completed ? "line-through" : "none",
+                color: todo.completed ? "gray" : "black",
+              },
+            ]}
+          >
+            {todo.title}
+          </Text>
           <AntDesign
             name="closecircle"
             size={24}
-            style={styles.deleteNoteButton}
-            onPress={() => removeNote(note.id)}
+            style={styles.deleteTodoButton}
+            onPress={() => removeTodo(todo.id)}
           />
         </TouchableOpacity>
       </View>
     );
   };
 
-  const rightActions = (dragX, index) => {
+  const rightActions = (dragX:any, index:number) => {
     const trans = dragX.interpolate({
       inputRange: [0, 50, 100, 101],
       outputRange: [-20, 0, 0, 1],
@@ -92,28 +152,30 @@ const NotesModal = ({ notes, closeModal, deleteNote, addNote }) => {
           style={[
             styles.section,
             styles.header,
-            { borderBottomColor: newNotes.color },
+            { borderBottomColor: newTodos.color },
           ]}
         >
-          <Text style={styles.title}>{newNotes.name}</Text>
-          <Text style={styles.taskCount}>There are {taskCount} Notes</Text>
+          <Text style={styles.title}>{newTodos.name}</Text>
+          <Text style={styles.taskCount}>
+            Completed {completedCount} of {taskCount} tasks
+          </Text>
         </View>
         <View style={[styles.section, { flex: 3 }]}>
           <FlatList
-            data={newNotes}
+            data={newTodos}
             keyExtractor={(_, index) => index.toString()}
             contentContainerStyle={{
               paddingHorizontal: 32,
               paddingVertical: 64,
             }}
             showsVerticalScrollIndicator={false}
-            renderItem={({ item, index }) => renderNote(item, index)}
+            renderItem={({ item, index }) => renderTodo(item, index)}
           />
           <Formik
-            initialValues={{ name: "", id: "" }}
-            validationSchema={noteSchema}
+            initialValues={{ title: "", id: "", completed: false }}
+            validationSchema={todoSchema}
             onSubmit={(values, actions) => {
-              addNote(values);
+              addTodo(values);
               actions.resetForm();
               Keyboard.dismiss();
             }}
@@ -131,20 +193,20 @@ const NotesModal = ({ notes, closeModal, deleteNote, addNote }) => {
                   enablesReturnKeyAutomatically={true}
                   autoCorrect={true}
                   style={[globalStyles.noteInput, { borderColor: "red" }]}
-                  placeholder="Enter Note . . ."
+                  placeholder="Enter Todo . . ."
                   placeholderTextColor={"#002C5F"}
-                  onChangeText={handleChange("name")}
-                  value={values.name}
-                  onBlur={handleBlur("name")}
+                  onChangeText={handleChange("title")}
+                  value={values.title}
+                  onBlur={handleBlur("title")}
                 />
-                <TouchableOpacity
-                  style={[styles.noteStyle, { backgroundColor: "red" }]}
+                <Button
+                  style={[styles.todoStyle, { backgroundColor: "red" }]}
                   onPress={handleSubmit}
                 >
                   <AntDesign name="plus" size={16} color="white" />
-                </TouchableOpacity>
-                <Text style={globalStyles.noteErrorText}>
-                  {touched.name && errors.name}
+                </Button>
+                <Text style={globalStyles.todoErrorText}>
+                  {touched.title && errors.title}
                 </Text>
               </View>
             )}
@@ -155,7 +217,7 @@ const NotesModal = ({ notes, closeModal, deleteNote, addNote }) => {
   );
 };
 
-const styles = StyleSheet.create({
+const styles = StyleSheet.create<Styles>({
   container: {
     flex: 1,
     justifyContent: "center",
@@ -194,17 +256,17 @@ const styles = StyleSheet.create({
     margin: 8,
     paddingHorizontal: 8,
   },
-  noteStyle: {
+  todoStyle: {
     borderRadius: 4,
     padding: 16,
   },
-  noteContainer: {
+  todoContainer: {
     display: "flex",
     justifyContent: "flex-end",
     flexDirection: "row",
     paddingVertical: 16,
   },
-  note: {
+  todo: {
     color: "black",
     fontWeight: "700",
     fontSize: 16,
@@ -215,18 +277,18 @@ const styles = StyleSheet.create({
     alignItems: "center",
     width: 80,
   },
-  deleteNoteButton: {
+  deleteTodoButton: {
     marginLeft: "auto",
     color: "red",
   },
 });
 
-const mapStateToProps = (state, ownProps) => {
+const mapStateToProps = (state:any) => {
   return {
-    state: state.notes,
+    state: state.todos,
   };
 };
 
-const mapDispatchToProps = { addNote, deleteNote };
+const mapDispatchToProps = { addTodo, deleteTodo };
 
-export default connect(mapStateToProps, mapDispatchToProps)(NotesModal);
+export default connect(mapStateToProps, mapDispatchToProps)(TodosModal);

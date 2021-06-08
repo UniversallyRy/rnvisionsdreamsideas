@@ -6,6 +6,9 @@ import {
   TouchableOpacity,
   FlatList,
   Modal,
+  StyleProp,
+  TextStyle, 
+  ViewStyle,
 } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
 import TodoLists from "./todoLists";
@@ -14,7 +17,28 @@ import AddTodoListModal from "./addTodoListModal";
 import AddNoteModal from "./addNoteModal";
 import { coltsGray } from "../../styles/global";
 
-const NoteMain = ({ stateNotes, stateTodos }) => {
+interface NoteMainProps {
+  stateNotes: object;
+  stateTodos: object;
+  container: StyleProp<ViewStyle>;
+  titleStyle: StyleProp<TextStyle>;
+  divider: StyleProp<ViewStyle>;
+  title: StyleProp<TextStyle>;
+  addList: StyleProp<ViewStyle>;
+  add: StyleProp<TextStyle>;
+}
+
+interface Styles {
+  container: ViewStyle;
+  titleStyle: TextStyle;
+  divider: ViewStyle;
+  title: TextStyle;
+  addList: ViewStyle;
+  add: TextStyle;
+}
+
+
+const NoteMain: React.FC<NoteMainProps> = ({ stateNotes, stateTodos }) => {
   const [todoModal, setTodoModal] = useState(false);
   const [noteModal, setNoteModal] = useState(false);
 
@@ -25,7 +49,7 @@ const NoteMain = ({ stateNotes, stateTodos }) => {
     setNoteModal(!noteModal);
   };
 
-  const renderList = (list) => {
+  const renderList = (list:object) => {
     return <TodoLists list={list} />;
   };
 
@@ -63,8 +87,7 @@ const NoteMain = ({ stateNotes, stateTodos }) => {
       >
         <NoteList notes={stateNotes} style={{ marginRight: 5 }} key={1} />
         <FlatList
-          data={stateTodos}
-          keyExtractor={(item) => item.id.toString()}
+          data={[stateTodos]}
           horizontal={true}
           showsHorizontalScrollIndicator={false}
           renderItem={({ item }) => renderList(item)}
@@ -113,7 +136,7 @@ const NoteMain = ({ stateNotes, stateTodos }) => {
   );
 };
 
-const styles = StyleSheet.create({
+const styles = StyleSheet.create<Styles>({
   container: {
     flex: 1,
     alignItems: "center",
