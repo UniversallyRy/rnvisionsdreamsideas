@@ -265,7 +265,7 @@ export const globalStyles = StyleSheet.create({
     width: 100,
     height: 100,
   },
-  noteErrorText: {
+  todoErrorText: {
     width: windowWidth * 0.75,
     color: "crimson",
     fontWeight: "bold",
