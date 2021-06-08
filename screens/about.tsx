@@ -5,6 +5,7 @@ import { coltsGray, coltsBlue } from "../styles/global";
 
 interface StyleProps {
   aboutContainer: StyleProp<ViewStyle>;
+  textContainer: StyleProp<ViewStyle>;
   text: StyleProp<TextStyle>;
 }
 
