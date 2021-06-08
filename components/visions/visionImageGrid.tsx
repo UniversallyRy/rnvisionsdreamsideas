@@ -1,5 +1,5 @@
 import React, { useCallback, memo } from "react";
-import { Image, StyleSheet,  StyleProp, TextStyle, ViewStyle, Dimensions, View } from "react-native";
+import { Image, StyleSheet,  StyleProp, ViewStyle, Dimensions, View } from "react-native";
 import { NavigationStackProp } from 'react-navigation-stack';
 import { FlatList } from "react-native-gesture-handler";
 import { Card } from "react-native-paper";
