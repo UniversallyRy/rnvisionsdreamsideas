@@ -30,7 +30,7 @@ const getFonts = () =>
   });
 // const CombinedDefaultTheme = merge( PaperDefaultTheme, NavigationDefaultTheme );
 // const CombinedDarkTheme = merge( PaperDarkTheme, NavigationDarkTheme );
-// todos: FINISH FIXING JEST TESTING, modal fixes/keyboard popup pushes content, visionboard fixes, build dream journal out, add separate note container and reducer
+// todos: FINISH FIXING JEST TESTING, IMPROVE ACCESSIBILITY, modal fixes/keyboard popup pushes content, visionboard fixes, build dream journal out, add separate note container and reducer
 const App = () => {
   const [fontsLoaded, setFontsLoaded] = useState(false);
   const [persistLoaded, setPersistLoaded] = useState(true);
