@@ -74,6 +74,7 @@ const VisionsContainer: React.FC<ImageProps> = ({
             width,
             justifyContent: "center",
             alignItems: "center",
+            marginTop: 10,
           }}
         >
           <TouchableOpacity

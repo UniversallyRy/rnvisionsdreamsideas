@@ -4,10 +4,12 @@ import { Button, Text } from "react-native-paper";
 import { coltsBlue, raidSilver } from "../styles/global";
 
 interface ButtonProps {
-  text: string;
+  text?: string;
   onPress: () => void; //((event: GestureResponderEvent) => void);
   button?: StyleProp<ViewStyle>;
   buttonText?: StyleProp<TextStyle>;
+  accessabilityLabel?: string;
+  style?: any
 }
 
 interface Styles {
@@ -24,7 +26,7 @@ const FlatButton:React.FC<ButtonProps> = ({ text, onPress }) => {
       style={styles.button}
       onPress={onPress}
     >
-      <Text style={styles.buttonText}> {text} </Text>
+      <Text style={styles.buttonText}>{text}</Text>
     </Button>
   );
 };
@@ -34,8 +36,8 @@ const styles = StyleSheet.create<Styles>({
     alignSelf: "center",
     width: 200,
     borderRadius: 2,
-    paddingVertical: 30,
-    marginTop: 30,
+    paddingVertical: 10,
+    marginTop: 20,
     marginBottom: 10,
     borderColor: "black",
     backgroundColor: raidSilver,
@@ -46,7 +48,6 @@ const styles = StyleSheet.create<Styles>({
     },
     shadowOpacity: 7.25,
     shadowRadius: 4.84,
-
     elevation: 5,
   },
   buttonText: {

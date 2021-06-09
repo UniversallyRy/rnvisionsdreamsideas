@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { View, StyleProp, ViewStyle, Platform, Dimensions, Image } from "react-native";
-import { Button } from "react-native-paper";
+import { Button, Text } from "react-native-paper";
 import { connect } from "react-redux";
 import * as ImagePicker from "expo-image-picker";
 import { coltsBlue, globalStyles } from "../../styles/global";
@@ -85,7 +85,6 @@ const ImagePic: React.FC<ImageProps> = ({ addPic }) => {
           Add from gallery
         </Button>
         <Button
-          icon="plus"
           color={coltsBlue}
           style={globalStyles.uploadButton}
           accessibilityLabel="Take A Picture"
@@ -94,17 +93,18 @@ const ImagePic: React.FC<ImageProps> = ({ addPic }) => {
           Take a Picture
         </Button>
       </View>
-      {image && (
-        <Image
-          source={{ uri: image }}
-          style={{
-            width: windowWidth * 0.97,
-            height: windowHeight * 0.4,
-            resizeMode: "cover",
-            alignSelf: "center",
-          }}
-        />
-      )}
+      <Text>
+        {image && (
+          <Image source={{uri: image}}
+            style={{
+              width: windowWidth * 0.97,
+              height: windowHeight * 0.4,
+              resizeMode: "cover",
+              alignSelf: "center",
+            }}
+          />
+        )}
+      </Text>
     </>
   );
 };

@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef } from "react";
-import { View, GestureResponderEvent } from "react-native";
+import { View } from "react-native";
 import { TextInput, Text } from "react-native-paper";
 import { connect } from "react-redux";
 import { Formik } from "formik";
@@ -56,7 +56,7 @@ const AddVision: React.FC<VisionProps> = ({ addVision, stateUri, setModalOpen })
               {touched.title && errors.title}
             </Text>
             <ImagePicker />
-            <FlatButton text="submit" onPress={handleSubmit} />
+            <FlatButton accessabilityLabel="submit" onPress={handleSubmit} />
           </>
         )}
       </Formik>

@@ -45,7 +45,6 @@ const Visions: React.FC<VisionProps> = ({ navigation }) => {
 
     if (!isCancelled) {
     }
-
     return () => {
       isCancelled = true;
     };
@@ -57,11 +56,12 @@ const Visions: React.FC<VisionProps> = ({ navigation }) => {
 
   return (
     <View style={styles.container}>
-      {/* <StatusBar hidden/> */}
       <Modal visible={modalOpen} animationType="slide">
         <TouchableWithoutFeedback style={{ margin: 10 }} onPress={Keyboard.dismiss}>
           <View style={globalStyles.modalContent}>
-            <Text> Add A Vision </Text>
+            <Text> 
+              Add A Vision 
+            </Text>
             <AddVision setModalOpen={setModalOpen} />
             <View style={globalStyles.closeModalContainer}>
               <Icon

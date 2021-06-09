@@ -8,21 +8,21 @@ import {
   TextStyle, 
   ViewStyle,
   KeyboardAvoidingView,
-  Keyboard,
+  Keyboard, FlatList, TextInput, Platform, Dimensions
 } from "react-native";
 import { connect } from "react-redux";
 import { Button } from "react-native-paper";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { FlatList, RectButton, TextInput } from "react-native-gesture-handler";
+// import { FlatList, TextInput } from "react-native-gesture-handler";
 import { AntDesign } from "@expo/vector-icons";
-import { Formik } from "formik";
+import { Formik, FormikHelpers } from "formik";
 import * as yup from "yup";
 import { deleteNote, addNote } from "../../redux/actions";
 import { globalStyles } from "../../styles/global";
+export const { width: windowWidth, height: windowHeight } = Dimensions.get("window");
 
 interface NoteModalProps {
-  notes: [];
-  stateTodos: object;
+  notes: any;
   closeModal: (() => void);
   deleteNote: ((item: string) => void);
   addNote: ((item: object) => void);
@@ -32,12 +32,13 @@ interface NoteModalProps {
   title: StyleProp<TextStyle>;
   taskCount: StyleProp<TextStyle>;
   footer: StyleProp<ViewStyle>;
-  input:StyleProp<TextStyle>;
-  noteStyle:StyleProp<ViewStyle>;
+  noteInput:StyleProp<TextStyle>;
+  buttonStyle:StyleProp<ViewStyle>;
   noteContainer:StyleProp<ViewStyle>;
   note:StyleProp<TextStyle>;
   deleteButton:StyleProp<ViewStyle>;
   deleteNoteButton:StyleProp<ViewStyle>;
+  noteErrorText:StyleProp<TextStyle>;
 }
 
 interface RenderProps {
@@ -51,16 +52,22 @@ interface Styles {
   title: TextStyle;
   taskCount: ViewStyle;
   footer: ViewStyle;
-  input:TextStyle;
-  noteStyle:ViewStyle;
+  noteInput:TextStyle;
+  buttonStyle:ViewStyle;
   noteContainer:ViewStyle;
   note:TextStyle;
   deleteButton:ViewStyle;
   deleteNoteButton:ViewStyle;
+  noteErrorText:TextStyle;
 }
 
+interface Values {
+  name: string;
+  id: string;
+} 
+
 const noteSchema = yup.object({
-  name: yup.string().required().min(4),
+  name: yup.string().required().min(6),
 });
 
 const NotesModal: React.FC<NoteModalProps> = ({ notes, closeModal, deleteNote, addNote }) => {
@@ -72,7 +79,7 @@ const NotesModal: React.FC<NoteModalProps> = ({ notes, closeModal, deleteNote, a
     deleteNote(noteId);
   };
 
-  const renderNote: React.FC<RenderProps> = ({note}) => {
+  const renderNote: React.FC<RenderProps> = ( note, index) => {
     return (
         <TouchableOpacity style={styles.noteContainer}>
           <Text>{note.name}</Text>
@@ -86,33 +93,11 @@ const NotesModal: React.FC<NoteModalProps> = ({ notes, closeModal, deleteNote, a
     );
   };
 
-  // const rightActions = (dragX:any, index:number) => {
-  //   const trans = dragX.interpolate({
-  //     inputRange: [0, 50, 100, 101],
-  //     outputRange: [-20, 0, 0, 1],
-  //   });
-  //   return (
-  //     <RectButton>
-  //       <Animated.View style={styles.deleteButton}>
-  //         <Animated.Text
-  //           style={{
-  //             color: "white",
-  //             fontWeight: "700",
-  //             transform: [{ translateX: trans }],
-  //           }}
-  //         >
-  //           Delete
-  //         </Animated.Text>
-  //       </Animated.View>
-  //     </RectButton>
-  //   );
-  // };
-
   return (
-    <KeyboardAvoidingView style={{ flex: 1 }} behavior="padding">
+    <KeyboardAvoidingView style={{ flex: 1 }} behavior={Platform.OS === "ios" ? "padding" : "height"}>
       <SafeAreaView style={styles.container}>
         <TouchableOpacity
-          style={{ position: "absolute", top: 64, right: 32, zIndex: 10 }}
+          style={{ position: "absolute", top: 40, right: 32, zIndex: 10 }}
         >
           <AntDesign
             name="close"
@@ -125,13 +110,13 @@ const NotesModal: React.FC<NoteModalProps> = ({ notes, closeModal, deleteNote, a
           style={[
             styles.section,
             styles.header,
-            { borderBottomColor: newNotes.color },
+            { borderBottomColor: "red" },
           ]}
         >
           <Text style={styles.title}>{newNotes.name}</Text>
           <Text style={styles.taskCount}>There are {taskCount} Notes</Text>
         </View>
-        <View style={[styles.section, { flex: 3 }]}>
+        <View style={styles.section}>
           <FlatList
             data={newNotes}
             keyExtractor={(_, index) => index.toString()}
@@ -139,12 +124,13 @@ const NotesModal: React.FC<NoteModalProps> = ({ notes, closeModal, deleteNote, a
               paddingHorizontal: 32,
               paddingVertical: 64,
             }}
-            renderItem={( item ) => renderNote({item})}
+            renderItem={({item}) => renderNote(item)}
           />
+          </View>
           <Formik
             initialValues={{ name: "", id: "" }}
             validationSchema={noteSchema}
-            onSubmit={(values, actions) => {
+            onSubmit={(values: Values, actions:FormikHelpers<Values>) => {
               addNote(values);
               actions.resetForm();
               Keyboard.dismiss();
@@ -158,31 +144,32 @@ const NotesModal: React.FC<NoteModalProps> = ({ notes, closeModal, deleteNote, a
               errors,
               handleSubmit,
             }) => (
-              <View style={[styles.section, styles.footer]}>
-                <TextInput
-                  enablesReturnKeyAutomatically={true}
-                  autoCorrect={true}
-                  style={[globalStyles.noteInput, { borderColor: "red" }]}
-                  placeholder="Enter Note . . ."
-                  placeholderTextColor={"#002C5F"}
-                  onChangeText={handleChange("name")}
-                  value={values.name}
-                  onBlur={handleBlur("name")}
-                />
+              <View style={styles.footer}>
+                <View style={{flexDirection: 'column'}}>
+                  <TextInput
+                    enablesReturnKeyAutomatically={true}
+                    autoCorrect={true}
+                    style={globalStyles.noteInput}
+                    placeholder="Enter Note . . ."
+                    placeholderTextColor={"#002C5F"}
+                    onChangeText={handleChange("name")}
+                    value={values.name}
+                    onBlur={handleBlur("name")}
+                  />
+                  <Text style={styles.noteErrorText}>
+                    {touched.name && errors.name}
+                  </Text>
+                </View>
                 <Button
-                  style={[styles.noteStyle, { backgroundColor: "red" }]}
+                  style={styles.buttonStyle}
                   onPress={handleSubmit}
                 >
-                  <AntDesign  name="plus" size={16} color="white" />
+                  <AntDesign style={{margin: "auto"}}name="plus" size={18} color="white" />
                 </Button>
-                <Text style={globalStyles.todoErrorText}>
-                  {touched.name && errors.name}
-                </Text>
               </View>
             )}
-          </Formik>
-        </View>
-      </SafeAreaView>
+          </Formik>   
+        </SafeAreaView>
     </KeyboardAvoidingView>
   );
 };
@@ -190,16 +177,16 @@ const NotesModal: React.FC<NoteModalProps> = ({ notes, closeModal, deleteNote, a
 const styles = StyleSheet.create<Styles>({
   container: {
     flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
+    height: windowHeight,
+    width: windowWidth,
+    margin:'auto',
   },
   section: {
-    flex: 1,
     alignSelf: "stretch",
   },
   header: {
     justifyContent: "flex-end",
-    marginLeft: 64,
+    marginLeft: 10,
     borderBottomWidth: 4,
   },
   title: {
@@ -214,25 +201,36 @@ const styles = StyleSheet.create<Styles>({
     fontWeight: "600",
   },
   footer: {
-    paddingHorizontal: 32,
+    position: 'absolute',
+    bottom: 0,
+    paddingHorizontal: 10,
+    paddingVertical: 10,
     flexDirection: "row",
-    alignItems: "center",
   },
-  input: {
-    flex: 1,
-    height: 48,
+  noteInput: {
+    height: 30,
     borderWidth: StyleSheet.hairlineWidth,
     borderRadius: 6,
     margin: 8,
     paddingHorizontal: 8,
+    borderColor: "red"
   },
-  noteStyle: {
+  noteErrorText:{
+    fontSize: 10,
+    color: "crimson",
+    fontWeight: "bold",
+    marginBottom: 10,
+    marginTop: 6,
+    textAlign: "center",
+  },
+  buttonStyle: {
+    height: 60,
+    margin: "auto",
     borderRadius: 4,
-    padding: 16,
+    padding: 10,
+    backgroundColor: "red", 
   },
   noteContainer: {
-    display: "flex",
-    justifyContent: "flex-end",
     flexDirection: "row",
     paddingVertical: 16,
   },

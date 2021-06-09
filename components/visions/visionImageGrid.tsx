@@ -1,5 +1,5 @@
 import React, { useCallback, memo } from "react";
-import { Image, StyleSheet,  StyleProp, ViewStyle, Dimensions, View } from "react-native";
+import { Image, StyleSheet, StyleProp, ViewStyle, ImageStyle, Dimensions, View } from "react-native";
 import { NavigationStackProp } from 'react-navigation-stack';
 import { FlatList } from "react-native-gesture-handler";
 import { Card } from "react-native-paper";
@@ -10,7 +10,7 @@ interface GridProps {
   navigation: NavigationStackProp;
   state: any;
   gridContainer: StyleProp<ViewStyle>;
-  gridItem: StyleProp<ViewStyle>;
+  gridItem: StyleProp<ImageStyle>;
 }
 
 interface ListProps {
@@ -19,7 +19,7 @@ interface ListProps {
 
 interface Styles {
   gridContainer: ViewStyle;
-  gridItem: ViewStyle;
+  gridItem: ImageStyle;
 }
 
 const { width: width, height: height } = Dimensions.get("window");
@@ -28,13 +28,13 @@ const VisionGridContainer: React.FC<GridProps> = ({ state, navigation }) => {
   const VisionGridList = memo(function GridImage({ data }:any) {
     return (
       <Card
-        style={{ ...styles.gridItem, backgroundColor: coltsBlue }}
         onPress={() => navigation.navigate("VisionDetails", data)}
-      >
-        {/* <Card onPress={ () => navigation.navigate( 'Visions', item ) }> */}
+      > 
         <Image
+          style={styles.gridItem }
           source={{ uri: data.uri }}
-          testID={data.id}
+          testID={data.id}  
+          resizeMode={'cover'}
         />
       </Card>
     );
@@ -45,7 +45,7 @@ const VisionGridContainer: React.FC<GridProps> = ({ state, navigation }) => {
   }, []);
 
   return (
-    <View style={{ flex: 1, backgroundColor: coltsBlue }}>
+    <View style={{ flex: 1 }}>
       <FlatList
         numColumns={3}
         contentContainerStyle={styles.gridContainer}
@@ -60,25 +60,18 @@ const VisionGridContainer: React.FC<GridProps> = ({ state, navigation }) => {
 
 const styles = StyleSheet.create<Styles>({
   gridContainer: {
-    paddingTop: 3,
-    backgroundColor: coltsBlue,
+    padding: 3,
   },
   gridItem: {
     height: height * 0.25,
     width: width * 0.32,
-    margin: 1,
     alignSelf: "center",
     overflow: "hidden",
-    borderRadius: 3,
-    borderWidth: 2,
+    borderRadius: 2,
+    borderWidth: 1,
     borderColor: coltsGray,
-    shadowColor: "black",
-    shadowOpacity: 0.6,
-    shadowRadius: 350,
-    shadowOffset: {
-      width: 0,
-      height: 0,
-    },
+    backgroundColor: coltsBlue,
+
   },
 });
 

@@ -65,7 +65,7 @@ const styles = StyleSheet.create<Styles>({
     marginHorizontal: 12,
     alignItems: "center",
     width: 200,
-    height: 345,
+    height: 312,
   },
   noteTitle: {
     alignSelf: "center",

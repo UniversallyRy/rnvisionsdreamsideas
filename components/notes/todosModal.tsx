@@ -10,6 +10,8 @@ import {
   KeyboardAvoidingView,
   Keyboard,
   Animated,
+  Dimensions,
+  Platform
 } from "react-native";
 import { connect } from "react-redux";
 import { Button } from "react-native-paper";
@@ -20,6 +22,8 @@ import { Formik } from "formik";
 import * as yup from "yup";
 import { addTodo, deleteTodo } from "../../redux/actions";
 import { globalStyles } from "../../styles/global";
+
+export const { width: windowWidth, height: windowHeight } = Dimensions.get("window");
 
 interface TodoModalProps {
   list: any;
@@ -33,8 +37,8 @@ interface TodoModalProps {
   title: StyleProp<TextStyle>;
   taskCount: StyleProp<TextStyle>;
   footer: StyleProp<ViewStyle>;
-  input:StyleProp<TextStyle>;
-  todoStyle:StyleProp<ViewStyle>;
+  todoInput:StyleProp<TextStyle>;
+  buttonStyle:StyleProp<ViewStyle>;
   todonoteContainer:StyleProp<ViewStyle>;
   todo:StyleProp<TextStyle>;
   deleteButton:StyleProp<ViewStyle>;
@@ -42,7 +46,7 @@ interface TodoModalProps {
 }
 
 interface RenderProps {
-  note?: any;
+  todo: any;
 }
 
 interface Styles {
@@ -52,12 +56,13 @@ interface Styles {
   title: TextStyle;
   taskCount: ViewStyle;
   footer: ViewStyle;
-  input:TextStyle;
-  todoStyle:ViewStyle;
+  todoInput:TextStyle;
+  buttonStyle:ViewStyle;
   todoContainer:ViewStyle;
   todo:TextStyle;
   deleteButton:ViewStyle;
   deleteTodoButton:ViewStyle;
+  noteErrorText:TextStyle;
 }
 
 
@@ -136,10 +141,10 @@ const TodosModal: React.FC<TodoModalProps> = ({ list, closeModal, deleteTodo, ad
   };
 
   return (
-    <KeyboardAvoidingView style={{ flex: 1 }} behavior="padding">
+    <KeyboardAvoidingView style={{ flex: 1 }} behavior={Platform.OS === "ios" ? "padding" : "height"}>
       <SafeAreaView style={styles.container}>
         <TouchableOpacity
-          style={{ position: "absolute", top: 64, right: 32, zIndex: 10 }}
+          style={{ position: "absolute", top: 40, right: 32, zIndex: 10}}
         >
           <AntDesign
             name="close"
@@ -160,7 +165,7 @@ const TodosModal: React.FC<TodoModalProps> = ({ list, closeModal, deleteTodo, ad
             Completed {completedCount} of {taskCount} tasks
           </Text>
         </View>
-        <View style={[styles.section, { flex: 3 }]}>
+        <View style={styles.section}>
           <FlatList
             data={newTodos}
             keyExtractor={(_, index) => index.toString()}
@@ -171,6 +176,7 @@ const TodosModal: React.FC<TodoModalProps> = ({ list, closeModal, deleteTodo, ad
             showsVerticalScrollIndicator={false}
             renderItem={({ item, index }) => renderTodo(item, index)}
           />
+        </View>
           <Formik
             initialValues={{ title: "", id: "", completed: false }}
             validationSchema={todoSchema}
@@ -188,30 +194,31 @@ const TodosModal: React.FC<TodoModalProps> = ({ list, closeModal, deleteTodo, ad
               errors,
               handleSubmit,
             }) => (
-              <View style={[styles.section, styles.footer]}>
-                <TextInput
-                  enablesReturnKeyAutomatically={true}
-                  autoCorrect={true}
-                  style={[globalStyles.noteInput, { borderColor: "red" }]}
-                  placeholder="Enter Todo . . ."
-                  placeholderTextColor={"#002C5F"}
-                  onChangeText={handleChange("title")}
-                  value={values.title}
-                  onBlur={handleBlur("title")}
-                />
+              <View style={styles.footer}>
+                <View style={{flexDirection: 'column'}}>
+                  <TextInput
+                    enablesReturnKeyAutomatically={true}
+                    autoCorrect={true}
+                    style={globalStyles.noteInput}
+                    placeholder="Enter Todo . . ."
+                    placeholderTextColor={"#002C5F"}
+                    onChangeText={handleChange("title")}
+                    value={values.title}
+                    onBlur={handleBlur("title")}
+                  />
+                  <Text style={styles.noteErrorText}>
+                    {touched.title && errors.title}
+                  </Text>
+                </View>
                 <Button
-                  style={[styles.todoStyle, { backgroundColor: "red" }]}
+                  style={styles.buttonStyle}
                   onPress={handleSubmit}
                 >
                   <AntDesign name="plus" size={16} color="white" />
                 </Button>
-                <Text style={globalStyles.todoErrorText}>
-                  {touched.title && errors.title}
-                </Text>
               </View>
             )}
           </Formik>
-        </View>
       </SafeAreaView>
     </KeyboardAvoidingView>
   );
@@ -220,16 +227,16 @@ const TodosModal: React.FC<TodoModalProps> = ({ list, closeModal, deleteTodo, ad
 const styles = StyleSheet.create<Styles>({
   container: {
     flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
+    height: windowHeight,
+    width: windowWidth,
+    margin:'auto',
   },
   section: {
-    flex: 1,
     alignSelf: "stretch",
   },
   header: {
     justifyContent: "flex-end",
-    marginLeft: 64,
+    marginLeft: 20,
     borderBottomWidth: 4,
   },
   title: {
@@ -244,25 +251,36 @@ const styles = StyleSheet.create<Styles>({
     fontWeight: "600",
   },
   footer: {
-    paddingHorizontal: 32,
+    position: 'absolute',
+    bottom: 0,
+    paddingHorizontal: 10,
+    paddingVertical: 10,
     flexDirection: "row",
-    alignItems: "center",
   },
-  input: {
-    flex: 1,
-    height: 48,
+  todoInput: {
+    height: 30,
     borderWidth: StyleSheet.hairlineWidth,
     borderRadius: 6,
     margin: 8,
     paddingHorizontal: 8,
+    borderColor: "red"
   },
-  todoStyle: {
+  noteErrorText:{
+    fontSize: 10,
+    color: "crimson",
+    fontWeight: "bold",
+    marginBottom: 10,
+    marginTop: 6,
+    textAlign: "center",
+  },
+  buttonStyle: {
+    height: 60,
+    margin: "auto",
     borderRadius: 4,
-    padding: 16,
+    padding: 10,
+    backgroundColor: "red", 
   },
   todoContainer: {
-    display: "flex",
-    justifyContent: "flex-end",
     flexDirection: "row",
     paddingVertical: 16,
   },
