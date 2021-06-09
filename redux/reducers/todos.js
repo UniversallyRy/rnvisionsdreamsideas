@@ -6,83 +6,83 @@ import {
   ADD_LIST,
   DELETE_LIST,
 } from "../actionTypes";
-import { v4 as uuidv4 } from "uuid";
+import uuid from "../../utils/uuid";
 import produce from "immer";
 
 const initialValue = [
   {
     name: "Plan A Trip",
-    id: uuidv4(),
+    id: uuid.generate(),
     color: "#FE1F14",
     todos: [
       {
         title: "Book Flight",
         completed: false,
-        id: uuidv4(),
+        id: uuid.generate(),
       },
       {
         title: "Passport Check",
         completed: false,
-        id: uuidv4(),
+        id: uuid.generate(),
       },
       {
         title: "Reserve Hotel",
         completed: true,
-        id: uuidv4(),
+        id: uuid.generate(),
       },
       {
         title: "Pack Luggage",
         completed: false,
-        id: uuidv4(),
+        id: uuid.generate(),
       },
     ],
   },
   {
     name: "Errands",
-    id: uuidv4(),
+    id: uuid.generate(),
     color: "#000000",
     todos: [
       {
         title: "Store",
         completed: true,
-        id: uuidv4(),
+        id: uuid.generate(),
       },
       {
         title: "Hike",
         completed: false,
-        id: uuidv4(),
+        id: uuid.generate(),
       },
       {
         title: "Take a video",
         completed: true,
-        id: uuidv4(),
+        id: uuid.generate(),
       },
       {
         title: "Walk Dog",
         completed: true,
-        id: uuidv4(),
+        id: uuid.generate(),
       },
     ],
   },
   {
     name: "Party",
-    id: uuidv4(),
+    id: uuid.generate(),
     color: "#2E4045",
     todos: [
       {
         title: "Ballons",
         completed: false,
-        id: uuidv4(),
+        id: uuid.generate(),
       },
       {
         title: "Make Dinner",
         completed: false,
-        id: uuidv4(),
+        id: uuid.generate(),
       },
       {
         title: "Send Invites",
         completed: true,
-        id: uuidv4(),
+        id: uuid.generate(),
       },
     ],
   },
@@ -99,7 +99,7 @@ export default produce((draft, action) => {
     //       ...draft,
     //       {
     //         title: action.payload.title,
-    //         id: uuidv4(),
+    //         id: uuid.generate(),
     //         completed: false,
     //       },
     //     ];
@@ -111,7 +111,7 @@ export default produce((draft, action) => {
       return [
         {
           name: action.payload.name,
-          id: uuidv4(),
+          id: uuid.generate(),
           color: action.payload.color,
           todos: [],
         },
