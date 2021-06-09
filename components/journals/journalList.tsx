@@ -35,7 +35,7 @@ const JournalList: React.FC<JournalListProps> = ({ state, navigation, deleteJour
     <FlatList
       style={{ paddingTop: 10, backgroundColor: coltsBlue }}
       data={state}
-      keyExtractor={(item, index) => index.toString(item)}
+      keyExtractor={(item, index) => index.toString()}
       renderItem={({ item }:any) => (
         <View style={globalStyles.journalBorder}>
           <Card

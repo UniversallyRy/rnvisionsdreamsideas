@@ -20,12 +20,12 @@ import { coltsGray } from "../../styles/global";
 interface NoteMainProps {
   stateNotes: object;
   stateTodos: object;
-  container: StyleProp<ViewStyle>;
-  titleStyle: StyleProp<TextStyle>;
-  divider: StyleProp<ViewStyle>;
-  title: StyleProp<TextStyle>;
-  addList: StyleProp<ViewStyle>;
-  add: StyleProp<TextStyle>;
+  container?: StyleProp<ViewStyle>;
+  titleStyle?: StyleProp<TextStyle>;
+  divider?: StyleProp<ViewStyle>;
+  title?: StyleProp<TextStyle>;
+  addList?: StyleProp<ViewStyle>;
+  add?: StyleProp<TextStyle>;
 }
 
 interface Styles {
@@ -85,9 +85,10 @@ const NoteMain: React.FC<NoteMainProps> = ({ stateNotes, stateTodos }) => {
           marginTop: 40,
         }}
       >
-        <NoteList notes={stateNotes} style={{ marginRight: 5 }} key={1} />
+        <NoteList notes={stateNotes} style={{ marginRight: 3 }} key={1} />
         <FlatList
-          data={[stateTodos]}
+          keyExtractor={(_, index) => index.toString()}  
+          data={stateTodos}
           horizontal={true}
           showsHorizontalScrollIndicator={false}
           renderItem={({ item }) => renderList(item)}
