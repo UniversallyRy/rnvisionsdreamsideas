@@ -1,15 +1,15 @@
 import { ADD_NOTE, EDIT_NOTE, DELETE_NOTE } from "../actionTypes";
-import { v4 as uuidv4 } from "uuid";
+import uuid from "../../utils/uuid";
 import produce from "immer";
 
 const initialNotes = [
   {
     name: "This is a default note",
-    id: uuidv4(),
+    id: uuid.generate(),
   },
   {
     name: "This is a 2nd note",
-    id: uuidv4(),
+    id: uuid.generate(),
   },
 ];
 export default function (state = initialNotes, action) {
@@ -19,7 +19,7 @@ export default function (state = initialNotes, action) {
         ...state,
         {
           name: action.payload.name,
-          id: uuidv4(),
+          id: uuid.generate(),
         },
       ];
 
