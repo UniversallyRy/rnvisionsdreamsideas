@@ -12,7 +12,6 @@ import { globalStyles } from "../../styles/global";
 interface AddJournalProps {
   addJournal: ((item: any) => void);
   setModalOpen: ((i:boolean) => void);
-  addJournalForm: StyleProp<ViewStyle>;
   errorText: StyleProp<TextStyle>;
 }
 

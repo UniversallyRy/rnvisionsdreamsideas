@@ -6,52 +6,7 @@ export const coltsGray = "#A2AAAD";
 export const raidSilver = "#A5ACAF";
 
 export const globalStyles = StyleSheet.create({
-  // Vision Styles
-  slideContainer: {
-    width: windowWidth,
-    height: windowHeight * 0.88,
-    backgroundColor: "transparent",
-    alignSelf: "center",
-    justifyContent: "center",
-    alignItems: "center",
-    marginBottom: 30,
-  },
-  slideCarousel: {
-    width: windowWidth,
-    flex: 1,
-  },
-  slideImage: {
-    width: windowWidth * 0.98,
-    height: windowHeight * 0.6,
-  },
-  slideTitle: {
-    alignSelf: "center",
-    justifyContent: "center",
-    fontSize: 32,
-    marginBottom: 20,
-    marginTop: 20,
-  },
-  pagination: {
-    position: "absolute",
-    bottom: 8,
-    width: "100%",
-    justifyContent: "center",
-    flexDirection: "row",
-  },
-  paginationDot: {
-    width: 8,
-    height: 8,
-    borderRadius: 4,
-    marginHorizontal: 2,
-    marginTop: 10,
-  },
-  // Journal Styles
-  addJournalForm: {
-    margin: 15,
-  },
-
   // Note Styles
-
   addNoteForm: {
     flex: 1,
     margin: 10,
