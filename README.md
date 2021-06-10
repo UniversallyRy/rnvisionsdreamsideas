@@ -62,5 +62,3 @@ A project that initially started as just a vision board, but expanded as my Java
 - Github Profile: [@universallyry](https://github.com/universallyry)
 
 ---
-
-_This README was generated with ❤️ by [readme-md-generator](https://github.com/kefranabg/readme-md-generator)_
