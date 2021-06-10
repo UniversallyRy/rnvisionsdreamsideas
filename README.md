@@ -1,9 +1,9 @@
-# Vision Board made with React Native
+# Affirmation Taker
 
 ## Built With
 
 - [React Native](https://reactnative.dev/)
-- [ReactJS](https://reactjs.org)
+- [TypeScript](https://www.typescriptlang.org/)
 - [React Redux](https://react-redux.js.org/)
 
 ## Prerequisites
@@ -14,26 +14,30 @@
 ## Usage
 
 ```bash
-expo install
+npm install
 ```
 
 or
 
 ```bash
-npm install
+bash install
 ```
 
 And then to run the project:
 
 ```bash
-expo start
+npm start
 ```
 
 or
 
 ```bash
-npm start
+expo start
 ```
+
+## About
+
+A project that initially started as just a vision board, but expanded as my JavaScript knowledge grew. It now includes a dream journal and note taker/todo list combo.
 
 ## Demo
 
@@ -49,3 +53,14 @@ npm start
     <td valign="top"><img src="demo/notes.gif"></td>
   </tr>
  </table>
+
+## Made with ❤️ by :
+
+👤 **Ryan Paige**
+
+- Twitter: [@universallyry](https://twitter.com/universallyry)
+- Github Profile: [@universallyry](https://github.com/universallyry)
+
+---
+
+_This README was generated with ❤️ by [readme-md-generator](https://github.com/kefranabg/readme-md-generator)_
