@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import {
   KeyboardAvoidingView,
   StyleSheet,
-  Text,
   TouchableOpacity,
   View,
   StyleProp,
@@ -10,13 +9,14 @@ import {
   ViewStyle,
   Platform
 } from "react-native";
-import { TextInput, Button } from "react-native-paper";
+import { TextInput, Text } from "react-native-paper";
 import { connect } from "react-redux";
 import { AntDesign } from "@expo/vector-icons";
 import { Formik } from "formik";
 import * as yup from "yup";
 import { addNote } from "../../redux/actions";
 import { globalStyles } from "../../styles/global";
+import FlatButton  from "../../shared/button";
 
 interface ModalProps {
   closeModal: (() => void);
@@ -24,7 +24,6 @@ interface ModalProps {
   container: StyleProp<ViewStyle>;
   title: StyleProp<TextStyle>;
   input: StyleProp<TextStyle>;
-  create: StyleProp<ViewStyle>;
   colorSelect: StyleProp<ViewStyle>;
   todoErrorText: StyleProp<TextStyle>;
 }
@@ -33,7 +32,6 @@ interface Styles {
   container: ViewStyle;
   title: TextStyle;
   input: TextStyle;
-  create: ViewStyle;
   colorSelect: ViewStyle;
 }
 
@@ -86,20 +84,10 @@ const AddNoteModal: React.FC<ModalProps> = ({ closeModal, addNote }) => {
               <Text style={globalStyles.todoErrorText}>
                 {touched.name && errors.name}
               </Text>
-              <View
-                style={{
-                  flexDirection: "row",
-                  justifyContent: "space-between",
-                  marginTop: 12,
-                }}
-              ></View>
-              <TouchableOpacity style={[styles.create, { backgroundColor: "#f30" }]}>
-                <Button onPress={handleSubmit}>
-                  <Text style={{ color: "white", fontWeight: "600" }}>
-                  Add Note
-                  </Text>
-                </Button>
-              </TouchableOpacity>
+              <FlatButton 
+                onPress={handleSubmit}
+                text="Add Note"
+              />
             </View>
           )}
         </Formik>
@@ -117,25 +105,12 @@ const styles = StyleSheet.create<Styles>({
   title: {
     fontSize: 28,
     fontWeight: "600",
-    color: "black",
     alignSelf: "center",
     marginBottom: 16,
   },
   input: {
-    borderWidth: StyleSheet.hairlineWidth,
-    borderColor: "blue",
-    borderRadius: 6,
-    height: 50,
     marginTop: 8,
-    paddingHorizontal: 16,
-    fontSize: 18,
-  },
-  create: {
-    marginTop: 24,
-    height: 50,
-    borderRadius: 6,
-    alignItems: "center",
-    justifyContent: "center",
+    paddingHorizontal: 18,
   },
   colorSelect: {
     width: 30,

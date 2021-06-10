@@ -7,7 +7,6 @@ import Visions from "../screens/visionScreen";
 // import VisionImageGrid from '../components/visions/visionImageGrid';
 import VisionDetails from "../components/visions/visionDetails";
 import Header from "../shared/header";
-import { coltsGray, coltsBlue } from "../styles/global";
 
 type NavProp = {
   navigation: NavigationStackProp,
@@ -34,9 +33,9 @@ const screens = {
 
 const VisionStack = createStackNavigator(screens, {
   defaultNavigationOptions: {
-    headerTintColor: coltsBlue,
+    // headerTintColor: coltsBlue,
     headerStyle: {
-      backgroundColor: coltsGray,
+      // backgroundColor: coltsGray,
       height: 100,
     },
   },

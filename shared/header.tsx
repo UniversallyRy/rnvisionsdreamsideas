@@ -1,12 +1,19 @@
 import React from "react";
-import { StyleSheet, Text, View, SafeAreaView } from "react-native";
+import { StyleSheet, View, SafeAreaView, StyleProp, TextStyle, ViewStyle } from "react-native";
+import { Text } from "react-native-paper";
 import { MaterialIcons } from "@expo/vector-icons";
-import { coltsBlue, raidSilver } from "../styles/global";
 
 type HeaderProps = {
   navigation: any;
   title: string;
+  headerContainer?: StyleProp<ViewStyle>;
+  headerText?: StyleProp<TextStyle>;
 };
+
+interface Styles {
+  headerContainer: ViewStyle;
+  headerText: TextStyle;
+}
 
 const Header:React.FC<HeaderProps> = ({ navigation, title }) => {
   const openMenu = () => {
@@ -20,7 +27,6 @@ const Header:React.FC<HeaderProps> = ({ navigation, title }) => {
           name="menu"
           size={36}
           onPress={openMenu}
-          styles={styles.icon}
         />
         {/* <Image source={require('../assets/favicon.png')}/> */}
         <Text style={styles.headerText}>{title}</Text>
@@ -29,33 +35,15 @@ const Header:React.FC<HeaderProps> = ({ navigation, title }) => {
   );
 };
 
-const styles = StyleSheet.create({
-  header: {
-    width: "100%",
-    height: "100%",
-    flex: 1,
+const styles = StyleSheet.create<Styles>({
+  headerContainer: {
     flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "flex-start",
-    backgroundColor: raidSilver,
   },
   headerText: {
     fontWeight: "bold",
     marginTop: 8,
     marginLeft: 20,
-    color: coltsBlue,
     letterSpacing: 7,
-  },
-  headerContainer: {
-    flex: 1,
-    flexDirection: "row",
-    padding: 10,
-    alignItems: "flex-start",
-  },
-  icon: {
-    position: "relative",
-    flex: 1,
-    marginBottom: 10,
   },
 });
 

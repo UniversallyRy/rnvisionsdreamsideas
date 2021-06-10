@@ -1,21 +1,19 @@
 import React, { useState } from "react";
 import {
   StyleSheet,
-  Text,
   View,
-  TouchableOpacity,
   FlatList,
   Modal,
   StyleProp,
   TextStyle, 
   ViewStyle,
 } from "react-native";
-import { AntDesign } from "@expo/vector-icons";
+import { Text } from "react-native-paper";
 import TodoLists from "./todoLists";
 import NoteList from "./noteList";
 import AddTodoListModal from "./addTodoListModal";
 import AddNoteModal from "./addNoteModal";
-import { coltsGray } from "../../styles/global";
+import { Icon } from "../../shared/icon";
 
 interface NoteMainProps {
   stateNotes: object;
@@ -25,7 +23,6 @@ interface NoteMainProps {
   divider?: StyleProp<ViewStyle>;
   title?: StyleProp<TextStyle>;
   addList?: StyleProp<ViewStyle>;
-  add?: StyleProp<TextStyle>;
 }
 
 interface Styles {
@@ -34,7 +31,6 @@ interface Styles {
   divider: ViewStyle;
   title: TextStyle;
   addList: ViewStyle;
-  add: TextStyle;
 }
 
 
@@ -73,7 +69,7 @@ const NoteMain: React.FC<NoteMainProps> = ({ stateNotes, stateTodos }) => {
         <View style={styles.divider} />
         <Text style={styles.title}>
           Note{" "}
-          <Text style={{ fontWeight: "300", color: coltsGray }}>Lists</Text>
+          <Text style={{ fontWeight: "300", color: "lightgray" }}>Lists</Text>
         </Text>
         <View style={styles.divider} />
       </View>
@@ -83,7 +79,7 @@ const NoteMain: React.FC<NoteMainProps> = ({ stateNotes, stateTodos }) => {
           flexDirection: "row",
         }}
       >
-        <NoteList notes={stateNotes} style={{ marginRight: 3 }} key={1} />
+        <NoteList notes={stateNotes} key={1} />
         <FlatList
           keyExtractor={(_, index) => index.toString()}  
           data={stateTodos}
@@ -93,42 +89,9 @@ const NoteMain: React.FC<NoteMainProps> = ({ stateNotes, stateTodos }) => {
           keyboardShouldPersistTaps="always"
         />
       </View>
-      <View
-        style={{
-          marginVertical: 40,
-          flexDirection: "row",
-        }}
-      >
-        <View
-          style={{
-            flexDirection: "column",
-            marginRight: 5,
-            alignItems: "center",
-          }}
-        >
-          <TouchableOpacity
-            onPress={() => toggleNoteModal()}
-            style={styles.addList}
-          >
-            <AntDesign color={coltsGray} name="plus" size={30} />
-          </TouchableOpacity>
-          <Text style={styles.add}>Add New Note</Text>
-        </View>
-        <View
-          style={{
-            flexDirection: "column",
-            marginLeft: 5,
-            alignItems: "center",
-          }}
-        >
-          <TouchableOpacity
-            onPress={() => toggleTodoModal()}
-            style={styles.addList}
-          >
-            <AntDesign color={coltsGray} name="plus" size={30} />
-          </TouchableOpacity>
-          <Text style={styles.add}>Add New Todos</Text>
-        </View>
+      <View style={styles.addList}>
+        <Icon item="plus" onPress={() => toggleNoteModal()} />
+        <Icon item="plus" onPress={() => toggleTodoModal()} />
       </View>
     </View>
   );
@@ -145,7 +108,7 @@ const styles = StyleSheet.create<Styles>({
     marginTop: 50,
   },
   divider: {
-    backgroundColor: coltsGray,
+    backgroundColor: "black",
     height: 1,
     flex: 1,
     marginTop: 40,
@@ -153,22 +116,11 @@ const styles = StyleSheet.create<Styles>({
   title: {
     fontSize: 38,
     fontWeight: "800",
-    color: "black",
     paddingHorizontal: 20,
   },
   addList: {
-    borderWidth: 2,
-    width: 100,
-    borderRadius: 4,
-    padding: 16,
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  add: {
-    color: "black",
-    fontWeight: "600",
-    fontSize: 14,
-    alignSelf: "center",
+    flexDirection: "row",
+    marginTop: "auto"
   },
 });
 

@@ -1,7 +1,6 @@
 import React from "react";
 import { StyleSheet, StyleProp, TextStyle, ViewStyle, View } from "react-native";
 import { Card, Text } from "react-native-paper";
-import { coltsGray, coltsBlue } from "../styles/global";
 
 interface AboutProps {
   aboutContainer: StyleProp<ViewStyle>;
@@ -33,23 +32,21 @@ const About: React.FC<AboutProps> = () => {
 
 const styles = StyleSheet.create<Styles>({
   aboutContainer:{
-    backgroundColor: coltsGray, 
-    flex: 1
+    flex: 1,
+    margin: 1,
   },
   textContainer: {
-    backgroundColor: coltsBlue,
     flex: 0.4,
     flexDirection: "row",
     alignSelf: "center",
     alignItems: "center",
     justifyContent: "center",
-    elevation: 4,
+    elevation: 5,
   },
   text: {
     padding: 8,
     margin: 30,
     alignSelf: "center",
-    color: coltsGray,
   },
 });
 

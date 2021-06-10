@@ -91,11 +91,16 @@ const NotesModal: React.FC<NoteModalProps> = ({ notes, closeModal, deleteNote, a
 
   return (
     <KeyboardAvoidingView style={{ flex: 1 }} behavior={Platform.OS === "ios" ? "padding" : "height"}>
-        
-          <Icon
-            item="close"
+        <TouchableOpacity
+          style={{ position: "absolute", top: 40, right: 32, zIndex: 10 }}
+        >
+          <AntDesign
+            name="close"
+            size={24}
+            color="black"
             onPress={closeModal}
           />
+        </TouchableOpacity>
         <View
           style={[
             styles.header,
@@ -167,7 +172,7 @@ const styles = StyleSheet.create<Styles>({
     flex: 1,
   },
   header: {
-    justifyContent: "flex-end",
+    marginTop: 10,
     marginLeft: 10,
     borderBottomWidth: 2,
   },

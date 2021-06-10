@@ -1,11 +1,10 @@
-import { StyleProp, ViewStyle, TextStyle } from "react-native";
+import { StyleProp, ViewStyle } from "react-native";
 import { createDrawerNavigator } from "react-navigation-drawer";
 import { createAppContainer, NavigationNavigator, NavigationProp, NavigationState } from "react-navigation";
 import VisionStack from "./visionStack";
 import AboutStack from "./aboutStack";
 import NoteStack from "./noteStack";
 import JournalStack from "./journalStack";
-import { coltsGray, coltsBlue } from "../styles/global";
 
 interface DrawerProps {
   style?: StyleProp<ViewStyle>
@@ -28,12 +27,12 @@ const RootDrawerNavigator:NavigationNavigator<DrawerProps, NavigationProp<Naviga
   },
   {
     drawerType: "front",
-    drawerWidth: 150,
-    drawerBackgroundColor: coltsGray,
+    drawerWidth: 130,
+    // drawerBackgroundColor: coltsGray,
     contentOptions: {
       // stack screens container styling
-      activeTintColor: coltsBlue,
-      inactiveTintColor: "black",
+      // activeTintColor: coltsBlue,
+      // inactiveTintColor: "black",
       itemsContainerStyle: {
         marginVertical: 10,
       },

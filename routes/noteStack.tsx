@@ -2,7 +2,6 @@ import React from "react";
 import { createStackNavigator, NavigationStackProp } from "react-navigation-stack";
 import NoteScreen from "../screens/noteScreen";
 import Header from "../shared/header";
-import { coltsGray, coltsBlue } from "../styles/global";
 
 type NavProp = {
   navigation: NavigationStackProp;
@@ -21,9 +20,9 @@ const screens = {
 
 const NoteStack = createStackNavigator(screens, {
   defaultNavigationOptions: {
-    headerTintColor: coltsBlue,
+    // headerTintColor: coltsBlue,
     headerStyle: {
-      backgroundColor: coltsGray,
+      // backgroundColor: coltsGray,
       height: 100,
     },
   },

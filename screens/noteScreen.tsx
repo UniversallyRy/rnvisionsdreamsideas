@@ -29,8 +29,6 @@ const NoteScreen:React.FC<NoteProps> = ({ stateNotes, stateTodos }) => {
 const styles = StyleSheet.create<Styles>({
   noteScreenContainer: {
     flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
   },
 });
 

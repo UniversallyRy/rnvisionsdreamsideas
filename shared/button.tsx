@@ -9,7 +9,7 @@ interface ButtonProps {
   button?: StyleProp<ViewStyle>;
   buttonText?: StyleProp<TextStyle>;
   accessabilityLabel?: string;
-  style?: any
+  color?: any
 }
 
 interface Styles {
@@ -18,13 +18,14 @@ interface Styles {
 }
 
 // Custom button made for Flat styling
-const FlatButton:React.FC<ButtonProps> = ({ text, onPress }) => {
+const FlatButton:React.FC<ButtonProps> = ({ color, text, onPress }) => {
   return (
     <Button
-      color={coltsBlue}
+      mode="contained"
       icon="plus"
       style={styles.button}
       onPress={onPress}
+      color={color}
     >
       <Text style={styles.buttonText}>{text}</Text>
     </Button>
@@ -35,23 +36,13 @@ const styles = StyleSheet.create<Styles>({
   button: {
     alignSelf: "center",
     width: 200,
-    borderRadius: 2,
+    borderRadius: 1,
     paddingVertical: 10,
     marginTop: 20,
     marginBottom: 10,
-    borderColor: "black",
-    backgroundColor: raidSilver,
-    shadowColor: "black",
-    shadowOffset: {
-      width: 3,
-      height: 2,
-    },
-    shadowOpacity: 7.25,
-    shadowRadius: 4.84,
-    elevation: 5,
+    elevation: 1,
   },
   buttonText: {
-    color: coltsBlue,
     fontWeight: "bold",
     textTransform: "uppercase",
     fontSize: 16,

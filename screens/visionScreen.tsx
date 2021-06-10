@@ -16,7 +16,7 @@ import { NavigationStackProp } from 'react-navigation-stack';
 import AddVision from "../components/visions/addVision";
 import VisionsContainer from "../components/visions/visionImageList";
 import VisionGridContainer from "../components/visions/visionImageGrid";
-import {Icon} from "../shared/icon";
+import { Icon } from "../shared/icon";
 
 const {height: windowHeight } = Dimensions.get("window");
 
@@ -41,7 +41,6 @@ interface Styles {
 
 const Visions: React.FC<VisionProps> = ({ navigation }) => {
   const scrollX = useRef(new Animated.Value(0)).current;
-  const scrollXIndex = useRef(new Animated.Value(0)).current;
   const [modalOpen, setModalOpen] = useState(false);
   const [gridView, setGridView] = useState(false);
 
