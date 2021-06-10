@@ -4,7 +4,7 @@ import { FAB } from "react-native-paper";
 
 interface IconProps {
   item: string;
-  onPress?: ((event: GestureResponderEvent) => void);
+  onPress?: ((item:any) => void);
   modalToggle?: StyleProp<ViewStyle>;
   style?: StyleProp<TextStyle>
 }

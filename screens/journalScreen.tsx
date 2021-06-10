@@ -1,18 +1,18 @@
-import React, { useState, memo } from "react";
+import React, { useState } from "react";
 import {
   StyleSheet,
   StyleProp,
   TextStyle,
   ViewStyle,
+  Dimensions,
   View,
 } from "react-native";
 import { Text, Modal, Portal, Provider } from "react-native-paper";
 import { NavigationStackProp } from 'react-navigation-stack';
 import AddJournalModal from "../components/journals/addJournalModal";
 import JournalList from "../components/journals/journalList";
-import { coltsBlue, globalStyles } from "../styles/global";
 import JournalGridContainer from "../components/journals/journalGrid";
-import {Icon} from "../shared/icon";
+import { Icon } from "../shared/icon";
 
 interface JournalProps {
   navigation: NavigationStackProp;
@@ -21,15 +21,19 @@ interface JournalProps {
   addJournalTitle: StyleProp<TextStyle>;
   closeModalContainer: StyleProp<ViewStyle>;
   visionAddToggle:StyleProp<ViewStyle>;
+  modalContent:StyleProp<ViewStyle>;
 }
 
 interface Styles {
   journalContainer: ViewStyle;
+  addJournalContainer: ViewStyle;
   addJournalTitle: ViewStyle;
   visionAddToggle: ViewStyle;
+  modalContent: ViewStyle;
   closeModalContainer: ViewStyle;
-  addJournalContainer: ViewStyle;
 }
+
+const {height: windowHeight } = Dimensions.get("window");
 
 const JournalScreen: React.FC<JournalProps>= ({ navigation }) => {
   const [modalOpen, setModalOpen] = useState(false);
@@ -48,14 +52,15 @@ const JournalScreen: React.FC<JournalProps>= ({ navigation }) => {
             onDismiss={() => setModalOpen(false)}
             contentContainerStyle={styles.addJournalContainer}
           >
-            <Text style={styles.addJournalTitle}>Add A Journal Entry</Text>
-            <AddJournalModal setModalOpen={setModalOpen} />
-            <View style={styles.closeModalContainer}>
-              <Icon
-                item="close"
-                style={{ alignSelf:"center" }}
-                onPress={() => setModalOpen(false)}
-              />
+            <View style={styles.modalContent}>
+              <Text style={styles.addJournalTitle}>Add A Journal Entry</Text>
+              <AddJournalModal setModalOpen={setModalOpen} />
+              <View style={styles.closeModalContainer}>
+                <Icon
+                  item="close"
+                  onPress={() => setModalOpen(false)}
+                />
+              </View>
             </View>
           </Modal>
         </Portal>
@@ -75,24 +80,27 @@ const JournalScreen: React.FC<JournalProps>= ({ navigation }) => {
 
 const styles = StyleSheet.create<Styles>({
   journalContainer:{
-    flex: 1, 
-    backgroundColor: coltsBlue 
+    fontFamily: "roboto-black",
+    flex: 1,
   },
   addJournalTitle: {
     alignSelf: "center",
-    borderWidth: 1,
-    borderColor: coltsBlue,
     padding: 20,
     fontSize: 18,
     borderRadius: 2,
   },
   addJournalContainer: {
     flex: 1,
-    backgroundColor: coltsBlue,
+    backgroundColor:"white",
+    height: windowHeight,
     fontFamily: "roboto-black",
   },
   visionAddToggle: {
     flexDirection: "row",
+  },
+  modalContent: {
+    flex: 1,
+    height: windowHeight,
   },
   closeModalContainer: {
     flex: 1,

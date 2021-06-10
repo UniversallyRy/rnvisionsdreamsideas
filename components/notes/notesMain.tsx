@@ -159,14 +159,13 @@ const styles = StyleSheet.create<Styles>({
   addList: {
     borderWidth: 2,
     width: 100,
-    borderColor: coltsGray,
     borderRadius: 4,
     padding: 16,
     alignItems: "center",
     justifyContent: "center",
   },
   add: {
-    color: coltsGray,
+    color: "black",
     fontWeight: "600",
     fontSize: 14,
     alignSelf: "center",

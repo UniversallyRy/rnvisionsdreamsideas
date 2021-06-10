@@ -1,9 +1,7 @@
 import React, { useState } from "react";
-import { Modal, StyleSheet, StyleProp, TextStyle, ViewStyle, Text, TouchableOpacity, View } from "react-native";
-import { Button, Card, Paragraph } from "react-native-paper";
-import { connect } from "react-redux";
+import { Modal, StyleSheet, StyleProp, TextStyle, ViewStyle } from "react-native";
+import { Card, Text } from "react-native-paper";
 import NotesModal from "./notesModal";
-import { deleteNote } from "../../redux/actions";
 
 interface NoteListProps {
   notes: object;
@@ -12,7 +10,6 @@ interface NoteListProps {
   noteTitle: StyleProp<TextStyle>;
   count: StyleProp<TextStyle>;
   subtitle: StyleProp<ViewStyle>;
-  deleteButton: StyleProp<TextStyle>;
 }
 
 interface Styles {
@@ -20,10 +17,9 @@ interface Styles {
   noteTitle: TextStyle;
   count: TextStyle;
   subtitle: ViewStyle;
-  deleteButton: ViewStyle;
 }
 
-const NoteList: React.FC<NoteListProps> = ({ notes, deleteNote }) => {
+const NoteList: React.FC<NoteListProps> = ({ notes }) => {
   const [visible, setVisible] = useState(false);
   const noteCount = Object.keys(notes).length;
 
@@ -32,7 +28,7 @@ const NoteList: React.FC<NoteListProps> = ({ notes, deleteNote }) => {
   };
 
   return (
-    <View>
+    <Card style={[styles.noteContainer, { backgroundColor: "green" }]} onPress={() => toggleListModal()}>
       <Modal
         animationType="slide"
         visible={visible}
@@ -40,19 +36,14 @@ const NoteList: React.FC<NoteListProps> = ({ notes, deleteNote }) => {
       >
         <NotesModal notes={notes} closeModal={() => toggleListModal()} />
       </Modal>
-      <TouchableOpacity
-        style={[styles.noteContainer, { backgroundColor: "green" }]}
-        onPress={() => toggleListModal()}
-      >
         <Text style={styles.noteTitle} numberOfLines={1}>
           List of Notes
         </Text>
-        <View style={{ marginTop: "auto", alignItems: "center" }}>
+        <Card.Content style={{ alignItems: "center", bottom: 0}}>
           <Text style={styles.count}>{noteCount}</Text>
           <Text style={styles.subtitle}>Notes</Text>
-        </View>
-      </TouchableOpacity>
-    </View>
+        </Card.Content>
+    </Card>
   );
 };
 
@@ -65,32 +56,23 @@ const styles = StyleSheet.create<Styles>({
     marginHorizontal: 12,
     alignItems: "center",
     width: 200,
-    height: 312,
+    height: 280,
   },
   noteTitle: {
     alignSelf: "center",
     fontSize: 24,
     fontWeight: "700",
-    color: "white",
     marginBottom: 16,
   },
   count: {
+    marginTop: 40,
     fontSize: 48,
     fontWeight: "200",
-    color: "white",
   },
   subtitle: {
     fontSize: 12,
     fontWeight: "700",
-    color: "white",
-  },
-  deleteButton: {
-    margin: 2,
-    width: 200,
-    alignSelf: "center",
   },
 });
 
-const mapDispatchToProps = { deleteNote };
-
-export default connect(null, mapDispatchToProps)(NoteList);
+export default NoteList;

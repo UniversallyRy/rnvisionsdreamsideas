@@ -1,9 +1,8 @@
 import React, { useState } from "react";
-import { Modal, StyleProp, TextStyle, ViewStyle, StyleSheet, Text, TouchableOpacity, View, GestureResponderEvent} from "react-native";
-import { Button } from "react-native-paper";
+import { Modal, StyleProp, TextStyle, ViewStyle, StyleSheet, View, GestureResponderEvent} from "react-native";
+import { Card, Button, Text } from "react-native-paper";
 import { connect } from "react-redux";
 import TodosModal from "./todosModal";
-import { coltsGray } from "../../styles/global";
 import { deleteList } from "../../redux/actions";
 
 interface TodoListsProps {
@@ -54,7 +53,7 @@ const TodoLists: React.FC<TodoListsProps>= ({ list, deleteList }) => {
   remainingCount = Object.keys(remainingCount).length - completedCount;
 
   return (
-    <View>
+    <Card style={[styles.listContainer, { backgroundColor: list.color }]} onPress={() => toggleListModal()}>
       <Modal
         animationType="slide"
         visible={visible}
@@ -62,14 +61,10 @@ const TodoLists: React.FC<TodoListsProps>= ({ list, deleteList }) => {
       >
         <TodosModal list={list} closeModal={() => toggleListModal()} />
       </Modal>
-      <TouchableOpacity
-        style={[styles.listContainer, { backgroundColor: list.color }]}
-        onPress={() => toggleListModal()}
-      >
+      <Card.Content>
         <Text style={styles.listTitle} numberOfLines={1}>
           {list.name}
         </Text>
-        <View>
           <View style={{ alignItems: "center" }}>
             <Text style={styles.count}>{remainingCount}</Text>
             <Text style={styles.subtitle}>Remaining</Text>
@@ -78,45 +73,43 @@ const TodoLists: React.FC<TodoListsProps>= ({ list, deleteList }) => {
             <Text style={styles.count}>{completedCount}</Text>
             <Text style={styles.subtitle}>Completed</Text>
           </View>
-        </View>
-      </TouchableOpacity>
+      </Card.Content>
       <Button
         style={styles.deleteButton}
-        color={coltsGray}
         icon="close-outline"
         mode="contained"
         onPress={() => deleteList(list.id)}
       >
         Delete
       </Button>
-    </View>
+    </Card>
   );
 };
 
 const styles = StyleSheet.create<Styles>({
   listContainer: {
+    flex: 1,
     padding: 32,
     paddingHorizontal: 16,
     borderRadius: 6,
     marginHorizontal: 12,
     alignItems: "center",
     width: 200,
+    height: 245,
   },
   listTitle: {
+    alignSelf: "center",
     fontSize: 24,
     fontWeight: "700",
-    color: "white",
     marginBottom: 16,
   },
   count: {
-    fontSize: 48,
+    fontSize: 50,
     fontWeight: "200",
-    color: "white",
   },
   subtitle: {
-    fontSize: 12,
+    fontSize: 10,
     fontWeight: "700",
-    color: "white",
   },
   deleteButton: {
     margin: 2,

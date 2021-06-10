@@ -1,6 +1,5 @@
-import React, { useEffect, useState, useRef } from "react";
-import { View, StyleSheet, StyleProp, TextStyle, ViewStyle, Dimensions} from "react-native";
-import { TextInput, Text } from "react-native-paper";
+import React from "react";
+import { TextInput, Text, Surface } from "react-native-paper";
 import { connect } from "react-redux";
 import { Formik } from "formik";
 import * as yup from "yup";
@@ -10,7 +9,7 @@ import { addVision } from "../../redux/actions";
 import { globalStyles } from "../../styles/global";
 
 interface VisionProps {
-  addVision:((item: object) => void);
+  addVision:((item: any) => void);
   stateUri: string;
   setModalOpen:((arg0:boolean) => void);
 }
@@ -24,7 +23,7 @@ const simulateSlowNetworkRequest = () =>
 
 const AddVision: React.FC<VisionProps> = ({ addVision, stateUri, setModalOpen }) => {
   return (
-    <View style={{ margin: 3, marginTop: 100 }}>
+    <Surface style={{ margin: 3, marginTop: 100 }}>
       <Formik
         enableReinitialize={true}
         initialValues={{ uri: stateUri, title: "", id: null }}
@@ -60,7 +59,7 @@ const AddVision: React.FC<VisionProps> = ({ addVision, stateUri, setModalOpen })
           </>
         )}
       </Formik>
-    </View>
+    </Surface>
   );
 };
 

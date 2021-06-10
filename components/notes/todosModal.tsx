@@ -21,7 +21,6 @@ import { AntDesign, Ionicons } from "@expo/vector-icons";
 import { Formik } from "formik";
 import * as yup from "yup";
 import { addTodo, deleteTodo } from "../../redux/actions";
-import { globalStyles } from "../../styles/global";
 
 export const { width: windowWidth, height: windowHeight } = Dimensions.get("window");
 
@@ -199,7 +198,7 @@ const TodosModal: React.FC<TodoModalProps> = ({ list, closeModal, deleteTodo, ad
                   <TextInput
                     enablesReturnKeyAutomatically={true}
                     autoCorrect={true}
-                    style={globalStyles.noteInput}
+                    style={styles.todoInput}
                     placeholder="Enter Todo . . ."
                     placeholderTextColor={"#002C5F"}
                     onChangeText={handleChange("title")}
@@ -258,12 +257,12 @@ const styles = StyleSheet.create<Styles>({
     flexDirection: "row",
   },
   todoInput: {
-    height: 30,
-    borderWidth: StyleSheet.hairlineWidth,
-    borderRadius: 6,
-    margin: 8,
-    paddingHorizontal: 8,
-    borderColor: "red"
+    width: windowWidth * 0.75,
+    paddingLeft: 14,
+    paddingTop: 32,
+    paddingRight: 14,
+    paddingBottom: 16,
+    marginLeft: 4,
   },
   noteErrorText:{
     fontSize: 10,

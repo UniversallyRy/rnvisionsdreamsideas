@@ -1,6 +1,6 @@
 import React from "react";
-import { View, StyleProp, TextStyle, ViewStyle,} from "react-native";
-import { TextInput, Text } from "react-native-paper";
+import { StyleProp, TextStyle, ViewStyle,} from "react-native";
+import { TextInput, Text, Surface } from "react-native-paper";
 import { connect } from "react-redux";
 import { Formik } from "formik";
 import * as yup from "yup";
@@ -10,11 +10,12 @@ import { globalStyles } from "../../styles/global";
 
 
 interface AddJournalProps {
-  addJournal: ((item: object) => void);
+  addJournal: ((item: any) => void);
   setModalOpen: ((i:boolean) => void);
   addJournalForm: StyleProp<ViewStyle>;
   errorText: StyleProp<TextStyle>;
 }
+
 
 // require an entry into form input that's at least 4 letters
 const JournalSchema = yup.object({
@@ -25,54 +26,57 @@ const JournalSchema = yup.object({
 const AddJournal:React.FC<AddJournalProps> = ({ addJournal, setModalOpen }) => {
 
   return (
-    <Formik
-      // Control whether Formik should reset the form if initialValues changes
-      enableReinitialize
-      initialValues={{ title: "", body: "", id: "", date: "" }}
-      validationSchema={JournalSchema}
-      onSubmit={(values, actions) => {
-        addJournal(values);
-        actions.resetForm();
-        setModalOpen(false);
-      }}
-    >
-      {({
-        handleChange,
-        values,
-        handleBlur,
-        handleSubmit,
-        touched,
-        errors,
-      }) => (
-        <View style={globalStyles.addJournalForm}>
-          <TextInput
-            mode="flat"
-            placeholder="Journal Title"
-            onChangeText={handleChange("title")}
-            value={values.title}
-            onBlur={handleBlur("title")}
-          />
-          <Text style={globalStyles.errorText}>
-            {/* Above <Text/> shows up only when input is focused and exited without requirements */}
-            {touched.title && errors.title}
-          </Text>
-          <TextInput
-            multiline
-            mode="flat"
-            placeholder="Journal Body"
-            onChangeText={handleChange("body")}
-            value={values.body}
-            onBlur={handleBlur("body")}
-          />
-          <Text style={globalStyles.errorText}>
-            {touched.body && errors.body}
-          </Text>
-          <FlatButton text="submit" onPress={handleSubmit} />
-        </View>
-      )}
-    </Formik>
+    <Surface style={{ margin: 3, marginTop: 100 }}>
+      <Formik
+        // Control whether Formik should reset the form if initialValues changes
+        enableReinitialize
+        initialValues={{ title: "", body: "", id: "", date: "" }}
+        validationSchema={JournalSchema}
+        onSubmit={(values, actions) => {
+          addJournal(values);
+          actions.resetForm();
+          setModalOpen(false);
+        }}
+      >
+        {({
+          handleChange,
+          values,
+          handleBlur,
+          handleSubmit,
+          touched,
+          errors,
+        }) => (
+          <>
+            <TextInput
+              mode="flat"
+              placeholder="Journal Title"
+              onChangeText={handleChange("title")}
+              value={values.title}
+              onBlur={handleBlur("title")}
+            />
+            <Text style={globalStyles.errorText}>
+              {/* Above <Text/> shows up only when input is focused and exited without requirements */}
+              {touched.title && errors.title}
+            </Text>
+            <TextInput
+              multiline
+              mode="flat"
+              placeholder="Journal Body"
+              onChangeText={handleChange("body")}
+              value={values.body}
+              onBlur={handleBlur("body")}
+            />
+            <Text style={globalStyles.errorText}>
+              {touched.body && errors.body}
+            </Text>
+            <FlatButton text="submit" onPress={handleSubmit} />
+          </>
+        )}
+      </Formik>
+    </Surface>
   );
 };
+
 
 // actions from redux to save entry to store
 const mapDispatchToProps = { addJournal };

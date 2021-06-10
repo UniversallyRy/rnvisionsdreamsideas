@@ -1,9 +1,9 @@
 import React from "react";
-import { StyleSheet, View, FlatList, StyleProp, TextStyle, ViewStyle,} from "react-native";
+import { StyleSheet, View, FlatList, StyleProp, TextStyle, ViewStyle, Dimensions} from "react-native";
 import { NavigationStackProp } from 'react-navigation-stack';
 import { Button, Card, Paragraph } from "react-native-paper";
 import { connect } from "react-redux";
-import { globalStyles, coltsGray, coltsBlue } from "../../styles/global";
+import { globalStyles } from "../../styles/global";
 import { deleteJournal } from "../../redux/actions";
 
 interface JournalListProps {
@@ -14,8 +14,12 @@ interface JournalListProps {
   editButton: StyleProp<ViewStyle>;
   deleteButton: StyleProp<ViewStyle>;
   divider: StyleProp<ViewStyle>;
-  coltsGray: StyleProp<TextStyle>;
-  coltsBlue: StyleProp<TextStyle>;
+  journalCard: StyleProp<TextStyle>;
+  journalTitle: StyleProp<ViewStyle>;
+  journalText: StyleProp<ViewStyle>;
+  journalBorder: StyleProp<ViewStyle>;
+  journalDate: StyleProp<ViewStyle>;
+  
 }
 
 interface Styles {
@@ -23,7 +27,13 @@ interface Styles {
   editButton: ViewStyle;
   deleteButton: ViewStyle;
   divider: ViewStyle;
+  journalCard: ViewStyle;
+  journalTitle: ViewStyle;
+  journalText: ViewStyle;
+  journalBorder: ViewStyle;
+  journalDate: ViewStyle;
 }
+const { width: windowWidth } = Dimensions.get("window");
 
 const JournalList: React.FC<JournalListProps> = ({ state, navigation, deleteJournal }) => {
   const removeJournal = (id:string) => {
@@ -33,25 +43,25 @@ const JournalList: React.FC<JournalListProps> = ({ state, navigation, deleteJour
 
   return (
     <FlatList
-      style={{ paddingTop: 10, backgroundColor: coltsBlue }}
+      style={{ paddingTop: 10 }}
       data={state}
       keyExtractor={(item, index) => index.toString()}
       renderItem={({ item }:any) => (
-        <View style={globalStyles.journalBorder}>
+        <View style={styles.journalBorder}>
           <Card
-            style={globalStyles.journalCard}
+            style={styles.journalCard}
             onPress={() => navigation.navigate("JournalDetails", item)}
           >
             <Card.Content>
-              <Paragraph style={globalStyles.journalTitle}>
+              <Paragraph style={styles.journalTitle}>
                 {item.title}
               </Paragraph>
               <View style={styles.divider} />
-              <Paragraph style={globalStyles.journalText}>
+              <Paragraph style={styles.journalText}>
                 {item.body}
               </Paragraph>
               <View style={styles.divider} />
-              <Paragraph style={globalStyles.journalDate}>
+              <Paragraph style={styles.journalDate}>
                 {item.date}
               </Paragraph>
             </Card.Content>
@@ -59,7 +69,6 @@ const JournalList: React.FC<JournalListProps> = ({ state, navigation, deleteJour
           <View style={styles.buttonsContainer}>
             <Button
               style={styles.editButton}
-              color={coltsGray}
               icon="lead-pencil"
               mode="contained"
             >
@@ -82,8 +91,33 @@ const JournalList: React.FC<JournalListProps> = ({ state, navigation, deleteJour
 };
 
 const styles = StyleSheet.create<Styles>({
+  journalBorder: {
+    margin: 10,
+    alignSelf: "center",
+    overflow: "hidden",
+    borderRadius: 10,
+    width: windowWidth * 0.92,
+  },
+  journalCard: {
+    alignSelf: "center",
+    width: windowWidth * 0.92,
+  },
+  journalTitle: {
+    fontFamily: "roboto-black",
+    fontSize: 20,
+    marginBottom: 10,
+  },
+  journalText: {
+    fontFamily: "roboto-regular",
+    fontSize: 12,
+  },
+  journalDate: {
+    fontFamily: "roboto-italic",
+    fontSize: 10,
+    marginTop: 35,
+    margin: 5,
+  },
   buttonsContainer: {
-    backgroundColor: "#000",
     flexDirection: "row",
     alignContent: "center",
     fontSize: 20,
@@ -96,7 +130,6 @@ const styles = StyleSheet.create<Styles>({
     marginLeft: 2,
   },
   divider: {
-    backgroundColor: coltsGray,
     height: 0.3,
     flex: 1,
     marginTop: 10,
@@ -104,6 +137,7 @@ const styles = StyleSheet.create<Styles>({
     opacity: 0.7,
   },
 });
+
 
 const mapDispatchToProps = { deleteJournal };
 

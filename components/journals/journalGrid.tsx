@@ -1,26 +1,25 @@
 import React, { useCallback, memo } from "react";
-import { Text, StyleSheet, Dimensions, StyleProp, TextStyle, ViewStyle,} from "react-native";
+import { StyleSheet, Dimensions, StyleProp, TextStyle, ViewStyle,} from "react-native";
+import { Card, Text } from "react-native-paper";
 import { NavigationStackProp } from 'react-navigation-stack';
 import { FlatList } from "react-native-gesture-handler";
-import { Card, Surface } from "react-native-paper";
 import { connect } from "react-redux";
-import { coltsBlue, coltsGray } from "../../styles/global";
 
 interface GridProps {
   navigation: NavigationStackProp;
   state: [];
   gridContainer: StyleProp<ViewStyle>;
   gridItem: StyleProp<TextStyle>;
-  coltsBlue: StyleProp<TextStyle>;
-  coltsGray: StyleProp<TextStyle>;
+  gridText: StyleProp<ViewStyle>;
 }
 
 interface Styles {
   gridContainer: ViewStyle;
-  gridItem: TextStyle;
+  gridItem: ViewStyle;
+  gridText: TextStyle;
 }
 
-const { width: width, height: height } = Dimensions.get("window");
+const { width: windowWidth, height: windowHeight } = Dimensions.get("window");
 
 const JournalGridContainer:React.FC<GridProps> = ({ state, navigation }) => {
 
@@ -28,14 +27,13 @@ const JournalGridContainer:React.FC<GridProps> = ({ state, navigation }) => {
     function GridJournal({ data, index }:any) {
       return (
         <Card
-          style={{ backgroundColor: coltsBlue }}
+          style={styles.gridItem}
           onPress={() => navigation.navigate("JournalDetails", data)}
         >
-          <Card.Content style={styles.gridItem}>
-            <Text style={{ color: coltsGray }}>{data.title}</Text>
+          <Card.Content style={styles.gridText}>
+            <Text>{data.title}</Text>
             <Text
               style={{
-                color: coltsGray,
                 marginTop: 30,
                 bottom: 0,
                 position: "absolute",
@@ -50,16 +48,13 @@ const JournalGridContainer:React.FC<GridProps> = ({ state, navigation }) => {
   );
 
   const renderList = useCallback(function renderList({ item, index }) {
-    return <JournalGridList data={item} />;
+    return <JournalGridList  style ={styles.gridItem} data={item} />;
   }, []);
 
   return (
-    <Surface
+    <Card
       style={{
         flex: 1,
-        backgroundColor: coltsBlue,
-        justifyContent: "center",
-        alignItems: "center",
       }}
     >
       <FlatList
@@ -67,35 +62,30 @@ const JournalGridContainer:React.FC<GridProps> = ({ state, navigation }) => {
         contentContainerStyle={styles.gridContainer}
         scrollEnabled
         data={state}
-        keyExtractor={(item, index) => index.toString()}
         renderItem={renderList}
       />
-    </Surface>
+    </Card>
   );
 };
 
 const styles = StyleSheet.create<Styles>({
   gridContainer: {
-    paddingTop: 3,
+    backgroundColor: "lightgray",
+    flex: 1,
+    paddingTop: 10,
   },
   gridItem: {
-    height: height * 0.25,
-    width: width * 0.32,
-    margin: 1,
     flex: 1,
-    flexDirection: "column",
-    overflow: "hidden",
+    alignSelf: "center",
     borderRadius: 3,
-    borderWidth: 2,
-    borderColor: coltsGray,
-    backgroundColor: "#000",
-    shadowColor: "black",
-    shadowOpacity: 0.6,
-    shadowRadius: 350,
-    shadowOffset: {
-      width: 0,
-      height: 0,
-    },
+    height: windowHeight * 0.25,
+    width: windowWidth * 0.30,
+    marginRight: 2,
+    marginLeft: 2,
+  },
+  gridText: {
+    height: windowHeight * 0.25,
+    width: windowWidth * 0.3,
   },
 });
 

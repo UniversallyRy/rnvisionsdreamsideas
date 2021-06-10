@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import {
   TouchableOpacity,
   StyleSheet,
@@ -8,17 +8,19 @@ import {
   TextStyle, 
   ViewStyle,
   KeyboardAvoidingView,
-  Keyboard, FlatList, TextInput, Platform, Dimensions
+  Keyboard, 
+  FlatList, 
+  TextInput, 
+  Platform, 
+  Dimensions
 } from "react-native";
 import { connect } from "react-redux";
-import { Button } from "react-native-paper";
-import { SafeAreaView } from "react-native-safe-area-context";
-// import { FlatList, TextInput } from "react-native-gesture-handler";
+import { Button, Surface } from "react-native-paper";
 import { AntDesign } from "@expo/vector-icons";
 import { Formik, FormikHelpers } from "formik";
 import * as yup from "yup";
 import { deleteNote, addNote } from "../../redux/actions";
-import { globalStyles } from "../../styles/global";
+import { Icon } from "../../shared/icon";
 export const { width: windowWidth, height: windowHeight } = Dimensions.get("window");
 
 interface NoteModalProps {
@@ -27,7 +29,6 @@ interface NoteModalProps {
   deleteNote: ((item: string) => void);
   addNote: ((item: object) => void);
   container: StyleProp<ViewStyle>;
-  section: StyleProp<ViewStyle>;
   header: StyleProp<TextStyle>;
   title: StyleProp<TextStyle>;
   taskCount: StyleProp<TextStyle>;
@@ -35,7 +36,6 @@ interface NoteModalProps {
   noteInput:StyleProp<TextStyle>;
   buttonStyle:StyleProp<ViewStyle>;
   noteContainer:StyleProp<ViewStyle>;
-  note:StyleProp<TextStyle>;
   deleteNoteButton:StyleProp<ViewStyle>;
   noteErrorText:StyleProp<TextStyle>;
 }
@@ -46,7 +46,6 @@ interface RenderProps {
 
 interface Styles {
   container: ViewStyle;
-  section: ViewStyle;
   header: TextStyle;
   title: TextStyle;
   taskCount: ViewStyle;
@@ -54,7 +53,6 @@ interface Styles {
   noteInput:TextStyle;
   buttonStyle:ViewStyle;
   noteContainer:ViewStyle;
-  note:TextStyle;
   deleteNoteButton:ViewStyle;
   noteErrorText:TextStyle;
 }
@@ -79,7 +77,7 @@ const NotesModal: React.FC<NoteModalProps> = ({ notes, closeModal, deleteNote, a
 
   const renderNote: React.FC<RenderProps> = ( note, index) => {
     return (
-        <TouchableOpacity style={styles.noteContainer}>
+        <Surface style={styles.noteContainer}>
           <Text style={{paddingRight: 20}}>{note.name}</Text>
           <AntDesign
             name="closecircle"
@@ -87,26 +85,19 @@ const NotesModal: React.FC<NoteModalProps> = ({ notes, closeModal, deleteNote, a
             style={styles.deleteNoteButton}
             onPress={() => removeNote(note.id)}
           />
-        </TouchableOpacity>
+        </Surface>
     );
   };
 
   return (
     <KeyboardAvoidingView style={{ flex: 1 }} behavior={Platform.OS === "ios" ? "padding" : "height"}>
-      <SafeAreaView style={styles.container}>
-        <TouchableOpacity
-          style={{ position: "absolute", top: 40, right: 32, zIndex: 10 }}
-        >
-          <AntDesign
-            name="close"
-            size={24}
-            color="black"
+        
+          <Icon
+            item="close"
             onPress={closeModal}
           />
-        </TouchableOpacity>
         <View
           style={[
-            styles.section,
             styles.header,
             { borderBottomColor: "red" },
           ]}
@@ -114,7 +105,7 @@ const NotesModal: React.FC<NoteModalProps> = ({ notes, closeModal, deleteNote, a
           <Text style={styles.title}>{newNotes.name}</Text>
           <Text style={styles.taskCount}>There are {taskCount} Notes</Text>
         </View>
-        <View style={styles.section}>
+        <View>
           <FlatList
             data={newNotes}
             keyExtractor={(_, index) => index.toString()}
@@ -147,7 +138,7 @@ const NotesModal: React.FC<NoteModalProps> = ({ notes, closeModal, deleteNote, a
                   <TextInput
                     enablesReturnKeyAutomatically={true}
                     autoCorrect={true}
-                    style={globalStyles.noteInput}
+                    style={styles.noteInput}
                     placeholder="Enter Note . . ."
                     placeholderTextColor={"#002C5F"}
                     onChangeText={handleChange("name")}
@@ -167,7 +158,6 @@ const NotesModal: React.FC<NoteModalProps> = ({ notes, closeModal, deleteNote, a
               </View>
             )}
           </Formik>   
-        </SafeAreaView>
     </KeyboardAvoidingView>
   );
 };
@@ -175,43 +165,36 @@ const NotesModal: React.FC<NoteModalProps> = ({ notes, closeModal, deleteNote, a
 const styles = StyleSheet.create<Styles>({
   container: {
     flex: 1,
-    height: windowHeight,
-    width: windowWidth,
-    margin:'auto',
-  },
-  section: {
-    alignSelf: "stretch",
   },
   header: {
     justifyContent: "flex-end",
     marginLeft: 10,
-    borderBottomWidth: 4,
+    borderBottomWidth: 2,
   },
   title: {
     fontSize: 30,
     fontWeight: "800",
-    color: "black",
   },
   taskCount: {
     marginTop: 4,
     marginBottom: 16,
-    color: "gray",
+    color: "black",
     fontWeight: "600",
   },
   footer: {
     position: 'absolute',
     bottom: 0,
     paddingHorizontal: 10,
-    paddingVertical: 10,
+    paddingVertical: 5,
     flexDirection: "row",
   },
   noteInput: {
-    height: 30,
-    borderWidth: StyleSheet.hairlineWidth,
-    borderRadius: 6,
-    margin: 8,
-    paddingHorizontal: 8,
-    borderColor: "red"
+    width: windowWidth * 0.75,
+    paddingLeft: 14,
+    paddingTop: 32,
+    paddingRight: 14,
+    paddingBottom: 16,
+    marginLeft: 4,
   },
   noteErrorText:{
     fontSize: 10,
@@ -231,11 +214,6 @@ const styles = StyleSheet.create<Styles>({
   noteContainer: {
     flexDirection: "row",
     paddingVertical: 16,
-  },
-  note: {
-    color: "black",
-    fontWeight: "700",
-    fontSize: 16,
   },
   deleteNoteButton: {
     marginLeft: "auto",

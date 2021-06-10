@@ -27,7 +27,6 @@ interface VisionProps {
   navigation: NavigationStackProp;
   container: StyleProp<ViewStyle>;
   modalContent: StyleProp<TextStyle>;
-  modalClose: StyleProp<ViewStyle>;
   closeModalContainer: StyleProp<ViewStyle>;
   visionAddToggle: StyleProp<ViewStyle>;
 }
@@ -35,7 +34,6 @@ interface VisionProps {
 interface Styles {
   container: ViewStyle;
   modalContent: TextStyle;
-  modalClose: ViewStyle;
   closeModalContainer: ViewStyle;
   visionAddToggle: ViewStyle;
 }
@@ -74,7 +72,6 @@ const Visions: React.FC<VisionProps> = ({ navigation }) => {
             <View style={styles.closeModalContainer}>
               <Icon
                 item="close"
-                style={styles.modalClose}
                 onPress={() => setModalOpen(false)}
               />
             </View>
@@ -99,9 +96,6 @@ const styles = StyleSheet.create<Styles>({
   container: {
     fontFamily: "roboto-black",
     flex: 1,
-  },
-  modalClose: {
-    position: "absolute",
   },
   closeModalContainer: {
     flex: 1,

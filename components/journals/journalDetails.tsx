@@ -1,8 +1,7 @@
 import React from "react";
-import { View, StyleSheet, StyleProp, TextStyle, ViewStyle, } from "react-native";
-import { NavigationStackProp } from 'react-navigation-stack';
+import { View, StyleSheet, StyleProp, TextStyle, ViewStyle, Dimensions } from "react-native";
 import { Button, Text, Card } from "react-native-paper";
-import { globalStyles, coltsGray, windowWidth } from "../../styles/global";
+import { NavigationStackProp } from 'react-navigation-stack';
 
 interface JournalDProps {
   navigation: NavigationStackProp;
@@ -17,7 +16,16 @@ interface JournalDProps {
 
 interface Styles {
   divider: ViewStyle;
+  jDetailsContainer: ViewStyle;
+  jDetailsCard: ViewStyle;
+  jDetailsTitle: ViewStyle;
+  jDetailsText: TextStyle;
+  jDetailsDate: TextStyle;
+  jDetailsButton: TextStyle;
 }
+
+const { width: windowWidth, height: windowHeight } = Dimensions.get("window");
+
 
 const JournalDetails: React.FC<JournalDProps> = ({ navigation }) => {
   const handlePress = () => {
@@ -25,28 +33,28 @@ const JournalDetails: React.FC<JournalDProps> = ({ navigation }) => {
   };
 
   return (
-    <Card style={globalStyles.jDetailsContainer}>
-      <Card.Content style={globalStyles.jDetailsCard}>
-        <Text style={globalStyles.jDetailsTitle}>
+    <Card style={styles.jDetailsContainer}>
+      <Card.Content style={styles.jDetailsCard}>
+        <Text style={styles.jDetailsTitle}>
           {" "}
           {navigation.getParam("title")}{" "}
         </Text>
         <View style={styles.divider} />
-        <Text style={globalStyles.jDetailsText}>
+        <Text style={styles.jDetailsText}>
           {" "}
           {navigation.getParam("body")}{" "}
         </Text>
         <View style={styles.divider} />
-        <Text style={globalStyles.jDetailsDate}>
+        <Text style={styles.jDetailsDate}>
           {" "}
           {navigation.getParam("date")}{" "}
         </Text>
         <Button
-          style={globalStyles.jDetailsButton}
+          style={styles.jDetailsButton}
           icon="arrow-left"
           mode="contained"
           dark={true}
-          accessibilityLabel={"back to home"}
+          accessibilityLabel={"Back to Journals"}
           onPress={handlePress}
         >
           Go Back
@@ -58,13 +66,47 @@ const JournalDetails: React.FC<JournalDProps> = ({ navigation }) => {
 
 const styles = StyleSheet.create<Styles>({
   divider: {
-    backgroundColor: coltsGray,
+    backgroundColor: "violet",
     alignSelf: "center",
     height: 0.3,
     width: windowWidth * 0.98,
     marginTop: 10,
     marginBottom: 10,
     opacity: 0.7,
+  },
+  jDetailsText: {
+    fontSize: 14,
+    fontFamily: "roboto-regular",
+    padding: 7,
+    marginTop: 50,
+    marginVertical: 18,
+    lineHeight: 20,
+  },
+  jDetailsTitle: {
+    fontFamily: "roboto-bold",
+    fontSize: 18,
+    padding: 10,
+  },
+  jDetailsDate: {
+    fontFamily: "roboto-italic",
+    fontSize: 10,
+    padding: 10,
+  },
+  jDetailsButton: {
+    fontSize: 40,
+    fontFamily: "roboto-black",
+  },
+  jDetailsContainer: {
+    flexDirection: "row",
+    width: windowWidth,
+    height: windowHeight,
+    alignContent: "center",
+    justifyContent: "center",
+  },
+  jDetailsCard: {
+    alignSelf: "center",
+    margin: 10,
+    width: windowWidth * 0.99,
   },
 });
 

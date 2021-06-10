@@ -1,25 +1,38 @@
 import React from "react";
 import {
+  StyleSheet,
   StyleProp,
   ViewStyle,
   View,
 } from "react-native";
-import { globalStyles } from "../styles/global";
 import { connect } from "react-redux";
 import NoteMain from "../components/notes/notesMain";
+
 interface NoteProps {
   noteScreenContainer?: StyleProp<ViewStyle>;
   stateNotes: any;
   stateTodos: any;
 }
 
+interface Styles {
+  noteScreenContainer: ViewStyle;
+}
+
 const NoteScreen:React.FC<NoteProps> = ({ stateNotes, stateTodos }) => {
   return (
-    <View style={globalStyles.noteScreenContainer}>
+    <View style={styles.noteScreenContainer}>
       <NoteMain stateNotes={stateNotes} stateTodos={stateTodos} />
     </View>
   );
 };
+
+const styles = StyleSheet.create<Styles>({
+  noteScreenContainer: {
+    flex: 1,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+});
 
 const mapStateToProps = (state:any) => {
   return {

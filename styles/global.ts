@@ -46,123 +46,17 @@ export const globalStyles = StyleSheet.create({
     marginTop: 10,
   },
   // Journal Styles
-
-  journalBorder: {
-    margin: 10,
-    alignSelf: "center",
-    overflow: "hidden",
-    borderRadius: 18,
-    borderWidth: 2,
-    borderColor: coltsGray,
-    shadowColor: "black",
-    shadowOpacity: 0.9,
-    shadowRadius: 350,
-    shadowOffset: {
-      width: 4,
-      height: 3,
-    },
-    width: windowWidth * 0.92,
-  },
-  journalCard: {
-    backgroundColor: "#000",
-    alignSelf: "center",
-    width: windowWidth * 0.92,
-    marginBottom: 1,
-    borderRadius: 7,
-  },
-  journalTitle: {
-    fontFamily: "roboto-black",
-    fontSize: 20,
-    marginBottom: 10,
-  },
-  journalText: {
-    fontFamily: "roboto-regular",
-    fontSize: 12,
-  },
-  journalDate: {
-    fontFamily: "roboto-italic",
-    fontSize: 10,
-    marginTop: 35,
-    margin: 5,
-    color: coltsGray,
-  },
   addJournalForm: {
     margin: 15,
   },
-  jDetailsText: {
-    fontSize: 14,
-    fontFamily: "roboto-regular",
-    padding: 7,
-    marginTop: 50,
-    marginVertical: 18,
-    lineHeight: 20,
-    color: coltsGray,
-  },
-  jDetailsTitle: {
-    fontFamily: "roboto-black",
-    fontSize: 18,
-    color: raidSilver,
-    padding: 10,
-  },
-  jDetailsDate: {
-    fontFamily: "roboto-italic",
-    fontSize: 10,
-    color: raidSilver,
-    padding: 10,
-  },
-  jDetailsButton: {
-    fontSize: 40,
-    fontFamily: "roboto-black",
-    backgroundColor: coltsGray,
-    shadowColor: coltsBlue,
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.25,
-    shadowRadius: 1.84,
-    elevation: 1,
-  },
-  jDetailsContainer: {
-    flexDirection: "row",
-    width: windowWidth,
-    height: windowHeight,
-    alignContent: "center",
-    justifyContent: "center",
-    backgroundColor: coltsGray,
-  },
-  jDetailsCard: {
-    alignSelf: "center",
-    margin: 10,
-    backgroundColor: coltsBlue,
-    width: windowWidth * 0.99,
-  },
+
   // Note Styles
 
-  noteScreenContainer: {
-    flex: 1,
-    backgroundColor: coltsBlue,
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  noteListContainer: {
-    marginTop: 20,
-    alignSelf: "center",
-    backgroundColor: coltsGray,
-  },
   addNoteForm: {
     flex: 1,
     margin: 10,
     flexDirection: "row",
     flexWrap: "wrap",
-  },
-  noteInput: {
-    width: windowWidth * 0.75,
-    paddingLeft: 14,
-    paddingTop: 32,
-    paddingRight: 14,
-    paddingBottom: 16,
-    marginLeft: 4,
   },
   textInput: {
     width: 100,
