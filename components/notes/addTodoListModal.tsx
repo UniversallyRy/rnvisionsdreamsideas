@@ -25,7 +25,7 @@ interface ModalProps {
   input: StyleProp<TextStyle>;
   create: StyleProp<ViewStyle>;
   colorSelect: StyleProp<ViewStyle>;
-  todoErrorText: StyleProp<TextStyle>;
+  errorText: StyleProp<TextStyle>;
 }
 
 interface Styles {
@@ -107,7 +107,7 @@ const AddTodoListModal:React.FC<ModalProps> = ({ closeModal, addList }) => {
                 onBlur={handleBlur("name")}
               />
 
-              <Text style={globalStyles.todoErrorText}>
+              <Text style={globalStyles.errorText}>
                 {touched.name && errors.name}
               </Text>
               <View

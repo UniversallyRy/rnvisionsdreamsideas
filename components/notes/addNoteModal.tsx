@@ -25,7 +25,7 @@ interface ModalProps {
   title: StyleProp<TextStyle>;
   input: StyleProp<TextStyle>;
   colorSelect: StyleProp<ViewStyle>;
-  todoErrorText: StyleProp<TextStyle>;
+  errorText: StyleProp<TextStyle>;
 }
 
 interface Styles {
@@ -81,7 +81,7 @@ const AddNoteModal: React.FC<ModalProps> = ({ closeModal, addNote }) => {
                 onBlur={handleBlur("name")}
               />
 
-              <Text style={globalStyles.todoErrorText}>
+              <Text style={globalStyles.errorText}>
                 {touched.name && errors.name}
               </Text>
               <FlatButton 
