@@ -16,11 +16,11 @@ export default function (state = initialNotes, action) {
   switch (action.type) {
     case ADD_NOTE:
       return [
-        ...state,
         {
           name: action.payload.name,
           id: uuid.generate(),
         },
+        ...state,
       ];
 
     case EDIT_NOTE:

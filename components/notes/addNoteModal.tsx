@@ -8,6 +8,7 @@ import {
   StyleProp,
   TextStyle, 
   ViewStyle,
+  Platform
 } from "react-native";
 import { TextInput, Button } from "react-native-paper";
 import { connect } from "react-redux";
@@ -43,7 +44,7 @@ const listSchema = yup.object({
 // red, slate blue, black, dark gray, blueish gray, teal, tan
 const AddNoteModal: React.FC<ModalProps> = ({ closeModal, addNote }) => {
   return (
-    <KeyboardAvoidingView style={styles.container} behavior={"padding"}>
+    <KeyboardAvoidingView style={styles.container} behavior={Platform.OS === "ios" ? "padding" : "height"}>
       <TouchableOpacity
         style={{ position: "absolute", top: 64, right: 32 }}
         onPress={closeModal}
@@ -77,9 +78,9 @@ const AddNoteModal: React.FC<ModalProps> = ({ closeModal, addNote }) => {
                 style={styles.input}
                 placeholder="Enter A New Note . . ."
                 placeholderTextColor={"#002C5F"}
-                onChangeText={handleChange("note")}
+                onChangeText={handleChange("name")}
                 value={values.name}
-                onBlur={handleBlur("note")}
+                onBlur={handleBlur("name")}
               />
 
               <Text style={globalStyles.todoErrorText}>

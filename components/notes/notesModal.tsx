@@ -36,7 +36,6 @@ interface NoteModalProps {
   buttonStyle:StyleProp<ViewStyle>;
   noteContainer:StyleProp<ViewStyle>;
   note:StyleProp<TextStyle>;
-  deleteButton:StyleProp<ViewStyle>;
   deleteNoteButton:StyleProp<ViewStyle>;
   noteErrorText:StyleProp<TextStyle>;
 }
@@ -56,7 +55,6 @@ interface Styles {
   buttonStyle:ViewStyle;
   noteContainer:ViewStyle;
   note:TextStyle;
-  deleteButton:ViewStyle;
   deleteNoteButton:ViewStyle;
   noteErrorText:TextStyle;
 }
@@ -82,7 +80,7 @@ const NotesModal: React.FC<NoteModalProps> = ({ notes, closeModal, deleteNote, a
   const renderNote: React.FC<RenderProps> = ( note, index) => {
     return (
         <TouchableOpacity style={styles.noteContainer}>
-          <Text>{note.name}</Text>
+          <Text style={{paddingRight: 20}}>{note.name}</Text>
           <AntDesign
             name="closecircle"
             size={24}
@@ -238,12 +236,6 @@ const styles = StyleSheet.create<Styles>({
     color: "black",
     fontWeight: "700",
     fontSize: 16,
-  },
-  deleteButton: {
-    backgroundColor: "red",
-    justifyContent: "center",
-    alignItems: "center",
-    width: 80,
   },
   deleteNoteButton: {
     marginLeft: "auto",

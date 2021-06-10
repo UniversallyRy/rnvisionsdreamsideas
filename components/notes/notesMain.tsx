@@ -81,8 +81,6 @@ const NoteMain: React.FC<NoteMainProps> = ({ stateNotes, stateTodos }) => {
         style={{
           height: 450,
           flexDirection: "row",
-          paddingLeft: 22,
-          marginTop: 40,
         }}
       >
         <NoteList notes={stateNotes} style={{ marginRight: 3 }} key={1} />
@@ -97,15 +95,14 @@ const NoteMain: React.FC<NoteMainProps> = ({ stateNotes, stateTodos }) => {
       </View>
       <View
         style={{
-          marginVertical: 48,
-          paddingBottom: 24,
+          marginVertical: 40,
           flexDirection: "row",
         }}
       >
         <View
           style={{
             flexDirection: "column",
-            margin: 10,
+            marginRight: 5,
             alignItems: "center",
           }}
         >
@@ -120,7 +117,7 @@ const NoteMain: React.FC<NoteMainProps> = ({ stateNotes, stateTodos }) => {
         <View
           style={{
             flexDirection: "column",
-            margin: 10,
+            marginLeft: 5,
             alignItems: "center",
           }}
         >
@@ -145,7 +142,7 @@ const styles = StyleSheet.create<Styles>({
   },
   titleStyle: {
     flexDirection: "row",
-    marginTop: 40,
+    marginTop: 50,
   },
   divider: {
     backgroundColor: coltsGray,
@@ -172,7 +169,6 @@ const styles = StyleSheet.create<Styles>({
     color: coltsGray,
     fontWeight: "600",
     fontSize: 14,
-    marginTop: 6,
     alignSelf: "center",
   },
 });
