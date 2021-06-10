@@ -1,19 +1,18 @@
 import React, { useCallback, memo, useRef, useEffect } from "react";
 import {
   GestureResponderEvent,
-  Text,
   Dimensions,
   Animated,
 } from "react-native";
-import { Surface, Button } from "react-native-paper";
+import { Surface, Text } from "react-native-paper";
 import { NavigationStackProp } from 'react-navigation-stack';
 import { deleteVision } from "../../redux/actions";
-import { globalStyles, coltsGray, coltsBlue } from "../../styles/global";
+import { DeleteButton } from "../../shared/icon";
 import { connect } from "react-redux";
 import {
   TouchableOpacity,
-  TouchableWithoutFeedback,
 } from "react-native-gesture-handler";
+
 
 interface ImageProps {
   navigation: NavigationStackProp;
@@ -27,7 +26,6 @@ interface ListProps {
   item: any;
   index: number;
 }
-
 
 // react native's Dimensions import to grab mobile screens dimensions
 const { width: width } = Dimensions.get("window");
@@ -68,46 +66,27 @@ const VisionsContainer: React.FC<ImageProps> = ({
       });
 
       return (
-        <TouchableOpacity
+        <Surface
           style={{
-            backgroundColor: coltsBlue,
             width,
-            justifyContent: "center",
             alignItems: "center",
-            marginTop: 10,
+            marginTop: 20,
           }}
         >
           <TouchableOpacity
             onLongPress={() => navigation.navigate("VisionDetails", data)}
             style={{
-              borderRadius: 18,
+              borderRadius: 12,
               borderWidth: 2,
               overflow: "hidden",
-              borderColor: coltsGray,
-              shadowColor: "black",
-              shadowOpacity: 0.6,
-              shadowRadius: 350,
-              shadowOffset: {
-                width: 0,
-                height: 0,
-              },
             }}
           >
             <Surface
-              style={{
-                width: ITEM_WIDTH,
-                height: ITEM_HEIGHT,
-                overflow: "hidden",
-                alignItems: "center",
-                borderRadius: 8,
-                elevation: 4,
-              }}
             >
               <Animated.Image
                 source={{ uri: data.uri }}
                 resizeMode={"cover"}
                 style={{
-                  alignSelf: "center",
                   width: ITEM_WIDTH * 1,
                   height: ITEM_HEIGHT,
                   transform: [{ translateX }],
@@ -115,15 +94,12 @@ const VisionsContainer: React.FC<ImageProps> = ({
               />
             </Surface>
           </TouchableOpacity>
-          <Button
-            style={globalStyles.visionDeleteButton}
-            color={coltsBlue}
-            icon="close-outline"
+          <DeleteButton
+            item="close-outline"
             onPress={() => removeVision(data.id)}
-          >
-            <Text>Delete</Text>
-          </Button>
-        </TouchableOpacity>
+          />
+            <Text style={{fontFamily: "roboto-bold"}}>Delete</Text>
+        </Surface>
       );
     },
     [state]

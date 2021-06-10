@@ -1,22 +1,25 @@
 import React, { useState, useRef, useEffect } from "react";
 import {
-  Animated,
-  Modal,
   StyleSheet,
   StyleProp,
   TextStyle,
   ViewStyle,
   View,
-  TouchableWithoutFeedback,
+  Dimensions,
+  Animated,
+  Modal,
   Keyboard,
+  TouchableWithoutFeedback,
 } from "react-native";
 import { Text } from "react-native-paper";
 import { NavigationStackProp } from 'react-navigation-stack';
 import AddVision from "../components/visions/addVision";
 import VisionsContainer from "../components/visions/visionImageList";
 import VisionGridContainer from "../components/visions/visionImageGrid";
-import { coltsBlue, globalStyles } from "../styles/global";
-import Icon from "../shared/icon";
+import {Icon} from "../shared/icon";
+
+const {height: windowHeight } = Dimensions.get("window");
+
 
 const VISIBLE_ITEMS = 3;
 
@@ -25,11 +28,16 @@ interface VisionProps {
   container: StyleProp<ViewStyle>;
   modalContent: StyleProp<TextStyle>;
   modalClose: StyleProp<ViewStyle>;
+  closeModalContainer: StyleProp<ViewStyle>;
   visionAddToggle: StyleProp<ViewStyle>;
 }
 
 interface Styles {
   container: ViewStyle;
+  modalContent: TextStyle;
+  modalClose: ViewStyle;
+  closeModalContainer: ViewStyle;
+  visionAddToggle: ViewStyle;
 }
 
 
@@ -58,15 +66,15 @@ const Visions: React.FC<VisionProps> = ({ navigation }) => {
     <View style={styles.container}>
       <Modal visible={modalOpen} animationType="slide">
         <TouchableWithoutFeedback style={{ margin: 10 }} onPress={Keyboard.dismiss}>
-          <View style={globalStyles.modalContent}>
+          <View style={styles.modalContent}>
             <Text> 
               Add A Vision 
             </Text>
             <AddVision setModalOpen={setModalOpen} />
-            <View style={globalStyles.closeModalContainer}>
+            <View style={styles.closeModalContainer}>
               <Icon
                 item="close"
-                style={{ ...globalStyles.modalClose }}
+                style={styles.modalClose}
                 onPress={() => setModalOpen(false)}
               />
             </View>
@@ -79,7 +87,7 @@ const Visions: React.FC<VisionProps> = ({ navigation }) => {
       ) : (
         <VisionsContainer navigation={navigation} scrollX={scrollX} />
       )}
-      <View style={globalStyles.visionAddToggle}>
+      <View style={styles.visionAddToggle}>
         <Icon item="plus" onPress={() => setModalOpen(true)} />
         <Icon item="grid" onPress={() => toggleGrid()} />
       </View>
@@ -89,10 +97,22 @@ const Visions: React.FC<VisionProps> = ({ navigation }) => {
 
 const styles = StyleSheet.create<Styles>({
   container: {
+    fontFamily: "roboto-black",
     flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
-    backgroundColor: coltsBlue,
+  },
+  modalClose: {
+    position: "absolute",
+  },
+  closeModalContainer: {
+    flex: 1,
+    justifyContent: "flex-end",
+  },
+  modalContent: {
+    flex: 1,
+    height: windowHeight,
+  },
+    visionAddToggle: {
+    flexDirection: "row",
   },
 });
 

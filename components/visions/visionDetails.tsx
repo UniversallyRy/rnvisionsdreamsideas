@@ -1,16 +1,24 @@
 import React from "react";
-import { Image, StyleProp, TextStyle, ViewStyle, ImageStyle } from "react-native";
+import { StyleSheet, StyleProp, TextStyle, ViewStyle, ImageStyle, Dimensions } from "react-native";
 import { NavigationStackProp } from 'react-navigation-stack';
 import { Button, Text, Card } from "react-native-paper";
-import { globalStyles } from "../../styles/global";
 
 interface VisionProps {
   navigation: NavigationStackProp;
   vDetailsContent: StyleProp<ViewStyle>;
-  journalTitle: StyleProp<TextStyle>;
+  visionTitle: StyleProp<TextStyle>;
   vDetailsImage: StyleProp<ImageStyle>;
-  jDetailsButton: StyleProp<ViewStyle>;
+  vDetailsButton: StyleProp<ViewStyle>;
 }
+
+interface Styles {
+  vDetailsContent: ViewStyle;
+  visionTitle: TextStyle;
+  vDetailsImage: ImageStyle;
+  vDetailsButton: ViewStyle;
+}
+
+const {width: windowWidth, height: windowHeight } = Dimensions.get("window");
 
 const VisionDetails: React.FC<VisionProps> = ({ navigation }) => {
   const handlePress = () => {
@@ -19,19 +27,18 @@ const VisionDetails: React.FC<VisionProps> = ({ navigation }) => {
   const imageUri = navigation.getParam("uri");
 
   return (
-    <Card style={globalStyles.vDetailsContent}>
+    <Card elevation={7} style={styles.vDetailsContent}>
       <Card.Content>
-        <Text style={globalStyles.journalTitle}>
+        <Text style={styles.visionTitle}>
           {" "}
           {navigation.getParam("title")}{" "}
         </Text>
-        <Image source={{ uri: imageUri }} style={globalStyles.vDetailsImage} />
+        <Card.Cover source={{ uri: imageUri }} style={styles.vDetailsImage} />
         <Button
-          style={globalStyles.jDetailsButton}
+          style={styles.vDetailsButton}
           icon="arrow-left"
           mode="contained"
-          dark={true}
-          accessibilityLabel={"back to home"}
+          accessibilityLabel={"Back to All Visions"}
           onPress={handlePress}
         >
           Go Back
@@ -40,5 +47,33 @@ const VisionDetails: React.FC<VisionProps> = ({ navigation }) => {
     </Card>
   );
 };
+
+const styles = StyleSheet.create<Styles>({
+  vDetailsContent: {
+    flexDirection: "row",
+    flex: 1,
+  },
+  visionTitle: {
+    fontFamily: "roboto-black",
+    alignSelf: "center",
+    fontSize: 22,
+    marginBottom: 10,
+  },
+  vDetailsImage: {
+    resizeMode: "contain",
+    borderRadius: 4,
+    alignSelf: "center",
+    height: windowHeight * 0.65,
+    width: windowWidth * 0.97,
+    margin: 5,
+  },
+  vDetailsButton: {
+    fontSize: 40,
+    fontFamily: "roboto-bold",
+    alignSelf: "center",
+    width: windowWidth * 0.97,
+    elevation: 1,
+  },
+});
 
 export default VisionDetails;

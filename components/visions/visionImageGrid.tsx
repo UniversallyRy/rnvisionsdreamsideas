@@ -1,10 +1,9 @@
 import React, { useCallback, memo } from "react";
-import { Image, StyleSheet, StyleProp, ViewStyle, ImageStyle, Dimensions, View } from "react-native";
+import { StyleSheet, StyleProp, ViewStyle, ImageStyle, Dimensions } from "react-native";
 import { NavigationStackProp } from 'react-navigation-stack';
 import { FlatList } from "react-native-gesture-handler";
 import { Card } from "react-native-paper";
 import { connect } from "react-redux";
-import { coltsBlue, coltsGray } from "../../styles/global";
 
 interface GridProps {
   navigation: NavigationStackProp;
@@ -28,9 +27,11 @@ const VisionGridContainer: React.FC<GridProps> = ({ state, navigation }) => {
   const VisionGridList = memo(function GridImage({ data }:any) {
     return (
       <Card
+        accessibilityLabel={"Grid List"}
+        accessible  
         onPress={() => navigation.navigate("VisionDetails", data)}
       > 
-        <Image
+        <Card.Cover
           style={styles.gridItem }
           source={{ uri: data.uri }}
           testID={data.id}  
@@ -45,7 +46,7 @@ const VisionGridContainer: React.FC<GridProps> = ({ state, navigation }) => {
   }, []);
 
   return (
-    <View style={{ flex: 1 }}>
+    <Card style={{ flex: 1 }}>
       <FlatList
         numColumns={3}
         contentContainerStyle={styles.gridContainer}
@@ -54,7 +55,7 @@ const VisionGridContainer: React.FC<GridProps> = ({ state, navigation }) => {
         keyExtractor={(item, index) => index.toString()}
         renderItem={renderList}
       />
-    </View>
+    </Card>
   );
 };
 
@@ -69,8 +70,6 @@ const styles = StyleSheet.create<Styles>({
     overflow: "hidden",
     borderRadius: 2,
     borderWidth: 1,
-    borderColor: coltsGray,
-    backgroundColor: coltsBlue,
 
   },
 });

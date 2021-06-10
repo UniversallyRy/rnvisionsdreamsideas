@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from "react";
-import { View, StyleProp, ViewStyle, Platform, Dimensions, Image } from "react-native";
-import { Button, Text } from "react-native-paper";
+import { StyleSheet, StyleProp, ViewStyle, Platform, Dimensions, Image } from "react-native";
+import { Button, Card, Text } from "react-native-paper";
 import { connect } from "react-redux";
 import * as ImagePicker from "expo-image-picker";
-import { coltsBlue, globalStyles } from "../../styles/global";
 import { addPic } from "../../redux/actions";
 import * as ImageManipulator from "expo-image-manipulator";
 
@@ -11,11 +10,10 @@ interface ImageProps {
   addPic: ((item:any) => void);
   visionButtonContainer: StyleProp<ViewStyle>;
   uploadButton: StyleProp<ViewStyle>;
-  coltsBlue: StyleProp<ViewStyle>;
 }
-
-interface ListProps {
-  item: object;
+interface Styles {
+  visionButtonContainer: ViewStyle;
+  uploadButton: ViewStyle;
 }
 
 
@@ -74,40 +72,48 @@ const ImagePic: React.FC<ImageProps> = ({ addPic }) => {
   };
 
   return (
-    <>
-      <View style={globalStyles.visionButtonContainer}>
+      <Card>
+        <Card.Content style={styles.visionButtonContainer}>
         <Button
-          color={coltsBlue}
-          style={globalStyles.uploadButton}
+          style={styles.uploadButton}
           accessibilityLabel="Add Image From Gallery"
           onPress={pickImage}
         >
           Add from gallery
         </Button>
         <Button
-          color={coltsBlue}
-          style={globalStyles.uploadButton}
+          style={styles.uploadButton}
           accessibilityLabel="Take A Picture"
           onPress={CameraImage}
         >
           Take a Picture
         </Button>
-      </View>
+        </Card.Content>
       <Text>
         {image && (
           <Image source={{uri: image}}
             style={{
               width: windowWidth * 0.97,
-              height: windowHeight * 0.4,
-              resizeMode: "cover",
+              height: windowHeight * 0.6,
+              resizeMode: "contain",
               alignSelf: "center",
             }}
           />
         )}
       </Text>
-    </>
+    </Card>
   );
 };
+
+const styles = StyleSheet.create<Styles>({
+  visionButtonContainer: {
+    flexDirection: "row",
+  },
+  uploadButton: {
+    margin: 5,
+    alignSelf: "center"
+  },
+});
 
 const mapDispatchToProps = { addPic };
 

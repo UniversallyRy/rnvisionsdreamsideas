@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef } from "react";
-import { View } from "react-native";
+import { View, StyleSheet, StyleProp, TextStyle, ViewStyle, Dimensions} from "react-native";
 import { TextInput, Text } from "react-native-paper";
 import { connect } from "react-redux";
 import { Formik } from "formik";
@@ -15,7 +15,6 @@ interface VisionProps {
   setModalOpen:((arg0:boolean) => void);
 }
 
-
 const visionSchema = yup.object({
   title: yup.string().required().min(4),
 });
@@ -25,7 +24,7 @@ const simulateSlowNetworkRequest = () =>
 
 const AddVision: React.FC<VisionProps> = ({ addVision, stateUri, setModalOpen }) => {
   return (
-    <View style={{ margin: 15, marginTop: 100 }}>
+    <View style={{ margin: 3, marginTop: 100 }}>
       <Formik
         enableReinitialize={true}
         initialValues={{ uri: stateUri, title: "", id: null }}
@@ -46,6 +45,7 @@ const AddVision: React.FC<VisionProps> = ({ addVision, stateUri, setModalOpen })
         }) => (
           <>
             <TextInput
+              style={{fontFamily: "roboto-black"}}
               mode="outlined"
               placeholder="Vision Title"
               onChangeText={handleChange("title")}

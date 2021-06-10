@@ -7,46 +7,6 @@ export const raidSilver = "#A5ACAF";
 
 export const globalStyles = StyleSheet.create({
   // Vision Styles
-
-  visionPage: {
-    fontFamily: "roboto-black",
-    backgroundColor: coltsGray,
-    flex: 1,
-  },
-  vDetailsContent: {
-    backgroundColor: coltsBlue,
-    flexDirection: "row",
-    flex: 1,
-  },
-  vDetailsImage: {
-    resizeMode: "contain",
-    alignSelf: "center",
-    height: windowHeight * 0.55,
-    width: windowWidth * 0.95,
-  },
-  visionButtonContainer: {
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "center",
-    marginBottom: 7,
-  },
-  visionDeleteButton: {
-    borderRadius: 13,
-    justifyContent: "center",
-    backgroundColor: coltsGray,
-    margin: 4,
-    height: 50,
-    width: windowWidth * 0.95,
-  },
-  uploadButton: {
-    alignSelf: "center",
-    alignItems: "center",
-    justifyContent: "center",
-    backgroundColor: coltsGray,
-    width: 200,
-    height: 70,
-    margin: 5,
-  },
   slideContainer: {
     width: windowWidth,
     height: windowHeight * 0.88,
@@ -68,7 +28,6 @@ export const globalStyles = StyleSheet.create({
     alignSelf: "center",
     justifyContent: "center",
     fontSize: 32,
-    color: coltsBlue,
     marginBottom: 20,
     marginTop: 20,
   },
@@ -85,46 +44,6 @@ export const globalStyles = StyleSheet.create({
     borderRadius: 4,
     marginHorizontal: 2,
     marginTop: 10,
-  },
-  paginationDotActive: {
-    backgroundColor: coltsBlue,
-  },
-  paginationDotInactive: {
-    backgroundColor: "gray",
-  },
-  modalToggle: {
-    marginTop: 20,
-    marginBottom: 25,
-    marginHorizontal: 100,
-    borderWidth: 1,
-    borderColor: coltsGray,
-    color: coltsGray,
-    padding: 10,
-    borderRadius: 10,
-    justifyContent: "center",
-    alignSelf: "center",
-    alignItems: "center",
-  },
-  closeModalContainer: {
-    flex: 1,
-    marginTop: 95,
-    marginBottom: 30,
-    justifyContent: "flex-end",
-    borderColor: coltsBlue,
-    color: coltsBlue,
-  },
-  modalClose: {
-    position: "absolute",
-  },
-  modalContent: {
-    flex: 1,
-    backgroundColor: coltsBlue,
-    height: windowHeight,
-  },
-  visionAddToggle: {
-    flexDirection: "row",
-    alignSelf: "center",
-    backgroundColor: coltsBlue,
   },
   // Journal Styles
 
@@ -154,13 +73,11 @@ export const globalStyles = StyleSheet.create({
   journalTitle: {
     fontFamily: "roboto-black",
     fontSize: 20,
-    color: coltsGray,
     marginBottom: 10,
   },
   journalText: {
     fontFamily: "roboto-regular",
     fontSize: 12,
-    color: coltsGray,
   },
   journalDate: {
     fontFamily: "roboto-italic",
@@ -169,21 +86,8 @@ export const globalStyles = StyleSheet.create({
     margin: 5,
     color: coltsGray,
   },
-  addJournalContainer: {
-    flex: 1,
-    backgroundColor: coltsBlue,
-    fontFamily: "roboto-black",
-  },
   addJournalForm: {
     margin: 15,
-  },
-  addJournalTitle: {
-    alignSelf: "center",
-    borderWidth: 1,
-    borderColor: coltsBlue,
-    padding: 20,
-    fontSize: 18,
-    borderRadius: 2,
   },
   jDetailsText: {
     fontSize: 14,
@@ -352,12 +256,11 @@ export const globalStyles = StyleSheet.create({
     fontSize: 30,
   },
   navbar: {
-    color: coltsBlue,
     fontSize: 40,
   },
   errorText: {
+    fontFamily: "roboto-bold",
     color: "crimson",
-    fontWeight: "bold",
     marginBottom: 10,
     marginTop: 6,
     textAlign: "center",

@@ -12,7 +12,7 @@ import AddJournalModal from "../components/journals/addJournalModal";
 import JournalList from "../components/journals/journalList";
 import { coltsBlue, globalStyles } from "../styles/global";
 import JournalGridContainer from "../components/journals/journalGrid";
-import Icon from "../shared/icon";
+import {Icon} from "../shared/icon";
 
 interface JournalProps {
   navigation: NavigationStackProp;
@@ -20,13 +20,15 @@ interface JournalProps {
   addJournalContainer: StyleProp<ViewStyle>;
   addJournalTitle: StyleProp<TextStyle>;
   closeModalContainer: StyleProp<ViewStyle>;
-  modalClose: StyleProp<ViewStyle>;
   visionAddToggle:StyleProp<ViewStyle>;
-  coltsBlue: StyleProp<TextStyle>;
 }
 
 interface Styles {
   journalContainer: ViewStyle;
+  addJournalTitle: ViewStyle;
+  visionAddToggle: ViewStyle;
+  closeModalContainer: ViewStyle;
+  addJournalContainer: ViewStyle;
 }
 
 const JournalScreen: React.FC<JournalProps>= ({ navigation }) => {
@@ -44,14 +46,14 @@ const JournalScreen: React.FC<JournalProps>= ({ navigation }) => {
           <Modal
             visible={modalOpen}
             onDismiss={() => setModalOpen(false)}
-            contentContainerStyle={globalStyles.addJournalContainer}
+            contentContainerStyle={styles.addJournalContainer}
           >
-            <Text style={globalStyles.addJournalTitle}>Add A Journal Entry</Text>
+            <Text style={styles.addJournalTitle}>Add A Journal Entry</Text>
             <AddJournalModal setModalOpen={setModalOpen} />
-            <View style={globalStyles.closeModalContainer}>
+            <View style={styles.closeModalContainer}>
               <Icon
                 item="close"
-                style={{ ...globalStyles.modalClose }}
+                style={{ alignSelf:"center" }}
                 onPress={() => setModalOpen(false)}
               />
             </View>
@@ -62,7 +64,7 @@ const JournalScreen: React.FC<JournalProps>= ({ navigation }) => {
         ) : (
           <JournalList navigation={navigation} />
         )}
-        <View style={globalStyles.visionAddToggle}>
+        <View style={styles.visionAddToggle}>
           <Icon item="plus" onPress={() => setModalOpen(true)} />
           <Icon item="grid" onPress={() => toggleGrid()} />
         </View>
@@ -75,6 +77,26 @@ const styles = StyleSheet.create<Styles>({
   journalContainer:{
     flex: 1, 
     backgroundColor: coltsBlue 
+  },
+  addJournalTitle: {
+    alignSelf: "center",
+    borderWidth: 1,
+    borderColor: coltsBlue,
+    padding: 20,
+    fontSize: 18,
+    borderRadius: 2,
+  },
+  addJournalContainer: {
+    flex: 1,
+    backgroundColor: coltsBlue,
+    fontFamily: "roboto-black",
+  },
+  visionAddToggle: {
+    flexDirection: "row",
+  },
+  closeModalContainer: {
+    flex: 1,
+    justifyContent: "flex-end",
   },
 });
 

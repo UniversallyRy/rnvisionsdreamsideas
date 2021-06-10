@@ -1,24 +1,47 @@
 import React from "react";
-import { GestureResponderEvent, StyleProp, ViewStyle, TextStyle } from "react-native";
-import { globalStyles } from "../styles/global";
-import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { GestureResponderEvent, StyleSheet, StyleProp, ViewStyle, TextStyle } from "react-native";
+import { FAB } from "react-native-paper";
 
 interface IconProps {
   item: string;
-  onPress: ((event: GestureResponderEvent) => void);
+  onPress?: ((event: GestureResponderEvent) => void);
   modalToggle?: StyleProp<ViewStyle>;
   style?: StyleProp<TextStyle>
 }
 
-const Icon:React.FC<IconProps> = ({ item, onPress }) => {
+interface Styles {
+  modalToggle: ViewStyle;
+  delete: ViewStyle;
+}
+
+export const Icon:React.FC<IconProps> = ({ item, onPress }) => {
   return (
-    <MaterialCommunityIcons
-      name={`${item}`}
-      size={24}
-      style={globalStyles.modalToggle}
+    <FAB
+      icon={`${item}`}
+      small
+      style={styles.modalToggle}
       onPress={onPress}
     />
   );
 };
 
-export default Icon;
+export const DeleteButton:React.FC<IconProps> = ({ item, onPress }) => {
+  return (
+    <FAB
+      icon={`${item}`}
+      small
+      style={styles.delete}
+      onPress={onPress}
+    />
+  );
+};
+const styles = StyleSheet.create<Styles>({
+  modalToggle: {
+    marginBottom: 15,
+    marginHorizontal: 84,
+  },
+  delete: {
+    margin: 5,
+  }
+});
+
