@@ -108,7 +108,7 @@ const VisionsContainer: React.FC<ImageProps> = ({
   const renderList: React.FC<ListProps> = useCallback(
     ({ item, index }:any) => {
     return <VisionImageList index={index} data={item} />;
-  }, []);
+  }, [VisionImageList]);
 
   return (
     <>

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Modal, StyleProp, TextStyle, ViewStyle, StyleSheet, View, GestureResponderEvent} from "react-native";
+import { Modal, StyleProp, TextStyle, ViewStyle, StyleSheet, View, GestureResponderEvent, TouchableOpacity} from "react-native";
 import { Card, Button, Text } from "react-native-paper";
 import { connect } from "react-redux";
 import TodosModal from "./todosModal";
@@ -7,8 +7,9 @@ import { deleteList } from "../../redux/actions";
 
 interface TodoListsProps {
   list: any;
-  deleteList: ((event: GestureResponderEvent) => void);
+  deleteList: ((id:string) => void);
   listContainer: StyleProp<ViewStyle>;
+  cardContainer: StyleProp<ViewStyle>;
   listTitle: StyleProp<TextStyle>;
   count: StyleProp<TextStyle>;
   subtitle: StyleProp<TextStyle>;
@@ -17,6 +18,7 @@ interface TodoListsProps {
 
 interface Styles {
   listContainer: ViewStyle;
+  cardContainer: ViewStyle;
   listTitle: TextStyle;
   count: TextStyle;
   subtitle: TextStyle;
@@ -53,15 +55,16 @@ const TodoLists: React.FC<TodoListsProps>= ({ list, deleteList }) => {
   remainingCount = Object.keys(remainingCount).length - completedCount;
 
   return (
-    <Card style={[styles.listContainer, { backgroundColor: list.color }]} onPress={() => toggleListModal()}>
+    <View style={styles.listContainer}>
+    <Card style={[styles.cardContainer, { backgroundColor: list.color }]} onPress={() => toggleListModal()}>
       <Modal
         animationType="slide"
         visible={visible}
         onRequestClose={() => toggleListModal()}
       >
-        <TodosModal list={list} closeModal={() => toggleListModal()} />
+        <TodosModal item={list} closeModal={() => toggleListModal()} />
       </Modal>
-      <Card.Content>
+      <View>
         <Text style={styles.listTitle} numberOfLines={1}>
           {list.name}
         </Text>
@@ -73,27 +76,28 @@ const TodoLists: React.FC<TodoListsProps>= ({ list, deleteList }) => {
             <Text style={styles.count}>{completedCount}</Text>
             <Text style={styles.subtitle}>Completed</Text>
           </View>
-      </Card.Content>
-      <Button
-        style={styles.deleteButton}
-        icon="close-outline"
-        mode="contained"
-        onPress={() => deleteList(list.id)}
-      >
-        Delete
-      </Button>
+      </View>
     </Card>
+        <Button
+          style={styles.deleteButton}
+          icon="close-outline"
+          mode="contained"
+          onPress={() => deleteList(list.id)}
+          >
+          Delete
+        </Button>
+        </View>
   );
 };
 
 const styles = StyleSheet.create<Styles>({
   listContainer: {
     flex: 1,
-    padding: 32,
-    paddingHorizontal: 16,
-    borderRadius: 6,
-    marginHorizontal: 12,
     alignItems: "center",
+  },
+  cardContainer: {
+    padding: 20,
+    borderRadius: 6,
     width: 200,
     height: 245,
   },
@@ -114,7 +118,6 @@ const styles = StyleSheet.create<Styles>({
   deleteButton: {
     margin: 2,
     width: 200,
-    alignSelf: "center",
   },
 });
 

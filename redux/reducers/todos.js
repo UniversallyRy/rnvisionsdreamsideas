@@ -8,6 +8,7 @@ import {
 } from "../actionTypes";
 import uuid from "../../utils/uuid";
 import produce from "immer";
+import merge from "deepmerge";
 
 const initialValue = [
   {
@@ -17,50 +18,50 @@ const initialValue = [
     todos: [
       {
         title: "Book Flight",
-        completed: false,
         id: uuid.generate(),
+        completed: false,
       },
       {
         title: "Passport Check",
-        completed: false,
         id: uuid.generate(),
+        completed: false,
       },
       {
         title: "Reserve Hotel",
-        completed: true,
         id: uuid.generate(),
+        completed: true,
       },
       {
         title: "Pack Luggage",
-        completed: false,
         id: uuid.generate(),
+        completed: false,
       },
     ],
   },
   {
     name: "Errands",
     id: uuid.generate(),
-    color: "#000000",
+    color: "#83ADB5",
     todos: [
       {
         title: "Store",
-        completed: true,
         id: uuid.generate(),
+        completed: true,
       },
       {
         title: "Hike",
-        completed: false,
         id: uuid.generate(),
+        completed: false,
       },
       {
         title: "Take a video",
-        completed: true,
         id: uuid.generate(),
+        completed: true,
       },
       {
         title: "Walk Dog",
-        completed: true,
         id: uuid.generate(),
+        completed: true,
       },
     ],
   },
@@ -71,18 +72,18 @@ const initialValue = [
     todos: [
       {
         title: "Ballons",
-        completed: false,
         id: uuid.generate(),
+        completed: false,
       },
       {
         title: "Make Dinner",
-        completed: false,
         id: uuid.generate(),
+        completed: false,
       },
       {
         title: "Send Invites",
-        completed: true,
         id: uuid.generate(),
+        completed: true,
       },
     ],
   },
@@ -90,23 +91,6 @@ const initialValue = [
 
 export default produce((draft, action) => {
   switch (action.type) {
-    case ADD_TODO:
-      return (state = initialValue);
-
-    // return draft.map((item) => {
-    //   if (newTodos.name === action.payload.name) {
-    //     return [
-    //       ...draft,
-    //       {
-    //         title: action.payload.title,
-    //         id: uuid.generate(),
-    //         completed: false,
-    //       },
-    //     ];
-    //   }
-    //   i++;
-    // });
-
     case ADD_LIST:
       return [
         {
@@ -121,6 +105,20 @@ export default produce((draft, action) => {
     case DELETE_LIST:
       return draft.filter((list) => list.id != action.payload.id);
 
+    case ADD_TODO:
+      let newDraft = Object.assign([{}], draft);
+
+      newDraft.map((item) => {
+        if (item.id == action.payload.listid) {
+          item.todos.push({
+            title: action.payload.title,
+            id: uuid.generate(),
+            completed: false,
+          });
+        }
+      });
+      return draft;
+
     case EDIT_TODO:
       const newState = action.payload.draft;
       return newState;
@@ -133,6 +131,16 @@ export default produce((draft, action) => {
 
     // return { todos, ...draft }
     case DELETE_TODO:
-      return draft.filter((list) => list.todos.id != action.payload.id);
+      let newDr = Object.assign([{}], draft);
+
+      newDr.map((item) => {
+        if (item.id == action.payload.listid) {
+          item.todos.filter((todo) => todo.id != action.payload.id);
+        }
+      });
+      return newDr;
+
+    default:
+      return draft;
   }
 }, initialValue);

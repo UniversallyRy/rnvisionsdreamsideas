@@ -5,31 +5,28 @@ import {
   StyleProp, 
   TextStyle, 
   ViewStyle,
-  Text,
   View,
   KeyboardAvoidingView,
   Keyboard,
-  Animated,
   Dimensions,
-  Platform
+  FlatList,
+  Platform,
 } from "react-native";
 import { connect } from "react-redux";
-import { Button } from "react-native-paper";
-import { SafeAreaView } from "react-native-safe-area-context";
-import { FlatList, RectButton, TextInput } from "react-native-gesture-handler";
+import { Button, Text } from "react-native-paper";
+import {  TextInput } from "react-native-gesture-handler";
 import { AntDesign, Ionicons } from "@expo/vector-icons";
 import { Formik } from "formik";
 import * as yup from "yup";
 import { addTodo, deleteTodo } from "../../redux/actions";
-
 export const { width: windowWidth, height: windowHeight } = Dimensions.get("window");
 
 interface TodoModalProps {
-  list: any;
+  item: any;
   stateTodos: object;
   closeModal: (() => void);
-  deleteTodo: ((item: string) => void);
-  addTodo: ((item: object) => void);
+  deleteTodo: ((id: string, id2: string) => void);
+  addTodo: ((item: object, id: string) => void);
   container: StyleProp<ViewStyle>;
   section: StyleProp<ViewStyle>;
   header: StyleProp<TextStyle>;
@@ -69,9 +66,9 @@ const todoSchema = yup.object({
   title: yup.string().required().min(4),
 });
 
-const TodosModal: React.FC<TodoModalProps> = ({ list, closeModal, deleteTodo, addTodo }) => {
+const TodosModal: React.FC<TodoModalProps> = ({ item, closeModal, deleteTodo, addTodo }) => {
   const [completedTodo, setCompleted] = useState(false);
-  const newTodos = list.todos;
+  const newTodos = item.todos;
   const taskCount = newTodos.length;
   const completedCount = newTodos.filter((todo:any) => todo.completed).length;
 
@@ -79,14 +76,8 @@ const TodosModal: React.FC<TodoModalProps> = ({ list, closeModal, deleteTodo, ad
     setCompleted((newTodos[index].completed = !newTodos[index].completed));
   };
 
-  const removeTodo = (id:string) => {
-    var todoId = id;
-    deleteTodo(todoId);
-  };
-
   const renderTodo = (todo:any, index:number) => {
     return (
-      <View renderRightActions={(_:any, dragX:any) => rightActions(dragX, index)}>
         <TouchableOpacity style={styles.todoContainer}>
           <Ionicons
             name={todo.completed ? "ios-square" : "ios-square-outline"}
@@ -101,7 +92,7 @@ const TodosModal: React.FC<TodoModalProps> = ({ list, closeModal, deleteTodo, ad
               {
                 textDecorationLine: todo.completed ? "line-through" : "none",
                 color: todo.completed ? "gray" : "black",
-              },
+              }
             ]}
           >
             {todo.title}
@@ -110,38 +101,15 @@ const TodosModal: React.FC<TodoModalProps> = ({ list, closeModal, deleteTodo, ad
             name="closecircle"
             size={24}
             style={styles.deleteTodoButton}
-            onPress={() => removeTodo(todo.id)}
+            onPress={() => deleteTodo(todo.id, item.id)}
           />
         </TouchableOpacity>
-      </View>
-    );
-  };
-
-  const rightActions = (dragX:any, index:number) => {
-    const trans = dragX.interpolate({
-      inputRange: [0, 50, 100, 101],
-      outputRange: [-20, 0, 0, 1],
-    });
-    return (
-      <RectButton>
-        <Animated.View style={styles.deleteButton}>
-          <Animated.Text
-            style={{
-              color: "white",
-              fontWeight: "700",
-              transform: [{ translateX: trans }],
-            }}
-          >
-            Delete
-          </Animated.Text>
-        </Animated.View>
-      </RectButton>
     );
   };
 
   return (
     <KeyboardAvoidingView style={{ flex: 1 }} behavior={Platform.OS === "ios" ? "padding" : "height"}>
-      <SafeAreaView style={styles.container}>
+      <View style={styles.container}>
         <TouchableOpacity
           style={{ position: "absolute", top: 40, right: 32, zIndex: 10}}
         >
@@ -164,7 +132,7 @@ const TodosModal: React.FC<TodoModalProps> = ({ list, closeModal, deleteTodo, ad
             Completed {completedCount} of {taskCount} tasks
           </Text>
         </View>
-        <View style={styles.section}>
+        <TouchableOpacity style={styles.section}>
           <FlatList
             data={newTodos}
             keyExtractor={(_, index) => index.toString()}
@@ -175,12 +143,12 @@ const TodosModal: React.FC<TodoModalProps> = ({ list, closeModal, deleteTodo, ad
             showsVerticalScrollIndicator={false}
             renderItem={({ item, index }) => renderTodo(item, index)}
           />
-        </View>
+        </TouchableOpacity>
           <Formik
             initialValues={{ title: "", id: "", completed: false }}
             validationSchema={todoSchema}
             onSubmit={(values, actions) => {
-              addTodo(values);
+              addTodo(values, item.id );
               actions.resetForm();
               Keyboard.dismiss();
             }}
@@ -218,7 +186,7 @@ const TodosModal: React.FC<TodoModalProps> = ({ list, closeModal, deleteTodo, ad
               </View>
             )}
           </Formik>
-      </SafeAreaView>
+      </View>
     </KeyboardAvoidingView>
   );
 };
@@ -239,9 +207,9 @@ const styles = StyleSheet.create<Styles>({
     borderBottomWidth: 4,
   },
   title: {
+    marginTop: 100,
     fontSize: 30,
     fontWeight: "800",
-    color: "black",
   },
   taskCount: {
     marginTop: 4,

@@ -5,9 +5,8 @@ import { connect } from "react-redux";
 import { Formik } from "formik";
 import * as yup from "yup";
 import FlatButton from "../../shared/button";
-import { addJournal } from "../../redux/actions";
+import { addJournal, addTodo } from "../../redux/actions";
 import { globalStyles } from "../../styles/global";
-
 
 interface AddJournalProps {
   addJournal: ((item: any) => void);
@@ -78,6 +77,6 @@ const AddJournal:React.FC<AddJournalProps> = ({ addJournal, setModalOpen }) => {
 
 
 // actions from redux to save entry to store
-const mapDispatchToProps = { addJournal };
+const mapDispatchToProps = { addTodo, addJournal };
 
 export default connect(null, mapDispatchToProps)(AddJournal);

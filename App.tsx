@@ -38,14 +38,12 @@ const App = () => {
   if (fontsLoaded) {
     return (
       <Provider store={store}>
-        <PersistGate loading={persistLoaded} persistor={persistor}>
           <PaperProvider>
             <NavigationContainer>
               <NavDrawer />
               <StatusBar animated={true} />
             </NavigationContainer>
           </PaperProvider>
-        </PersistGate>
       </Provider>
     );
   } else {

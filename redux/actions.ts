@@ -111,14 +111,14 @@ export const deleteList = (id) => ({
   },
 });
 
-export const addTodo = ({ title, id, completed, name }) => ({
+export const addTodo = ({ title, id ,completed }, listid) => ({
   type: ADD_TODO,
   payload: {
-    title,
-    id,
-    completed,
-    name,
-  },
+      listid,
+      title,
+      id,
+      completed,
+    }
 });
 
 export const toggleTodo = ({ id, todo }) => ({
@@ -136,10 +136,11 @@ export const editTodo = (state) => ({
   },
 });
 
-export const deleteTodo = (id) => ({
+export const deleteTodo = ({id}, listid) => ({
   type: DELETE_TODO,
   payload: {
     id,
+    listid,
   },
 });
 

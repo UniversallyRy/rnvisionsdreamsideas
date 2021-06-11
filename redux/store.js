@@ -18,7 +18,7 @@ const persistedReducer = persistReducer(persistConfig, rootReducer); // create a
 // const persistedState = loadFromLocal();
 
 const store = createStore(
-  persistedReducer,
+  rootReducer,
   applyMiddleware(),
   window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
 );

@@ -45,7 +45,7 @@ const NoteMain: React.FC<NoteMainProps> = ({ stateNotes, stateTodos }) => {
     setNoteModal(!noteModal);
   };
 
-  const renderList = (list:object) => {
+  const renderList = (list:any) => {
     return <TodoLists list={list} />;
   };
 

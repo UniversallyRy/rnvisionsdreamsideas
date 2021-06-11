@@ -31,7 +31,6 @@ const styles = StyleSheet.create<Styles>({
     flex: 1,
   },
 });
-
 const mapStateToProps = (state:any) => {
   return {
     stateNotes: state.note,
