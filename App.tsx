@@ -20,7 +20,7 @@ import { PersistGate } from "redux-persist/integration/react";
 import * as Font from "expo-font";
 // const CombinedDefaultTheme = merge( PaperDefaultTheme, NavigationDefaultTheme );
 // const CombinedDarkTheme = merge( PaperDarkTheme, NavigationDarkTheme );
-// todos: FINISH FIXING JEST TESTING, IMPROVE ACCESSIBILITY, modal fixes/keyboard popup pushes content, visionboard fixes, build dream journal out, add separate note container and reducer
+// todos: FINISH FIXING JEST TESTING, IMPROVE ACCESSIBILITY, visionboard fixes, build dream journal out, move styles back outside components eventually
 
 const getFonts = () =>
   Font.loadAsync({
