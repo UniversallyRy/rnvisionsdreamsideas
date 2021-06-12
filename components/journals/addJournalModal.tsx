@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleProp, TextStyle, ViewStyle,} from "react-native";
+import { StyleProp, TextStyle } from "react-native";
 import { TextInput, Text, Surface } from "react-native-paper";
 import { connect } from "react-redux";
 import { Formik } from "formik";

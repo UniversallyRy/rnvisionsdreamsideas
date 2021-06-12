@@ -28,7 +28,6 @@ const Header:React.FC<HeaderProps> = ({ navigation, title }) => {
           size={36}
           onPress={openMenu}
         />
-        {/* <Image source={require('../assets/favicon.png')}/> */}
         <Text style={styles.headerText}>{title}</Text>
       </View>
     </SafeAreaView>

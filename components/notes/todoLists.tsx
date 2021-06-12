@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Modal, StyleProp, TextStyle, ViewStyle, StyleSheet, View, GestureResponderEvent, TouchableOpacity} from "react-native";
+import { Modal, StyleProp, TextStyle, ViewStyle, StyleSheet, View} from "react-native";
 import { Card, Button, Text } from "react-native-paper";
 import { connect } from "react-redux";
 import TodosModal from "./todosModal";
@@ -24,8 +24,6 @@ interface Styles {
   subtitle: TextStyle;
   deleteButton: ViewStyle;
 }
-
-
 
 const TodoLists: React.FC<TodoListsProps>= ({ list, deleteList }) => {
   const [visible, setVisible] = useState(false);
@@ -56,37 +54,37 @@ const TodoLists: React.FC<TodoListsProps>= ({ list, deleteList }) => {
 
   return (
     <View style={styles.listContainer}>
-    <Card style={[styles.cardContainer, { backgroundColor: list.color }]} onPress={() => toggleListModal()}>
-      <Modal
-        animationType="slide"
-        visible={visible}
-        onRequestClose={() => toggleListModal()}
-      >
-        <TodosModal item={list} closeModal={() => toggleListModal()} />
-      </Modal>
-      <View>
-        <Text style={styles.listTitle} numberOfLines={1}>
-          {list.name}
-        </Text>
-          <View style={{ alignItems: "center" }}>
-            <Text style={styles.count}>{remainingCount}</Text>
-            <Text style={styles.subtitle}>Remaining</Text>
-          </View>
-          <View style={{ alignItems: "center" }}>
-            <Text style={styles.count}>{completedCount}</Text>
-            <Text style={styles.subtitle}>Completed</Text>
-          </View>
-      </View>
-    </Card>
-        <Button
-          style={styles.deleteButton}
-          icon="close-outline"
-          mode="contained"
-          onPress={() => deleteList(list.id)}
-          >
-          Delete
-        </Button>
+      <Card style={[styles.cardContainer, { backgroundColor: list.color }]} onPress={() => toggleListModal()}>
+        <Modal
+          animationType="slide"
+          visible={visible}
+          onRequestClose={() => toggleListModal()}
+        >
+          <TodosModal item={list} closeModal={() => toggleListModal()} />
+        </Modal>
+        <View>
+          <Text style={styles.listTitle} numberOfLines={1}>
+            {list.name}
+          </Text>
+            <View style={{ alignItems: "center" }}>
+              <Text style={styles.count}>{remainingCount}</Text>
+              <Text style={styles.subtitle}>Remaining</Text>
+            </View>
+            <View style={{ alignItems: "center" }}>
+              <Text style={styles.count}>{completedCount}</Text>
+              <Text style={styles.subtitle}>Completed</Text>
+            </View>
         </View>
+      </Card>
+      <Button
+        style={styles.deleteButton}
+        icon="close-outline"
+        mode="contained"
+        onPress={() => deleteList(list.id)}
+        >
+        Delete
+      </Button>
+    </View>
   );
 };
 

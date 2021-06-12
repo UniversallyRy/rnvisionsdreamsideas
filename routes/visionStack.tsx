@@ -4,7 +4,6 @@ import {
   NavigationStackProp,
 } from "react-navigation-stack";
 import Visions from "../screens/visionScreen";
-// import VisionImageGrid from '../components/visions/visionImageGrid';
 import VisionDetails from "../components/visions/visionDetails";
 import Header from "../shared/header";
 

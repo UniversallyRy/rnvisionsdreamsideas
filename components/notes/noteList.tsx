@@ -5,11 +5,11 @@ import NotesModal from "./notesModal";
 
 interface NoteListProps {
   notes: object;
-  deleteNote: ((item: object) => void);
-  noteContainer: StyleProp<ViewStyle>;
-  noteTitle: StyleProp<TextStyle>;
-  count: StyleProp<TextStyle>;
-  subtitle: StyleProp<ViewStyle>;
+  deleteNote?: ((item: object) => void);
+  noteContainer?: StyleProp<ViewStyle>;
+  noteTitle?: StyleProp<TextStyle>;
+  count?: StyleProp<TextStyle>;
+  subtitle?: StyleProp<ViewStyle>;
 }
 
 interface Styles {

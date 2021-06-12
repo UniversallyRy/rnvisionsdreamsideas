@@ -64,7 +64,6 @@ const ImagePic: React.FC<ImageProps> = ({ addPic }) => {
       mediaTypes: ImagePicker.MediaTypeOptions.Images,
       allowsEditing: true,
     });
-    // .canccelled prop from ImagePicker import
     if (!result.cancelled) {
       setImage(result.uri);
       addPic(result.uri);

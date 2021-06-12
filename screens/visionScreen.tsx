@@ -20,9 +20,6 @@ import { Icon } from "../shared/icon";
 
 const {height: windowHeight } = Dimensions.get("window");
 
-
-const VISIBLE_ITEMS = 3;
-
 interface VisionProps {
   navigation: NavigationStackProp;
   container: StyleProp<ViewStyle>;

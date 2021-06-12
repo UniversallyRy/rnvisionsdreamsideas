@@ -3,7 +3,6 @@ import { StyleSheet, View, FlatList, StyleProp, TextStyle, ViewStyle, Dimensions
 import { NavigationStackProp } from 'react-navigation-stack';
 import { Button, Card, Paragraph } from "react-native-paper";
 import { connect } from "react-redux";
-import { globalStyles } from "../../styles/global";
 import { deleteJournal } from "../../redux/actions";
 
 interface JournalListProps {

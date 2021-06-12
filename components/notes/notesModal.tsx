@@ -20,7 +20,7 @@ import { AntDesign } from "@expo/vector-icons";
 import { Formik, FormikHelpers } from "formik";
 import * as yup from "yup";
 import { deleteNote, addNote } from "../../redux/actions";
-import { Icon } from "../../shared/icon";
+
 export const { width: windowWidth, height: windowHeight } = Dimensions.get("window");
 
 interface NoteModalProps {
@@ -38,10 +38,6 @@ interface NoteModalProps {
   noteContainer:StyleProp<ViewStyle>;
   deleteNoteButton:StyleProp<ViewStyle>;
   noteErrorText:StyleProp<TextStyle>;
-}
-
-interface RenderProps {
-  note?: any;
 }
 
 interface Styles {
@@ -75,7 +71,7 @@ const NotesModal: React.FC<NoteModalProps> = ({ notes, closeModal, deleteNote, a
     deleteNote(noteId);
   };
 
-  const renderNote: React.FC<RenderProps> = ( note, index) => {
+  const renderNote = ( note:any, index = 0) => {
     return (
         <Surface style={styles.noteContainer}>
           <Text style={{paddingRight: 20}}>{note.name}</Text>

@@ -1,11 +1,10 @@
 import React from "react";
-import { StyleSheet, StyleProp, TextStyle, ViewStyle, GestureResponderEvent } from "react-native";
+import { StyleSheet, StyleProp, TextStyle, ViewStyle } from "react-native";
 import { Button, Text } from "react-native-paper";
-import { coltsBlue, raidSilver } from "../styles/global";
 
 interface ButtonProps {
   text?: string;
-  onPress: () => void; //((event: GestureResponderEvent) => void);
+  onPress: () => void;
   button?: StyleProp<ViewStyle>;
   buttonText?: StyleProp<TextStyle>;
   accessabilityLabel?: string;

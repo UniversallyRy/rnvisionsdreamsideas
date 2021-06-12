@@ -25,7 +25,7 @@ interface TodoModalProps {
   item: any;
   stateTodos: object;
   closeModal: (() => void);
-  deleteTodo: ((id: string, id2: string) => void);
+  deleteTodo: ((id: any, id2: any) => void);
   addTodo: ((item: object, id: string) => void);
   container: StyleProp<ViewStyle>;
   section: StyleProp<ViewStyle>;

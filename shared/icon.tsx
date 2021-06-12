@@ -1,10 +1,10 @@
 import React from "react";
-import { GestureResponderEvent, StyleSheet, StyleProp, ViewStyle, TextStyle } from "react-native";
+import { StyleSheet, StyleProp, ViewStyle, TextStyle } from "react-native";
 import { FAB } from "react-native-paper";
 
 interface IconProps {
   item: string;
-  onPress?: ((item:any) => void);
+  onPress?: (() => void);
   modalToggle?: StyleProp<ViewStyle>;
   style?: StyleProp<TextStyle>
 }

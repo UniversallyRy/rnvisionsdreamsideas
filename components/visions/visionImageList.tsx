@@ -16,7 +16,7 @@ import {
 
 interface ImageProps {
   navigation: NavigationStackProp;
-  state: any;
+  state: [];
   index: any;
   scrollX: any;
   deleteVision: ((event: GestureResponderEvent) => void);
@@ -102,7 +102,7 @@ const VisionsContainer: React.FC<ImageProps> = ({
         </Surface>
       );
     },
-    [state]
+    
   );
 
   const renderList: React.FC<ListProps> = useCallback(
