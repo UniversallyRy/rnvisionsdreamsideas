@@ -17,136 +17,34 @@ import {
   DELETE_TODO,
   SET_FILTER,
 } from "./actionTypes";
+import { createAction } from '@reduxjs/toolkit'
 
-// export const addText = (value) => ({
-//   type: "ADD_TEXT",
-//   payload: value,
-// });
 
-export const addVision = ({ uri, title, id }) => ({
-  type: ADD_VISION,
-  payload: {
-    uri,
-    title,
-    id,
-  },
-});
+export const addVision = createAction(ADD_VISION);
+export const editVision = createAction(EDIT_VISION);
+export const deleteVision = createAction(DELETE_VISION);
+export const addPic = createAction(ADD_PIC);
 
-export const editVision = ({ task, id, complete }) => ({
-  type: EDIT_VISION,
-  payload: { task, id, complete },
-});
 
-export const deleteVision = (id) => ({
-  type: DELETE_VISION,
-  payload: {
-    id,
-  },
-});
+export const addJournal = createAction(ADD_JOURNAL)
+export const editJournal = createAction(EDIT_JOURNAL);
+export const deleteJournal = createAction(DELETE_JOURNAL)
 
-export const addPic = (uri) => ({
-  type: ADD_PIC,
-  payload: {
-    uri,
-  },
-});
 
-export const addJournal = ({ title, body, id }) => ({
-  type: ADD_JOURNAL,
-  payload: {
-    title,
-    body,
-    id,
-  },
-});
 
-export const editJournal = (id) => ({
-  type: EDIT_JOURNAL,
-  payload: {
-    id,
-  },
-});
+export const addNote = createAction(ADD_NOTE);
+export const editNote = createAction(EDIT_NOTE);
+export const deleteNote = createAction(DELETE_NOTE);
 
-export const deleteJournal = (id) => ({
-  type: DELETE_JOURNAL,
-  payload: {
-    id,
-  },
-});
 
-export const addNote = ({ name, id }) => ({
-  type: ADD_NOTE,
-  payload: {
-    name,
-    id,
-  },
-});
+export const addList = createAction(ADD_LIST);
+export const deleteList = createAction(DELETE_LIST);
 
-export const editNote = ({ name, id }) => ({
-  type: EDIT_NOTE,
-  payload: { name, id },
-});
 
-export const deleteNote = (id) => ({
-  type: DELETE_NOTE,
-  payload: {
-    id,
-  },
-});
+export const addTodo = createAction(ADD_TODO);
+export const toggleTodo = createAction(TOGGLE_TODO);
+export const editTodo = createAction(EDIT_TODO);
+export const deleteTodo = createAction(DELETE_TODO);
 
-export const addList = ({ name, id, color, todos }) => ({
-  type: ADD_LIST,
-  payload: {
-    name,
-    id,
-    color,
-    todos,
-  },
-});
 
-export const deleteList = (id) => ({
-  type: DELETE_LIST,
-  payload: {
-    id,
-  },
-});
-
-export const addTodo = ({ title, id ,completed }, listid) => ({
-  type: ADD_TODO,
-  payload: {
-      listid,
-      title,
-      id,
-      completed,
-    }
-});
-
-export const toggleTodo = ({ id, todo }) => ({
-  type: TOGGLE_TODO,
-  payload: {
-    id,
-    todo,
-  },
-});
-
-export const editTodo = (state) => ({
-  type: EDIT_TODO,
-  payload: {
-    state,
-  },
-});
-
-export const deleteTodo = ({id}, listid) => ({
-  type: DELETE_TODO,
-  payload: {
-    id,
-    listid,
-  },
-});
-
-export const setFilter = (filter) => ({
-  type: SET_FILTER,
-  payload: {
-    filter,
-  },
-});
+export const setFilter = createAction(SET_FILTER);
