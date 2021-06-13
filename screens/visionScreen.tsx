@@ -103,6 +103,7 @@ const styles = StyleSheet.create<Styles>({
   },
     visionAddToggle: {
     flexDirection: "row",
+    alignSelf: "center",
   },
 });
 

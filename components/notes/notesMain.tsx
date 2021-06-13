@@ -120,6 +120,7 @@ const styles = StyleSheet.create<Styles>({
   },
   addList: {
     flexDirection: "row",
+    alignSelf: "center",
     marginTop: "auto"
   },
 });

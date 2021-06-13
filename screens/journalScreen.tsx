@@ -96,6 +96,7 @@ const styles = StyleSheet.create<Styles>({
     fontFamily: "roboto-black",
   },
   visionAddToggle: {
+    alignSelf: "center",
     flexDirection: "row",
   },
   modalContent: {

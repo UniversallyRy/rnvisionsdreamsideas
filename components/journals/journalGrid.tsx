@@ -4,16 +4,19 @@ import { Card, Text } from "react-native-paper";
 import { NavigationStackProp } from 'react-navigation-stack';
 import { FlatList } from "react-native-gesture-handler";
 import { connect } from "react-redux";
+import autoMergeLevel1 from "redux-persist/es/stateReconciler/autoMergeLevel1";
 
 interface GridProps {
   navigation: NavigationStackProp;
   state: [];
+  container: StyleProp<ViewStyle>;
   gridContainer: StyleProp<ViewStyle>;
   gridItem: StyleProp<TextStyle>;
   gridText: StyleProp<ViewStyle>;
 }
 
 interface Styles {
+  container: ViewStyle
   gridContainer: ViewStyle;
   gridItem: ViewStyle;
   gridText: TextStyle;
@@ -48,14 +51,12 @@ const JournalGridContainer:React.FC<GridProps> = ({ state, navigation }) => {
   );
 
   const renderList = useCallback(function renderList({ item, index }) {
-    return <JournalGridList  style ={styles.gridItem} data={item} />;
+    return <JournalGridList data={item} />;
   }, []);
 
   return (
     <Card
-      style={{
-        flex: 1,
-      }}
+      style={styles.container}
     >
       <FlatList
         numColumns={3}
@@ -69,19 +70,25 @@ const JournalGridContainer:React.FC<GridProps> = ({ state, navigation }) => {
 };
 
 const styles = StyleSheet.create<Styles>({
-  gridContainer: {
-    backgroundColor: "lightgray",
+  container: {
     flex: 1,
+    backgroundColor: "lightgray",
     paddingTop: 10,
+    width: windowWidth,
+    height: windowHeight
+  },
+  gridContainer: {
+    flex: 1,
+    marginLeft: "auto",
+    marginRight: "auto",
+    backgroundColor: "lightgray",
+    padding: 10,
   },
   gridItem: {
-    flex: 1,
-    alignSelf: "center",
     borderRadius: 3,
     height: windowHeight * 0.25,
-    width: windowWidth * 0.30,
-    marginRight: 2,
-    marginLeft: 2,
+    width: windowWidth * 0.29,
+    margin: 5,
   },
   gridText: {
     height: windowHeight * 0.25,
