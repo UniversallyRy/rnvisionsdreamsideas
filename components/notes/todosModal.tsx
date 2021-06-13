@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   TouchableOpacity,
   StyleSheet,
@@ -18,15 +18,16 @@ import {  TextInput } from "react-native-gesture-handler";
 import { AntDesign, Ionicons } from "@expo/vector-icons";
 import { Formik } from "formik";
 import * as yup from "yup";
-import { addTodo, deleteTodo } from "../../redux/actions";
+import { addTodo, deleteTodo, toggleTodo } from "../../redux/actions";
 export const { width: windowWidth, height: windowHeight } = Dimensions.get("window");
 
 interface TodoModalProps {
   item: any;
-  stateTodos: object;
   closeModal: (() => void);
-  deleteTodo: ((id: any, id2: any) => void);
-  addTodo: ((item: object, id: string) => void);
+  deleteTodo: ((id:any) => void);
+  addTodo: ((item: object) => void);
+  toggleTodo: ((item: object) => void);
+  completedList: ((item: object) => void);
   container: StyleProp<ViewStyle>;
   section: StyleProp<ViewStyle>;
   header: StyleProp<TextStyle>;
@@ -66,25 +67,30 @@ const todoSchema = yup.object({
   title: yup.string().required().min(4),
 });
 
-const TodosModal: React.FC<TodoModalProps> = ({ item, closeModal, deleteTodo, addTodo }) => {
-  const [completedTodo, setCompleted] = useState(false);
+const TodosModal: React.FC<TodoModalProps> = ({ completedList, item, closeModal, deleteTodo, addTodo, toggleTodo }) => {
   const newTodos = item.todos;
-  const taskCount = newTodos.length;
+  const taskCount = item.todos.length;
   const completedCount = newTodos.filter((todo:any) => todo.completed).length;
 
-  const toggleTodoCompleted = (index:number) => {
-    setCompleted((newTodos[index].completed = !newTodos[index].completed));
-  };
-
+  useEffect(() => {
+    const init = () => {
+      let newNum = taskCount - completedCount
+      completedList(newNum, completedCount);
+    }
+    return () => {
+      init()
+    }
+  }, [item.todos])
+  
   const renderTodo = (todo:any, index:number) => {
     return (
-        <TouchableOpacity style={styles.todoContainer}>
+        <View style={styles.todoContainer}>
           <Ionicons
             name={todo.completed ? "ios-square" : "ios-square-outline"}
             size={24}
             color="gray"
             style={{ width: 32 }}
-            onPress={() => toggleTodoCompleted(index)}
+            onPress={() => toggleTodo({ id: todo.id, listid: item.id })}
           />
           <Text
             style={[
@@ -97,13 +103,13 @@ const TodosModal: React.FC<TodoModalProps> = ({ item, closeModal, deleteTodo, ad
           >
             {todo.title}
           </Text>
-          <AntDesign
-            name="closecircle"
+          <Ionicons
+            name="md-close-circle"
             size={24}
             style={styles.deleteTodoButton}
-            onPress={() => deleteTodo(todo.id, item.id)}
+            onPress={() => deleteTodo({id:todo.id, listid: item.id})}
           />
-        </TouchableOpacity>
+        </View>
     );
   };
 
@@ -134,7 +140,7 @@ const TodosModal: React.FC<TodoModalProps> = ({ item, closeModal, deleteTodo, ad
         </View>
         <TouchableOpacity style={styles.section}>
           <FlatList
-            data={newTodos}
+            data={item.todos}
             keyExtractor={(_, index) => index.toString()}
             contentContainerStyle={{
               paddingHorizontal: 32,
@@ -145,10 +151,13 @@ const TodosModal: React.FC<TodoModalProps> = ({ item, closeModal, deleteTodo, ad
           />
         </TouchableOpacity>
           <Formik
-            initialValues={{ title: "", id: "", completed: false }}
+            initialValues={{ title: "", listid: ""}}
             validationSchema={todoSchema}
             onSubmit={(values, actions) => {
-              addTodo(values, item.id );
+              values.listid = item.id
+              let newNum = taskCount - completedCount
+              addTodo(values);
+              completedList(newNum, completedCount);
               actions.resetForm();
               Keyboard.dismiss();
             }}
@@ -265,6 +274,7 @@ const styles = StyleSheet.create<Styles>({
   deleteTodoButton: {
     marginLeft: "auto",
     color: "red",
+    width: 30
   },
 });
 
@@ -274,6 +284,6 @@ const mapStateToProps = (state:any) => {
   };
 };
 
-const mapDispatchToProps = { addTodo, deleteTodo };
+const mapDispatchToProps = { addTodo, deleteTodo, toggleTodo };
 
 export default connect(mapStateToProps, mapDispatchToProps)(TodosModal);

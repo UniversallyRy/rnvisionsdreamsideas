@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Modal, StyleProp, TextStyle, ViewStyle, StyleSheet, View} from "react-native";
 import { Card, Button, Text } from "react-native-paper";
 import { connect } from "react-redux";
@@ -7,7 +7,8 @@ import { deleteList } from "../../redux/actions";
 
 interface TodoListsProps {
   list: any;
-  deleteList: ((id:string) => void);
+  deleteList: ((id:object) => void);
+  completedList: any
   listContainer: StyleProp<ViewStyle>;
   cardContainer: StyleProp<ViewStyle>;
   listTitle: StyleProp<TextStyle>;
@@ -27,14 +28,36 @@ interface Styles {
 
 const TodoLists: React.FC<TodoListsProps>= ({ list, deleteList }) => {
   const [visible, setVisible] = useState(false);
+  const [InitRemaining, setInitRemaining] = useState(0);
+  const [InitCount, setInitCount] = useState(0);
+  const [isMount, setIsMount] = useState(true);
   const toggleListModal = () => {
     setVisible(!visible);
   };
-
+  useEffect(()=>{
+          if(isMount){
+              let completedCount = (filtered(list.todos, (todo:any) => todo.completed));
+              let remainingCount = (filtered(list.todos, (todo:any) => !todo.completed));
+              setInitCount(Object.keys(completedCount).length);
+              setInitRemaining(Object.keys(remainingCount).length);
+              console.log('list')
+              setIsMount(false);
+              return;
+          }
+      completedList(InitRemaining, InitCount);
+          
+          //Do anything here for 2nd render onwards
+  }, [TodosModal])
+    
+const completedList = (remaining, completed) => {
+  setInitRemaining(remaining);
+  setInitCount(completed);
+}
+  
   const filtered = (obj:object, predicate:any) => {
     let result = {},
-      key;
-
+    key;
+    
     for (key in obj) {
       if (obj.hasOwnProperty(key) && !predicate(obj[key])) {
         result[key] = obj[key];
@@ -42,15 +65,6 @@ const TodoLists: React.FC<TodoListsProps>= ({ list, deleteList }) => {
     }
     return result;
   };
-
-  let completedCount:object | number = filtered(list.todos, (todo:any) => todo.completed);
-  completedCount = Object.keys(completedCount).length;
-
-  let remainingCount = filtered(list.todos, (todo:any) => {
-    let count = 1;
-    count++;
-  });
-  remainingCount = Object.keys(remainingCount).length - completedCount;
 
   return (
     <View style={styles.listContainer}>
@@ -60,18 +74,18 @@ const TodoLists: React.FC<TodoListsProps>= ({ list, deleteList }) => {
           visible={visible}
           onRequestClose={() => toggleListModal()}
         >
-          <TodosModal item={list} closeModal={() => toggleListModal()} />
+          <TodosModal completedList={completedList} item={list} closeModal={() => toggleListModal()} />
         </Modal>
         <View>
           <Text style={styles.listTitle} numberOfLines={1}>
             {list.name}
           </Text>
             <View style={{ alignItems: "center" }}>
-              <Text style={styles.count}>{remainingCount}</Text>
+              <Text style={styles.count}>{InitRemaining}</Text>
               <Text style={styles.subtitle}>Remaining</Text>
             </View>
             <View style={{ alignItems: "center" }}>
-              <Text style={styles.count}>{completedCount}</Text>
+              <Text style={styles.count}>{InitCount}</Text>
               <Text style={styles.subtitle}>Completed</Text>
             </View>
         </View>
@@ -80,7 +94,7 @@ const TodoLists: React.FC<TodoListsProps>= ({ list, deleteList }) => {
         style={styles.deleteButton}
         icon="close-outline"
         mode="contained"
-        onPress={() => deleteList(list.id)}
+        onPress={() => deleteList({id: list.id})}
         >
         Delete
       </Button>
@@ -106,7 +120,7 @@ const styles = StyleSheet.create<Styles>({
     marginBottom: 16,
   },
   count: {
-    fontSize: 50,
+    fontSize: 40,
     fontWeight: "200",
   },
   subtitle: {

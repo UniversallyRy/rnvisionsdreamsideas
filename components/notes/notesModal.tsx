@@ -26,7 +26,7 @@ export const { width: windowWidth, height: windowHeight } = Dimensions.get("wind
 interface NoteModalProps {
   notes: any;
   closeModal: (() => void);
-  deleteNote: ((item: string) => void);
+  deleteNote: ((item: object) => void);
   addNote: ((item: object) => void);
   container: StyleProp<ViewStyle>;
   header: StyleProp<TextStyle>;
@@ -65,12 +65,7 @@ const noteSchema = yup.object({
 const NotesModal: React.FC<NoteModalProps> = ({ notes, closeModal, deleteNote, addNote }) => {
   const newNotes:any = notes;
   const taskCount = newNotes.length;
-
-  const removeNote = (id:string) => {
-    var noteId = id;
-    deleteNote(noteId);
-  };
-
+  
   const renderNote = ( note:any, index = 0) => {
     return (
         <Surface style={styles.noteContainer}>
@@ -79,7 +74,7 @@ const NotesModal: React.FC<NoteModalProps> = ({ notes, closeModal, deleteNote, a
             name="closecircle"
             size={24}
             style={styles.deleteNoteButton}
-            onPress={() => removeNote(note.id)}
+            onPress={() => deleteNote({id: note.id})}
           />
         </Surface>
     );
