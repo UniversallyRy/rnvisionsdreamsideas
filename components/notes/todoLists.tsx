@@ -40,7 +40,6 @@ const TodoLists: React.FC<TodoListsProps>= ({ list, deleteList }) => {
               let remainingCount = (filtered(list.todos, (todo:any) => !todo.completed));
               setInitCount(Object.keys(completedCount).length);
               setInitRemaining(Object.keys(remainingCount).length);
-              console.log('list')
               setIsMount(false);
               return;
           }
