@@ -8,7 +8,7 @@ import { deleteJournal } from "../../redux/actions";
 interface JournalListProps {
   navigation: NavigationStackProp;
   state: [];
-  deleteJournal: ((item: string) => void);
+  deleteJournal: ((item: object) => void);
   buttonsContainer: StyleProp<ViewStyle>;
   editButton: StyleProp<ViewStyle>;
   deleteButton: StyleProp<ViewStyle>;
@@ -35,10 +35,6 @@ interface Styles {
 const { width: windowWidth } = Dimensions.get("window");
 
 const JournalList: React.FC<JournalListProps> = ({ state, navigation, deleteJournal }) => {
-  const removeJournal = (id:string) => {
-    var buttonId = id;
-    deleteJournal(buttonId);
-  };
 
   return (
     <FlatList
@@ -78,7 +74,7 @@ const JournalList: React.FC<JournalListProps> = ({ state, navigation, deleteJour
               color="red"
               icon="close-outline"
               mode="contained"
-              onPress={() => removeJournal(item.id)}
+              onPress={() => deleteJournal({id: item.id})}
             >
               Delete
             </Button>

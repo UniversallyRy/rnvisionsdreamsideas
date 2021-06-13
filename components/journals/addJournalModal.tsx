@@ -28,7 +28,7 @@ const AddJournal:React.FC<AddJournalProps> = ({ addJournal, setModalOpen }) => {
       <Formik
         // Control whether Formik should reset the form if initialValues changes
         enableReinitialize
-        initialValues={{ title: "", body: "", id: "", date: "" }}
+        initialValues={{ title: "", body: "" }}
         validationSchema={JournalSchema}
         onSubmit={(values, actions) => {
           addJournal(values);
@@ -77,6 +77,6 @@ const AddJournal:React.FC<AddJournalProps> = ({ addJournal, setModalOpen }) => {
 
 
 // actions from redux to save entry to store
-const mapDispatchToProps = { addTodo, addJournal };
+const mapDispatchToProps = { addJournal };
 
 export default connect(null, mapDispatchToProps)(AddJournal);
