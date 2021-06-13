@@ -19,7 +19,7 @@ interface ImageProps {
   state: [];
   index: any;
   scrollX: any;
-  deleteVision: ((event: GestureResponderEvent) => void);
+  deleteVision: ((item: object) => void);
 }
 
 interface ListProps {
@@ -48,11 +48,6 @@ const VisionsContainer: React.FC<ImageProps> = ({
           _isMounted.current = false;
         };
       }, []);
-
-      const removeVision = (id: any) => {
-        var buttonId = id;
-        deleteVision(buttonId);
-      };
 
       const inputRange = [
         (index - 1) * width,
@@ -96,7 +91,7 @@ const VisionsContainer: React.FC<ImageProps> = ({
           </TouchableOpacity>
           <DeleteButton
             item="close-outline"
-            onPress={() => removeVision(data.id)}
+            onPress={() => deleteVision({id: data.id})}
           />
             <Text style={{fontFamily: "roboto-bold"}}>Delete</Text>
         </Surface>

@@ -23,7 +23,7 @@ const simulateSlowNetworkRequest = () =>
 
 const AddVision: React.FC<VisionProps> = ({ addVision, stateUri, setModalOpen }) => {
   return (
-    <Surface style={{ margin: 3, marginTop: 100 }}>
+    <Surface style={{ margin: 3, marginTop: 50 }}>
       <Formik
         enableReinitialize={true}
         initialValues={{ uri: stateUri, title: "", id: null }}

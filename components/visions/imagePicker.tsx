@@ -55,7 +55,7 @@ const ImagePic: React.FC<ImageProps> = ({ addPic }) => {
     // .canccelled prop from ImagePicker import
     if (!result.cancelled) {
       setImage(manipResult.uri);
-      addPic(manipResult.uri);
+      addPic({uri: manipResult.uri});
     }
   };
 
@@ -66,7 +66,7 @@ const ImagePic: React.FC<ImageProps> = ({ addPic }) => {
     });
     if (!result.cancelled) {
       setImage(result.uri);
-      addPic(result.uri);
+      addPic({uri: result.uri});
     }
   };
 
@@ -93,7 +93,7 @@ const ImagePic: React.FC<ImageProps> = ({ addPic }) => {
           <Image source={{uri: image}}
             style={{
               width: windowWidth * 0.97,
-              height: windowHeight * 0.6,
+              height: windowHeight * 0.5,
               resizeMode: "contain",
               alignSelf: "center",
             }}
@@ -109,7 +109,7 @@ const styles = StyleSheet.create<Styles>({
     flexDirection: "row",
   },
   uploadButton: {
-    margin: 5,
+    margin: 4,
     alignSelf: "center"
   },
 });
