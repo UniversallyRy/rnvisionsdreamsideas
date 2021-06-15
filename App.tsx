@@ -13,7 +13,7 @@ import "react-native-gesture-handler";
 import { AppRegistry, StatusBar } from "react-native";
 import React, { useState } from "react";
 import { Provider } from "react-redux";
-import { store, persistor } from "./redux/store";
+import { store, /*persistor */ } from "./redux/store";
 import { AppLoading } from "expo";
 import NavDrawer from "./routes/drawer";
 import { PersistGate } from "redux-persist/integration/react";
