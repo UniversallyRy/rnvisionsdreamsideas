@@ -1,8 +1,8 @@
-import React from "react";
+import React, { FunctionComponent } from "react";
 import { View, StyleSheet, StyleProp, ViewStyle } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 
-interface VisionProps {
+type VisionProps = {
   icon: string;
   isSelected: boolean;
   container: StyleProp<ViewStyle>;
@@ -12,9 +12,9 @@ interface Styles {
   container: ViewStyle;
 }
 
-const Tab: React.FC<VisionProps> = ({ icon, isSelected }) => (
-  <View style={styles.container}>
-    <Ionicons name={icon} color={isSelected ? "black" : "grey"} size={30} />
+const Tab: FunctionComponent<VisionProps> = ({ icon, isSelected }) => (
+  <View style={ styles.container }>
+    <Ionicons name={ icon } color={ isSelected ? "black" : "grey" } size={ 30 } />
   </View>
 );
 
