@@ -1,17 +1,11 @@
 import React, { useCallback, memo, useRef, useEffect } from "react";
-import {
-  GestureResponderEvent,
-  Dimensions,
-  Animated,
-} from "react-native";
+import { Dimensions, Animated, TouchableOpacity } from "react-native";
 import { Surface, Text } from "react-native-paper";
 import { NavigationStackProp } from 'react-navigation-stack';
 import { deleteVision } from "../../redux/actions";
 import { DeleteButton } from "../../shared/icon";
 import { connect } from "react-redux";
-import {
-  TouchableOpacity,
-} from "react-native-gesture-handler";
+
 
 
 interface ImageProps {

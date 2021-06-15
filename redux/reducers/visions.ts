@@ -14,7 +14,7 @@ const initialVisions = Array.from({ length: 8 }).map((_, i) => {
 const visions = createReducer(initialVisions, (builder) => {
     builder
     .addCase(ADD_VISION, (state, action) => {
-      state.push({
+      state.unshift({
           uri: action.payload.uri,
           title: action.payload.title,
           id: uuid.generate(),

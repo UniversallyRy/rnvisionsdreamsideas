@@ -1,18 +1,18 @@
-import React, { useCallback, memo } from "react";
+import React, { FunctionComponent, useCallback, memo } from "react";
 import { StyleSheet, StyleProp, ViewStyle, ImageStyle, Dimensions } from "react-native";
 import { NavigationStackProp } from 'react-navigation-stack';
 import { FlatList } from "react-native-gesture-handler";
 import { Card } from "react-native-paper";
 import { connect } from "react-redux";
 
-interface GridProps {
+type GridProps = {
   navigation: NavigationStackProp;
   state: any;
   gridContainer: StyleProp<ViewStyle>;
   gridItem: StyleProp<ImageStyle>;
 }
 
-interface ListProps {
+type ListProps = {
   item: object;
 }
 
@@ -23,37 +23,37 @@ interface Styles {
 
 const { width: width, height: height } = Dimensions.get("window");
 
-const VisionGridContainer: React.FC<GridProps> = ({ state, navigation }) => {
+const VisionGridContainer: FunctionComponent<GridProps> = ({ state, navigation }) => {
   const VisionGridList = memo(function GridImage({ data }:any) {
     return (
       <Card
-        accessibilityLabel={"Grid List"}
+        accessibilityLabel={ "Grid List" }
         accessible  
-        onPress={() => navigation.navigate("VisionDetails", data)}
+        onPress={ () => navigation.navigate("VisionDetails", data) }
       > 
         <Card.Cover
-          style={styles.gridItem }
+          style={ styles.gridItem }
           source={{ uri: data.uri }}
-          testID={data.id}  
-          resizeMode={'cover'}
+          testID={ data.id }  
+          resizeMode={ 'cover' }
         />
       </Card>
     );
   });
 
-  const renderList: React.FC<ListProps> = useCallback(function renderList({ item }) {
-    return <VisionGridList data={item} />;
+  const renderList: FunctionComponent<ListProps> = useCallback(function renderList({ item }) {
+    return <VisionGridList data={ item } />;
   }, []);
 
   return (
     <Card style={{ flex: 1 }}>
       <FlatList
-        numColumns={3}
-        contentContainerStyle={styles.gridContainer}
+        numColumns={ 3 }
+        contentContainerStyle={ styles.gridContainer }
         scrollEnabled
-        data={state}
-        keyExtractor={(item, index) => index.toString()}
-        renderItem={renderList}
+        data={ state }
+        keyExtractor={ (item, index) => index.toString() }
+        renderItem={ renderList }
       />
     </Card>
   );

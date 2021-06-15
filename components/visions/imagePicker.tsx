@@ -1,25 +1,27 @@
-import React, { useState, useEffect } from "react";
-import { StyleSheet, StyleProp, ViewStyle, Platform, Dimensions, Image } from "react-native";
-import { Button, Card, Text } from "react-native-paper";
+import React, { FunctionComponent, useState, useEffect } from "react";
+import { StyleSheet, StyleProp, ViewStyle, ImageStyle, Platform, Dimensions } from "react-native";
+import { Button, Card, Text, Surface } from "react-native-paper";
 import { connect } from "react-redux";
 import * as ImagePicker from "expo-image-picker";
 import { addPic } from "../../redux/actions";
-import * as ImageManipulator from "expo-image-manipulator";
+import * as ImageManipulator from "expo-image-manipulator"
 
-interface ImageProps {
+type ImageProps = {
   addPic: ((item:any) => void);
   visionButtonContainer: StyleProp<ViewStyle>;
   uploadButton: StyleProp<ViewStyle>;
+  image: StyleProp<ImageStyle>;
 }
 interface Styles {
   visionButtonContainer: ViewStyle;
   uploadButton: ViewStyle;
+  image: ImageStyle;
 }
 
+const { width: windowWidth, height: windowHeight } = Dimensions.get("window");
 
-const ImagePic: React.FC<ImageProps> = ({ addPic }) => {
+const ImagePic: FunctionComponent<ImageProps> = ({ addPic }) => {
   const [image, setImage] = useState('');
-  const { width: windowWidth, height: windowHeight } = Dimensions.get("window");
 
   useEffect(() => {
     (async () => {
@@ -47,7 +49,7 @@ const ImagePic: React.FC<ImageProps> = ({ addPic }) => {
       quality: 1,
     });
 
-    const manipResult = await ImageManipulator.manipulateAsync(
+    let manipResult = await ImageManipulator.manipulateAsync(
       result.uri,
       [{ resize: { height: 800 } }],
       { compress: 1, format: ImageManipulator.SaveFormat.PNG }
@@ -66,52 +68,57 @@ const ImagePic: React.FC<ImageProps> = ({ addPic }) => {
     });
     if (!result.cancelled) {
       setImage(result.uri);
-      addPic({uri: result.uri});
+      addPic({ uri: result.uri });
     }
   };
 
   return (
-      <Card>
-        <Card.Content style={styles.visionButtonContainer}>
-        <Button
-          style={styles.uploadButton}
-          accessibilityLabel="Add Image From Gallery"
-          onPress={pickImage}
-        >
-          Add from gallery
-        </Button>
-        <Button
-          style={styles.uploadButton}
-          accessibilityLabel="Take A Picture"
-          onPress={CameraImage}
-        >
-          Take a Picture
-        </Button>
-        </Card.Content>
-      <Text>
-        {image && (
-          <Image source={{uri: image}}
-            style={{
-              width: windowWidth * 0.97,
-              height: windowHeight * 0.5,
-              resizeMode: "contain",
-              alignSelf: "center",
-            }}
-          />
-        )}
-      </Text>
-    </Card>
+      <>
+        <Text>
+          { image && (
+            <Card.Cover source={{ uri: image }}
+              style={ styles.image }
+            />
+          )}
+        </Text>
+        <Surface style={ styles.visionButtonContainer }>
+          <Button
+            mode="contained"
+            accessibilityLabel="Add Image From Gallery"
+            onPress={ pickImage }
+            style={ styles.uploadButton }
+          >
+            Add from gallery
+          </Button>
+          <Button
+            mode="contained"
+            accessibilityLabel="Take A Picture"
+            onPress={ CameraImage }
+            style={ styles.uploadButton }
+          >
+            Take a Picture
+          </Button>
+        </Surface>
+    </>
   );
 };
 
 const styles = StyleSheet.create<Styles>({
   visionButtonContainer: {
+    alignSelf: "center",
     flexDirection: "row",
+    
   },
   uploadButton: {
-    margin: 4,
-    alignSelf: "center"
+    margin: 5,
+    elevation: 5,
   },
+  image:{
+    width: windowWidth * 0.97,
+    height: windowHeight * 0.73,
+    resizeMode: "contain",
+    alignSelf: "center",
+  }
 });
 
 const mapDispatchToProps = { addPic };
