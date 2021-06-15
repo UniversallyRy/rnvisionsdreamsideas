@@ -10,12 +10,11 @@ import {
   KeyboardAvoidingView,
   Keyboard, 
   FlatList, 
-  TextInput, 
   Platform, 
   Dimensions
 } from "react-native";
 import { connect } from "react-redux";
-import { Button, Surface } from "react-native-paper";
+import { Button, Surface, TextInput } from "react-native-paper";
 import { AntDesign } from "@expo/vector-icons";
 import { Formik, FormikHelpers } from "formik";
 import * as yup from "yup";
@@ -187,10 +186,8 @@ const styles = StyleSheet.create<Styles>({
   noteInput: {
     width: windowWidth * 0.75,
     paddingLeft: 14,
-    paddingTop: 32,
-    paddingRight: 14,
-    paddingBottom: 16,
-    marginLeft: 4,
+    marginLeft: 5,
+    marginRight: 5,
   },
   noteErrorText:{
     fontSize: 10,
@@ -201,8 +198,9 @@ const styles = StyleSheet.create<Styles>({
     textAlign: "center",
   },
   buttonStyle: {
-    height: 60,
+    height: 64,
     margin: "auto",
+    marginLeft: 2,
     borderRadius: 4,
     padding: 10,
     backgroundColor: "red", 

@@ -232,7 +232,7 @@ const styles = StyleSheet.create<Styles>({
     width: windowWidth * 0.75,
     paddingLeft: 14,
     marginLeft: 4,
-    marginRight: 1,
+    marginRight: 5,
   },
   noteErrorText:{
     fontSize: 10,
@@ -244,8 +244,8 @@ const styles = StyleSheet.create<Styles>({
   },
   buttonStyle: {
     height: 64,
-    marginLeft: 1,
     margin: "auto",
+    marginLeft: 2,
     borderRadius: 4,
     padding: 10,
     backgroundColor: "red", 
