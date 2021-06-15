@@ -1,12 +1,11 @@
-import React, { useCallback, memo } from "react";
-import { StyleSheet, Dimensions, StyleProp, TextStyle, ViewStyle,} from "react-native";
+import React, { FunctionComponent, useCallback, memo } from "react";
+import { StyleSheet, Dimensions, StyleProp, TextStyle, ViewStyle } from "react-native";
 import { Card, Text } from "react-native-paper";
 import { NavigationStackProp } from 'react-navigation-stack';
 import { FlatList } from "react-native-gesture-handler";
 import { connect } from "react-redux";
-import autoMergeLevel1 from "redux-persist/es/stateReconciler/autoMergeLevel1";
 
-interface GridProps {
+type GridProps = {
   navigation: NavigationStackProp;
   state: [];
   container: StyleProp<ViewStyle>;
@@ -24,17 +23,17 @@ interface Styles {
 
 const { width: windowWidth, height: windowHeight } = Dimensions.get("window");
 
-const JournalGridContainer:React.FC<GridProps> = ({ state, navigation }) => {
+const JournalGridContainer: FunctionComponent<GridProps> = ({ state, navigation }) => {
 
   const JournalGridList = memo(
     function GridJournal({ data, index }:any) {
       return (
         <Card
-          style={styles.gridItem}
-          onPress={() => navigation.navigate("JournalDetails", data)}
+          style={ styles.gridItem }
+          onPress={ () => navigation.navigate("JournalDetails", data) }
         >
-          <Card.Content style={styles.gridText}>
-            <Text>{data.title}</Text>
+          <Card.Content style={ styles.gridText }>
+            <Text>{ data.title }</Text>
             <Text
               style={{
                 marginTop: 30,
@@ -42,7 +41,7 @@ const JournalGridContainer:React.FC<GridProps> = ({ state, navigation }) => {
                 position: "absolute",
               }}
             >
-              {data.date}
+              { data.date }
             </Text>
           </Card.Content>
         </Card>
@@ -51,19 +50,19 @@ const JournalGridContainer:React.FC<GridProps> = ({ state, navigation }) => {
   );
 
   const renderList = useCallback(function renderList({ item, index }) {
-    return <JournalGridList data={item} />;
+    return <JournalGridList data={ item } />;
   }, []);
 
   return (
     <Card
-      style={styles.container}
+      style={ styles.container }
     >
       <FlatList
-        numColumns={3}
-        contentContainerStyle={styles.gridContainer}
+        numColumns={ 3 }
+        contentContainerStyle={ styles.gridContainer }
         scrollEnabled
-        data={state}
-        renderItem={renderList}
+        data={ state }
+        renderItem={ renderList }
       />
     </Card>
   );

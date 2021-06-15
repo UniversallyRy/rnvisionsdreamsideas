@@ -1,9 +1,9 @@
-import React from "react";
+import React, { FunctionComponent } from "react";
 import { View, StyleSheet, StyleProp, TextStyle, ViewStyle, Dimensions } from "react-native";
 import { Button, Text, Card } from "react-native-paper";
 import { NavigationStackProp } from 'react-navigation-stack';
 
-interface JournalDProps {
+type JournalDProps = {
   navigation: NavigationStackProp;
   jDetailsContainer: StyleProp<ViewStyle>;
   jDetailsCard: StyleProp<ViewStyle>;
@@ -27,7 +27,7 @@ interface Styles {
 const { width: windowWidth, height: windowHeight } = Dimensions.get("window");
 
 
-const JournalDetails: React.FC<JournalDProps> = ({ navigation }) => {
+const JournalDetails: FunctionComponent<JournalDProps> = ({ navigation }) => {
   const handlePress = () => {
     navigation.goBack();
   };

@@ -1,17 +1,17 @@
-import React from "react";
+import React, { FunctionComponent } from "react";
 import { StyleProp, TextStyle } from "react-native";
 import { TextInput, Text, Surface } from "react-native-paper";
 import { connect } from "react-redux";
 import { Formik } from "formik";
 import * as yup from "yup";
 import FlatButton from "../../shared/button";
-import { addJournal, addTodo } from "../../redux/actions";
+import { addJournal } from "../../redux/actions";
 import { globalStyles } from "../../styles/global";
 
-interface AddJournalProps {
+type AddJournalProps = {
   addJournal: ((item: any) => void);
   setModalOpen: ((i:boolean) => void);
-  errorText: StyleProp<TextStyle>;
+  errorText?: StyleProp<TextStyle>;
 }
 
 
@@ -21,7 +21,7 @@ const JournalSchema = yup.object({
   body: yup.string().required().min(4),
 });
 
-const AddJournal:React.FC<AddJournalProps> = ({ addJournal, setModalOpen }) => {
+const AddJournal: FunctionComponent<AddJournalProps> = ({ addJournal, setModalOpen }) => {
 
   return (
     <Surface style={{ margin: 3, marginTop: 100 }}>
@@ -75,8 +75,6 @@ const AddJournal:React.FC<AddJournalProps> = ({ addJournal, setModalOpen }) => {
   );
 };
 
-
-// actions from redux to save entry to store
 const mapDispatchToProps = { addJournal };
 
 export default connect(null, mapDispatchToProps)(AddJournal);

@@ -1,11 +1,11 @@
-import React from "react";
-import { StyleSheet, View, FlatList, StyleProp, TextStyle, ViewStyle, Dimensions} from "react-native";
+import React, { FunctionComponent } from "react";
+import { StyleSheet, View, FlatList, StyleProp, TextStyle, ViewStyle, Dimensions } from "react-native";
 import { NavigationStackProp } from 'react-navigation-stack';
 import { Button, Card, Paragraph } from "react-native-paper";
 import { connect } from "react-redux";
 import { deleteJournal } from "../../redux/actions";
 
-interface JournalListProps {
+type JournalListProps = {
   navigation: NavigationStackProp;
   state: [];
   deleteJournal: ((item: object) => void);
@@ -34,47 +34,47 @@ interface Styles {
 }
 const { width: windowWidth } = Dimensions.get("window");
 
-const JournalList: React.FC<JournalListProps> = ({ state, navigation, deleteJournal }) => {
+const JournalList: FunctionComponent<JournalListProps> = ({ state, navigation, deleteJournal }) => {
 
   return (
     <FlatList
       style={{ paddingTop: 10 }}
-      data={state}
-      keyExtractor={(item, index) => index.toString()}
-      renderItem={({ item }:any) => (
-        <View style={styles.journalBorder}>
+      data={ state }
+      keyExtractor={ (item, index) => index.toString() }
+      renderItem={ ({ item }:any) => (
+        <View style={ styles.journalBorder }>
           <Card
-            style={styles.journalCard}
-            onPress={() => navigation.navigate("JournalDetails", item)}
+            style={ styles.journalCard }
+            onPress={ () => navigation.navigate("JournalDetails", item) }
           >
             <Card.Content>
-              <Paragraph style={styles.journalTitle}>
-                {item.title}
+              <Paragraph style={ styles.journalTitle }>
+                { item.title }
               </Paragraph>
-              <View style={styles.divider} />
-              <Paragraph style={styles.journalText}>
-                {item.body}
+              <View style={ styles.divider } />
+              <Paragraph style={ styles.journalText }>
+                { item.body }
               </Paragraph>
-              <View style={styles.divider} />
-              <Paragraph style={styles.journalDate}>
-                {item.date}
+              <View style={ styles.divider } />
+              <Paragraph style={ styles.journalDate }>
+                { item.date }
               </Paragraph>
             </Card.Content>
           </Card>
-          <View style={styles.buttonsContainer}>
+          <View style={ styles.buttonsContainer }>
             <Button
-              style={styles.editButton}
+              style={ styles.editButton }
               icon="lead-pencil"
               mode="contained"
             >
               Edit
             </Button>
             <Button
-              style={styles.deleteButton}
+              style={ styles.deleteButton }
               color="red"
               icon="close-outline"
               mode="contained"
-              onPress={() => deleteJournal({id: item.id})}
+              onPress={ () => deleteJournal({ id: item.id }) }
             >
               Delete
             </Button>
