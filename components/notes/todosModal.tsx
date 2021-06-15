@@ -231,10 +231,8 @@ const styles = StyleSheet.create<Styles>({
   todoInput: {
     width: windowWidth * 0.75,
     paddingLeft: 14,
-    paddingTop: 32,
-    paddingRight: 14,
-    paddingBottom: 16,
     marginLeft: 4,
+    marginRight: 1,
   },
   noteErrorText:{
     fontSize: 10,
@@ -245,7 +243,8 @@ const styles = StyleSheet.create<Styles>({
     textAlign: "center",
   },
   buttonStyle: {
-    height: 60,
+    height: 64,
+    marginLeft: 1,
     margin: "auto",
     borderRadius: 4,
     padding: 10,
