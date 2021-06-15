@@ -11,7 +11,7 @@
       "noEmit": true,
       "strictNullChecks": true,
       "target": "esnext",
-      "jsx": "react",
+      "jsx": "react-native",
       "types": ["node", "react", "react-dom", "jest"]
     },
     "exclude": [
