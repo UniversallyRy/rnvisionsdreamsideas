@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { FunctionComponent, useEffect } from "react";
 import {
   TouchableOpacity,
   StyleSheet,
@@ -13,21 +13,20 @@ import {
   Platform,
 } from "react-native";
 import { connect } from "react-redux";
-import { Button, Text } from "react-native-paper";
-import {  TextInput } from "react-native-gesture-handler";
+import { Button, Text, TextInput } from "react-native-paper";
 import { AntDesign, Ionicons } from "@expo/vector-icons";
 import { Formik } from "formik";
 import * as yup from "yup";
 import { addTodo, deleteTodo, toggleTodo } from "../../redux/actions";
 export const { width: windowWidth, height: windowHeight } = Dimensions.get("window");
 
-interface TodoModalProps {
+type TodoModalProps = {
   item: any;
   closeModal: (() => void);
   deleteTodo: ((id:any) => void);
   addTodo: ((item: object) => void);
   toggleTodo: ((item: object) => void);
-  completedList: ((item: object) => void);
+  completedList: ((count1: number, count2: number) => void);
   container: StyleProp<ViewStyle>;
   section: StyleProp<ViewStyle>;
   header: StyleProp<TextStyle>;
@@ -40,10 +39,6 @@ interface TodoModalProps {
   todo:StyleProp<TextStyle>;
   deleteButton:StyleProp<ViewStyle>;
   deleteTodoButton:StyleProp<ViewStyle>;
-}
-
-interface RenderProps {
-  todo: any;
 }
 
 interface Styles {
@@ -67,7 +62,7 @@ const todoSchema = yup.object({
   title: yup.string().required().min(4),
 });
 
-const TodosModal: React.FC<TodoModalProps> = ({ completedList, item, closeModal, deleteTodo, addTodo, toggleTodo }) => {
+const TodosModal: FunctionComponent<TodoModalProps> = ({ completedList, item, closeModal, deleteTodo, addTodo, toggleTodo }) => {
   const newTodos = item.todos;
   const taskCount = item.todos.length;
   const completedCount = newTodos.filter((todo:any) => todo.completed).length;
@@ -84,13 +79,13 @@ const TodosModal: React.FC<TodoModalProps> = ({ completedList, item, closeModal,
   
   const renderTodo = (todo:any, index:number) => {
     return (
-        <View style={styles.todoContainer}>
+        <View style={ styles.todoContainer }>
           <Ionicons
-            name={todo.completed ? "ios-square" : "ios-square-outline"}
-            size={24}
+            name={ todo.completed ? "ios-square" : "ios-square-outline" }
+            size={ 24 }
             color="gray"
             style={{ width: 32 }}
-            onPress={() => toggleTodo({ id: todo.id, listid: item.id })}
+            onPress={ () => toggleTodo({ id: todo.id, listid: item.id }) }
           />
           <Text
             style={[
@@ -101,29 +96,29 @@ const TodosModal: React.FC<TodoModalProps> = ({ completedList, item, closeModal,
               }
             ]}
           >
-            {todo.title}
+            { todo.title }
           </Text>
           <Ionicons
             name="md-close-circle"
-            size={24}
-            style={styles.deleteTodoButton}
-            onPress={() => deleteTodo({id:todo.id, listid: item.id})}
+            size={ 24 }
+            style={ styles.deleteTodoButton }
+            onPress={ () => deleteTodo({ id:todo.id, listid: item.id }) }
           />
         </View>
     );
   };
 
   return (
-    <KeyboardAvoidingView style={{ flex: 1 }} behavior={Platform.OS === "ios" ? "padding" : "height"}>
-      <View style={styles.container}>
+    <KeyboardAvoidingView style={{ flex: 1 }} behavior={ Platform.OS === "ios" ? "padding" : "height" }>
+      <View style={ styles.container }>
         <TouchableOpacity
-          style={{ position: "absolute", top: 40, right: 32, zIndex: 10}}
+          style={{ position: "absolute", top: 40, right: 32, zIndex: 10 }}
         >
           <AntDesign
             name="close"
-            size={24}
+            size={ 24 }
             color="black"
-            onPress={closeModal}
+            onPress={ closeModal }
           />
         </TouchableOpacity>
         <View
@@ -133,27 +128,27 @@ const TodosModal: React.FC<TodoModalProps> = ({ completedList, item, closeModal,
             { borderBottomColor: newTodos.color },
           ]}
         >
-          <Text style={styles.title}>{newTodos.name}</Text>
-          <Text style={styles.taskCount}>
-            Completed {completedCount} of {taskCount} tasks
+          <Text style={ styles.title }>{ newTodos.name }</Text>
+          <Text style={ styles.taskCount }>
+            Completed { completedCount } of { taskCount } tasks
           </Text>
         </View>
-        <TouchableOpacity style={styles.section}>
+        <TouchableOpacity style={ styles.section }>
           <FlatList
-            data={item.todos}
-            keyExtractor={(_, index) => index.toString()}
+            data={ item.todos }
+            keyExtractor={ (_, index) => index.toString() }
             contentContainerStyle={{
               paddingHorizontal: 32,
               paddingVertical: 64,
             }}
-            showsVerticalScrollIndicator={false}
-            renderItem={({ item, index }) => renderTodo(item, index)}
+            showsVerticalScrollIndicator={ false }
+            renderItem={ ({ item, index }) => renderTodo(item, index) }
           />
         </TouchableOpacity>
           <Formik
-            initialValues={{ title: "", listid: ""}}
-            validationSchema={todoSchema}
-            onSubmit={(values, actions) => {
+            initialValues={{ title: "", listid: "" }}
+            validationSchema={ todoSchema }
+            onSubmit={ (values, actions) => {
               values.listid = item.id
               let newNum = taskCount - completedCount
               addTodo(values);
@@ -170,27 +165,27 @@ const TodosModal: React.FC<TodoModalProps> = ({ completedList, item, closeModal,
               errors,
               handleSubmit,
             }) => (
-              <View style={styles.footer}>
-                <View style={{flexDirection: 'column'}}>
+              <View style={ styles.footer }>
+                <View style={{ flexDirection: 'column' }}>
                   <TextInput
-                    enablesReturnKeyAutomatically={true}
-                    autoCorrect={true}
-                    style={styles.todoInput}
+                    enablesReturnKeyAutomatically={ true }
+                    autoCorrect={ true }
+                    style={ styles.todoInput }
                     placeholder="Enter Todo . . ."
-                    placeholderTextColor={"#002C5F"}
-                    onChangeText={handleChange("title")}
-                    value={values.title}
-                    onBlur={handleBlur("title")}
+                    placeholderTextColor={ "#002C5F" }
+                    onChangeText={ handleChange("title") }
+                    value={ values.title }
+                    onBlur={ handleBlur("title") }
                   />
-                  <Text style={styles.noteErrorText}>
-                    {touched.title && errors.title}
+                  <Text style={ styles.noteErrorText }>
+                    { touched.title && errors.title }
                   </Text>
                 </View>
                 <Button
-                  style={styles.buttonStyle}
-                  onPress={handleSubmit}
+                  style={ styles.buttonStyle }
+                  onPress={ handleSubmit }
                 >
-                  <AntDesign name="plus" size={16} color="white" />
+                  <AntDesign name="plus" size={ 16 } color="white" />
                 </Button>
               </View>
             )}

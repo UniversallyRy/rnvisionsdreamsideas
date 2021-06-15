@@ -1,4 +1,4 @@
-import React from "react";
+import React, { FunctionComponent } from "react";
 import {
   TouchableOpacity,
   StyleSheet,
@@ -23,7 +23,7 @@ import { deleteNote, addNote } from "../../redux/actions";
 
 export const { width: windowWidth, height: windowHeight } = Dimensions.get("window");
 
-interface NoteModalProps {
+type NoteModalProps = {
   notes: any;
   closeModal: (() => void);
   deleteNote: ((item: object) => void);
@@ -62,34 +62,34 @@ const noteSchema = yup.object({
   name: yup.string().required().min(6),
 });
 
-const NotesModal: React.FC<NoteModalProps> = ({ notes, closeModal, deleteNote, addNote }) => {
+const NotesModal: FunctionComponent<NoteModalProps> = ({ notes, closeModal, deleteNote, addNote }) => {
   const newNotes:any = notes;
   const taskCount = newNotes.length;
   
   const renderNote = ( note:any, index = 0) => {
     return (
-        <Surface style={styles.noteContainer}>
-          <Text style={{paddingRight: 20}}>{note.name}</Text>
+        <Surface style={ styles.noteContainer }>
+          <Text style={{ paddingRight: 20 }}>{ note.name }</Text>
           <AntDesign
             name="closecircle"
-            size={24}
-            style={styles.deleteNoteButton}
-            onPress={() => deleteNote({id: note.id})}
+            size={ 24 }
+            style={ styles.deleteNoteButton }
+            onPress={ () => deleteNote({ id: note.id }) }
           />
         </Surface>
     );
   };
 
   return (
-    <KeyboardAvoidingView style={{ flex: 1 }} behavior={Platform.OS === "ios" ? "padding" : "height"}>
+    <KeyboardAvoidingView style={{ flex: 1 }} behavior={ Platform.OS === "ios" ? "padding" : "height" }>
         <TouchableOpacity
           style={{ position: "absolute", top: 40, right: 32, zIndex: 10 }}
         >
           <AntDesign
             name="close"
-            size={24}
+            size={ 24 }
             color="black"
-            onPress={closeModal}
+            onPress={ closeModal }
           />
         </TouchableOpacity>
         <View
@@ -98,24 +98,24 @@ const NotesModal: React.FC<NoteModalProps> = ({ notes, closeModal, deleteNote, a
             { borderBottomColor: "red" },
           ]}
         >
-          <Text style={styles.title}>{newNotes.name}</Text>
-          <Text style={styles.taskCount}>There are {taskCount} Notes</Text>
+          <Text style={ styles.title }>{ newNotes.name }</Text>
+          <Text style={ styles.taskCount }>There are { taskCount } Notes</Text>
         </View>
         <View>
           <FlatList
-            data={newNotes}
-            keyExtractor={(_, index) => index.toString()}
+            data={ newNotes }
+            keyExtractor={ (_, index) => index.toString()  }
             contentContainerStyle={{
               paddingHorizontal: 32,
               paddingVertical: 64,
             }}
-            renderItem={({item}) => renderNote(item)}
+            renderItem={ ({ item }) => renderNote(item) }
           />
           </View>
           <Formik
             initialValues={{ name: "", id: "" }}
-            validationSchema={noteSchema}
-            onSubmit={(values: Values, actions:FormikHelpers<Values>) => {
+            validationSchema={ noteSchema }
+            onSubmit={ (values: Values, actions:FormikHelpers<Values>) => {
               addNote(values);
               actions.resetForm();
               Keyboard.dismiss();
@@ -129,27 +129,27 @@ const NotesModal: React.FC<NoteModalProps> = ({ notes, closeModal, deleteNote, a
               errors,
               handleSubmit,
             }) => (
-              <View style={styles.footer}>
-                <View style={{flexDirection: 'column'}}>
+              <View style={ styles.footer }>
+                <View style={{ flexDirection: 'column' }}>
                   <TextInput
-                    enablesReturnKeyAutomatically={true}
-                    autoCorrect={true}
-                    style={styles.noteInput}
+                    enablesReturnKeyAutomatically={ true }
+                    autoCorrect={ true }
+                    style={ styles.noteInput }
                     placeholder="Enter Note . . ."
-                    placeholderTextColor={"#002C5F"}
-                    onChangeText={handleChange("name")}
-                    value={values.name}
-                    onBlur={handleBlur("name")}
+                    placeholderTextColor={ "#002C5F" }
+                    onChangeText={ handleChange("name") }
+                    value={ values.name }
+                    onBlur={ handleBlur("name") }
                   />
-                  <Text style={styles.noteErrorText}>
-                    {touched.name && errors.name}
+                  <Text style={ styles.noteErrorText }>
+                    { touched.name && errors.name }
                   </Text>
                 </View>
                 <Button
-                  style={styles.buttonStyle}
-                  onPress={handleSubmit}
+                  style={ styles.buttonStyle }
+                  onPress={ handleSubmit }
                 >
-                  <AntDesign style={{margin: "auto"}}name="plus" size={18} color="white" />
+                  <AntDesign style={{ margin: "auto" }} name="plus" size={ 18 } color="white" />
                 </Button>
               </View>
             )}

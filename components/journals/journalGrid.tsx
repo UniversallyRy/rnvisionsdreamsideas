@@ -1,9 +1,8 @@
 import React, { FunctionComponent, useCallback, memo } from "react";
-import { StyleSheet, Dimensions, StyleProp, TextStyle, ViewStyle } from "react-native";
+import { StyleSheet, Dimensions, StyleProp, TextStyle, ViewStyle, FlatList} from "react-native";
+import { connect } from "react-redux";
 import { Card, Text } from "react-native-paper";
 import { NavigationStackProp } from 'react-navigation-stack';
-import { FlatList } from "react-native-gesture-handler";
-import { connect } from "react-redux";
 
 type GridProps = {
   navigation: NavigationStackProp;
@@ -49,7 +48,7 @@ const JournalGridContainer: FunctionComponent<GridProps> = ({ state, navigation 
     },
   );
 
-  const renderList = useCallback(function renderList({ item, index }) {
+  const renderList = useCallback(({ item, index }) => {
     return <JournalGridList data={ item } />;
   }, []);
 

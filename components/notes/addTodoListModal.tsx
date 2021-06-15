@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { FunctionComponent, useState } from "react";
+
 import {
   KeyboardAvoidingView,
   StyleSheet,
@@ -8,7 +9,7 @@ import {
   TextStyle,
   ViewStyle,
 } from "react-native";
-import { TextInput, Text} from "react-native-paper";
+import { TextInput, Text } from "react-native-paper";
 import { connect } from "react-redux";
 import { AntDesign } from "@expo/vector-icons";
 import { Formik } from "formik";
@@ -17,9 +18,10 @@ import { addList } from "../../redux/actions";
 import FlatButton  from "../../shared/button";
 import { globalStyles } from "../../styles/global";
 
-interface ModalProps {
+type ModalProps = {
   closeModal: (() => void);
   addList: ((item: object) => void);
+  bgColors?: string;
   container: StyleProp<ViewStyle>;
   title: StyleProp<TextStyle>;
   input: StyleProp<TextStyle>;
@@ -41,7 +43,7 @@ const listSchema = yup.object({
 });
 
 // red, slate blue, black, dark gray, blueish gray, teal, tan
-const AddTodoListModal:React.FC<ModalProps> = ({ closeModal, addList }) => {
+const AddTodoListModal: FunctionComponent<ModalProps> = ({ closeModal, addList }) => {
   const bgColors = [
     "#FE1F14",
     "#B9D3EE",
@@ -57,29 +59,29 @@ const AddTodoListModal:React.FC<ModalProps> = ({ closeModal, addList }) => {
     return bgColors.map((color) => {
       return (
         <TouchableOpacity
-          key={color}
-          style={[styles.colorSelect, { backgroundColor: color }]}
-          onPress={() => setColor(color)}
+          key={ color }
+          style={ [styles.colorSelect, { backgroundColor: color }] }
+          onPress={ () => setColor(color) }
         />
       );
     });
   };
 
   return (
-    <KeyboardAvoidingView style={styles.container} behavior={"padding"}>
+    <KeyboardAvoidingView style={ styles.container } behavior={ "padding" }>
       <TouchableOpacity
         style={{ position: "absolute", top: 64, right: 32 }}
-        onPress={closeModal}
+        onPress={ closeModal }
       >
-        <AntDesign name="close" size={24} color="black" />
+        <AntDesign name="close" size={ 24 } color="black" />
       </TouchableOpacity>
 
       <View style={{ alignSelf: "stretch", marginHorizontal: 32 }}>
-        <Text style={styles.title}>Create Todo List</Text>
+        <Text style={ styles.title }>Create Todo List</Text>
         <Formik
           initialValues={{ name: "", id: 0, color: "", todos: [] }}
-          validationSchema={listSchema}
-          onSubmit={(values, actions) => {
+          validationSchema={ listSchema }
+          onSubmit={ (values, actions) => {
             let color = bgColor;
             values.color = color;
             addList(values);
@@ -97,18 +99,18 @@ const AddTodoListModal:React.FC<ModalProps> = ({ closeModal, addList }) => {
           }) => (
             <View>
               <TextInput
-                enablesReturnKeyAutomatically={true}
-                autoCorrect={true}
-                style={styles.input}
+                enablesReturnKeyAutomatically={ true }
+                autoCorrect={ true } 
+                style={ styles.input }
                 placeholder="Enter A New List . . ."
-                placeholderTextColor={"#002C5F"}
-                onChangeText={handleChange("name")}
-                value={values.name}
-                onBlur={handleBlur("name")}
+                placeholderTextColor={ "#002C5F" }
+                onChangeText={ handleChange("name") }
+                value={ values.name }
+                onBlur={ handleBlur("name") }
               />
 
-              <Text style={globalStyles.errorText}>
-                {touched.name && errors.name}
+              <Text style={ globalStyles.errorText }>
+                { touched.name && errors.name }
               </Text>
               <View
                 style={{
@@ -117,12 +119,12 @@ const AddTodoListModal:React.FC<ModalProps> = ({ closeModal, addList }) => {
                   marginTop: 12,
                 }}
               >
-                {renderColors()}
+                { renderColors() }
               </View>
               <TouchableOpacity
-                style={styles.create}
+                style={ styles.create }
               >
-                <FlatButton text="Add Note" color={bgColor}onPress={handleSubmit}/>
+                <FlatButton text="Add Note" color={ bgColor }onPress={ handleSubmit }/>
               </TouchableOpacity>
             </View>
           )}

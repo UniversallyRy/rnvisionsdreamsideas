@@ -1,9 +1,9 @@
-import React, { useState } from "react";
+import React, { FunctionComponent, useState } from "react";
 import { Modal, StyleSheet, StyleProp, TextStyle, ViewStyle } from "react-native";
 import { Card, Text } from "react-native-paper";
 import NotesModal from "./notesModal";
 
-interface NoteListProps {
+type NoteListProps = {
   notes: object;
   deleteNote?: ((item: object) => void);
   noteContainer?: StyleProp<ViewStyle>;
@@ -19,7 +19,7 @@ interface Styles {
   subtitle: ViewStyle;
 }
 
-const NoteList: React.FC<NoteListProps> = ({ notes }) => {
+const NoteList: FunctionComponent<NoteListProps> = ({ notes }) => {
   const [visible, setVisible] = useState(false);
   const noteCount = Object.keys(notes).length;
 
@@ -28,20 +28,20 @@ const NoteList: React.FC<NoteListProps> = ({ notes }) => {
   };
 
   return (
-    <Card style={[styles.noteContainer, { backgroundColor: "green" }]} onPress={() => toggleListModal()}>
+    <Card style={ [styles.noteContainer, { backgroundColor: "green" }] } onPress={ () => toggleListModal() }>
       <Modal
         animationType="slide"
-        visible={visible}
-        onRequestClose={() => toggleListModal()}
+        visible={ visible }
+        onRequestClose={ () => toggleListModal() }
       >
-        <NotesModal notes={notes} closeModal={() => toggleListModal()} />
+        <NotesModal notes={ notes } closeModal={ () => toggleListModal() }/>
       </Modal>
-        <Text style={styles.noteTitle} numberOfLines={1}>
+        <Text style={ styles.noteTitle } numberOfLines={ 1 }>
           List of Notes
         </Text>
-        <Card.Content style={{ alignItems: "center", bottom: 0}}>
-          <Text style={styles.count}>{noteCount}</Text>
-          <Text style={styles.subtitle}>Notes</Text>
+        <Card.Content style={{ alignItems: "center", bottom: 0 }}>
+          <Text style={ styles.count }>{ noteCount }</Text>
+          <Text style={ styles.subtitle }>Notes</Text>
         </Card.Content>
     </Card>
   );

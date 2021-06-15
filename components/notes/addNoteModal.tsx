@@ -1,4 +1,4 @@
-import React from "react";
+import React, { FunctionComponent } from "react";
 import {
   KeyboardAvoidingView,
   StyleSheet,
@@ -18,7 +18,7 @@ import { addNote } from "../../redux/actions";
 import { globalStyles } from "../../styles/global";
 import FlatButton  from "../../shared/button";
 
-interface ModalProps {
+type ModalProps = {
   closeModal: (() => void);
   addNote: ((item: object) => void);
   container: StyleProp<ViewStyle>;
@@ -40,22 +40,22 @@ const listSchema = yup.object({
 });
 
 // red, slate blue, black, dark gray, blueish gray, teal, tan
-const AddNoteModal: React.FC<ModalProps> = ({ closeModal, addNote }) => {
+const AddNoteModal: FunctionComponent<ModalProps> = ({ closeModal, addNote }) => {
   return (
-    <KeyboardAvoidingView style={styles.container} behavior={Platform.OS === "ios" ? "padding" : "height"}>
+    <KeyboardAvoidingView style={ styles.container } behavior={ Platform.OS === "ios" ? "padding" : "height" }>
       <TouchableOpacity
         style={{ position: "absolute", top: 64, right: 32 }}
-        onPress={closeModal}
+        onPress={ closeModal }
       >
-        <AntDesign name="close" size={24} color="black" />
+        <AntDesign name="close" size={ 24 } color="black" />
       </TouchableOpacity>
 
       <View style={{ alignSelf: "stretch", marginHorizontal: 32 }}>
-        <Text style={styles.title}>Create A New Note</Text>
+        <Text style={ styles.title }>Create A New Note</Text>
         <Formik
           initialValues={{ name: "", id: 0 }}
-          validationSchema={listSchema}
-          onSubmit={(values, actions) => {
+          validationSchema={ listSchema }
+          onSubmit={ (values, actions) => {
             addNote(values);
             actions.resetForm();
             closeModal();
@@ -71,21 +71,21 @@ const AddNoteModal: React.FC<ModalProps> = ({ closeModal, addNote }) => {
           }) => (
             <View>
               <TextInput
-                enablesReturnKeyAutomatically={true}
-                autoCorrect={true}
-                style={styles.input}
+                enablesReturnKeyAutomatically={ true }
+                autoCorrect={ true }
+                style={ styles.input }
                 placeholder="Enter A New Note . . ."
-                placeholderTextColor={"#002C5F"}
-                onChangeText={handleChange("name")}
-                value={values.name}
-                onBlur={handleBlur("name")}
+                placeholderTextColor={ "#002C5F" }
+                onChangeText={ handleChange("name") }
+                value={ values.name }
+                onBlur={ handleBlur("name") }
               />
 
-              <Text style={globalStyles.errorText}>
-                {touched.name && errors.name}
+              <Text style={ globalStyles.errorText }>
+                { touched.name && errors.name }
               </Text>
               <FlatButton 
-                onPress={handleSubmit}
+                onPress={ handleSubmit }
                 text="Add Note"
               />
             </View>

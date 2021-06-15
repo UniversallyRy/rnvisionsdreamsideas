@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { FunctionComponent, useState } from "react";
 import {
   StyleSheet,
   View,
@@ -15,7 +15,7 @@ import AddTodoListModal from "./addTodoListModal";
 import AddNoteModal from "./addNoteModal";
 import { Icon } from "../../shared/icon";
 
-interface NoteMainProps {
+type NoteMainProps = {
   stateNotes: [];
   stateTodos: [];
   container?: StyleProp<ViewStyle>;
@@ -34,7 +34,7 @@ interface Styles {
 }
 
 
-const NoteMain: React.FC<NoteMainProps> = ({ stateNotes, stateTodos }) => {
+const NoteMain: FunctionComponent<NoteMainProps> = ({ stateNotes, stateTodos }) => {
   const [todoModal, setTodoModal] = useState(false);
   const [noteModal, setNoteModal] = useState(false);
 
@@ -46,32 +46,32 @@ const NoteMain: React.FC<NoteMainProps> = ({ stateNotes, stateTodos }) => {
   };
 
   const renderList = (list:any) => {
-    return <TodoLists list={list} />;
+    return <TodoLists list={ list } />;
   };
 
   return (
-    <View style={styles.container}>
+    <View style={ styles.container }>
       <Modal
         animationType="slide"
-        visible={todoModal}
-        onRequestClose={() => toggleTodoModal()}
+        visible={ todoModal }
+        onRequestClose={ () => toggleTodoModal() }
       >
-        <AddTodoListModal closeModal={() => toggleTodoModal()} />
+        <AddTodoListModal closeModal={ () => toggleTodoModal() } />
       </Modal>
       <Modal
         animationType="slide"
-        visible={noteModal}
-        onRequestClose={() => toggleNoteModal()}
+        visible={ noteModal }
+        onRequestClose={ () => toggleNoteModal() }
       >
-        <AddNoteModal closeModal={() => toggleNoteModal()} />
+        <AddNoteModal closeModal={ () => toggleNoteModal() } />
       </Modal>
-      <View style={styles.titleStyle}>
-        <View style={styles.divider} />
-        <Text style={styles.title}>
+      <View style={ styles.titleStyle }>
+        <View style={ styles.divider } />
+        <Text style={ styles.title }>
           Note{" "}
           <Text style={{ fontWeight: "300", color: "lightgray" }}>Lists</Text>
         </Text>
-        <View style={styles.divider} />
+        <View style={ styles.divider } />
       </View>
       <View
         style={{
@@ -79,19 +79,19 @@ const NoteMain: React.FC<NoteMainProps> = ({ stateNotes, stateTodos }) => {
           flexDirection: "row",
         }}
       >
-        <NoteList notes={stateNotes} key={1} />
+        <NoteList notes={ stateNotes } key={ 1 } />
         <FlatList
-          keyExtractor={(_, index) => index.toString()}  
-          data={stateTodos}
-          horizontal={true}
-          showsHorizontalScrollIndicator={false}
-          renderItem={({ item }) => renderList(item)}
+          keyExtractor={ (_, index) => index.toString() }  
+          data={ stateTodos }
+          horizontal={ true }
+          showsHorizontalScrollIndicator={ false }
+          renderItem={ ({ item }) => renderList(item) }
           keyboardShouldPersistTaps="always"
         />
       </View>
-      <View style={styles.addList}>
-        <Icon item="plus" onPress={() => toggleNoteModal()} />
-        <Icon item="plus" onPress={() => toggleTodoModal()} />
+      <View style={ styles.addList }>
+        <Icon item="plus" onPress={ () => toggleNoteModal() } />
+        <Icon item="plus" onPress={ () => toggleTodoModal() } />
       </View>
     </View>
   );

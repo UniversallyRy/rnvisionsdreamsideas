@@ -1,11 +1,11 @@
-import React, { useState, useEffect } from "react";
-import { Modal, StyleProp, TextStyle, ViewStyle, StyleSheet, View} from "react-native";
+import React, { FunctionComponent, useState, useEffect } from "react";
+import { Modal, StyleProp, TextStyle, ViewStyle, StyleSheet, View } from "react-native";
 import { Card, Button, Text } from "react-native-paper";
 import { connect } from "react-redux";
 import TodosModal from "./todosModal";
 import { deleteList } from "../../redux/actions";
 
-interface TodoListsProps {
+type TodoListsProps = {
   list: any;
   deleteList: ((id:object) => void);
   completedList: any
@@ -26,7 +26,7 @@ interface Styles {
   deleteButton: ViewStyle;
 }
 
-const TodoLists: React.FC<TodoListsProps>= ({ list, deleteList }) => {
+const TodoLists: FunctionComponent<TodoListsProps>= ({ list, deleteList }) => {
   const [visible, setVisible] = useState(false);
   const [InitRemaining, setInitRemaining] = useState(0);
   const [InitCount, setInitCount] = useState(0);
@@ -48,7 +48,7 @@ const TodoLists: React.FC<TodoListsProps>= ({ list, deleteList }) => {
           //Do anything here for 2nd render onwards
   }, [TodosModal])
     
-const completedList = (remaining, completed) => {
+const completedList = (remaining:number, completed:number) => {
   setInitRemaining(remaining);
   setInitCount(completed);
 }
@@ -66,34 +66,34 @@ const completedList = (remaining, completed) => {
   };
 
   return (
-    <View style={styles.listContainer}>
-      <Card style={[styles.cardContainer, { backgroundColor: list.color }]} onPress={() => toggleListModal()}>
+    <View style={ styles.listContainer }>
+      <Card style={ [styles.cardContainer, { backgroundColor: list.color }] } onPress={ () => toggleListModal() }>
         <Modal
           animationType="slide"
-          visible={visible}
-          onRequestClose={() => toggleListModal()}
+          visible={ visible }
+          onRequestClose={ () => toggleListModal() }
         >
-          <TodosModal completedList={completedList} item={list} closeModal={() => toggleListModal()} />
+          <TodosModal completedList={ completedList } item={ list } closeModal={ () => toggleListModal() } />
         </Modal>
         <View>
-          <Text style={styles.listTitle} numberOfLines={1}>
-            {list.name}
+          <Text style={ styles.listTitle } numberOfLines={ 1 }>
+            { list.name }
           </Text>
             <View style={{ alignItems: "center" }}>
-              <Text style={styles.count}>{InitRemaining}</Text>
-              <Text style={styles.subtitle}>Remaining</Text>
+              <Text style={ styles.count }>{ InitRemaining }</Text>
+              <Text style={ styles.subtitle }>Remaining</Text>
             </View>
             <View style={{ alignItems: "center" }}>
-              <Text style={styles.count}>{InitCount}</Text>
-              <Text style={styles.subtitle}>Completed</Text>
+              <Text style={ styles.count }>{ InitCount }</Text>
+              <Text style={ styles.subtitle }>Completed</Text>
             </View>
         </View>
       </Card>
       <Button
-        style={styles.deleteButton}
+        style={ styles.deleteButton }
         icon="close-outline"
         mode="contained"
-        onPress={() => deleteList({id: list.id})}
+        onPress={ () => deleteList({id: list.id}) }
         >
         Delete
       </Button>
