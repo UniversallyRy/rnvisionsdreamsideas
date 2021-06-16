@@ -84,7 +84,6 @@ const VisionsContainer: FunctionComponent<ImageProps> = ({
             item="close-outline"
             onPress={ () => deleteVision({ id: data.id} ) }
           />
-            <Text style={{ fontFamily: "roboto-bold" }}>Delete</Text>
         </Surface>
       );
     },

@@ -1,6 +1,6 @@
 import React from "react";
 import { StyleSheet, StyleProp, ViewStyle, TextStyle } from "react-native";
-import { FAB } from "react-native-paper";
+import { FAB, useTheme } from "react-native-paper";
 
 interface IconProps {
   item: string;
@@ -15,8 +15,10 @@ interface Styles {
 }
 
 export const Icon:React.FC<IconProps> = ({ item, onPress }) => {
+  const theme = useTheme();
   return (
     <FAB
+      theme={theme}
       icon={`${item}`}
       small
       style={styles.modalToggle}
@@ -39,10 +41,12 @@ const styles = StyleSheet.create<Styles>({
   modalToggle: {
     marginBottom: 15,
     marginHorizontal: 84,
-    elevation: 2
+    elevation: 2,
+    backgroundColor: "silver"
   },
   delete: {
     margin: 5,
+    backgroundColor: "red",
     elevation: 2
   }
 });

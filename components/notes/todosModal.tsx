@@ -6,14 +6,12 @@ import {
   TextStyle, 
   ViewStyle,
   View,
-  KeyboardAvoidingView,
   Keyboard,
   Dimensions,
   FlatList,
-  Platform,
 } from "react-native";
 import { connect } from "react-redux";
-import { Button, Text, TextInput } from "react-native-paper";
+import { Card, Button, Text, TextInput, useTheme } from "react-native-paper";
 import { AntDesign, Ionicons } from "@expo/vector-icons";
 import { Formik } from "formik";
 import * as yup from "yup";
@@ -66,6 +64,8 @@ const TodosModal: FunctionComponent<TodoModalProps> = ({ completedList, item, cl
   const newTodos = item.todos;
   const taskCount = item.todos.length;
   const completedCount = newTodos.filter((todo:any) => todo.completed).length;
+  const theme = useTheme();
+
 
   useEffect(() => {
     const init = () => {
@@ -109,7 +109,7 @@ const TodosModal: FunctionComponent<TodoModalProps> = ({ completedList, item, cl
   };
 
   return (
-    <KeyboardAvoidingView style={{ flex: 1 }} behavior={ Platform.OS === "ios" ? "padding" : "height" }>
+    <Card style={{ flex: 1 }} >
       <View style={ styles.container }>
         <TouchableOpacity
           style={{ position: "absolute", top: 40, right: 32, zIndex: 10 }}
@@ -191,7 +191,7 @@ const TodosModal: FunctionComponent<TodoModalProps> = ({ completedList, item, cl
             )}
           </Formik>
       </View>
-    </KeyboardAvoidingView>
+    </Card>
   );
 };
 

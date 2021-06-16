@@ -1,11 +1,12 @@
 import React, { useState, useRef, useEffect } from "react";
 import { StyleSheet, StyleProp, ViewStyle, Animated, Modal } from "react-native";
-import { Card, Surface } from "react-native-paper";
+import { Card, Surface, useTheme } from "react-native-paper";
 import { NavigationStackProp } from 'react-navigation-stack';
 import AddVision from "../components/visions/addVisionModal";
 import VisionsContainer from "../components/visions/visionImageList";
 import VisionGridContainer from "../components/visions/visionImageGrid";
 import { Icon } from "../shared/icon";
+import { ThemesContext } from './../ThemeContext';
 
 interface VisionProps {
   navigation: NavigationStackProp;
@@ -23,6 +24,7 @@ const Visions: React.FC<VisionProps> = ({ navigation }) => {
   const scrollX = useRef(new Animated.Value(0)).current;
   const [modalOpen, setModalOpen] = useState(false);
   const [gridView, setGridView] = useState(false);
+  const theme = useTheme();
 
 
   useEffect(() => {
@@ -40,7 +42,13 @@ const Visions: React.FC<VisionProps> = ({ navigation }) => {
   };
 
   return (
-    <Card style={styles.container}>
+    <Card
+      theme={{
+        colors: {
+          primary: theme?.colors.surface,
+        },
+      }}
+     style={styles.container}>
       <Modal visible={modalOpen} animationType="slide">
         <AddVision setModalOpen={setModalOpen} />  
       </Modal>

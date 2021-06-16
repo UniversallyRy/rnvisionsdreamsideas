@@ -4,7 +4,7 @@ import {
   StyleProp,
   ViewStyle,
 } from "react-native";
-import { Surface } from "react-native-paper";
+import { Card } from "react-native-paper";
 import { connect } from "react-redux";
 import NoteMain from "../components/notes/notesMain";
 
@@ -20,9 +20,9 @@ interface Styles {
 
 const NoteScreen:React.FC<NoteProps> = ({ stateNotes, stateTodos }) => {
   return (
-    <Surface style={styles.noteScreenContainer}>
+    <Card style={styles.noteScreenContainer}>
       <NoteMain stateNotes={stateNotes} stateTodos={stateTodos} />
-    </Surface>
+    </Card>
   );
 };
 

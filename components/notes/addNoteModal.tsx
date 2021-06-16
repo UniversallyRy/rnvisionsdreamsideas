@@ -9,7 +9,7 @@ import {
   ViewStyle,
   Platform
 } from "react-native";
-import { TextInput, Text } from "react-native-paper";
+import { Card, TextInput, Text } from "react-native-paper";
 import { connect } from "react-redux";
 import { AntDesign } from "@expo/vector-icons";
 import { Formik } from "formik";
@@ -42,58 +42,60 @@ const listSchema = yup.object({
 // red, slate blue, black, dark gray, blueish gray, teal, tan
 const AddNoteModal: FunctionComponent<ModalProps> = ({ closeModal, addNote }) => {
   return (
-    <KeyboardAvoidingView style={ styles.container } behavior={ Platform.OS === "ios" ? "padding" : "height" }>
-      <TouchableOpacity
-        style={{ position: "absolute", top: 64, right: 32 }}
-        onPress={ closeModal }
-      >
-        <AntDesign name="close" size={ 24 } color="black" />
-      </TouchableOpacity>
-
-      <View style={{ alignSelf: "stretch", marginHorizontal: 32 }}>
-        <Text style={ styles.title }>Create A New Note</Text>
-        <Formik
-          initialValues={{ name: "", id: 0 }}
-          validationSchema={ listSchema }
-          onSubmit={ (values, actions) => {
-            addNote(values);
-            actions.resetForm();
-            closeModal();
-          }}
+    <Card style={{ flex: 1 }}>
+      <View style={ styles.container }>
+        <TouchableOpacity
+          style={{ position: "absolute", top: 64, right: 32 }}
+          onPress={ closeModal }
         >
-          {({
-            handleChange,
-            values,
-            handleBlur,
-            handleSubmit,
-            touched,
-            errors,
-          }) => (
-            <View>
-              <TextInput
-                enablesReturnKeyAutomatically={ true }
-                autoCorrect={ true }
-                style={ styles.input }
-                placeholder="Enter A New Note . . ."
-                placeholderTextColor={ "#002C5F" }
-                onChangeText={ handleChange("name") }
-                value={ values.name }
-                onBlur={ handleBlur("name") }
-              />
+          <AntDesign name="close" size={ 24 } color="black" />
+        </TouchableOpacity>
 
-              <Text style={ globalStyles.errorText }>
-                { touched.name && errors.name }
-              </Text>
-              <FlatButton 
-                onPress={ handleSubmit }
-                text="Add Note"
-              />
-            </View>
-          )}
-        </Formik>
+        <View style={{ alignSelf: "stretch", marginHorizontal: 32 }}>
+          <Text style={ styles.title }>Create A New Note</Text>
+          <Formik
+            initialValues={{ name: "", id: 0 }}
+            validationSchema={ listSchema }
+            onSubmit={ (values, actions) => {
+              addNote(values);
+              actions.resetForm();
+              closeModal();
+            }}
+          >
+            {({
+              handleChange,
+              values,
+              handleBlur,
+              handleSubmit,
+              touched,
+              errors,
+            }) => (
+              <View>
+                <TextInput
+                  enablesReturnKeyAutomatically={ true }
+                  autoCorrect={ true }
+                  style={ styles.input }
+                  placeholder="Enter A New Note . . ."
+                  placeholderTextColor={ "#002C5F" }
+                  onChangeText={ handleChange("name") }
+                  value={ values.name }
+                  onBlur={ handleBlur("name") }
+                />
+
+                <Text style={ globalStyles.errorText }>
+                  { touched.name && errors.name }
+                </Text>
+                <FlatButton 
+                  onPress={ handleSubmit }
+                  text="Add Note"
+                />
+              </View>
+            )}
+          </Formik>
+        </View>
       </View>
-    </KeyboardAvoidingView>
-  );
+      </Card>
+    );
 };
 
 const styles = StyleSheet.create<Styles>({

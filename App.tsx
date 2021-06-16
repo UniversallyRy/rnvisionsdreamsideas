@@ -18,9 +18,26 @@ import { AppLoading } from "expo";
 import NavDrawer from "./routes/drawer";
 import { PersistGate } from "redux-persist/integration/react";
 import * as Font from "expo-font";
-// const CombinedDefaultTheme = merge( PaperDefaultTheme, NavigationDefaultTheme );
-// const CombinedDarkTheme = merge( PaperDarkTheme, NavigationDarkTheme );
-// todos: add gesture controls for components, vision add pic crop fixes, build dream journal out, move styles back outside components eventually,FINISH FIXING JEST TESTING, IMPROVE ACCESSIBILITY,
+import { ThemesContext } from "./ThemeContext";
+
+
+const CombinedDefaultTheme = {
+  ...PaperDefaultTheme,
+  ...NavigationDefaultTheme,
+  colors: {
+    ...PaperDefaultTheme.colors,
+    ...NavigationDefaultTheme.colors,
+  },
+};
+const CombinedDarkTheme = {
+  ...PaperDarkTheme,
+  ...NavigationDarkTheme,
+  colors: {
+    ...PaperDarkTheme.colors,
+    ...NavigationDarkTheme.colors,
+  },
+};
+
 
 const getFonts = () =>
   Font.loadAsync({
@@ -33,17 +50,35 @@ const getFonts = () =>
 
 const App = () => {
   const [fontsLoaded, setFontsLoaded] = useState(false);
+  const [isThemeDark, setIsThemeDark] = React.useState(false);
   const [persistLoaded, setPersistLoaded] = useState(true);
+
+
+  let theme = isThemeDark ? CombinedDarkTheme : CombinedDefaultTheme;
+
+  const toggleTheme = React.useCallback(() => {
+    return setIsThemeDark(!isThemeDark);
+  }, [isThemeDark]);
+
+  const preferences = React.useMemo(
+    () => ({
+      toggleTheme,
+      isThemeDark,
+    }),
+    [toggleTheme, isThemeDark]
+  );
 
   if (fontsLoaded) {
     return (
       <Provider store={store}>
-          <PaperProvider>
-            <NavigationContainer>
+        <ThemesContext.Provider value={preferences}>
+          <PaperProvider theme={theme}>
+            <NavigationContainer theme={theme}>
               <NavDrawer />
               <StatusBar animated={true} />
             </NavigationContainer>
           </PaperProvider>
+        </ThemesContext.Provider>
       </Provider>
     );
   } else {

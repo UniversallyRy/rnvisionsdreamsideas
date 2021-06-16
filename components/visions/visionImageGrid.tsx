@@ -46,7 +46,7 @@ const VisionGridContainer: FunctionComponent<GridProps> = ({ state, navigation }
   }, []);
 
   return (
-    <Surface style={{ margin: "auto", flex: 1 }}>
+    <Card style={{ margin: "auto", flex: 1 }}>
       <FlatList
         numColumns={ 3 }
         contentContainerStyle={ styles.gridContainer }
@@ -55,7 +55,7 @@ const VisionGridContainer: FunctionComponent<GridProps> = ({ state, navigation }
         keyExtractor={ (item, index) => index.toString() }
         renderItem={ renderList }
       />
-    </Surface>
+    </Card>
   );
 };
 

@@ -9,7 +9,7 @@ import {
   TextStyle,
   ViewStyle,
 } from "react-native";
-import { TextInput, Text } from "react-native-paper";
+import { TextInput, Text, Card } from "react-native-paper";
 import { connect } from "react-redux";
 import { AntDesign } from "@expo/vector-icons";
 import { Formik } from "formik";
@@ -68,69 +68,71 @@ const AddTodoListModal: FunctionComponent<ModalProps> = ({ closeModal, addList }
   };
 
   return (
-    <KeyboardAvoidingView style={ styles.container } behavior={ "padding" }>
-      <TouchableOpacity
-        style={{ position: "absolute", top: 64, right: 32 }}
-        onPress={ closeModal }
-      >
-        <AntDesign name="close" size={ 24 } color="black" />
-      </TouchableOpacity>
-
-      <View style={{ alignSelf: "stretch", marginHorizontal: 32 }}>
-        <Text style={ styles.title }>Create Todo List</Text>
-        <Formik
-          initialValues={{ name: "", id: 0, color: "", todos: [] }}
-          validationSchema={ listSchema }
-          onSubmit={ (values, actions) => {
-            let color = bgColor;
-            values.color = color;
-            addList(values);
-            actions.resetForm();
-            closeModal();
-          }}
+    <Card style={{ flex: 1 }}>
+      <View style={ styles.container } >
+        <TouchableOpacity
+          style={{ position: "absolute", top: 64, right: 32 }}
+          onPress={ closeModal }
         >
-          {({
-            handleChange,
-            values,
-            handleBlur,
-            handleSubmit,
-            touched,
-            errors,
-          }) => (
-            <View>
-              <TextInput
-                enablesReturnKeyAutomatically={ true }
-                autoCorrect={ true } 
-                style={ styles.input }
-                placeholder="Enter A New List . . ."
-                placeholderTextColor={ "#002C5F" }
-                onChangeText={ handleChange("name") }
-                value={ values.name }
-                onBlur={ handleBlur("name") }
-              />
+          <AntDesign name="close" size={ 24 } color="black" />
+        </TouchableOpacity>
 
-              <Text style={ globalStyles.errorText }>
-                { touched.name && errors.name }
-              </Text>
-              <View
-                style={{
-                  flexDirection: "row",
-                  justifyContent: "space-between",
-                  marginTop: 12,
-                }}
-              >
-                { renderColors() }
+        <View style={{ alignSelf: "stretch", marginHorizontal: 32 }}>
+          <Text style={ styles.title }>Create Todo List</Text>
+          <Formik
+            initialValues={{ name: "", id: 0, color: "", todos: [] }}
+            validationSchema={ listSchema }
+            onSubmit={ (values, actions) => {
+              let color = bgColor;
+              values.color = color;
+              addList(values);
+              actions.resetForm();
+              closeModal();
+            }}
+          >
+            {({
+              handleChange,
+              values,
+              handleBlur,
+              handleSubmit,
+              touched,
+              errors,
+            }) => (
+              <View>
+                <TextInput
+                  enablesReturnKeyAutomatically={ true }
+                  autoCorrect={ true } 
+                  style={ styles.input }
+                  placeholder="Enter A New List . . ."
+                  placeholderTextColor={ "#002C5F" }
+                  onChangeText={ handleChange("name") }
+                  value={ values.name }
+                  onBlur={ handleBlur("name") }
+                />
+
+                <Text style={ globalStyles.errorText }>
+                  { touched.name && errors.name }
+                </Text>
+                <View
+                  style={{
+                    flexDirection: "row",
+                    justifyContent: "space-between",
+                    marginTop: 12,
+                  }}
+                >
+                  { renderColors() }
+                </View>
+                <TouchableOpacity
+                  style={ styles.create }
+                >
+                  <FlatButton text="Add Note" color={ bgColor }onPress={ handleSubmit }/>
+                </TouchableOpacity>
               </View>
-              <TouchableOpacity
-                style={ styles.create }
-              >
-                <FlatButton text="Add Note" color={ bgColor }onPress={ handleSubmit }/>
-              </TouchableOpacity>
-            </View>
-          )}
-        </Formik>
+            )}
+          </Formik>
+        </View>
       </View>
-    </KeyboardAvoidingView>
+    </Card>
   );
 };
 

@@ -1,48 +1,50 @@
 import React from "react";
-import { StyleSheet, View, SafeAreaView, StyleProp, TextStyle, ViewStyle } from "react-native";
-import { Text } from "react-native-paper";
-import { MaterialIcons } from "@expo/vector-icons";
+import { StyleSheet, StyleProp, TextStyle, ViewStyle, Dimensions } from "react-native";
+import { useTheme, Appbar, TouchableRipple, Switch } from "react-native-paper";
+import { ThemesContext } from './../ThemeContext';
 
 type HeaderProps = {
   navigation: any;
   title: string;
-  headerContainer?: StyleProp<ViewStyle>;
-  headerText?: StyleProp<TextStyle>;
 };
 
-interface Styles {
-  headerContainer: ViewStyle;
-  headerText: TextStyle;
-}
+const { width: windowWidth, height: windowHeight } = Dimensions.get("window");
 
 const Header:React.FC<HeaderProps> = ({ navigation, title }) => {
   const openMenu = () => {
     navigation.openDrawer();
   };
 
+  const theme = useTheme();
+  const { toggleTheme, isThemeDark } = React.useContext(ThemesContext);
+
   return (
-    <SafeAreaView>
-      <View style={styles.headerContainer}>
-        <MaterialIcons
-          name="menu"
-          size={36}
-          onPress={openMenu}
+    <Appbar.Header
+      theme={{
+        colors: {
+          primary: theme?.colors.primary,
+        },
+      }}
+      style={styles.headerContainer}
+    >
+      <Appbar.Content title={title}/>
+      <TouchableRipple>
+      <Switch
+          style={[{ marginRight: 15, backgroundColor: theme.colors.backdrop }]}
+          color={'darkgray'}
+          value={isThemeDark}
+          onValueChange={() => toggleTheme()}
         />
-        <Text style={styles.headerText}>{title}</Text>
-      </View>
-    </SafeAreaView>
+      </TouchableRipple>
+    </Appbar.Header>
   );
 };
 
-const styles = StyleSheet.create<Styles>({
+const styles = StyleSheet.create({
   headerContainer: {
-    flexDirection: "row",
-  },
-  headerText: {
-    fontWeight: "bold",
-    marginTop: 8,
-    marginLeft: 20,
-    letterSpacing: 7,
+    flex: 1,
+    width: windowWidth,
+    height: windowHeight
   },
 });
 

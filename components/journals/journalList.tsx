@@ -47,10 +47,9 @@ const JournalList: FunctionComponent<JournalListProps> = ({ state, navigation, d
         data={ state }
         keyExtractor={ (item, index) => index.toString() }
         renderItem={ ({ item }:any) => (
-          <Surface style={ styles.journalCard }>
-            <Card
+          <Card onPress={ () => navigation.navigate("JournalDetails", item)} style={ styles.journalCard }>
+            <Surface
               style={ styles.journalText }
-              onPress={ () => navigation.navigate("JournalDetails", item) }
             >
               <Card.Content>
                 <Paragraph style={ styles.journalTitle }>
@@ -65,7 +64,7 @@ const JournalList: FunctionComponent<JournalListProps> = ({ state, navigation, d
                   { item.date }
                 </Paragraph>
               </Card.Content>
-            </Card>
+            </Surface>
             <Surface style={ styles.buttonsContainer }>
               <Button
                 style={ styles.editButton }
@@ -84,7 +83,7 @@ const JournalList: FunctionComponent<JournalListProps> = ({ state, navigation, d
                 Delete
               </Button>
             </Surface>
-          </Surface>
+          </Card>
         )}
       />
     </Card>
@@ -103,6 +102,7 @@ const styles = StyleSheet.create<Styles>({
     borderRadius: 10,
     width: windowWidth * 0.92,
     elevation: 4,
+    color: "red",
   },
   journalText: {
     alignSelf: "center",

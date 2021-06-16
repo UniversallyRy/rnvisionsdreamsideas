@@ -2,23 +2,21 @@ import React, { FunctionComponent } from "react";
 import {
   TouchableOpacity,
   StyleSheet,
-  Text,
   View,
   StyleProp,
   TextStyle, 
   ViewStyle,
-  KeyboardAvoidingView,
   Keyboard, 
   FlatList, 
-  Platform, 
   Dimensions
 } from "react-native";
 import { connect } from "react-redux";
-import { Button, Surface, TextInput } from "react-native-paper";
+import { Button, Card, TextInput, Text, useTheme } from "react-native-paper";
 import { AntDesign } from "@expo/vector-icons";
 import { Formik, FormikHelpers } from "formik";
 import * as yup from "yup";
 import { deleteNote, addNote } from "../../redux/actions";
+import { ThemesContext } from '../../ThemeContext';
 
 export const { width: windowWidth, height: windowHeight } = Dimensions.get("window");
 
@@ -64,23 +62,26 @@ const noteSchema = yup.object({
 const NotesModal: FunctionComponent<NoteModalProps> = ({ notes, closeModal, deleteNote, addNote }) => {
   const newNotes:any = notes;
   const taskCount = newNotes.length;
+  const theme = useTheme();
   
   const renderNote = ( note:any, index = 0) => {
     return (
-        <Surface style={ styles.noteContainer }>
-          <Text style={{ paddingRight: 20 }}>{ note.name }</Text>
+        <Card 
+          style={ styles.noteContainer }
+        >
+          <Text theme={theme}style={{ paddingRight: 20 }}>{ note.name }</Text>
           <AntDesign
             name="closecircle"
             size={ 24 }
             style={ styles.deleteNoteButton }
             onPress={ () => deleteNote({ id: note.id }) }
           />
-        </Surface>
+        </Card>
     );
   };
 
   return (
-    <KeyboardAvoidingView style={{ flex: 1 }} behavior={ Platform.OS === "ios" ? "padding" : "height" }>
+    <Card style={styles.container} >
         <TouchableOpacity
           style={{ position: "absolute", top: 40, right: 32, zIndex: 10 }}
         >
@@ -153,13 +154,15 @@ const NotesModal: FunctionComponent<NoteModalProps> = ({ notes, closeModal, dele
               </View>
             )}
           </Formik>   
-    </KeyboardAvoidingView>
+    </Card>
   );
 };
 
 const styles = StyleSheet.create<Styles>({
   container: {
     flex: 1,
+    width: windowWidth,
+    height: windowHeight
   },
   header: {
     marginTop: 10,
@@ -208,6 +211,8 @@ const styles = StyleSheet.create<Styles>({
     elevation: 3,
   },
   noteContainer: {
+    alignSelf: "center",
+    width: windowWidth * 0.995,
     flexDirection: "row",
     paddingVertical: 16,
   },
