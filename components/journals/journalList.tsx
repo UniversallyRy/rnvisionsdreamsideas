@@ -17,11 +17,11 @@ type JournalListProps = {
   editButton: StyleProp<ViewStyle>;
   deleteButton: StyleProp<ViewStyle>;
   divider: StyleProp<ViewStyle>;
-  journalCard: StyleProp<TextStyle>;
-  journalTitle: StyleProp<ViewStyle>;
-  journalText: StyleProp<ViewStyle>;
-  journalBorder: StyleProp<ViewStyle>;
-  journalDate: StyleProp<ViewStyle>;
+  journalCard: StyleProp<ViewStyle>;
+  journalTitle: StyleProp<TextStyle>;
+  journalParagraph: StyleProp<TextStyle>;
+  journalText: StyleProp<TextStyle>;
+  journalDate: StyleProp<TextStyle>;
   
 }
 
@@ -32,10 +32,10 @@ interface Styles {
   deleteButton: ViewStyle;
   divider: ViewStyle;
   journalCard: ViewStyle;
-  journalTitle: ViewStyle;
-  journalText: ViewStyle;
-  journalBorder: ViewStyle;
-  journalDate: ViewStyle;
+  journalTitle: TextStyle;
+  journalParagraph: TextStyle;
+  journalText: TextStyle;
+  journalDate: TextStyle;
 }
 
 const JournalList: FunctionComponent<JournalListProps> = ({ state, navigation, deleteJournal }) => {
@@ -47,9 +47,9 @@ const JournalList: FunctionComponent<JournalListProps> = ({ state, navigation, d
         data={ state }
         keyExtractor={ (item, index) => index.toString() }
         renderItem={ ({ item }:any) => (
-          <Surface style={ styles.journalBorder }>
+          <Surface style={ styles.journalCard }>
             <Card
-              style={ styles.journalCard }
+              style={ styles.journalText }
               onPress={ () => navigation.navigate("JournalDetails", item) }
             >
               <Card.Content>
@@ -57,7 +57,7 @@ const JournalList: FunctionComponent<JournalListProps> = ({ state, navigation, d
                   { item.title }
                 </Paragraph>
                 <Text style={ styles.divider } />
-                <Paragraph style={ styles.journalText }>
+                <Paragraph style={ styles.journalParagraph }>
                   { item.body }
                 </Paragraph>
                 <Text style={ styles.divider } />
@@ -94,19 +94,17 @@ const JournalList: FunctionComponent<JournalListProps> = ({ state, navigation, d
 const styles = StyleSheet.create<Styles>({
   container: {
     flex: 1,
-    backgroundColor: "lightgray",
     paddingTop: 10,
-    width: windowWidth,
-    height: windowHeight
   },
-  journalBorder: {
-    margin: 10,
+  journalCard: {
+    margin: 5,
     alignSelf: "center",
     overflow: "hidden",
     borderRadius: 10,
     width: windowWidth * 0.92,
+    elevation: 4,
   },
-  journalCard: {
+  journalText: {
     alignSelf: "center",
     width: windowWidth * 0.92,
   },
@@ -115,7 +113,7 @@ const styles = StyleSheet.create<Styles>({
     fontSize: 20,
     marginBottom: 10,
   },
-  journalText: {
+  journalParagraph: {
     fontFamily: "roboto-regular",
     fontSize: 12,
   },

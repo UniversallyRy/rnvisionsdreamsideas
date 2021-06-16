@@ -110,7 +110,8 @@ const styles = StyleSheet.create<Styles>({
     padding: 20,
     borderRadius: 6,
     width: 200,
-    height: 245,
+    height: 238,
+    elevation: 5,
   },
   listTitle: {
     alignSelf: "center",
@@ -129,6 +130,7 @@ const styles = StyleSheet.create<Styles>({
   deleteButton: {
     margin: 2,
     width: 200,
+    elevation: 5,
   },
 });
 

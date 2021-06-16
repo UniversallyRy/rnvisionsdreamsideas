@@ -87,6 +87,7 @@ const styles = StyleSheet.create<Styles>({
     height: windowHeight * 0.25,
     width: windowWidth * 0.29,
     margin: 5,
+    elevation: 5,
   },
   gridText: {
     height: windowHeight * 0.25,

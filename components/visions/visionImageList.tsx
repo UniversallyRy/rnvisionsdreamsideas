@@ -59,19 +59,18 @@ const VisionsContainer: React.FC<ImageProps> = ({
           style={{
             width,
             alignItems: "center",
-            marginTop: 20,
+            marginTop: 50,
           }}
         >
           <TouchableOpacity
             onLongPress={() => navigation.navigate("VisionDetails", data)}
             style={{
               borderRadius: 12,
-              borderWidth: 2,
               overflow: "hidden",
+              elevation: 3
             }}
           >
-            <Surface
-            >
+            <Surface>
               <Animated.Image
                 source={{ uri: data.uri }}
                 resizeMode={"cover"}
