@@ -16,7 +16,6 @@ import { AntDesign } from "@expo/vector-icons";
 import { Formik, FormikHelpers } from "formik";
 import * as yup from "yup";
 import { deleteNote, addNote } from "../../redux/actions";
-import { ThemesContext } from '../../ThemeContext';
 
 export const { width: windowWidth, height: windowHeight } = Dimensions.get("window");
 

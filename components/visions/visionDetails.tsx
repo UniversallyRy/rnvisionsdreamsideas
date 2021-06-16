@@ -5,6 +5,7 @@ import { Button, Text, Card } from "react-native-paper";
 
 type VisionProps = {
   navigation: NavigationStackProp;
+  route: any;
   vDetailsContent: StyleProp<ViewStyle>;
   visionTitle: StyleProp<TextStyle>;
   vDetailsImage: StyleProp<ImageStyle>;
@@ -20,19 +21,16 @@ interface Styles {
 
 const { width: windowWidth, height: windowHeight } = Dimensions.get("window");
 
-const VisionDetails: FunctionComponent<VisionProps> = ({ navigation }) => {
+const VisionDetails: FunctionComponent<VisionProps> = ({ navigation, route }) => {
   const handlePress = () => {
     navigation.goBack();
   };
-  const imageUri = navigation.getParam("uri");
+  const { imageUri, visionTitle } = route.params;
 
   return (
     <Card elevation={ 7 } style={ styles.vDetailsContent }>
       <Card.Content>
-        <Text style={styles.visionTitle}>
-          {" "}
-          {navigation.getParam("title")}{" "}
-        </Text>
+        <Card.Title title={visionTitle} style={styles.visionTitle} />
         <Card.Cover source={{ uri: imageUri }} style={ styles.vDetailsImage } />
         <Button
           style={ styles.vDetailsButton }

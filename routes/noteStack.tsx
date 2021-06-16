@@ -1,31 +1,31 @@
 import React from "react";
-import { createStackNavigator, NavigationStackProp } from "react-navigation-stack";
+import { createStackNavigator, StackNavigationProp } from "@react-navigation/stack";
 import NoteScreen from "../screens/noteScreen";
 import Header from "../shared/header";
 
 type NavProp = {
-  navigation: NavigationStackProp;
+  navigation: any;
 };
 
-const screens = {
-  NoteScreen: {
-    screen: NoteScreen,
-    navigationOptions: ({ navigation }: NavProp) => {
-      return {
-        headerTitle: () => <Header navigation={navigation} title="Notes" />,
-      };
-    },
-  },
+const Stack = createStackNavigator()
+
+
+export const NoteStack = () => {
+  return (
+    <Stack.Navigator
+    screenOptions={{
+      header: ({ scene, previous, navigation }) => (
+        <Header title="Notes" scene={scene} previous={previous} navigation={navigation} />
+      ),
+    }}
+    initialRouteName="Notes"
+    >
+      <Stack.Screen
+        name="Notes"
+        component={NoteScreen}
+        options={{ headerTitle: 'Notes' }}
+      />
+
+    </Stack.Navigator>
+  );
 };
-
-const NoteStack = createStackNavigator(screens, {
-  defaultNavigationOptions: {
-    // headerTintColor: coltsBlue,
-    headerStyle: {
-      // backgroundColor: coltsGray,
-      height: 100,
-    },
-  },
-});
-
-export default NoteStack;

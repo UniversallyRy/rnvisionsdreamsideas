@@ -15,7 +15,7 @@ import React, { useState } from "react";
 import { Provider } from "react-redux";
 import { store, /*persistor */ } from "./redux/store";
 import { AppLoading } from "expo";
-import NavDrawer from "./routes/drawer";
+import { BottomTabs } from "./routes/drawer";
 import { PersistGate } from "redux-persist/integration/react";
 import * as Font from "expo-font";
 import { ThemesContext } from "./ThemeContext";
@@ -73,9 +73,9 @@ const App = () => {
       <Provider store={store}>
         <ThemesContext.Provider value={preferences}>
           <PaperProvider theme={theme}>
+            <StatusBar animated={true} />
             <NavigationContainer theme={theme}>
-              <NavDrawer />
-              <StatusBar animated={true} />
+              <BottomTabs />
             </NavigationContainer>
           </PaperProvider>
         </ThemesContext.Provider>

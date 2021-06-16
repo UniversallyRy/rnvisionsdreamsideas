@@ -1,33 +1,55 @@
 import React from "react";
-import { StyleSheet, StyleProp, TextStyle, ViewStyle, Dimensions } from "react-native";
+import { StyleSheet, TouchableOpacity, StyleProp, TextStyle, ViewStyle, Dimensions } from "react-native";
 import { useTheme, Appbar, TouchableRipple, Switch } from "react-native-paper";
 import { ThemesContext } from './../ThemeContext';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 type HeaderProps = {
   navigation: any;
   title: string;
+  scene: any,
+  previous: any,
 };
 
 const { width: windowWidth, height: windowHeight } = Dimensions.get("window");
 
-const Header:React.FC<HeaderProps> = ({ navigation, title }) => {
+const Header:React.FC<HeaderProps> = ({ scene, previous, navigation, title }) => {
   const openMenu = () => {
     navigation.openDrawer();
   };
-
+  const { options } = scene.descriptor;
+  const header =
+    options.headerTitle !== undefined
+      ? options.headerTitle
+      : options.title !== undefined
+      ? options.title
+      : scene.route.name;
   const theme = useTheme();
   const { toggleTheme, isThemeDark } = React.useContext(ThemesContext);
 
   return (
     <Appbar.Header
-      theme={{
-        colors: {
-          primary: theme?.colors.primary,
-        },
-      }}
+      theme={{ colors: { primary: theme.colors.primary }} }
       style={styles.headerContainer}
     >
-      <Appbar.Content title={title}/>
+    {previous ? (
+        <Appbar.BackAction
+          onPress={navigation.goBack}
+          color={theme.colors.background}
+        />
+    ) : (
+      <TouchableOpacity
+      onPress={() => {
+        navigation.openDrawer();
+      }}
+    >
+      
+    </TouchableOpacity>
+  )}
+      <Appbar.Content title={
+          !previous ? title : ''
+        }
+        />
       <TouchableRipple>
       <Switch
           style={[{ marginRight: 15, backgroundColor: theme.colors.backdrop }]}
@@ -42,9 +64,8 @@ const Header:React.FC<HeaderProps> = ({ navigation, title }) => {
 
 const styles = StyleSheet.create({
   headerContainer: {
-    flex: 1,
-    width: windowWidth,
-    height: windowHeight
+    margin: 15,
+    padding: 10,
   },
 });
 

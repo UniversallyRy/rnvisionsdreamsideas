@@ -1,43 +1,44 @@
 import React from "react";
 import {
   createStackNavigator,
-  NavigationStackProp,
-} from "react-navigation-stack";
+  StackNavigationProp,
+} from "@react-navigation/stack";
 import Visions from "../screens/visionScreen";
 import VisionDetails from "../components/visions/visionDetails";
 import Header from "../shared/header";
+import { ParamListBase, } from "@react-navigation/routers";
 
 type NavProp = {
-  navigation: NavigationStackProp,
+  navigation?: StackNavigationProp<
+  ParamListBase,
+  'Profile'
+>,
 };
 
-const screens = {
-  VisionImageGrid: {
-    screen: Visions,
-    navigationOptions: ({ navigation }: NavProp) => {
-      return {
-        headerTitle: () => (
-          <Header navigation={navigation} title="Vision Board" />
+const Stack = createStackNavigator()
+
+export const VisionStack = () => {
+  return (
+    <Stack.Navigator 
+    initialRouteName="Visions"
+    headerMode="screen"
+    screenOptions={{
+        header: ({ scene, previous, navigation }) => (
+          <Header title="Visions" scene={scene} previous={previous} navigation={navigation} />
         ),
-      };
-    },
-  },
-  VisionDetails: {
-    screen: VisionDetails,
-    navigationOptions: {
-      title: "Vision Details",
-    },
-  },
+    }}
+    >
+      <Stack.Screen
+        name="Visions"
+        component={Visions}
+      />
+      <Stack.Screen
+        name="VisionDetails"
+        component={VisionDetails}
+        options={{ headerTitle: 'Vision Details' }}
+      />
+    </Stack.Navigator>
+  );
 };
 
-const VisionStack = createStackNavigator(screens, {
-  defaultNavigationOptions: {
-    // headerTintColor: coltsBlue,
-    headerStyle: {
-      // backgroundColor: coltsGray,
-      height: 100,
-    },
-  },
-});
 
-export default VisionStack;

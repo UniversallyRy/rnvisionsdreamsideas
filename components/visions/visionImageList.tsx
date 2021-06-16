@@ -23,7 +23,6 @@ interface ListProps {
 const { width: width } = Dimensions.get("window");
 const ITEM_WIDTH = width * 0.94;
 const ITEM_HEIGHT = ITEM_WIDTH * 1.27;
-
 const VisionsContainer: FunctionComponent<ImageProps> = ({
   navigation,
   state,
@@ -61,7 +60,7 @@ const VisionsContainer: FunctionComponent<ImageProps> = ({
           }}
         >
           <TouchableOpacity
-            onLongPress={ () => navigation.navigate("VisionDetails", data) }
+            onLongPress={ () => navigation.navigate("VisionDetails", { visionTitle: data.title, imageUri: data.uri }) }
             style={{
               borderRadius: 12,
               overflow: "hidden",

@@ -1,7 +1,7 @@
 import React, { FunctionComponent, useCallback, memo } from "react";
-import { StyleSheet, Dimensions, StyleProp, TextStyle, ViewStyle, FlatList} from "react-native";
+import { Text, StyleSheet, Dimensions, StyleProp, TextStyle, ViewStyle, FlatList} from "react-native";
 import { connect } from "react-redux";
-import { Card, Text } from "react-native-paper";
+import { Card } from "react-native-paper";
 import { NavigationStackProp } from 'react-navigation-stack';
 
 type GridProps = {
@@ -29,7 +29,7 @@ const JournalGridContainer: FunctionComponent<GridProps> = ({ state, navigation 
       return (
         <Card
           style={ styles.gridItem }
-          onPress={ () => navigation.navigate("JournalDetails", data) }
+          onPress={ () => navigation.navigate("JournalDetails", { title:data.title, body:data.body, date:data.date }) }
         >
           <Card.Content style={ styles.gridText }>
             <Text>{ data.title }</Text>

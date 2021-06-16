@@ -29,7 +29,7 @@ const VisionGridContainer: FunctionComponent<GridProps> = ({ state, navigation }
       <Card
         accessibilityLabel={ "Grid List" }
         accessible  
-        onPress={ () => navigation.navigate("VisionDetails", data) }
+        onPress={ () => navigation.navigate("VisionDetails", { visionTitle: data.title, imageUri: data.uri }) }
       > 
         <Card.Cover
           style={ styles.gridItem }

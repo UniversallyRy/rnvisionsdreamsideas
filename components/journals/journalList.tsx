@@ -1,6 +1,6 @@
 import React, { FunctionComponent } from "react";
-import { StyleSheet, FlatList, StyleProp, TextStyle, ViewStyle, Dimensions } from "react-native";
-import { Surface, Button, Card, Paragraph, Text} from "react-native-paper";
+import { Text, StyleSheet, FlatList, StyleProp, TextStyle, ViewStyle, Dimensions } from "react-native";
+import { Surface, Button, Card, Paragraph} from "react-native-paper";
 import { NavigationStackProp } from 'react-navigation-stack';
 import { connect } from "react-redux";
 import { deleteJournal } from "../../redux/actions";
@@ -47,7 +47,7 @@ const JournalList: FunctionComponent<JournalListProps> = ({ state, navigation, d
         data={ state }
         keyExtractor={ (item, index) => index.toString() }
         renderItem={ ({ item }:any) => (
-          <Card onPress={ () => navigation.navigate("JournalDetails", item)} style={ styles.journalCard }>
+          <Card onPress={ () => navigation.navigate("JournalDetails", { title:item.title, body:item.body, date:item.date})} style={ styles.journalCard }>
             <Surface
               style={ styles.journalText }
             >

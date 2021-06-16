@@ -1,31 +1,31 @@
 import React from "react";
-import { createStackNavigator, NavigationStackProp } from "react-navigation-stack";
+import { createStackNavigator, } from "@react-navigation/stack";
 import About from "../screens/about";
 import Header from "../shared/header";
 
 type NavProp = {
-  navigation: NavigationStackProp;
+  navigation: any;
 };
 
-const screens = {
-  About: {
-    screen: About,
-    navigationOptions: ({ navigation }: NavProp) => {
-      return {
-        headerTitle: () => <Header navigation={navigation} title="About" />,
-      };
-    },
-  },
+const Stack = createStackNavigator()
+
+export const AboutStack = () => {
+  return (
+    <Stack.Navigator 
+      screenOptions={{
+        header: ({ scene, previous, navigation }) => (
+          <Header title="About" scene={scene} previous={previous} navigation={navigation} />
+        ),
+      }}
+      initialRouteName="About"
+    >
+      <Stack.Screen
+        name="About Stack"
+        component={About}
+      />
+
+    </Stack.Navigator>
+  );
 };
 
-const AboutStack = createStackNavigator(screens, {
-  defaultNavigationOptions: {
-    // headerTintColor: coltsBlue,
-    headerStyle: {
-      // backgroundColor: coltsGray,
-      height: 100,
-    },
-  },
-});
 
-export default AboutStack;

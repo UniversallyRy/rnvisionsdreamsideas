@@ -1,40 +1,39 @@
 import React from "react";
-import { createStackNavigator, NavigationStackProp } from "react-navigation-stack";
+import { createStackNavigator, } from "@react-navigation/stack";
 import JournalScreen from "../screens/journalScreen";
 import JournalDetails from "../components/journals/journalDetails";
 import Header from "../shared/header";
 
 type NavProp = {
-  navigation: NavigationStackProp;
+  navigation: any;
 };
 
-const screens = {
-  JournalList: {
-    screen: JournalScreen,
-    navigationOptions: ({ navigation }: NavProp) => {
-      return {
-        headerTitle: () => (
-          <Header navigation={navigation} title="Dream Journal" />
+const Stack = createStackNavigator()
+
+export const JournalStack = () => {
+  return (
+    <Stack.Navigator 
+      screenOptions={{
+        header: ({ scene, previous, navigation }) => (
+          <Header title="Journal Screen" scene={scene} previous={previous} navigation={navigation} />
         ),
-      };
-    },
-  },
-  JournalDetails: {
-    screen: JournalDetails,
-    navigationOptions: {
-      title: "Journal Details",
-    },
-  },
+      }}
+      initialRouteName="JournalScreen"
+    >
+      <Stack.Screen
+        name="JournalScreen"
+        component={JournalScreen}
+        options={{ headerTitle: 'Journal Screen' }}
+      />
+      <Stack.Screen
+        name="JournalDetails"
+        component={JournalDetails}
+        options={{ headerTitle: 'Journal Details' }}
+      />
+
+    </Stack.Navigator>
+  );
 };
 
-const JournalStack = createStackNavigator(screens, {
-  defaultNavigationOptions: {
-    // headerTintColor: coltsBlue,
-    headerStyle: {
-      // backgroundColor: coltsGray,
-      height: 100,
-    },
-  },
-});
 
 export default JournalStack;

@@ -1,10 +1,11 @@
 import React, { FunctionComponent } from "react";
-import { View, StyleSheet, StyleProp, TextStyle, ViewStyle, Dimensions } from "react-native";
-import { Button, Text, Card } from "react-native-paper";
+import { Text, View, StyleSheet, StyleProp, TextStyle, ViewStyle, Dimensions } from "react-native";
+import { Button, Card } from "react-native-paper";
 import { NavigationStackProp } from 'react-navigation-stack';
 
 type JournalDProps = {
   navigation: NavigationStackProp;
+  route: any,
   jDetailsContainer: StyleProp<ViewStyle>;
   jDetailsCard: StyleProp<ViewStyle>;
   jDetailsTitle: StyleProp<ViewStyle>;
@@ -27,27 +28,29 @@ interface Styles {
 const { width: windowWidth, height: windowHeight } = Dimensions.get("window");
 
 
-const JournalDetails: FunctionComponent<JournalDProps> = ({ navigation }) => {
+const JournalDetails: FunctionComponent<JournalDProps> = ({ route, navigation }) => {
   const handlePress = () => {
     navigation.goBack();
   };
+
+  const { title, body, date } = route.params;
 
   return (
     <Card style={styles.jDetailsContainer}>
       <Card.Content style={styles.jDetailsCard}>
         <Text style={styles.jDetailsTitle}>
           {" "}
-          {navigation.getParam("title")}{" "}
+          {title}{" "}
         </Text>
         <View style={styles.divider} />
         <Text style={styles.jDetailsText}>
           {" "}
-          {navigation.getParam("body")}{" "}
+          {body}{" "}
         </Text>
         <View style={styles.divider} />
         <Text style={styles.jDetailsDate}>
           {" "}
-          {navigation.getParam("date")}{" "}
+          {date}{" "}
         </Text>
         <Button
           style={styles.jDetailsButton}
