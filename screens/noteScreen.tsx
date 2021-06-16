@@ -3,8 +3,8 @@ import {
   StyleSheet,
   StyleProp,
   ViewStyle,
-  View,
 } from "react-native";
+import { Surface } from "react-native-paper";
 import { connect } from "react-redux";
 import NoteMain from "../components/notes/notesMain";
 
@@ -20,14 +20,15 @@ interface Styles {
 
 const NoteScreen:React.FC<NoteProps> = ({ stateNotes, stateTodos }) => {
   return (
-    <View style={styles.noteScreenContainer}>
+    <Surface style={styles.noteScreenContainer}>
       <NoteMain stateNotes={stateNotes} stateTodos={stateTodos} />
-    </View>
+    </Surface>
   );
 };
 
 const styles = StyleSheet.create<Styles>({
   noteScreenContainer: {
+    fontFamily: "roboto-black",
     flex: 1,
   },
 });

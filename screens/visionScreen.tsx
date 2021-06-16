@@ -1,23 +1,11 @@
 import React, { useState, useRef, useEffect } from "react";
-import {
-  StyleSheet,
-  StyleProp,
-  TextStyle,
-  ViewStyle,
-  View,
-  Dimensions,
-  Animated,
-  Modal,
-  TouchableWithoutFeedback,
-} from "react-native";
-import { Text, Card} from "react-native-paper";
+import { StyleSheet, StyleProp, ViewStyle, Animated, Modal } from "react-native";
+import { Card, Surface } from "react-native-paper";
 import { NavigationStackProp } from 'react-navigation-stack';
 import AddVision from "../components/visions/addVisionModal";
 import VisionsContainer from "../components/visions/visionImageList";
 import VisionGridContainer from "../components/visions/visionImageGrid";
 import { Icon } from "../shared/icon";
-
-const {height: windowHeight } = Dimensions.get("window");
 
 interface VisionProps {
   navigation: NavigationStackProp;
@@ -52,7 +40,7 @@ const Visions: React.FC<VisionProps> = ({ navigation }) => {
   };
 
   return (
-    <View style={styles.container}>
+    <Card style={styles.container}>
       <Modal visible={modalOpen} animationType="slide">
         <AddVision setModalOpen={setModalOpen} />  
       </Modal>
@@ -62,11 +50,11 @@ const Visions: React.FC<VisionProps> = ({ navigation }) => {
       ) : (
         <VisionsContainer navigation={navigation} scrollX={scrollX} />
       )}
-      <View style={styles.visionAddToggle}>
+      <Surface style={styles.visionAddToggle}>
         <Icon item="plus" onPress={() => setModalOpen(true)} />
         <Icon item="grid" onPress={() => toggleGrid()} />
-      </View>
-    </View>
+      </Surface>
+    </Card>
   );
 };
 

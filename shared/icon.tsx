@@ -39,9 +39,11 @@ const styles = StyleSheet.create<Styles>({
   modalToggle: {
     marginBottom: 15,
     marginHorizontal: 84,
+    elevation: 2
   },
   delete: {
     margin: 5,
+    elevation: 2
   }
 });
 

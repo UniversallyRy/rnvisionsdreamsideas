@@ -5,9 +5,9 @@ import {
   TextStyle,
   ViewStyle,
   Dimensions,
-  View,
+  Modal
 } from "react-native";
-import { Text, Modal, Portal, Provider } from "react-native-paper";
+import { Card, Surface, Text } from "react-native-paper";
 import { NavigationStackProp } from 'react-navigation-stack';
 import AddJournalModal from "../components/journals/addJournalModal";
 import JournalList from "../components/journals/journalList";
@@ -17,7 +17,6 @@ import { Icon } from "../shared/icon";
 interface JournalProps {
   navigation: NavigationStackProp;
   journalContainer: StyleProp<ViewStyle>;
-  addJournalContainer: StyleProp<ViewStyle>;
   addJournalTitle: StyleProp<TextStyle>;
   closeModalContainer: StyleProp<ViewStyle>;
   visionAddToggle:StyleProp<ViewStyle>;
@@ -26,7 +25,6 @@ interface JournalProps {
 
 interface Styles {
   journalContainer: ViewStyle;
-  addJournalContainer: ViewStyle;
   addJournalTitle: ViewStyle;
   visionAddToggle: ViewStyle;
   modalContent: ViewStyle;
@@ -44,44 +42,37 @@ const JournalScreen: React.FC<JournalProps>= ({ navigation }) => {
   };
 
   return (
-    <Provider>
-      <View style={styles.journalContainer}>
-        <Portal>
+    <Card style={styles.journalContainer}>
           <Modal
             visible={modalOpen}
             onDismiss={() => setModalOpen(false)}
-            contentContainerStyle={styles.addJournalContainer}
           >
-            <View style={styles.modalContent}>
               <Text style={styles.addJournalTitle}>Add A Journal Entry</Text>
               <AddJournalModal setModalOpen={setModalOpen} />
-              <View style={styles.closeModalContainer}>
+              <Surface style={styles.closeModalContainer}>
                 <Icon
                   item="close"
                   onPress={() => setModalOpen(false)}
                 />
-              </View>
-            </View>
+              </Surface>
           </Modal>
-        </Portal>
         {gridView ? (
           <JournalGridContainer navigation={navigation} />
         ) : (
           <JournalList navigation={navigation} />
         )}
-        <View style={styles.visionAddToggle}>
+        <Surface style={styles.visionAddToggle}>
           <Icon item="plus" onPress={() => setModalOpen(true)} />
           <Icon item="grid" onPress={() => toggleGrid()} />
-        </View>
-      </View>
-    </Provider>
+        </Surface>
+    </Card>
   );
 };
 
 const styles = StyleSheet.create<Styles>({
   journalContainer:{
-    fontFamily: "roboto-black",
     flex: 1,
+    fontFamily: "roboto-black",
   },
   addJournalTitle: {
     alignSelf: "center",
@@ -89,18 +80,12 @@ const styles = StyleSheet.create<Styles>({
     fontSize: 18,
     borderRadius: 2,
   },
-  addJournalContainer: {
-    flex: 1,
-    backgroundColor:"white",
-    height: windowHeight,
-    fontFamily: "roboto-black",
-  },
   visionAddToggle: {
-    alignSelf: "center",
     flexDirection: "row",
+    alignSelf: "center",
+    marginTop: "auto",
   },
   modalContent: {
-    flex: 1,
     height: windowHeight,
   },
   closeModalContainer: {

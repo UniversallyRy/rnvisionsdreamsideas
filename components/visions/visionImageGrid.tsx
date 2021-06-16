@@ -2,7 +2,7 @@ import React, { FunctionComponent, useCallback, memo } from "react";
 import { StyleSheet, StyleProp, ViewStyle, ImageStyle, Dimensions } from "react-native";
 import { NavigationStackProp } from 'react-navigation-stack';
 import { FlatList } from "react-native-gesture-handler";
-import { Card } from "react-native-paper";
+import { Card, Surface } from "react-native-paper";
 import { connect } from "react-redux";
 
 type GridProps = {
@@ -46,7 +46,7 @@ const VisionGridContainer: FunctionComponent<GridProps> = ({ state, navigation }
   }, []);
 
   return (
-    <Card style={{ flex: 1 }}>
+    <Surface style={{ margin: "auto", flex: 1 }}>
       <FlatList
         numColumns={ 3 }
         contentContainerStyle={ styles.gridContainer }
@@ -55,20 +55,22 @@ const VisionGridContainer: FunctionComponent<GridProps> = ({ state, navigation }
         keyExtractor={ (item, index) => index.toString() }
         renderItem={ renderList }
       />
-    </Card>
+    </Surface>
   );
 };
 
 const styles = StyleSheet.create<Styles>({
   gridContainer: {
+    alignSelf: "center",
     padding: 3,
+    elevation: 4
   },
   gridItem: {
     height: height * 0.25,
     width: width * 0.32,
     alignSelf: "center",
     overflow: "hidden",
-    borderRadius: 2,
+    borderRadius: 3,
     borderWidth: 1,
 
   },

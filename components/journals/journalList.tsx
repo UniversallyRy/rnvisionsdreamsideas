@@ -1,9 +1,13 @@
 import React, { FunctionComponent } from "react";
-import { StyleSheet, View, FlatList, StyleProp, TextStyle, ViewStyle, Dimensions } from "react-native";
+import { StyleSheet, FlatList, StyleProp, TextStyle, ViewStyle, Dimensions } from "react-native";
+import { Surface, Button, Card, Paragraph, Text} from "react-native-paper";
 import { NavigationStackProp } from 'react-navigation-stack';
-import { Button, Card, Paragraph } from "react-native-paper";
 import { connect } from "react-redux";
 import { deleteJournal } from "../../redux/actions";
+
+const { width: windowWidth, height: windowHeight } = Dimensions.get("window");
+
+
 
 type JournalListProps = {
   navigation: NavigationStackProp;
@@ -22,6 +26,7 @@ type JournalListProps = {
 }
 
 interface Styles {
+  container: ViewStyle;
   buttonsContainer: ViewStyle;
   editButton: ViewStyle;
   deleteButton: ViewStyle;
@@ -32,60 +37,68 @@ interface Styles {
   journalBorder: ViewStyle;
   journalDate: ViewStyle;
 }
-const { width: windowWidth } = Dimensions.get("window");
 
 const JournalList: FunctionComponent<JournalListProps> = ({ state, navigation, deleteJournal }) => {
 
   return (
-    <FlatList
-      style={{ paddingTop: 10 }}
-      data={ state }
-      keyExtractor={ (item, index) => index.toString() }
-      renderItem={ ({ item }:any) => (
-        <View style={ styles.journalBorder }>
-          <Card
-            style={ styles.journalCard }
-            onPress={ () => navigation.navigate("JournalDetails", item) }
-          >
-            <Card.Content>
-              <Paragraph style={ styles.journalTitle }>
-                { item.title }
-              </Paragraph>
-              <View style={ styles.divider } />
-              <Paragraph style={ styles.journalText }>
-                { item.body }
-              </Paragraph>
-              <View style={ styles.divider } />
-              <Paragraph style={ styles.journalDate }>
-                { item.date }
-              </Paragraph>
-            </Card.Content>
-          </Card>
-          <View style={ styles.buttonsContainer }>
-            <Button
-              style={ styles.editButton }
-              icon="lead-pencil"
-              mode="contained"
+    <Card style={styles.container}>
+      <FlatList
+        style={{ paddingTop: 10 }}
+        data={ state }
+        keyExtractor={ (item, index) => index.toString() }
+        renderItem={ ({ item }:any) => (
+          <Surface style={ styles.journalBorder }>
+            <Card
+              style={ styles.journalCard }
+              onPress={ () => navigation.navigate("JournalDetails", item) }
             >
-              Edit
-            </Button>
-            <Button
-              style={ styles.deleteButton }
-              color="red"
-              icon="close-outline"
-              mode="contained"
-              onPress={ () => deleteJournal({ id: item.id }) }
-            >
-              Delete
-            </Button>
-          </View>
-        </View>
-      )}
-    />
+              <Card.Content>
+                <Paragraph style={ styles.journalTitle }>
+                  { item.title }
+                </Paragraph>
+                <Text style={ styles.divider } />
+                <Paragraph style={ styles.journalText }>
+                  { item.body }
+                </Paragraph>
+                <Text style={ styles.divider } />
+                <Paragraph style={ styles.journalDate }>
+                  { item.date }
+                </Paragraph>
+              </Card.Content>
+            </Card>
+            <Surface style={ styles.buttonsContainer }>
+              <Button
+                style={ styles.editButton }
+                icon="lead-pencil"
+                mode="contained"
+              >
+                Edit
+              </Button>
+              <Button
+                style={ styles.deleteButton }
+                color="red"
+                icon="close-outline"
+                mode="contained"
+                onPress={ () => deleteJournal({ id: item.id }) }
+              >
+                Delete
+              </Button>
+            </Surface>
+          </Surface>
+        )}
+      />
+    </Card>
   );
 };
 
 const styles = StyleSheet.create<Styles>({
+  container: {
+    flex: 1,
+    backgroundColor: "lightgray",
+    paddingTop: 10,
+    width: windowWidth,
+    height: windowHeight
+  },
   journalBorder: {
     margin: 10,
     alignSelf: "center",
