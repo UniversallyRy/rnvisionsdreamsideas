@@ -233,6 +233,7 @@ const styles = StyleSheet.create<Styles>({
     paddingLeft: 14,
     marginLeft: 4,
     marginRight: 5,
+    elevation: 3,
   },
   noteErrorText:{
     fontSize: 10,
@@ -249,6 +250,7 @@ const styles = StyleSheet.create<Styles>({
     borderRadius: 4,
     padding: 10,
     backgroundColor: "red", 
+    elevation: 3,
   },
   todoContainer: {
     flexDirection: "row",
