@@ -24,13 +24,13 @@ const VisionDetails: FunctionComponent<VisionProps> = ({ navigation, route }) =>
   const handlePress = () => {
     navigation.goBack();
   };
-  const { imageUri, visionTitle } = route.params;
+  const { data } = route.params;
 
   return (
-    <Card elevation={ 7 } style={ styles.vDetailsContent }>
+    <Card elevation={ 7 } style={ styles.vDetailsContent}>
       <Card.Content>
-        <Card.Title title={visionTitle} style={styles.visionTitle} />
-        <Card.Cover source={{ uri: imageUri }} style={ styles.vDetailsImage } />
+        <Card.Title title={data.title} style={styles.visionTitle} />
+        <Card.Cover key= {data.id} source={{ uri: data.uri }} style={ styles.vDetailsImage } />
         <Button
           style={ styles.vDetailsButton }
           icon="arrow-left"

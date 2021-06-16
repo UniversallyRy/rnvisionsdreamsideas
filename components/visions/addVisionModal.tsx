@@ -1,6 +1,6 @@
 import React, { FunctionComponent } from "react";
-import { TextInput, Text, Button, Surface } from "react-native-paper";
-import { KeyboardAvoidingView, Platform, StyleSheet, StyleProp, ViewStyle, TextStyle, View, Dimensions, TouchableOpacity, Keyboard } from "react-native";
+import { Text, KeyboardAvoidingView, Platform, StyleSheet, StyleProp, ViewStyle, TextStyle, View, Dimensions, TouchableOpacity } from "react-native";
+import { TextInput, Button, Surface } from "react-native-paper";
 import { AntDesign } from "@expo/vector-icons";
 import { connect } from "react-redux";
 import { Formik } from "formik";
@@ -8,12 +8,6 @@ import * as yup from "yup";
 import ImagePic from "./imagePicker";
 import { addVision } from "../../redux/actions";
 import { globalStyles } from "../../styles/global";
-
-interface Styles {
-  container: ViewStyle;
-  modalContent: TextStyle;
-  visionAddToggle: ViewStyle;
-}
 
 type VisionProps = {
   addVision:((item: any) => void);
@@ -24,6 +18,13 @@ type VisionProps = {
   modalContent: StyleProp<TextStyle>;
   visionAddToggle: StyleProp<ViewStyle>;
 }
+
+interface Styles {
+  container: ViewStyle;
+  modalContent: TextStyle;
+  visionAddToggle: ViewStyle;
+}
+
 
 const visionSchema = yup.object({
   title: yup.string().required().min(4),
@@ -42,49 +43,50 @@ const AddVisionModal: FunctionComponent<VisionProps> = ({ addVision, stateUri, s
         >
           <AntDesign name="close" size={ 24 } color="black" onPress={ () => setModalOpen(false) } />
         </TouchableOpacity>
-          <Formik
-            enableReinitialize={ true }
-            initialValues={{ uri: stateUri, title: "", id: null }}
-            validationSchema={ visionSchema }
-            onSubmit={ (values, actions) => {
-              addVision(values);
-              actions.resetForm();
-              setModalOpen(false);
-            }}
-          >
-            {({
-              handleChange,
-              values,
-              handleBlur,
-              touched,
-              errors,
-              handleSubmit,
-            }) => (
-              <Surface style={styles.footer}> 
-              <ImagePic/>
-                <View style={{ marginTop: 30, flexDirection: 'row' }}>
-                  <View style={{ flexDirection: 'column' }}>
-                    <TextInput
-                      style={ styles.textinput }
-                      placeholder="Vision Title"
-                      onChangeText={ handleChange("title") }
-                      value={ values.title }
-                      onBlur={ handleBlur("title") }
-                    />
-                    <Text style={ globalStyles.errorText }>
-                      { touched.title && errors.title }
-                    </Text>
-                  </View>
-                  <Button
-                  style={ styles.buttonStyle }
-                  onPress={ handleSubmit }
-                  >
-                    <AntDesign name="plus" size={ 16 } color="white" />
-                  </Button>
+        <Formik
+          enableReinitialize={ true }
+          initialValues={{ uri: stateUri, title: "", id: null }}
+          validationSchema={ visionSchema }
+          onSubmit={ (values, actions) => {
+            addVision(values);
+            actions.resetForm();
+            setModalOpen(false);
+          }}
+        >
+          {({
+            handleChange,
+            values,
+            handleBlur,
+            touched,
+            errors,
+            handleSubmit,
+          }) => (
+            <Surface style={styles.footer}> 
+            <ImagePic/>
+              <View style={{ marginTop: 30, flexDirection: 'row' }}>
+                <View style={{ flexDirection: 'column' }}>
+                  <TextInput
+                    textAlign='auto'
+                    style={ styles.textinput }
+                    placeholder="Vision Title"
+                    onChangeText={ handleChange("title") }
+                    value={ values.title }
+                    onBlur={ handleBlur("title") }
+                  />
+                  <Text style={ globalStyles.errorText }>
+                    { touched.title && errors.title }
+                  </Text>
                 </View>
-              </Surface>
-          )}
-          </Formik>
+                <Button
+                style={ styles.buttonStyle }
+                onPress={ handleSubmit }
+                >
+                  <AntDesign name="plus" size={ 16 } color="white" />
+                </Button>
+              </View>
+            </Surface>
+        )}
+        </Formik>
     </View>
     </KeyboardAvoidingView>
   );

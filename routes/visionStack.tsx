@@ -1,19 +1,8 @@
 import React from "react";
-import {
-  createStackNavigator,
-  StackNavigationProp,
-} from "@react-navigation/stack";
+import { createStackNavigator } from "@react-navigation/stack";
 import Visions from "../screens/visionScreen";
 import VisionDetails from "../components/visions/visionDetails";
 import Header from "../shared/header";
-import { ParamListBase, } from "@react-navigation/routers";
-
-type NavProp = {
-  navigation?: StackNavigationProp<
-  ParamListBase,
-  'Profile'
->,
-};
 
 const Stack = createStackNavigator()
 

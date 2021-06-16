@@ -1,13 +1,14 @@
-import React, { FunctionComponent, useCallback, memo, useRef, useEffect } from "react";
-import { Dimensions, Animated, TouchableOpacity } from "react-native";
-import { Surface } from "react-native-paper";
+import React, { FunctionComponent, useState, useRef } from "react";
+import { View, TouchableOpacity, StyleSheet, Dimensions, FlatList, Image } from "react-native";
+import { Surface, Text } from "react-native-paper";
+import { NavigationStackProp } from 'react-navigation-stack';
 import { deleteVision } from "../../redux/actions";
 import { DeleteButton } from "../../shared/icon";
 import { connect } from "react-redux";
 
 type ImageProps = {
-  navigation: any;
-  state: [];
+  navigation: NavigationStackProp;
+  state: any;
   index: any;
   scrollX: any;
   deleteVision: ((item: object) => void);
@@ -19,95 +20,88 @@ interface ListProps {
 }
 
 // react native's Dimensions import to grab mobile screens dimensions
-const { width: width } = Dimensions.get("window");
-const ITEM_WIDTH = width * 0.94;
-const ITEM_HEIGHT = ITEM_WIDTH * 1.27;
+const { width: width, height: height } = Dimensions.get("window");
+const SPACING = 10;
+const ITEM_SIZE = 80;
+
 const VisionsContainer: FunctionComponent<ImageProps> = ({
   navigation,
   state,
   scrollX,
   deleteVision,
 }) => {
-  const VisionImageList = memo(
-    function VisionImage({ data, index }:any) {
-      const _isMounted = useRef(true); // Initial value _isMounted = true
 
-      useEffect(() => {
-        return () => {
-          // ComponentWillUnmount in Class Component
-          _isMounted.current = false;
-        };
-      }, []);
+  const topRef = useRef();
+  const thumbRef = useRef();
+  const [activeIndex, setActiveIndex] = useState(0)
 
-      const inputRange = [
-        (index - 1) * width,
-        index * width,
-        (index + 1) * width,
-      ];
-
-      const translateX = scrollX.interpolate({
-        inputRange,
-        outputRange: [-width * 0.7, 0, width * 0.7],
-      });
-
-      return (
-        <Surface
-          style={{
-            width,
-            alignItems: "center",
-            marginTop: 50,
-          }}
-        >
-          <TouchableOpacity
-            onLongPress={ () => navigation.navigate("VisionDetails", { visionTitle: data.title, imageUri: data.uri }) }
-            style={{
-              borderRadius: 12,
-              overflow: "hidden",
-              elevation: 3
-            }}
-          >
-            <Surface>
-              <Animated.Image
-                source={{ uri: data.uri }}
-                resizeMode={"cover"}
-                style={{
-                  width: ITEM_WIDTH * 1,
-                  height: ITEM_HEIGHT,
-                  transform: [{ translateX }],
-                }}
-              />
-            </Surface>
-          </TouchableOpacity>
-          <DeleteButton
-            item="close-outline"
-            onPress={ () => deleteVision({ id: data.id} ) }
-          />
-        </Surface>
-      );
-    },
-    
-  );
-
-  const renderList: React.FC<ListProps> = useCallback(
-    ({ item, index }:any) => {
-    return <VisionImageList index={index} data={item} />;
-  }, [VisionImageList]);
+  const scrollActiveIndex = (index) => {
+    setActiveIndex(index);
+    topRef?.current?.scrollToOffset({
+      offset: index * width,
+      animated: true
+    })
+    if(index * (ITEM_SIZE + SPACING) - ITEM_SIZE / 2 > width / 2) {
+      thumbRef?.current?.scrollToOffset({
+        offset: index * (ITEM_SIZE + SPACING) - width / 2 + ITEM_SIZE / 2,
+        animated: true,
+      })
+    } else {
+      thumbRef?.current?.scrollToOffset({
+        offset: 0,
+        animated: true,
+      })
+    }
+  }
 
   return (
-    <>
-      <Animated.FlatList
-        onScroll={ Animated.event(
-          [{ nativeEvent: { contentOffset: { x: scrollX } } }],
-          { useNativeDriver: true }
-        )}
+    <View style={{flex:1}}>
+      <FlatList
+        ref={topRef}
         data={ state }
-        keyExtractor={ (_, index) => String(index) }
-        renderItem={ renderList }
         horizontal
-        showsHorizontalScrollIndicator={ false }
-        pagingEnabled={ true }
+        pagingEnabled
+        showsHorizontalScrollIndicator={false}
+        onMomentumScrollEnd={ev => {
+          scrollActiveIndex(Math.floor(ev.nativeEvent.contentOffset.x/ width))
+        }}
+        keyExtractor={ (_, index) => String(index) }
+        renderItem={ ({item}) => {
+          return <View style={{width, height}}>
+              <Image
+              source={{uri:item.uri}}
+              style={[StyleSheet.absoluteFill]}
+              />
+          </View>
+        }}
       />
-    </>
+      <FlatList
+        ref={thumbRef}
+        data={ state }
+        horizontal
+        showsHorizontalScrollIndicator={false}
+        style={{position: "absolute", bottom: ITEM_SIZE}}
+        contentContainerStyle={{paddingHorizontal: SPACING}}
+        keyExtractor={ (_, index) => String(index) }
+        renderItem={ ({item, index}) => {
+          return <TouchableOpacity
+                    onPress={() => scrollActiveIndex(index)}
+                  >
+                    <Image
+                          source={{uri:item.uri}}
+                          style={{
+                            width: ITEM_SIZE,
+                            height: ITEM_SIZE,
+                            borderRadius: 12,
+                            marginRight: SPACING,
+                            borderWidth: 2,
+                            borderColor: activeIndex === index ? "#fff" : 'transparent'
+                          }}
+                      />
+          </TouchableOpacity>
+        }}
+      />
+    </View>
   );
 };
 

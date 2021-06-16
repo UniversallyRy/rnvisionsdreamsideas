@@ -26,9 +26,10 @@ const VisionGridContainer: FunctionComponent<GridProps> = ({ state, navigation }
   const VisionGridList = memo(function GridImage({ data }:any) {
     return (
       <Card
+        style={{margin: 4, borderRadius: 12,}}
         accessibilityLabel={ "Grid List" }
         accessible  
-        onPress={ () => navigation.navigate("VisionDetails", { visionTitle: data.title, imageUri: data.uri }) }
+        onPress={ () => navigation.navigate("VisionDetails", { data }) }
       > 
         <Card.Cover
           style={ styles.gridItem }
@@ -47,7 +48,7 @@ const VisionGridContainer: FunctionComponent<GridProps> = ({ state, navigation }
   return (
     <Card style={{ margin: "auto", flex: 1 }}>
       <FlatList
-        numColumns={ 3 }
+        numColumns={ 2 }
         contentContainerStyle={ styles.gridContainer }
         scrollEnabled
         data={ state }
@@ -66,10 +67,10 @@ const styles = StyleSheet.create<Styles>({
   },
   gridItem: {
     height: height * 0.25,
-    width: width * 0.32,
+    width: width * 0.45,
     alignSelf: "center",
     overflow: "hidden",
-    borderRadius: 3,
+    borderRadius: 12,
     borderWidth: 1,
 
   },

@@ -36,13 +36,6 @@ export const BottomTabs = () => {
             tabBarIcon: 'message-text-outline',
           }}
         />
-        <Tab.Screen
-          name="About"
-          component={AboutStack}
-          options={{
-            tabBarIcon: 'message-text-outline',
-          }}
-        />
       </Tab.Navigator>
   );
 };
