@@ -1,9 +1,9 @@
-import React from "react";
+import React, { FunctionComponent } from "react";
 import { StyleSheet, StyleProp, TextStyle, ViewStyle, ImageStyle, Dimensions } from "react-native";
 import { NavigationStackProp } from 'react-navigation-stack';
 import { Button, Text, Card } from "react-native-paper";
 
-interface VisionProps {
+type VisionProps = {
   navigation: NavigationStackProp;
   vDetailsContent: StyleProp<ViewStyle>;
   visionTitle: StyleProp<TextStyle>;
@@ -18,28 +18,28 @@ interface Styles {
   vDetailsButton: ViewStyle;
 }
 
-const {width: windowWidth, height: windowHeight } = Dimensions.get("window");
+const { width: windowWidth, height: windowHeight } = Dimensions.get("window");
 
-const VisionDetails: React.FC<VisionProps> = ({ navigation }) => {
+const VisionDetails: FunctionComponent<VisionProps> = ({ navigation }) => {
   const handlePress = () => {
     navigation.goBack();
   };
   const imageUri = navigation.getParam("uri");
 
   return (
-    <Card elevation={7} style={styles.vDetailsContent}>
+    <Card elevation={ 7 } style={ styles.vDetailsContent }>
       <Card.Content>
         <Text style={styles.visionTitle}>
           {" "}
           {navigation.getParam("title")}{" "}
         </Text>
-        <Card.Cover source={{ uri: imageUri }} style={styles.vDetailsImage} />
+        <Card.Cover source={{ uri: imageUri }} style={ styles.vDetailsImage } />
         <Button
-          style={styles.vDetailsButton}
+          style={ styles.vDetailsButton }
           icon="arrow-left"
           mode="contained"
-          accessibilityLabel={"Back to All Visions"}
-          onPress={handlePress}
+          accessibilityLabel={ "Back to All Visions" }
+          onPress={ handlePress } 
         >
           Go Back
         </Button>

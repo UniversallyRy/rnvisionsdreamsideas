@@ -1,4 +1,4 @@
-import React, { useCallback, memo, useRef, useEffect } from "react";
+import React, { FunctionComponent, useCallback, memo, useRef, useEffect } from "react";
 import { Dimensions, Animated, TouchableOpacity } from "react-native";
 import { Surface, Text } from "react-native-paper";
 import { NavigationStackProp } from 'react-navigation-stack';
@@ -6,9 +6,7 @@ import { deleteVision } from "../../redux/actions";
 import { DeleteButton } from "../../shared/icon";
 import { connect } from "react-redux";
 
-
-
-interface ImageProps {
+type ImageProps = {
   navigation: NavigationStackProp;
   state: [];
   index: any;
@@ -26,7 +24,7 @@ const { width: width } = Dimensions.get("window");
 const ITEM_WIDTH = width * 0.94;
 const ITEM_HEIGHT = ITEM_WIDTH * 1.27;
 
-const VisionsContainer: React.FC<ImageProps> = ({
+const VisionsContainer: FunctionComponent<ImageProps> = ({
   navigation,
   state,
   scrollX,
@@ -63,7 +61,7 @@ const VisionsContainer: React.FC<ImageProps> = ({
           }}
         >
           <TouchableOpacity
-            onLongPress={() => navigation.navigate("VisionDetails", data)}
+            onLongPress={ () => navigation.navigate("VisionDetails", data) }
             style={{
               borderRadius: 12,
               overflow: "hidden",
@@ -84,9 +82,9 @@ const VisionsContainer: React.FC<ImageProps> = ({
           </TouchableOpacity>
           <DeleteButton
             item="close-outline"
-            onPress={() => deleteVision({id: data.id})}
+            onPress={ () => deleteVision({ id: data.id} ) }
           />
-            <Text style={{fontFamily: "roboto-bold"}}>Delete</Text>
+            <Text style={{ fontFamily: "roboto-bold" }}>Delete</Text>
         </Surface>
       );
     },
@@ -101,16 +99,16 @@ const VisionsContainer: React.FC<ImageProps> = ({
   return (
     <>
       <Animated.FlatList
-        onScroll={Animated.event(
+        onScroll={ Animated.event(
           [{ nativeEvent: { contentOffset: { x: scrollX } } }],
           { useNativeDriver: true }
         )}
-        data={state}
-        keyExtractor={(_, index) => String(index)}
-        renderItem={renderList}
+        data={ state }
+        keyExtractor={ (_, index) => String(index) }
+        renderItem={ renderList }
         horizontal
-        showsHorizontalScrollIndicator={false}
-        pagingEnabled={true}
+        showsHorizontalScrollIndicator={ false }
+        pagingEnabled={ true }
       />
     </>
   );
