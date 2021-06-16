@@ -1,7 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
 import { StyleSheet, StyleProp, ViewStyle, Animated, Modal } from "react-native";
 import { Card, Surface, useTheme } from "react-native-paper";
-import { NavigationStackProp } from 'react-navigation-stack';
 import AddVision from "../components/visions/addVisionModal";
 import VisionsContainer from "../components/visions/visionImageList";
 import VisionGridContainer from "../components/visions/visionImageGrid";
@@ -9,7 +8,7 @@ import { Icon } from "../shared/icon";
 import { ThemesContext } from './../ThemeContext';
 
 interface VisionProps {
-  navigation: NavigationStackProp;
+  navigation: any;
   container: StyleProp<ViewStyle>;
   visionAddToggle: StyleProp<ViewStyle>;
 }

@@ -1,10 +1,9 @@
 import React, { FunctionComponent } from "react";
 import { StyleSheet, StyleProp, TextStyle, ViewStyle, ImageStyle, Dimensions } from "react-native";
-import { NavigationStackProp } from 'react-navigation-stack';
-import { Button, Text, Card } from "react-native-paper";
+import { Button, Card } from "react-native-paper";
 
 type VisionProps = {
-  navigation: NavigationStackProp;
+  navigation: any;
   route: any;
   vDetailsContent: StyleProp<ViewStyle>;
   visionTitle: StyleProp<TextStyle>;

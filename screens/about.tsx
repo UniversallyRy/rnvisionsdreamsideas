@@ -1,6 +1,6 @@
 import React from "react";
-import { StyleSheet, StyleProp, TextStyle, ViewStyle, View } from "react-native";
-import { Card, Text } from "react-native-paper";
+import { StyleSheet, Text, StyleProp, TextStyle, ViewStyle, View } from "react-native";
+import { Card } from "react-native-paper";
 
 interface AboutProps {
   aboutContainer: StyleProp<ViewStyle>;

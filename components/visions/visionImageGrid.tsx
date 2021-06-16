@@ -1,12 +1,11 @@
 import React, { FunctionComponent, useCallback, memo } from "react";
 import { StyleSheet, StyleProp, ViewStyle, ImageStyle, Dimensions } from "react-native";
-import { NavigationStackProp } from 'react-navigation-stack';
 import { FlatList } from "react-native-gesture-handler";
 import { Card, Surface } from "react-native-paper";
 import { connect } from "react-redux";
 
 type GridProps = {
-  navigation: NavigationStackProp;
+  navigation: any;
   state: any;
   gridContainer: StyleProp<ViewStyle>;
   gridItem: StyleProp<ImageStyle>;

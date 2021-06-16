@@ -47,7 +47,7 @@ const Header:React.FC<HeaderProps> = ({ scene, previous, navigation, title }) =>
     </TouchableOpacity>
   )}
       <Appbar.Content title={
-          !previous ? title : ''
+          !previous ? header : ''
         }
         />
       <TouchableRipple>

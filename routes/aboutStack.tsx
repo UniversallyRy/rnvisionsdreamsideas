@@ -20,7 +20,7 @@ export const AboutStack = () => {
       initialRouteName="About"
     >
       <Stack.Screen
-        name="About Stack"
+        name="About"
         component={About}
       />
 

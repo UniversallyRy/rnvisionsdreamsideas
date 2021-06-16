@@ -5,17 +5,17 @@ import {
   TextStyle,
   ViewStyle,
   Dimensions,
+  Text,
   Modal
 } from "react-native";
-import { Card, Surface, Text } from "react-native-paper";
-import { NavigationStackProp } from 'react-navigation-stack';
+import { Card, Surface } from "react-native-paper";
 import AddJournalModal from "../components/journals/addJournalModal";
 import JournalList from "../components/journals/journalList";
 import JournalGridContainer from "../components/journals/journalGrid";
 import { Icon } from "../shared/icon";
 
 interface JournalProps {
-  navigation: NavigationStackProp;
+  navigation: any;
   journalContainer: StyleProp<ViewStyle>;
   addJournalTitle: StyleProp<TextStyle>;
   closeModalContainer: StyleProp<ViewStyle>;

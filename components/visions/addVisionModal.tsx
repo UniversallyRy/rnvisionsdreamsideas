@@ -8,7 +8,6 @@ import * as yup from "yup";
 import ImagePic from "./imagePicker";
 import { addVision } from "../../redux/actions";
 import { globalStyles } from "../../styles/global";
-import { NavigationStackProp } from 'react-navigation-stack';
 
 interface Styles {
   container: ViewStyle;
@@ -20,7 +19,7 @@ type VisionProps = {
   addVision:((item: any) => void);
   stateUri: string;
   setModalOpen:((arg0:boolean) => void);
-  navigation: NavigationStackProp;
+  navigation: any;
   container: StyleProp<ViewStyle>;
   modalContent: StyleProp<TextStyle>;
   visionAddToggle: StyleProp<ViewStyle>;

@@ -1,13 +1,12 @@
 import React, { FunctionComponent, useCallback, memo, useRef, useEffect } from "react";
 import { Dimensions, Animated, TouchableOpacity } from "react-native";
-import { Surface, Text } from "react-native-paper";
-import { NavigationStackProp } from 'react-navigation-stack';
+import { Surface } from "react-native-paper";
 import { deleteVision } from "../../redux/actions";
 import { DeleteButton } from "../../shared/icon";
 import { connect } from "react-redux";
 
 type ImageProps = {
-  navigation: NavigationStackProp;
+  navigation: any;
   state: [];
   index: any;
   scrollX: any;

@@ -1,7 +1,6 @@
 import React, { FunctionComponent } from "react";
 import { Text, StyleSheet, FlatList, StyleProp, TextStyle, ViewStyle, Dimensions } from "react-native";
 import { Surface, Button, Card, Paragraph} from "react-native-paper";
-import { NavigationStackProp } from 'react-navigation-stack';
 import { connect } from "react-redux";
 import { deleteJournal } from "../../redux/actions";
 
@@ -10,7 +9,7 @@ const { width: windowWidth, height: windowHeight } = Dimensions.get("window");
 
 
 type JournalListProps = {
-  navigation: NavigationStackProp;
+  navigation: any;
   state: [];
   deleteJournal: ((item: object) => void);
   buttonsContainer: StyleProp<ViewStyle>;
