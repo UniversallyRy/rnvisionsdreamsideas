@@ -1,6 +1,6 @@
 import React, { FunctionComponent, useState } from "react";
-import { Modal, StyleSheet, StyleProp, TextStyle, ViewStyle } from "react-native";
-import { Card, Text } from "react-native-paper";
+import { Text, Modal, StyleSheet, StyleProp, TextStyle, ViewStyle } from "react-native";
+import { Card } from "react-native-paper";
 import NotesModal from "./notesModal";
 
 type NoteListProps = {

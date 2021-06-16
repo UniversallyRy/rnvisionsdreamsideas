@@ -1,6 +1,6 @@
 import React, { FunctionComponent } from "react";
-import { Text, View, StyleSheet, StyleProp, TextStyle, ViewStyle, Dimensions } from "react-native";
-import { Button, Card } from "react-native-paper";
+import { View, Text, Dimensions, StyleSheet, StyleProp, TextStyle, ViewStyle } from "react-native";
+import { Card, Button } from "react-native-paper";
 
 type JournalDProps = {
   navigation: any;

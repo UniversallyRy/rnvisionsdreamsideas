@@ -1,9 +1,5 @@
 import React from "react";
-import {
-  StyleSheet,
-  StyleProp,
-  ViewStyle,
-} from "react-native";
+import { StyleSheet, StyleProp, ViewStyle } from "react-native";
 import { Card } from "react-native-paper";
 import { connect } from "react-redux";
 import NoteMain from "../components/notes/notesMain";

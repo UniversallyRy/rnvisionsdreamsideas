@@ -1,8 +1,7 @@
 import React from "react";
-import { StyleSheet, TouchableOpacity, StyleProp, TextStyle, ViewStyle, Dimensions } from "react-native";
+import { StyleSheet, TouchableOpacity, Dimensions, StyleProp, TextStyle, ViewStyle } from "react-native";
 import { useTheme, Appbar, TouchableRipple, Switch } from "react-native-paper";
 import { ThemesContext } from './../ThemeContext';
-import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 type HeaderProps = {
   navigation: any;
@@ -10,8 +9,6 @@ type HeaderProps = {
   scene: any,
   previous: any,
 };
-
-const { width: windowWidth, height: windowHeight } = Dimensions.get("window");
 
 const Header:React.FC<HeaderProps> = ({ scene, previous, navigation, title }) => {
   const openMenu = () => {

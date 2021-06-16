@@ -4,9 +4,6 @@ import { Surface, Button, Card, Paragraph} from "react-native-paper";
 import { connect } from "react-redux";
 import { deleteJournal } from "../../redux/actions";
 
-const { width: windowWidth, height: windowHeight } = Dimensions.get("window");
-
-
 
 type JournalListProps = {
   navigation: any;
@@ -21,7 +18,6 @@ type JournalListProps = {
   journalParagraph: StyleProp<TextStyle>;
   journalText: StyleProp<TextStyle>;
   journalDate: StyleProp<TextStyle>;
-  
 }
 
 interface Styles {
@@ -36,6 +32,8 @@ interface Styles {
   journalText: TextStyle;
   journalDate: TextStyle;
 }
+
+const { width: windowWidth, height: windowHeight } = Dimensions.get("window");
 
 const JournalList: FunctionComponent<JournalListProps> = ({ state, navigation, deleteJournal }) => {
 

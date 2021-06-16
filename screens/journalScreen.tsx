@@ -1,13 +1,5 @@
 import React, { useState } from "react";
-import {
-  StyleSheet,
-  StyleProp,
-  TextStyle,
-  ViewStyle,
-  Dimensions,
-  Text,
-  Modal
-} from "react-native";
+import { Modal, Text, Dimensions, StyleSheet, StyleProp, TextStyle, ViewStyle } from "react-native";
 import { Card, Surface } from "react-native-paper";
 import AddJournalModal from "../components/journals/addJournalModal";
 import JournalList from "../components/journals/journalList";

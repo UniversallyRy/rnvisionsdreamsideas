@@ -1,21 +1,11 @@
 import React, { FunctionComponent } from "react";
-import {
-  TouchableOpacity,
-  StyleSheet,
-  View,
-  StyleProp,
-  TextStyle, 
-  ViewStyle,
-  Keyboard, 
-  FlatList, 
-  Dimensions
-} from "react-native";
+import { View, TouchableOpacity, FlatList, Text, Dimensions, Keyboard, StyleSheet, StyleProp, TextStyle, ViewStyle } from "react-native";
 import { connect } from "react-redux";
-import { Button, Card, TextInput, Text, useTheme } from "react-native-paper";
+import { Card, TextInput, Button, useTheme } from "react-native-paper";
 import { AntDesign } from "@expo/vector-icons";
 import { Formik, FormikHelpers } from "formik";
-import * as yup from "yup";
 import { deleteNote, addNote } from "../../redux/actions";
+import * as yup from "yup";
 
 export const { width: windowWidth, height: windowHeight } = Dimensions.get("window");
 
@@ -68,7 +58,7 @@ const NotesModal: FunctionComponent<NoteModalProps> = ({ notes, closeModal, dele
         <Card 
           style={ styles.noteContainer }
         >
-          <Text theme={theme}style={{ paddingRight: 20 }}>{ note.name }</Text>
+          <Text style={{ paddingRight: 20 }}>{ note.name }</Text>
           <AntDesign
             name="closecircle"
             size={ 24 }
@@ -131,6 +121,7 @@ const NotesModal: FunctionComponent<NoteModalProps> = ({ notes, closeModal, dele
               <View style={ styles.footer }>
                 <View style={{ flexDirection: 'column' }}>
                   <TextInput
+                    textAlign="auto"
                     enablesReturnKeyAutomatically={ true }
                     autoCorrect={ true }
                     style={ styles.noteInput }

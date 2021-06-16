@@ -1,6 +1,5 @@
 import React, { FunctionComponent, useState, useRef } from "react";
-import { View, TouchableOpacity, StyleSheet, Dimensions, FlatList, Image } from "react-native";
-import { Surface, Text } from "react-native-paper";
+import { View, TouchableOpacity, Dimensions, FlatList, Image, StyleSheet } from "react-native";
 import { NavigationStackProp } from 'react-navigation-stack';
 import { deleteVision } from "../../redux/actions";
 import { DeleteButton } from "../../shared/icon";
@@ -18,7 +17,6 @@ interface ListProps {
   item: any;
   index: number;
 }
-
 // react native's Dimensions import to grab mobile screens dimensions
 const { width: width, height: height } = Dimensions.get("window");
 const SPACING = 10;

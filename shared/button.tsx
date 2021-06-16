@@ -1,6 +1,6 @@
 import React from "react";
-import { StyleSheet, StyleProp, TextStyle, ViewStyle } from "react-native";
-import { Button, Text } from "react-native-paper";
+import { Text, StyleSheet, StyleProp, TextStyle, ViewStyle } from "react-native";
+import { Button } from "react-native-paper";
 
 interface ButtonProps {
   text?: string;

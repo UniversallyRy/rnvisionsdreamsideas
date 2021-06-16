@@ -1,9 +1,9 @@
 import React, { FunctionComponent, useState, useEffect } from "react";
-import { StyleSheet, StyleProp, ViewStyle, ImageStyle, Platform, Dimensions } from "react-native";
-import { Button, Card, Text, Surface } from "react-native-paper";
+import { Text, Platform, Dimensions, StyleSheet, StyleProp, ViewStyle, ImageStyle } from "react-native";
+import { Card, Surface, Button } from "react-native-paper";
 import { connect } from "react-redux";
-import * as ImagePicker from "expo-image-picker";
 import { addPic } from "../../redux/actions";
+import * as ImagePicker from "expo-image-picker";
 import * as ImageManipulator from "expo-image-manipulator"
 
 type ImageProps = {

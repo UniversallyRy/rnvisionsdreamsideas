@@ -1,22 +1,13 @@
 import React, { FunctionComponent, useState } from "react";
-
-import {
-  KeyboardAvoidingView,
-  StyleSheet,
-  TouchableOpacity,
-  View,
-  StyleProp, 
-  TextStyle,
-  ViewStyle,
-} from "react-native";
-import { TextInput, Text, Card } from "react-native-paper";
+import { View, Text, TouchableOpacity, StyleSheet, StyleProp, TextStyle, ViewStyle } from "react-native";
+import { Card, TextInput } from "react-native-paper";
 import { connect } from "react-redux";
 import { AntDesign } from "@expo/vector-icons";
 import { Formik } from "formik";
-import * as yup from "yup";
 import { addList } from "../../redux/actions";
-import FlatButton  from "../../shared/button";
 import { globalStyles } from "../../styles/global";
+import FlatButton  from "../../shared/button";
+import * as yup from "yup";
 
 type ModalProps = {
   closeModal: (() => void);
@@ -41,7 +32,6 @@ interface Styles {
 const listSchema = yup.object({
   name: yup.string().required().min(4),
 });
-
 // red, slate blue, black, dark gray, blueish gray, teal, tan
 const AddTodoListModal: FunctionComponent<ModalProps> = ({ closeModal, addList }) => {
   const bgColors = [
@@ -100,6 +90,7 @@ const AddTodoListModal: FunctionComponent<ModalProps> = ({ closeModal, addList }
             }) => (
               <View>
                 <TextInput
+                  textAlign="auto"
                   enablesReturnKeyAutomatically={ true }
                   autoCorrect={ true } 
                   style={ styles.input }

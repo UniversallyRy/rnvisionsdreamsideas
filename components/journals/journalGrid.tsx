@@ -1,5 +1,5 @@
 import React, { FunctionComponent, useCallback, memo } from "react";
-import { Text, StyleSheet, Dimensions, StyleProp, TextStyle, ViewStyle, FlatList} from "react-native";
+import { FlatList, Text, Dimensions, StyleSheet, StyleProp, TextStyle, ViewStyle } from "react-native";
 import { connect } from "react-redux";
 import { Card } from "react-native-paper";
 

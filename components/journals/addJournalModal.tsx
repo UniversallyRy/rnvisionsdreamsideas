@@ -1,20 +1,18 @@
 import React, { FunctionComponent } from "react";
-import { StyleProp, TextStyle } from "react-native";
-import { TextInput, Text, Surface } from "react-native-paper";
+import { Text, StyleProp, TextStyle } from "react-native";
+import { Surface, TextInput } from "react-native-paper";
 import { connect } from "react-redux";
 import { Formik } from "formik";
-import * as yup from "yup";
-import FlatButton from "../../shared/button";
 import { addJournal } from "../../redux/actions";
 import { globalStyles } from "../../styles/global";
+import FlatButton from "../../shared/button";
+import * as yup from "yup";
 
 type AddJournalProps = {
   addJournal: ((item: any) => void);
   setModalOpen: ((i:boolean) => void);
   errorText?: StyleProp<TextStyle>;
 }
-
-
 // require an entry into form input that's at least 4 letters
 const JournalSchema = yup.object({
   title: yup.string().required().min(4),
@@ -46,6 +44,7 @@ const AddJournal: FunctionComponent<AddJournalProps> = ({ addJournal, setModalOp
         }) => (
           <>
             <TextInput
+              textAlign="auto"
               mode="flat"
               placeholder="Journal Title"
               onChangeText={handleChange("title")}
@@ -57,6 +56,7 @@ const AddJournal: FunctionComponent<AddJournalProps> = ({ addJournal, setModalOp
               {touched.title && errors.title}
             </Text>
             <TextInput
+              textAlign="auto"
               multiline
               mode="flat"
               placeholder="Journal Body"

@@ -1,11 +1,10 @@
 import React, { useState, useRef, useEffect } from "react";
-import { StyleSheet, StyleProp, ViewStyle, Animated, Modal } from "react-native";
+import { Animated, Modal, StyleProp, ViewStyle, StyleSheet } from "react-native";
 import { Card, Surface, useTheme } from "react-native-paper";
 import AddVision from "../components/visions/addVisionModal";
 import VisionsContainer from "../components/visions/visionImageList";
 import VisionGridContainer from "../components/visions/visionImageGrid";
 import { Icon } from "../shared/icon";
-import { ThemesContext } from './../ThemeContext';
 
 interface VisionProps {
   navigation: any;

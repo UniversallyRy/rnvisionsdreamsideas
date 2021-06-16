@@ -1,14 +1,5 @@
 import React, { FunctionComponent, useState } from "react";
-import {
-  StyleSheet,
-  View,
-  FlatList,
-  Modal,
-  StyleProp,
-  TextStyle, 
-  ViewStyle,
-} from "react-native";
-import { Text } from "react-native-paper";
+import { StyleSheet, View, Text, FlatList, Modal, StyleProp, TextStyle, ViewStyle } from "react-native";
 import TodoLists from "./todoLists";
 import NoteList from "./noteList";
 import AddTodoListModal from "./addTodoListModal";

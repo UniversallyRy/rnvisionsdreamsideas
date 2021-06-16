@@ -1,7 +1,7 @@
 import React, { FunctionComponent, useCallback, memo } from "react";
-import { StyleSheet, StyleProp, ViewStyle, ImageStyle, Dimensions } from "react-native";
+import { Dimensions, StyleSheet, StyleProp, ViewStyle, ImageStyle } from "react-native";
 import { FlatList } from "react-native-gesture-handler";
-import { Card, Surface } from "react-native-paper";
+import { Card } from "react-native-paper";
 import { connect } from "react-redux";
 
 type GridProps = {

@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet, Text, StyleProp, TextStyle, ViewStyle, View } from "react-native";
+import { View, Text, StyleSheet, StyleProp, TextStyle, ViewStyle } from "react-native";
 import { Card } from "react-native-paper";
 
 interface AboutProps {

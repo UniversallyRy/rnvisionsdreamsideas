@@ -1,22 +1,11 @@
 import React, { FunctionComponent, useEffect } from "react";
-import {
-  TouchableOpacity,
-  StyleSheet,
-  StyleProp, 
-  TextStyle, 
-  ViewStyle,
-  View,
-  Keyboard,
-  Dimensions,
-  FlatList,
-} from "react-native";
+import { View, Text, TouchableOpacity, FlatList, Keyboard, Dimensions, StyleSheet, StyleProp, TextStyle, ViewStyle } from "react-native";
+import { Card, TextInput, Button, useTheme } from "react-native-paper";
 import { connect } from "react-redux";
-import { Card, Button, Text, TextInput, useTheme } from "react-native-paper";
 import { AntDesign, Ionicons } from "@expo/vector-icons";
 import { Formik } from "formik";
-import * as yup from "yup";
 import { addTodo, deleteTodo, toggleTodo } from "../../redux/actions";
-export const { width: windowWidth, height: windowHeight } = Dimensions.get("window");
+import * as yup from "yup";
 
 type TodoModalProps = {
   item: any;
@@ -55,6 +44,7 @@ interface Styles {
   noteErrorText:TextStyle;
 }
 
+const { width: windowWidth, height: windowHeight } = Dimensions.get("window");
 
 const todoSchema = yup.object({
   title: yup.string().required().min(4),
@@ -168,6 +158,7 @@ const TodosModal: FunctionComponent<TodoModalProps> = ({ completedList, item, cl
               <View style={ styles.footer }>
                 <View style={{ flexDirection: 'column' }}>
                   <TextInput
+                    textAlign="auto"
                     enablesReturnKeyAutomatically={ true }
                     autoCorrect={ true }
                     style={ styles.todoInput }

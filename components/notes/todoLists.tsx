@@ -1,6 +1,6 @@
 import React, { FunctionComponent, useState, useEffect } from "react";
-import { Modal, StyleProp, TextStyle, ViewStyle, StyleSheet, View } from "react-native";
-import { Card, Button, Text } from "react-native-paper";
+import { Modal, StyleProp, TextStyle, ViewStyle, StyleSheet, View, Text } from "react-native";
+import { Card, Button } from "react-native-paper";
 import { connect } from "react-redux";
 import TodosModal from "./todosModal";
 import { deleteList } from "../../redux/actions";

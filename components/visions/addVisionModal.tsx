@@ -1,13 +1,13 @@
 import React, { FunctionComponent } from "react";
-import { Text, KeyboardAvoidingView, Platform, StyleSheet, StyleProp, ViewStyle, TextStyle, View, Dimensions, TouchableOpacity } from "react-native";
-import { TextInput, Button, Surface } from "react-native-paper";
+import { View, Text, TouchableOpacity, Platform, KeyboardAvoidingView, Dimensions, StyleSheet, StyleProp, ViewStyle, TextStyle,  } from "react-native";
+import { Surface, TextInput, Button, } from "react-native-paper";
 import { AntDesign } from "@expo/vector-icons";
 import { connect } from "react-redux";
 import { Formik } from "formik";
-import * as yup from "yup";
-import ImagePic from "./imagePicker";
 import { addVision } from "../../redux/actions";
 import { globalStyles } from "../../styles/global";
+import ImagePic from "./imagePicker";
+import * as yup from "yup";
 
 type VisionProps = {
   addVision:((item: any) => void);
