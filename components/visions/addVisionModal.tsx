@@ -1,6 +1,6 @@
 import React, { FunctionComponent } from "react";
-import { View, Text, TouchableOpacity, Platform, KeyboardAvoidingView, Dimensions, StyleSheet, StyleProp, ViewStyle, TextStyle,  } from "react-native";
-import { Surface, TextInput, Button, } from "react-native-paper";
+import { View, Text, TouchableOpacity, Platform, KeyboardAvoidingView, Dimensions, StyleSheet, StyleProp, ViewStyle, TextStyle } from "react-native";
+import { TextInput, Button, } from "react-native-paper";
 import { AntDesign } from "@expo/vector-icons";
 import { connect } from "react-redux";
 import { Formik } from "formik";
@@ -61,7 +61,7 @@ const AddVisionModal: FunctionComponent<VisionProps> = ({ addVision, stateUri, s
             errors,
             handleSubmit,
           }) => (
-            <Surface style={styles.footer}> 
+            <View style={styles.footer}> 
             <ImagePic/>
               <View style={{ marginTop: 30, flexDirection: 'row' }}>
                 <View style={{ flexDirection: 'column' }}>
@@ -84,7 +84,7 @@ const AddVisionModal: FunctionComponent<VisionProps> = ({ addVision, stateUri, s
                   <AntDesign name="plus" size={ 16 } color="white" />
                 </Button>
               </View>
-            </Surface>
+            </View>
         )}
         </Formik>
     </View>

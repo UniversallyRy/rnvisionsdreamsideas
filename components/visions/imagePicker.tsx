@@ -1,6 +1,6 @@
 import React, { FunctionComponent, useState, useEffect } from "react";
-import { Text, Platform, Dimensions, StyleSheet, StyleProp, ViewStyle, ImageStyle } from "react-native";
-import { Card, Surface, Button } from "react-native-paper";
+import { View, Text, Platform, Dimensions, StyleSheet, StyleProp, ViewStyle, ImageStyle } from "react-native";
+import { Card, Button } from "react-native-paper";
 import { connect } from "react-redux";
 import { addPic } from "../../redux/actions";
 import * as ImagePicker from "expo-image-picker";
@@ -81,7 +81,7 @@ const ImagePic: FunctionComponent<ImageProps> = ({ addPic }) => {
             />
           )}
         </Text>
-        <Surface style={ styles.visionButtonContainer }>
+        <View style={ styles.visionButtonContainer }>
           <Button
             mode="contained"
             accessibilityLabel="Add Image From Gallery"
@@ -98,7 +98,7 @@ const ImagePic: FunctionComponent<ImageProps> = ({ addPic }) => {
           >
             Take a Picture
           </Button>
-        </Surface>
+        </View>
     </>
   );
 };

@@ -68,7 +68,7 @@ const JournalDetails: FunctionComponent<JournalDProps> = ({ route, navigation })
 
 const styles = StyleSheet.create<Styles>({
   divider: {
-    backgroundColor: "violet",
+    backgroundColor: "gray",
     alignSelf: "center",
     height: 0.3,
     width: windowWidth * 0.98,

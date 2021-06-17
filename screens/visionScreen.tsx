@@ -40,8 +40,7 @@ const Visions: React.FC<VisionProps> = ({ navigation }) => {
   };
 
   return (
-    <Card
-      
+    <View
      style={styles.container}>
       <Modal visible={modalOpen} animationType="slide">
         <AddVision setModalOpen={setModalOpen} />  
@@ -56,7 +55,7 @@ const Visions: React.FC<VisionProps> = ({ navigation }) => {
         <Icon item="plus" onPress={() => setModalOpen(true)} />
         <Icon item="grid" onPress={() => toggleGrid()} />
       </Surface>
-    </Card>
+    </View>
   );
 };
 
