@@ -126,7 +126,6 @@ const NotesModal: FunctionComponent<NoteModalProps> = ({ notes, closeModal, dele
                     autoCorrect={ true }
                     style={ styles.noteInput }
                     placeholder="Enter Note . . ."
-                    placeholderTextColor={ "#002C5F" }
                     onChangeText={ handleChange("name") }
                     value={ values.name }
                     onBlur={ handleBlur("name") }

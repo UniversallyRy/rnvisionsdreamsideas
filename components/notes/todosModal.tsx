@@ -163,7 +163,6 @@ const TodosModal: FunctionComponent<TodoModalProps> = ({ completedList, item, cl
                     autoCorrect={ true }
                     style={ styles.todoInput }
                     placeholder="Enter Todo . . ."
-                    placeholderTextColor={ "#002C5F" }
                     onChangeText={ handleChange("title") }
                     value={ values.title }
                     onBlur={ handleBlur("title") }
@@ -248,7 +247,6 @@ const styles = StyleSheet.create<Styles>({
     paddingVertical: 16,
   },
   todo: {
-    color: "black",
     fontWeight: "700",
     fontSize: 16,
   },

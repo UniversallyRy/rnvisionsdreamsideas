@@ -95,7 +95,6 @@ const AddTodoListModal: FunctionComponent<ModalProps> = ({ closeModal, addList }
                   autoCorrect={ true } 
                   style={ styles.input }
                   placeholder="Enter A New List . . ."
-                  placeholderTextColor={ "#002C5F" }
                   onChangeText={ handleChange("name") }
                   value={ values.name }
                   onBlur={ handleBlur("name") }

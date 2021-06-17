@@ -67,7 +67,6 @@ const AddNoteModal: FunctionComponent<ModalProps> = ({ closeModal, addNote }) =>
                   autoCorrect={ true }
                   style={ styles.input }
                   placeholder="Enter A New Note . . ."
-                  placeholderTextColor={ "#002C5F" }
                   onChangeText={ handleChange("name") }
                   value={ values.name }
                   onBlur={ handleBlur("name") }
