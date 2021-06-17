@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Modal, Text, Dimensions, StyleSheet, StyleProp, TextStyle, ViewStyle } from "react-native";
+import { View, Modal, Text, Dimensions, StyleSheet, StyleProp, TextStyle, ViewStyle } from "react-native";
 import { Card, Surface } from "react-native-paper";
 import AddJournalModal from "../components/journals/addJournalModal";
 import JournalList from "../components/journals/journalList";
@@ -23,7 +23,7 @@ interface Styles {
   closeModalContainer: ViewStyle;
 }
 
-const {height: windowHeight } = Dimensions.get("window");
+const {height: windowHeight, width: windowWidth} = Dimensions.get("window");
 
 const JournalScreen: React.FC<JournalProps>= ({ navigation }) => {
   const [modalOpen, setModalOpen] = useState(false);
@@ -53,10 +53,10 @@ const JournalScreen: React.FC<JournalProps>= ({ navigation }) => {
         ) : (
           <JournalList navigation={navigation} />
         )}
-        <Surface style={styles.visionAddToggle}>
+        <View style={styles.visionAddToggle}>
           <Icon item="plus" onPress={() => setModalOpen(true)} />
           <Icon item="grid" onPress={() => toggleGrid()} />
-        </Surface>
+        </View>
     </Card>
   );
 };
@@ -73,9 +73,11 @@ const styles = StyleSheet.create<Styles>({
     borderRadius: 2,
   },
   visionAddToggle: {
+    width: windowWidth,
     flexDirection: "row",
-    alignSelf: "center",
     marginTop: "auto",
+    alignItems: "center",
+    justifyContent: "center",
   },
   modalContent: {
     height: windowHeight,

@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
-import { Animated, Modal, StyleProp, ViewStyle, StyleSheet } from "react-native";
+import { View, Animated, Modal, StyleProp, ViewStyle, StyleSheet } from "react-native";
 import { Card, Surface, useTheme } from "react-native-paper";
 import AddVision from "../components/visions/addVisionModal";
 import VisionsContainer from "../components/visions/visionImageList";
@@ -41,11 +41,7 @@ const Visions: React.FC<VisionProps> = ({ navigation }) => {
 
   return (
     <Card
-      theme={{
-        colors: {
-          primary: theme?.colors.surface,
-        },
-      }}
+      
      style={styles.container}>
       <Modal visible={modalOpen} animationType="slide">
         <AddVision setModalOpen={setModalOpen} />  
@@ -71,7 +67,9 @@ const styles = StyleSheet.create<Styles>({
   },
     visionAddToggle: {
     flexDirection: "row",
-    alignSelf: "center",
+    marginTop: "auto",
+    alignItems: "center",
+    justifyContent: "center",
   },
 });
 

@@ -99,7 +99,6 @@ const styles = StyleSheet.create<Styles>({
     borderRadius: 10,
     width: windowWidth * 0.92,
     elevation: 4,
-    color: "red",
   },
   journalText: {
     alignSelf: "center",

@@ -1,5 +1,5 @@
 import React, { FunctionComponent, useCallback, memo } from "react";
-import { FlatList, Text, Dimensions, StyleSheet, StyleProp, TextStyle, ViewStyle } from "react-native";
+import { View, FlatList, Text, Dimensions, StyleSheet, StyleProp, TextStyle, ViewStyle } from "react-native";
 import { connect } from "react-redux";
 import { Card } from "react-native-paper";
 
@@ -52,7 +52,7 @@ const JournalGridContainer: FunctionComponent<GridProps> = ({ state, navigation 
   }, []);
 
   return (
-    <Card
+    <View
       style={ styles.container }
     >
       <FlatList
@@ -62,23 +62,18 @@ const JournalGridContainer: FunctionComponent<GridProps> = ({ state, navigation 
         data={ state }
         renderItem={ renderList }
       />
-    </Card>
+    </View>
   );
 };
 
 const styles = StyleSheet.create<Styles>({
   container: {
     flex: 1,
-    backgroundColor: "lightgray",
     paddingTop: 10,
-    width: windowWidth,
-    height: windowHeight
   },
   gridContainer: {
-    flex: 1,
     marginLeft: "auto",
     marginRight: "auto",
-    backgroundColor: "lightgray",
     padding: 10,
   },
   gridItem: {

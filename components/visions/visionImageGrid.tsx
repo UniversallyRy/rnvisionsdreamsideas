@@ -1,5 +1,5 @@
 import React, { FunctionComponent, useCallback, memo } from "react";
-import { Dimensions, StyleSheet, StyleProp, ViewStyle, ImageStyle } from "react-native";
+import { Dimensions, StyleSheet, StyleProp, ViewStyle, ImageStyle, View } from "react-native";
 import { FlatList } from "react-native-gesture-handler";
 import { Card } from "react-native-paper";
 import { connect } from "react-redux";
@@ -46,7 +46,7 @@ const VisionGridContainer: FunctionComponent<GridProps> = ({ state, navigation }
   }, []);
 
   return (
-    <Card style={{ margin: "auto", flex: 1 }}>
+    <View style={{ margin: "auto", flex: 1 }}>
       <FlatList
         numColumns={ 2 }
         contentContainerStyle={ styles.gridContainer }
@@ -55,7 +55,7 @@ const VisionGridContainer: FunctionComponent<GridProps> = ({ state, navigation }
         keyExtractor={ (item, index) => index.toString() }
         renderItem={ renderList }
       />
-    </Card>
+    </View>
   );
 };
 
