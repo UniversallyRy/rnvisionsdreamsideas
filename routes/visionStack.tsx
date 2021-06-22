@@ -1,12 +1,26 @@
-import React from "react";
-import { createStackNavigator } from "@react-navigation/stack";
+import React, { FunctionComponent } from "react";
+import { createStackNavigator, StackNavigationProp} from "@react-navigation/stack";
 import Visions from "../screens/visionScreen";
 import VisionDetails from "../components/visions/visionDetails";
 import Header from "../shared/header";
 
-const Stack = createStackNavigator()
+type VisionStackParamList = {
+  Visions: undefined;
+  VisionDetails: undefined;
+};
 
-export const VisionStack = () => {
+type VisionScreenNavigationProp = StackNavigationProp<
+  VisionStackParamList,
+  'Visions'
+>;
+
+type NavProp = {
+  navigation: VisionScreenNavigationProp;
+}
+
+const Stack = createStackNavigator<VisionStackParamList>()
+
+export const VisionStack: FunctionComponent<NavProp> = () => {
   return (
     <Stack.Navigator 
     initialRouteName="Visions"

@@ -1,18 +1,26 @@
-import React from "react";
+import React, { FunctionComponent } from "react";
 import { StyleProp, ViewStyle } from "react-native";
-import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
+import { createMaterialBottomTabNavigator, MaterialBottomTabNavigationProp } from '@react-navigation/material-bottom-tabs';
 import { VisionStack } from "./visionStack";
 import { AboutStack } from "./aboutStack";
 import { NoteStack } from "./noteStack";
 import JournalStack from "./journalStack";
 
-interface DrawerProps {
-  style?: StyleProp<ViewStyle>
+type TabStackParamList = {
+  Visions: undefined;
+  Journals: undefined;
+  Notes: undefined;
+};
+
+type NavigationProp = MaterialBottomTabNavigationProp<TabStackParamList>;
+interface TabProps {
+  navigation: NavigationProp;
+  style?: StyleProp<ViewStyle>;
 }
 
 const Tab = createMaterialBottomTabNavigator();
 
-export const BottomTabs = () => {
+export const BottomTabs: FunctionComponent<TabProps> = () => {
   return (
       <Tab.Navigator>
         <Tab.Screen

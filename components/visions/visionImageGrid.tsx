@@ -3,10 +3,11 @@ import { Dimensions, StyleSheet, StyleProp, ViewStyle, ImageStyle, View } from "
 import { FlatList } from "react-native-gesture-handler";
 import { Card } from "react-native-paper";
 import { connect } from "react-redux";
+import { NavigationScreenProp } from 'react-navigation';
 
 type GridProps = {
-  navigation: any;
-  state: any;
+  state: object[];
+  navigation: NavigationScreenProp<string,object>;
   gridContainer: StyleProp<ViewStyle>;
   gridItem: StyleProp<ImageStyle>;
 }

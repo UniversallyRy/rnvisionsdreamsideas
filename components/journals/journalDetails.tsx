@@ -1,10 +1,12 @@
 import React, { FunctionComponent } from "react";
 import { View, Text, Dimensions, StyleSheet, StyleProp, TextStyle, ViewStyle } from "react-native";
 import { Card, Button } from "react-native-paper";
+import { NavigationScreenProp } from 'react-navigation';
+import { RouteProp } from '@react-navigation/native';
 
-type JournalDProps = {
-  navigation: any;
-  route: any,
+export type JournalDProps = {
+  navigation: NavigationScreenProp<string, object>;
+  route: any;
   jDetailsContainer: StyleProp<ViewStyle>;
   jDetailsCard: StyleProp<ViewStyle>;
   jDetailsTitle: StyleProp<ViewStyle>;

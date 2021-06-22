@@ -1,16 +1,25 @@
-import React from "react";
+import React, { FunctionComponent } from "react";
 import { createStackNavigator, StackNavigationProp } from "@react-navigation/stack";
 import NoteScreen from "../screens/noteScreen";
 import Header from "../shared/header";
 
-type NavProp = {
-  navigation: any;
+type NoteStackParamList = {
+  Notes: undefined;
 };
 
-const Stack = createStackNavigator()
+type NoteScreenNavigationProp = StackNavigationProp<
+  NoteStackParamList,
+  'Notes'
+>;
+
+type NavProp = {
+  navigation: NoteScreenNavigationProp;
+}
+
+const Stack = createStackNavigator<NoteStackParamList>()
 
 
-export const NoteStack = () => {
+export const NoteStack: FunctionComponent<NavProp> = () => {
   return (
     <Stack.Navigator
     screenOptions={{

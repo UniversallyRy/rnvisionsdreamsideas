@@ -1,27 +1,36 @@
-import React from "react";
-import { createStackNavigator, } from "@react-navigation/stack";
+import React, { FunctionComponent } from "react";
+import { createStackNavigator, StackNavigationProp } from "@react-navigation/stack";
 import About from "../screens/about";
 import Header from "../shared/header";
 
-type NavProp = {
-  navigation: any;
+type AboutStackParamList = {
+  About: undefined;
 };
 
-const Stack = createStackNavigator()
+type AboutScreenNavigationProp = StackNavigationProp<
+  AboutStackParamList,
+  'About'
+>;
 
-export const AboutStack = () => {
+type NavProp = {
+  navigation: AboutScreenNavigationProp;
+};
+
+const Stack = createStackNavigator<AboutStackParamList>()
+
+export const AboutStack: FunctionComponent<NavProp> = () => {
   return (
     <Stack.Navigator 
       screenOptions={{
         header: ({ scene, previous, navigation }) => (
-          <Header title="About" scene={scene} previous={previous} navigation={navigation} />
+          <Header title="About" scene={ scene } previous={ previous } navigation={ navigation } />
         ),
       }}
       initialRouteName="About"
     >
       <Stack.Screen
         name="About"
-        component={About}
+        component={ About }
       />
 
     </Stack.Navigator>

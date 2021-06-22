@@ -1,16 +1,31 @@
-import React from "react";
-import { createStackNavigator, } from "@react-navigation/stack";
+import React, { FunctionComponent } from "react";
+import { createStackNavigator, StackNavigationProp } from "@react-navigation/stack";
 import JournalScreen from "../screens/journalScreen";
 import JournalDetails from "../components/journals/journalDetails";
 import Header from "../shared/header";
 
-type NavProp = {
-  navigation: any;
+export type JournalStackParamList = {
+  JournalScreen: undefined;
+  JournalDetails: { 
+    title: string;
+    body: string;
+    date : string;
+  };
 };
 
-const Stack = createStackNavigator()
+type JournalScreenNavigationProp = StackNavigationProp<
+  JournalStackParamList,
+  'JournalScreen'
+>;
 
-export const JournalStack = () => {
+type NavProp = {
+  navigation: JournalScreenNavigationProp;
+};
+
+
+const Stack = createStackNavigator<JournalStackParamList>()
+
+export const JournalStack: FunctionComponent<NavProp> = () => {
   return (
     <Stack.Navigator 
       screenOptions={{
