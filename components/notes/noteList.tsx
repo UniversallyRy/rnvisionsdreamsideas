@@ -4,8 +4,7 @@ import { Card } from "react-native-paper";
 import NotesModal from "./notesModal";
 
 type NoteListProps = {
-  notes: object;
-  deleteNote?: ((item: object) => void);
+  notes: object[];
   noteContainer?: StyleProp<ViewStyle>;
   noteTitle?: StyleProp<TextStyle>;
   count?: StyleProp<TextStyle>;

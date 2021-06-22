@@ -1,19 +1,20 @@
 import React from "react";
 import { StyleSheet, TouchableOpacity, Dimensions, StyleProp, TextStyle, ViewStyle } from "react-native";
 import { useTheme, Appbar, TouchableRipple, Switch } from "react-native-paper";
+import { NavigationScreenProp } from 'react-navigation';
 import { ThemesContext } from './../ThemeContext';
 
 type HeaderProps = {
-  navigation: any;
+  navigation: NavigationScreenProp<string, object>;
   title: string;
   scene: any,
   previous: any,
 };
 
 const Header:React.FC<HeaderProps> = ({ scene, previous, navigation, title }) => {
-  const openMenu = () => {
-    navigation.openDrawer();
-  };
+  // const openMenu = () => {
+  //   navigation.openDrawer();
+  // };
   const { options } = scene.descriptor;
   const header =
     options.headerTitle !== undefined
@@ -36,9 +37,9 @@ const Header:React.FC<HeaderProps> = ({ scene, previous, navigation, title }) =>
         />
     ) : (
       <TouchableOpacity
-      onPress={() => {
-        navigation.openDrawer();
-      }}
+      // onPress={() => {
+      //   navigation.openDrawer();
+      // }}
     >
       
     </TouchableOpacity>

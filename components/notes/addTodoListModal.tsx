@@ -10,7 +10,7 @@ import FlatButton  from "../../shared/button";
 import * as yup from "yup";
 
 type ModalProps = {
-  closeModal: (() => void);
+  closeModal: (() => boolean);
   addList: ((item: object) => void);
   bgColors?: string;
   container: StyleProp<ViewStyle>;

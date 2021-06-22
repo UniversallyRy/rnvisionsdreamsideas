@@ -1,13 +1,14 @@
 import React, { useState } from "react";
 import { View, Modal, Text, Dimensions, StyleSheet, StyleProp, TextStyle, ViewStyle } from "react-native";
 import { Card, Surface } from "react-native-paper";
+import { NavigationScreenProp } from 'react-navigation';
 import AddJournalModal from "../components/journals/addJournalModal";
 import JournalList from "../components/journals/journalList";
 import JournalGridContainer from "../components/journals/journalGrid";
 import { Icon } from "../shared/icon";
 
 interface JournalProps {
-  navigation: any;
+  navigation: NavigationScreenProp<string, object>;
   journalContainer: StyleProp<ViewStyle>;
   addJournalTitle: StyleProp<TextStyle>;
   closeModalContainer: StyleProp<ViewStyle>;

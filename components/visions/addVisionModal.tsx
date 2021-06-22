@@ -1,8 +1,8 @@
 import React, { FunctionComponent } from "react";
 import { View, Text, TouchableOpacity, Platform, KeyboardAvoidingView, Dimensions, StyleSheet, StyleProp, ViewStyle, TextStyle } from "react-native";
 import { TextInput, Button, } from "react-native-paper";
-import { AntDesign } from "@expo/vector-icons";
 import { connect } from "react-redux";
+import { AntDesign } from "@expo/vector-icons";
 import { Formik } from "formik";
 import { addVision } from "../../redux/actions";
 import { globalStyles } from "../../styles/global";
@@ -12,8 +12,7 @@ import * as yup from "yup";
 type VisionProps = {
   addVision:((item: any) => void);
   stateUri: string;
-  setModalOpen:((arg0:boolean) => void);
-  navigation: any;
+  setModalOpen:((arg0:boolean) => boolean);
   container: StyleProp<ViewStyle>;
   modalContent: StyleProp<TextStyle>;
   visionAddToggle: StyleProp<ViewStyle>;

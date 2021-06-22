@@ -1,13 +1,15 @@
 import React, { FunctionComponent } from "react";
 import { Text, StyleSheet, FlatList, StyleProp, TextStyle, ViewStyle, Dimensions } from "react-native";
 import { Surface, Button, Card, Paragraph} from "react-native-paper";
+import { NavigationScreenProp } from 'react-navigation';
 import { connect } from "react-redux";
 import { deleteJournal } from "../../redux/actions";
 
 
+
 type JournalListProps = {
-  navigation: any;
-  state: [];
+  state: object[];
+  navigation: NavigationScreenProp<string, object>;
   deleteJournal: ((item: object) => void);
   buttonsContainer: StyleProp<ViewStyle>;
   editButton: StyleProp<ViewStyle>;
@@ -33,7 +35,7 @@ interface Styles {
   journalDate: TextStyle;
 }
 
-const { width: windowWidth, height: windowHeight } = Dimensions.get("window");
+const { width: windowWidth } = Dimensions.get("window");
 
 const JournalList: FunctionComponent<JournalListProps> = ({ state, navigation, deleteJournal }) => {
 

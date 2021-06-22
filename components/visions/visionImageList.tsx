@@ -1,15 +1,15 @@
 import React, { FunctionComponent, useState, useRef } from "react";
 import { View, TouchableOpacity, Dimensions, FlatList, Image, StyleSheet } from "react-native";
-import { NavigationStackProp } from 'react-navigation-stack';
+import { NavigationScreenProp } from 'react-navigation';
 import { deleteVision } from "../../redux/actions";
 import { DeleteButton } from "../../shared/icon";
 import { connect } from "react-redux";
 
+// needs to add navigation and delete picture option back
 type ImageProps = {
-  navigation: NavigationStackProp;
-  state: any;
+  navigation: NavigationScreenProp<string, object>;
+  state: object[];
   index: any;
-  scrollX: any;
   deleteVision: ((item: object) => void);
 }
 
@@ -25,7 +25,6 @@ const ITEM_SIZE = 80;
 const VisionsContainer: FunctionComponent<ImageProps> = ({
   navigation,
   state,
-  scrollX,
   deleteVision,
 }) => {
 
@@ -53,7 +52,7 @@ const VisionsContainer: FunctionComponent<ImageProps> = ({
   }
 
   return (
-    <View style={{flex:1}}>
+    <View style={{ flex:1 }}>
       <FlatList
         ref={topRef}
         data={ state }
@@ -65,10 +64,10 @@ const VisionsContainer: FunctionComponent<ImageProps> = ({
         }}
         keyExtractor={ (_, index) => String(index) }
         renderItem={ ({item}) => {
-          return <View style={{width, height}}>
+          return <View style={{ width, height }}>
               <Image
-              source={{uri:item.uri}}
-              style={[StyleSheet.absoluteFill]}
+              source={ { uri:item.uri } }
+              style={ [StyleSheet.absoluteFill] }
               />
           </View>
         }}

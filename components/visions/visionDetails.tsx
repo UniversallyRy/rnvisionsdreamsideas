@@ -1,9 +1,10 @@
 import React, { FunctionComponent } from "react";
 import { Dimensions, StyleSheet, StyleProp, TextStyle, ViewStyle, ImageStyle } from "react-native";
 import { Card, Button } from "react-native-paper";
+import { NavigationScreenProp } from 'react-navigation';
 
 type VisionProps = {
-  navigation: any;
+  navigation: NavigationScreenProp<string, object>;
   route: any;
   vDetailsContent: StyleProp<ViewStyle>;
   visionTitle: StyleProp<TextStyle>;

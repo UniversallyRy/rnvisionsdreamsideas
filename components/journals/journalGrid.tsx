@@ -1,11 +1,12 @@
 import React, { FunctionComponent, useCallback, memo } from "react";
 import { View, FlatList, Text, Dimensions, StyleSheet, StyleProp, TextStyle, ViewStyle } from "react-native";
+import { NavigationScreenProp } from 'react-navigation';
 import { connect } from "react-redux";
 import { Card } from "react-native-paper";
 
 type GridProps = {
-  navigation: any;
-  state: [];
+  navigation: NavigationScreenProp<string, object>;
+  state: object[];
   container: StyleProp<ViewStyle>;
   gridContainer: StyleProp<ViewStyle>;
   gridItem: StyleProp<TextStyle>;

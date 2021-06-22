@@ -14,7 +14,7 @@ type TabStackParamList = {
 
 type NavigationProp = MaterialBottomTabNavigationProp<TabStackParamList>;
 interface TabProps {
-  navigation: NavigationProp;
+  navigation?: NavigationProp;
   style?: StyleProp<ViewStyle>;
 }
 

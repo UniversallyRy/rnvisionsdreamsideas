@@ -2,7 +2,6 @@ import React, { FunctionComponent } from "react";
 import { View, Text, Dimensions, StyleSheet, StyleProp, TextStyle, ViewStyle } from "react-native";
 import { Card, Button } from "react-native-paper";
 import { NavigationScreenProp } from 'react-navigation';
-import { RouteProp } from '@react-navigation/native';
 
 export type JournalDProps = {
   navigation: NavigationScreenProp<string, object>;

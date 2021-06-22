@@ -7,8 +7,8 @@ import AddNoteModal from "./addNoteModal";
 import { Icon } from "../../shared/icon";
 
 type NoteMainProps = {
-  stateNotes: [];
-  stateTodos: [];
+  stateNotes: object[];
+  stateTodos: object[];
   container?: StyleProp<ViewStyle>;
   titleStyle?: StyleProp<TextStyle>;
   divider?: StyleProp<ViewStyle>;

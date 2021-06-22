@@ -4,11 +4,11 @@ import { Button } from "react-native-paper";
 
 interface ButtonProps {
   text?: string;
+  color?: string;
   onPress: () => void;
   button?: StyleProp<ViewStyle>;
   buttonText?: StyleProp<TextStyle>;
   accessabilityLabel?: string;
-  color?: any
 }
 
 interface Styles {

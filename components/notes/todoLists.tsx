@@ -8,7 +8,6 @@ import { deleteList } from "../../redux/actions";
 type TodoListsProps = {
   list: any;
   deleteList: ((id:object) => void);
-  completedList: any
   listContainer: StyleProp<ViewStyle>;
   cardContainer: StyleProp<ViewStyle>;
   listTitle: StyleProp<TextStyle>;

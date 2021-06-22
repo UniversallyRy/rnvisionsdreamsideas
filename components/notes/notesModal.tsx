@@ -10,8 +10,8 @@ import * as yup from "yup";
 export const { width: windowWidth, height: windowHeight } = Dimensions.get("window");
 
 type NoteModalProps = {
-  notes: any;
-  closeModal: (() => void);
+  notes: object[];
+  closeModal: (() => boolean);
   deleteNote: ((item: object) => void);
   addNote: ((item: object) => void);
   container: StyleProp<ViewStyle>;

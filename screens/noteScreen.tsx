@@ -5,9 +5,9 @@ import { connect } from "react-redux";
 import NoteMain from "../components/notes/notesMain";
 
 interface NoteProps {
+  stateNotes: object[];
+  stateTodos: object[];
   noteScreenContainer?: StyleProp<ViewStyle>;
-  stateNotes: any;
-  stateTodos: any;
 }
 
 interface Styles {

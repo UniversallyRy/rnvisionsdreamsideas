@@ -9,11 +9,11 @@ import * as yup from "yup";
 
 type TodoModalProps = {
   item: any;
-  closeModal: (() => void);
+  closeModal: (() => boolean);
   deleteTodo: ((id:any) => void);
   addTodo: ((item: object) => void);
   toggleTodo: ((item: object) => void);
-  completedList: ((count1: number, count2: number) => void);
+  completedList: ((count1: number, count2: number) => boolean);
   container: StyleProp<ViewStyle>;
   section: StyleProp<ViewStyle>;
   header: StyleProp<TextStyle>;
