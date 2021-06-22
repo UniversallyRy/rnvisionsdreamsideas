@@ -9,7 +9,7 @@ import { connect } from "react-redux";
 type ImageProps = {
   navigation: NavigationScreenProp<string, object>;
   state: object[];
-  index: any;
+  index: number;
   deleteVision: ((item: object) => void);
 }
 
@@ -54,11 +54,11 @@ const VisionsContainer: FunctionComponent<ImageProps> = ({
   return (
     <View style={{ flex:1 }}>
       <FlatList
-        ref={topRef}
+        ref={ topRef }
         data={ state }
         horizontal
         pagingEnabled
-        showsHorizontalScrollIndicator={false}
+        showsHorizontalScrollIndicator={ false }
         onMomentumScrollEnd={ev => {
           scrollActiveIndex(Math.floor(ev.nativeEvent.contentOffset.x/ width))
         }}
@@ -73,19 +73,19 @@ const VisionsContainer: FunctionComponent<ImageProps> = ({
         }}
       />
       <FlatList
-        ref={thumbRef}
+        ref={ thumbRef }
         data={ state }
         horizontal
-        showsHorizontalScrollIndicator={false}
-        style={{position: "absolute", bottom: ITEM_SIZE}}
-        contentContainerStyle={{paddingHorizontal: SPACING}}
+        showsHorizontalScrollIndicator={ false }
+        style={{ position: "absolute", bottom: ITEM_SIZE }}
+        contentContainerStyle={{ paddingHorizontal: SPACING }}
         keyExtractor={ (_, index) => String(index) }
         renderItem={ ({item, index}:any) => {
           return <TouchableOpacity
-                    onPress={() => scrollActiveIndex(index)}
+                    onPress={ () => scrollActiveIndex(index) }
                   >
                     <Image
-                      source={{uri:item.uri}}
+                      source={{ uri:item.uri }}
                       style={{
                         width: ITEM_SIZE,
                         height: ITEM_SIZE,
