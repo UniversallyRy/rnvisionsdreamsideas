@@ -28,8 +28,8 @@ const VisionsContainer: FunctionComponent<ImageProps> = ({
   deleteVision,
 }) => {
 
-  const topRef = useRef();
-  const thumbRef = useRef();
+  const topRef:any = useRef();
+  const thumbRef:any = useRef();
   const [activeIndex, setActiveIndex] = useState(0)
 
   const scrollActiveIndex = (index) => {
@@ -63,7 +63,7 @@ const VisionsContainer: FunctionComponent<ImageProps> = ({
           scrollActiveIndex(Math.floor(ev.nativeEvent.contentOffset.x/ width))
         }}
         keyExtractor={ (_, index) => String(index) }
-        renderItem={ ({item}) => {
+        renderItem={ ({ item }:any) => {
           return <View style={{ width, height }}>
               <Image
               source={ { uri:item.uri } }
@@ -80,21 +80,21 @@ const VisionsContainer: FunctionComponent<ImageProps> = ({
         style={{position: "absolute", bottom: ITEM_SIZE}}
         contentContainerStyle={{paddingHorizontal: SPACING}}
         keyExtractor={ (_, index) => String(index) }
-        renderItem={ ({item, index}) => {
+        renderItem={ ({item, index}:any) => {
           return <TouchableOpacity
                     onPress={() => scrollActiveIndex(index)}
                   >
                     <Image
-                          source={{uri:item.uri}}
-                          style={{
-                            width: ITEM_SIZE,
-                            height: ITEM_SIZE,
-                            borderRadius: 12,
-                            marginRight: SPACING,
-                            borderWidth: 2,
-                            borderColor: activeIndex === index ? "#fff" : 'transparent'
-                          }}
-                      />
+                      source={{uri:item.uri}}
+                      style={{
+                        width: ITEM_SIZE,
+                        height: ITEM_SIZE,
+                        borderRadius: 12,
+                        marginRight: SPACING,
+                        borderWidth: 2,
+                        borderColor: activeIndex === index ? "#fff" : 'transparent'
+                      }}
+                    />
           </TouchableOpacity>
         }}
       />
