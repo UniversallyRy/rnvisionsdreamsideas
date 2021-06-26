@@ -29,7 +29,7 @@ export const JournalStack: FunctionComponent<NavProp> = () => {
   return (
     <Stack.Navigator 
       screenOptions={{
-        header: ({ scene, previous, navigation }) => (
+        header: ({ scene, previous, navigation }:any) => (
           <Header title="Journal Screen" scene={scene} previous={previous} navigation={navigation} />
         ),
       }}

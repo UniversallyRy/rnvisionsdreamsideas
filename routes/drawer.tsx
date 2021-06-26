@@ -2,9 +2,9 @@ import React, { FunctionComponent } from "react";
 import { StyleProp, ViewStyle } from "react-native";
 import { createMaterialBottomTabNavigator, MaterialBottomTabNavigationProp } from '@react-navigation/material-bottom-tabs';
 import { VisionStack } from "./visionStack";
-import { AboutStack } from "./aboutStack";
-import { NoteStack } from "./noteStack";
 import JournalStack from "./journalStack";
+import { NoteStack } from "./noteStack";
+// import { AboutStack } from "./aboutStack";
 
 type TabStackParamList = {
   Visions: undefined;

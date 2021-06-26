@@ -26,7 +26,7 @@ export const VisionStack: FunctionComponent<NavProp> = () => {
     initialRouteName="Visions"
     headerMode="screen"
     screenOptions={{
-        header: ({ scene, previous, navigation }) => (
+        header: ({ scene, previous, navigation }:any) => (
           <Header title="Visions" scene={scene} previous={previous} navigation={navigation} />
         ),
     }}
