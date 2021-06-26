@@ -115,7 +115,7 @@ const AddTodoListModal: FunctionComponent<ModalProps> = ({ closeModal, addList }
                 <TouchableOpacity
                   style={ styles.create }
                 >
-                  <FlatButton text="Add Note" color={ bgColor }onPress={ handleSubmit }/>
+                  <FlatButton text="Add List" color={ bgColor }onPress={ handleSubmit }/>
                 </TouchableOpacity>
               </View>
             )}
