@@ -1,9 +1,10 @@
 import React, { FunctionComponent, useState, useRef } from "react";
-import { View, TouchableOpacity, Dimensions, FlatList, Image, StyleSheet } from "react-native";
+import { View, TouchableOpacity, FlatList, Image, StyleSheet } from "react-native";
 import { NavigationScreenProp } from 'react-navigation';
 import { deleteVision } from "../../redux/actions";
 import { DeleteButton } from "../../shared/icon";
 import { connect } from "react-redux";
+import { windowHeight, windowWidth } from "../../utils/dimensions";
 
 // needs to add navigation and delete picture option back
 type ImageProps = {
@@ -17,8 +18,7 @@ interface ListProps {
   item: any;
   index: number;
 }
-// react native's Dimensions import to grab mobile screens dimensions
-const { width: width, height: height } = Dimensions.get("window");
+
 const SPACING = 10;
 const ITEM_SIZE = 80;
 
@@ -35,12 +35,12 @@ const VisionsContainer: FunctionComponent<ImageProps> = ({
   const scrollActiveIndex = (index) => {
     setActiveIndex(index);
     topRef?.current?.scrollToOffset({
-      offset: index * width,
+      offset: index * windowWidth,
       animated: true
     })
-    if(index * (ITEM_SIZE + SPACING) - ITEM_SIZE / 2 > width / 2) {
+    if(index * (ITEM_SIZE + SPACING) - ITEM_SIZE / 2 > windowWidth / 2) {
       thumbRef?.current?.scrollToOffset({
-        offset: index * (ITEM_SIZE + SPACING) - width / 2 + ITEM_SIZE / 2,
+        offset: index * (ITEM_SIZE + SPACING) - windowWidth / 2 + ITEM_SIZE / 2,
         animated: true,
       })
     } else {
@@ -60,11 +60,11 @@ const VisionsContainer: FunctionComponent<ImageProps> = ({
         pagingEnabled
         showsHorizontalScrollIndicator={ false }
         onMomentumScrollEnd={ev => {
-          scrollActiveIndex(Math.floor(ev.nativeEvent.contentOffset.x/ width))
+          scrollActiveIndex(Math.floor(ev.nativeEvent.contentOffset.x/ windowWidth))
         }}
         keyExtractor={ (_, index) => String(index) }
         renderItem={ ({ item }:any) => {
-          return <View style={{ width, height }}>
+          return <View style={{ width:windowWidth, height:windowHeight }}>
               <Image
               source={ { uri:item.uri } }
               style={ [StyleSheet.absoluteFill] }

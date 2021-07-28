@@ -1,7 +1,9 @@
 import React, { FunctionComponent } from "react";
-import { Dimensions, StyleSheet, StyleProp, TextStyle, ViewStyle, ImageStyle } from "react-native";
+import { StyleSheet, StyleProp, TextStyle, ViewStyle, ImageStyle } from "react-native";
 import { Card, Button } from "react-native-paper";
 import { NavigationScreenProp } from 'react-navigation';
+import { windowHeight, windowWidth } from "../../utils/dimensions";
+
 
 type VisionProps = {
   navigation: NavigationScreenProp<string, object>;
@@ -18,8 +20,6 @@ interface Styles {
   vDetailsImage: ImageStyle;
   vDetailsButton: ViewStyle;
 }
-
-const { width: windowWidth, height: windowHeight } = Dimensions.get("window");
 
 const VisionDetails: FunctionComponent<VisionProps> = ({ navigation, route }) => {
   const handlePress = () => {

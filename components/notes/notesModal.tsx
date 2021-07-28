@@ -1,13 +1,12 @@
 import React, { FunctionComponent } from "react";
-import { View, TouchableOpacity, FlatList, Text, Dimensions, Keyboard, StyleSheet, StyleProp, TextStyle, ViewStyle } from "react-native";
+import { View, TouchableOpacity, FlatList, Text, Keyboard, StyleSheet, StyleProp, TextStyle, ViewStyle } from "react-native";
 import { connect } from "react-redux";
 import { Card, TextInput, Button, useTheme } from "react-native-paper";
 import { AntDesign } from "@expo/vector-icons";
 import { Formik, FormikHelpers } from "formik";
 import { deleteNote, addNote } from "../../redux/actions";
+import { windowHeight, windowWidth } from "../../utils/dimensions";
 import * as yup from "yup";
-
-export const { width: windowWidth, height: windowHeight } = Dimensions.get("window");
 
 type NoteModalProps = {
   notes: object[];

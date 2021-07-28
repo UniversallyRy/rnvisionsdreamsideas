@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet, TouchableOpacity, Dimensions, StyleProp, TextStyle, ViewStyle } from "react-native";
+import { StyleSheet, TouchableOpacity, StyleProp, TextStyle, ViewStyle } from "react-native";
 import { useTheme, Appbar, TouchableRipple, Switch } from "react-native-paper";
 import { NavigationScreenProp } from 'react-navigation';
 import { ThemesContext } from './../ThemeContext';

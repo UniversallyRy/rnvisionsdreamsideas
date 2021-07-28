@@ -1,11 +1,13 @@
 import React, { FunctionComponent, useEffect } from "react";
-import { View, Text, TouchableOpacity, FlatList, Keyboard, Dimensions, StyleSheet, StyleProp, TextStyle, ViewStyle } from "react-native";
+import { View, Text, TouchableOpacity, FlatList, Keyboard, StyleSheet, StyleProp, TextStyle, ViewStyle } from "react-native";
 import { Card, TextInput, Button, useTheme } from "react-native-paper";
 import { connect } from "react-redux";
 import { AntDesign, Ionicons } from "@expo/vector-icons";
 import { Formik } from "formik";
 import { addTodo, deleteTodo, toggleTodo } from "../../redux/actions";
 import * as yup from "yup";
+import { windowHeight, windowWidth } from "../../utils/dimensions";
+
 
 type TodoModalProps = {
   item: any;
@@ -43,8 +45,6 @@ interface Styles {
   deleteTodoButton:ViewStyle;
   noteErrorText:TextStyle;
 }
-
-const { width: windowWidth, height: windowHeight } = Dimensions.get("window");
 
 const todoSchema = yup.object({
   title: yup.string().required().min(4),

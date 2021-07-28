@@ -1,9 +1,11 @@
 import React, { FunctionComponent } from "react";
-import { Text, StyleSheet, FlatList, StyleProp, TextStyle, ViewStyle, Dimensions } from "react-native";
+import { Text, StyleSheet, FlatList, StyleProp, TextStyle, ViewStyle } from "react-native";
 import { Surface, Button, Card, Paragraph} from "react-native-paper";
 import { NavigationScreenProp } from 'react-navigation';
 import { connect } from "react-redux";
 import { deleteJournal } from "../../redux/actions";
+import { windowWidth } from "../../utils/dimensions";
+
 
 
 
@@ -34,8 +36,6 @@ interface Styles {
   journalText: TextStyle;
   journalDate: TextStyle;
 }
-
-const { width: windowWidth } = Dimensions.get("window");
 
 const JournalList: FunctionComponent<JournalListProps> = ({ state, navigation, deleteJournal }) => {
 

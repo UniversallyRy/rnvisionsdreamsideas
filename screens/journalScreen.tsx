@@ -1,11 +1,13 @@
 import React, { useState } from "react";
-import { View, Modal, Text, Dimensions, StyleSheet, StyleProp, TextStyle, ViewStyle } from "react-native";
+import { View, Modal, Text, StyleSheet, StyleProp, TextStyle, ViewStyle } from "react-native";
 import { Card, Surface } from "react-native-paper";
 import { NavigationScreenProp } from 'react-navigation';
 import AddJournalModal from "../components/journals/addJournalModal";
 import JournalList from "../components/journals/journalList";
 import JournalGridContainer from "../components/journals/journalGrid";
 import { Icon } from "../shared/icon";
+import { windowHeight, windowWidth } from "../utils/dimensions";
+
 
 interface JournalProps {
   navigation: NavigationScreenProp<string, object>;
@@ -23,8 +25,6 @@ interface Styles {
   modalContent: ViewStyle;
   closeModalContainer: ViewStyle;
 }
-
-const {height: windowHeight, width: windowWidth} = Dimensions.get("window");
 
 const JournalScreen: React.FC<JournalProps>= ({ navigation }) => {
   const [modalOpen, setModalOpen] = useState(false);

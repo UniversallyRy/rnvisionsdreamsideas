@@ -1,10 +1,11 @@
 import React, { FunctionComponent, useState, useEffect } from "react";
-import { View, Text, Platform, Dimensions, StyleSheet, StyleProp, ViewStyle, ImageStyle } from "react-native";
+import { View, Text, Platform, StyleSheet, StyleProp, ViewStyle, ImageStyle } from "react-native";
 import { Card, Button } from "react-native-paper";
 import { connect } from "react-redux";
 import { addPic } from "../../redux/actions";
 import * as ImagePicker from "expo-image-picker";
 import * as ImageManipulator from "expo-image-manipulator"
+import { windowHeight, windowWidth } from "../../utils/dimensions";
 
 type ImageProps = {
   addPic: ((item:any) => void);
@@ -17,8 +18,6 @@ interface Styles {
   uploadButton: ViewStyle;
   image: ImageStyle;
 }
-
-const { width: windowWidth, height: windowHeight } = Dimensions.get("window");
 
 const ImagePic: FunctionComponent<ImageProps> = ({ addPic }) => {
   const [image, setImage] = useState('');

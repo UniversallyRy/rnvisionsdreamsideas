@@ -1,7 +1,8 @@
 import React, { FunctionComponent } from "react";
-import { View, Text, Dimensions, StyleSheet, StyleProp, TextStyle, ViewStyle } from "react-native";
+import { View, Text, StyleSheet, StyleProp, TextStyle, ViewStyle } from "react-native";
 import { Card, Button } from "react-native-paper";
 import { NavigationScreenProp } from 'react-navigation';
+import { windowHeight, windowWidth } from "../../utils/dimensions";
 
 export type JournalDProps = {
   navigation: NavigationScreenProp<string, object>;
@@ -24,9 +25,6 @@ interface Styles {
   jDetailsDate: TextStyle;
   jDetailsButton: TextStyle;
 }
-
-const { width: windowWidth, height: windowHeight } = Dimensions.get("window");
-
 
 const JournalDetails: FunctionComponent<JournalDProps> = ({ route, navigation }) => {
   const handlePress = () => {

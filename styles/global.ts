@@ -1,10 +1,9 @@
-import { StyleSheet, TextStyle, Dimensions } from "react-native";
+import { StyleSheet, TextStyle } from "react-native";
 
 interface Styles {
   errorText: TextStyle;
 }
 
-export const { width: windowWidth, height: windowHeight } = Dimensions.get("window");
 export const coltsBlue = "#002C5F";
 export const coltsGray = "#A2AAAD";
 export const raidSilver = "#A5ACAF";

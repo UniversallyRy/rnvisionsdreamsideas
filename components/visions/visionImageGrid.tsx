@@ -1,9 +1,11 @@
 import React, { FunctionComponent, useCallback, memo } from "react";
-import { Dimensions, StyleSheet, StyleProp, ViewStyle, ImageStyle, View } from "react-native";
+import { StyleSheet, StyleProp, ViewStyle, ImageStyle, View } from "react-native";
 import { FlatList } from "react-native-gesture-handler";
 import { Card } from "react-native-paper";
 import { connect } from "react-redux";
 import { NavigationScreenProp } from 'react-navigation';
+import { windowHeight, windowWidth } from "../../utils/dimensions";
+
 
 type GridProps = {
   state: object[];
@@ -20,8 +22,6 @@ interface Styles {
   gridContainer: ViewStyle;
   gridItem: ImageStyle;
 }
-
-const { width: width, height: height } = Dimensions.get("window");
 
 const VisionGridContainer: FunctionComponent<GridProps> = ({ state, navigation }) => {
   const VisionGridList = memo(function GridImage({ data }:any) {
@@ -67,8 +67,8 @@ const styles = StyleSheet.create<Styles>({
     elevation: 4
   },
   gridItem: {
-    height: height * 0.25,
-    width: width * 0.45,
+    height: windowHeight * 0.25,
+    width: windowWidth * 0.45,
     alignSelf: "center",
     overflow: "hidden",
     borderRadius: 12,

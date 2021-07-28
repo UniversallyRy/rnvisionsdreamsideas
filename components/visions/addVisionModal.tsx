@@ -1,5 +1,5 @@
 import React, { FunctionComponent } from "react";
-import { View, Text, TouchableOpacity, Platform, KeyboardAvoidingView, Dimensions, StyleSheet, StyleProp, ViewStyle, TextStyle } from "react-native";
+import { View, Text, TouchableOpacity, Platform, KeyboardAvoidingView, StyleSheet, StyleProp, ViewStyle, TextStyle } from "react-native";
 import { TextInput, Button, } from "react-native-paper";
 import { connect } from "react-redux";
 import { AntDesign } from "@expo/vector-icons";
@@ -7,6 +7,7 @@ import { Formik } from "formik";
 import { addVision } from "../../redux/actions";
 import { globalStyles } from "../../styles/global";
 import ImagePic from "./imagePicker";
+import { windowHeight, windowWidth } from "../../utils/dimensions";
 import * as yup from "yup";
 
 type VisionProps = {
@@ -24,11 +25,9 @@ interface Styles {
   visionAddToggle: ViewStyle;
 }
 
-
 const visionSchema = yup.object({
   title: yup.string().required().min(4),
 });
-const { width: windowWidth, height: windowHeight } = Dimensions.get("window");
 
 const simulateSlowNetworkRequest = () =>
   new Promise((resolve) => setTimeout(resolve, 2500));
@@ -132,7 +131,6 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
   },
 });
-
 
 const mapStateToProps = (state:any) => {
   return {

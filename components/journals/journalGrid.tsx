@@ -1,8 +1,9 @@
 import React, { FunctionComponent, useCallback, memo } from "react";
-import { View, FlatList, Text, Dimensions, StyleSheet, StyleProp, TextStyle, ViewStyle } from "react-native";
+import { View, FlatList, Text, StyleSheet, StyleProp, TextStyle, ViewStyle } from "react-native";
 import { NavigationScreenProp } from 'react-navigation';
 import { connect } from "react-redux";
 import { Card } from "react-native-paper";
+import { windowHeight, windowWidth } from "../../utils/dimensions";
 
 type GridProps = {
   navigation: NavigationScreenProp<string, object>;
@@ -19,8 +20,6 @@ interface Styles {
   gridItem: ViewStyle;
   gridText: TextStyle;
 }
-
-const { width: windowWidth, height: windowHeight } = Dimensions.get("window");
 
 const JournalGridContainer: FunctionComponent<GridProps> = ({ state, navigation }) => {
 
