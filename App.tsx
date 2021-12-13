@@ -14,7 +14,7 @@ import { AppRegistry, StatusBar } from "react-native";
 import React, { useState } from "react";
 import { Provider } from "react-redux";
 import { store, /*persistor */ } from "./redux/store";
-import { AppLoading } from "expo";
+import AppLoading from 'expo-app-loading';
 import { BottomTabs } from "./routes/drawer";
 import { PersistGate } from "redux-persist/integration/react";
 import * as Font from "expo-font";
@@ -88,7 +88,8 @@ const App = () => {
         onFinish={() => {
           setFontsLoaded(true);
           setPersistLoaded(false);
-        }}
+        }}  
+        onError={console.warn}
       />
     );
   }
