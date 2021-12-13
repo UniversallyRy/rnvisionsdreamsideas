@@ -1,6 +1,5 @@
-import { ADD_VISION, EDIT_VISION, DELETE_VISION } from "../actionTypes";
 import uuid from "../../utils/uuid";
-import { createReducer } from '@reduxjs/toolkit'
+import { createSlice } from '@reduxjs/toolkit'
 
 
 const initialVisions = Array.from({ length: 8 }).map((_, i) => {
@@ -11,21 +10,26 @@ const initialVisions = Array.from({ length: 8 }).map((_, i) => {
   };
 });
 
-const visions = createReducer(initialVisions, (builder) => {
-    builder
-    .addCase(ADD_VISION, (state, action) => {
+const visions = createSlice({
+    name: "Visions",
+    initialState: initialVisions,
+    reducers:{
+      addVision: (state, action) => {
       state.unshift({
           uri: action.payload.uri,
           title: action.payload.title,
           id: uuid.generate(),
       })
-    })
-    .addCase(EDIT_VISION, (state, action) => {
+    },
+    editVision: (state, action) => {
       return state;
-    })
-    .addCase(DELETE_VISION, (state, action) => {
+    },
+    deleteVision: (state, action) => {
       return state.filter((vision) => vision.id !== action.payload.id);
-    })
+    }
+  }
 })
 
-export default visions;
+const { actions, reducer } = visions;
+export const { addVision, deleteVision, editVision} = actions;
+export default reducer;

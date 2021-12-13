@@ -1,8 +1,11 @@
-import { configureStore } from '@reduxjs/toolkit'
-import { createStore, applyMiddleware } from "redux";
-// import { persistStore, persistReducer } from "redux-persist";
-import rootReducer from "./reducers";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { configureStore } from '@reduxjs/toolkit'
+// import { persistStore, persistReducer } from "redux-persist";
+import visions from "./reducers/visions";
+import pic from "./reducers/newpic";
+import journals from "./reducers/journals";
+import note from "./reducers/note";
+import todos from "./reducers/todos";
 
 const persistConfig = {
   // configuration object for redux-persist
@@ -20,7 +23,13 @@ const persistConfig = {
 //   window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
 // );
 const store = configureStore({
-  reducer: rootReducer
+  reducer: { 
+    visions: visions, 
+    pic: pic, 
+    journals: journals, 
+    todos: todos, 
+    note: note 
+  }
 })
 
 // const persistor = persistStore(store);

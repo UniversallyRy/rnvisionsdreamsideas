@@ -1,5 +1,5 @@
-import { createReducer } from '@reduxjs/toolkit'
-import { ADD_JOURNAL, EDIT_JOURNAL, DELETE_JOURNAL } from "../actionTypes";
+import { createSlice } from '@reduxjs/toolkit'
+// import { ADD_JOURNAL, EDIT_JOURNAL, DELETE_JOURNAL } from "../actionTypes";
 import uuid from "../../utils/uuid";
 import moment from "moment";
 import lorem from "../../shared/lorem";
@@ -33,22 +33,52 @@ const initialJournals:IJournalState[] = [
 ];
 
 
-const journals = createReducer(initialJournals, (builder) => {
-  builder
-  .addCase(ADD_JOURNAL, (state, action) => {
-    state.push({
-      title: action.payload.title,
-      body: action.payload.body,
-      id: uuid.generate(),
-      date: moment().format("MMMM Do YYYY"),
-    })
-  })
-  .addCase(DELETE_JOURNAL, (state, action) => {
-    return state.filter((todo) => todo.id != action.payload.id);
-    })
-  .addCase(EDIT_JOURNAL, (state, action) => {
-    return state;
-  })
+const journals = createSlice({
+  name:"Journals",
+  initialState: initialJournals,
+  reducers:{
+    addJournal: (state, action) => {
+      state.push({
+        title: action.payload.title,
+        body: action.payload.body,
+        id: uuid.generate(),
+        date: moment().format("MMMM Do YYYY")
+      })
+    },
+    deleteJournal: (state, action) => {
+      return state.filter((todo) => todo.id != action.payload.id);
+    },
+    editJournal: (state, action) => {
+      return state;
+    }
+  },
+  extraReducers: {
+  }
+  // .addCase(DELETE_JOURNAL, (state, action) => {
+  //   return state.filter((todo) => todo.id != action.payload.id);
+  //   })
+  // .addCase(EDIT_JOURNAL, (state, action) => {
+  //   return state;
+  // })
 })
+// const journals = createReducer(initialJournals, (builder) => {
+//   builder
+//   .addCase(ADD_JOURNAL, (state, action) => {
+//     state.push({
+//       title: action.payload.title,
+//       body: action.payload.body,
+//       id: uuid.generate(),
+//       date: moment().format("MMMM Do YYYY"),
+//     })
+//   })
+//   .addCase(DELETE_JOURNAL, (state, action) => {
+//     return state.filter((todo) => todo.id != action.payload.id);
+//     })
+//   .addCase(EDIT_JOURNAL, (state, action) => {
+//     return state;
+//   })
+// })
 
-export default journals;
+const { actions, reducer } = journals
+export const { addJournal, deleteJournal} = actions;
+export default reducer

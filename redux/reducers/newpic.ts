@@ -1,16 +1,19 @@
-import { createReducer } from '@reduxjs/toolkit'
-import { ADD_PIC } from "../actionTypes";
+import { createSlice } from '@reduxjs/toolkit'
 
-const initialPic = "";
+const initialState = "";
 
-const newpic = createReducer(initialPic, (builder) => {
-  builder
-  .addCase(ADD_PIC, (state, action) => {
-    var uri = "";
-    var newUri = uri == action.payload.uri ? "" : action.payload.uri;
-
-    return newUri;
-  })
+const newpic = createSlice({
+  name:"New Pic",
+  initialState,
+  reducers: {
+    addPic: (state, action) => {
+      var uri = "";
+      var newUri = uri == action.payload.uri ? "" : action.payload.uri;
+      return newUri;
+    }
+  }
 });
 
-export default newpic;
+const { actions, reducer } = newpic
+export const { addPic } = actions;
+export default reducer

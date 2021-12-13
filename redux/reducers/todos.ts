@@ -1,13 +1,5 @@
-import {
-  ADD_TODO,
-  EDIT_TODO,
-  DELETE_TODO,
-  TOGGLE_TODO,
-  ADD_LIST,
-  DELETE_LIST,
-} from "../actionTypes";
 import uuid from "../../utils/uuid";
-import { createReducer } from '@reduxjs/toolkit'
+import { createReducer, createSlice } from '@reduxjs/toolkit'
 
 const initialValue = [
   {
@@ -88,52 +80,57 @@ const initialValue = [
   },
 ];
 
-const todos = createReducer(initialValue, (builder) => {
-  builder
-  .addCase(ADD_LIST, (state, action) => {
-    state.push({
-          name: action.payload.name,
-          id: uuid.generate(),
-          color: action.payload.color,
-          todos: [],
-    })
-  })
-  .addCase(DELETE_LIST, (state, action) => {
-    return state.filter((todo) => todo.id != action.payload.id);
-  })
-  .addCase(ADD_TODO, (state, action) => {
-      state.map((item) => {
-        if (item.id == action.payload.listid) {
-          item.todos.push({
-            title: action.payload.title,
+const todos = createSlice( {
+  name: "Todos",
+  initialState: initialValue,
+  reducers:{
+    addList: (state, action) => {
+      state.push({
+            name: action.payload.name,
             id: uuid.generate(),
-            completed: false,
-          });
-        }
-      });
-  })
-  .addCase(EDIT_TODO, (state, action) => {
-    return state.filter((todo) => todo.id != action.payload.id);
-  })
-  .addCase(TOGGLE_TODO, (state, action) => {
-    state.map((item) => {
-      if (item.id == action.payload.listid ) {
-        item.todos.map((todo) => {
-          if(todo.id == action.payload.id) {
-            todo.completed = !todo.completed
+            color: action.payload.color,
+            todos: [],
+      })
+    },
+    deleteList: (state, action) => {
+      return state.filter((todo) => todo.id != action.payload.id);
+    },
+    addTodo: (state, action) => {
+        state.map((item) => {
+          if (item.id == action.payload.listid) {
+            item.todos.push({
+              title: action.payload.title,
+              id: uuid.generate(),
+              completed: false,
+            });
           }
-        })
-      }
-    });
-  })
-  .addCase(DELETE_TODO, (state, action) => {
+        });
+    },
+    editTodo: (state, action) => {
+      return state.filter((todo) => todo.id != action.payload.id);
+    },
+    toggleTodo: (state, action) => {
       state.map((item) => {
-        if (item.id == action.payload.listid) {
-          item.todos = item.todos.filter((todo) => todo.id != action.payload.id);
+        if (item.id == action.payload.listid ) {
+          item.todos.map((todo) => {
+            if(todo.id == action.payload.id) {
+              todo.completed = !todo.completed
+            }
+          })
         }
       });
-      return state;
-  })
+    },
+    deleteTodo: (state, action) => {
+        state.map((item) => {
+          if (item.id == action.payload.listid) {
+            item.todos = item.todos.filter((todo) => todo.id != action.payload.id);
+          }
+        });
+        return state;
+    },
+  }
 });
 
-export default todos;
+const { actions, reducer } = todos
+export const { addList, deleteList, addTodo, editTodo, toggleTodo, deleteTodo} = actions;
+export default reducer
