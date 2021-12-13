@@ -26,7 +26,7 @@ const ImagePic: FunctionComponent<ImageProps> = ({ addPic }) => {
     (async () => {
       if (Platform.OS !== "web") {
         const { status } =
-          await ImagePicker.requestCameraRollPermissionsAsync();
+          await ImagePicker.requestMediaLibraryPermissionsAsync();
         const { camStatus }:any = await ImagePicker.getCameraPermissionsAsync();
         if (status !== "granted") {
           alert("Sorry, we need gallery permissions to make this work!");
