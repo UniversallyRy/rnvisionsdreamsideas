@@ -1,7 +1,7 @@
 import React, { FunctionComponent } from "react";
 import { View, Text, TouchableOpacity, Platform, KeyboardAvoidingView, StyleSheet, StyleProp, ViewStyle, TextStyle } from "react-native";
 import { TextInput, Button, } from "react-native-paper";
-import { connect, ConnectedProps} from "react-redux";
+import { connect, useDispatch, ConnectedProps} from "react-redux";
 import { AntDesign } from "@expo/vector-icons";
 import { Formik } from "formik";
 import { addVision } from "../../redux/reducers/visions";
@@ -32,7 +32,8 @@ const visionSchema = yup.object({
 const simulateSlowNetworkRequest = () =>
   new Promise((resolve) => setTimeout(resolve, 2500));
 
-const AddVisionModal: FunctionComponent<VisionProps> = ({ addVision, stateUri, setModalOpen }) => {
+const AddVisionModal: FunctionComponent<VisionProps> = ({ stateUri, setModalOpen }) => {
+  const dispatch = useDispatch()
   return (
     <KeyboardAvoidingView style={{ flex: 1 }} behavior={ Platform.OS === "ios" ? "padding" : "height" }>
     <View style={styles.container}> 
@@ -46,7 +47,7 @@ const AddVisionModal: FunctionComponent<VisionProps> = ({ addVision, stateUri, s
           initialValues={{ uri: stateUri, title: "", id: null }}
           validationSchema={ visionSchema }
           onSubmit={ (values, actions) => {
-            addVision(values);
+            dispatch(addVision(values));
             actions.resetForm();
             setModalOpen(false);
           }}
@@ -139,7 +140,5 @@ const mapStateToProps = (state:any) => {
   };
 };
 
-const mapDispatchToProps = { addVision };
-
-export default connect(mapStateToProps, mapDispatchToProps)(AddVisionModal);
+export default connect(mapStateToProps)(AddVisionModal);
 export type PropsFromRedux = ConnectedProps<typeof AddVisionModal>

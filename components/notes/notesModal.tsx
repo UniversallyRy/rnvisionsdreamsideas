@@ -1,6 +1,6 @@
 import React, { FunctionComponent } from "react";
 import { View, TouchableOpacity, FlatList, Text, Keyboard, StyleSheet, StyleProp, TextStyle, ViewStyle } from "react-native";
-import { connect } from "react-redux";
+import { connect, useDispatch } from "react-redux";
 import { Card, TextInput, Button, useTheme } from "react-native-paper";
 import { AntDesign } from "@expo/vector-icons";
 import { Formik, FormikHelpers } from "formik";
@@ -47,10 +47,11 @@ const noteSchema = yup.object({
   name: yup.string().required().min(6),
 });
 
-const NotesModal: FunctionComponent<NoteModalProps> = ({ notes, closeModal, deleteNote, addNote }) => {
+const NotesModal: FunctionComponent<NoteModalProps> = ({ notes, closeModal}) => {
   const newNotes:any = notes;
   const taskCount = newNotes.length;
   const theme = useTheme();
+  const dispatch = useDispatch()
   
   const renderNote = ( note:any, index = 0) => {
     return (
@@ -62,7 +63,7 @@ const NotesModal: FunctionComponent<NoteModalProps> = ({ notes, closeModal, dele
             name="closecircle"
             size={ 24 }
             style={ styles.deleteNoteButton }
-            onPress={ () => deleteNote({ id: note.id }) }
+            onPress={ () => dispatch(deleteNote( { id: note.id } )) }
           />
         </Card>
     );
@@ -104,7 +105,7 @@ const NotesModal: FunctionComponent<NoteModalProps> = ({ notes, closeModal, dele
             initialValues={{ name: "", id: "" }}
             validationSchema={ noteSchema }
             onSubmit={ (values: Values, actions:FormikHelpers<Values>) => {
-              addNote(values);
+              dispatch(addNote(values));
               actions.resetForm();
               Keyboard.dismiss();
             }}
@@ -207,6 +208,7 @@ const styles = StyleSheet.create<Styles>({
   },
   deleteNoteButton: {
     marginLeft: "auto",
+    marginRight: 3,
     color: "red",
   },
 });
@@ -217,6 +219,4 @@ const mapStateToProps = (state:any) => {
   };
 };
 
-const mapDispatchToProps = { addNote, deleteNote };
-
-export default connect(mapStateToProps, mapDispatchToProps)(NotesModal);
+export default connect(mapStateToProps)(NotesModal);

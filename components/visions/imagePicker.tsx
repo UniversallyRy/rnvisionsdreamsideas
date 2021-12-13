@@ -1,7 +1,7 @@
 import React, { FunctionComponent, useState, useEffect } from "react";
 import { View, Text, Platform, StyleSheet, StyleProp, ViewStyle, ImageStyle } from "react-native";
 import { Card, Button } from "react-native-paper";
-import { connect, ConnectedProps } from "react-redux";
+import { useDispatch, ConnectedProps } from "react-redux";
 import { addPic } from "../../redux/reducers/newpic";
 import * as ImagePicker from "expo-image-picker";
 import { ImageInfo } from 'expo-image-picker/build/ImagePicker.types'
@@ -20,9 +20,9 @@ interface Styles {
   image: ImageStyle;
 }
 
-const ImagePic: FunctionComponent<ImageProps> = ({ addPic }) => {
+const ImagePic: FunctionComponent<ImageProps> = () => {
   const [image, setImage] = useState('');
-
+  const dispatch = useDispatch()
   useEffect(() => {
     (async () => {
       if (Platform.OS !== "web") {
@@ -57,7 +57,7 @@ const ImagePic: FunctionComponent<ImageProps> = ({ addPic }) => {
     // .canccelled prop from ImagePicker import
     if (!result.cancelled) {
       setImage(manipResult.uri);
-      addPic({uri: manipResult.uri});
+      dispatch(addPic({uri: manipResult.uri}));
     }else {
       result.uri = ''
     }
@@ -70,7 +70,7 @@ const ImagePic: FunctionComponent<ImageProps> = ({ addPic }) => {
     });
     if (!result.cancelled) {
       setImage(result.uri);
-      addPic({ uri: result.uri });
+      dispatch(addPic({ uri: result.uri }));
     }
   };
 
@@ -123,9 +123,8 @@ const styles = StyleSheet.create<Styles>({
   }
 });
 
-const mapDispatchToProps = { addPic };
 
-export default connect(null, mapDispatchToProps)(ImagePic);
+export default ImagePic;
 
 // {isOn: boolean, toggleOn: () => void}
 export type PropsFromImg = ConnectedProps<typeof ImagePic>

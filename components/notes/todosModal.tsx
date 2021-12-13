@@ -1,7 +1,7 @@
 import React, { FunctionComponent, useEffect } from "react";
 import { View, Text, TouchableOpacity, FlatList, Keyboard, StyleSheet, StyleProp, TextStyle, ViewStyle } from "react-native";
 import { Card, TextInput, Button, useTheme } from "react-native-paper";
-import { connect } from "react-redux";
+import { connect, useDispatch } from "react-redux";
 import { AntDesign, Ionicons } from "@expo/vector-icons";
 import { Formik } from "formik";
 import { addTodo, deleteTodo, toggleTodo } from "../../redux/reducers/todos";
@@ -50,11 +50,12 @@ const todoSchema = yup.object({
   title: yup.string().required().min(4),
 });
 
-const TodosModal: FunctionComponent<TodoModalProps> = ({ completedList, item, closeModal, deleteTodo, addTodo, toggleTodo }) => {
+const TodosModal: FunctionComponent<TodoModalProps> = ({ completedList, item, closeModal }) => {
   const newTodos = item.todos;
   const taskCount = item.todos.length;
   const completedCount = newTodos.filter((todo:any) => todo.completed).length;
   const theme = useTheme();
+  const dispatch = useDispatch()
 
 
   useEffect(() => {
@@ -75,7 +76,7 @@ const TodosModal: FunctionComponent<TodoModalProps> = ({ completedList, item, cl
             size={ 24 }
             color="gray"
             style={{ width: 32 }}
-            onPress={ () => toggleTodo({ id: todo.id, listid: item.id }) }
+            onPress={ () => dispatch(toggleTodo({ id: todo.id, listid: item.id })) }
           />
           <Text
             style={[
@@ -92,7 +93,7 @@ const TodosModal: FunctionComponent<TodoModalProps> = ({ completedList, item, cl
             name="md-close-circle"
             size={ 24 }
             style={ styles.deleteTodoButton }
-            onPress={ () => deleteTodo({ id:todo.id, listid: item.id }) }
+            onPress={ () => dispatch(deleteTodo({ id:todo.id, listid: item.id })) }
           />
         </View>
     );
@@ -141,7 +142,7 @@ const TodosModal: FunctionComponent<TodoModalProps> = ({ completedList, item, cl
             onSubmit={ (values, actions) => {
               values.listid = item.id
               let newNum = taskCount - completedCount
-              addTodo(values);
+              dispatch(addTodo(values));
               completedList(newNum, completedCount);
               actions.resetForm();
               Keyboard.dismiss();
@@ -270,6 +271,4 @@ const mapStateToProps = (state:any) => {
   };
 };
 
-const mapDispatchToProps = { addTodo, deleteTodo, toggleTodo };
-
-export default connect(mapStateToProps, mapDispatchToProps)(TodosModal);
+export default connect(mapStateToProps)(TodosModal);

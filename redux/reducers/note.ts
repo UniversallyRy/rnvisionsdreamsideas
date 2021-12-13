@@ -12,7 +12,7 @@ const initialNotes = [
   },
 ];
 const notes = createSlice( {
-  name:"Notes",
+  name:"notes",
   initialState: initialNotes,
   reducers: {
     addNote: (state, action) => {
@@ -26,11 +26,11 @@ const notes = createSlice( {
       return newState;
     },
     deleteNote: (state, action) => {
-      return state.filter((todo) => todo.id != action.payload.id);
+      state.filter(item => item.id != action.payload.id);
     },
   }
 })
 
 const { actions, reducer } = notes
 export const { addNote, editNote, deleteNote} = actions;
-export default reducer
+export default reducer;

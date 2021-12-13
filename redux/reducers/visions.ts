@@ -25,7 +25,7 @@ const visions = createSlice({
       return state;
     },
     deleteVision: (state, action) => {
-      return state.filter((vision) => vision.id !== action.payload.id);
+      return state.filter((vision) => vision.id != action.payload.id);
     }
   }
 })

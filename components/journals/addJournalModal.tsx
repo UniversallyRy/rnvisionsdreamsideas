@@ -1,7 +1,7 @@
 import React, { FunctionComponent } from "react";
 import { Text, StyleProp, TextStyle } from "react-native";
 import { Surface, TextInput } from "react-native-paper";
-import { connect } from "react-redux";
+import { useDispatch } from "react-redux";
 import { Formik } from "formik";
 // import { addJournal } from "../../redux/actions";
 import { addJournal } from "../../redux/reducers/journals";
@@ -20,8 +20,8 @@ const JournalSchema = yup.object({
   body: yup.string().required().min(4),
 });
 
-const AddJournal: FunctionComponent<AddJournalProps> = ({ addJournal, setModalOpen }) => {
-
+const AddJournal: FunctionComponent<AddJournalProps> = ({ setModalOpen }) => {
+  const dispatch = useDispatch();
   return (
     <Surface style={{ margin: 3, marginTop: 100 }}>
       <Formik
@@ -30,7 +30,7 @@ const AddJournal: FunctionComponent<AddJournalProps> = ({ addJournal, setModalOp
         initialValues={{ title: "", body: "" }}
         validationSchema={JournalSchema}
         onSubmit={(values, actions) => {
-          addJournal(values);
+          dispatch(addJournal(values));
           actions.resetForm();
           setModalOpen(false);
         }}
@@ -78,6 +78,4 @@ const AddJournal: FunctionComponent<AddJournalProps> = ({ addJournal, setModalOp
   );
 };
 
-const mapDispatchToProps = { addJournal };
-
-export default connect(null, mapDispatchToProps)(AddJournal);
+export default AddJournal;

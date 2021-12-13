@@ -1,7 +1,7 @@
 import React, { FunctionComponent, useState, useEffect } from "react";
 import { Modal, StyleProp, TextStyle, ViewStyle, StyleSheet, View, Text } from "react-native";
 import { Card, Button } from "react-native-paper";
-import { connect } from "react-redux";
+import { useDispatch } from "react-redux";
 import TodosModal from "./todosModal";
 import { deleteList } from "../../redux/reducers/todos";
 
@@ -25,7 +25,8 @@ interface Styles {
   deleteButton: ViewStyle;
 }
 
-const TodoLists: FunctionComponent<TodoListsProps>= ({ list, deleteList }) => {
+const TodoLists: FunctionComponent<TodoListsProps>= ({ list }) => {
+  const dispatch = useDispatch()
   const [visible, setVisible] = useState(false);
   const [InitRemaining, setInitRemaining] = useState(0);
   const [InitCount, setInitCount] = useState(0);
@@ -92,7 +93,7 @@ const completedList = (remaining:number, completed:number) => {
         style={ styles.deleteButton }
         icon="close-outline"
         mode="contained"
-        onPress={ () => deleteList({id: list.id}) }
+        onPress={ () => dispatch(deleteList({id: list.id})) }
         >
         Delete
       </Button>
@@ -133,6 +134,5 @@ const styles = StyleSheet.create<Styles>({
   },
 });
 
-const mapDispatchToProps = { deleteList };
 
-export default connect(null, mapDispatchToProps)(TodoLists);
+export default TodoLists;

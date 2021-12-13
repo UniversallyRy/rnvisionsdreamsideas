@@ -2,7 +2,7 @@ import React, { FunctionComponent } from "react";
 import { Text, StyleSheet, FlatList, StyleProp, TextStyle, ViewStyle } from "react-native";
 import { Surface, Button, Card, Paragraph} from "react-native-paper";
 import { NavigationScreenProp } from 'react-navigation';
-import { connect } from "react-redux";
+import { connect, useDispatch } from "react-redux";
 import { deleteJournal } from "../../redux/reducers/journals";
 import { windowWidth } from "../../utils/dimensions";
 
@@ -34,7 +34,8 @@ interface Styles {
   journalDate: TextStyle;
 }
 
-const JournalList: FunctionComponent<JournalListProps> = ({ state, navigation, deleteJournal }) => {
+const JournalList: FunctionComponent<JournalListProps> = ({ state, navigation }) => {
+  const dispatch = useDispatch();
 
   return (
     <Card style={styles.container}>
@@ -74,7 +75,7 @@ const JournalList: FunctionComponent<JournalListProps> = ({ state, navigation, d
                 color="red"
                 icon="close-outline"
                 mode="contained"
-                onPress={ () => deleteJournal({ id: item.id }) }
+                onPress={ () => dispatch(deleteJournal({ id: item.id })) }
               >
                 Delete
               </Button>
@@ -140,7 +141,6 @@ const styles = StyleSheet.create<Styles>({
 });
 
 
-const mapDispatchToProps = { deleteJournal };
 
 const mapStateToProps = (state:any) => {
   return {
@@ -148,4 +148,4 @@ const mapStateToProps = (state:any) => {
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(JournalList);
+export default connect(mapStateToProps)(JournalList);

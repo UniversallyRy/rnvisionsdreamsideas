@@ -2,7 +2,7 @@ import React, { FunctionComponent, useState, useRef } from "react";
 import { View, TouchableOpacity, FlatList, Image, StyleSheet } from "react-native";
 import { NavigationScreenProp } from 'react-navigation';
 import { deleteVision } from "../../redux/reducers/visions";
-import { connect, ConnectedProps } from "react-redux";
+import { connect, useDispatch, ConnectedProps } from "react-redux";
 import { windowHeight, windowWidth } from "../../utils/dimensions";
 
 // needs to add navigation and delete picture option back
@@ -21,12 +21,8 @@ interface ListProps {
 const SPACING = 10;
 const ITEM_SIZE = 80;
 
-const VisionsContainer: FunctionComponent<ImageProps> = ({
-  navigation,
-  state,
-  deleteVision,
-}) => {
-
+const VisionsContainer: FunctionComponent<ImageProps> = ({navigation, state}) => {
+  const dispatch = useDispatch()
   const topRef:any = useRef();
   const thumbRef:any = useRef();
   const [activeIndex, setActiveIndex] = useState(0)
@@ -107,9 +103,7 @@ const mapStateToProps = (state:any) => {
   };
 };
 
-const mapDispatchToProps = { deleteVision };
-
-export default connect(mapStateToProps, mapDispatchToProps)(VisionsContainer);
+export default connect(mapStateToProps)(VisionsContainer);
 
 
 export type PropsFromRedux = ConnectedProps<typeof VisionsContainer>
