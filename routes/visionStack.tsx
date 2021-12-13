@@ -24,11 +24,11 @@ export const VisionStack: FunctionComponent<NavProp> = () => {
   return (
     <Stack.Navigator 
     initialRouteName="Visions"
-    headerMode="screen"
     screenOptions={{
         header: ({ scene, previous, navigation }:any) => (
           <Header title="Visions" scene={scene} previous={previous} navigation={navigation} />
         ),
+        headerMode:"screen"
     }}
     >
       <Stack.Screen
