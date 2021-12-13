@@ -1,9 +1,8 @@
 import React, { FunctionComponent, useState, useRef } from "react";
 import { View, TouchableOpacity, FlatList, Image, StyleSheet } from "react-native";
 import { NavigationScreenProp } from 'react-navigation';
-import { deleteVision } from "../../redux/actions";
-import { DeleteButton } from "../../shared/icon";
-import { connect } from "react-redux";
+import { deleteVision } from "../../redux/reducers/visions";
+import { connect, ConnectedProps } from "react-redux";
 import { windowHeight, windowWidth } from "../../utils/dimensions";
 
 // needs to add navigation and delete picture option back
@@ -111,3 +110,6 @@ const mapStateToProps = (state:any) => {
 const mapDispatchToProps = { deleteVision };
 
 export default connect(mapStateToProps, mapDispatchToProps)(VisionsContainer);
+
+
+export type PropsFromRedux = ConnectedProps<typeof VisionsContainer>

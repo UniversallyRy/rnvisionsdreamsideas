@@ -4,7 +4,7 @@ import { Card, TextInput } from "react-native-paper";
 import { connect } from "react-redux";
 import { AntDesign } from "@expo/vector-icons";
 import { Formik } from "formik";
-import { addList } from "../../redux/actions";
+import { addList } from "../../redux/reducers/todos";
 import { globalStyles } from "../../styles/global";
 import FlatButton  from "../../shared/button";
 import * as yup from "yup";
@@ -90,7 +90,7 @@ const AddTodoListModal: FunctionComponent<ModalProps> = ({ closeModal, addList }
             }) => (
               <View>
                 <TextInput
-                  textAlign="auto"
+                  textAlign="center"
                   enablesReturnKeyAutomatically={ true }
                   autoCorrect={ true } 
                   style={ styles.input }
@@ -98,6 +98,7 @@ const AddTodoListModal: FunctionComponent<ModalProps> = ({ closeModal, addList }
                   onChangeText={ handleChange("name") }
                   value={ values.name }
                   onBlur={ handleBlur("name") }
+                  autoComplete
                 />
 
                 <Text style={ globalStyles.errorText }>

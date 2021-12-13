@@ -3,7 +3,7 @@ import { Modal, StyleProp, TextStyle, ViewStyle, StyleSheet, View, Text } from "
 import { Card, Button } from "react-native-paper";
 import { connect } from "react-redux";
 import TodosModal from "./todosModal";
-import { deleteList } from "../../redux/actions";
+import { deleteList } from "../../redux/reducers/todos";
 
 type TodoListsProps = {
   list: any;

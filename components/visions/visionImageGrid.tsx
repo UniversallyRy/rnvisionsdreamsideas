@@ -2,7 +2,7 @@ import React, { FunctionComponent, useCallback, memo } from "react";
 import { StyleSheet, StyleProp, ViewStyle, ImageStyle, View } from "react-native";
 import { FlatList } from "react-native-gesture-handler";
 import { Card } from "react-native-paper";
-import { connect } from "react-redux";
+import { connect, ConnectedProps } from "react-redux";
 import { NavigationScreenProp } from 'react-navigation';
 import { windowHeight, windowWidth } from "../../utils/dimensions";
 
@@ -84,3 +84,6 @@ const mapStateToProps = (state:any) => {
 };
 
 export default connect(mapStateToProps)(VisionGridContainer);
+
+export type PropsFromRedux = ConnectedProps<typeof VisionGridContainer>
+

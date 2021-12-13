@@ -1,8 +1,8 @@
 import React, { FunctionComponent, useState, useEffect } from "react";
 import { View, Text, Platform, StyleSheet, StyleProp, ViewStyle, ImageStyle } from "react-native";
 import { Card, Button } from "react-native-paper";
-import { connect } from "react-redux";
-import { addPic } from "../../redux/actions";
+import { connect, ConnectedProps } from "react-redux";
+import { addPic } from "../../redux/reducers/newpic";
 import * as ImagePicker from "expo-image-picker";
 import { ImageInfo } from 'expo-image-picker/build/ImagePicker.types'
 import * as ImageManipulator from "expo-image-manipulator"
@@ -126,3 +126,6 @@ const styles = StyleSheet.create<Styles>({
 const mapDispatchToProps = { addPic };
 
 export default connect(null, mapDispatchToProps)(ImagePic);
+
+// {isOn: boolean, toggleOn: () => void}
+export type PropsFromImg = ConnectedProps<typeof ImagePic>

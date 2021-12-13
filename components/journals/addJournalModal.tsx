@@ -3,7 +3,8 @@ import { Text, StyleProp, TextStyle } from "react-native";
 import { Surface, TextInput } from "react-native-paper";
 import { connect } from "react-redux";
 import { Formik } from "formik";
-import { addJournal } from "../../redux/actions";
+// import { addJournal } from "../../redux/actions";
+import { addJournal } from "../../redux/reducers/journals";
 import { globalStyles } from "../../styles/global";
 import FlatButton from "../../shared/button";
 import * as yup from "yup";
@@ -44,25 +45,27 @@ const AddJournal: FunctionComponent<AddJournalProps> = ({ addJournal, setModalOp
         }) => (
           <>
             <TextInput
-              textAlign="auto"
+              textAlign="center"
               mode="flat"
               placeholder="Journal Title"
               onChangeText={handleChange("title")}
               value={values.title}
               onBlur={handleBlur("title")}
+              autoComplete
             />
             <Text style={globalStyles.errorText}>
               {/* Above <Text/> shows up only when input is focused and exited without requirements */}
               {touched.title && errors.title}
             </Text>
             <TextInput
-              textAlign="auto"
+              textAlign="center"
               multiline
               mode="flat"
               placeholder="Journal Body"
               onChangeText={handleChange("body")}
               value={values.body}
               onBlur={handleBlur("body")}
+              autoComplete
             />
             <Text style={globalStyles.errorText}>
               {touched.body && errors.body}

@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import { Card, TextInput, Button, useTheme } from "react-native-paper";
 import { AntDesign } from "@expo/vector-icons";
 import { Formik, FormikHelpers } from "formik";
-import { deleteNote, addNote } from "../../redux/actions";
+import { deleteNote, addNote } from "../../redux/reducers/note";
 import { windowHeight, windowWidth } from "../../utils/dimensions";
 import * as yup from "yup";
 
@@ -120,7 +120,7 @@ const NotesModal: FunctionComponent<NoteModalProps> = ({ notes, closeModal, dele
               <View style={ styles.footer }>
                 <View style={{ flexDirection: 'column' }}>
                   <TextInput
-                    textAlign="auto"
+                    textAlign="center"
                     enablesReturnKeyAutomatically={ true }
                     autoCorrect={ true }
                     style={ styles.noteInput }
@@ -128,6 +128,7 @@ const NotesModal: FunctionComponent<NoteModalProps> = ({ notes, closeModal, dele
                     onChangeText={ handleChange("name") }
                     value={ values.name }
                     onBlur={ handleBlur("name") }
+                    autoComplete
                   />
                   <Text style={ styles.noteErrorText }>
                     { touched.name && errors.name }

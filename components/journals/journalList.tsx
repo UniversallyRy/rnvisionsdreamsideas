@@ -3,11 +3,8 @@ import { Text, StyleSheet, FlatList, StyleProp, TextStyle, ViewStyle } from "rea
 import { Surface, Button, Card, Paragraph} from "react-native-paper";
 import { NavigationScreenProp } from 'react-navigation';
 import { connect } from "react-redux";
-import { deleteJournal } from "../../redux/actions";
+import { deleteJournal } from "../../redux/reducers/journals";
 import { windowWidth } from "../../utils/dimensions";
-
-
-
 
 type JournalListProps = {
   state: object[];

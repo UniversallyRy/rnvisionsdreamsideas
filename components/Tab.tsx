@@ -12,7 +12,7 @@ interface Styles {
   container: ViewStyle;
 }
 
-const Tab: FunctionComponent<TabProps> = ({ icon, isSelected }) => (
+const Tab: FunctionComponent<TabProps> = ({ icon, isSelected }: any) => (
   <View style={ styles.container }>
     <Ionicons name={ icon } color={ isSelected ? "black" : "grey" } size={ 30 } />
   </View>

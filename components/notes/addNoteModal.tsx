@@ -4,7 +4,8 @@ import { Card, TextInput } from "react-native-paper";
 import { connect } from "react-redux";
 import { AntDesign } from "@expo/vector-icons";
 import { Formik } from "formik";
-import { addNote } from "../../redux/actions";
+import { addNote } from "../../redux/reducers/note";
+
 import { globalStyles } from "../../styles/global";
 import FlatButton  from "../../shared/button";
 import * as yup from "yup";
@@ -62,7 +63,7 @@ const AddNoteModal: FunctionComponent<ModalProps> = ({ closeModal, addNote }) =>
             }) => (
               <View>
                 <TextInput
-                  textAlign="auto"
+                  textAlign="center"
                   enablesReturnKeyAutomatically={ true }
                   autoCorrect={ true }
                   style={ styles.input }
@@ -70,6 +71,7 @@ const AddNoteModal: FunctionComponent<ModalProps> = ({ closeModal, addNote }) =>
                   onChangeText={ handleChange("name") }
                   value={ values.name }
                   onBlur={ handleBlur("name") }
+                  autoComplete
                 />
 
                 <Text style={ globalStyles.errorText }>

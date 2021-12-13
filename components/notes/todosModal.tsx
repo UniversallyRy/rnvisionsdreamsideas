@@ -4,7 +4,7 @@ import { Card, TextInput, Button, useTheme } from "react-native-paper";
 import { connect } from "react-redux";
 import { AntDesign, Ionicons } from "@expo/vector-icons";
 import { Formik } from "formik";
-import { addTodo, deleteTodo, toggleTodo } from "../../redux/actions";
+import { addTodo, deleteTodo, toggleTodo } from "../../redux/reducers/todos";
 import * as yup from "yup";
 import { windowHeight, windowWidth } from "../../utils/dimensions";
 
@@ -158,7 +158,7 @@ const TodosModal: FunctionComponent<TodoModalProps> = ({ completedList, item, cl
               <View style={ styles.footer }>
                 <View style={{ flexDirection: 'column' }}>
                   <TextInput
-                    textAlign="auto"
+                    textAlign="center"
                     enablesReturnKeyAutomatically={ true }
                     autoCorrect={ true }
                     style={ styles.todoInput }
@@ -166,6 +166,7 @@ const TodosModal: FunctionComponent<TodoModalProps> = ({ completedList, item, cl
                     onChangeText={ handleChange("title") }
                     value={ values.title }
                     onBlur={ handleBlur("title") }
+                    autoComplete
                   />
                   <Text style={ styles.noteErrorText }>
                     { touched.title && errors.title }

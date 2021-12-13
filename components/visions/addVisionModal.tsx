@@ -1,16 +1,16 @@
 import React, { FunctionComponent } from "react";
 import { View, Text, TouchableOpacity, Platform, KeyboardAvoidingView, StyleSheet, StyleProp, ViewStyle, TextStyle } from "react-native";
 import { TextInput, Button, } from "react-native-paper";
-import { connect } from "react-redux";
+import { connect, ConnectedProps} from "react-redux";
 import { AntDesign } from "@expo/vector-icons";
 import { Formik } from "formik";
-import { addVision } from "../../redux/actions";
+import { addVision } from "../../redux/reducers/visions";
 import { globalStyles } from "../../styles/global";
-import ImagePic from "./imagePicker";
+import ImagePic, { PropsFromImg } from "./imagePicker";
 import { windowHeight, windowWidth } from "../../utils/dimensions";
 import * as yup from "yup";
 
-type VisionProps = {
+interface VisionProps extends PropsFromImg {
   addVision:((item: any) => void);
   stateUri: string;
   setModalOpen:((arg0:boolean) => boolean);
@@ -64,12 +64,13 @@ const AddVisionModal: FunctionComponent<VisionProps> = ({ addVision, stateUri, s
               <View style={{ marginTop: 30, flexDirection: 'row' }}>
                 <View style={{ flexDirection: 'column' }}>
                   <TextInput
-                    textAlign='auto'
+                    textAlign='center'
                     style={ styles.textinput }
                     placeholder="Vision Title"
                     onChangeText={ handleChange("title") }
                     value={ values.title }
                     onBlur={ handleBlur("title") }
+                    autoComplete
                   />
                   <Text style={ globalStyles.errorText }>
                     { touched.title && errors.title }
@@ -141,3 +142,4 @@ const mapStateToProps = (state:any) => {
 const mapDispatchToProps = { addVision };
 
 export default connect(mapStateToProps, mapDispatchToProps)(AddVisionModal);
+export type PropsFromRedux = ConnectedProps<typeof AddVisionModal>
