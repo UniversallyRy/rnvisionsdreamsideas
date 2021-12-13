@@ -23,8 +23,8 @@ export const NoteStack: FunctionComponent<NavProp> = () => {
   return (
     <Stack.Navigator
     screenOptions={{
-      header: ({ scene, previous, navigation }:any) => (
-        <Header title="Notes" scene={scene} previous={previous} navigation={navigation} />
+      header: ({ route, previous, navigation }:any) => (
+        <Header title="Notes" scene={route} previous={previous} navigation={navigation} />
       ),
     }}
     initialRouteName="Notes"

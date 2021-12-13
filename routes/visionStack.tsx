@@ -23,13 +23,13 @@ const Stack = createStackNavigator<VisionStackParamList>()
 export const VisionStack: FunctionComponent<NavProp> = () => {
   return (
     <Stack.Navigator 
-    initialRouteName="Visions"
-    screenOptions={{
-        header: ({ scene, previous, navigation }:any) => (
-          <Header title="Visions" scene={scene} previous={previous} navigation={navigation} />
+      screenOptions={{
+        headerMode:"screen",
+        header: ({ route, previous, navigation }:any) => (
+          <Header title="Visions" scene={route} previous={previous} navigation={navigation} />
         ),
-        headerMode:"screen"
-    }}
+      }}
+      initialRouteName="Visions"
     >
       <Stack.Screen
         name="Visions"

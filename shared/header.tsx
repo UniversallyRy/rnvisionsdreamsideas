@@ -11,17 +11,8 @@ type HeaderProps = {
   previous: any,
 };
 
-const Header:React.FC<HeaderProps> = ({ scene, previous, navigation, title }) => {
-  // const openMenu = () => {
-  //   navigation.openDrawer();
-  // };
-  const { options } = scene.descriptor;
-  const header =
-    options.headerTitle !== undefined
-      ? options.headerTitle
-      : options.title !== undefined
-      ? options.title
-      : scene.route.name;
+const Header:React.FC<HeaderProps> = ({ scene, previous, navigation }) => {
+  const header = scene.name
   const theme = useTheme();
   const { toggleTheme, isThemeDark } = React.useContext(ThemesContext);
 
@@ -32,7 +23,7 @@ const Header:React.FC<HeaderProps> = ({ scene, previous, navigation, title }) =>
     >
     {previous ? (
         <Appbar.BackAction
-          onPress={navigation.goBack}
+          onPress={() => navigation.goBack()}
           color={theme.colors.background}
         />
     ) : (
