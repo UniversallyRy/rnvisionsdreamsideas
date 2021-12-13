@@ -4,6 +4,7 @@ import { Card, Button } from "react-native-paper";
 import { connect } from "react-redux";
 import { addPic } from "../../redux/actions";
 import * as ImagePicker from "expo-image-picker";
+import { ImageInfo } from 'expo-image-picker/build/ImagePicker.types'
 import * as ImageManipulator from "expo-image-manipulator"
 import { windowHeight, windowWidth } from "../../utils/dimensions";
 
@@ -42,7 +43,7 @@ const ImagePic: FunctionComponent<ImageProps> = ({ addPic }) => {
 
   const pickImage = async () => {
     // result variable saves image you pick from phone's gallery
-    let result = await ImagePicker.launchImageLibraryAsync({
+    let result:any = await ImagePicker.launchImageLibraryAsync({
       mediaTypes: ImagePicker.MediaTypeOptions.Images,
       allowsEditing: true,
       quality: 1,
@@ -57,6 +58,8 @@ const ImagePic: FunctionComponent<ImageProps> = ({ addPic }) => {
     if (!result.cancelled) {
       setImage(manipResult.uri);
       addPic({uri: manipResult.uri});
+    }else {
+      result.uri = ''
     }
   };
 
