@@ -5,13 +5,13 @@ import VisionDetails from "../components/visions/visionDetails";
 import Header from "../shared/header";
 
 type VisionStackParamList = {
-  Visions: undefined;
+  VisionScreen: undefined;
   VisionDetails: undefined;
 };
 
 type VisionScreenNavigationProp = StackNavigationProp<
   VisionStackParamList,
-  'Visions'
+  'VisionScreen'
 >;
 
 type NavProp = {
@@ -26,13 +26,13 @@ export const VisionStack: FunctionComponent<NavProp> = () => {
       screenOptions={{
         headerMode:"screen",
         header: ({ route, previous, navigation }:any) => (
-          <Header title="Visions" scene={route} previous={previous} navigation={navigation} />
+          <Header title="Visions " scene={route} previous={previous} navigation={navigation} />
         ),
       }}
-      initialRouteName="Visions"
+      initialRouteName="VisionScreen"
     >
       <Stack.Screen
-        name="Visions"
+        name="VisionScreen"
         component={Visions}
       />
       <Stack.Screen

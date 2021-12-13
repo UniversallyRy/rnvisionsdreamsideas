@@ -4,12 +4,12 @@ import NoteScreen from "../screens/noteScreen";
 import Header from "../shared/header";
 
 type NoteStackParamList = {
-  Notes: undefined;
+  NoteScreen: undefined;
 };
 
 type NoteScreenNavigationProp = StackNavigationProp<
   NoteStackParamList,
-  'Notes'
+  'NoteScreen'
 >;
 
 type NavProp = {
@@ -27,10 +27,10 @@ export const NoteStack: FunctionComponent<NavProp> = () => {
         <Header title="Notes" scene={route} previous={previous} navigation={navigation} />
       ),
     }}
-    initialRouteName="Notes"
+    initialRouteName="NoteScreen"
     >
       <Stack.Screen
-        name="Notes"
+        name="NoteScreen"
         component={NoteScreen}
         options={{ headerTitle: 'Notes' }}
       />
