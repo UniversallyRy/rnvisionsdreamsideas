@@ -10,7 +10,6 @@ import FlatButton from "../../shared/button";
 import * as yup from "yup";
 
 type AddJournalProps = {
-  addJournal: ((item: any) => void);
   setModalOpen: ((i:boolean) => void);
   errorText?: StyleProp<TextStyle>;
 }
