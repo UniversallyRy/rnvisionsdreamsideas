@@ -41,7 +41,7 @@ const Header:React.FC<HeaderProps> = ({ scene, previous, navigation }) => {
         />
       <TouchableRipple>
       <Switch
-          style={[{ marginRight: 15, backgroundColor: theme.colors.backdrop }]}
+          style={[{ marginRight: 15 }]}
           color={'darkgray'}
           value={isThemeDark}
           onValueChange={() => toggleTheme()}
