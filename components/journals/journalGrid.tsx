@@ -35,7 +35,8 @@ const JournalGridContainer: FunctionComponent<GridProps> = ({ state, navigation 
             <Text
               style={{
                 marginTop: 30,
-                bottom: 0,
+                bottom:3,
+                left: 3,
                 position: "absolute",
               }}
             >
@@ -86,6 +87,7 @@ const styles = StyleSheet.create<Styles>({
   gridText: {
     height: windowHeight * 0.25,
     width: windowWidth * 0.3,
+    paddingHorizontal: 10
   },
 });
 

@@ -53,8 +53,8 @@ const Header:React.FC<HeaderProps> = ({ scene, previous, navigation }) => {
 
 const styles = StyleSheet.create({
   headerContainer: {
-    margin: 15,
-    padding: 10,
+    margin: 10,
+    paddingBottom: 10,
   },
 });
 
