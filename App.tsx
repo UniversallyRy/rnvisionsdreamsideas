@@ -11,7 +11,7 @@ import {
 import "react-native-get-random-values";
 import "react-native-gesture-handler";
 import { AppRegistry, StatusBar } from "react-native";
-import React, { useState } from "react";
+import React, { useState, useMemo, useCallback } from "react";
 import { Provider } from "react-redux";
 import { store, /*persistor */ } from "./redux/store";
 import AppLoading from 'expo-app-loading';
@@ -50,17 +50,17 @@ const getFonts = () =>
 
 const App = () => {
   const [fontsLoaded, setFontsLoaded] = useState(false);
-  const [isThemeDark, setIsThemeDark] = React.useState(false);
+  const [isThemeDark, setIsThemeDark] = useState(false);
   const [persistLoaded, setPersistLoaded] = useState(true);
 
 
   let theme = isThemeDark ? CombinedDarkTheme : CombinedDefaultTheme;
 
-  const toggleTheme = React.useCallback(() => {
+  const toggleTheme = useCallback(() => {
     return setIsThemeDark(!isThemeDark);
   }, [isThemeDark]);
 
-  const preferences = React.useMemo(
+  const preferences = useMemo(
     () => ({
       toggleTheme,
       isThemeDark,

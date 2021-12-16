@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import { StyleSheet, TouchableOpacity, StyleProp, TextStyle, ViewStyle } from "react-native";
 import { useTheme, Appbar, TouchableRipple, Switch } from "react-native-paper";
 import { NavigationScreenProp } from 'react-navigation';
@@ -14,7 +14,7 @@ type HeaderProps = {
 const Header:React.FC<HeaderProps> = ({ scene, previous, navigation }) => {
   const header = scene.name
   const theme = useTheme();
-  const { toggleTheme, isThemeDark } = React.useContext(ThemesContext);
+  const { toggleTheme, isThemeDark } = useContext(ThemesContext);
 
   return (
     <Appbar.Header
