@@ -20,7 +20,7 @@ type NavProp = {
 
 const Stack = createStackNavigator<VisionStackParamList>()
 
-export const VisionStack: FunctionComponent<NavProp> = () => {
+const VisionStack: FunctionComponent<NavProp> = () => {
   return (
     <Stack.Navigator 
       screenOptions={{
@@ -43,5 +43,7 @@ export const VisionStack: FunctionComponent<NavProp> = () => {
     </Stack.Navigator>
   );
 };
+
+export default VisionStack;
 
 

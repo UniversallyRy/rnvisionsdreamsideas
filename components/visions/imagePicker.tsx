@@ -8,19 +8,13 @@ import { ImageInfo } from 'expo-image-picker/build/ImagePicker.types'
 import * as ImageManipulator from "expo-image-manipulator"
 import { windowHeight, windowWidth } from "../../utils/dimensions";
 
-type ImageProps = {
-  addPic: ((item:any) => void);
-  visionButtonContainer: StyleProp<ViewStyle>;
-  uploadButton: StyleProp<ViewStyle>;
-  image: StyleProp<ImageStyle>;
-}
 interface Styles {
   visionButtonContainer: ViewStyle;
   uploadButton: ViewStyle;
   image: ImageStyle;
 }
 
-const ImagePic: FunctionComponent<ImageProps> = () => {
+const ImagePic = () => {
   const [image, setImage] = useState('');
   const dispatch = useDispatch()
   useEffect(() => {
@@ -127,4 +121,3 @@ const styles = StyleSheet.create<Styles>({
 export default ImagePic;
 
 // {isOn: boolean, toggleOn: () => void}
-export type PropsFromImg = ConnectedProps<typeof ImagePic>

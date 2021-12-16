@@ -18,7 +18,7 @@ type NavProp = {
 
 const Stack = createStackNavigator<AboutStackParamList>()
 
-export const AboutStack: FunctionComponent<NavProp> = () => {
+const AboutStack: FunctionComponent<NavProp> = () => {
   return (
     <Stack.Navigator 
       initialRouteName="About"
@@ -37,4 +37,4 @@ export const AboutStack: FunctionComponent<NavProp> = () => {
   );
 };
 
-
+export default AboutStack;

@@ -2,10 +2,10 @@ import React, { useState, useRef, useEffect } from "react";
 import { View, Animated, Modal, StyleProp, ViewStyle, StyleSheet } from "react-native";
 import { NavigationScreenProp } from 'react-navigation';
 import { Surface, useTheme } from "react-native-paper";
+import { Icon } from "../shared/icon";
 import AddVision from "../components/visions/addVisionModal";
 import VisionsContainer from "../components/visions/visionImageList";
 import VisionGridContainer from "../components/visions/visionImageGrid";
-import { Icon } from "../shared/icon";
 
 interface VisionProps {
   navigation: NavigationScreenProp<string, object>;

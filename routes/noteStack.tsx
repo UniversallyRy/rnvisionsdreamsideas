@@ -19,7 +19,7 @@ type NavProp = {
 const Stack = createStackNavigator<NoteStackParamList>()
 
 
-export const NoteStack: FunctionComponent<NavProp> = () => {
+const NoteStack: FunctionComponent<NavProp> = () => {
   return (
     <Stack.Navigator
     screenOptions={{
@@ -38,3 +38,5 @@ export const NoteStack: FunctionComponent<NavProp> = () => {
     </Stack.Navigator>
   );
 };
+
+export default NoteStack

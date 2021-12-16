@@ -6,11 +6,11 @@ import { AntDesign } from "@expo/vector-icons";
 import { Formik } from "formik";
 import { addVision } from "../../redux/reducers/visions";
 import { globalStyles } from "../../styles/global";
-import ImagePic, { PropsFromImg } from "./imagePicker";
+import ImagePic from "./imagePicker";
 import { windowHeight, windowWidth } from "../../utils/dimensions";
 import * as yup from "yup";
 
-interface VisionProps extends PropsFromImg {
+interface VisionProps {
   addVision:((item: any) => void);
   stateUri: string;
   setModalOpen:((arg0:boolean) => boolean);
