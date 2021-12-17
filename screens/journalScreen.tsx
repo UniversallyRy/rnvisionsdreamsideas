@@ -1,4 +1,4 @@
-import React, { useState, useEffect} from "react";
+import React, { useState } from "react";
 import { View, Modal, Text, StyleSheet, StyleProp, TextStyle, ViewStyle } from "react-native";
 import { Card, Surface } from "react-native-paper";
 import { NavigationScreenProp } from 'react-navigation';
