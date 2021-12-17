@@ -1,5 +1,6 @@
 
 const months = [
+    'All',
     'Jan',
     'Feb',
     'Mar',

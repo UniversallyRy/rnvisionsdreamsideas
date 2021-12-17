@@ -14,7 +14,7 @@ export interface IJournalState {
 }
 
 const initialJournals:IJournalState = {
-  monthFilter: 'Nov',
+  monthFilter: 'all',
   journals:[
     {
     title: "Journal Entry 1",

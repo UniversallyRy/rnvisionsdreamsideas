@@ -7,10 +7,8 @@ import { deleteJournal } from "../../redux/reducers/journals";
 import { windowWidth } from "../../utils/dimensions";
 
 type JournalListProps = {
-  journals: {
-    monthFilter: string;
+    month: string;
     journals: []
-  };
   navigation: NavigationScreenProp<string, object>;
   deleteJournal: ((item: object) => void);
   buttonsContainer: StyleProp<ViewStyle>;
@@ -37,17 +35,17 @@ interface Styles {
   journalDate: TextStyle;
 }
 
-const JournalList: FunctionComponent<JournalListProps> = ({ journals,  navigation }) => {
+const JournalList: FunctionComponent<JournalListProps> = ({ journals, month,  navigation }) => {
   const dispatch = useDispatch();
 
   return (
     <Card style={styles.container}>
       <FlatList
         style={{ paddingTop: 10 }}
-        data={ journals.journals }
+        data={ journals }
         keyExtractor={ (item, index) => index.toString() }
         renderItem={ ({ item }:any) => {
-          if (!item.date.includes(journals.monthFilter)) {
+          if ((month != 'All') && !item.date.includes(month)) {
             return null
           }
           else{
@@ -154,7 +152,8 @@ const styles = StyleSheet.create<Styles>({
 const mapStateToProps = (state:any) => {
   const { journals } = state
   return {
-    journals
+    journals: journals.journals,
+    month: journals.monthFilter
   };
 };
 
