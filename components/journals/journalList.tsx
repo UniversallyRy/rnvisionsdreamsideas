@@ -96,9 +96,8 @@ const JournalList: FunctionComponent<JournalListProps> = ({ journals, month,  na
 
 const styles = StyleSheet.create<Styles>({
   container: {
-    position: 'absolute',
+    alignSelf: "center",
     marginTop: 50,
-    paddingTop: 5,
   },
   journalCard: {
     margin: 5,

@@ -7,8 +7,8 @@ import { windowHeight, windowWidth } from "../../utils/dimensions";
 import { changeMonth } from "../../redux/reducers/journals";
 
 
-type GridProps = {
-    state: object[];
+type FilterProps = {
+    state: string;
     container: StyleProp<ViewStyle>;
     listContainer: StyleProp<ViewStyle>;
     listItem: StyleProp<TextStyle>;
@@ -20,7 +20,7 @@ interface Styles {
     listItem: ViewStyle;
   }
 
-const JournalFilter = ({ state }) => {
+const JournalFilter: React.FC<FilterProps> = ({ state }) => {
     const [expanded, setExpanded] = useState(false);
     const handlePress = () => setExpanded(!expanded);
     const dispatch = useDispatch();
@@ -66,6 +66,8 @@ const JournalFilter = ({ state }) => {
 
 const styles = StyleSheet.create<Styles>({
     container: {
+      position: 'absolute',
+      width: windowWidth,
       margin: 1,
       zIndex: 1,
       backgroundColor: 'lightgray',

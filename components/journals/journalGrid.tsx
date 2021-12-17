@@ -7,8 +7,8 @@ import { windowHeight, windowWidth } from "../../utils/dimensions";
 
 type GridProps = {
   navigation: NavigationScreenProp<string, object>;
-    monthFilter: string,
-    journals: Object[]
+  monthFilter: string,
+  journals: Object[]
   month: string;
   container: StyleProp<ViewStyle>;
   gridContainer: StyleProp<ViewStyle>;
@@ -67,8 +67,7 @@ const JournalGridContainer: FunctionComponent<GridProps> = ({ journals, month, n
 
 const styles = StyleSheet.create<Styles>({
   container: {
-    position: 'absolute',
-    flex: 1,
+    height: windowHeight,
     marginTop: 35,
     paddingTop: 5,
   },

@@ -30,7 +30,6 @@ interface Styles {
 const JournalScreen: React.FC<JournalProps>= ({ navigation }) => {
   const [modalOpen, setModalOpen] = useState(false);
   const [gridView, setGridView] = useState(true);
-  const [rerender, setRerender] = useState(false);
 
   const toggleGrid = () => {
     setGridView(!gridView);
@@ -67,7 +66,6 @@ const JournalScreen: React.FC<JournalProps>= ({ navigation }) => {
 
 const styles = StyleSheet.create<Styles>({
   journalContainer:{
-    flex: 1,
     fontFamily: "roboto-black",
   },
   addJournalTitle: {
