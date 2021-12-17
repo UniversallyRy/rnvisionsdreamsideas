@@ -5,6 +5,7 @@ import { NavigationScreenProp } from 'react-navigation';
 import AddJournalModal from "../components/journals/addJournalModal";
 import JournalList from "../components/journals/journalList";
 import JournalGridContainer from "../components/journals/journalGrid";
+import JournalFilter from "../components/journals/journalFilter";
 import { Icon } from "../shared/icon";
 import { windowHeight, windowWidth } from "../utils/dimensions";
 
@@ -49,6 +50,7 @@ const JournalScreen: React.FC<JournalProps>= ({ navigation }) => {
                 />
               </Surface>
           </Modal>
+          <JournalFilter/>
         {gridView ? (
           <JournalGridContainer navigation={navigation} />
         ) : (
