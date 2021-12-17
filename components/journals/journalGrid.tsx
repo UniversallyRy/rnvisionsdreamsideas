@@ -1,9 +1,8 @@
-import React, { FunctionComponent, useCallback, memo,  useState} from "react";
+import React, { FunctionComponent} from "react";
 import { View, FlatList, Text, StyleSheet, StyleProp, TextStyle, ViewStyle } from "react-native";
 import { NavigationScreenProp } from 'react-navigation';
 import { connect } from "react-redux";
 import { Card } from "react-native-paper";
-import { changeMonth } from "../../redux/reducers/journals";
 import { windowHeight, windowWidth } from "../../utils/dimensions";
 
 type GridProps = {
