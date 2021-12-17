@@ -39,15 +39,16 @@ export const DeleteButton:React.FC<IconProps> = ({ item, onPress }) => {
 };
 const styles = StyleSheet.create<Styles>({
   modalToggle: {
-    marginBottom: 15,
+    marginTop: 3,
+    marginBottom: 1,
     marginHorizontal: 84,
     elevation: 2,
     backgroundColor: "silver"
   },
   delete: {
     margin: 5,
+    elevation: 2,
     backgroundColor: "red",
-    elevation: 2
   }
 });
 
