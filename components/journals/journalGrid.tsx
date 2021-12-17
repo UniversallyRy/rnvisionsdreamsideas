@@ -68,8 +68,10 @@ const JournalGridContainer: FunctionComponent<GridProps> = ({ journals, month, n
 
 const styles = StyleSheet.create<Styles>({
   container: {
+    position: 'absolute',
     flex: 1,
-    paddingTop: 10,
+    marginTop: 35,
+    paddingTop: 5,
   },
   gridContainer: {
     marginLeft: "auto",

@@ -1,5 +1,5 @@
 import React, { FunctionComponent } from "react";
-import { Text, StyleSheet, FlatList, StyleProp, TextStyle, ViewStyle } from "react-native";
+import { Text, StyleSheet, FlatList, StyleProp, TextStyle, ViewStyle, View } from "react-native";
 import { Surface, Button, Card, Paragraph} from "react-native-paper";
 import { NavigationScreenProp } from 'react-navigation';
 import { connect, useDispatch } from "react-redux";
@@ -7,8 +7,8 @@ import { deleteJournal } from "../../redux/reducers/journals";
 import { windowWidth } from "../../utils/dimensions";
 
 type JournalListProps = {
-    month: string;
-    journals: []
+  month: string;
+  journals: [];
   navigation: NavigationScreenProp<string, object>;
   deleteJournal: ((item: object) => void);
   buttonsContainer: StyleProp<ViewStyle>;
@@ -39,7 +39,7 @@ const JournalList: FunctionComponent<JournalListProps> = ({ journals, month,  na
   const dispatch = useDispatch();
 
   return (
-    <Card style={styles.container}>
+    <View style={styles.container}>
       <FlatList
         style={{ paddingTop: 10 }}
         data={ journals }
@@ -90,14 +90,15 @@ const JournalList: FunctionComponent<JournalListProps> = ({ journals, month,  na
           )}
         }}
       />
-    </Card>
+    </View>
   );
 };
 
 const styles = StyleSheet.create<Styles>({
   container: {
-    flex: 1,
-    paddingTop: 10,
+    position: 'absolute',
+    marginTop: 50,
+    paddingTop: 5,
   },
   journalCard: {
     margin: 5,

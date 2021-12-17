@@ -48,6 +48,7 @@ const JournalFilter = ({ state }) => {
                         title={item}
                         left={() => <List.Icon icon="calendar" />}
                         onPress={() => handleItemPress(item)}
+                        titleStyle={{fontSize: 10}}
                     />
                 )
             })}
@@ -65,15 +66,16 @@ const JournalFilter = ({ state }) => {
 
 const styles = StyleSheet.create<Styles>({
     container: {
-      paddingTop: 10,
+      margin: 1,
+      zIndex: 1,
+      backgroundColor: 'lightgray',
     },
     listContainer: {
-      padding: 10,
-      zIndex: 0,
+      justifyContent: "center",
+      height: 40,
     },
     listItem: {
-      borderRadius: 4,
-      fontSize: 6,
+      height: 50,
     }
   });
   
