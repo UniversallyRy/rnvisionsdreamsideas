@@ -4,36 +4,40 @@ import moment from "moment";
 import lorem from "../../shared/lorem";
 
 export interface IJournalState {
-   monthFilter: string;
-   journals: {
+  monthFilter: string;
+  journals: {
     title: string;
     body: string;
     id: string;
     date: string;
-   }[];
+    isEditing: boolean;
+  }[];
 }
 
 const initialJournals:IJournalState = {
-  monthFilter: 'all',
+  monthFilter: 'All',
   journals:[
     {
-    title: "Journal Entry 1",
-    body: lorem,
-    id: uuid.generate(),
-    date: moment("2014-02-17").format("MMMM Do YYYY"),
-  },
-  {
-    title: "Journal entry 2",
-    body: lorem,
-    id: uuid.generate(),
-    date: moment("2017-11-07").format("MMMM Do YYYY"),
-  },
-  {
-    title: "Journal Entry 33",
-    body: lorem,
-    id: uuid.generate(),
-    date: moment("2020-07-30").format("MMMM Do YYYY"),
-  },
+      title: "Journal Entry 1",
+      body: lorem,
+      id: uuid.generate(),
+      date: moment("2014-02-17").format("MMMM Do YYYY"),
+      isEditing: false,
+    },
+    {
+      title: "Journal entry 2",
+      body: lorem,
+      id: uuid.generate(),
+      date: moment("2017-11-07").format("MMMM Do YYYY"),
+      isEditing: false,
+    },
+    {
+      title: "Journal Entry 33",
+      body: lorem,
+      id: uuid.generate(),
+      date: moment("2020-07-30").format("MMMM Do YYYY"),
+      isEditing: false,
+    },
   ]
 };
 
@@ -47,14 +51,26 @@ const journalsReducer = createSlice({
         title: action.payload.title,
         body: action.payload.body,
         id: uuid.generate(),
-        date: moment().format("MMMM Do YYYY")
+        date: moment().format("MMMM Do YYYY"),
+        isEditing: false,
       })
     },
     deleteJournal: (state, action) => {
-      return state.journals.filter((todo) => todo.id != action.payload.id);
+       state.journals = state.journals.filter((item) => item.id != action.payload.id); 
     },
     editJournal: (state, action) => {
-      return state;
+      const index = state.journals.findIndex(item => item.id === action.payload.id);
+      state.journals[index] = {
+        ...state.journals[index],
+        ...action.payload,
+      };
+    },
+    editJournalToggle: (state, action) => {
+      state.journals.map((item) => {
+         if(item.id === action.payload.id){
+           item.isEditing = !item.isEditing
+         }
+      });
     },
     changeMonth: (state, action) => {
       state.monthFilter = action.payload;
@@ -72,5 +88,5 @@ const journalsReducer = createSlice({
 })
 
 const { actions, reducer } = journalsReducer;
-export const { addJournal, deleteJournal, changeMonth } = actions;
+export const { addJournal, deleteJournal, changeMonth, editJournal, editJournalToggle} = actions;
 export default reducer
