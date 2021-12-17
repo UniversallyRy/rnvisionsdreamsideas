@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect} from "react";
 import { View, Modal, Text, StyleSheet, StyleProp, TextStyle, ViewStyle } from "react-native";
 import { Card, Surface } from "react-native-paper";
 import { NavigationScreenProp } from 'react-navigation';
@@ -30,37 +30,38 @@ interface Styles {
 const JournalScreen: React.FC<JournalProps>= ({ navigation }) => {
   const [modalOpen, setModalOpen] = useState(false);
   const [gridView, setGridView] = useState(true);
+  const [rerender, setRerender] = useState(false);
 
   const toggleGrid = () => {
     setGridView(!gridView);
   };
 
   return (
-    <Card style={styles.journalContainer}>
-          <Modal
-            visible={modalOpen}
-            onDismiss={() => setModalOpen(false)}
-          >
-              <Text style={styles.addJournalTitle}>Add A Journal Entry</Text>
-              <AddJournalModal setModalOpen={setModalOpen} />
-              <Surface style={styles.closeModalContainer}>
-                <Icon
-                  item="close"
-                  onPress={() => setModalOpen(false)}
-                />
-              </Surface>
-          </Modal>
-          <JournalFilter/>
-        {gridView ? (
-          <JournalGridContainer navigation={navigation} />
-        ) : (
-          <JournalList navigation={navigation} />
-        )}
-        <View style={styles.visionAddToggle}>
-          <Icon item="plus" onPress={() => setModalOpen(true)} />
-          <Icon item="grid" onPress={() => toggleGrid()} />
-        </View>
-    </Card>
+      <Card style={styles.journalContainer}>
+            <Modal
+              visible={modalOpen}
+              onDismiss={() => setModalOpen(false)}
+            >
+                <Text style={styles.addJournalTitle}>Add A Journal Entry</Text>
+                <AddJournalModal setModalOpen={setModalOpen} />
+                <Surface style={styles.closeModalContainer}>
+                  <Icon
+                    item="close"
+                    onPress={() => setModalOpen(false)}
+                  />
+                </Surface>
+            </Modal>
+            <JournalFilter/>
+          {gridView ? (
+            <JournalGridContainer navigation={navigation} />
+          ) : (
+            <JournalList navigation={navigation} />
+          )}
+          <View style={styles.visionAddToggle}>
+            <Icon item="plus" onPress={() => setModalOpen(true)} />
+            <Icon item="grid" onPress={() => toggleGrid()} />
+          </View>
+      </Card>
   );
 };
 

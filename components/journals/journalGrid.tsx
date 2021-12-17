@@ -1,13 +1,16 @@
-import React, { FunctionComponent, useCallback, memo } from "react";
+import React, { FunctionComponent, useCallback, memo,  useState} from "react";
 import { View, FlatList, Text, StyleSheet, StyleProp, TextStyle, ViewStyle } from "react-native";
 import { NavigationScreenProp } from 'react-navigation';
 import { connect } from "react-redux";
 import { Card } from "react-native-paper";
+import { changeMonth } from "../../redux/reducers/journals";
 import { windowHeight, windowWidth } from "../../utils/dimensions";
 
 type GridProps = {
   navigation: NavigationScreenProp<string, object>;
-  state: object[];
+    monthFilter: string,
+    journals: Object[]
+  month: string;
   container: StyleProp<ViewStyle>;
   gridContainer: StyleProp<ViewStyle>;
   gridItem: StyleProp<TextStyle>;
@@ -21,36 +24,7 @@ interface Styles {
   gridText: TextStyle;
 }
 
-const JournalGridContainer: FunctionComponent<GridProps> = ({ state, navigation }) => {
-
-  const JournalGridList = memo(
-    function GridJournal({ data, index }:any) {
-      return (
-        <Card
-          style={ styles.gridItem }
-          onPress={ () => navigation.navigate("JournalDetails", { title:data.title, body:data.body, date:data.date }) }
-        >
-          <Card.Content style={ styles.gridText }>
-            <Text>{ data.title }</Text>
-            <Text
-              style={{
-                marginTop: 30,
-                bottom:3,
-                left: 3,
-                position: "absolute",
-              }}
-            >
-              { data.date }
-            </Text>
-          </Card.Content>
-        </Card>
-      );
-    },
-  );
-
-  const renderList = useCallback(({ item, index }) => {
-    return <JournalGridList data={ item } />;
-  }, []);
+const JournalGridContainer: FunctionComponent<GridProps> = ({ journals, month, navigation }) => {     
 
   return (
     <View
@@ -60,8 +34,33 @@ const JournalGridContainer: FunctionComponent<GridProps> = ({ state, navigation 
         numColumns={ 3 }
         contentContainerStyle={ styles.gridContainer }
         scrollEnabled
-        data={ state }
-        renderItem={ renderList }
+        data={ journals }
+        renderItem={ ({ item }:any) => {
+          if (!item.date.includes(month)) {
+            return null
+          }else{
+          return (
+            <Card
+              key={item.title + '_key'}
+              style={ styles.gridItem }
+              onPress={ () => navigation.navigate("JournalDetails", { title:item.title, body:item.body, date:item.date }) }
+            >
+              <Card.Content style={ styles.gridText }>
+                <Text>{ item.title }</Text>
+                <Text
+                  style={{
+                    marginTop: 30,
+                    bottom:3,
+                    left: 3,
+                    position: "absolute",
+                  }}
+                >
+                  { item.date }
+                </Text>
+              </Card.Content>
+            </Card>
+          );
+        }}}
       />
     </View>
   );
@@ -93,7 +92,8 @@ const styles = StyleSheet.create<Styles>({
 
 const mapStateToProps = (state:any) => {
   return {
-    state: state.journals,
+    month: state.journals.monthFilter,
+    journals: state.journals.journals,
   };
 };
 

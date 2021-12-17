@@ -1,9 +1,11 @@
 import React, {  useState } from 'react'
-import { connect } from 'react-redux'
+import { connect, useDispatch } from 'react-redux'
 import { StyleSheet, StyleProp, TextStyle, ViewStyle } from "react-native";
 import { List } from 'react-native-paper';
 import months from '../../utils/months';
 import { windowHeight, windowWidth } from "../../utils/dimensions";
+import { changeMonth } from "../../redux/reducers/journals";
+
 
 type GridProps = {
     state: object[];
@@ -18,36 +20,40 @@ interface Styles {
     listItem: ViewStyle;
   }
 
-const JournalFilter = () => {
-    const [newState, setState] = useState()
-    const [expanded, setExpanded] = React.useState(true);
-
+const JournalFilter = ({ state }) => {
+    const [expanded, setExpanded] = useState(false);
     const handlePress = () => setExpanded(!expanded);
+    const dispatch = useDispatch();
+
+    const handleItemPress = (item) => {
+        dispatch(changeMonth(item))
+        setExpanded(false);
+    }
 
     
     const MonthsList = () => {
         return (
             <List.Accordion
                 style={styles.listContainer}
-                title="By Month"
+                title={state}
                 left={props => <List.Icon {...props} icon="calendar" />}
                 expanded={expanded}
                 onPress={handlePress}
             >
             {months.map(item => {
                 return(
-                     <List.Item 
+                    <List.Item 
                         style={styles.listItem} 
                         key={item} 
                         title={item}
                         left={() => <List.Icon icon="calendar" />}
+                        onPress={() => handleItemPress(item)}
                     />
                 )
             })}
             </List.Accordion>
         )
     }
-  
 
     return (
         <List.Section style={styles.container}>
@@ -72,12 +78,10 @@ const styles = StyleSheet.create<Styles>({
   });
   
 
-const mapStateToProps = (state) => ({
-  
-})
-
-const mapDispatchToProps = {
-  
+const mapStateToProps = (state) => {
+    return {
+        state: state.journals.monthFilter,
+      };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(JournalFilter)
+export default connect(mapStateToProps)(JournalFilter);

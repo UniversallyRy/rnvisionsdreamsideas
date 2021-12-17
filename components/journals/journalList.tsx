@@ -7,7 +7,10 @@ import { deleteJournal } from "../../redux/reducers/journals";
 import { windowWidth } from "../../utils/dimensions";
 
 type JournalListProps = {
-  state: object[];
+  journals: {
+    monthFilter: string;
+    journals: []
+  };
   navigation: NavigationScreenProp<string, object>;
   deleteJournal: ((item: object) => void);
   buttonsContainer: StyleProp<ViewStyle>;
@@ -34,54 +37,60 @@ interface Styles {
   journalDate: TextStyle;
 }
 
-const JournalList: FunctionComponent<JournalListProps> = ({ state, navigation }) => {
+const JournalList: FunctionComponent<JournalListProps> = ({ journals,  navigation }) => {
   const dispatch = useDispatch();
 
   return (
     <Card style={styles.container}>
       <FlatList
         style={{ paddingTop: 10 }}
-        data={ state }
+        data={ journals.journals }
         keyExtractor={ (item, index) => index.toString() }
-        renderItem={ ({ item }:any) => (
-          <Card onPress={ () => navigation.navigate("JournalDetails", { title:item.title, body:item.body, date:item.date})} style={ styles.journalCard }>
-            <Surface
-              style={ styles.journalText }
-            >
-              <Card.Content>
-                <Paragraph style={ styles.journalTitle }>
-                  { item.title }
-                </Paragraph>
-                <Text style={ styles.divider } />
-                <Paragraph style={ styles.journalParagraph }>
-                  { item.body }
-                </Paragraph>
-                <Text style={ styles.divider } />
-                <Paragraph style={ styles.journalDate }>
-                  { item.date }
-                </Paragraph>
-              </Card.Content>
-            </Surface>
-            <Surface style={ styles.buttonsContainer }>
-              <Button
-                style={ styles.editButton }
-                icon="lead-pencil"
-                mode="contained"
-              >
-                Edit
-              </Button>
-              <Button
-                style={ styles.deleteButton }
-                color="red"
-                icon="close-outline"
-                mode="contained"
-                onPress={ () => dispatch(deleteJournal({ id: item.id })) }
-              >
-                Delete
-              </Button>
-            </Surface>
-          </Card>
-        )}
+        renderItem={ ({ item }:any) => {
+          if (!item.date.includes(journals.monthFilter)) {
+            return null
+          }
+          else{
+            return(
+              <Card onPress={ () => navigation.navigate("JournalDetails", { title:item.title, body:item.body, date:item.date})} style={ styles.journalCard }>
+                <Surface
+                  style={ styles.journalText }
+                >
+                  <Card.Content>
+                    <Paragraph style={ styles.journalTitle }>
+                      { item.title }
+                    </Paragraph>
+                    <Text style={ styles.divider } />
+                    <Paragraph style={ styles.journalParagraph }>
+                      { item.body }
+                    </Paragraph>
+                    <Text style={ styles.divider } />
+                    <Paragraph style={ styles.journalDate }>
+                      { item.date }
+                    </Paragraph>
+                  </Card.Content>
+                </Surface>
+                <Surface style={ styles.buttonsContainer }>
+                  <Button
+                    style={ styles.editButton }
+                    icon="lead-pencil"
+                    mode="contained"
+                  >
+                    Edit
+                  </Button>
+                  <Button
+                    style={ styles.deleteButton }
+                    color="red"
+                    icon="close-outline"
+                    mode="contained"
+                    onPress={ () => dispatch(deleteJournal({ id: item.id })) }
+                  >
+                    Delete
+                  </Button>
+                </Surface>
+              </Card>
+          )}
+        }}
       />
     </Card>
   );
@@ -143,8 +152,9 @@ const styles = StyleSheet.create<Styles>({
 
 
 const mapStateToProps = (state:any) => {
+  const { journals } = state
   return {
-    state: state.journals,
+    journals
   };
 };
 

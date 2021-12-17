@@ -1,18 +1,22 @@
 import { createSlice } from '@reduxjs/toolkit'
-// import { ADD_JOURNAL, EDIT_JOURNAL, DELETE_JOURNAL } from "../actionTypes";
 import uuid from "../../utils/uuid";
 import moment from "moment";
 import lorem from "../../shared/lorem";
 
 export interface IJournalState {
-   title: string;
-   body: string;
-   id: string;
-   date: string;
+   monthFilter: string;
+   journals: {
+    title: string;
+    body: string;
+    id: string;
+    date: string;
+   }[];
 }
 
-const initialJournals:IJournalState[] = [
-  {
+const initialJournals:IJournalState = {
+  monthFilter: 'Nov',
+  journals:[
+    {
     title: "Journal Entry 1",
     body: lorem,
     id: uuid.generate(),
@@ -30,15 +34,16 @@ const initialJournals:IJournalState[] = [
     id: uuid.generate(),
     date: moment("2020-07-30").format("MMMM Do YYYY"),
   },
-];
+  ]
+};
 
 
-const journals = createSlice({
+const journalsReducer = createSlice({
   name:"Journals",
   initialState: initialJournals,
   reducers:{
     addJournal: (state, action) => {
-      state.push({
+      state.journals.push({
         title: action.payload.title,
         body: action.payload.body,
         id: uuid.generate(),
@@ -46,11 +51,15 @@ const journals = createSlice({
       })
     },
     deleteJournal: (state, action) => {
-      return state.filter((todo) => todo.id != action.payload.id);
+      return state.journals.filter((todo) => todo.id != action.payload.id);
     },
     editJournal: (state, action) => {
       return state;
-    }
+    },
+    changeMonth: (state, action) => {
+      state.monthFilter = action.payload;
+      return state;
+    },
   },
   extraReducers: {
   }
@@ -61,24 +70,7 @@ const journals = createSlice({
   //   return state;
   // })
 })
-// const journals = createReducer(initialJournals, (builder) => {
-//   builder
-//   .addCase(ADD_JOURNAL, (state, action) => {
-//     state.push({
-//       title: action.payload.title,
-//       body: action.payload.body,
-//       id: uuid.generate(),
-//       date: moment().format("MMMM Do YYYY"),
-//     })
-//   })
-//   .addCase(DELETE_JOURNAL, (state, action) => {
-//     return state.filter((todo) => todo.id != action.payload.id);
-//     })
-//   .addCase(EDIT_JOURNAL, (state, action) => {
-//     return state;
-//   })
-// })
 
-const { actions, reducer } = journals
-export const { addJournal, deleteJournal} = actions;
+const { actions, reducer } = journalsReducer;
+export const { addJournal, deleteJournal, changeMonth } = actions;
 export default reducer
