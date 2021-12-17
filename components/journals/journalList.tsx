@@ -3,7 +3,7 @@ import { StyleSheet, FlatList, StyleProp, ViewStyle, View } from "react-native";
 import { NavigationScreenProp } from 'react-navigation';
 import { connect } from "react-redux";
 import JournalItem from "./journalItem";
-import { windowWidth } from "../../utils/dimensions";
+import { windowHeight, windowWidth } from "../../utils/dimensions";
 
 type JournalListProps = {
   month: string;
@@ -21,16 +21,14 @@ const JournalList: FunctionComponent<JournalListProps> = ({ journals, month,  na
   return (
     <View style={styles.container}>
       <FlatList
-        style={{ paddingTop: 10 }}
         data={ journals }
         keyExtractor={ (item, index) => index.toString() }
         renderItem={ ({ item }:any) => {
           if ((month != 'All') && !item.date.includes(month)) {
             return null
           }
-          else{
             return <JournalItem navigation={navigation} item={item}/>
-          }
+    
         }}
       />
     </View>
@@ -41,6 +39,8 @@ const styles = StyleSheet.create<Styles>({
   container: {
     alignSelf: "center",
     marginTop: 50,
+    paddingBottom: 40,
+    borderRadius: 22,
   },
 });
 

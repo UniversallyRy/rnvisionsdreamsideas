@@ -1,5 +1,5 @@
 import React, { FunctionComponent, useState } from "react";
-import { Text, StyleSheet, FlatList, StyleProp, TextStyle, ViewStyle, View } from "react-native";
+import { Text, StyleSheet, KeyboardAvoidingView, StyleProp, TextStyle, ViewStyle } from "react-native";
 import { Surface, Button, Card, Paragraph, TextInput } from "react-native-paper";
 import { NavigationScreenProp } from 'react-navigation';
 import { connect, useDispatch } from "react-redux";
@@ -50,6 +50,7 @@ const JournalItem: FunctionComponent<JournalListProps> = ({ item,  navigation })
   };
 
   return (
+            <KeyboardAvoidingView>
               <Card onPress={ () => navigation.navigate("JournalDetails", { title:item.title, body:item.body, date:item.date})} style={ styles.journalCard }>
                 <Surface
                   style={ styles.journalText }
@@ -69,11 +70,11 @@ const JournalItem: FunctionComponent<JournalListProps> = ({ item,  navigation })
                     <Text style={ styles.divider } />
                     {item.isEditing
                     ?<TextInput
-                      label={'Body'}
-                      value={textBody}
-                      multiline={true}
-                      onChangeText={text => setBody(text)}
-                      autoComplete
+                        label={'Body'}
+                        value={textBody}
+                        multiline={true}
+                        onChangeText={text => setBody(text)}
+                        autoComplete
                     />
                     :<Paragraph style={ styles.journalParagraph }>
                       { item.body }
@@ -91,13 +92,13 @@ const JournalItem: FunctionComponent<JournalListProps> = ({ item,  navigation })
                 <Surface style={ styles.buttonsContainer }>
                   {item.isEditing 
                   ?<Button
-                    style={ styles.editButton }
-                    icon="lead-pencil"
-                    mode="contained"
-                    onPress={() => editHandler(item.id)}
-                  >
-                    Save
-                  </Button>
+                    style={ styles.editButton}
+                        icon="lead-pencil"
+                        mode="contained"
+                        onPress={() => editHandler(item.id)}
+                    >
+                        Save
+                    </Button>
                   :<Button
                     style={ styles.editButton }
                     icon="lead-pencil"
@@ -109,14 +110,14 @@ const JournalItem: FunctionComponent<JournalListProps> = ({ item,  navigation })
                   }
                   {item.isEditing 
                   ?<Button
-                    style={ styles.deleteButton }
+                    style={ styles.deleteButton}
                     color="red"
                     icon="close-outline"
                     mode="contained"
                     onPress={ () => dispatch(editJournalToggle({id: item.id})) }
-                  >
-                    Cancel
-                  </Button>
+                   >
+                        Cancel
+                   </Button>
                   :<Button
                     style={ styles.deleteButton }
                     color="red"
@@ -129,16 +130,18 @@ const JournalItem: FunctionComponent<JournalListProps> = ({ item,  navigation })
                   }
                 </Surface>
               </Card>
+            </KeyboardAvoidingView>
           )}
 
 const styles = StyleSheet.create<Styles>({
   journalCard: {
     flex: 1,
     margin: 5,
+    paddingTop: 3,
     borderRadius: 10,
     width: windowWidth * 0.92,
     height: windowHeight * 0.40,
-    elevation: 3,
+    elevation: 1,
   },
   journalText: {
     alignSelf: "center",

@@ -66,6 +66,9 @@ const JournalScreen: React.FC<JournalProps>= ({ navigation }) => {
 
 const styles = StyleSheet.create<Styles>({
   journalContainer:{
+    width: windowWidth,
+    height: windowHeight,
+    flex: 1,
     fontFamily: "roboto-black",
   },
   addJournalTitle: {
@@ -75,11 +78,11 @@ const styles = StyleSheet.create<Styles>({
     borderRadius: 2,
   },
   visionAddToggle: {
-    width: windowWidth,
     flexDirection: "row",
     marginTop: "auto",
-    alignItems: "center",
+    paddingTop: 1,
     justifyContent: "center",
+    backgroundColor: 'transparent',
   },
   modalContent: {
     height: windowHeight,
