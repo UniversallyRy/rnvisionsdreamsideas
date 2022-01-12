@@ -4,18 +4,18 @@ import { Card, Button } from "react-native-paper";
 import { useDispatch, ConnectedProps } from "react-redux";
 import { addPic } from "../../redux/reducers/newpic";
 import * as ImagePicker from "expo-image-picker";
-import { ImageInfo } from 'expo-image-picker/build/ImagePicker.types'
-import * as ImageManipulator from "expo-image-manipulator"
+import { manipulateAsync, SaveFormat } from "expo-image-manipulator"
 import { windowHeight, windowWidth } from "../../utils/dimensions";
 
 interface Styles {
+  container: ViewStyle;
   visionButtonContainer: ViewStyle;
   uploadButton: ViewStyle;
   image: ImageStyle;
 }
 
 const ImagePic = () => {
-  const [image, setImage] = useState('');
+  const [image, setImage] = useState(``);
   const dispatch = useDispatch()
   useEffect(() => {
     (async () => {
@@ -43,10 +43,10 @@ const ImagePic = () => {
       quality: 1,
     });
 
-    let manipResult = await ImageManipulator.manipulateAsync(
+    let manipResult = await manipulateAsync(
       result.uri,
-      [{ resize: { height: 800 } }],
-      { compress: 1, format: ImageManipulator.SaveFormat.PNG }
+      [{ resize: { width: 425} }],
+      { compress: 1, format: SaveFormat.PNG }
     );
     // .canccelled prop from ImagePicker import
     if (!result.cancelled) {
@@ -69,14 +69,13 @@ const ImagePic = () => {
   };
 
   return (
-      <>
-        <Text>
-          { image && (
-            <Card.Cover source={{ uri: image }}
-              style={ styles.image }
+      <Card elevation={0} style={ styles.container }>
+        <Card.Content>
+          { image != "" && (
+            <Card.Cover source={{ uri: image }} style={ styles.image }
             />
           )}
-        </Text>
+        </Card.Content>
         <View style={ styles.visionButtonContainer }>
           <Button
             mode="contained"
@@ -95,7 +94,7 @@ const ImagePic = () => {
             Take a Picture
           </Button>
         </View>
-    </>
+    </Card>
   );
 };
 
@@ -103,21 +102,24 @@ const styles = StyleSheet.create<Styles>({
   visionButtonContainer: {
     alignSelf: "center",
     flexDirection: "row",
-    
   },
   uploadButton: {
     margin: 5,
-    elevation: 5,
+    elevation: 3,
+  },
+  container:{
+    width: windowWidth,
+    alignItems:"center",
+    marginBottom: 40,
   },
   image:{
-    width: windowWidth * 0.97,
-    height: windowHeight * 0.73,
-    resizeMode: "contain",
-    alignSelf: "center",
+    width: 500,
+    height: 500,
+    marginBottom: 80,
+    borderRadius: 28,
+    elevation: 2,
   }
 });
 
-
 export default ImagePic;
-
 // {isOn: boolean, toggleOn: () => void}

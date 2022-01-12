@@ -75,8 +75,8 @@ const AddVisionModal: FunctionComponent<VisionProps> = ({ stateUri, setModalOpen
             handleSubmit,
           }) => (
             <View style={styles.footer}> 
-            <ImagePic/>
-              <View style={{ marginTop: 30, flexDirection: 'row' }}>
+              <ImagePic/>
+              <View style={{ flexDirection: 'row' }}>
                 <View style={{ flexDirection: 'column' }}>
                   <TextInput
                     textAlign='center'
@@ -109,7 +109,6 @@ const AddVisionModal: FunctionComponent<VisionProps> = ({ stateUri, setModalOpen
 const styles = StyleSheet.create<Styles>({
   container: {
     fontFamily: "roboto-black",
-    flex: 1,
     height: windowHeight,
     width: windowWidth,
     margin:'auto',
@@ -122,23 +121,20 @@ const styles = StyleSheet.create<Styles>({
     fontFamily: "roboto-black",
     width: windowWidth * 0.75,
     height: 60,
-    paddingLeft: 14,
-    marginLeft: 9,
-    elevation: 2,
-    marginRight: 5,
+    paddingLeft: 10,
+    elevation: 1,
+    marginRight: 3,
   },
   buttonStyle: {
     backgroundColor: "#6200ee", 
     height: 60,
     padding: 10,
-    marginLeft: 2,
-    elevation: 3,
+    elevation: 2,
   },
   footer: {
     position: 'absolute',
+    alignItems: "center",
     bottom: 0,
-    paddingHorizontal: 10,
-    paddingVertical: 10,
   },
 });
 
