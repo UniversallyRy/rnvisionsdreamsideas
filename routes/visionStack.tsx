@@ -1,8 +1,9 @@
 import React, { FunctionComponent } from "react";
-import { createStackNavigator, StackNavigationProp} from "@react-navigation/stack";
+import { createStackNavigator, StackNavigationProp, CardStyleInterpolators, HeaderStyleInterpolators, TransitionPresets} from "@react-navigation/stack";
 import Visions from "../screens/visionScreen";
 import VisionDetails from "../components/visions/visionDetails";
 import Header from "../shared/header";
+import Animated from "react-native-reanimated";
 
 type VisionStackParamList = {
   VisionScreen: undefined;
@@ -34,11 +35,21 @@ const VisionStack: FunctionComponent<NavProp> = () => {
       <Stack.Screen
         name="VisionScreen"
         component={Visions}
+        options={{ 
+          ...TransitionPresets.DefaultTransition,
+          cardStyleInterpolator: CardStyleInterpolators.forRevealFromBottomAndroid, 
+          headerStyleInterpolator: HeaderStyleInterpolators.forUIKit,
+        }}
       />
       <Stack.Screen
         name="VisionDetails"
         component={VisionDetails}
-        options={{ headerTitle: 'Vision Details' }}
+        options={{ 
+          headerTitle: 'Vision Details', 
+          ...TransitionPresets.ModalTransition,
+          cardStyleInterpolator: CardStyleInterpolators.forFadeFromBottomAndroid, 
+          headerStyleInterpolator: HeaderStyleInterpolators.forUIKit,
+        }}
       />
     </Stack.Navigator>
   );
