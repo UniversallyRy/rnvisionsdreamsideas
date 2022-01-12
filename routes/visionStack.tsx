@@ -3,17 +3,13 @@ import { createStackNavigator, StackNavigationProp, CardStyleInterpolators, Head
 import Visions from "../screens/visionScreen";
 import VisionDetails from "../components/visions/visionDetails";
 import Header from "../shared/header";
-import Animated from "react-native-reanimated";
 
 type VisionStackParamList = {
   VisionScreen: undefined;
   VisionDetails: undefined;
 };
 
-type VisionScreenNavigationProp = StackNavigationProp<
-  VisionStackParamList,
-  'VisionScreen'
->;
+type VisionScreenNavigationProp = StackNavigationProp<VisionStackParamList,'VisionScreen'>;
 
 type NavProp = {
   navigation: VisionScreenNavigationProp;
