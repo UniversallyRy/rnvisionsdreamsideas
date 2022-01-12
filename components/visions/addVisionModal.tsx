@@ -21,16 +21,15 @@ interface VisionProps {
 
 interface Styles {
   container: ViewStyle;
-  modalContent: TextStyle;
+  textinput: TextStyle;
   visionAddToggle: ViewStyle;
+  footer: ViewStyle;
+  buttonStyle: ViewStyle;
 }
 
 const visionSchema = yup.object({
   title: yup.string().required().min(4),
 });
-
-const simulateSlowNetworkRequest = () =>
-  new Promise((resolve) => setTimeout(resolve, 2500));
 
 const AddVisionModal: FunctionComponent<VisionProps> = ({ stateUri, setModalOpen }) => {
   const dispatch = useDispatch()
@@ -92,7 +91,7 @@ const AddVisionModal: FunctionComponent<VisionProps> = ({ stateUri, setModalOpen
   );
 };
 
-const styles = StyleSheet.create({
+const styles = StyleSheet.create<Styles>({
   container: {
     fontFamily: "roboto-black",
     flex: 1,
@@ -100,13 +99,7 @@ const styles = StyleSheet.create({
     width: windowWidth,
     margin:'auto',
   },
-  section: {
-    alignSelf: "stretch",
-    justifyContent: "flex-end",
-    marginLeft: 20,
-    borderBottomWidth: 4,
-  },
-    visionAddToggle: {
+  visionAddToggle: {
     flexDirection: "row",
     alignSelf: "center",
   },
