@@ -1,5 +1,6 @@
 import React, { FunctionComponent } from "react";
-import { View, Text, TouchableOpacity, Platform, KeyboardAvoidingView, StyleSheet, StyleProp, ViewStyle, TextStyle } from "react-native";
+import { Animated, View, Text, TouchableOpacity, Platform, KeyboardAvoidingView, StyleSheet, StyleProp, ViewStyle, TextStyle } from "react-native";
+import { useCardAnimation } from '@react-navigation/stack';
 import { TextInput, Button, } from "react-native-paper";
 import { connect, useDispatch, ConnectedProps} from "react-redux";
 import { AntDesign } from "@expo/vector-icons";
@@ -33,9 +34,23 @@ const visionSchema = yup.object({
 
 const AddVisionModal: FunctionComponent<VisionProps> = ({ stateUri, setModalOpen }) => {
   const dispatch = useDispatch()
+  const { current } = useCardAnimation();
   return (
     <KeyboardAvoidingView style={{ flex: 1 }} behavior={ Platform.OS === "ios" ? "padding" : "height" }>
-    <View style={styles.container}> 
+      <Animated.View 
+        style={{
+          transform: [
+            {
+              scale: current.progress.interpolate({
+                inputRange: [0, 1],
+                outputRange: [0.9, 1],
+                extrapolate: 'clamp',
+              }),
+            },
+          ],
+          ...styles.container
+        }}
+      > 
         <TouchableOpacity
           style={{ position: "absolute", top: 40, right: 32, zIndex: 10 }}
         >
@@ -86,7 +101,7 @@ const AddVisionModal: FunctionComponent<VisionProps> = ({ stateUri, setModalOpen
             </View>
         )}
         </Formik>
-    </View>
+      </Animated.View>
     </KeyboardAvoidingView>
   );
 };

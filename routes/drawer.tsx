@@ -22,19 +22,24 @@ const Tab = createMaterialBottomTabNavigator();
 
 export const BottomTabs: FunctionComponent<TabProps> = () => {
   return (
-      <Tab.Navigator>
+      <Tab.Navigator
+        initialRouteName="Visions"
+        shifting={true}
+      >
         <Tab.Screen
           name="Visions"
           component={VisionStack}
           options={{
             tabBarIcon: 'home-account',
+            tabBarAccessibilityLabel: 'Visions Tab',
           }}
-        />
+          />
         <Tab.Screen
           name="Journals"
           component={JournalStack}
           options={{
             tabBarIcon: 'bell-outline',
+            tabBarAccessibilityLabel: 'Journals Tab',
           }}
         />
         <Tab.Screen
@@ -42,6 +47,7 @@ export const BottomTabs: FunctionComponent<TabProps> = () => {
           component={NoteStack}
           options={{
             tabBarIcon: 'message-text-outline',
+            tabBarAccessibilityLabel: 'Notes Tab',
           }}
         />
       </Tab.Navigator>
