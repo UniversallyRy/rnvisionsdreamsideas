@@ -6,14 +6,19 @@ import TodosModal from "./todosModal";
 import { deleteList } from "../../redux/reducers/todos";
 
 type TodoListsProps = {
-  list: any;
-  deleteList: ((id:object) => void);
-  listContainer: StyleProp<ViewStyle>;
-  cardContainer: StyleProp<ViewStyle>;
-  listTitle: StyleProp<TextStyle>;
-  count: StyleProp<TextStyle>;
-  subtitle: StyleProp<TextStyle>;
-  deleteButton: StyleProp<ViewStyle>;
+  list: {
+    todos: [];
+    name: string;
+    id: number;
+    color: string;
+    deleteList: ((id:object) => void);
+    listContainer: StyleProp<ViewStyle>;
+    cardContainer: StyleProp<ViewStyle>;
+    listTitle: StyleProp<TextStyle>;
+    count: StyleProp<TextStyle>;
+    subtitle: StyleProp<TextStyle>;
+    deleteButton: StyleProp<ViewStyle>; 
+  }
 }
 
 interface Styles {

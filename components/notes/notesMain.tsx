@@ -36,7 +36,7 @@ const NoteMain: FunctionComponent<NoteMainProps> = ({ stateNotes, stateTodos }) 
     setNoteModal(!noteModal);
   };
 
-  const renderList = (list:any) => {
+  const renderList = (list) => {
     return <TodoLists list={ list } />;
   };
 
