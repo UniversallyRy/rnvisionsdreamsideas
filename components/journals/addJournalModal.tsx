@@ -50,6 +50,7 @@ const AddJournal: FunctionComponent<AddJournalProps> = ({ setModalOpen }) => {
               onChangeText={handleChange("title")}
               value={values.title}
               onBlur={handleBlur("title")}
+              accessibilityLabel="Input Journal Title Here"
               autoComplete
             />
             <Text style={globalStyles.errorText}>
@@ -64,6 +65,7 @@ const AddJournal: FunctionComponent<AddJournalProps> = ({ setModalOpen }) => {
               onChangeText={handleChange("body")}
               value={values.body}
               onBlur={handleBlur("body")}
+              accessibilityLabel="Input Journal body text Here"
               autoComplete
             />
             <Text style={globalStyles.errorText}>
