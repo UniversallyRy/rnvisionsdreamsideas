@@ -34,6 +34,7 @@ const JournalGridContainer: FunctionComponent<GridProps> = ({ journals, month, n
         contentContainerStyle={ styles.gridContainer }
         scrollEnabled
         data={ journals }
+        accessibilityLabel="Journal List Entries in Grid Format"
         renderItem={ ({ item }:any) => {
           if ((month != 'All') && !item.date.includes(month)) {
             return null

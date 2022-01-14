@@ -21,6 +21,7 @@ const JournalList: FunctionComponent<JournalListProps> = ({ journals, month,  na
     <View style={styles.container}>
       <FlatList
         data={ journals }
+        accessibilityLabel="Contains Journal Entries"
         keyExtractor={ (item, index) => index.toString() }
         renderItem={ ({ item }:any) => {
           if ((month != 'All') && !item.date.includes(month)) {

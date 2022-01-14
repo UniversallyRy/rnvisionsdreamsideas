@@ -39,6 +39,7 @@ const JournalFilter: React.FC<FilterProps> = ({ state }) => {
                 left={props => <List.Icon {...props} icon="calendar" />}
                 expanded={expanded}
                 onPress={handlePress}
+                accessibilityLabel="Dropdown of months to filter journal entries"
             >
             {months.map(item => {
                 return(
@@ -49,6 +50,7 @@ const JournalFilter: React.FC<FilterProps> = ({ state }) => {
                         left={() => <List.Icon icon="calendar" />}
                         onPress={() => handleItemPress(item)}
                         titleStyle={{fontSize: 10}}
+                        accessibilityLabel={`Dropdown text for ${item}`}
                     />
                 )
             })}

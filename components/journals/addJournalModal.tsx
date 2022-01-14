@@ -71,7 +71,7 @@ const AddJournal: FunctionComponent<AddJournalProps> = ({ setModalOpen }) => {
             <Text style={globalStyles.errorText}>
               {touched.body && errors.body}
             </Text>
-            <FlatButton text="submit" onPress={handleSubmit} />
+            <FlatButton text="submit" onPress={handleSubmit} accessabilityLabel="Clicking here adds journal entry"/>
           </>
         )}
       </Formik>

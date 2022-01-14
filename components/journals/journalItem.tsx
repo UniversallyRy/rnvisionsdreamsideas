@@ -51,7 +51,7 @@ const JournalItem: FunctionComponent<JournalListProps> = ({ item,  navigation })
 
   return (
             <KeyboardAvoidingView>
-              <Card onPress={ () => navigation.navigate("JournalDetails", { title:item.title, body:item.body, date:item.date})} style={ styles.journalCard }>
+              <Card accessibilityLabel="Card containing single Journal Entry" onPress={ () => navigation.navigate("JournalDetails", { title:item.title, body:item.body, date:item.date})} style={ styles.journalCard }>
                 <Surface
                   style={ styles.journalText }
                 >
