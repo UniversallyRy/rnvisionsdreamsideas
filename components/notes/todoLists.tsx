@@ -77,6 +77,7 @@ const completedList = (remaining:number, completed:number) => {
           animationType="slide"
           visible={ visible }
           onRequestClose={ () => toggleListModal() }
+          accessibilityLabel="CLicking here opens Todo Modal"
         >
           <TodosModal completedList={ completedList } item={ list } closeModal={ () => toggleListModal() } />
         </Modal>
@@ -84,11 +85,11 @@ const completedList = (remaining:number, completed:number) => {
           <Text style={ styles.listTitle } numberOfLines={ 1 }>
             { list.name }
           </Text>
-            <View style={{ alignItems: "center" }}>
+            <View style={{ alignItems: "center" }} accessibilityLabel="Remaining Todo Count" >
               <Text style={ styles.count }>{ InitRemaining }</Text>
               <Text style={ styles.subtitle }>Remaining</Text>
             </View>
-            <View style={{ alignItems: "center" }}>
+            <View style={{ alignItems: "center" }} accessibilityLabel="Completed Todo Count">
               <Text style={ styles.count }>{ InitCount }</Text>
               <Text style={ styles.subtitle }>Completed</Text>
             </View>
@@ -99,6 +100,7 @@ const completedList = (remaining:number, completed:number) => {
         icon="close-outline"
         mode="contained"
         onPress={ () => dispatch(deleteList({id: list.id})) }
+        accessibilityLabel="Click here to delete list"
         >
         Delete
       </Button>
