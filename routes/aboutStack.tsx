@@ -1,22 +1,19 @@
 import React, { FunctionComponent } from "react";
 import { createStackNavigator, StackNavigationProp } from "@react-navigation/stack";
-import About from "../screens/about";
 import Header from "../shared/header";
+import About from "../screens/about";
 
 type AboutStackParamList = {
   About: undefined;
 };
 
-type AboutScreenNavigationProp = StackNavigationProp<
-  AboutStackParamList,
-  'About'
->;
+type AboutScreenNavigationProp = StackNavigationProp<AboutStackParamList, 'About'>;
 
 type NavProp = {
   navigation: AboutScreenNavigationProp;
 };
 
-const Stack = createStackNavigator<AboutStackParamList>()
+const Stack = createStackNavigator<AboutStackParamList>();
 
 const AboutStack: FunctionComponent<NavProp> = () => {
   return (
@@ -32,7 +29,6 @@ const AboutStack: FunctionComponent<NavProp> = () => {
         name="About"
         component={ About }
       />
-
     </Stack.Navigator>
   );
 };
