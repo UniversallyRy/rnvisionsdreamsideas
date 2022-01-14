@@ -3,7 +3,7 @@ import { connect, useDispatch } from 'react-redux'
 import { StyleSheet, StyleProp, TextStyle, ViewStyle } from "react-native";
 import { List } from 'react-native-paper';
 import months from '../../utils/months';
-import { windowHeight, windowWidth } from "../../utils/dimensions";
+import { windowWidth } from "../../utils/dimensions";
 import { changeMonth } from "../../redux/reducers/journals";
 
 

@@ -3,7 +3,6 @@ import { StyleSheet, FlatList, StyleProp, ViewStyle, View } from "react-native";
 import { NavigationScreenProp } from 'react-navigation';
 import { connect } from "react-redux";
 import JournalItem from "./journalItem";
-import { windowHeight, windowWidth } from "../../utils/dimensions";
 
 type JournalListProps = {
   month: string;
