@@ -1,5 +1,16 @@
 import React, { FunctionComponent } from "react";
-import { Animated, View, Text, TouchableOpacity, Platform, KeyboardAvoidingView, StyleSheet, StyleProp, ViewStyle, TextStyle } from "react-native";
+import { 
+  Animated, 
+  View, 
+  Text, 
+  TouchableOpacity, 
+  Platform, 
+  KeyboardAvoidingView, 
+  StyleSheet, 
+  StyleProp, 
+  ViewStyle, 
+  TextStyle 
+} from "react-native";
 import { useCardAnimation } from '@react-navigation/stack';
 import { TextInput, Button, } from "react-native-paper";
 import { connect, useDispatch, ConnectedProps} from "react-redux";

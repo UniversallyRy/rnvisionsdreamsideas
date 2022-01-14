@@ -1,7 +1,7 @@
 import React, { FunctionComponent, useState, useRef } from "react";
 import { View, TouchableOpacity, FlatList, Image, StyleSheet } from "react-native";
 import { NavigationScreenProp } from 'react-navigation';
-import { deleteVision } from "../../redux/reducers/visions";
+// import { deleteVision } from "../../redux/reducers/visions";
 import { connect, useDispatch, ConnectedProps } from "react-redux";
 import { windowHeight, windowWidth } from "../../utils/dimensions";
 

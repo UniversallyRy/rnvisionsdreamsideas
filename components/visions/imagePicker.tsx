@@ -1,11 +1,11 @@
 import React, { FunctionComponent, useState, useEffect } from "react";
-import { View, Text, Platform, StyleSheet, StyleProp, ViewStyle, ImageStyle } from "react-native";
+import { View, Platform, StyleSheet, StyleProp, ViewStyle, ImageStyle } from "react-native";
 import { Card, Button } from "react-native-paper";
 import { useDispatch, ConnectedProps } from "react-redux";
 import { addPic } from "../../redux/reducers/newpic";
 import * as ImagePicker from "expo-image-picker";
 import { manipulateAsync, SaveFormat } from "expo-image-manipulator"
-import { windowHeight, windowWidth } from "../../utils/dimensions";
+import { windowWidth } from "../../utils/dimensions";
 
 interface Styles {
   container: ViewStyle;
@@ -14,7 +14,7 @@ interface Styles {
   image: ImageStyle;
 }
 
-const ImagePic = () => {
+const ImagePic: FunctionComponent = () => {
   const [image, setImage] = useState(``);
   const dispatch = useDispatch()
   useEffect(() => {
