@@ -5,8 +5,8 @@ import JournalDetails from "../components/journals/journalDetails";
 import Header from "../shared/header";
 
 export type JournalStackParamList = {
-  Journal: undefined;
-  JournalDetails: { 
+  "Journal Entries": undefined;
+  "Journal Details": { 
     title: string;
     body: string;
     date : string;
@@ -15,7 +15,7 @@ export type JournalStackParamList = {
 
 type JournalScreenNavigationProp = StackNavigationProp<
   JournalStackParamList,
-  'Journal'
+  'Journal Entries'
 >;
 
 type NavProp = {
@@ -30,18 +30,18 @@ export const JournalStack: FunctionComponent<NavProp> = () => {
     <Stack.Navigator 
       screenOptions={{
         header: ({ route, previous, navigation }:any) => (
-          <Header title="Journals" scene={route} previous={previous} navigation={navigation} />
+          <Header scene={route} previous={previous} navigation={navigation} />
         ),
       }}
-      initialRouteName="Journal"
+      initialRouteName="Journal Entries"
     >
       <Stack.Screen
-        name="Journal"
+        name="Journal Entries"
         component={JournalScreen}
         options={{ headerTitle: 'Journal Screen' }}
       />
       <Stack.Screen
-        name="JournalDetails"
+        name="Journal Details"
         component={JournalDetails}
         options={{ headerTitle: 'Journal Details' }}
       />

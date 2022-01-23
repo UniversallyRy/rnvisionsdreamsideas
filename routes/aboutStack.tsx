@@ -18,10 +18,9 @@ const Stack = createStackNavigator<AboutStackParamList>();
 const AboutStack: FunctionComponent<NavProp> = () => {
   return (
     <Stack.Navigator 
-      initialRouteName="About"
       screenOptions={{
         header: ({ scene, previous, navigation }:any) => (
-          <Header title="About" scene={ scene } previous={ previous } navigation={ navigation } />
+          <Header scene={ scene } previous={ previous } navigation={ navigation } />
         ),
       }}
     >
