@@ -1,6 +1,5 @@
 import React, { useContext } from 'react'
-import { StyleProp, StyleSheet, View, ViewStyle } from 'react-native'
-import { Surface } from 'react-native-paper'
+import { StyleSheet, View, ViewStyle } from 'react-native'
 import { VisionContext } from '../../screens/visionScreen';
 import { Icon } from "../../shared/icon"; 
 
