@@ -1,20 +1,24 @@
 import React, { useContext } from "react";
 import { NavigationScreenProp } from 'react-navigation';
 import { TouchableOpacity, StyleSheet } from "react-native";
-import { Appbar, TouchableRipple, Switch, useTheme, IconButton, Colors, List } from "react-native-paper";
+import { Appbar, TouchableRipple, Switch, useTheme, IconButton, Colors } from "react-native-paper";
 import { ThemesContext } from './../ThemeContext';
 
-type HeaderProps = {
-  navigation: NavigationScreenProp<string, object>;
-  title: string;
-  scene: any,
-  previous: any,
+export type HeaderProps = {
+  navigation: NavigationScreenProp<string, object>
+  scene: {
+    key: string
+    name: string
+    params: undefined
+  }
+  previous: undefined | boolean
 };
 
 const Header:React.FC<HeaderProps> = ({ scene, previous, navigation }) => {
+  const { toggleTheme, isThemeDark } = useContext(ThemesContext);
+  // scene.name = Stack.Screen name prop
   const header = scene.name;
   const theme = useTheme();
-  const { toggleTheme, isThemeDark } = useContext(ThemesContext);
 
   return (
     <Appbar.Header
@@ -30,12 +34,11 @@ const Header:React.FC<HeaderProps> = ({ scene, previous, navigation }) => {
       <TouchableOpacity/>
     )}
       <Appbar.Content title={
-          !previous ? header : ''
+          !previous ? header : 'Back'
         }
       />
         <TouchableRipple>
           <Switch
-            style={[{ marginLeft: 5 }]}
             color={'darkgray'}
             value={isThemeDark}
             onValueChange={() => toggleTheme()}
@@ -59,8 +62,7 @@ const Header:React.FC<HeaderProps> = ({ scene, previous, navigation }) => {
 
 const styles = StyleSheet.create({
   headerContainer: {
-    margin: 10,
-    paddingBottom: 10,
+    paddingBottom: 15,
   },
 });
 
