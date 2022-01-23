@@ -5,18 +5,17 @@ import VisionDetails from "../components/visions/visionDetails";
 import Header from "../shared/header";
 
 type VisionStackParamList = {
-  VisionScreen: undefined;
-  VisionDetails: undefined;
+  "Vision Images": undefined;
+  "Vision Details": undefined;
 };
 
-type VisionScreenNavigationProp = StackNavigationProp<VisionStackParamList,'VisionScreen'>;
+type VisionScreenNavigationProp = StackNavigationProp<VisionStackParamList,'Vision Images'>;
 
-type NavProp = {
-  navigation: VisionScreenNavigationProp;
-}
+type NavProp = { navigation: VisionScreenNavigationProp };
 
-const Stack = createStackNavigator<VisionStackParamList>()
+const Stack = createStackNavigator<VisionStackParamList>();
 
+// screenOption transition animations
 const customTrans: StackNavigationOptions = {
   gestureEnabled: true,
   gestureDirection: "horizontal",
@@ -56,38 +55,25 @@ const customTrans: StackNavigationOptions = {
 const VisionStack: FunctionComponent<NavProp> = () => {
   return (
     <Stack.Navigator 
-      initialRouteName="VisionScreen"
-      screenOptions ={{
-        headerMode:"screen",
+      initialRouteName= "Vision Images"
+      screenOptions= {{
+        headerMode: "screen",
         header: ({ route, previous, navigation }:any) => (
-          <Header title="Visions " scene={route} previous={previous} navigation={navigation} />
+          <Header scene={route} previous={previous} navigation={navigation} />
           ),
         ...customTrans,
       }}
     >
       <Stack.Screen
-        name="VisionScreen"
-        component={Visions}
-        options={{ 
-          // ...TransitionPresets.DefaultTransition,
-          // cardStyleInterpolator: CardStyleInterpolators.forRevealFromBottomAndroid, 
-          // headerStyleInterpolator: HeaderStyleInterpolators.forUIKit,
-        }}
+        name= "Vision Images"
+        component= { Visions }
       />
       <Stack.Screen
-        name="VisionDetails"
-        component={VisionDetails}
-        options={{ 
-          headerTitle: 'Vision Details', 
-          // ...TransitionPresets.ModalTransition,
-          // cardStyleInterpolator: CardStyleInterpolators.forFadeFromBottomAndroid, 
-          // headerStyleInterpolator: HeaderStyleInterpolators.forUIKit,
-        }}
+        name= "Vision Details"
+        component= { VisionDetails }
       />
     </Stack.Navigator>
   );
 };
 
 export default VisionStack;
-
-
