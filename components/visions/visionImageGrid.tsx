@@ -11,8 +11,6 @@ import FooterButtons from "./FooterButtons"
 type GridProps = {
   state: object[];
   navigation: NavigationScreenProp<string,object>;
-  gridContainer: StyleProp<ViewStyle>;
-  gridItem: StyleProp<ImageStyle>;
 }
 
 type ListProps = {
@@ -25,6 +23,7 @@ interface Styles {
 }
 
 const VisionGridContainer: FunctionComponent<GridProps> = ({ state, navigation }) => {
+  
   const VisionGridList = memo(function GridImage({ data }:any) {
     return (
       <Card

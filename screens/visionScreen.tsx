@@ -1,14 +1,12 @@
 import React, { useState, useRef, useEffect, createContext, SetStateAction, Dispatch } from "react";
-import { View, Animated, Modal, StyleProp, ViewStyle, StyleSheet } from "react-native";
+import { View, Animated, Modal, ViewStyle, StyleSheet } from "react-native";
 import { NavigationScreenProp } from 'react-navigation';
-import { useTheme } from "react-native-paper";
 import VisionsListContainer from "../components/visions/visionImageList";
 import VisionGridContainer from "../components/visions/visionImageGrid";
 import AddVision from "../components/visions/addVisionModal";
 
 interface VisionProps {
   navigation: NavigationScreenProp<string, object>;
-  container: StyleProp<ViewStyle>;
 }
 
 type ContextProps = {
@@ -31,11 +29,8 @@ const Visions: React.FC<VisionProps> = ({ navigation }) => {
   useEffect(() => {
     let isCancelled = false;
 
-    if (!isCancelled) {
-    }
-    return () => {
-      isCancelled = true;
-    };
+    if (!isCancelled) {}
+    return () => { isCancelled = true;};
   }, []);
 
   const toggleView = () => {
@@ -52,7 +47,7 @@ const Visions: React.FC<VisionProps> = ({ navigation }) => {
       {gridView ? (
         <VisionGridContainer navigation={navigation} />
       ) : (
-        <VisionsListContainer navigation={navigation} scrollX={scrollX} />
+        <VisionsListContainer navigation={navigation} />
       )}
       </VisionContext.Provider>
     </View>
@@ -61,8 +56,8 @@ const Visions: React.FC<VisionProps> = ({ navigation }) => {
 
 const styles = StyleSheet.create<Styles>({
   container: {
-    fontFamily: "roboto-black",
     flex: 1,
+    fontFamily: "roboto-black",
   }
 });
 

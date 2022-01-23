@@ -8,10 +8,6 @@ import { windowHeight, windowWidth } from "../../utils/dimensions";
 type VisionProps = {
   navigation: NavigationScreenProp<string, object>;
   route: any;
-  vDetailsContent: StyleProp<ViewStyle>;
-  visionTitle: StyleProp<TextStyle>;
-  vDetailsImage: StyleProp<ImageStyle>;
-  vDetailsButton: StyleProp<ViewStyle>;
 }
 
 interface Styles {

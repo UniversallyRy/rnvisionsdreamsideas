@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from "react";
+import React, { Dispatch, FunctionComponent, SetStateAction } from "react";
 import { 
   Animated, 
   View, 
@@ -23,12 +23,8 @@ import { windowHeight, windowWidth } from "../../utils/dimensions";
 import * as yup from "yup";
 
 interface VisionProps {
-  addVision:((item: any) => void);
   stateUri: string;
-  setModalOpen:((arg0:boolean) => boolean);
-  container: StyleProp<ViewStyle>;
-  modalContent: StyleProp<TextStyle>;
-  visionAddToggle: StyleProp<ViewStyle>;
+  setModalOpen: Dispatch<SetStateAction<boolean>>; 
 }
 
 interface Styles {
