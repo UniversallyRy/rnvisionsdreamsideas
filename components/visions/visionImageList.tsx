@@ -4,6 +4,7 @@ import { NavigationScreenProp } from 'react-navigation';
 // import { deleteVision } from "../../redux/reducers/visions";
 import { connect, useDispatch, ConnectedProps } from "react-redux";
 import { windowHeight, windowWidth } from "../../utils/dimensions";
+import FooterButtons from "./FooterButtons";
 
 // needs to add navigation and delete picture option back
 type ImageProps = {
@@ -21,7 +22,7 @@ interface ListProps {
 const SPACING = 10;
 const ITEM_SIZE = 80;
 
-const VisionsContainer: FunctionComponent<ImageProps> = ({navigation, state}) => {
+const VisionsListContainer: FunctionComponent<ImageProps> = ({navigation, state}) => {
   const dispatch = useDispatch()
   const topRef:any = useRef();
   const thumbRef:any = useRef();
@@ -67,6 +68,7 @@ const VisionsContainer: FunctionComponent<ImageProps> = ({navigation, state}) =>
           </View>
         }}
       />
+      <FooterButtons/>
       <FlatList
         ref={ thumbRef }
         data={ state }
@@ -76,23 +78,27 @@ const VisionsContainer: FunctionComponent<ImageProps> = ({navigation, state}) =>
         contentContainerStyle={{ paddingHorizontal: SPACING }}
         keyExtractor={ (_, index) => String(index) }
         renderItem={ ({item, index}:any) => {
-          return <TouchableOpacity
-                    onPress={ () => scrollActiveIndex(index) }
-                  >
-                    <Image
-                      source={{ uri:item.uri }}
-                      style={{
-                        width: ITEM_SIZE,
-                        height: ITEM_SIZE,
-                        borderRadius: 12,
-                        marginRight: SPACING,
-                        borderWidth: 2,
-                        borderColor: activeIndex === index ? "#fff" : 'transparent'
-                      }}
-                    />
-          </TouchableOpacity>
+          return (
+            <View>
+              <TouchableOpacity
+                onPress={ () => scrollActiveIndex(index) }
+              >
+                <Image
+                  source={{ uri:item.uri }}
+                  style={{
+                    width: ITEM_SIZE,
+                    height: ITEM_SIZE,
+                    borderRadius: 12,
+                    marginRight: SPACING,
+                    borderWidth: 2,
+                    borderColor: activeIndex === index ? "#fff" : 'transparent'
+                  }}
+                />
+              </TouchableOpacity>
+            </View>
+          )
         }}
-      />
+        />
     </View>
   );
 };
@@ -103,7 +109,7 @@ const mapStateToProps = (state:any) => {
   };
 };
 
-export default connect(mapStateToProps)(VisionsContainer);
+export default connect(mapStateToProps)(VisionsListContainer);
 
 
-export type PropsFromRedux = ConnectedProps<typeof VisionsContainer>
+export type PropsFromRedux = ConnectedProps<typeof VisionsListContainer>

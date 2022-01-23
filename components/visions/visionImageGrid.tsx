@@ -5,6 +5,7 @@ import { Card } from "react-native-paper";
 import { connect, ConnectedProps } from "react-redux";
 import { NavigationScreenProp } from 'react-navigation';
 import { windowHeight, windowWidth } from "../../utils/dimensions";
+import FooterButtons from "./FooterButtons"
 
 
 type GridProps = {
@@ -55,6 +56,8 @@ const VisionGridContainer: FunctionComponent<GridProps> = ({ state, navigation }
         data={ state }
         keyExtractor={ (item, index) => index.toString() }
         renderItem={ renderList }
+      />
+      <FooterButtons
       />
     </View>
   );
