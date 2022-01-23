@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
-import { StyleSheet, TouchableOpacity } from "react-native";
-import { useTheme, Appbar, TouchableRipple, Switch } from "react-native-paper";
 import { NavigationScreenProp } from 'react-navigation';
+import { TouchableOpacity, StyleSheet } from "react-native";
+import { Appbar, TouchableRipple, Switch, useTheme, IconButton, Colors, List } from "react-native-paper";
 import { ThemesContext } from './../ThemeContext';
 
 type HeaderProps = {
@@ -12,7 +12,7 @@ type HeaderProps = {
 };
 
 const Header:React.FC<HeaderProps> = ({ scene, previous, navigation }) => {
-  const header = scene.name
+  const header = scene.name;
   const theme = useTheme();
   const { toggleTheme, isThemeDark } = useContext(ThemesContext);
 
@@ -22,31 +22,37 @@ const Header:React.FC<HeaderProps> = ({ scene, previous, navigation }) => {
       style={styles.headerContainer}
     >
     {previous ? (
-        <Appbar.BackAction
-          onPress={() => navigation.goBack()}
-          color={theme.colors.background}
-        />
+      <Appbar.BackAction
+        onPress={() => navigation.goBack()}
+        color={theme.colors.background}
+      />
     ) : (
-      <TouchableOpacity
-      // onPress={() => {
-      //   navigation.openDrawer();
-      // }}
-    >
-      
-    </TouchableOpacity>
-  )}
+      <TouchableOpacity/>
+    )}
       <Appbar.Content title={
           !previous ? header : ''
         }
+      />
+        <TouchableRipple>
+          <Switch
+            style={[{ marginLeft: 5 }]}
+            color={'darkgray'}
+            value={isThemeDark}
+            onValueChange={() => toggleTheme()}
+          />
+        </TouchableRipple>
+        {isThemeDark === true ?
+        <IconButton
+          icon="moon-waxing-crescent"
+          color={Colors.grey300}
+          size={14}
         />
-      <TouchableRipple>
-      <Switch
-          style={[{ marginRight: 15 }]}
-          color={'darkgray'}
-          value={isThemeDark}
-          onValueChange={() => toggleTheme()}
+        :<IconButton
+          icon="white-balance-sunny"
+          color={Colors.yellow800}
+          size={14}
         />
-      </TouchableRipple>
+        }
     </Appbar.Header>
   );
 };
