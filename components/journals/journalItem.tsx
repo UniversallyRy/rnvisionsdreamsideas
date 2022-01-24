@@ -1,6 +1,6 @@
+import { Card, Input, Layout, Text, Button, Icon } from "@ui-kitten/components";
 import React, { FunctionComponent, useState } from "react";
-import { Text, StyleSheet, KeyboardAvoidingView, StyleProp, TextStyle, ViewStyle } from "react-native";
-import { Surface, Button, Card, Paragraph, TextInput } from "react-native-paper";
+import { StyleSheet, KeyboardAvoidingView, TextStyle, ViewStyle } from "react-native";
 import { NavigationScreenProp } from 'react-navigation';
 import { connect, useDispatch } from "react-redux";
 import { deleteJournal, editJournal, editJournalToggle } from "../../redux/reducers/journals";
@@ -15,16 +15,6 @@ type JournalListProps = {
     isEditing: boolean,
   };
   navigation: NavigationScreenProp<string, object>;
-  deleteJournal: ((item: object) => void);
-  buttonsContainer: StyleProp<ViewStyle>;
-  editButton: StyleProp<ViewStyle>;
-  deleteButton: StyleProp<ViewStyle>;
-  divider: StyleProp<ViewStyle>;
-  journalCard: StyleProp<ViewStyle>;
-  journalTitle: StyleProp<TextStyle>;
-  journalParagraph: StyleProp<TextStyle>;
-  journalText: StyleProp<TextStyle>;
-  journalDate: StyleProp<TextStyle>;
 }
 
 interface Styles {
@@ -49,60 +39,66 @@ const JournalItem: FunctionComponent<JournalListProps> = ({ item,  navigation })
     
   };
 
+
+const EditIcon = (props) => (
+  <Icon {...props} name='edit'/>
+);
+const SaveIcon = (props) => (
+  <Icon {...props} name='save-outline'/>
+);
+const DeleteIcon = (props) => (
+  <Icon {...props} name='trash-outline'/>
+);
+
+  const {title, body, date} = item;
   return (
-            <KeyboardAvoidingView>
-              <Card accessibilityLabel="Card containing single Journal Entry" onPress={ () => navigation.navigate("JournalDetails", { title:item.title, body:item.body, date:item.date})} style={ styles.journalCard }>
-                <Surface
-                  style={ styles.journalText }
-                >
-                  <Card.Content>
-                    {item.isEditing
-                    ?<TextInput
-                      label="Title"
-                      value={textTitle}
-                      onChangeText={text => setTitle(text)}
-                      autoComplete
-                    />
-                    :<Paragraph style={ styles.journalTitle }>
-                      { item.title }
-                    </Paragraph>
-                    }
-                    <Text style={ styles.divider } />
-                    {item.isEditing
-                    ?<TextInput
+    <KeyboardAvoidingView>
+      <Card accessibilityLabel="Card containing single Journal Entry" onPress={ () => navigation.navigate("Journal Details", { title, body, date })} style={ styles.journalCard }>
+        <Layout
+          style={ styles.journalText }
+        >
+          {item.isEditing
+            ?<Input
+                label="Title"
+                value={textTitle}
+                onChangeText={text => setTitle(text)}
+              />
+            :<Text style={ styles.journalTitle }>
+              { item.title }
+              </Text>
+          }
+          <Text style={ styles.divider } />
+            {item.isEditing
+                    ?<Input
                         label={'Body'}
                         value={textBody}
                         multiline={true}
                         onChangeText={text => setBody(text)}
-                        autoComplete
                     />
-                    :<Paragraph style={ styles.journalParagraph }>
+                    :<Text style={ styles.journalParagraph }>
                       { item.body }
-                    </Paragraph>
+                    </Text>
                     }
                     <Text style={ styles.divider } />
-                  </Card.Content>
-                </Surface>
+                </Layout>
                 {item.isEditing 
                 ? null
-                :<Paragraph style={ styles.journalDate }>
+                :<Text style={ styles.journalDate }>
                       { item.date }
-                </Paragraph>
+                </Text>
                 }
-                <Surface style={ styles.buttonsContainer }>
+                <Layout style={ styles.buttonsContainer }>
                   {item.isEditing 
                   ?<Button
-                    style={ styles.editButton}
-                        icon="lead-pencil"
-                        mode="contained"
-                        onPress={() => editHandler(item.id)}
+                      style={ styles.editButton}
+                      accessoryRight={SaveIcon}
+                      onPress={() => editHandler(item.id)}
                     >
                         Save
                     </Button>
                   :<Button
                     style={ styles.editButton }
-                    icon="lead-pencil"
-                    mode="contained"
+                    accessoryRight={EditIcon}
                     onPress={() => dispatch(editJournalToggle({id: item.id}))}
                   >
                     Edit
@@ -111,27 +107,22 @@ const JournalItem: FunctionComponent<JournalListProps> = ({ item,  navigation })
                   {item.isEditing 
                   ?<Button
                     style={ styles.deleteButton}
-                    color="red"
-                    icon="close-outline"
-                    mode="contained"
                     onPress={ () => dispatch(editJournalToggle({id: item.id})) }
                    >
                         Cancel
                    </Button>
                   :<Button
                     style={ styles.deleteButton }
-                    color="red"
-                    icon="close-outline"
-                    mode="contained"
+                    accessoryRight={DeleteIcon}
                     onPress={ () => dispatch(deleteJournal({ id: item.id })) }
                   >
                     Delete
                   </Button>
                   }
-                </Surface>
+                </Layout>
               </Card>
             </KeyboardAvoidingView>
-          )}
+  )}
 
 const styles = StyleSheet.create<Styles>({
   journalCard: {

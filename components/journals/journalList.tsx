@@ -8,7 +8,6 @@ type JournalListProps = {
   month: string;
   journals: [];
   navigation: NavigationScreenProp<string, object>;
-  container: StyleProp<ViewStyle>;
  }
 
 interface Styles {

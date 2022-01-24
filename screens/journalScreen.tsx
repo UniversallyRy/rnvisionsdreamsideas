@@ -1,13 +1,16 @@
 import React, { useState } from "react";
-import { View, Modal, Text, StyleSheet, StyleProp, TextStyle, ViewStyle } from "react-native";
-import { Card, Surface } from "react-native-paper";
+import { Modal, StyleSheet, StyleProp, TextStyle, ViewStyle } from "react-native";
 import { NavigationScreenProp } from 'react-navigation';
+import { SafeAreaView } from "react-native-safe-area-context";
+import { Layout, Text } from "@ui-kitten/components";
 import AddJournalModal from "../components/journals/addJournalModal";
 import JournalList from "../components/journals/journalList";
 import JournalGridContainer from "../components/journals/journalGrid";
 import JournalFilter from "../components/journals/journalFilter";
-import { Icon } from "../shared/icon";
 import { windowHeight, windowWidth } from "../utils/dimensions";
+import { Icon } from "../shared/icon";
+import Header from "../shared/header";
+import { CloseButton } from "../shared/button";
 
 
 interface JournalProps {
@@ -36,39 +39,40 @@ const JournalScreen: React.FC<JournalProps>= ({ navigation }) => {
   };
 
   return (
-      <Card style={styles.journalContainer}>
-            <Modal
-              visible={modalOpen}
-              onDismiss={() => setModalOpen(false)}
-            >
-                <Text style={styles.addJournalTitle}>Add A Journal Entry</Text>
-                <AddJournalModal setModalOpen={setModalOpen} />
-                <Surface style={styles.closeModalContainer}>
-                  <Icon
-                    item="close"
-                    onPress={() => setModalOpen(false)}
-                  />
-                </Surface>
-            </Modal>
-            <JournalFilter/>
-          {gridView ? (
-            <JournalGridContainer navigation={navigation} />
-          ) : (
-            <JournalList navigation={navigation} />
-          )}
-          <View style={styles.visionAddToggle}>
-            <Icon item="plus" onPress={() => setModalOpen(true)} />
-            <Icon item="grid" onPress={() => toggleGrid()} />
-          </View>
-      </Card>
+      <SafeAreaView style={styles.journalContainer}>
+        <Header name="Journals"/>
+        <Modal
+          style={styles.journalContainer}
+          visible={modalOpen}
+          onDismiss={() => setModalOpen(false)}
+        >
+          <Text style={styles.addJournalTitle}>Add A Journal Entry</Text>
+          <AddJournalModal setModalOpen={setModalOpen} />
+          <CloseButton
+            style={{position: "absolute", left: windowWidth * 0.45, bottom: 0}}
+            accessibilityLabel={"Closes Modal"}
+            onPress={() => setModalOpen(false)}
+          />
+        </Modal>
+        <JournalFilter/>
+        {gridView ? (
+          <JournalGridContainer navigation={navigation} />
+        ) : (
+          <JournalList navigation={navigation} />
+        )}
+        <Layout style={styles.visionAddToggle}>
+          <Icon item="plus" onPress={() => setModalOpen(true)} />
+          <Icon item="grid" onPress={() => toggleGrid()} />
+        </Layout>
+      </SafeAreaView>
   );
 };
 
 const styles = StyleSheet.create<Styles>({
   journalContainer:{
+    flex: 1,
     width: windowWidth,
     height: windowHeight,
-    flex: 1,
     fontFamily: "roboto-black",
   },
   addJournalTitle: {
@@ -89,7 +93,6 @@ const styles = StyleSheet.create<Styles>({
   },
   closeModalContainer: {
     flex: 1,
-    justifyContent: "flex-end",
   },
 });
 

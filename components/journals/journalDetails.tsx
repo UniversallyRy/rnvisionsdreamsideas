@@ -1,7 +1,9 @@
 import React, { FunctionComponent } from "react";
-import { View, Text, StyleSheet, StyleProp, TextStyle, ViewStyle } from "react-native";
-import { Card, Button } from "react-native-paper";
+import { StyleSheet, StyleProp, TextStyle, ViewStyle } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 import { NavigationScreenProp } from 'react-navigation';
+import { Card, Layout, Text } from "@ui-kitten/components";
+import Header from "../../shared/header";
 import { windowHeight, windowWidth } from "../../utils/dimensions";
 
 export type JournalDProps = {
@@ -27,45 +29,39 @@ interface Styles {
 }
 
 const JournalDetails: FunctionComponent<JournalDProps> = ({ route, navigation }) => {
-  const handlePress = () => {
-    navigation.goBack();
-  };
 
   const { title, body, date } = route.params;
 
   return (
-    <Card style={styles.jDetailsContainer}>
-      <Card.Content style={styles.jDetailsCard}>
+    <SafeAreaView style={styles.jDetailsContainer}>
+      <Header name="Vision Details" navigation={navigation}/>
+      <Card style={styles.jDetailsCard}>
         <Text style={styles.jDetailsTitle}>
           {" "}
           {title}{" "}
         </Text>
-        <View style={styles.divider} />
+        <Layout style={styles.divider} />
         <Text style={styles.jDetailsText}>
           {" "}
           {body}{" "}
         </Text>
-        <View style={styles.divider} />
+        <Layout style={styles.divider} />
         <Text style={styles.jDetailsDate}>
           {" "}
           {date}{" "}
         </Text>
-        <Button
-          style={styles.jDetailsButton}
-          icon="arrow-left"
-          mode="contained"
-          dark={true}
-          accessibilityLabel={"Back to Journals"}
-          onPress={handlePress}
-        >
-          Go Back
-        </Button>
-      </Card.Content>
-    </Card>
+      </Card>
+    </SafeAreaView>
   );
 };
 
 const styles = StyleSheet.create<Styles>({
+  jDetailsContainer: {
+    flexDirection: "column",
+    width: windowWidth,
+    height: windowHeight,
+    alignContent: "center",
+  },
   divider: {
     backgroundColor: "gray",
     alignSelf: "center",
@@ -97,17 +93,11 @@ const styles = StyleSheet.create<Styles>({
     fontSize: 40,
     fontFamily: "roboto-black",
   },
-  jDetailsContainer: {
-    flexDirection: "row",
-    width: windowWidth,
-    height: windowHeight,
-    alignContent: "center",
-    justifyContent: "center",
-  },
   jDetailsCard: {
     alignSelf: "center",
     margin: 10,
     width: windowWidth * 0.99,
+    height: windowHeight * 0.5
   },
 });
 

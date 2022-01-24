@@ -3,15 +3,12 @@ import { connect, useDispatch } from 'react-redux'
 import { StyleSheet, StyleProp, TextStyle, ViewStyle } from "react-native";
 import { List } from 'react-native-paper';
 import months from '../../utils/months';
-import { windowWidth } from "../../utils/dimensions";
+import { windowHeight, windowWidth } from "../../utils/dimensions";
 import { changeMonth } from "../../redux/reducers/journals";
 
 
 type FilterProps = {
     state: string;
-    container: StyleProp<ViewStyle>;
-    listContainer: StyleProp<ViewStyle>;
-    listItem: StyleProp<TextStyle>;
   }
 
 interface Styles {
@@ -68,6 +65,7 @@ const JournalFilter: React.FC<FilterProps> = ({ state }) => {
 
 const styles = StyleSheet.create<Styles>({
     container: {
+      top: windowHeight * 0.07,
       position: 'absolute',
       width: windowWidth,
       margin: 1,

@@ -1,19 +1,15 @@
+import { Card, Text } from "@ui-kitten/components";
 import React, { FunctionComponent} from "react";
-import { View, FlatList, Text, StyleSheet, StyleProp, TextStyle, ViewStyle } from "react-native";
+import { FlatList, StyleSheet, TextStyle, ViewStyle } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 import { NavigationScreenProp } from 'react-navigation';
 import { connect } from "react-redux";
-import { Card } from "react-native-paper";
 import { windowHeight, windowWidth } from "../../utils/dimensions";
 
 type GridProps = {
   navigation: NavigationScreenProp<string, object>;
-  monthFilter: string,
   journals: Object[]
   month: string;
-  container: StyleProp<ViewStyle>;
-  gridContainer: StyleProp<ViewStyle>;
-  gridItem: StyleProp<TextStyle>;
-  gridText: StyleProp<ViewStyle>;
 }
 
 interface Styles {
@@ -26,7 +22,7 @@ interface Styles {
 const JournalGridContainer: FunctionComponent<GridProps> = ({ journals, month, navigation }) => {     
 
   return (
-    <View
+    <SafeAreaView
       style={ styles.container }
     >
       <FlatList
@@ -43,26 +39,23 @@ const JournalGridContainer: FunctionComponent<GridProps> = ({ journals, month, n
             <Card
               key={item.title + '_key'}
               style={ styles.gridItem }
-              onPress={ () => navigation.navigate("JournalDetails", { title:item.title, body:item.body, date:item.date }) }
+              onPress={ () => navigation.navigate("Journal Details", { title:item.title, body:item.body, date:item.date }) }
             >
-              <Card.Content style={ styles.gridText }>
                 <Text>{ item.title }</Text>
                 <Text
                   style={{
                     marginTop: 30,
-                    bottom:3,
-                    left: 3,
-                    position: "absolute",
+                    top:100,
+                    right: 20,
                   }}
                 >
                   { item.date }
                 </Text>
-              </Card.Content>
             </Card>
           );
         }}}
       />
-    </View>
+    </SafeAreaView>
   );
 };
 
@@ -73,8 +66,6 @@ const styles = StyleSheet.create<Styles>({
     paddingTop: 5,
   },
   gridContainer: {
-    marginLeft: "auto",
-    marginRight: "auto",
     padding: 10,
   },
   gridItem: {

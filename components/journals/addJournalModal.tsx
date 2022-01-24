@@ -1,17 +1,17 @@
 import React, { FunctionComponent } from "react";
-import { Text, StyleProp, TextStyle } from "react-native";
-import { Surface, TextInput } from "react-native-paper";
+import { StyleProp, TextStyle } from "react-native";
 import { useDispatch } from "react-redux";
 import { Formik } from "formik";
 // import { addJournal } from "../../redux/actions";
 import { addJournal } from "../../redux/reducers/journals";
 import { globalStyles } from "../../styles/global";
-import FlatButton from "../../shared/button";
+import { CloseButton, SubmitButton } from "../../shared/button";
 import * as yup from "yup";
+import { SafeAreaView } from "react-native-safe-area-context";
+import { Input, Text } from "@ui-kitten/components";
 
 type AddJournalProps = {
   setModalOpen: ((i:boolean) => void);
-  errorText?: StyleProp<TextStyle>;
 }
 // require an entry into form input that's at least 4 letters
 const JournalSchema = yup.object({
@@ -22,7 +22,7 @@ const JournalSchema = yup.object({
 const AddJournal: FunctionComponent<AddJournalProps> = ({ setModalOpen }) => {
   const dispatch = useDispatch();
   return (
-    <Surface style={{ margin: 3, marginTop: 100 }}>
+    <SafeAreaView style={{ margin: 3, marginTop: 100 }}>
       <Formik
         // Control whether Formik should reset the form if initialValues changes
         enableReinitialize
@@ -43,39 +43,37 @@ const AddJournal: FunctionComponent<AddJournalProps> = ({ setModalOpen }) => {
           errors,
         }) => (
           <>
-            <TextInput
+            <Input
               textAlign="center"
-              mode="flat"
               placeholder="Journal Title"
               onChangeText={handleChange("title")}
               value={values.title}
               onBlur={handleBlur("title")}
               accessibilityLabel="Input Journal Title Here"
-              autoComplete
             />
             <Text style={globalStyles.errorText}>
               {/* Above <Text/> shows up only when input is focused and exited without requirements */}
               {touched.title && errors.title}
             </Text>
-            <TextInput
+            <Input
               textAlign="center"
               multiline
-              mode="flat"
               placeholder="Journal Body"
               onChangeText={handleChange("body")}
               value={values.body}
               onBlur={handleBlur("body")}
               accessibilityLabel="Input Journal body text Here"
-              autoComplete
             />
             <Text style={globalStyles.errorText}>
               {touched.body && errors.body}
             </Text>
-            <FlatButton text="submit" onPress={handleSubmit} accessabilityLabel="Clicking here adds journal entry"/>
+            <SubmitButton onPress={handleSubmit} accessibilityLabel="Clicking here adds journal entry">
+              Submit
+            </SubmitButton>
           </>
         )}
       </Formik>
-    </Surface>
+    </SafeAreaView>
   );
 };
 
