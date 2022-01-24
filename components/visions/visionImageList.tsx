@@ -1,8 +1,9 @@
+import { Layout } from "@ui-kitten/components";
 import React, { FC, useState, useRef } from "react";
-import { View, TouchableOpacity, FlatList, FlatListProps,Image, StyleSheet } from "react-native";
+import { TouchableOpacity, FlatList, Image, StyleSheet } from "react-native";
 import { NavigationScreenProp } from 'react-navigation';
 // import { deleteVision } from "../../redux/reducers/visions";
-import { connect, useDispatch, ConnectedProps } from "react-redux";
+import { connect, ConnectedProps } from "react-redux";
 import { windowHeight, windowWidth } from "../../utils/dimensions";
 import FooterButtons from "./FooterButtons";
 
@@ -40,7 +41,7 @@ const VisionListContainer: FC<ImageProps> = ({navigation, state}) => {
   }
 
   return (
-    <View style={{ flex:1 }}>
+    <Layout style={{ flex:1 }}>
       <FlatList
         ref={ topRef }
         data={ state }
@@ -52,12 +53,12 @@ const VisionListContainer: FC<ImageProps> = ({navigation, state}) => {
         }}
         keyExtractor={ (_, index) => String(index) }
         renderItem={ ({ item }:any) => {
-          return <View style={{ width:windowWidth, height:windowHeight }}>
+          return <Layout style={{ width:windowWidth, height:windowHeight }}>
                     <Image
                       source={ { uri:item.uri } }
                       style={ [StyleSheet.absoluteFill] }
                     />
-                </View>
+                </Layout>
         }}
       />
       <FlatList
@@ -70,29 +71,27 @@ const VisionListContainer: FC<ImageProps> = ({navigation, state}) => {
         keyExtractor={ (_, index) => String(index) }
         renderItem={ ({item, index}:any) => {
           return (
-            <View>
-              <TouchableOpacity
-                onPress={ () => scrollActiveIndex(index) }
-                onLongPress={ () => navigation.navigate("Vision Details", { item }) }
-              >
-                <Image
-                  source={{ uri:item.uri }}
-                  style={{
-                    width: ITEM_SIZE,
-                    height: ITEM_SIZE,
-                    borderRadius: 12,
-                    marginRight: SPACING,
-                    borderWidth: 2,
-                    borderColor: activeIndex === index ? "#fff" : 'transparent'
-                  }}
-                />
-              </TouchableOpacity>
-            </View>
+            <TouchableOpacity
+              onPress={ () => scrollActiveIndex(index) }
+              onLongPress={ () => navigation.navigate("Vision Details", { item }) }
+            >
+              <Image
+                source={{ uri:item.uri }}
+                style={{
+                  width: ITEM_SIZE,
+                  height: ITEM_SIZE,
+                  borderRadius: 12,
+                  marginRight: SPACING,
+                  borderWidth: 2,
+                  borderColor: activeIndex === index ? "#fff" : 'transparent'
+                }}
+              />
+            </TouchableOpacity>
           )
         }}
         />
         <FooterButtons/>
-    </View>
+    </Layout>
   );
 };
 

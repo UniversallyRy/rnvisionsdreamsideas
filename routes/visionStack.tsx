@@ -13,7 +13,7 @@ type VisionScreenNavigationProp = StackNavigationProp<VisionStackParamList,'Visi
 
 type NavProp = { navigation: VisionScreenNavigationProp };
 
-const Stack = createStackNavigator<VisionStackParamList>();
+const { Navigator,  Screen} = createStackNavigator<VisionStackParamList>();
 
 // screenOption transition animations
 const customTrans: StackNavigationOptions = {
@@ -54,25 +54,22 @@ const customTrans: StackNavigationOptions = {
 
 const VisionStack: FunctionComponent<NavProp> = () => {
   return (
-    <Stack.Navigator 
+    <Navigator 
       initialRouteName= "Vision Images"
       screenOptions= {{
-        headerMode: "screen",
-        header: ({ route, previous, navigation }:any) => (
-          <Header scene={route} previous={previous} navigation={navigation} />
-          ),
+        headerMode: "none",
         ...customTrans,
       }}
     >
-      <Stack.Screen
+      <Screen
         name= "Vision Images"
         component= { Visions }
       />
-      <Stack.Screen
+      <Screen
         name= "Vision Details"
         component= { VisionDetails }
       />
-    </Stack.Navigator>
+    </Navigator>
   );
 };
 

@@ -3,11 +3,6 @@ import {
   DarkTheme as NavigationDarkTheme,
   DefaultTheme as NavigationDefaultTheme,
 } from "@react-navigation/native";
-import {
-  DarkTheme as PaperDarkTheme,
-  DefaultTheme as PaperDefaultTheme,
-  Provider as PaperProvider,
-} from "react-native-paper";
 import "react-native-get-random-values";
 import "react-native-gesture-handler";
 import { AppRegistry, StatusBar } from "react-native";
@@ -16,27 +11,14 @@ import { Provider } from "react-redux";
 import { store, /*persistor */ } from "./redux/store";
 import AppLoading from 'expo-app-loading';
 import { BottomTabs } from "./routes/drawer";
-import { PersistGate } from "redux-persist/integration/react";
+// import { PersistGate } from "redux-persist/integration/react";
+import * as eva from '@eva-design/eva';
+import { EvaIconsPack } from '@ui-kitten/eva-icons';
+import { ApplicationProvider, IconRegistry } from '@ui-kitten/components';
 import * as Font from "expo-font";
 import { ThemesContext } from "./ThemeContext";
+import { default as theme } from './styles/custom-theme.json'
 
-
-const CombinedDefaultTheme = {
-  ...PaperDefaultTheme,
-  ...NavigationDefaultTheme,
-  colors: {
-    ...PaperDefaultTheme.colors,
-    ...NavigationDefaultTheme.colors,
-  },
-};
-const CombinedDarkTheme = {
-  ...PaperDarkTheme,
-  ...NavigationDarkTheme,
-  colors: {
-    ...PaperDarkTheme.colors,
-    ...NavigationDarkTheme.colors,
-  },
-};
 
 
 const getFonts = () =>
@@ -52,32 +34,24 @@ const App = () => {
   const [fontsLoaded, setFontsLoaded] = useState(false);
   const [isThemeDark, setIsThemeDark] = useState(false);
   const [persistLoaded, setPersistLoaded] = useState(true);
+  const [theme, setTheme] = React.useState('light');
 
-
-  let theme = isThemeDark ? CombinedDarkTheme : CombinedDefaultTheme;
-
-  const toggleTheme = useCallback(() => {
-    return setIsThemeDark(!isThemeDark);
-  }, [isThemeDark]);
-
-  const preferences = useMemo(
-    () => ({
-      toggleTheme,
-      isThemeDark,
-    }),
-    [toggleTheme, isThemeDark]
-  );
+  const toggleTheme = () => {
+    const nextTheme = theme === 'light' ? 'dark' : 'light';
+    setTheme(nextTheme);
+  };
 
   if (fontsLoaded) {
     return (
       <Provider store={store}>
-        <ThemesContext.Provider value={preferences}>
-          <PaperProvider theme={theme}>
+        <ThemesContext.Provider value={{ theme, toggleTheme }}>
+        <IconRegistry icons={EvaIconsPack}/>
+          <ApplicationProvider {...eva} theme={eva[theme]}>
             <StatusBar animated={true} />
-            <NavigationContainer theme={theme}>
+            <NavigationContainer>
               <BottomTabs />
             </NavigationContainer>
-          </PaperProvider>
+          </ApplicationProvider>
         </ThemesContext.Provider>
       </Provider>
     );

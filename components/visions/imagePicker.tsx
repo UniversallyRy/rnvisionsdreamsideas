@@ -1,6 +1,6 @@
 import React, { FunctionComponent, useState, useEffect } from "react";
-import { View, Platform, StyleSheet, StyleProp, ViewStyle, ImageStyle } from "react-native";
-import { Card, Button } from "react-native-paper";
+import { Platform, StyleSheet, ViewStyle, ImageStyle, Image } from "react-native";
+import { Card, Button, Layout } from "@ui-kitten/components";
 import { useDispatch, ConnectedProps } from "react-redux";
 import { addPic } from "../../redux/reducers/newpic";
 import * as ImagePicker from "expo-image-picker";
@@ -69,16 +69,13 @@ const ImagePic: FunctionComponent = () => {
   };
 
   return (
-      <Card elevation={0} style={ styles.container }>
-        <Card.Content>
+      <Layout style={ styles.container }>
           { image != "" && (
-            <Card.Cover source={{ uri: image }} style={ styles.image }
+            <Image source={{ uri: image }} style={ styles.image }
             />
           )}
-        </Card.Content>
-        <View style={ styles.visionButtonContainer }>
+        <Layout style={ styles.visionButtonContainer }>
           <Button
-            mode="contained"
             accessibilityLabel="Add Image From Gallery"
             onPress={ pickImage }
             style={ styles.uploadButton }
@@ -86,38 +83,37 @@ const ImagePic: FunctionComponent = () => {
             Add from gallery
           </Button>
           <Button
-            mode="contained"
             accessibilityLabel="Take A Picture"
             onPress={ CameraImage }
             style={ styles.uploadButton }
           >
             Take a Picture
           </Button>
-        </View>
-    </Card>
+        </Layout>
+    </Layout>
   );
 };
 
 const styles = StyleSheet.create<Styles>({
+  container:{
+    width: windowWidth,
+    alignItems:"center",
+    justifyContent: "center",
+    marginBottom: 40,
+  },
   visionButtonContainer: {
-    alignSelf: "center",
+    alignItems:"center",
     flexDirection: "row",
   },
   uploadButton: {
     margin: 5,
-    elevation: 3,
-  },
-  container:{
-    width: windowWidth,
-    alignItems:"center",
-    marginBottom: 40,
+    elevation: 2,
   },
   image:{
     width: 500,
     height: 500,
     marginBottom: 80,
     borderRadius: 28,
-    elevation: 2,
   }
 });
 

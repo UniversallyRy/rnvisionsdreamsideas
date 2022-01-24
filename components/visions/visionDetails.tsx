@@ -1,54 +1,63 @@
-import React, { FunctionComponent } from "react";
-import { StyleSheet, StyleProp, TextStyle, ViewStyle, ImageStyle } from "react-native";
-import { Card, Button } from "react-native-paper";
+import React, { FC } from "react";
+import { Image, StyleSheet, TextStyle, ViewStyle, ImageStyle } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 import { NavigationScreenProp } from 'react-navigation';
+import { Card, Text } from '@ui-kitten/components';
 import { windowHeight, windowWidth } from "../../utils/dimensions";
+import Header from "../../shared/header";
 
 
 type VisionProps = {
   navigation: NavigationScreenProp<string, object>;
-  route: any;
+  route: {
+    key: string;
+    name: string;
+    params: {
+      data: {
+        id: string;
+        title: string;
+        uri: string;
+      },
+    },
+    path: undefined;
+  };
 }
 
 interface Styles {
   vDetailsContent: ViewStyle;
   visionTitle: TextStyle;
   vDetailsImage: ImageStyle;
-  vDetailsButton: ViewStyle;
+  vCardContainer: ViewStyle;
 }
 
-const VisionDetails: FunctionComponent<VisionProps> = ({ navigation, route }) => {
-  const handlePress = () => {
-    navigation.goBack();
-  };
+const VisionDetails: FC<VisionProps> = ({ navigation, route }) => {
+  console.log(route)
   const { data } = route.params;
 
   return (
-    <Card elevation={ 7 } style={ styles.vDetailsContent }>
-      <Card.Content>
-        <Card.Title title={ data.title } style={ styles.visionTitle } />
-        <Card.Cover key= { data.id } source={{ uri: data.uri }} style={ styles.vDetailsImage } />
-        <Button
-          style={ styles.vDetailsButton }
-          icon="arrow-left"
-          mode="contained"
-          accessibilityLabel={ "Back to All Visions" }
-          onPress={ handlePress } 
-        >
-          Go Back
-        </Button>
-      </Card.Content>
-    </Card>
+    <SafeAreaView style={ styles.vDetailsContent }>
+      <Header name="Vision Details" navigation={navigation}/>
+      <Card style={ styles.vCardContainer}>
+          <Text style={ styles.visionTitle }>{data.title}</Text>
+          <Image key= { data.id } source={{ uri: data.uri }} style={ styles.vDetailsImage } />
+      </Card>
+    </SafeAreaView>
   );
 };
 
 const styles = StyleSheet.create<Styles>({
   vDetailsContent: {
-    flexDirection: "row",
+    fontFamily: "roboto-black",
+    flexDirection: "column",
     flex: 1,
   },
+  vCardContainer: {
+    alignSelf: "center",
+    width: windowWidth,
+    height: windowHeight,
+    elevation: 1,
+  },
   visionTitle: {
-    fontFamily: "roboto-black",
     alignSelf: "center",
     fontSize: 22,
     marginBottom: 10,
@@ -60,13 +69,6 @@ const styles = StyleSheet.create<Styles>({
     height: windowHeight * 0.65,
     width: windowWidth * 0.97,
     margin: 5,
-  },
-  vDetailsButton: {
-    fontSize: 40,
-    fontFamily: "roboto-bold",
-    alignSelf: "center",
-    width: windowWidth * 0.97,
-    elevation: 1,
   },
 });
 

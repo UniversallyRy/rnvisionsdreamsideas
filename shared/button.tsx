@@ -1,35 +1,61 @@
 import React from "react";
-import { Text, StyleSheet, StyleProp, TextStyle, ViewStyle } from "react-native";
-import { Button } from "react-native-paper";
+import { StyleSheet, TextStyle, ViewStyle } from "react-native";
+import { Button, Icon, Text } from "@ui-kitten/components"
 
 interface ButtonProps {
   text?: string;
-  color?: string;
   onPress: () => void;
-  button?: StyleProp<ViewStyle>;
-  buttonText?: StyleProp<TextStyle>;
-  accessabilityLabel?: string;
 }
 
 interface Styles {
   button: ViewStyle;
+  submit: ViewStyle;
   buttonText: TextStyle;
 }
 
+const SubmitIcon = (props) => (
+  <Icon {...props} name='plus-outline'/>
+);
+const GridIcon = (props) => (
+  <Icon {...props} name='grid'/>
+);
+
+
 // Custom button made for Flat styling
-const FlatButton:React.FC<ButtonProps> = ({ color, text, onPress }) => {
+const FlatButton:React.FC<ButtonProps> = ({ text, onPress }) => {
   return (
     <Button
-      mode="contained"
-      icon="plus"
       style={styles.button}
       onPress={onPress}
-      color={color}
     >
       <Text style={styles.buttonText}>{text}</Text>
     </Button>
   );
 };
+
+export const SubmitButton = ({ onPress, ...props }) => {
+  return (
+    <Button
+      style={styles.submit}
+      appearance='ghost'
+      accessoryLeft={SubmitIcon}
+      onPress={onPress}
+      {...props}
+    />
+  );
+};
+
+export const GridButton = ({ onPress, ...props }) => {
+  return (
+    <Button
+      appearance='ghost'
+      accessoryLeft={GridIcon}
+      onPress={onPress}
+      {...props}
+    />
+  );
+};
+
 
 const styles = StyleSheet.create<Styles>({
   button: {
@@ -47,6 +73,11 @@ const styles = StyleSheet.create<Styles>({
     fontSize: 16,
     textAlign: "center",
   },
+  submit: {
+    alignItems: "center",
+    justifyContent: "center",
+    margin: 2,
+  } 
 });
 
 export default FlatButton;

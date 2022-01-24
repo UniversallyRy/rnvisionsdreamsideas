@@ -1,9 +1,11 @@
 import React, { useState, useRef, useEffect, createContext, SetStateAction, Dispatch } from "react";
-import { View, Animated, Modal, ViewStyle, StyleSheet } from "react-native";
+import { Animated, Modal, ViewStyle, StyleSheet } from "react-native";
 import { NavigationScreenProp } from 'react-navigation';
+import { SafeAreaView } from "react-native-safe-area-context";
 import VisionsListContainer from "../components/visions/visionImageList";
 import VisionGridContainer from "../components/visions/visionImageGrid";
 import AddVision from "../components/visions/addVisionModal";
+import Header from "../shared/header";
 
 interface VisionProps {
   navigation: NavigationScreenProp<string, object>;
@@ -25,6 +27,7 @@ const Visions: React.FC<VisionProps> = ({ navigation }) => {
   const scrollX = useRef(new Animated.Value(0)).current;
   const [modalOpen, setModalOpen] = useState(false);
   const [gridView, setGridView] = useState(false);
+  
 
   useEffect(() => {
     let isCancelled = false;
@@ -37,8 +40,11 @@ const Visions: React.FC<VisionProps> = ({ navigation }) => {
     setGridView(!gridView);
   };
 
+
+  
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
+      <Header name="Visions"/>
       <Modal visible={modalOpen} animationType="slide">
         <AddVision setModalOpen={setModalOpen} />  
       </Modal>
@@ -50,7 +56,7 @@ const Visions: React.FC<VisionProps> = ({ navigation }) => {
         <VisionsListContainer navigation={navigation} />
       )}
       </VisionContext.Provider>
-    </View>
+    </SafeAreaView>
   );
 };
 

@@ -7,12 +7,11 @@ import {
   Platform, 
   KeyboardAvoidingView, 
   StyleSheet, 
-  StyleProp, 
   ViewStyle, 
   TextStyle 
 } from "react-native";
 import { useCardAnimation } from '@react-navigation/stack';
-import { TextInput, Button, } from "react-native-paper";
+import { Input, Layout } from "@ui-kitten/components";
 import { connect, useDispatch, ConnectedProps} from "react-redux";
 import { AntDesign } from "@expo/vector-icons";
 import { Formik } from "formik";
@@ -21,6 +20,7 @@ import { globalStyles } from "../../styles/global";
 import ImagePic from "./imagePicker";
 import { windowHeight, windowWidth } from "../../utils/dimensions";
 import * as yup from "yup";
+import { SubmitButton } from "../../shared/button";
 
 interface VisionProps {
   stateUri: string;
@@ -43,7 +43,7 @@ const AddVisionModal: FunctionComponent<VisionProps> = ({ stateUri, setModalOpen
   const dispatch = useDispatch()
   const { current } = useCardAnimation();
   return (
-    <KeyboardAvoidingView style={{ flex: 1 }} behavior={ Platform.OS === "ios" ? "padding" : "height" }>
+    <Layout>
       <Animated.View 
         style={{
           transform: [
@@ -81,35 +81,33 @@ const AddVisionModal: FunctionComponent<VisionProps> = ({ stateUri, setModalOpen
             errors,
             handleSubmit,
           }) => (
-            <View style={styles.footer}> 
+            <Layout style={styles.footer}> 
               <ImagePic/>
-              <View style={{ flexDirection: 'row' }}>
+              <KeyboardAvoidingView style={{ flexDirection: 'row' }} behavior={ Platform.OS === "ios" ? "padding" : "height" }>
                 <View style={{ flexDirection: 'column' }}>
-                  <TextInput
+                  <Input
                     textAlign='center'
                     style={ styles.textinput }
                     placeholder="Vision Title"
                     onChangeText={ handleChange("title") }
                     value={ values.title }
                     onBlur={ handleBlur("title") }
-                    autoComplete
+                    
                   />
                   <Text style={ globalStyles.errorText }>
                     { touched.title && errors.title }
                   </Text>
                 </View>
-                <Button
-                style={ styles.buttonStyle }
-                onPress={ handleSubmit }
-                >
-                  <AntDesign name="plus" size={ 16 } color="white" />
-                </Button>
-              </View>
-            </View>
+                <SubmitButton
+                  style={ styles.buttonStyle }
+                  onPress={ handleSubmit }
+                />
+              </KeyboardAvoidingView>
+            </Layout>
         )}
         </Formik>
       </Animated.View>
-    </KeyboardAvoidingView>
+    </Layout>
   );
 };
 
@@ -125,22 +123,18 @@ const styles = StyleSheet.create<Styles>({
     alignSelf: "center",
   },
   textinput: {
-    fontFamily: "roboto-black",
     width: windowWidth * 0.75,
     height: 60,
-    paddingLeft: 10,
-    elevation: 1,
     marginRight: 3,
   },
   buttonStyle: {
-    backgroundColor: "#6200ee", 
-    height: 60,
-    padding: 10,
-    elevation: 2,
+    height: 25,
+    width: 25,
   },
   footer: {
     position: 'absolute',
     alignItems: "center",
+    justifyContent: "center",
     bottom: 0,
   },
 });

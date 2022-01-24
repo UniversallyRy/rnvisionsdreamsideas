@@ -1,7 +1,7 @@
 import React, { FunctionComponent, useCallback, memo } from "react";
-import { StyleSheet, StyleProp, ViewStyle, ImageStyle, View } from "react-native";
-import { FlatList } from "react-native-gesture-handler";
-import { Card } from "react-native-paper";
+import { Image, StyleSheet, ViewStyle, ImageStyle } from "react-native";
+import { FlatList, TouchableOpacity } from "react-native-gesture-handler";
+import { Layout } from "@ui-kitten/components";
 import { connect, ConnectedProps } from "react-redux";
 import { NavigationScreenProp } from 'react-navigation';
 import { windowHeight, windowWidth } from "../../utils/dimensions";
@@ -26,19 +26,19 @@ const VisionGridContainer: FunctionComponent<GridProps> = ({ state, navigation }
   
   const VisionGridList = memo(function GridImage({ data }:any) {
     return (
-      <Card
-        style={{margin: 4, borderRadius: 12,}}
+      <TouchableOpacity
+        style={{margin: 4, borderRadius: 12,   elevation: 2,}}
         accessibilityLabel={ "Grid List" }
         accessible  
         onPress={ () => navigation.navigate("Vision Details", { data }) }
       > 
-        <Card.Cover
+        <Image
           style={ styles.gridItem }
           source={{ uri: data.uri }}
           testID={ data.id }  
           resizeMode={ 'cover' }
         />
-      </Card>
+      </TouchableOpacity>
     );
   });
 
@@ -47,7 +47,7 @@ const VisionGridContainer: FunctionComponent<GridProps> = ({ state, navigation }
   }, []);
 
   return (
-    <View style={{ margin: "auto", flex: 1 }}>
+    <Layout style={{ margin: "auto", flex: 1 }}>
       <FlatList
         numColumns={ 2 }
         contentContainerStyle={ styles.gridContainer }
@@ -56,9 +56,8 @@ const VisionGridContainer: FunctionComponent<GridProps> = ({ state, navigation }
         keyExtractor={ (item, index) => index.toString() }
         renderItem={ renderList }
       />
-      <FooterButtons
-      />
-    </View>
+      <FooterButtons/>
+    </Layout>
   );
 };
 
@@ -66,7 +65,6 @@ const styles = StyleSheet.create<Styles>({
   gridContainer: {
     alignSelf: "center",
     padding: 3,
-    elevation: 4
   },
   gridItem: {
     height: windowHeight * 0.25,
@@ -74,8 +72,7 @@ const styles = StyleSheet.create<Styles>({
     alignSelf: "center",
     overflow: "hidden",
     borderRadius: 12,
-    borderWidth: 1,
-
+    borderWidth: 1
   },
 });
 
