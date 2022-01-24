@@ -2,7 +2,6 @@ import React, { FunctionComponent } from "react";
 import { createStackNavigator, StackNavigationProp, StackNavigationOptions, TransitionSpecs } from "@react-navigation/stack";
 import Visions from "../screens/visionScreen";
 import VisionDetails from "../components/visions/visionDetails";
-import Header from "../shared/header";
 
 type VisionStackParamList = {
   "Vision Images": undefined;
