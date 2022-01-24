@@ -20,13 +20,17 @@ const GridIcon = (props) => (
   <Icon {...props} name='grid'/>
 );
 
+const CloseIcon = (props) => (
+  <Icon {...props} name='close-outline'/>
+);
 
 // Custom button made for Flat styling
-const FlatButton:React.FC<ButtonProps> = ({ text, onPress }) => {
+const FlatButton:React.FC<ButtonProps> = ({ text, onPress, ...props }) => {
   return (
     <Button
       style={styles.button}
       onPress={onPress}
+      {...props}
     >
       <Text style={styles.buttonText}>{text}</Text>
     </Button>
@@ -38,7 +42,7 @@ export const SubmitButton = ({ onPress, ...props }) => {
     <Button
       style={styles.submit}
       appearance='ghost'
-      accessoryLeft={SubmitIcon}
+      accessoryRight={SubmitIcon}
       onPress={onPress}
       {...props}
     />
@@ -50,6 +54,17 @@ export const GridButton = ({ onPress, ...props }) => {
     <Button
       appearance='ghost'
       accessoryLeft={GridIcon}
+      onPress={onPress}
+      {...props}
+    />
+  );
+};
+
+export const CloseButton = ({ onPress, ...props }) => {
+  return (
+    <Button
+      appearance='ghost'
+      accessoryRight={CloseIcon}
       onPress={onPress}
       {...props}
     />
