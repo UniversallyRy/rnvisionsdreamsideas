@@ -1,11 +1,10 @@
 import React, { FunctionComponent } from "react";
-import { View, TouchableOpacity, Text, StyleSheet, StyleProp, TextStyle, ViewStyle } from "react-native";
-import { Card, TextInput } from "react-native-paper";
+import { TouchableOpacity, StyleSheet, TextStyle, ViewStyle } from "react-native";
 import { connect, useDispatch } from "react-redux";
+import { Card, Input, Layout, Text } from "@ui-kitten/components";
 import { AntDesign } from "@expo/vector-icons";
 import { Formik } from "formik";
 import { addNote } from "../../redux/reducers/note";
-
 import { globalStyles } from "../../styles/global";
 import FlatButton  from "../../shared/button";
 import * as yup from "yup";
@@ -13,11 +12,6 @@ import * as yup from "yup";
 type ModalProps = {
   closeModal: (() => void);
   addNote: ((item: object) => void);
-  container: StyleProp<ViewStyle>;
-  title: StyleProp<TextStyle>;
-  input: StyleProp<TextStyle>;
-  colorSelect: StyleProp<ViewStyle>;
-  errorText: StyleProp<TextStyle>;
 }
 
 interface Styles {
@@ -35,7 +29,7 @@ const AddNoteModal: FunctionComponent<ModalProps> = ({ closeModal }) => {
   const dispatch = useDispatch()
   return (
     <Card style={{ flex: 1 }}>
-      <View style={ styles.container }>
+      <Layout style={ styles.container }>
         <TouchableOpacity
           style={{ position: "absolute", top: 64, right: 32 }}
           onPress={ closeModal }
@@ -43,7 +37,7 @@ const AddNoteModal: FunctionComponent<ModalProps> = ({ closeModal }) => {
           <AntDesign name="close" size={ 24 } color="black" />
         </TouchableOpacity>
 
-        <View style={{ alignSelf: "stretch", marginHorizontal: 32 }}>
+        <Layout style={{ alignSelf: "stretch", marginHorizontal: 32 }}>
           <Text style={ styles.title }>Create A New Note</Text>
           <Formik
             initialValues={{ name: "", id: 0 }}
@@ -62,8 +56,8 @@ const AddNoteModal: FunctionComponent<ModalProps> = ({ closeModal }) => {
               touched,
               errors,
             }) => (
-              <View>
-                <TextInput
+              <Layout>
+                <Input
                   textAlign="center"
                   enablesReturnKeyAutomatically={ true }
                   autoCorrect={ true }
@@ -72,7 +66,6 @@ const AddNoteModal: FunctionComponent<ModalProps> = ({ closeModal }) => {
                   onChangeText={ handleChange("name") }
                   value={ values.name }
                   onBlur={ handleBlur("name") }
-                  autoComplete
                 />
 
                 <Text style={ globalStyles.errorText }>
@@ -82,13 +75,13 @@ const AddNoteModal: FunctionComponent<ModalProps> = ({ closeModal }) => {
                   onPress={ handleSubmit }
                   text="Add Note"
                 />
-              </View>
+              </Layout>
             )}
           </Formik>
-        </View>
-      </View>
-      </Card>
-    );
+        </Layout>
+      </Layout>
+    </Card>
+  );
 };
 
 const styles = StyleSheet.create<Styles>({

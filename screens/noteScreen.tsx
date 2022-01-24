@@ -1,13 +1,13 @@
 import React from "react";
-import { StyleSheet, StyleProp, ViewStyle } from "react-native";
-import { Card } from "react-native-paper";
+import { StyleSheet, ViewStyle } from "react-native";
 import { connect } from "react-redux";
+import { Layout } from "@ui-kitten/components";
 import NoteMain from "../components/notes/notesMain";
+import Header from "../shared/header";
 
 interface NoteProps {
   stateNotes: object[];
   stateTodos: object[];
-  noteScreenContainer?: StyleProp<ViewStyle>;
 }
 
 interface Styles {
@@ -16,16 +16,17 @@ interface Styles {
 
 const NoteScreen:React.FC<NoteProps> = ({ stateNotes, stateTodos }) => {
   return (
-    <Card style={styles.noteScreenContainer}>
+    <Layout style={styles.noteScreenContainer}>
+      <Header name="Notes"/>
       <NoteMain stateNotes={stateNotes} stateTodos={stateTodos} />
-    </Card>
+    </Layout>
   );
 };
 
 const styles = StyleSheet.create<Styles>({
   noteScreenContainer: {
-    fontFamily: "roboto-black",
     flex: 1,
+    fontFamily: "roboto-black",
   },
 });
 const mapStateToProps = (state:any) => {
