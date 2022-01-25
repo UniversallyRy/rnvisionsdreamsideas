@@ -31,7 +31,6 @@ interface Styles {
 }
 
 const VisionDetails: FC<VisionProps> = ({ navigation, route }) => {
-  console.log(route)
   const { data } = route.params;
 
   return (
