@@ -11,23 +11,8 @@ import { windowHeight, windowWidth } from "../../utils/dimensions";
 
 type TodoModalProps = {
   item: any;
-  closeModal: (() => boolean);
-  deleteTodo: ((id:any) => void);
-  addTodo: ((item: object) => void);
-  toggleTodo: ((item: object) => void);
-  completedList: ((count1: number, count2: number) => boolean);
-  container: StyleProp<ViewStyle>;
-  section: StyleProp<ViewStyle>;
-  header: StyleProp<TextStyle>;
-  title: StyleProp<TextStyle>;
-  taskCount: StyleProp<TextStyle>;
-  footer: StyleProp<ViewStyle>;
-  todoInput:StyleProp<TextStyle>;
-  buttonStyle:StyleProp<ViewStyle>;
-  todonoteContainer:StyleProp<ViewStyle>;
-  todo:StyleProp<TextStyle>;
-  deleteButton:StyleProp<ViewStyle>;
-  deleteTodoButton:StyleProp<ViewStyle>;
+  closeModal: (() => void);
+  completedList: ((count1: number, count2: number) => void);
 }
 
 interface Styles {

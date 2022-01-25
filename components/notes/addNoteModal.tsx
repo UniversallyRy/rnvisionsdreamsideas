@@ -1,7 +1,7 @@
 import React, { FunctionComponent } from "react";
-import { TouchableOpacity, StyleSheet, TextStyle, ViewStyle } from "react-native";
+import { Text, TouchableOpacity, StyleSheet, TextStyle, ViewStyle } from "react-native";
 import { connect, useDispatch } from "react-redux";
-import { Card, Input, Layout, Text } from "@ui-kitten/components";
+import { Input, Layout } from "@ui-kitten/components";
 import { AntDesign } from "@expo/vector-icons";
 import { Formik } from "formik";
 import { addNote } from "../../redux/reducers/note";
@@ -11,7 +11,6 @@ import * as yup from "yup";
 
 type ModalProps = {
   closeModal: (() => void);
-  addNote: ((item: object) => void);
 }
 
 interface Styles {
@@ -28,7 +27,6 @@ const listSchema = yup.object({
 const AddNoteModal: FunctionComponent<ModalProps> = ({ closeModal }) => {
   const dispatch = useDispatch()
   return (
-    <Card style={{ flex: 1 }}>
       <Layout style={ styles.container }>
         <TouchableOpacity
           style={{ position: "absolute", top: 64, right: 32 }}
@@ -80,7 +78,6 @@ const AddNoteModal: FunctionComponent<ModalProps> = ({ closeModal }) => {
           </Formik>
         </Layout>
       </Layout>
-    </Card>
   );
 };
 

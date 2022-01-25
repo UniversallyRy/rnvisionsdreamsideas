@@ -13,19 +13,19 @@ interface Styles {
   buttonText: TextStyle;
 }
 
-const SubmitIcon = (props) => (
+export const SubmitIcon = (props) => (
   <Icon {...props} name='plus-outline'/>
 );
-const GridIcon = (props) => (
+export const GridIcon = (props) => (
   <Icon {...props} name='grid'/>
 );
 
-const CloseIcon = (props) => (
+export const CloseIcon = (props) => (
   <Icon {...props} name='close-outline'/>
 );
 
 // Custom button made for Flat styling
-const FlatButton:React.FC<ButtonProps> = ({ text, onPress, ...props }) => {
+export const FlatButton:React.FC<ButtonProps> = ({ text, onPress, ...props }) => {
   return (
     <Button
       style={styles.button}

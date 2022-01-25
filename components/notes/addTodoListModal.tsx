@@ -1,7 +1,7 @@
 import React, { FunctionComponent, useState } from "react";
-import { View, Text, TouchableOpacity, StyleSheet, StyleProp, TextStyle, ViewStyle } from "react-native";
-import { Card, TextInput } from "react-native-paper";
+import { Text, TouchableOpacity, StyleSheet, StyleProp, TextStyle, ViewStyle } from "react-native";
 import { connect, useDispatch } from "react-redux";
+import { Input, Layout } from "@ui-kitten/components";
 import { AntDesign } from "@expo/vector-icons";
 import { Formik } from "formik";
 import { addList } from "../../redux/reducers/todos";
@@ -10,15 +10,8 @@ import FlatButton  from "../../shared/button";
 import * as yup from "yup";
 
 type ModalProps = {
-  closeModal: (() => boolean);
-  addList: ((item: object) => void);
+  closeModal: (() => void);
   bgColors?: string;
-  container: StyleProp<ViewStyle>;
-  title: StyleProp<TextStyle>;
-  input: StyleProp<TextStyle>;
-  create: StyleProp<ViewStyle>;
-  colorSelect: StyleProp<ViewStyle>;
-  errorText: StyleProp<TextStyle>;
 }
 
 interface Styles {
@@ -59,8 +52,8 @@ const AddTodoListModal: FunctionComponent<ModalProps> = ({ closeModal }) => {
   };
 
   return (
-    <Card style={{ flex: 1 }}>
-      <View style={ styles.container } >
+    <Layout style={{ flex: 1 }}>
+      <Layout style={ styles.container } >
         <TouchableOpacity
           style={{ position: "absolute", top: 64, right: 32 }}
           onPress={ closeModal }
@@ -68,7 +61,7 @@ const AddTodoListModal: FunctionComponent<ModalProps> = ({ closeModal }) => {
           <AntDesign name="close" size={ 24 } color="black" />
         </TouchableOpacity>
 
-        <View style={{ alignSelf: "stretch", marginHorizontal: 32 }}>
+        <Layout style={{ alignSelf: "stretch", marginHorizontal: 32 }}>
           <Text style={ styles.title }>Create Todo List</Text>
           <Formik
             initialValues={{ name: "", id: 0, color: "", todos: [] }}
@@ -89,8 +82,8 @@ const AddTodoListModal: FunctionComponent<ModalProps> = ({ closeModal }) => {
               touched,
               errors,
             }) => (
-              <View>
-                <TextInput
+              <Layout>
+                <Input
                   textAlign="center"
                   enablesReturnKeyAutomatically={ true }
                   autoCorrect={ true } 
@@ -99,13 +92,12 @@ const AddTodoListModal: FunctionComponent<ModalProps> = ({ closeModal }) => {
                   onChangeText={ handleChange("name") }
                   value={ values.name }
                   onBlur={ handleBlur("name") }
-                  autoComplete
                 />
 
                 <Text style={ globalStyles.errorText }>
                   { touched.name && errors.name }
                 </Text>
-                <View
+                <Layout
                   style={{
                     flexDirection: "row",
                     justifyContent: "space-between",
@@ -113,18 +105,18 @@ const AddTodoListModal: FunctionComponent<ModalProps> = ({ closeModal }) => {
                   }}
                 >
                   { renderColors() }
-                </View>
+                </Layout>
                 <TouchableOpacity
                   style={ styles.create }
                 >
-                  <FlatButton text="Add List" color={ bgColor }onPress={ handleSubmit }/>
+                  <FlatButton text="Add List" onPress={ handleSubmit }/>
                 </TouchableOpacity>
-              </View>
+              </Layout>
             )}
           </Formik>
-        </View>
-      </View>
-    </Card>
+        </Layout>
+      </Layout>
+    </Layout>
   );
 };
 

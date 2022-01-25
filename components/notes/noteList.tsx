@@ -1,14 +1,10 @@
+import { Card, Layout } from "@ui-kitten/components";
 import React, { FunctionComponent, useState } from "react";
-import { Text, Modal, StyleSheet, StyleProp, TextStyle, ViewStyle } from "react-native";
-import { Card } from "react-native-paper";
+import { Text, Modal, StyleSheet, TextStyle, ViewStyle } from "react-native";
 import NotesModal from "./notesModal";
 
 type NoteListProps = {
   notes: object[];
-  noteContainer?: StyleProp<ViewStyle>;
-  noteTitle?: StyleProp<TextStyle>;
-  count?: StyleProp<TextStyle>;
-  subtitle?: StyleProp<ViewStyle>;
 }
 
 interface Styles {
@@ -38,10 +34,10 @@ const NoteList: FunctionComponent<NoteListProps> = ({ notes }) => {
         <Text style={ styles.noteTitle } numberOfLines={ 1 }>
           List of Notes
         </Text>
-        <Card.Content style={{ alignItems: "center", bottom: 0 }}>
+        <Layout style={{ alignItems: "center", bottom: 0, backgroundColor: "transparent" }}>
           <Text style={ styles.count }>{ noteCount }</Text>
           <Text style={ styles.subtitle }>Notes</Text>
-        </Card.Content>
+        </Layout>
     </Card>
   );
 };
@@ -60,7 +56,7 @@ const styles = StyleSheet.create<Styles>({
   },
   noteTitle: {
     alignSelf: "center",
-    fontSize: 24,
+    fontSize: 16,
     fontWeight: "700",
     marginBottom: 16,
   },

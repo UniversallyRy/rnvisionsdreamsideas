@@ -1,5 +1,5 @@
 import React, { FunctionComponent, useState } from "react";
-import { StyleSheet, View, Text, FlatList, Modal, StyleProp, TextStyle, ViewStyle } from "react-native";
+import { StyleSheet, View, Text, FlatList, Modal, TextStyle, ViewStyle } from "react-native";
 import TodoLists from "./todoLists";
 import NoteList from "./noteList";
 import AddTodoListModal from "./addTodoListModal";
@@ -9,11 +9,6 @@ import { Icon } from "../../shared/icon";
 type NoteMainProps = {
   stateNotes: object[];
   stateTodos: object[];
-  container?: StyleProp<ViewStyle>;
-  titleStyle?: StyleProp<TextStyle>;
-  divider?: StyleProp<ViewStyle>;
-  title?: StyleProp<TextStyle>;
-  addList?: StyleProp<ViewStyle>;
 }
 
 interface Styles {
@@ -54,7 +49,7 @@ const NoteMain: FunctionComponent<NoteMainProps> = ({ stateNotes, stateTodos }) 
         visible={ noteModal }
         onRequestClose={ () => toggleNoteModal() }
       >
-        <AddNoteModal closeModal={ () => toggleNoteModal() } />
+        <AddNoteModal closeModal={() => toggleNoteModal()} />
       </Modal>
       <View style={ styles.titleStyle }>
         <View style={ styles.divider } />

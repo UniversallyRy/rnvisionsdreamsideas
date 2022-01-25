@@ -1,28 +1,16 @@
 import React, { FunctionComponent } from "react";
-import { View, TouchableOpacity, FlatList, Text, Keyboard, StyleSheet, StyleProp, TextStyle, ViewStyle } from "react-native";
+import { TouchableOpacity, FlatList, Text, Keyboard, StyleSheet, TextStyle, ViewStyle } from "react-native";
 import { connect, useDispatch } from "react-redux";
-import { Card, TextInput, Button, useTheme } from "react-native-paper";
-import { AntDesign } from "@expo/vector-icons";
 import { Formik, FormikHelpers } from "formik";
 import { deleteNote, addNote } from "../../redux/reducers/note";
 import { windowHeight, windowWidth } from "../../utils/dimensions";
 import * as yup from "yup";
+import { Card, Input, Layout } from "@ui-kitten/components";
+import { CloseButton } from "../../shared/button";
 
 type NoteModalProps = {
   notes: object[];
-  closeModal: (() => boolean);
-  deleteNote: ((item: object) => void);
-  addNote: ((item: object) => void);
-  container: StyleProp<ViewStyle>;
-  header: StyleProp<TextStyle>;
-  title: StyleProp<TextStyle>;
-  taskCount: StyleProp<TextStyle>;
-  footer: StyleProp<ViewStyle>;
-  noteInput:StyleProp<TextStyle>;
-  buttonStyle:StyleProp<ViewStyle>;
-  noteContainer:StyleProp<ViewStyle>;
-  deleteNoteButton:StyleProp<ViewStyle>;
-  noteErrorText:StyleProp<TextStyle>;
+  closeModal: (() => void);
 }
 
 interface Styles {
@@ -50,7 +38,6 @@ const noteSchema = yup.object({
 const NotesModal: FunctionComponent<NoteModalProps> = ({ notes, closeModal}) => {
   const newNotes:any = notes;
   const taskCount = newNotes.length;
-  const theme = useTheme();
   const dispatch = useDispatch()
   
   const renderNote = ( note:any, index = 0) => {
@@ -58,30 +45,25 @@ const NotesModal: FunctionComponent<NoteModalProps> = ({ notes, closeModal}) => 
         <Card 
           style={ styles.noteContainer }
         >
-          <Text style={{ paddingRight: 20 }}>{ note.name }</Text>
-          <AntDesign
-            name="closecircle"
-            size={ 24 }
-            style={ styles.deleteNoteButton }
-            onPress={ () => dispatch(deleteNote( { id: note.id } )) }
+          <Text>{ note.name }</Text>
+          <CloseButton
+            style={styles.deleteNoteButton}
+            onPress={deleteNote}
           />
         </Card>
     );
   };
 
   return (
-    <Card style={styles.container} >
+    <Layout style={styles.container} >
         <TouchableOpacity
           style={{ position: "absolute", top: 40, right: 32, zIndex: 10 }}
         >
-          <AntDesign
-            name="close"
-            size={ 24 }
-            color="black"
+          <CloseButton
             onPress={ closeModal }
           />
         </TouchableOpacity>
-        <View
+        <Layout
           style={[
             styles.header,
             { borderBottomColor: "red" },
@@ -89,8 +71,8 @@ const NotesModal: FunctionComponent<NoteModalProps> = ({ notes, closeModal}) => 
         >
           <Text style={ styles.title }>{ newNotes.name }</Text>
           <Text style={ styles.taskCount }>There are { taskCount } Notes</Text>
-        </View>
-        <View>
+        </Layout>
+        <Layout>
           <FlatList
             data={ newNotes }
             keyExtractor={ (_, index) => index.toString()  }
@@ -100,7 +82,7 @@ const NotesModal: FunctionComponent<NoteModalProps> = ({ notes, closeModal}) => 
             }}
             renderItem={ ({ item }) => renderNote(item) }
           />
-          </View>
+          </Layout>
           <Formik
             initialValues={{ name: "", id: "" }}
             validationSchema={ noteSchema }
@@ -118,9 +100,9 @@ const NotesModal: FunctionComponent<NoteModalProps> = ({ notes, closeModal}) => 
               errors,
               handleSubmit,
             }) => (
-              <View style={ styles.footer }>
-                <View style={{ flexDirection: 'column' }}>
-                  <TextInput
+              <Layout style={ styles.footer }>
+                <Layout style={{ flexDirection: 'column' }}>
+                  <Input
                     textAlign="center"
                     enablesReturnKeyAutomatically={ true }
                     autoCorrect={ true }
@@ -129,28 +111,27 @@ const NotesModal: FunctionComponent<NoteModalProps> = ({ notes, closeModal}) => 
                     onChangeText={ handleChange("name") }
                     value={ values.name }
                     onBlur={ handleBlur("name") }
-                    autoComplete
                   />
                   <Text style={ styles.noteErrorText }>
                     { touched.name && errors.name }
                   </Text>
-                </View>
-                <Button
+                </Layout>
+                <CloseButton
                   style={ styles.buttonStyle }
                   onPress={ handleSubmit }
                 >
-                  <AntDesign style={{ margin: "auto" }} name="plus" size={ 18 } color="white" />
-                </Button>
-              </View>
+                </CloseButton>
+              </Layout>
             )}
           </Formik>   
-    </Card>
+    </Layout>
   );
 };
 
 const styles = StyleSheet.create<Styles>({
   container: {
     flex: 1,
+    flexDirection: "column",
     width: windowWidth,
     height: windowHeight
   },
@@ -192,19 +173,13 @@ const styles = StyleSheet.create<Styles>({
     textAlign: "center",
   },
   buttonStyle: {
-    height: 64,
+    height: 30,
     margin: "auto",
-    marginLeft: 2,
-    borderRadius: 4,
-    padding: 10,
-    backgroundColor: "red", 
-    elevation: 3,
   },
   noteContainer: {
     alignSelf: "center",
+    flexDirection: "column",
     width: windowWidth * 0.995,
-    flexDirection: "row",
-    paddingVertical: 16,
   },
   deleteNoteButton: {
     marginLeft: "auto",

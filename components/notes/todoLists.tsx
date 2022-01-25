@@ -1,9 +1,10 @@
 import React, { FunctionComponent, useState, useEffect } from "react";
-import { Modal, StyleProp, TextStyle, ViewStyle, StyleSheet, View, Text } from "react-native";
-import { Card, Button } from "react-native-paper";
+import { Modal, TextStyle, ViewStyle, StyleSheet, View } from "react-native";
+import { Card, Layout, Text } from "@ui-kitten/components";
 import { useDispatch } from "react-redux";
 import TodosModal from "./todosModal";
 import { deleteList } from "../../redux/reducers/todos";
+import { CloseButton } from "../../shared/button";
 
 type TodoListsProps = {
   list: {
@@ -11,13 +12,6 @@ type TodoListsProps = {
     name: string;
     id: number;
     color: string;
-    deleteList: ((id:object) => void);
-    listContainer: StyleProp<ViewStyle>;
-    cardContainer: StyleProp<ViewStyle>;
-    listTitle: StyleProp<TextStyle>;
-    count: StyleProp<TextStyle>;
-    subtitle: StyleProp<TextStyle>;
-    deleteButton: StyleProp<ViewStyle>; 
   }
 }
 
@@ -71,7 +65,7 @@ const completedList = (remaining:number, completed:number) => {
   };
 
   return (
-    <View style={ styles.listContainer }>
+    <Layout style={ styles.listContainer }>
       <Card style={ [styles.cardContainer, { backgroundColor: list.color }] } onPress={ () => toggleListModal() }>
         <Modal
           animationType="slide"
@@ -95,7 +89,7 @@ const completedList = (remaining:number, completed:number) => {
             </View>
         </View>
       </Card>
-      <Button
+      <CloseButton
         style={ styles.deleteButton }
         icon="close-outline"
         mode="contained"
@@ -103,8 +97,8 @@ const completedList = (remaining:number, completed:number) => {
         accessibilityLabel="Click here to delete list"
         >
         Delete
-      </Button>
-    </View>
+      </CloseButton>
+    </Layout>
   );
 };
 
