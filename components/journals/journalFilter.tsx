@@ -1,10 +1,11 @@
-import React, {  useState } from 'react'
+import React, {  useEffect, useState } from 'react'
 import { connect, useDispatch } from 'react-redux'
-import { StyleSheet, StyleProp, TextStyle, ViewStyle } from "react-native";
-import { List } from 'react-native-paper';
+import { StyleSheet, ViewStyle } from "react-native";
 import months from '../../utils/months';
 import { windowHeight, windowWidth } from "../../utils/dimensions";
 import { changeMonth } from "../../redux/reducers/journals";
+import { Layout, IndexPath, Select, SelectItem } from '@ui-kitten/components';
+import { CloseIcon } from '../../shared/button';
 
 
 type FilterProps = {
@@ -19,54 +20,59 @@ interface Styles {
 
 const JournalFilter: React.FC<FilterProps> = ({ state }) => {
     const [expanded, setExpanded] = useState(false);
+    const [selectedIndex, setSelectedIndex] = useState(new IndexPath(0));
     const handlePress = () => setExpanded(!expanded);
     const dispatch = useDispatch();
+    console.log(state)
+    const displayValue = months[selectedIndex.row];
 
-    const handleItemPress = (item) => {
-        dispatch(changeMonth(item))
-        setExpanded(false);
+    useEffect(() => {    
+      dispatch(changeMonth(displayValue))
+    }, [displayValue]);
+
+    const handleItemPress = (index) => {
+      console.log(index)
+      setSelectedIndex(index)
+      setExpanded(!false);
     }
 
-    
     const MonthsList = () => {
         return (
-            <List.Accordion
+            <Select
                 style={styles.listContainer}
-                title={state}
-                left={props => <List.Icon {...props} icon="calendar" />}
-                expanded={expanded}
-                onPress={handlePress}
+                value={displayValue}
+                // title={state}
+                // left={props => <List.Icon {...props} icon="calendar" />}
+                label={"Month Picker"}
+                selectedIndex={selectedIndex}
+                onSelect={handleItemPress}
                 accessibilityLabel="Dropdown of months to filter journal entries"
             >
             {months.map(item => {
                 return(
-                    <List.Item 
+                    <SelectItem  
                         style={styles.listItem} 
                         key={item} 
                         title={item}
-                        left={() => <List.Icon icon="calendar" />}
-                        onPress={() => handleItemPress(item)}
-                        titleStyle={{fontSize: 10}}
+                        accessoryRight={CloseIcon}
                         accessibilityLabel={`Dropdown text for ${item}`}
                     />
                 )
             })}
-            </List.Accordion>
+            </Select>
         )
     }
 
     return (
-        <List.Section style={styles.container}>
+        <Layout style={styles.container} level="1">
             <MonthsList/>
-        </List.Section>
+        </Layout>
     )
   
 }
 
 const styles = StyleSheet.create<Styles>({
     container: {
-      top: windowHeight * 0.07,
-      position: 'absolute',
       width: windowWidth,
       margin: 1,
       zIndex: 1,
@@ -74,10 +80,9 @@ const styles = StyleSheet.create<Styles>({
     },
     listContainer: {
       justifyContent: "center",
-      height: 40,
+      width: windowWidth,
     },
     listItem: {
-      height: 50,
     }
   });
   
