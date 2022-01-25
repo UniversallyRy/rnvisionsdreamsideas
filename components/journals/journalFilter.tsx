@@ -19,11 +19,8 @@ interface Styles {
   }
 
 const JournalFilter: React.FC<FilterProps> = ({ state }) => {
-    const [expanded, setExpanded] = useState(false);
     const [selectedIndex, setSelectedIndex] = useState(new IndexPath(0));
-    const handlePress = () => setExpanded(!expanded);
     const dispatch = useDispatch();
-    console.log(state)
     const displayValue = months[selectedIndex.row];
 
     useEffect(() => {    
@@ -31,9 +28,7 @@ const JournalFilter: React.FC<FilterProps> = ({ state }) => {
     }, [displayValue]);
 
     const handleItemPress = (index) => {
-      console.log(index)
       setSelectedIndex(index)
-      setExpanded(!false);
     }
 
     const MonthsList = () => {
