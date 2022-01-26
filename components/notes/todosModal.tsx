@@ -1,12 +1,12 @@
 import React, { FunctionComponent, useEffect } from "react";
-import { View, Text, TouchableOpacity, FlatList, Keyboard, StyleSheet, StyleProp, TextStyle, ViewStyle } from "react-native";
-import { Card, TextInput, Button, useTheme } from "react-native-paper";
+import { Text, TouchableOpacity, FlatList, Keyboard, StyleSheet, TextStyle, ViewStyle } from "react-native";
 import { connect, useDispatch } from "react-redux";
-import { AntDesign, Ionicons } from "@expo/vector-icons";
 import { Formik } from "formik";
 import { addTodo, deleteTodo, toggleTodo } from "../../redux/reducers/todos";
 import * as yup from "yup";
 import { windowHeight, windowWidth } from "../../utils/dimensions";
+import { CheckBox, Input, Layout } from "@ui-kitten/components";
+import { CloseButton, SubmitButton } from "../../shared/button";
 
 
 type TodoModalProps = {
@@ -39,7 +39,6 @@ const TodosModal: FunctionComponent<TodoModalProps> = ({ completedList, item, cl
   const newTodos = item.todos;
   const taskCount = item.todos.length;
   const completedCount = newTodos.filter((todo:any) => todo.completed).length;
-  const theme = useTheme();
   const dispatch = useDispatch()
 
 
@@ -55,120 +54,108 @@ const TodosModal: FunctionComponent<TodoModalProps> = ({ completedList, item, cl
   
   const renderTodo = (todo:any, index:number) => {
     return (
-        <View style={ styles.todoContainer }>
-          <Ionicons
-            name={ todo.completed ? "ios-square" : "ios-square-outline" }
-            size={ 24 }
-            color="gray"
-            style={{ width: 32 }}
-            onPress={ () => dispatch(toggleTodo({ id: todo.id, listid: item.id })) }
-          />
-          <Text
-            style={[
-              styles.todo,
-              {
-                textDecorationLine: todo.completed ? "line-through" : "none",
-                color: todo.completed ? "gray" : "black",
-              }
-            ]}
-          >
-            { todo.title }
-          </Text>
-          <Ionicons
-            name="md-close-circle"
-            size={ 24 }
-            style={ styles.deleteTodoButton }
-            onPress={ () => dispatch(deleteTodo({ id:todo.id, listid: item.id })) }
-          />
-        </View>
+      <Layout style={ styles.todoContainer } level="1">
+        <CheckBox
+          checked={ todo.completed }
+          style={{ width: 32 }}
+          onChange={ () => dispatch(toggleTodo({ id: todo.id, listid: item.id })) }
+        />
+        <Text
+          style={[
+            styles.todo,
+            {
+              textDecorationLine: todo.completed ? "line-through" : "none",
+              color: todo.completed ? "gray" : "black",
+            }
+          ]}
+        >
+          { todo.title }
+        </Text>
+        <CloseButton
+          style={ styles.deleteTodoButton }
+          onPress={ () => dispatch(deleteTodo({ id:todo.id, listid: item.id })) }
+        />
+      </Layout>
     );
   };
 
   return (
-    <Card style={{ flex: 1 }} >
-      <View style={ styles.container }>
-        <TouchableOpacity
-          style={{ position: "absolute", top: 40, right: 32, zIndex: 10 }}
-        >
-          <AntDesign
-            name="close"
-            size={ 24 }
-            color="black"
-            onPress={ closeModal }
-          />
-        </TouchableOpacity>
-        <View
-          style={[
-            styles.section,
-            styles.header,
-            { borderBottomColor: newTodos.color },
-          ]}
-        >
-          <Text style={ styles.title }>{ newTodos.name }</Text>
-          <Text style={ styles.taskCount }>
-            Completed { completedCount } of { taskCount } tasks
-          </Text>
-        </View>
-        <TouchableOpacity style={ styles.section }>
-          <FlatList
-            data={ item.todos }
-            keyExtractor={ (_, index) => index.toString() }
-            contentContainerStyle={{
-              paddingHorizontal: 32,
-              paddingVertical: 64,
-            }}
-            showsVerticalScrollIndicator={ false }
-            renderItem={ ({ item, index }) => renderTodo(item, index) }
-          />
-        </TouchableOpacity>
-          <Formik
-            initialValues={{ title: "", listid: "" }}
-            validationSchema={ todoSchema }
-            onSubmit={ (values, actions) => {
-              values.listid = item.id
-              let newNum = taskCount - completedCount
-              dispatch(addTodo(values));
-              completedList(newNum, completedCount);
-              actions.resetForm();
-              Keyboard.dismiss();
-            }}
-          >
-            {({
-              handleChange,
-              values,
-              handleBlur,
-              touched,
-              errors,
-              handleSubmit,
-            }) => (
-              <View style={ styles.footer }>
-                <View style={{ flexDirection: 'column' }}>
-                  <TextInput
-                    textAlign="center"
-                    enablesReturnKeyAutomatically={ true }
-                    autoCorrect={ true }
-                    style={ styles.todoInput }
-                    placeholder="Enter Todo . . ."
-                    onChangeText={ handleChange("title") }
-                    value={ values.title }
-                    onBlur={ handleBlur("title") }
-                    autoComplete
-                  />
-                  <Text style={ styles.noteErrorText }>
-                    { touched.title && errors.title }
-                  </Text>
-                </View>
-                <Button
-                  style={ styles.buttonStyle }
-                  onPress={ handleSubmit }
-                >
-                  <AntDesign name="plus" size={ 16 } color="white" />
-                </Button>
-              </View>
-            )}
-          </Formik>
-      </View>
-    </Card>
+    <Layout style={ styles.container }>
+      <TouchableOpacity
+        style={{ position: "absolute", top: 40, right: 32, zIndex: 10 }}
+      >
+        <CloseButton
+          onPress={ closeModal }
+        />
+      </TouchableOpacity>
+      <Layout
+        style={[
+          styles.section,
+          styles.header,
+          { borderBottomColor: newTodos.color },
+        ]}
+      >
+        <Text style={ styles.title }>{ newTodos.name }</Text>
+        <Text style={ styles.taskCount }>
+          Completed { completedCount } of { taskCount } tasks
+        </Text>
+      </Layout>
+      <TouchableOpacity style={ styles.section }>
+        <FlatList
+          data={ item.todos }
+          keyExtractor={ (_, index) => index.toString() }
+          contentContainerStyle={{
+            paddingHorizontal: 32,
+            paddingVertical: 64,
+          }}
+          showsVerticalScrollIndicator={ false }
+          renderItem={ ({ item, index }) => renderTodo(item, index) }
+        />
+      </TouchableOpacity>
+      <Formik
+        initialValues={{ title: "", listid: "" }}
+        validationSchema={ todoSchema }
+        onSubmit={ (values, actions) => {
+          values.listid = item.id
+          let newNum = taskCount - completedCount
+          dispatch(addTodo(values));
+          completedList(newNum, completedCount);
+          actions.resetForm();
+          Keyboard.dismiss();
+        }}
+      >
+        {({
+          handleChange,
+          values,
+          handleBlur,
+          touched,
+          errors,
+          handleSubmit,
+        }) => (
+          <Layout style={ styles.footer }>
+            <Layout style={{ flexDirection: 'column' }}>
+              <Input
+                textAlign="center"
+                enablesReturnKeyAutomatically={ true }
+                autoCorrect={ true }
+                style={ styles.todoInput }
+                placeholder="Enter Todo . . ."
+                onChangeText={ handleChange("title") }
+                value={ values.title }
+                onBlur={ handleBlur("title") }
+              />
+              <Text style={ styles.noteErrorText }>
+                { touched.title && errors.title }
+              </Text>
+            </Layout>
+            <SubmitButton
+              style={ styles.buttonStyle }
+              onPress={ handleSubmit }
+            />
+          </Layout>
+        )}
+      </Formik>
+    </Layout>
   );
 };
 
@@ -221,16 +208,14 @@ const styles = StyleSheet.create<Styles>({
     textAlign: "center",
   },
   buttonStyle: {
-    height: 64,
+    height: 20,
     margin: "auto",
     marginLeft: 2,
     borderRadius: 4,
-    padding: 10,
-    backgroundColor: "red", 
-    elevation: 3,
   },
   todoContainer: {
     flexDirection: "row",
+    alignItems: "center",
     paddingVertical: 16,
   },
   todo: {
