@@ -3,7 +3,6 @@ import React, { useContext } from 'react'
 import { StyleSheet, View, ViewStyle } from 'react-native'
 import { VisionContext } from '../../screens/visionScreen';
 import { GridButton, SubmitButton } from '../../shared/button';
-import { Icon } from "../../shared/icon"; 
 
 export interface Styles {
     buttonContainer: ViewStyle;

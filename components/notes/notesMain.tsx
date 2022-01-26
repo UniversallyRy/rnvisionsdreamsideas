@@ -4,7 +4,7 @@ import TodoLists from "./todoLists";
 import NoteList from "./noteList";
 import AddTodoListModal from "./addTodoListModal";
 import AddNoteModal from "./addNoteModal";
-import { Icon } from "../../shared/icon";
+import FooterButtons from "../visions/FooterButtons";
 
 type NoteMainProps = {
   stateNotes: object[];
@@ -75,10 +75,7 @@ const NoteMain: FunctionComponent<NoteMainProps> = ({ stateNotes, stateTodos }) 
           keyboardShouldPersistTaps="always"
         />
       </View>
-      <View style={ styles.addList }>
-        <Icon item="plus" onPress={ () => toggleNoteModal() } />
-        <Icon item="plus" onPress={ () => toggleTodoModal() } />
-      </View>
+      <FooterButtons/>
     </View>
   );
 };
