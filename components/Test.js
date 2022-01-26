@@ -1,7 +1,7 @@
 import React from "react";
 import { PURGE } from "redux-persist";
 import { connect } from "react-redux";
-import { Button } from "react-native-paper";
+import { Button } from "@ui-kitten/components";
 
 // Generate <TestComponent /> with a button that will purge the persisted store
 const Test = (state) => {
@@ -17,9 +17,7 @@ const Test = (state) => {
       result: () => null, // Func expected on the submitted action.
     });
   };
-  return (
-    <Button mode="contained" onPress={() => onPurgeStoredState(state)}></Button>
-  );
+  return <Button onPress={() => onPurgeStoredState(state)}></Button>;
 };
 
 const mapStateToProps = (state, ownProps) => {
