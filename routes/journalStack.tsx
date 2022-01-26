@@ -29,7 +29,7 @@ export const JournalStack: FunctionComponent<NavProp> = () => {
     <Navigator 
       initialRouteName="Journal Entries"
       screenOptions={{
-        headerMode:"none"
+        headerShown: false,
       }}
     >
       <Screen

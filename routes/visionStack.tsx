@@ -56,7 +56,7 @@ const VisionStack: FunctionComponent<NavProp> = () => {
     <Navigator 
       initialRouteName= "Vision Images"
       screenOptions= {{
-        headerMode: "none",
+        headerShown: false,
         ...customTrans,
       }}
     >

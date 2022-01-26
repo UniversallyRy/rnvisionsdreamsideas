@@ -1,12 +1,6 @@
 import React from "react";
-import { View, Text, StyleSheet, StyleProp, TextStyle, ViewStyle } from "react-native";
-import { Card } from "react-native-paper";
-
-interface AboutProps {
-  aboutContainer: StyleProp<ViewStyle>;
-  textContainer: StyleProp<ViewStyle>;
-  text: StyleProp<TextStyle>;
-}
+import { StyleSheet, TextStyle, ViewStyle } from "react-native";
+import { Card, Layout, Text } from "@ui-kitten/components";
 
 interface Styles {
   textContainer: ViewStyle;
@@ -17,16 +11,16 @@ interface Styles {
 const aboutText: string =
   "This is an ongoing App based on charting any visions or dreams you may have. Notes tab for thoughts and todos.";
 
-const About: React.FC<AboutProps> = () => {
+const About = () => {
   return (
-    <View style={styles.aboutContainer}>
+    <Layout style={styles.aboutContainer}>
       <Card style={styles.textContainer}>
         <Text style={styles.text}>
           {" "}
           {aboutText}{" "}
         </Text>
       </Card>
-    </View>
+    </Layout>
   );
 };
 

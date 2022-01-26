@@ -21,7 +21,7 @@ const NoteStack: FunctionComponent<NavProp> = () => {
   return (
     <Stack.Navigator
       screenOptions= {{
-        headerMode: "none",
+        headerShown: false,
       }}
     >
       <Stack.Screen

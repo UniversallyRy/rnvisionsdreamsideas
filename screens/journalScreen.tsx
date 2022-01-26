@@ -8,9 +8,9 @@ import JournalList from "../components/journals/journalList";
 import JournalGridContainer from "../components/journals/journalGrid";
 import JournalFilter from "../components/journals/journalFilter";
 import { windowHeight, windowWidth } from "../utils/dimensions";
-import { Icon } from "../shared/icon";
 import Header from "../shared/header";
 import { CloseButton } from "../shared/button";
+import FooterButtons from "../components/visions/FooterButtons";
 
 
 interface JournalProps {
@@ -61,8 +61,7 @@ const JournalScreen: React.FC<JournalProps>= ({ navigation }) => {
           <JournalList navigation={navigation} />
         )}
         <Layout style={styles.visionAddToggle}>
-          <Icon item="plus" onPress={() => setModalOpen(true)} />
-          <Icon item="grid" onPress={() => toggleGrid()} />
+        <FooterButtons/>
         </Layout>
       </SafeAreaView>
   );
