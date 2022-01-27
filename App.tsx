@@ -10,7 +10,7 @@ import React, { useState, useMemo, useCallback } from "react";
 import { Provider } from "react-redux";
 import { store, /*persistor */ } from "./redux/store";
 import AppLoading from 'expo-app-loading';
-import { BottomTabs } from "./routes/drawer";
+import BottomTabs from "./routes/drawer";
 // import { PersistGate } from "redux-persist/integration/react";
 import * as eva from '@eva-design/eva';
 import { EvaIconsPack } from '@ui-kitten/eva-icons';
