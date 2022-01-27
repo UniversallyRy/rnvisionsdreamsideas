@@ -2,10 +2,11 @@ import React, {  useEffect, useState } from 'react'
 import { connect, useDispatch } from 'react-redux'
 import { StyleSheet, ViewStyle } from "react-native";
 import months from '../../utils/months';
-import { windowHeight, windowWidth } from "../../utils/dimensions";
+import { windowWidth } from "../../utils/dimensions";
 import { changeMonth } from "../../redux/reducers/journals";
 import { Layout, IndexPath, Select, SelectItem } from '@ui-kitten/components';
-import { CloseIcon } from '../../shared/button';
+import { CloseIcon } from '../../shared/icon';
+
 
 
 type FilterProps = {
@@ -36,8 +37,6 @@ const JournalFilter: React.FC<FilterProps> = ({ state }) => {
             <Select
                 style={styles.listContainer}
                 value={displayValue}
-                // title={state}
-                // left={props => <List.Icon {...props} icon="calendar" />}
                 label={"Month Picker"}
                 selectedIndex={selectedIndex}
                 onSelect={handleItemPress}
@@ -83,9 +82,9 @@ const styles = StyleSheet.create<Styles>({
   
 
 const mapStateToProps = (state) => {
-    return {
-        state: state.journals.monthFilter,
-      };
+  return {
+    state: state.journals.monthFilter,
+  };
 }
 
 export default connect(mapStateToProps)(JournalFilter);
