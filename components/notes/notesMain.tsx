@@ -1,14 +1,19 @@
-import React, { FunctionComponent, useState } from "react";
+import React, { createContext, FunctionComponent, useState } from "react";
 import { StyleSheet, View, Text, FlatList, Modal, TextStyle, ViewStyle } from "react-native";
 import TodoLists from "./todoLists";
 import NoteList from "./noteList";
 import AddTodoListModal from "./addTodoListModal";
 import AddNoteModal from "./addNoteModal";
-import FooterButtons from "../visions/FooterButtons";
+import FooterButtons from "./FooterButtons";
 
 type NoteMainProps = {
   stateNotes: object[];
   stateTodos: object[];
+}
+
+type ContextProps = {
+  toggleTodoModal: () => void;
+  toggleNoteModal: () => void;
 }
 
 interface Styles {
@@ -19,6 +24,7 @@ interface Styles {
   addList: ViewStyle;
 }
 
+export const NoteContext = createContext<ContextProps>({toggleTodoModal: () => {}, toggleNoteModal: () => {}});
 
 const NoteMain: FunctionComponent<NoteMainProps> = ({ stateNotes, stateTodos }) => {
   const [todoModal, setTodoModal] = useState(false);
@@ -37,45 +43,47 @@ const NoteMain: FunctionComponent<NoteMainProps> = ({ stateNotes, stateTodos }) 
 
   return (
     <View style={ styles.container }>
-      <Modal
-        animationType="slide"
-        visible={ todoModal }
-        onRequestClose={ () => toggleTodoModal() }
-      >
-        <AddTodoListModal closeModal={ () => toggleTodoModal() } />
-      </Modal>
-      <Modal
-        animationType="slide"
-        visible={ noteModal }
-        onRequestClose={ () => toggleNoteModal() }
-      >
-        <AddNoteModal closeModal={() => toggleNoteModal()} />
-      </Modal>
-      <View style={ styles.titleStyle }>
-        <View style={ styles.divider } />
-        <Text style={ styles.title }>
-          Note{" "}
-          <Text style={{ fontWeight: "300", color: "lightgray" }}>Lists</Text>
-        </Text>
-        <View style={ styles.divider } />
-      </View>
-      <View
-        style={{
-          height: 450,
-          flexDirection: "row",
-        }}
-      >
-        <NoteList notes={ stateNotes } key={ 1 } />
-        <FlatList
-          keyExtractor={ (_, index) => index.toString() }  
-          data={ stateTodos }
-          horizontal={ true }
-          showsHorizontalScrollIndicator={ false }
-          renderItem={ ({ item }) => renderList(item) }
-          keyboardShouldPersistTaps="always"
-        />
-      </View>
-      <FooterButtons/>
+      <NoteContext.Provider value={{ toggleTodoModal, toggleNoteModal }}>
+        <Modal
+          animationType="slide"
+          visible={ todoModal }
+          onRequestClose={ () => toggleTodoModal() }
+        >
+          <AddTodoListModal closeModal={ () => toggleTodoModal() } />
+        </Modal>
+        <Modal
+          animationType="slide"
+          visible={ noteModal }
+          onRequestClose={ () => toggleNoteModal() }
+        >
+          <AddNoteModal closeModal={() => toggleNoteModal()} />
+        </Modal>
+        <View style={ styles.titleStyle }>
+          <View style={ styles.divider } />
+          <Text style={ styles.title }>
+            Note{" "}
+            <Text style={{ fontWeight: "300", color: "lightgray" }}>Lists</Text>
+          </Text>
+          <View style={ styles.divider } />
+        </View>
+        <View
+          style={{
+            height: 450,
+            flexDirection: "row",
+          }}
+          >
+          <NoteList notes={ stateNotes } key={ 1 } />
+          <FlatList
+            keyExtractor={ (_, index) => index.toString() }  
+            data={ stateTodos }
+            horizontal={ true }
+            showsHorizontalScrollIndicator={ false }
+            renderItem={ ({ item }) => renderList(item) }
+            keyboardShouldPersistTaps="always"
+            />
+        </View>
+        <FooterButtons/>
+      </NoteContext.Provider>
     </View>
   );
 };
