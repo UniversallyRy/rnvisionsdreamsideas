@@ -1,23 +1,18 @@
-import {
-  NavigationContainer,
-  DarkTheme as NavigationDarkTheme,
-  DefaultTheme as NavigationDefaultTheme,
-} from "@react-navigation/native";
-import "react-native-get-random-values";
-import "react-native-gesture-handler";
+import React, { useState } from "react";
 import { AppRegistry, StatusBar } from "react-native";
-import React, { useState, useMemo, useCallback } from "react";
+import {NavigationContainer} from "@react-navigation/native";
+import AppLoading from 'expo-app-loading';
+import * as Font from "expo-font";
 import { Provider } from "react-redux";
 import { store, /*persistor */ } from "./redux/store";
-import AppLoading from 'expo-app-loading';
-import BottomTabs from "./routes/drawer";
-// import { PersistGate } from "redux-persist/integration/react";
-import * as eva from '@eva-design/eva';
-import { EvaIconsPack } from '@ui-kitten/eva-icons';
 import { ApplicationProvider, IconRegistry } from '@ui-kitten/components';
-import * as Font from "expo-font";
+import { EvaIconsPack } from '@ui-kitten/eva-icons';
+import * as eva from '@eva-design/eva';
 import { ThemesContext } from "./ThemeContext";
-import { default as theme } from './styles/custom-theme.json'
+import "react-native-get-random-values";
+import "react-native-gesture-handler";
+// import { PersistGate } from "redux-persist/integration/react";
+import BottomTabs from "./routes/drawer";
 
 
 
@@ -32,7 +27,6 @@ const getFonts = () =>
 
 const App = () => {
   const [fontsLoaded, setFontsLoaded] = useState(false);
-  const [isThemeDark, setIsThemeDark] = useState(false);
   const [persistLoaded, setPersistLoaded] = useState(true);
   const [theme, setTheme] = React.useState('light');
 
@@ -43,11 +37,11 @@ const App = () => {
 
   if (fontsLoaded) {
     return (
-      <Provider store={store}>
+      <Provider store={ store }>
         <ThemesContext.Provider value={{ theme, toggleTheme }}>
-        <IconRegistry icons={EvaIconsPack}/>
-          <ApplicationProvider {...eva} theme={eva[theme]}>
-            <StatusBar animated={true} />
+        <IconRegistry icons={ EvaIconsPack }/>
+          <ApplicationProvider { ...eva } theme={ eva[theme] }>
+            <StatusBar animated={ true } />
             <NavigationContainer>
               <BottomTabs />
             </NavigationContainer>
