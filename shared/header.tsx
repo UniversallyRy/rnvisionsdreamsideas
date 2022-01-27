@@ -1,13 +1,15 @@
 import React, { useContext } from "react";
 import { NavigationScreenProp } from 'react-navigation';
 import { StyleSheet, ViewStyle } from "react-native";
-import { Button, Divider, Icon, Layout, TopNavigation, TopNavigationAction } from "@ui-kitten/components";
+import { Layout, Divider, TopNavigation } from "@ui-kitten/components";
 import { ThemesContext } from './../ThemeContext';
+import { ToggleButton } from "./button";
+import { BackAction } from "./icon";
 
 export type HeaderProps = {
-    name: string
-    navigation?: NavigationScreenProp<string, object>;
-    props?: string[]
+  name: string
+  navigation?: NavigationScreenProp<string, object>;
+  props?: string[]
 };
 
 interface Styles {
@@ -16,7 +18,7 @@ interface Styles {
 
 const Header:React.FC<HeaderProps> = ({ name, navigation, props }) => {
 
-  const themeContext = useContext(ThemesContext);
+  const { toggleTheme } = useContext(ThemesContext);
   let navigateBack;
 
   if(navigation != undefined) {
@@ -24,43 +26,18 @@ const Header:React.FC<HeaderProps> = ({ name, navigation, props }) => {
       navigation.goBack();
     };
   }
-  
-  const BackIcon = (props) => (
-    <Icon {...props} name='arrow-back' />
-    );
-    
-  const BackAction = () => (
-    <TopNavigationAction icon={BackIcon} onPress={navigateBack }/>
-  );
 
   return (
     <Layout style={styles.headerContainer}>
-      {name.includes("Details")
-        ?<TopNavigation 
-            title={name} 
-            alignment='center' 
-            accessoryLeft={BackAction} 
-            accessoryRight={<Button
-                               style={{ marginVertical: 4 }} 
-                               onPress={themeContext.toggleTheme} 
-                               {...props}>
-                                 TOGGLE THEME
-                            </Button>} 
-          />
-        :<TopNavigation 
-            title={name} 
-            alignment='start' 
-            accessoryRight={<Button 
-                                style={{ marginVertical: 4 }} 
-                                onPress={themeContext.toggleTheme} 
-                                {...props}>
-                                  TOGGLE THEME
-                            </Button>} 
-        />
-      }
+      <TopNavigation 
+        title={name} 
+        alignment={name.includes("Details") ? "center" : "start"} 
+        accessoryLeft={name.includes("Details") ? BackAction(navigateBack) : undefined} 
+        accessoryRight={ToggleButton(toggleTheme)} 
+      />
       <Divider/>
     </Layout>
-  )
+  );
 };
 
 const styles = StyleSheet.create<Styles>({

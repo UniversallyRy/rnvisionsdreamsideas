@@ -1,6 +1,7 @@
 import React from "react";
 import { StyleSheet, TextStyle, ViewStyle } from "react-native";
-import { Button, Icon, Text } from "@ui-kitten/components"
+import { Button, Text } from "@ui-kitten/components"
+import { CloseIcon, GridIcon, SubmitIcon } from "./icon";
 
 interface ButtonProps {
   text?: string;
@@ -12,17 +13,6 @@ interface Styles {
   submit: ViewStyle;
   buttonText: TextStyle;
 }
-
-export const SubmitIcon = (props) => (
-  <Icon {...props} name='plus-outline'/>
-);
-export const GridIcon = (props) => (
-  <Icon {...props} name='grid'/>
-);
-
-export const CloseIcon = (props) => (
-  <Icon {...props} name='close-outline'/>
-);
 
 // Custom button made for Flat styling
 export const FlatButton:React.FC<ButtonProps> = ({ text, onPress, ...props }) => {
@@ -68,6 +58,17 @@ export const CloseButton = ({ onPress, ...props }) => {
       onPress={onPress}
       {...props}
     />
+  );
+};
+
+export const ToggleButton = ( toggleTheme ) => {
+  return (
+    <Button
+      style={{ marginVertical: 4 }} 
+      onPress={ toggleTheme } 
+    >
+        TOGGLE THEME
+    </Button>
   );
 };
 
