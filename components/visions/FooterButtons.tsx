@@ -1,12 +1,12 @@
 import { Layout } from '@ui-kitten/components';
 import React, { useContext } from 'react'
-import { StyleSheet, View, ViewStyle } from 'react-native'
+import { StyleSheet, ViewStyle } from 'react-native'
 import { VisionContext } from '../../screens/visionScreen';
 import { GridButton, SubmitButton } from '../../shared/button';
 
 export interface Styles {
     buttonContainer: ViewStyle;
-    grid: ViewStyle;
+    button: ViewStyle;
 }
 
 const FooterButtons = () => {
@@ -14,8 +14,8 @@ const FooterButtons = () => {
 
     return (
         <Layout style={styles.buttonContainer}>
-            <SubmitButton item="plus" onPress={() => setModalOpen(true)} style={styles.grid}/>
-            <GridButton item="grid" onPress={() => toggleView()} style={styles.grid}/>
+            <SubmitButton  onPress={() => setModalOpen(true)} style={styles.button}/>
+            <GridButton onPress={() => toggleView()} style={styles.button}/>
         </Layout>
     )
 }
@@ -23,12 +23,12 @@ const FooterButtons = () => {
 const styles = StyleSheet.create<Styles>({
     buttonContainer: {
         flexDirection: "row",
-        margin: 1,
-        alignItems: "center",
+        marginTop: "auto",
+        paddingTop: 1,
         justifyContent: "center",
         backgroundColor: 'rgba(52, 52, 52, 0.0)'
     },
-    grid: {
+    button: {
         backgroundColor: "lightgray",
         marginHorizontal: 50,
         borderRadius: 20,

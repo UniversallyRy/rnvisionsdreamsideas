@@ -23,8 +23,9 @@ const FooterButtons = () => {
 const styles = StyleSheet.create<Styles>({
     buttonContainer: {
         flexDirection: "row",
-        margin: 1,
-        top: 132,
+        marginTop: "auto",
+        paddingTop: 1,
+        justifyContent: "center",
         backgroundColor: 'rgba(52, 52, 52, 0.0)'
     },
     button: {
