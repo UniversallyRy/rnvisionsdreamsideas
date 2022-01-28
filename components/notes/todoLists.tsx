@@ -91,11 +91,9 @@ const completedList = (remaining:number, completed:number) => {
       </Card>
       <CloseButton
         style={ styles.deleteButton }
-        icon="close-outline"
-        mode="contained"
         onPress={ () => dispatch(deleteList({id: list.id})) }
         accessibilityLabel="Click here to delete list"
-        >
+      >
         Delete
       </CloseButton>
     </Layout>
@@ -108,11 +106,9 @@ const styles = StyleSheet.create<Styles>({
     alignItems: "center",
   },
   cardContainer: {
-    padding: 20,
-    borderRadius: 6,
     width: 200,
-    height: 238,
-    elevation: 5,
+    borderRadius: 6,
+    elevation: 3,
   },
   listTitle: {
     alignSelf: "center",
@@ -129,9 +125,10 @@ const styles = StyleSheet.create<Styles>({
     fontWeight: "700",
   },
   deleteButton: {
-    margin: 2,
+    alignItems: "center",
     width: 200,
-    elevation: 5,
+    margin: 1,
+    elevation: 2,
   },
 });
 
