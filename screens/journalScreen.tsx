@@ -1,8 +1,7 @@
 import React, { createContext, Dispatch, SetStateAction, useState } from "react";
-import { Modal, StyleSheet, StyleProp, TextStyle, ViewStyle } from "react-native";
+import { StyleSheet, StyleProp, TextStyle, ViewStyle } from "react-native";
 import { NavigationScreenProp } from 'react-navigation';
-import { SafeAreaView } from "react-native-safe-area-context";
-import { Layout, Text } from "@ui-kitten/components";
+import { Layout, Text, Modal } from "@ui-kitten/components";
 import AddJournalModal from "../components/journals/addJournalModal";
 import JournalList from "../components/journals/journalList";
 import JournalGridContainer from "../components/journals/journalGrid";
@@ -44,12 +43,11 @@ const JournalScreen: React.FC<JournalProps>= ({ navigation }) => {
   };
 
   return (
-      <SafeAreaView style={styles.journalContainer}>
+      <Layout style={styles.journalContainer}>
         <Header name="Journals"/>
         <Modal
-          style={styles.journalContainer}
+          style={{backgroundColor: "white",...styles.journalContainer}}
           visible={modalOpen}
-          onDismiss={() => setModalOpen(false)}
         >
           <Text style={styles.addJournalTitle}>Add A Journal Entry</Text>
           <AddJournalModal setModalOpen={setModalOpen} />
@@ -71,7 +69,7 @@ const JournalScreen: React.FC<JournalProps>= ({ navigation }) => {
           <FooterButtons/>
           </Layout>
         </JournalContext.Provider>
-      </SafeAreaView>
+      </Layout>
   );
 };
 
