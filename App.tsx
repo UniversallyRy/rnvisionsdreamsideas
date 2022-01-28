@@ -1,3 +1,5 @@
+import "react-native-get-random-values";
+import "react-native-gesture-handler";
 import React, { useState } from "react";
 import { AppRegistry, StatusBar } from "react-native";
 import {NavigationContainer} from "@react-navigation/native";
@@ -9,8 +11,6 @@ import { ApplicationProvider, IconRegistry } from '@ui-kitten/components';
 import { EvaIconsPack } from '@ui-kitten/eva-icons';
 import * as eva from '@eva-design/eva';
 import { ThemesContext } from "./ThemeContext";
-import "react-native-get-random-values";
-import "react-native-gesture-handler";
 // import { PersistGate } from "redux-persist/integration/react";
 import BottomTabs from "./routes/drawer";
 
