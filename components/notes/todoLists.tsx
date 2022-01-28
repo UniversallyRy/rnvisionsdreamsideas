@@ -74,15 +74,11 @@ const completedList = (remaining:number, completed:number) => {
         >
           <TodosModal completedList={ completedList } item={ list } closeModal={ () => toggleListModal() } />
         </Modal>
-          <Text style={ styles.listTitle } numberOfLines={ 1 }>
-            { list.name }
-          </Text>
-            <Card style={{ backgroundColor: list.color, borderColor: list.color }}>
-              <Text style={ styles.count }>{ InitRemaining }</Text>
-              <Text style={ styles.subtitle }>Remaining</Text>
-              <Text style={ styles.count }>{ InitCount }</Text>
-              <Text style={ styles.subtitle }>Completed</Text>
-            </Card>
+        <Text style={ styles.listTitle } numberOfLines={ 1 }> { list.name } </Text>
+        <Text style={ styles.count }>{ InitRemaining }</Text>
+        <Text style={ styles.subtitle }>Remaining</Text>
+        <Text style={ styles.count }>{ InitCount }</Text>
+        <Text style={ styles.subtitle }>Completed</Text>
       </Card>
       <CloseButton
         style={ styles.deleteButton }
