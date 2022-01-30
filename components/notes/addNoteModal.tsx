@@ -6,7 +6,7 @@ import { AntDesign } from "@expo/vector-icons";
 import { Formik } from "formik";
 import { addNote } from "../../redux/reducers/note";
 import { globalStyles } from "../../styles/global";
-import FlatButton  from "../../shared/button";
+import KittenButton  from "../../shared/button";
 import * as yup from "yup";
 
 type ModalProps = {
@@ -69,7 +69,7 @@ const AddNoteModal: FunctionComponent<ModalProps> = ({ closeModal }) => {
                 <Text style={ globalStyles.errorText }>
                   { touched.name && errors.name }
                 </Text>
-                <FlatButton 
+                <KittenButton 
                   onPress={ handleSubmit }
                   text="Add Note"
                 />

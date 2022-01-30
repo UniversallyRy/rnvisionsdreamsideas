@@ -1,12 +1,12 @@
 import React, { FunctionComponent, useState } from "react";
-import { Text, TouchableOpacity, StyleSheet, StyleProp, TextStyle, ViewStyle } from "react-native";
+import { Text, TouchableOpacity, StyleSheet, TextStyle, ViewStyle } from "react-native";
 import { connect, useDispatch } from "react-redux";
 import { Input, Layout } from "@ui-kitten/components";
 import { AntDesign } from "@expo/vector-icons";
 import { Formik } from "formik";
 import { addList } from "../../redux/reducers/todos";
 import { globalStyles } from "../../styles/global";
-import FlatButton  from "../../shared/button";
+import KittenButton  from "../../shared/button";
 import * as yup from "yup";
 
 type ModalProps = {
@@ -109,7 +109,7 @@ const AddTodoListModal: FunctionComponent<ModalProps> = ({ closeModal }) => {
                 <TouchableOpacity
                   style={ styles.create }
                 >
-                  <FlatButton text="Add List" onPress={ handleSubmit }/>
+                  <KittenButton text="Add List" onPress={ handleSubmit }/>
                 </TouchableOpacity>
               </Layout>
             )}

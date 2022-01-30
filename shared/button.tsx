@@ -15,7 +15,7 @@ interface Styles {
 }
 
 // Custom button made for Flat styling
-export const FlatButton:React.FC<ButtonProps> = ({ text, onPress, ...props }) => {
+export const KittenButton:React.FC<ButtonProps> = ({ text, onPress, ...props }) => {
   return (
     <Button
       style={styles.button}
@@ -95,4 +95,4 @@ const styles = StyleSheet.create<Styles>({
   } 
 });
 
-export default FlatButton;
+export default KittenButton;
