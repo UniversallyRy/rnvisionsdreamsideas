@@ -1,7 +1,7 @@
 import React from "react";
 import { GestureResponderEvent, StyleSheet, TextStyle, ViewStyle } from "react-native";
-import { Button, Text } from "@ui-kitten/components"
-import { CloseIcon, DayIcon, GridIcon, NightIcon, SubmitIcon } from "./icon";
+import { Button, Text, TopNavigationAction } from "@ui-kitten/components"
+import { BackIcon, CloseIcon, DayIcon, GridIcon, NightIcon, SubmitIcon } from "./icon";
 
 type ButtonProps = {
   text?: string;
@@ -10,11 +10,12 @@ type ButtonProps = {
 
 interface Styles {
   button: ViewStyle;
-  submit: ViewStyle;
   buttonText: TextStyle;
+  submit: ViewStyle;
+  toggle: ViewStyle;
 }
 
-// Custom button made for Flat styling
+// default export kittenui styled button
 export const KittenButton:React.FC<ButtonProps> = ({ text, onPress, ...props }) => {
   return (
     <Button
@@ -27,6 +28,7 @@ export const KittenButton:React.FC<ButtonProps> = ({ text, onPress, ...props }) 
   );
 };
 
+//
 export const SubmitButton = ({ onPress, ...props }) => {
   return (
     <Button
@@ -61,16 +63,21 @@ export const CloseButton = ({ onPress, ...props }) => {
   );
 };
 
+// Header Buttons
 export const ToggleButton = ( theme: string, toggleTheme: ((event: GestureResponderEvent) => void) | undefined, ...props: undefined[] ) => {
   return (
     <Button
-      style={{ marginVertical: 4 }} 
+      style={styles.toggle} 
       onPress={ toggleTheme } 
       accessoryRight={theme == "light" ? DayIcon : NightIcon}
       {...props}
     />
   );
 };
+
+export const BackAction = (navigateBack) => (
+  <TopNavigationAction icon={BackIcon} onPress={() => navigateBack()}/>
+);
 
 const styles = StyleSheet.create<Styles>({
   button: {
@@ -92,7 +99,11 @@ const styles = StyleSheet.create<Styles>({
     alignItems: "center",
     justifyContent: "center",
     margin: 2,
-  } 
+  },
+  toggle: {
+    alignItems: "center",
+    margin: 4 
+  }
 });
 
 export default KittenButton;

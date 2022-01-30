@@ -3,8 +3,7 @@ import { NavigationScreenProp } from 'react-navigation';
 import { StyleSheet, ViewStyle } from "react-native";
 import { Layout, Divider, TopNavigation } from "@ui-kitten/components";
 import { ThemesContext } from './../ThemeContext';
-import { ToggleButton } from "./button";
-import { BackAction } from "./icon";
+import { BackAction, ToggleButton } from "./button";
 
 export type HeaderProps = {
   name: string

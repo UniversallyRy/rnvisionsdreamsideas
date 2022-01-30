@@ -1,12 +1,12 @@
 import React from 'react';
 import { Icon, TopNavigationAction } from '@ui-kitten/components';
 
+
 export const CloseIcon = (props) => (
     <Icon {...props} name='close-outline'/>
 );
 
 // Footer Icons
-
 export const SubmitIcon = (props) => (
     <Icon {...props} name='plus-outline'/>
 );
@@ -16,7 +16,6 @@ export const GridIcon = (props) => (
 );
 
 // Journal Card Icons
-
 export const EditIcon = (props) => (
     <Icon {...props} name='edit'/>
 );
@@ -28,17 +27,13 @@ export const DeleteIcon = (props) => (
 );  
 
 // Tab Bar Icons
-export const BackIcon = (props) => (
-    <Icon {...props} name='arrow-back' />
-);
-
 export const DayIcon = (props) => (
     <Icon {...props} name='sun' />
 );
 export const NightIcon = (props) => (
     <Icon {...props} name='moon' />
 );
-    
-export const BackAction = (navigateBack) => (
-    <TopNavigationAction icon={BackIcon} onPress={() => navigateBack()}/>
+  
+export const BackIcon = (props) => (
+    <Icon {...props} name='arrow-back' />
 );
