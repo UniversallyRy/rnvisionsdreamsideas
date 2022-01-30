@@ -15,6 +15,8 @@ interface Styles {
   toggle: ViewStyle;
   footerContainer: ViewStyle;
   footerButton: ViewStyle;
+  note: ViewStyle;
+  todo: ViewStyle;
 }
 
 // default export kittenui styled button
@@ -36,7 +38,7 @@ export const SubmitButton = ({ onPress, ...props }) => {
     <Button
       style={styles.submit}
       appearance='ghost'
-      accessoryRight={SubmitIcon}
+      accessoryLeft={SubmitIcon}
       onPress={onPress}
       {...props}
     />
@@ -100,8 +102,12 @@ export const FooterButtons = ({ context }) => {
           <GridButton onPress={() => toggleView()} style={styles.footerButton}/>
         </>
         :<>
-          <SubmitButton onPress={() => toggleNoteModal()} style={styles.footerButton}/>
-          <SubmitButton onPress={() => toggleTodoModal()} style={styles.footerButton}/>
+          <SubmitButton onPress={() => toggleNoteModal()} style={styles.note}>
+            Note
+          </SubmitButton>
+          <SubmitButton onPress={() => toggleTodoModal()} style={styles.todo}>
+            Todo
+          </SubmitButton>
           </>
       }
     </Layout>
@@ -142,7 +148,12 @@ const styles = StyleSheet.create<Styles>({
 },
   footerButton: {
     marginHorizontal: 50,
-    borderRadius: 20,
+  },
+  note: {
+    marginHorizontal: 15,
+  },
+  todo: {
+    marginHorizontal: 15,
   }
 });
 
