@@ -2,7 +2,7 @@ import React, { FunctionComponent, useState } from "react";
 import { StyleSheet, TextStyle, ViewStyle } from "react-native";
 import { NavigationScreenProp } from 'react-navigation';
 import { connect, useDispatch } from "react-redux";
-import { Card, Input, Layout, Text } from "@ui-kitten/components";
+import { ButtonGroup, Card, Divider, Input, Layout, Text } from "@ui-kitten/components";
 import { CancelButton, DeleteButton, EditButton, SaveButton } from "../../shared/buttons";
 import { deleteJournal, editJournal, editJournalToggle } from "../../redux/reducers/journals";
 import { windowHeight, windowWidth } from "../../utils/dimensions";
@@ -19,8 +19,6 @@ type JournalListProps = {
 }
 
 interface Styles {
-  buttonsContainer: ViewStyle;
-  divider: ViewStyle;
   journalCard: ViewStyle;
   journalTitle: TextStyle;
   journalParagraph: TextStyle;
@@ -40,68 +38,65 @@ const JournalItem: FunctionComponent<JournalListProps> = ({ item,  navigation })
 
   const {title, body, date} = item;
   return (
-    <Layout>
-      <Card accessibilityLabel="Card containing single Journal Entry" onPress={ () => navigation.navigate("Journal Details", { title, body, date })} style={ styles.journalCard }>
-        <Layout
-          style={ styles.journalText }
-        >
-          {item.isEditing
-            ?<Input
-                label="Title"
-                value={textTitle}
-                onChangeText={text => setTitle(text)}
-              />
-            :<Text style={ styles.journalTitle }>
-              { item.title }
-              </Text>
-          }
-          <Text style={ styles.divider } />
-          {item.isEditing
-            ?<Input
-              label={'Body'}
-              value={textBody}
-              multiline={true}
-              onChangeText={text => setBody(text)}
+    <Card 
+      style={ styles.journalCard }
+      onPress={ () => navigation.navigate("Journal Details", { title, body, date })} 
+      accessibilityLabel="Card containing single Journal Entry" 
+    >
+      <Layout
+        style={ styles.journalText }
+      >
+        {item.isEditing
+          ?<Input
+              label="Title"
+              value={textTitle}
+              onChangeText={text => setTitle(text)}
             />
-            :<Text style={ styles.journalParagraph }>
-              { item.body }
+          :<Text style={ styles.journalTitle }>
+            { item.title }
             </Text>
-          }
-          <Text style={ styles.divider } />
-        </Layout>
-        {item.isEditing 
-          ? null
-          :<Text style={ styles.journalDate }>
-            { item.date }
+        }
+        <Divider />
+        {item.isEditing
+          ?<Input
+            label={'Body'}
+            value={textBody}
+            multiline={true}
+            onChangeText={text => setBody(text)}
+          />
+          :<Text style={ styles.journalParagraph }>
+            { item.body }
           </Text>
         }
-        <Layout style={ styles.buttonsContainer }>
-          {item.isEditing 
-            ?<>
-              <SaveButton onPress={() => editHandler(item.id)}/>
-              <CancelButton onPress={() => dispatch(editJournalToggle({id: item.id}))}/>
-            </>
-            :<>
-              <EditButton onPress={() => dispatch(editJournalToggle({id: item.id}))}/>
-              <DeleteButton onPress={ () => dispatch(deleteJournal({ id: item.id })) }/>
-            </>
-          }
-        </Layout>
-      </Card>
-    </Layout>
+        <Divider />
+      </Layout>
+      {item.isEditing 
+        ? null
+        :<Text style={ styles.journalDate }>
+          { item.date }
+        </Text>
+      }
+        {item.isEditing 
+          ?<ButtonGroup>
+            <SaveButton onPress={() => editHandler(item.id)}/>
+            <CancelButton onPress={() => dispatch(editJournalToggle({id: item.id}))}/>
+          </ButtonGroup>
+          :<ButtonGroup>
+            <EditButton onPress={() => dispatch(editJournalToggle({id: item.id}))}/>
+            <DeleteButton onPress={ () => dispatch(deleteJournal({ id: item.id })) }/>
+          </ButtonGroup>
+        }
+    </Card>
   );
 };
 
 const styles = StyleSheet.create<Styles>({
   journalCard: {
-    flex: 1,
-    flexDirection:"column", 
     margin: 5,
-    paddingTop: 3,
-    borderRadius: 4,
+    borderRadius: 3,
     width: windowWidth * 0.95,
     height: windowHeight * 0.35,
-    elevation: 3,
+    elevation: 2,
   },
   journalText: {
     alignSelf: "center",
@@ -121,16 +116,6 @@ const styles = StyleSheet.create<Styles>({
     fontFamily: "roboto-italic",
     fontSize: 10,
     margin: 5,
-  },
-  buttonsContainer: {
-    flexDirection: "row",
-    marginTop: "auto",
-  },
-  divider: {
-    height: 0.3,
-    marginTop: 10,
-    marginBottom: 10,
-    opacity: 0.7,
   },
 });
 
