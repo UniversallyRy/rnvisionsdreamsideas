@@ -1,9 +1,9 @@
 import React from "react";
-import { StyleSheet, TextStyle, ViewStyle } from "react-native";
+import { GestureResponderEvent, StyleSheet, TextStyle, ViewStyle } from "react-native";
 import { Button, Text } from "@ui-kitten/components"
-import { CloseIcon, GridIcon, SubmitIcon } from "./icon";
+import { CloseIcon, DayIcon, GridIcon, NightIcon, SubmitIcon } from "./icon";
 
-interface ButtonProps {
+type ButtonProps = {
   text?: string;
   onPress: () => void;
 }
@@ -61,17 +61,16 @@ export const CloseButton = ({ onPress, ...props }) => {
   );
 };
 
-export const ToggleButton = ( toggleTheme ) => {
+export const ToggleButton = ( theme: string, toggleTheme: ((event: GestureResponderEvent) => void) | undefined, ...props: undefined[] ) => {
   return (
     <Button
       style={{ marginVertical: 4 }} 
       onPress={ toggleTheme } 
-    >
-        TOGGLE THEME
-    </Button>
+      accessoryRight={theme == "light" ? DayIcon : NightIcon}
+      {...props}
+    />
   );
 };
-
 
 const styles = StyleSheet.create<Styles>({
   button: {

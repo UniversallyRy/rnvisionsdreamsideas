@@ -31,6 +31,13 @@ export const DeleteIcon = (props) => (
 export const BackIcon = (props) => (
     <Icon {...props} name='arrow-back' />
 );
+
+export const DayIcon = (props) => (
+    <Icon {...props} name='sun' />
+);
+export const NightIcon = (props) => (
+    <Icon {...props} name='moon' />
+);
     
 export const BackAction = (navigateBack) => (
     <TopNavigationAction icon={BackIcon} onPress={() => navigateBack()}/>

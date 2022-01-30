@@ -9,7 +9,7 @@ import { BackAction } from "./icon";
 export type HeaderProps = {
   name: string
   navigation?: NavigationScreenProp<string, object>;
-  props?: string[]
+  props: string[]
 };
 
 interface Styles {
@@ -18,7 +18,7 @@ interface Styles {
 
 const Header:React.FC<HeaderProps> = ({ name, navigation, props }) => {
 
-  const { toggleTheme } = useContext(ThemesContext);
+  const { theme, toggleTheme } = useContext(ThemesContext);
   let navigateBack;
 
   if(navigation != undefined) {
@@ -28,12 +28,13 @@ const Header:React.FC<HeaderProps> = ({ name, navigation, props }) => {
   }
 
   return (
-    <Layout style={styles.headerContainer}>
+    <Layout style={styles.headerContainer} {...props}>
       <TopNavigation 
         title={name} 
         alignment={name.includes("Details") ? "center" : "start"} 
+        // Show a back button if on a nested detail screen
         accessoryLeft={name.includes("Details") ? BackAction(navigateBack) : undefined} 
-        accessoryRight={ToggleButton(toggleTheme)} 
+        accessoryRight={ToggleButton(theme, toggleTheme)} 
       />
       <Divider/>
     </Layout>
