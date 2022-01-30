@@ -1,12 +1,12 @@
 import React, { FunctionComponent } from "react";
 import { TouchableOpacity, FlatList, Text, Keyboard, StyleSheet, TextStyle, ViewStyle } from "react-native";
 import { connect, useDispatch } from "react-redux";
+import { Card, Input, Layout } from "@ui-kitten/components";
 import { Formik, FormikHelpers } from "formik";
 import { deleteNote, addNote } from "../../redux/reducers/note";
 import { windowHeight, windowWidth } from "../../utils/dimensions";
-import * as yup from "yup";
-import { Card, Input, Layout } from "@ui-kitten/components";
 import { CloseButton } from "../../shared/buttons";
+import * as yup from "yup";
 
 type NoteModalProps = {
   notes: object[];

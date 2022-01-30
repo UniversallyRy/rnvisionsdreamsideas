@@ -1,9 +1,10 @@
 import React, { createContext, FunctionComponent, useState } from "react";
-import { StyleSheet, View, Text, FlatList, Modal, TextStyle, ViewStyle } from "react-native";
-import TodoLists from "./todoLists";
+import { StyleSheet, Text, FlatList, Modal, TextStyle, ViewStyle, View } from "react-native";
+import { Divider, Layout } from "@ui-kitten/components";
 import NoteList from "./noteList";
-import AddTodoListModal from "./addTodoListModal";
 import AddNoteModal from "./addNoteModal";
+import TodoLists from "./todoLists";
+import AddTodoListModal from "./addTodoListModal";
 import { FooterButtons } from "../../shared/buttons";
 
 type NoteMainProps = {
@@ -19,7 +20,6 @@ type ContextProps = {
 interface Styles {
   container: ViewStyle;
   titleStyle: TextStyle;
-  divider: ViewStyle;
   title: TextStyle;
   addList: ViewStyle;
 }
@@ -42,7 +42,7 @@ const NoteMain: FunctionComponent<NoteMainProps> = ({ stateNotes, stateTodos }) 
   };
 
   return (
-    <View style={ styles.container }>
+    <Layout style={ styles.container }>
       <NoteContext.Provider value={{ toggleNoteModal, toggleTodoModal }}>
         <Modal
           animationType="slide"
@@ -58,14 +58,12 @@ const NoteMain: FunctionComponent<NoteMainProps> = ({ stateNotes, stateTodos }) 
         >
           <AddNoteModal closeModal={() => toggleNoteModal()} />
         </Modal>
-        <View style={ styles.titleStyle }>
-          <View style={ styles.divider } />
+          <Divider/>
           <Text style={ styles.title }>
             Note{" "}
             <Text style={{ fontWeight: "300", color: "lightgray" }}>Lists</Text>
           </Text>
-          <View style={ styles.divider } />
-        </View>
+          <Divider/>
         <View
           style={{
             height: 450,
@@ -84,7 +82,7 @@ const NoteMain: FunctionComponent<NoteMainProps> = ({ stateNotes, stateTodos }) 
         </View>
         <FooterButtons context={NoteContext}/>
       </NoteContext.Provider>
-    </View>
+    </Layout>
   );
 };
 
@@ -97,12 +95,6 @@ const styles = StyleSheet.create<Styles>({
   titleStyle: {
     flexDirection: "row",
     marginTop: 50,
-  },
-  divider: {
-    backgroundColor: "black",
-    height: 1,
-    flex: 1,
-    marginTop: 40,
   },
   title: {
     fontSize: 38,

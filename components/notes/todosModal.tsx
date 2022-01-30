@@ -1,12 +1,12 @@
 import React, { FunctionComponent, useEffect } from "react";
 import { Text, TouchableOpacity, FlatList, Keyboard, StyleSheet, TextStyle, ViewStyle } from "react-native";
 import { connect, useDispatch } from "react-redux";
+import { Layout, Input, CheckBox } from "@ui-kitten/components";
 import { Formik } from "formik";
 import { addTodo, deleteTodo, toggleTodo } from "../../redux/reducers/todos";
-import * as yup from "yup";
 import { windowHeight, windowWidth } from "../../utils/dimensions";
-import { CheckBox, Input, Layout } from "@ui-kitten/components";
 import { CloseButton, SubmitButton } from "../../shared/buttons";
+import * as yup from "yup"; 
 
 
 type TodoModalProps = {

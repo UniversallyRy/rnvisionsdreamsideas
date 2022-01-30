@@ -52,7 +52,7 @@ const styles = StyleSheet.create<Styles>({
     alignItems: "center",
     width: 200,
     height: 280,
-    elevation: 5,
+    elevation: 2,
   },
   noteTitle: {
     alignSelf: "center",
