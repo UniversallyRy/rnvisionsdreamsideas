@@ -67,7 +67,7 @@ const VisionListContainer: FC<ImageProps> = ({ navigation, state }) => {
         ref={ thumbRef }
         horizontal
         showsHorizontalScrollIndicator={ false }
-        style={{ position: "absolute", bottom: ITEM_SIZE }}
+        style={{ position: "absolute", bottom: ITEM_SIZE - 30 }}
         contentContainerStyle={{ paddingHorizontal: SPACING }}
         keyExtractor={ (_, index) => String(index) }
         renderItem={ ({item, index}:any) => {
