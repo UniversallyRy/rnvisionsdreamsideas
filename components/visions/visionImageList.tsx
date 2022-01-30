@@ -6,6 +6,7 @@ import { Layout } from "@ui-kitten/components";
 import { windowHeight, windowWidth } from "../../utils/dimensions";
 import { FooterButtons } from "../../shared/buttons";
 import { VisionContext } from "../../screens/visionScreen";
+import { SPACING, THUMBNAIL_SIZE } from "../../constants";
 // import { deleteVision } from "../../redux/reducers/visions";
 
 // todos: navigation bug on thumbnail longpress and add delete picture option back
@@ -13,9 +14,6 @@ type ImageProps = {
   navigation: NavigationScreenProp<string, object>;
   state: [];
 }
-
-const SPACING = 10;
-const ITEM_SIZE = 80;
 
 const VisionListContainer: FC<ImageProps> = ({ navigation, state }) => {
   const [activeIndex, setActiveIndex] = useState(0)
@@ -28,9 +26,9 @@ const VisionListContainer: FC<ImageProps> = ({ navigation, state }) => {
       offset: index * windowWidth,
       animated: true
     })
-    if(index * (ITEM_SIZE + SPACING) - ITEM_SIZE / 2 > windowWidth / 2) {
+    if(index * (THUMBNAIL_SIZE + SPACING) - THUMBNAIL_SIZE / 2 > windowWidth / 2) {
       thumbRef.current?.scrollToOffset({
-        offset: index * (ITEM_SIZE + SPACING) - windowWidth / 2 + ITEM_SIZE / 2,
+        offset: index * (THUMBNAIL_SIZE + SPACING) - windowWidth / 2 + THUMBNAIL_SIZE / 2,
         animated: true,
       })
     } else {
@@ -67,7 +65,7 @@ const VisionListContainer: FC<ImageProps> = ({ navigation, state }) => {
         ref={ thumbRef }
         horizontal
         showsHorizontalScrollIndicator={ false }
-        style={{ position: "absolute", bottom: ITEM_SIZE - 30 }}
+        style={{ position: "absolute", bottom: THUMBNAIL_SIZE - 30 }}
         contentContainerStyle={{ paddingHorizontal: SPACING }}
         keyExtractor={ (_, index) => String(index) }
         renderItem={ ({item, index}:any) => {
@@ -79,8 +77,8 @@ const VisionListContainer: FC<ImageProps> = ({ navigation, state }) => {
               <Image
                 source={{ uri:item.uri }}
                 style={{
-                  width: ITEM_SIZE,
-                  height: ITEM_SIZE,
+                  width: THUMBNAIL_SIZE,
+                  height: THUMBNAIL_SIZE,
                   borderRadius: 3,
                   marginRight: SPACING,
                   borderWidth: 1,
