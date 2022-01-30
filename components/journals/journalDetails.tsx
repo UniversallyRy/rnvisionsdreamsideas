@@ -63,7 +63,7 @@ const styles = StyleSheet.create<Styles>({
     alignContent: "center",
   },
   divider: {
-    backgroundColor: "gray",
+    backgroundColor: "black",
     alignSelf: "center",
     height: 0.3,
     width: windowWidth * 0.98,
