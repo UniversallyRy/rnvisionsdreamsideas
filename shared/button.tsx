@@ -93,21 +93,20 @@ export const FooterButtons = ({ context }) => {
   }
 
   return (
-      <Layout style={styles.footerContainer}>
-        {context._currentValue.toggleView != undefined
-          ?<>
-            <SubmitButton onPress={() => setModalOpen(true)} style={styles.footerButton}/>
-            <GridButton onPress={() => toggleView()} style={styles.footerButton}/>
+    <Layout style={styles.footerContainer}>
+      {context._currentValue.toggleView != undefined
+        ?<>
+          <SubmitButton onPress={() => setModalOpen(true)} style={styles.footerButton}/>
+          <GridButton onPress={() => toggleView()} style={styles.footerButton}/>
+        </>
+        :<>
+          <SubmitButton onPress={() => toggleNoteModal()} style={styles.footerButton}/>
+          <SubmitButton onPress={() => toggleTodoModal()} style={styles.footerButton}/>
           </>
-          :<>
-            <SubmitButton onPress={() => toggleNoteModal()} style={styles.footerButton}/>
-            <SubmitButton onPress={() => toggleTodoModal()} style={styles.footerButton}/>
-          </>
-        }
-      </Layout>
-  )
-}
-
+      }
+    </Layout>
+  );
+};
 
 const styles = StyleSheet.create<Styles>({
   button: {
