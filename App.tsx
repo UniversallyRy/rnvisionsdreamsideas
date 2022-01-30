@@ -14,8 +14,6 @@ import { ThemesContext } from "./ThemeContext";
 // import { PersistGate } from "redux-persist/integration/react";
 import BottomTabs from "./routes/drawer";
 
-
-
 const getFonts = () =>
   Font.loadAsync({
     "roboto-black": require("./assets/fonts/Roboto-Black.ttf"),
@@ -39,7 +37,7 @@ const App = () => {
     return (
       <Provider store={ store }>
         <ThemesContext.Provider value={{ theme, toggleTheme }}>
-        <IconRegistry icons={ EvaIconsPack }/>
+          <IconRegistry icons={ EvaIconsPack }/>
           <ApplicationProvider { ...eva } theme={ eva[theme] }>
             <StatusBar animated={ true } />
             <NavigationContainer>
