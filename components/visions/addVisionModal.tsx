@@ -1,26 +1,15 @@
 import React, { Dispatch, FunctionComponent, SetStateAction } from "react";
-import { 
-  Animated, 
-  View, 
-  Text, 
-  TouchableOpacity, 
-  Platform, 
-  KeyboardAvoidingView, 
-  StyleSheet, 
-  ViewStyle, 
-  TextStyle 
-} from "react-native";
+import { Animated, Text, TouchableOpacity, StyleSheet, ViewStyle, TextStyle } from "react-native";
 import { useCardAnimation } from '@react-navigation/stack';
 import { Input, Layout } from "@ui-kitten/components";
 import { connect, useDispatch, ConnectedProps} from "react-redux";
-import { AntDesign } from "@expo/vector-icons";
 import { Formik } from "formik";
 import { addVision } from "../../redux/reducers/visions";
 import { globalStyles } from "../../styles/global";
 import ImagePic from "./imagePicker";
 import { windowHeight, windowWidth } from "../../utils/dimensions";
 import * as yup from "yup";
-import { SubmitButton } from "../../shared/buttons";
+import { CloseButton, SubmitButton } from "../../shared/buttons";
 
 interface VisionProps {
   stateUri: string;
@@ -61,7 +50,7 @@ const AddVisionModal: FunctionComponent<VisionProps> = ({ stateUri, setModalOpen
         <TouchableOpacity
           style={{ position: "absolute", top: 40, right: 32, zIndex: 10 }}
         >
-          <AntDesign name="close" size={ 24 } color="black" onPress={ () => setModalOpen(false) } />
+          <CloseButton onPress={ () => setModalOpen(false) } />
         </TouchableOpacity>
         <Formik
           enableReinitialize={ true }
@@ -83,8 +72,6 @@ const AddVisionModal: FunctionComponent<VisionProps> = ({ stateUri, setModalOpen
           }) => (
             <Layout style={styles.footer}> 
               <ImagePic/>
-              <KeyboardAvoidingView style={{ flexDirection: 'row' }} behavior={ Platform.OS === "ios" ? "padding" : "height" }>
-                <View style={{ flexDirection: 'column' }}>
                   <Input
                     textAlign='center'
                     style={ styles.textinput }
@@ -97,12 +84,10 @@ const AddVisionModal: FunctionComponent<VisionProps> = ({ stateUri, setModalOpen
                   <Text style={ globalStyles.errorText }>
                     { touched.title && errors.title }
                   </Text>
-                </View>
                 <SubmitButton
                   style={ styles.buttonStyle }
                   onPress={ handleSubmit }
                 />
-              </KeyboardAvoidingView>
             </Layout>
         )}
         </Formik>

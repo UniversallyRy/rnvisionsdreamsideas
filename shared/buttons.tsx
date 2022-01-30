@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import { GestureResponderEvent, StyleSheet, TextStyle, ViewStyle } from "react-native";
-import { Button, Layout, Text, TopNavigationAction } from "@ui-kitten/components"
+import { Layout, Button, Text, TopNavigationAction, ButtonGroup } from "@ui-kitten/components"
 import { BackIcon, CloseIcon, DayIcon, GridIcon, NightIcon, SaveIcon, SubmitIcon } from "./icons";
 import { windowWidth } from "../utils/dimensions";
 
@@ -14,6 +14,7 @@ interface Styles {
   buttonText: TextStyle;
   editButton: TextStyle;
   deleteButton: TextStyle;
+  imageButtons: TextStyle;
   submit: ViewStyle;
   toggle: ViewStyle;
   footerContainer: ViewStyle;
@@ -67,6 +68,27 @@ export const CloseButton = ({ onPress, ...props }) => {
       onPress={onPress}
       {...props}
     />
+  );
+};
+// Add Image Buttons
+export const ImageButtons = ({ pickImage, cameraImage, ...props }) => {
+  return (
+    <ButtonGroup {...props}>
+      <Button
+        accessibilityLabel="Add Image From Gallery"
+        onPress={ pickImage }
+        style={ styles.imageButtons }
+      >
+        Add from gallery
+      </Button>
+      <Button
+        accessibilityLabel="Take A Picture"
+        onPress={ cameraImage }
+        style={ styles.imageButtons }
+      >
+        Take a Picture
+      </Button>
+    </ButtonGroup>
   );
 };
 // Journal Buttons
@@ -184,6 +206,10 @@ const styles = StyleSheet.create<Styles>({
     margin: 1,
     backgroundColor: "red",
     width: windowWidth * 0.40,
+  },
+  imageButtons: {
+    margin: 5,
+    elevation: 1,
   },
   submit: {
     alignItems: "center",

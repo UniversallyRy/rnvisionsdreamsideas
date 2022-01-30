@@ -1,16 +1,15 @@
 import React, { FunctionComponent, useState, useEffect } from "react";
-import { Platform, StyleSheet, ViewStyle, ImageStyle, Image } from "react-native";
-import { Card, Button, Layout } from "@ui-kitten/components";
+import { Image, Platform, StyleSheet, ViewStyle, ImageStyle } from "react-native";
+import { Layout } from "@ui-kitten/components";
 import { useDispatch, ConnectedProps } from "react-redux";
 import { addPic } from "../../redux/reducers/newpic";
 import * as ImagePicker from "expo-image-picker";
 import { manipulateAsync, SaveFormat } from "expo-image-manipulator"
 import { windowWidth } from "../../utils/dimensions";
+import { ImageButtons } from "../../shared/buttons";
 
 interface Styles {
   container: ViewStyle;
-  visionButtonContainer: ViewStyle;
-  uploadButton: ViewStyle;
   image: ImageStyle;
 }
 
@@ -57,7 +56,7 @@ const ImagePic: FunctionComponent = () => {
     }
   };
 
-  const CameraImage = async () => {
+  const cameraImage = async () => {
     let result = await ImagePicker.launchCameraAsync({
       mediaTypes: ImagePicker.MediaTypeOptions.Images,
       allowsEditing: true,
@@ -69,27 +68,14 @@ const ImagePic: FunctionComponent = () => {
   };
 
   return (
-      <Layout style={ styles.container }>
-          { image != "" && (
-            <Image source={{ uri: image }} style={ styles.image }
-            />
-          )}
-        <Layout style={ styles.visionButtonContainer }>
-          <Button
-            accessibilityLabel="Add Image From Gallery"
-            onPress={ pickImage }
-            style={ styles.uploadButton }
-          >
-            Add from gallery
-          </Button>
-          <Button
-            accessibilityLabel="Take A Picture"
-            onPress={ CameraImage }
-            style={ styles.uploadButton }
-          >
-            Take a Picture
-          </Button>
-        </Layout>
+    <Layout style={ styles.container }>
+      { image != "" && (
+        <Image source={{ uri: image }} style={ styles.image } />
+      )}
+      <ImageButtons
+        pickImage={ pickImage }
+        cameraImage={ cameraImage }
+      />
     </Layout>
   );
 };
@@ -101,14 +87,6 @@ const styles = StyleSheet.create<Styles>({
     justifyContent: "center",
     marginBottom: 40,
   },
-  visionButtonContainer: {
-    alignItems:"center",
-    flexDirection: "row",
-  },
-  uploadButton: {
-    margin: 5,
-    elevation: 2,
-  },
   image:{
     width: 500,
     height: 500,
@@ -118,4 +96,6 @@ const styles = StyleSheet.create<Styles>({
 });
 
 export default ImagePic;
+export type PropsFromRedux = ConnectedProps<typeof ImagePic>
+
 // {isOn: boolean, toggleOn: () => void}
