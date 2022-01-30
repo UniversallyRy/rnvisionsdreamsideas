@@ -1,6 +1,6 @@
-import React from "react";
+import React, { useContext } from "react";
 import { GestureResponderEvent, StyleSheet, TextStyle, ViewStyle } from "react-native";
-import { Button, Text, TopNavigationAction } from "@ui-kitten/components"
+import { Button, Layout, Text, TopNavigationAction } from "@ui-kitten/components"
 import { BackIcon, CloseIcon, DayIcon, GridIcon, NightIcon, SubmitIcon } from "./icon";
 
 type ButtonProps = {
@@ -13,6 +13,8 @@ interface Styles {
   buttonText: TextStyle;
   submit: ViewStyle;
   toggle: ViewStyle;
+  footerContainer: ViewStyle;
+  footerButton: ViewStyle;
 }
 
 // default export kittenui styled button
@@ -79,6 +81,34 @@ export const BackAction = (navigateBack) => (
   <TopNavigationAction icon={BackIcon} onPress={() => navigateBack()}/>
 );
 
+export const FooterButtons = ({ context }) => {
+  const contextObj:any =  useContext(context);
+  let setModalOpen, toggleView, toggleNoteModal, toggleTodoModal
+  if(context._currentValue.hasOwnProperty('setModalOpen')){
+    setModalOpen  = contextObj.setModalOpen
+    toggleView  = contextObj.toggleView
+  }else{
+    toggleNoteModal = contextObj.toggleNoteModal
+    toggleTodoModal  = contextObj.toggleTodoModal
+  }
+
+  return (
+      <Layout style={styles.footerContainer}>
+        {context._currentValue.toggleView != undefined
+          ?<>
+            <SubmitButton onPress={() => setModalOpen(true)} style={styles.footerButton}/>
+            <GridButton onPress={() => toggleView()} style={styles.footerButton}/>
+          </>
+          :<>
+            <SubmitButton onPress={() => toggleNoteModal()} style={styles.footerButton}/>
+            <SubmitButton onPress={() => toggleTodoModal()} style={styles.footerButton}/>
+          </>
+        }
+      </Layout>
+  )
+}
+
+
 const styles = StyleSheet.create<Styles>({
   button: {
     alignSelf: "center",
@@ -103,6 +133,17 @@ const styles = StyleSheet.create<Styles>({
   toggle: {
     alignItems: "center",
     margin: 4 
+  },
+  footerContainer: {
+    flexDirection: "row",
+    alignSelf: "center",
+    position: "absolute",
+    bottom: 0,
+    backgroundColor: "transparent"
+},
+  footerButton: {
+    marginHorizontal: 50,
+    borderRadius: 20,
   }
 });
 

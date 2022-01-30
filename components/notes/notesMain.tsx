@@ -4,7 +4,7 @@ import TodoLists from "./todoLists";
 import NoteList from "./noteList";
 import AddTodoListModal from "./addTodoListModal";
 import AddNoteModal from "./addNoteModal";
-import FooterButtons from "./FooterButtons";
+import { FooterButtons } from "../../shared/button";
 
 type NoteMainProps = {
   stateNotes: object[];
@@ -43,7 +43,7 @@ const NoteMain: FunctionComponent<NoteMainProps> = ({ stateNotes, stateTodos }) 
 
   return (
     <View style={ styles.container }>
-      <NoteContext.Provider value={{ toggleTodoModal, toggleNoteModal }}>
+      <NoteContext.Provider value={{ toggleNoteModal, toggleTodoModal }}>
         <Modal
           animationType="slide"
           visible={ todoModal }
@@ -82,7 +82,7 @@ const NoteMain: FunctionComponent<NoteMainProps> = ({ stateNotes, stateTodos }) 
             keyboardShouldPersistTaps="always"
             />
         </View>
-        <FooterButtons/>
+        <FooterButtons context={NoteContext}/>
       </NoteContext.Provider>
     </View>
   );

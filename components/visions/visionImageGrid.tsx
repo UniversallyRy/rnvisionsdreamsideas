@@ -5,16 +5,20 @@ import { Layout } from "@ui-kitten/components";
 import { connect, ConnectedProps } from "react-redux";
 import { NavigationScreenProp } from 'react-navigation';
 import { windowHeight, windowWidth } from "../../utils/dimensions";
-import FooterButtons from "./FooterButtons"
-
-
-type GridProps = {
-  state: object[];
-  navigation: NavigationScreenProp<string,object>;
-}
+import { VisionContext } from "../../screens/visionScreen";
+import { FooterButtons } from "../../shared/button";
 
 type ListProps = {
-  item: object;
+  item: {
+    id: string;
+    title: string;
+    uri: string;
+  }
+}
+
+type GridProps = {
+  state: ListProps[];
+  navigation: NavigationScreenProp<string,object>;
 }
 
 interface Styles {
@@ -24,18 +28,18 @@ interface Styles {
 
 const VisionGridContainer: FunctionComponent<GridProps> = ({ state, navigation }) => {
   
-  const VisionGridList = memo(function GridImage({ data }:any) {
+  const VisionGridList = memo(function GridImage({ item }:ListProps) {
     return (
       <TouchableOpacity
         style={{margin: 4, borderRadius: 12,   elevation: 2,}}
         accessibilityLabel={ "Grid List" }
         accessible  
-        onPress={ () => navigation.navigate("Vision Details", { data }) }
+        onPress={ () => navigation.navigate("Vision Details", { item }) }
       > 
         <Image
           style={ styles.gridItem }
-          source={{ uri: data.uri }}
-          testID={ data.id }  
+          source={{ uri: item.uri }}
+          testID={ item.id }  
           resizeMode={ 'cover' }
         />
       </TouchableOpacity>
@@ -43,26 +47,27 @@ const VisionGridContainer: FunctionComponent<GridProps> = ({ state, navigation }
   });
 
   const renderList: FunctionComponent<ListProps> = useCallback(function renderList({ item }) {
-    return <VisionGridList data={ item } />;
+    return <VisionGridList item={ item } />;
   }, []);
 
   return (
-    <Layout style={{ margin: "auto", flex: 1 }}>
+    <Layout style={{ flex: 1 }}>
       <FlatList
         numColumns={ 2 }
         contentContainerStyle={ styles.gridContainer }
         scrollEnabled
         data={ state }
-        keyExtractor={ (item, index) => index.toString() }
+        keyExtractor={ (_item, index) => index.toString() }
         renderItem={ renderList }
       />
-      <FooterButtons/>
+      <FooterButtons context={VisionContext}/>
     </Layout>
   );
 };
 
 const styles = StyleSheet.create<Styles>({
   gridContainer: {
+    flex: 1,
     alignSelf: "center",
     padding: 3,
   },

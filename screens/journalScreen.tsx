@@ -8,8 +8,7 @@ import JournalGridContainer from "../components/journals/journalGrid";
 import JournalFilter from "../components/journals/journalFilter";
 import { windowHeight, windowWidth } from "../utils/dimensions";
 import Header from "../shared/header";
-import { CloseButton } from "../shared/button";
-import FooterButtons from "../components/journals/FooterButtons";
+import { CloseButton, FooterButtons } from "../shared/button";
 
 interface JournalProps {
   navigation: NavigationScreenProp<string, object>;
@@ -27,7 +26,6 @@ type ContextProps = {
 interface Styles {
   journalContainer: ViewStyle;
   addJournalTitle: ViewStyle;
-  visionAddToggle: ViewStyle;
   modalContent: ViewStyle;
   closeModalContainer: ViewStyle;
 }
@@ -65,9 +63,7 @@ const JournalScreen: React.FC<JournalProps>= ({ navigation }) => {
           <JournalList navigation={navigation} />
         )}
         <JournalContext.Provider value={{ setModalOpen, toggleView }}>
-          <Layout style={styles.visionAddToggle}>
-          <FooterButtons/>
-          </Layout>
+          <FooterButtons context={JournalContext}/>
         </JournalContext.Provider>
       </Layout>
   );
@@ -85,12 +81,6 @@ const styles = StyleSheet.create<Styles>({
     padding: 20,
     fontSize: 18,
     borderRadius: 2,
-  },
-  visionAddToggle: {
-    flexDirection: "row",
-    marginTop: "auto",
-    justifyContent: "center",
-    backgroundColor: 'transparent',
   },
   modalContent: {
     height: windowHeight,

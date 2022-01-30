@@ -1,22 +1,23 @@
-import { Layout } from "@ui-kitten/components";
 import React, { FC, useState, useRef } from "react";
 import { TouchableOpacity, FlatList, Image, StyleSheet } from "react-native";
 import { NavigationScreenProp } from 'react-navigation';
-// import { deleteVision } from "../../redux/reducers/visions";
 import { connect, ConnectedProps } from "react-redux";
+import { Layout } from "@ui-kitten/components";
+// import { deleteVision } from "../../redux/reducers/visions";
 import { windowHeight, windowWidth } from "../../utils/dimensions";
-import FooterButtons from "./FooterButtons";
+import { FooterButtons } from "../../shared/button";
+import { VisionContext } from "../../screens/visionScreen";
 
 // todos: navigation bug on thumbnail longpress and add delete picture option back
 type ImageProps = {
   navigation: NavigationScreenProp<string, object>;
-  state: object[];
+  state: [];
 }
 
 const SPACING = 10;
 const ITEM_SIZE = 80;
 
-const VisionListContainer: FC<ImageProps> = ({navigation, state}) => {
+const VisionListContainer: FC<ImageProps> = ({ navigation, state }) => {
   const [activeIndex, setActiveIndex] = useState(0)
   const topRef = useRef<FlatList>(null);
   const thumbRef = useRef<FlatList>(null);
@@ -41,7 +42,7 @@ const VisionListContainer: FC<ImageProps> = ({navigation, state}) => {
   }
 
   return (
-    <Layout style={{ flex:1 }}>
+    <Layout style={{flex: 1}}>
       <FlatList
         ref={ topRef }
         data={ state }
@@ -62,8 +63,8 @@ const VisionListContainer: FC<ImageProps> = ({navigation, state}) => {
         }}
       />
       <FlatList
-        ref={ thumbRef }
         data={ state }
+        ref={ thumbRef }
         horizontal
         showsHorizontalScrollIndicator={ false }
         style={{ position: "absolute", bottom: ITEM_SIZE }}
@@ -73,29 +74,29 @@ const VisionListContainer: FC<ImageProps> = ({navigation, state}) => {
           return (
             <TouchableOpacity
               onPress={ () => scrollActiveIndex(index) }
-              onLongPress={ () => navigation.navigate("Vision Details", { item }) }
+              onLongPress={ () => navigation.navigate("Vision Details", item ) }
             >
               <Image
                 source={{ uri:item.uri }}
                 style={{
                   width: ITEM_SIZE,
                   height: ITEM_SIZE,
-                  borderRadius: 12,
+                  borderRadius: 3,
                   marginRight: SPACING,
-                  borderWidth: 2,
+                  borderWidth: 1,
                   borderColor: activeIndex === index ? "#fff" : 'transparent'
                 }}
               />
             </TouchableOpacity>
           )
         }}
-        />
-        <FooterButtons/>
+      />
+      <FooterButtons context={VisionContext}/>
     </Layout>
   );
 };
 
-const mapStateToProps = (state:any) => {
+const mapStateToProps = (state: { visions: [] }) => {
   return {
     state: state.visions,
   };
@@ -103,5 +104,4 @@ const mapStateToProps = (state:any) => {
 
 export default connect(mapStateToProps)(VisionListContainer);
 
-
-export type PropsFromRedux = ConnectedProps<typeof VisionListContainer>
+export type PropsFromRedux = ConnectedProps<typeof VisionListContainer>;
