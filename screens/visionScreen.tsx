@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect, createContext, SetStateAction, Dispatch } from "react";
 import { Animated, Modal, ViewStyle, StyleSheet } from "react-native";
 import { NavigationScreenProp } from 'react-navigation';
-import { SafeAreaView } from "react-native-safe-area-context";
+import { Layout } from "@ui-kitten/components";
 import VisionsListContainer from "../components/visions/visionImageList";
 import VisionGridContainer from "../components/visions/visionImageGrid";
 import AddVision from "../components/visions/addVisionModal";
@@ -43,7 +43,7 @@ const Visions: React.FC<VisionProps> = ({ navigation }) => {
 
   
   return (
-    <SafeAreaView style={styles.container}>
+    <Layout style={styles.container}>
       <Header name="Visions"/>
       <Modal visible={modalOpen} animationType="slide">
         <AddVision setModalOpen={setModalOpen} />  
@@ -56,7 +56,7 @@ const Visions: React.FC<VisionProps> = ({ navigation }) => {
         <VisionsListContainer navigation={navigation} />
       )}
       </VisionContext.Provider>
-    </SafeAreaView>
+    </Layout>
   );
 };
 

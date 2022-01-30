@@ -8,14 +8,12 @@ import { BackAction, ToggleButton } from "./button";
 export type HeaderProps = {
   name: string
   navigation?: NavigationScreenProp<string, object>;
-  props: string[]
 };
 
 interface Styles {
   headerContainer: ViewStyle;
 }
-
-const Header:React.FC<HeaderProps> = ({ name, navigation, props }) => {
+const Header:React.FC<HeaderProps> = ({ name, navigation }) => {
 
   const { theme, toggleTheme } = useContext(ThemesContext);
   let navigateBack;
@@ -27,7 +25,7 @@ const Header:React.FC<HeaderProps> = ({ name, navigation, props }) => {
   }
 
   return (
-    <Layout style={styles.headerContainer} {...props}>
+    <Layout style={styles.headerContainer}>
       <TopNavigation 
         title={name} 
         alignment={name.includes("Details") ? "center" : "start"} 
