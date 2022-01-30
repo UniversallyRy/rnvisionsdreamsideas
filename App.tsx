@@ -1,8 +1,7 @@
 import "react-native-get-random-values";
-import "react-native-gesture-handler";
 import React, { useState } from "react";
 import { AppRegistry, StatusBar } from "react-native";
-import {NavigationContainer} from "@react-navigation/native";
+import { NavigationContainer } from "@react-navigation/native";
 import AppLoading from 'expo-app-loading';
 import * as Font from "expo-font";
 import { Provider } from "react-redux";
@@ -10,9 +9,10 @@ import { store, /*persistor */ } from "./redux/store";
 import { ApplicationProvider, IconRegistry } from '@ui-kitten/components';
 import { EvaIconsPack } from '@ui-kitten/eva-icons';
 import * as eva from '@eva-design/eva';
+import { default as customTheme } from './styles/custom-theme.json'; 
 import { ThemesContext } from "./ThemeContext";
-// import { PersistGate } from "redux-persist/integration/react";
 import BottomTabs from "./routes/drawer";
+// import { PersistGate } from "redux-persist/integration/react";
 
 const getFonts = () =>
   Font.loadAsync({
@@ -26,10 +26,12 @@ const getFonts = () =>
 const App = () => {
   const [fontsLoaded, setFontsLoaded] = useState(false);
   const [persistLoaded, setPersistLoaded] = useState(true);
-  const [theme, setTheme] = React.useState('light');
+  const [theme, setTheme] = useState('light');
+  const [evaTheme, setEvaTheme] = useState(eva.light);
 
   const toggleTheme = () => {
     const nextTheme = theme === 'light' ? 'dark' : 'light';
+    nextTheme === 'light' ? setEvaTheme(eva.light) : setEvaTheme(eva.dark);  
     setTheme(nextTheme);
   };
 
@@ -38,7 +40,7 @@ const App = () => {
       <Provider store={ store }>
         <ThemesContext.Provider value={{ theme, toggleTheme }}>
           <IconRegistry icons={ EvaIconsPack }/>
-          <ApplicationProvider { ...eva } theme={ eva[theme] }>
+          <ApplicationProvider { ...eva } theme={{ ...evaTheme, ...customTheme }}>
             <StatusBar animated={ true } />
             <NavigationContainer>
               <BottomTabs />
