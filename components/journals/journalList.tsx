@@ -1,7 +1,8 @@
 import React, { FunctionComponent } from "react";
-import { StyleSheet, FlatList, ViewStyle, View } from "react-native";
+import { StyleSheet, FlatList, ViewStyle } from "react-native";
 import { NavigationScreenProp } from 'react-navigation';
 import { connect } from "react-redux";
+import { Layout } from "@ui-kitten/components";
 import JournalItem from "./journalItem";
 
 type JournalListProps = {
@@ -17,20 +18,19 @@ interface Styles {
 const JournalList: FunctionComponent<JournalListProps> = ({ journals, month,  navigation }) => {
 
   return (
-    <View style={styles.container}>
+    <Layout style={styles.container}>
       <FlatList
         data={ journals }
         accessibilityLabel="Contains Journal Entries"
-        keyExtractor={ (item, index) => index.toString() }
+        keyExtractor={ (_item, index) => index.toString() }
         renderItem={ ({ item }:any) => {
           if ((month != 'All') && !item.date.includes(month)) {
             return null
           }
-            return <JournalItem navigation={navigation} item={item}/>
-    
+          return <JournalItem navigation={navigation} item={item}/>
         }}
       />
-    </View>
+    </Layout>
   );
 };
 

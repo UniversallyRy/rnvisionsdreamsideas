@@ -3,8 +3,8 @@ import { StyleSheet, TextStyle, ViewStyle } from "react-native";
 import { NavigationScreenProp } from 'react-navigation';
 import { connect, useDispatch } from "react-redux";
 import { Card, Input, Layout, Text } from "@ui-kitten/components";
-import { deleteJournal, editJournal, editJournalToggle } from "../../redux/reducers/journals";
 import { CancelButton, DeleteButton, EditButton, SaveButton } from "../../shared/buttons";
+import { deleteJournal, editJournal, editJournalToggle } from "../../redux/reducers/journals";
 import { windowHeight, windowWidth } from "../../utils/dimensions";
 
 type JournalListProps = {
