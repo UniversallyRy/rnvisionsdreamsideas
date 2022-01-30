@@ -1,10 +1,10 @@
-import { Card, Input, Layout, Text, Button } from "@ui-kitten/components";
 import React, { FunctionComponent, useState } from "react";
-import { StyleSheet, KeyboardAvoidingView, TextStyle, ViewStyle } from "react-native";
+import { StyleSheet, TextStyle, ViewStyle } from "react-native";
 import { NavigationScreenProp } from 'react-navigation';
 import { connect, useDispatch } from "react-redux";
+import { Card, Input, Layout, Text } from "@ui-kitten/components";
 import { deleteJournal, editJournal, editJournalToggle } from "../../redux/reducers/journals";
-import { DeleteIcon, EditIcon, SaveIcon } from "../../shared/icon";
+import { CancelButton, DeleteButton, EditButton, SaveButton } from "../../shared/buttons";
 import { windowHeight, windowWidth } from "../../utils/dimensions";
 
 type JournalListProps = {
@@ -20,8 +20,6 @@ type JournalListProps = {
 
 interface Styles {
   buttonsContainer: ViewStyle;
-  editButton: ViewStyle;
-  deleteButton: ViewStyle;
   divider: ViewStyle;
   journalCard: ViewStyle;
   journalTitle: TextStyle;
@@ -42,7 +40,7 @@ const JournalItem: FunctionComponent<JournalListProps> = ({ item,  navigation })
 
   const {title, body, date} = item;
   return (
-    <KeyboardAvoidingView>
+    <Layout>
       <Card accessibilityLabel="Card containing single Journal Entry" onPress={ () => navigation.navigate("Journal Details", { title, body, date })} style={ styles.journalCard }>
         <Layout
           style={ styles.journalText }
@@ -78,40 +76,19 @@ const JournalItem: FunctionComponent<JournalListProps> = ({ item,  navigation })
           </Text>
         }
         <Layout style={ styles.buttonsContainer }>
-          {item.isEditing ? <>
-            <Button
-              style={ styles.editButton}
-              accessoryRight={SaveIcon}
-              onPress={() => editHandler(item.id)}
-            >
-              Save
-            </Button>
-            <Button
-              style={ styles.deleteButton}
-              onPress={ () => dispatch(editJournalToggle({id: item.id})) }
-            >
-              Cancel
-            </Button>
-          </>
-          :<>
-            <Button
-              style={ styles.editButton }
-              accessoryRight={EditIcon}
-              onPress={() => dispatch(editJournalToggle({id: item.id}))}
-            >
-              Edit
-            </Button>
-            <Button
-              style={ styles.deleteButton }
-              accessoryRight={DeleteIcon}
-              onPress={ () => dispatch(deleteJournal({ id: item.id })) }
-            >
-              Delete
-            </Button>
-          </>}
+          {item.isEditing 
+            ?<>
+              <SaveButton onPress={() => editHandler(item.id)}/>
+              <CancelButton onPress={() => dispatch(editJournalToggle({id: item.id}))}/>
+            </>
+            :<>
+              <EditButton onPress={() => dispatch(editJournalToggle({id: item.id}))}/>
+              <DeleteButton onPress={ () => dispatch(deleteJournal({ id: item.id })) }/>
+            </>
+          }
         </Layout>
       </Card>
-    </KeyboardAvoidingView>
+    </Layout>
   );
 };
 
@@ -148,15 +125,6 @@ const styles = StyleSheet.create<Styles>({
   buttonsContainer: {
     flexDirection: "row",
     marginTop: "auto",
-  },
-  editButton: {
-    width: windowWidth * 0.40,
-    margin: 1,
-  },
-  deleteButton: {
-    margin: 1,
-    backgroundColor: "red",
-    width: windowWidth * 0.40,
   },
   divider: {
     height: 0.3,

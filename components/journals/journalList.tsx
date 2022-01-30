@@ -1,5 +1,5 @@
 import React, { FunctionComponent } from "react";
-import { StyleSheet, FlatList, StyleProp, ViewStyle, View } from "react-native";
+import { StyleSheet, FlatList, ViewStyle, View } from "react-native";
 import { NavigationScreenProp } from 'react-navigation';
 import { connect } from "react-redux";
 import JournalItem from "./journalItem";

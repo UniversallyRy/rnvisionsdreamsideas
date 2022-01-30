@@ -8,7 +8,7 @@ import JournalGridContainer from "../components/journals/journalGrid";
 import JournalFilter from "../components/journals/journalFilter";
 import { windowHeight, windowWidth } from "../utils/dimensions";
 import Header from "../shared/header";
-import { CloseButton, FooterButtons } from "../shared/button";
+import { CloseButton, FooterButtons } from "../shared/buttons";
 
 interface JournalProps {
   navigation: NavigationScreenProp<string, object>;

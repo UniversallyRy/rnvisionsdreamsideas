@@ -6,7 +6,7 @@ import { connect, ConnectedProps } from "react-redux";
 import { NavigationScreenProp } from 'react-navigation';
 import { windowHeight, windowWidth } from "../../utils/dimensions";
 import { VisionContext } from "../../screens/visionScreen";
-import { FooterButtons } from "../../shared/button";
+import { FooterButtons } from "../../shared/buttons";
 
 type ListProps = {
   item: {

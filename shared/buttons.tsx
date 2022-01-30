@@ -1,7 +1,8 @@
 import React, { useContext } from "react";
 import { GestureResponderEvent, StyleSheet, TextStyle, ViewStyle } from "react-native";
 import { Button, Layout, Text, TopNavigationAction } from "@ui-kitten/components"
-import { BackIcon, CloseIcon, DayIcon, GridIcon, NightIcon, SubmitIcon } from "./icon";
+import { BackIcon, CloseIcon, DayIcon, GridIcon, NightIcon, SaveIcon, SubmitIcon } from "./icons";
+import { windowWidth } from "../utils/dimensions";
 
 type ButtonProps = {
   text?: string;
@@ -11,6 +12,8 @@ type ButtonProps = {
 interface Styles {
   button: ViewStyle;
   buttonText: TextStyle;
+  editButton: TextStyle;
+  deleteButton: TextStyle;
   submit: ViewStyle;
   toggle: ViewStyle;
   footerContainer: ViewStyle;
@@ -32,7 +35,7 @@ export const KittenButton:React.FC<ButtonProps> = ({ text, onPress, ...props }) 
   );
 };
 
-//
+// Footer Buttons
 export const SubmitButton = ({ onPress, ...props }) => {
   return (
     <Button
@@ -66,7 +69,50 @@ export const CloseButton = ({ onPress, ...props }) => {
     />
   );
 };
+// Journal Buttons
+export const SaveButton = ({ onPress, ...props }) => {
+  return (
+    <Button
+      style={ styles.editButton}
+      accessoryRight={SaveIcon}
+      onPress={onPress}
+      {...props}
+    >
+      Save
+    </Button>
+  );
+};
 
+export const CancelButton = ({ onPress, ...props }) => {
+  return (
+    <Button
+      style={ styles.deleteButton}
+      onPress={ onPress }
+    >
+      Cancel
+    </Button>
+  );
+};
+export const EditButton = ({ onPress, ...props }) => {
+  return (
+    <Button
+      style={ styles.editButton}
+      onPress={ onPress }
+    >
+      Edit
+    </Button>
+  );
+};
+export const DeleteButton = ({ onPress, ...props }) => {
+  return (
+    <Button
+      style={ styles.deleteButton}
+      onPress={ onPress }
+    >
+      Delete
+    </Button>
+  );
+};
 // Header Buttons
 export const ToggleButton = ( theme: string, toggleTheme: ((event: GestureResponderEvent) => void) | undefined, ...props: undefined[] ) => {
   return (
@@ -129,6 +175,15 @@ const styles = StyleSheet.create<Styles>({
     textTransform: "uppercase",
     fontSize: 16,
     textAlign: "center",
+  },
+  editButton: {
+    width: windowWidth * 0.40,
+    margin: 1,
+  },
+  deleteButton: {
+    margin: 1,
+    backgroundColor: "red",
+    width: windowWidth * 0.40,
   },
   submit: {
     alignItems: "center",

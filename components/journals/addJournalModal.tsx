@@ -1,14 +1,14 @@
 import React, { FunctionComponent } from "react";
-import { StyleProp, TextStyle } from "react-native";
+import { Text } from "react-native";
 import { useDispatch } from "react-redux";
+import { Input, Layout } from "@ui-kitten/components";
 import { Formik } from "formik";
-// import { addJournal } from "../../redux/actions";
 import { addJournal } from "../../redux/reducers/journals";
 import { globalStyles } from "../../styles/global";
-import { CloseButton, SubmitButton } from "../../shared/button";
+import { SubmitButton } from "../../shared/buttons";
 import * as yup from "yup";
-import { SafeAreaView } from "react-native-safe-area-context";
-import { Input, Text } from "@ui-kitten/components";
+import { windowHeight } from "../../utils/dimensions";
+// import { addJournal } from "../../redux/actions";
 
 type AddJournalProps = {
   setModalOpen: ((i:boolean) => void);
@@ -22,7 +22,7 @@ const JournalSchema = yup.object({
 const AddJournal: FunctionComponent<AddJournalProps> = ({ setModalOpen }) => {
   const dispatch = useDispatch();
   return (
-    <SafeAreaView style={{ margin: 3, marginTop: 100 }}>
+    <Layout style={{ height: windowHeight }}>
       <Formik
         // Control whether Formik should reset the form if initialValues changes
         enableReinitialize
@@ -73,7 +73,7 @@ const AddJournal: FunctionComponent<AddJournalProps> = ({ setModalOpen }) => {
           </>
         )}
       </Formik>
-    </SafeAreaView>
+    </Layout>
   );
 };
 

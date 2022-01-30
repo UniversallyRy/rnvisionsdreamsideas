@@ -6,7 +6,7 @@ import { AntDesign } from "@expo/vector-icons";
 import { Formik } from "formik";
 import { addList } from "../../redux/reducers/todos";
 import { globalStyles } from "../../styles/global";
-import KittenButton  from "../../shared/button";
+import KittenButton  from "../../shared/buttons";
 import * as yup from "yup";
 
 type ModalProps = {

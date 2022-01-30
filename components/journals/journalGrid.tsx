@@ -1,7 +1,6 @@
-import { Card, Text } from "@ui-kitten/components";
+import { Card, Layout, Text } from "@ui-kitten/components";
 import React, { FunctionComponent} from "react";
 import { FlatList, StyleSheet, TextStyle, ViewStyle } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
 import { NavigationScreenProp } from 'react-navigation';
 import { connect } from "react-redux";
 import { windowHeight, windowWidth } from "../../utils/dimensions";
@@ -22,7 +21,7 @@ interface Styles {
 const JournalGridContainer: FunctionComponent<GridProps> = ({ journals, month, navigation }) => {     
 
   return (
-    <SafeAreaView
+    <Layout
       style={ styles.container }
     >
       <FlatList
@@ -55,7 +54,7 @@ const JournalGridContainer: FunctionComponent<GridProps> = ({ journals, month, n
           );
         }}}
       />
-    </SafeAreaView>
+    </Layout>
   );
 };
 

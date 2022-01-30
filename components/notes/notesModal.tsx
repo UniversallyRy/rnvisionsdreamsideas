@@ -6,7 +6,7 @@ import { deleteNote, addNote } from "../../redux/reducers/note";
 import { windowHeight, windowWidth } from "../../utils/dimensions";
 import * as yup from "yup";
 import { Card, Input, Layout } from "@ui-kitten/components";
-import { CloseButton } from "../../shared/button";
+import { CloseButton } from "../../shared/buttons";
 
 type NoteModalProps = {
   notes: object[];

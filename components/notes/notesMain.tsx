@@ -4,7 +4,7 @@ import TodoLists from "./todoLists";
 import NoteList from "./noteList";
 import AddTodoListModal from "./addTodoListModal";
 import AddNoteModal from "./addNoteModal";
-import { FooterButtons } from "../../shared/button";
+import { FooterButtons } from "../../shared/buttons";
 
 type NoteMainProps = {
   stateNotes: object[];

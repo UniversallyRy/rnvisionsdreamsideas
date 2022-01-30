@@ -20,7 +20,7 @@ import { globalStyles } from "../../styles/global";
 import ImagePic from "./imagePicker";
 import { windowHeight, windowWidth } from "../../utils/dimensions";
 import * as yup from "yup";
-import { SubmitButton } from "../../shared/button";
+import { SubmitButton } from "../../shared/buttons";
 
 interface VisionProps {
   stateUri: string;

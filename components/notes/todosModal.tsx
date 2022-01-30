@@ -6,7 +6,7 @@ import { addTodo, deleteTodo, toggleTodo } from "../../redux/reducers/todos";
 import * as yup from "yup";
 import { windowHeight, windowWidth } from "../../utils/dimensions";
 import { CheckBox, Input, Layout } from "@ui-kitten/components";
-import { CloseButton, SubmitButton } from "../../shared/button";
+import { CloseButton, SubmitButton } from "../../shared/buttons";
 
 
 type TodoModalProps = {

@@ -5,7 +5,7 @@ import { connect, ConnectedProps } from "react-redux";
 import { Layout } from "@ui-kitten/components";
 // import { deleteVision } from "../../redux/reducers/visions";
 import { windowHeight, windowWidth } from "../../utils/dimensions";
-import { FooterButtons } from "../../shared/button";
+import { FooterButtons } from "../../shared/buttons";
 import { VisionContext } from "../../screens/visionScreen";
 
 // todos: navigation bug on thumbnail longpress and add delete picture option back

@@ -4,7 +4,7 @@ import { Card, Layout, Text } from "@ui-kitten/components";
 import { useDispatch } from "react-redux";
 import TodosModal from "./todosModal";
 import { deleteList } from "../../redux/reducers/todos";
-import { CloseButton } from "../../shared/button";
+import { CloseButton } from "../../shared/buttons";
 
 type TodoListsProps = {
   list: {
