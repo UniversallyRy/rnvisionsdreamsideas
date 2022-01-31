@@ -11,14 +11,14 @@ type ButtonProps = {
 
 interface Styles {
   button: ViewStyle;
-  buttonText: TextStyle;
-  editButton: TextStyle;
-  deleteButton: TextStyle;
-  imageButtons: TextStyle;
+  text: TextStyle;
+  edit: ViewStyle;
+  delete: ViewStyle;
+  imgSelect: ViewStyle;
   submit: ViewStyle;
   toggle: ViewStyle;
   footerContainer: ViewStyle;
-  footerButton: ViewStyle;
+  footer: ViewStyle;
   note: ViewStyle;
   todo: ViewStyle;
 }
@@ -31,11 +31,10 @@ export const KittenButton:React.FC<ButtonProps> = ({ text, onPress, ...props }) 
       onPress={onPress}
       {...props}
     >
-      <Text style={styles.buttonText}>{text}</Text>
+      <Text style={styles.text}>{text}</Text>
     </Button>
   );
 };
-
 
 export const CloseButton = ({ onPress, ...props }) => {
   return (
@@ -60,40 +59,9 @@ export const ToggleButton = ( theme: string, toggleTheme: ((event: GestureRespon
   );
 };
 
-export const BackAction = (navigateBack) => (
+export const BackAction = (navigateBack: () => void) => (
   <TopNavigationAction icon={BackIcon} onPress={() => navigateBack()}/>
 );
-
-export const FooterButtons = ({ context }) => {
-  const contextObj:any =  useContext(context);
-  let setModalOpen, toggleView, toggleNoteModal, toggleTodoModal
-  if(context._currentValue.hasOwnProperty('setModalOpen')){
-    setModalOpen  = contextObj.setModalOpen
-    toggleView  = contextObj.toggleView
-  }else{
-    toggleNoteModal = contextObj.toggleNoteModal
-    toggleTodoModal  = contextObj.toggleTodoModal
-  }
-
-  return (
-    <Layout style={styles.footerContainer}>
-      {context._currentValue.toggleView != undefined
-        ?<>
-          <SubmitButton onPress={() => setModalOpen(true)} style={styles.footerButton}/>
-          <GridButton onPress={() => toggleView()} style={styles.footerButton}/>
-        </>
-        :<>
-          <SubmitButton onPress={() => toggleNoteModal()} style={styles.note}>
-            Note
-          </SubmitButton>
-          <SubmitButton onPress={() => toggleTodoModal()} style={styles.todo}>
-            Todo
-          </SubmitButton>
-          </>
-      }
-    </Layout>
-  );
-};
 // Vision Modal Buttons
 export const ImageButtons = ({ pickImage, cameraImage, ...props }) => {
   return (
@@ -101,14 +69,14 @@ export const ImageButtons = ({ pickImage, cameraImage, ...props }) => {
       <Button
         accessibilityLabel="Add Image From Gallery"
         onPress={ pickImage }
-        style={ styles.imageButtons }
+        style={ styles.imgSelect }
       >
         Add from gallery
       </Button>
       <Button
         accessibilityLabel="Take A Picture"
         onPress={ cameraImage }
-        style={ styles.imageButtons }
+        style={ styles.imgSelect }
       >
         Take a Picture
       </Button>
@@ -119,7 +87,7 @@ export const ImageButtons = ({ pickImage, cameraImage, ...props }) => {
 export const SaveButton = ({ onPress, ...props }) => {
   return (
     <Button
-      style={ styles.editButton}
+      style={ styles.edit}
       accessoryRight={SaveIcon}
       onPress={onPress}
       {...props}
@@ -132,8 +100,9 @@ export const SaveButton = ({ onPress, ...props }) => {
 export const CancelButton = ({ onPress, ...props }) => {
   return (
     <Button
-      style={ styles.deleteButton}
+      style={ styles.delete}
       onPress={ onPress }
+      {...props}
     >
       Cancel
     </Button>
@@ -142,8 +111,9 @@ export const CancelButton = ({ onPress, ...props }) => {
 export const EditButton = ({ onPress, ...props }) => {
   return (
     <Button
-      style={ styles.editButton}
+      style={ styles.edit}
       onPress={ onPress }
+      {...props}
     >
       Edit
     </Button>
@@ -152,8 +122,9 @@ export const EditButton = ({ onPress, ...props }) => {
 export const DeleteButton = ({ onPress, ...props }) => {
   return (
     <Button
-      style={ styles.deleteButton}
+      style={ styles.delete}
       onPress={ onPress }
+      {...props}
     >
       Delete
     </Button>
@@ -183,6 +154,42 @@ export const GridButton = ({ onPress, ...props }) => {
   );
 };
 
+export const FooterButtons = ({ context }) => {
+  const contextObj:any =  useContext(context);
+
+  let setModalOpen: (arg0: boolean) => any, 
+  toggleView: () => any, 
+  toggleNoteModal: () => any, 
+  toggleTodoModal: () => any
+
+  if(context._currentValue.hasOwnProperty('setModalOpen')){
+    setModalOpen  = contextObj.setModalOpen
+    toggleView  = contextObj.toggleView
+  }else{
+    toggleNoteModal = contextObj.toggleNoteModal
+    toggleTodoModal  = contextObj.toggleTodoModal
+  }
+
+  return (
+    <Layout style={styles.footerContainer}>
+      {context._currentValue.toggleView != undefined
+        ?<>
+          <SubmitButton onPress={() => setModalOpen(true)} style={styles.footer}/>
+          <GridButton onPress={() => toggleView()} style={styles.footer}/>
+        </>
+        :<>
+          <SubmitButton onPress={() => toggleNoteModal()} style={styles.note}>
+            Note
+          </SubmitButton>
+          <SubmitButton onPress={() => toggleTodoModal()} style={styles.todo}>
+            Todo
+          </SubmitButton>
+          </>
+      }
+    </Layout>
+  );
+};
+
 const styles = StyleSheet.create<Styles>({
   button: {
     alignSelf: "center",
@@ -193,22 +200,22 @@ const styles = StyleSheet.create<Styles>({
     marginBottom: 10,
     elevation: 1,
   },
-  buttonText: {
+  text: {
     fontWeight: "bold",
     textTransform: "uppercase",
     fontSize: 16,
     textAlign: "center",
   },
-  editButton: {
+  edit: {
     width: windowWidth * 0.40,
     margin: 1,
   },
-  deleteButton: {
+  delete: {
     margin: 1,
     backgroundColor: "red",
     width: windowWidth * 0.40,
   },
-  imageButtons: {
+  imgSelect: {
     margin: 5,
     elevation: 1,
   },
@@ -227,8 +234,8 @@ const styles = StyleSheet.create<Styles>({
     position: "absolute",
     bottom: 0,
     backgroundColor: "transparent"
-},
-  footerButton: {
+  },
+  footer: {
     marginHorizontal: 50,
   },
   note: {
