@@ -36,29 +36,6 @@ export const KittenButton:React.FC<ButtonProps> = ({ text, onPress, ...props }) 
   );
 };
 
-// Footer Buttons
-export const SubmitButton = ({ onPress, ...props }) => {
-  return (
-    <Button
-      style={styles.submit}
-      appearance='ghost'
-      accessoryLeft={SubmitIcon}
-      onPress={onPress}
-      {...props}
-    />
-  );
-};
-
-export const GridButton = ({ onPress, ...props }) => {
-  return (
-    <Button
-      appearance='ghost'
-      accessoryLeft={GridIcon}
-      onPress={onPress}
-      {...props}
-    />
-  );
-};
 
 export const CloseButton = ({ onPress, ...props }) => {
   return (
@@ -70,7 +47,54 @@ export const CloseButton = ({ onPress, ...props }) => {
     />
   );
 };
-// Add Image Buttons
+
+// Header Buttons
+export const ToggleButton = ( theme: string, toggleTheme: ((event: GestureResponderEvent) => void) | undefined, ...props: undefined[] ) => {
+  return (
+    <Button
+      style={styles.toggle} 
+      onPress={ toggleTheme } 
+      accessoryRight={theme == "light" ? DayIcon : NightIcon}
+      {...props}
+    />
+  );
+};
+
+export const BackAction = (navigateBack) => (
+  <TopNavigationAction icon={BackIcon} onPress={() => navigateBack()}/>
+);
+
+export const FooterButtons = ({ context }) => {
+  const contextObj:any =  useContext(context);
+  let setModalOpen, toggleView, toggleNoteModal, toggleTodoModal
+  if(context._currentValue.hasOwnProperty('setModalOpen')){
+    setModalOpen  = contextObj.setModalOpen
+    toggleView  = contextObj.toggleView
+  }else{
+    toggleNoteModal = contextObj.toggleNoteModal
+    toggleTodoModal  = contextObj.toggleTodoModal
+  }
+
+  return (
+    <Layout style={styles.footerContainer}>
+      {context._currentValue.toggleView != undefined
+        ?<>
+          <SubmitButton onPress={() => setModalOpen(true)} style={styles.footerButton}/>
+          <GridButton onPress={() => toggleView()} style={styles.footerButton}/>
+        </>
+        :<>
+          <SubmitButton onPress={() => toggleNoteModal()} style={styles.note}>
+            Note
+          </SubmitButton>
+          <SubmitButton onPress={() => toggleTodoModal()} style={styles.todo}>
+            Todo
+          </SubmitButton>
+          </>
+      }
+    </Layout>
+  );
+};
+// Vision Modal Buttons
 export const ImageButtons = ({ pickImage, cameraImage, ...props }) => {
   return (
     <ButtonGroup {...props}>
@@ -135,50 +159,27 @@ export const DeleteButton = ({ onPress, ...props }) => {
     </Button>
   );
 };
-// Header Buttons
-export const ToggleButton = ( theme: string, toggleTheme: ((event: GestureResponderEvent) => void) | undefined, ...props: undefined[] ) => {
+// Footer Buttons
+export const SubmitButton = ({ onPress, ...props }) => {
   return (
     <Button
-      style={styles.toggle} 
-      onPress={ toggleTheme } 
-      accessoryRight={theme == "light" ? DayIcon : NightIcon}
+      style={styles.submit}
+      appearance='ghost'
+      accessoryLeft={SubmitIcon}
+      onPress={onPress}
       {...props}
     />
   );
 };
 
-export const BackAction = (navigateBack) => (
-  <TopNavigationAction icon={BackIcon} onPress={() => navigateBack()}/>
-);
-
-export const FooterButtons = ({ context }) => {
-  const contextObj:any =  useContext(context);
-  let setModalOpen, toggleView, toggleNoteModal, toggleTodoModal
-  if(context._currentValue.hasOwnProperty('setModalOpen')){
-    setModalOpen  = contextObj.setModalOpen
-    toggleView  = contextObj.toggleView
-  }else{
-    toggleNoteModal = contextObj.toggleNoteModal
-    toggleTodoModal  = contextObj.toggleTodoModal
-  }
-
+export const GridButton = ({ onPress, ...props }) => {
   return (
-    <Layout style={styles.footerContainer}>
-      {context._currentValue.toggleView != undefined
-        ?<>
-          <SubmitButton onPress={() => setModalOpen(true)} style={styles.footerButton}/>
-          <GridButton onPress={() => toggleView()} style={styles.footerButton}/>
-        </>
-        :<>
-          <SubmitButton onPress={() => toggleNoteModal()} style={styles.note}>
-            Note
-          </SubmitButton>
-          <SubmitButton onPress={() => toggleTodoModal()} style={styles.todo}>
-            Todo
-          </SubmitButton>
-          </>
-      }
-    </Layout>
+    <Button
+      appearance='ghost'
+      accessoryLeft={GridIcon}
+      onPress={onPress}
+      {...props}
+    />
   );
 };
 
