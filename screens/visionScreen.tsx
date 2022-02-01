@@ -7,6 +7,8 @@ import VisionGridContainer from "../components/visions/visionImageGrid";
 import AddVision from "../components/visions/addVisionModal";
 import Header from "../shared/header";
 
+// todos: make visions drag and droppable, fix image reslolution/size
+
 interface VisionProps {
   navigation: NavigationScreenProp<string, object>;
 }

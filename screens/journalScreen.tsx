@@ -9,7 +9,7 @@ import JournalFilter from "../components/journals/journalFilter";
 import { windowHeight, windowWidth } from "../utils/dimensions";
 import Header from "../shared/header";
 import { CloseButton, FooterButtons } from "../shared/buttons";
-
+// todo: add swipe to delete
 interface JournalProps {
   navigation: NavigationScreenProp<string, object>;
   journalContainer: StyleProp<ViewStyle>;

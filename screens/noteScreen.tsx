@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import { Layout } from "@ui-kitten/components";
 import NoteMain from "../components/notes/notesMain";
 import Header from "../shared/header";
-
+// todo: draggable
 interface NoteProps {
   stateNotes: object[];
   stateTodos: object[];
