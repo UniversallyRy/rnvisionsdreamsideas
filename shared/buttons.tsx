@@ -12,15 +12,15 @@ type ButtonProps = {
 interface Styles {
   button: ViewStyle;
   text: TextStyle;
+  toggle: ViewStyle;
+  imgSelect: ViewStyle;
   edit: ViewStyle;
   delete: ViewStyle;
-  imgSelect: ViewStyle;
   submit: ViewStyle;
-  toggle: ViewStyle;
-  footerContainer: ViewStyle;
-  footer: ViewStyle;
   note: ViewStyle;
   todo: ViewStyle;
+  footerContainer: ViewStyle;
+  footer: ViewStyle;
 }
 
 // default export kittenui styled button
