@@ -71,7 +71,7 @@ export const ImageButtons = ({ pickImage, cameraImage, ...props }) => {
         onPress={ pickImage }
         style={ styles.imgSelect }
       >
-        Add from gallery
+        Add from Photos
       </Button>
       <Button
         accessibilityLabel="Take A Picture"
