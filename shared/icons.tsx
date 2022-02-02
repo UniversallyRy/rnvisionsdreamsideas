@@ -1,5 +1,5 @@
 import React from 'react';
-import { Icon, TopNavigationAction } from '@ui-kitten/components';
+import { Icon } from '@ui-kitten/components';
 
 
 export const CloseIcon = (props) => (

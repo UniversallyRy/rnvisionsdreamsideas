@@ -4,10 +4,6 @@ interface Styles {
   errorText: TextStyle;
 }
 
-export const coltsBlue = "#002C5F";
-export const coltsGray = "#A2AAAD";
-export const raidSilver = "#A5ACAF";
-
 export const globalStyles = StyleSheet.create<Styles>({
   errorText: {
     fontFamily: "roboto-bold",
