@@ -2,11 +2,10 @@ import React, { useState, useRef, useEffect, createContext, SetStateAction, Disp
 import { Animated, Modal, ViewStyle, StyleSheet } from "react-native";
 import { NavigationScreenProp } from 'react-navigation';
 import { Layout } from "@ui-kitten/components";
+import Header from "../shared/header";
 import VisionsListContainer from "../components/visions/visionImageList";
 import VisionGridContainer from "../components/visions/visionImageGrid";
 import AddVision from "../components/visions/addVisionModal";
-import Header from "../shared/header";
-
 // todos: make visions drag and droppable, fix image reslolution/size
 
 interface VisionProps {
@@ -35,27 +34,25 @@ const Visions: React.FC<VisionProps> = ({ navigation }) => {
     let isCancelled = false;
 
     if (!isCancelled) {}
-    return () => { isCancelled = true;};
+    return () => { isCancelled = true };
   }, []);
 
   const toggleView = () => {
     setGridView(!gridView);
   };
 
-
-  
   return (
-    <Layout style={styles.container}>
-      <Header name="Visions"/>
-      <Modal visible={modalOpen} animationType="slide">
-        <AddVision setModalOpen={setModalOpen} />  
+    <Layout style={ styles.container }>
+      <Header name={ "Visions" } />
+      <Modal visible={ modalOpen } animationType={ "slide" }>
+        <AddVision setModalOpen={ setModalOpen } />  
       </Modal>
       {/* when gridview is toggled use gridContainer otherwise VisionsContainer */}
       <VisionContext.Provider value={{ setModalOpen, toggleView }}>
       {gridView ? (
-        <VisionGridContainer navigation={navigation} />
+        <VisionGridContainer navigation={ navigation } />
       ) : (
-        <VisionsListContainer navigation={navigation} />
+        <VisionsListContainer navigation={ navigation } />
       )}
       </VisionContext.Provider>
     </Layout>

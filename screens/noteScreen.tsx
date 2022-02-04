@@ -16,9 +16,9 @@ interface Styles {
 
 const NoteScreen:React.FC<NoteProps> = ({ stateNotes, stateTodos }) => {
   return (
-    <Layout style={styles.noteScreenContainer}>
-      <Header name="Notes"/>
-      <NoteMain stateNotes={stateNotes} stateTodos={stateTodos} />
+    <Layout style={ styles.noteScreenContainer }>
+      <Header name={ "Notes" }/>
+      <NoteMain stateNotes={ stateNotes } stateTodos={ stateTodos } />
     </Layout>
   );
 };
@@ -29,11 +29,12 @@ const styles = StyleSheet.create<Styles>({
     fontFamily: "roboto-black",
   },
 });
+
 const mapStateToProps = (state:any) => {
   return {
     stateNotes: state.note,
     stateTodos: state.todos,
-  };
+  }
 };
 
 export default connect(mapStateToProps)(NoteScreen);

@@ -13,11 +13,11 @@ const aboutText: string =
 
 const About = () => {
   return (
-    <Layout style={styles.aboutContainer}>
-      <Card style={styles.textContainer}>
-        <Text style={styles.text}>
-          {" "}
-          {aboutText}{" "}
+    <Layout style={ styles.aboutContainer }>
+      <Card style={ styles.textContainer }>
+        <Text style={ styles.text }>
+          { " " }
+          { aboutText }{ " " }
         </Text>
       </Card>
     </Layout>
@@ -28,19 +28,18 @@ const styles = StyleSheet.create<Styles>({
   aboutContainer:{
     flex: 1,
     margin: 1,
+    alignItems: "center",
   },
   textContainer: {
     flex: 0.4,
     flexDirection: "row",
-    alignSelf: "center",
-    alignItems: "center",
     justifyContent: "center",
-    elevation: 5,
+    elevation: 2,
   },
   text: {
+    alignSelf: "center",
     padding: 8,
     margin: 30,
-    alignSelf: "center",
   },
 });
 

@@ -1,22 +1,17 @@
 import React, { createContext, Dispatch, SetStateAction, useState } from "react";
-import { StyleSheet, StyleProp, TextStyle, ViewStyle } from "react-native";
+import { StyleSheet, TextStyle, ViewStyle } from "react-native";
 import { NavigationScreenProp } from 'react-navigation';
 import { Layout, Text, Modal } from "@ui-kitten/components";
-import AddJournalModal from "../components/journals/addJournalModal";
+import Header from "../shared/header";
 import JournalList from "../components/journals/journalList";
 import JournalGridContainer from "../components/journals/journalGrid";
+import AddJournalModal from "../components/journals/addJournalModal";
 import JournalFilter from "../components/journals/journalFilter";
-import { windowHeight, windowWidth } from "../utils/dimensions";
-import Header from "../shared/header";
 import { CloseButton, FooterButtons } from "../shared/buttons";
+import { windowHeight, windowWidth } from "../utils/dimensions";
 // todo: add swipe to delete
 interface JournalProps {
   navigation: NavigationScreenProp<string, object>;
-  journalContainer: StyleProp<ViewStyle>;
-  addJournalTitle: StyleProp<TextStyle>;
-  closeModalContainer: StyleProp<ViewStyle>;
-  visionAddToggle:StyleProp<ViewStyle>;
-  modalContent:StyleProp<ViewStyle>;
 }
 
 type ContextProps = {
@@ -25,7 +20,7 @@ type ContextProps = {
 }
 interface Styles {
   journalContainer: ViewStyle;
-  addJournalTitle: ViewStyle;
+  addJournalTitle: TextStyle;
   modalContent: ViewStyle;
   closeModalContainer: ViewStyle;
 }
@@ -41,31 +36,32 @@ const JournalScreen: React.FC<JournalProps>= ({ navigation }) => {
   };
 
   return (
-      <Layout style={styles.journalContainer}>
-        <Header name="Journals"/>
-        <Modal
-          style={{backgroundColor: "white",...styles.journalContainer}}
-          visible={modalOpen}
-        >
-          <Text style={styles.addJournalTitle}>Add A Journal Entry</Text>
-          <AddJournalModal setModalOpen={setModalOpen} />
-          <CloseButton
-            style={{position: "absolute", left: windowWidth * 0.45, bottom: 0}}
-            accessibilityLabel={"Closes Modal"}
-            onPress={() => setModalOpen(false)}
-          />
-        </Modal>
-        <JournalFilter/>
-        
-        {gridView ? (
-          <JournalGridContainer navigation={navigation} />
-        ) : (
-          <JournalList navigation={navigation} />
-        )}
-        <JournalContext.Provider value={{ setModalOpen, toggleView }}>
-          <FooterButtons context={JournalContext}/>
-        </JournalContext.Provider>
-      </Layout>
+    <Layout style={ styles.journalContainer }>
+      <Header name={ "Journals" }/>
+      <Modal
+        style={{ backgroundColor: "white",...styles.journalContainer }}
+        visible={ modalOpen }
+      >
+        <Text style={ styles.addJournalTitle }>Add A Journal Entry</Text>
+        <AddJournalModal setModalOpen={ setModalOpen } />
+        <CloseButton
+          style={{ position: "absolute", left: windowWidth * 0.45, bottom: 0 }}
+          accessibilityLabel={ "Closes Modal" }
+          onPress={ () => setModalOpen(false) }
+        />
+      </Modal>
+      <JournalFilter/>
+      
+      {gridView ? (
+        <JournalGridContainer navigation={navigation} />
+      ) : (
+        <JournalList navigation={navigation} />
+      )}
+      
+      <JournalContext.Provider value={{ setModalOpen, toggleView }}>
+        <FooterButtons context={ JournalContext }/>
+      </JournalContext.Provider>
+    </Layout>
   );
 };
 
