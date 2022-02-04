@@ -21,11 +21,11 @@ const { Navigator, Screen } = createBottomTabNavigator();
 
 const BottomTabBar: FC<TabProps>= ({ navigation, state }) => (
   <BottomNavigation
-    selectedIndex={state.index}
-    onSelect={index => navigation.navigate(state.routeNames[index])}>
-    <BottomNavigationTab title='Visions'/>
-    <BottomNavigationTab title='Journals'/>
-    <BottomNavigationTab title='Notes'/>
+    selectedIndex={ state.index }
+    onSelect={ index => navigation.navigate(state.routeNames[index]) }>
+    <BottomNavigationTab title={ 'Visions' }/>
+    <BottomNavigationTab title={ 'Journals' }/>
+    <BottomNavigationTab title={ 'Notes' }/>
   </BottomNavigation>
 );  
 
@@ -34,11 +34,11 @@ const BottomTabs = () => (
     screenOptions={{
       headerShown:false
     }}
-    tabBar={props => <BottomTabBar {...props} />}
+    tabBar={ props => <BottomTabBar { ...props } /> }
   >
-    <Screen name='Visions' component={VisionStack}/>
-    <Screen name='Journals' component={JournalStack}/>
-    <Screen name='Notes' component={NoteStack}/>
+    <Screen name={ 'Visions' } component={ VisionStack }/>
+    <Screen name={ 'Journals' } component={ JournalStack }/>
+    <Screen name={ 'Notes' } component={ NoteStack }/>
   </Navigator>
 );
 

@@ -21,29 +21,27 @@ type NavProp = {
   navigation: JournalScreenNavigationProp;
 };
 
-
 const { Navigator,  Screen } = createStackNavigator<JournalStackParamList>()
 
 export const JournalStack: FunctionComponent<NavProp> = () => {
   return (
     <Navigator 
-      initialRouteName="Journal Entries"
+      initialRouteName={ "Journal Entries" }
       screenOptions={{
         headerShown: false,
       }}
     >
       <Screen
-        name="Journal Entries"
-        component={JournalScreen}
+        name={ "Journal Entries" }
+        component={ JournalScreen }
       />
       <Screen
-        name="Journal Details"
-        component={JournalDetails}
+        name={ "Journal Details" }
+        component={ JournalDetails }
       />
 
     </Navigator>
   );
 };
-
 
 export default JournalStack;

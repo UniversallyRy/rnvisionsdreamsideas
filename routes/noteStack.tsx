@@ -4,12 +4,12 @@ import NoteScreen from "../screens/noteScreen";
 
 type NoteStackParamList = {
   "Check Notes": undefined;
-};
+}
 
 type NoteScreenNavigationProp = StackNavigationProp<
   NoteStackParamList,
   'Check Notes'
->;
+>
 
 type NavProp = {
   navigation: NoteScreenNavigationProp;
@@ -25,7 +25,7 @@ const NoteStack: FunctionComponent<NavProp> = () => {
       }}
     >
       <Stack.Screen
-        name="Check Notes"
+        name={ "Check Notes" }
         component={ NoteScreen }
       />
     </Stack.Navigator>
