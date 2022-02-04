@@ -1,9 +1,9 @@
 import React, { FunctionComponent, useCallback, memo } from "react";
 import { Image, StyleSheet, ViewStyle, ImageStyle } from "react-native";
 import { FlatList, TouchableOpacity } from "react-native-gesture-handler";
-import { Layout } from "@ui-kitten/components";
 import { connect, ConnectedProps } from "react-redux";
 import { NavigationScreenProp } from 'react-navigation';
+import { Layout } from "@ui-kitten/components";
 import { windowHeight, windowWidth } from "../../utils/dimensions";
 import { VisionContext } from "../../screens/visionScreen";
 import { FooterButtons } from "../../shared/buttons";
@@ -31,10 +31,10 @@ const VisionGridContainer: FunctionComponent<GridProps> = ({ state, navigation }
   const VisionGridItem = memo(function GridImage({ item }:ListProps) {
     return (
       <TouchableOpacity
-        style={{margin: 4, borderRadius: 12,   elevation: 2,}}
+        style={{ margin: 4, borderRadius: 12, elevation: 2 }}
         accessibilityLabel={ "Grid Item" }
-        accessible  
         onPress={ () => navigation.navigate("Vision Details", { item }) }
+        accessible  
       > 
         <Image
           style={ styles.gridItem }

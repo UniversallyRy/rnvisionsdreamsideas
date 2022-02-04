@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit'
 
-const initialState = { pic: "" };
+const initialState = "";
 
 const newpic = createSlice({
   name:"New Pic",
@@ -9,11 +9,11 @@ const newpic = createSlice({
     addPic: (state, action) => {
       var uri = "";
       var newUri = uri == action.payload.uri ? "" : action.payload.uri;
-      state.pic = newUri;
+      return newUri;
     }
   }
 });
 
 const { actions, reducer } = newpic
 export const { addPic } = actions;
-export default reducer;
+export default reducer

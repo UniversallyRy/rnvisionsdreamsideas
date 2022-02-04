@@ -2,14 +2,15 @@ import React, { Dispatch, FunctionComponent, SetStateAction } from "react";
 import { Animated, Text, TouchableOpacity, StyleSheet, ViewStyle, TextStyle } from "react-native";
 import { useCardAnimation } from '@react-navigation/stack';
 import { Input, Layout } from "@ui-kitten/components";
-import { connect, useDispatch, ConnectedProps} from "react-redux";
+import { connect, ConnectedProps } from "react-redux";
 import { Formik } from "formik";
 import { addVision } from "../../redux/reducers/visions";
 import { globalStyles } from "../../styles/global";
 import ImagePic from "./imagePicker";
-import { windowHeight, windowWidth } from "../../utils/dimensions";
 import * as yup from "yup";
 import { CloseButton, SubmitButton } from "../../shared/buttons";
+import { useAppDispatch } from "../../utils/hooks";
+import { windowHeight, windowWidth } from "../../utils/dimensions";
 
 interface VisionProps {
   stateUri: string;
@@ -29,7 +30,7 @@ const visionSchema = yup.object({
 });
 
 const AddVisionModal: FunctionComponent<VisionProps> = ({ stateUri, setModalOpen }) => {
-  const dispatch = useDispatch()
+  const dispatch = useAppDispatch()
   const { current } = useCardAnimation();
   return (
     <Layout>
@@ -72,22 +73,22 @@ const AddVisionModal: FunctionComponent<VisionProps> = ({ stateUri, setModalOpen
           }) => (
             <Layout style={styles.footer}> 
               <ImagePic/>
-                  <Input
-                    textAlign='center'
-                    style={ styles.textinput }
-                    placeholder="Vision Title"
-                    onChangeText={ handleChange("title") }
-                    value={ values.title }
-                    onBlur={ handleBlur("title") }
-                    
-                  />
-                  <Text style={ globalStyles.errorText }>
-                    { touched.title && errors.title }
-                  </Text>
-                <SubmitButton
-                  style={ styles.buttonStyle }
-                  onPress={ handleSubmit }
-                />
+              <Input
+                textAlign='center'
+                style={ styles.textinput }
+                placeholder="Vision Title"
+                onChangeText={ handleChange("title") }
+                value={ values.title }
+                onBlur={ handleBlur("title") }
+                
+              />
+              <Text style={ globalStyles.errorText }>
+                { touched.title && errors.title }
+              </Text>
+              <SubmitButton
+                style={ styles.buttonStyle }
+                onPress={ handleSubmit }
+              />
             </Layout>
         )}
         </Formik>
@@ -98,10 +99,10 @@ const AddVisionModal: FunctionComponent<VisionProps> = ({ stateUri, setModalOpen
 
 const styles = StyleSheet.create<Styles>({
   container: {
-    fontFamily: "roboto-black",
     height: windowHeight,
     width: windowWidth,
     margin:'auto',
+    fontFamily: "roboto-black",
   },
   visionAddToggle: {
     flexDirection: "row",

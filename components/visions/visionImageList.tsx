@@ -9,10 +9,19 @@ import { VisionContext } from "../../screens/visionScreen";
 import { SPACING, THUMBNAIL_SIZE } from "../../constants";
 // import { deleteVision } from "../../redux/reducers/visions";
 
-// todos: navigation bug on thumbnail longpress and add delete picture option back
+// todos: add delete picture option back
 type ImageProps = {
   navigation: NavigationScreenProp<string, object>;
   state: [];
+}
+
+type ItemProps = {
+  item: {
+    id: string;
+    title: string;
+    uri: string;
+  }
+  index: number
 }
 
 const VisionListContainer: FC<ImageProps> = ({ navigation, state }) => {
@@ -40,7 +49,7 @@ const VisionListContainer: FC<ImageProps> = ({ navigation, state }) => {
   }
 
   return (
-    <Layout style={{flex: 1}}>
+    <Layout style={{ flex: 1 }}>
       <FlatList
         ref={ topRef }
         data={ state }
@@ -51,7 +60,7 @@ const VisionListContainer: FC<ImageProps> = ({ navigation, state }) => {
           scrollActiveIndex(Math.floor(ev.nativeEvent.contentOffset.x/ windowWidth))
         }}
         keyExtractor={ (_, index) => String(index) }
-        renderItem={ ({ item }:any) => {
+        renderItem={ ({ item }: ItemProps)  => {
           return <Layout style={{ width:windowWidth, height:windowHeight }}>
                     <Image
                       source={ { uri:item.uri } }
@@ -62,13 +71,13 @@ const VisionListContainer: FC<ImageProps> = ({ navigation, state }) => {
       />
       <FlatList
         data={ state }
+        style={{ position: "absolute", bottom: THUMBNAIL_SIZE - 30 }}
         ref={ thumbRef }
         horizontal
         showsHorizontalScrollIndicator={ false }
-        style={{ position: "absolute", bottom: THUMBNAIL_SIZE - 30 }}
         contentContainerStyle={{ paddingHorizontal: SPACING }}
         keyExtractor={ (_, index) => String(index) }
-        renderItem={ ({item, index}:any) => {
+        renderItem={ ({item, index}: ItemProps) => {
           return (
             <TouchableOpacity
               onPress={ () => scrollActiveIndex(index) }
@@ -89,7 +98,7 @@ const VisionListContainer: FC<ImageProps> = ({ navigation, state }) => {
           )
         }}
       />
-      <FooterButtons context={VisionContext}/>
+      <FooterButtons context={ VisionContext }/>
     </Layout>
   );
 };

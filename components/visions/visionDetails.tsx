@@ -34,9 +34,9 @@ const VisionDetails: FC<VisionProps> = ({ navigation, route }) => {
 
   return (
     <SafeAreaView style={ styles.vDetailsContent }>
-      <Header name="Vision Details" navigation={navigation}/>
-      <Card style={ styles.vCardContainer}>
-          <Text style={ styles.visionTitle }>{title}</Text>
+      <Header name={ "Vision Details" } navigation={ navigation }/>
+      <Card style={ styles.vCardContainer }>
+          <Text style={ styles.visionTitle }>{ title }</Text>
           <Image key= { id } source={{ uri }} style={ styles.vDetailsImage } />
       </Card>
     </SafeAreaView>
@@ -45,9 +45,9 @@ const VisionDetails: FC<VisionProps> = ({ navigation, route }) => {
 
 const styles = StyleSheet.create<Styles>({
   vDetailsContent: {
+    flex: 1,  
     fontFamily: "roboto-black",
     flexDirection: "column",
-    flex: 1,
   },
   vCardContainer: {
     alignSelf: "center",
@@ -62,7 +62,7 @@ const styles = StyleSheet.create<Styles>({
   },
   vDetailsImage: {
     resizeMode: "contain",
-    borderRadius: 4,
+    borderRadius: 3,
     alignSelf: "center",
     height: windowHeight * 0.65,
     width: windowWidth * 0.97,
