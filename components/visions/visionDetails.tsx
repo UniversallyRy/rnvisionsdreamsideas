@@ -6,14 +6,13 @@ import { Card, Text } from '@ui-kitten/components';
 import { windowHeight, windowWidth } from "../../utils/dimensions";
 import Header from "../../shared/header";
 
-
 type VisionProps = {
   navigation: NavigationScreenProp<string, object>;
   route: {
     key: string;
     name: string;
     params: {
-      data: {
+      item: {
         id: string;
         title: string;
         uri: string;
@@ -31,14 +30,14 @@ interface Styles {
 }
 
 const VisionDetails: FC<VisionProps> = ({ navigation, route }) => {
-  const { data } = route.params;
+  const { id, title, uri } = route.params.item;
 
   return (
     <SafeAreaView style={ styles.vDetailsContent }>
       <Header name="Vision Details" navigation={navigation}/>
       <Card style={ styles.vCardContainer}>
-          <Text style={ styles.visionTitle }>{data.title}</Text>
-          <Image key= { data.id } source={{ uri: data.uri }} style={ styles.vDetailsImage } />
+          <Text style={ styles.visionTitle }>{title}</Text>
+          <Image key= { id } source={{ uri }} style={ styles.vDetailsImage } />
       </Card>
     </SafeAreaView>
   );

@@ -28,11 +28,11 @@ interface Styles {
 
 const VisionGridContainer: FunctionComponent<GridProps> = ({ state, navigation }) => {
   
-  const VisionGridList = memo(function GridImage({ item }:ListProps) {
+  const VisionGridItem = memo(function GridImage({ item }:ListProps) {
     return (
       <TouchableOpacity
         style={{margin: 4, borderRadius: 12,   elevation: 2,}}
-        accessibilityLabel={ "Grid List" }
+        accessibilityLabel={ "Grid Item" }
         accessible  
         onPress={ () => navigation.navigate("Vision Details", { item }) }
       > 
@@ -47,7 +47,7 @@ const VisionGridContainer: FunctionComponent<GridProps> = ({ state, navigation }
   });
 
   const renderList: FunctionComponent<ListProps> = useCallback(function renderList({ item }) {
-    return <VisionGridList item={ item } />;
+    return <VisionGridItem item={ item } />;
   }, []);
 
   return (

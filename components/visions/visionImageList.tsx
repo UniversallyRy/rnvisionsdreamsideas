@@ -20,7 +20,7 @@ const VisionListContainer: FC<ImageProps> = ({ navigation, state }) => {
   const topRef = useRef<FlatList>(null);
   const thumbRef = useRef<FlatList>(null);
 
-  const scrollActiveIndex = (index) => {
+  const scrollActiveIndex = (index: number) => {
     setActiveIndex(index);
     topRef.current?.scrollToOffset({
       offset: index * windowWidth,
@@ -72,7 +72,7 @@ const VisionListContainer: FC<ImageProps> = ({ navigation, state }) => {
           return (
             <TouchableOpacity
               onPress={ () => scrollActiveIndex(index) }
-              onLongPress={ () => navigation.navigate("Vision Details", item ) }
+              onLongPress={ () => navigation.navigate("Vision Details", { item }) }
             >
               <Image
                 source={{ uri:item.uri }}
