@@ -4,7 +4,7 @@ import { configureStore } from '@reduxjs/toolkit'
 import visions from "./reducers/visions";
 import pic from "./reducers/newpic";
 import journals from "./reducers/journals";
-import note from "./reducers/note";
+import notes from "./reducers/note";
 import todos from "./reducers/todos";
 
 const persistConfig = {
@@ -28,7 +28,7 @@ const store = configureStore({
     pic: pic, 
     journals: journals, 
     todos: todos, 
-    note: note 
+    notes: notes 
   }
 })
 

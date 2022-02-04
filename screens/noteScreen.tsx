@@ -32,7 +32,7 @@ const styles = StyleSheet.create<Styles>({
 
 const mapStateToProps = (state:any) => {
   return {
-    stateNotes: state.note,
+    stateNotes: state.notes,
     stateTodos: state.todos,
   }
 };
