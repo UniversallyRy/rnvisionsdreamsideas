@@ -25,13 +25,13 @@ const Header:React.FC<HeaderProps> = ({ name, navigation }) => {
   }
 
   return (
-    <Layout style={styles.headerContainer}>
+    <Layout style={ styles.headerContainer }>
       <TopNavigation 
-        title={name} 
+        title={ name } 
         // Show a back button if on a nested detail screen
-        alignment={name.includes("Details") ? "center" : "start"} 
-        accessoryLeft={name.includes("Details") ? BackAction(navigateBack) : undefined} 
-        accessoryRight={ToggleButton(theme, toggleTheme)} 
+        alignment={ name.includes("Details") ? "center" : "start" } 
+        accessoryLeft={ name.includes("Details") ? BackAction(navigateBack) : undefined } 
+        accessoryRight={ ToggleButton(theme, toggleTheme) } 
       />
       <Divider/>
     </Layout>
