@@ -1,11 +1,6 @@
 import { Easing } from "react-native-reanimated";
 import { windowWidth } from "../utils/dimensions";
 
-
-export interface Positions {
-  [id: string]: number;
-}
-
 export const MARGIN = 8;
 export const SIZE = windowWidth / 2 - MARGIN;
 export const COL = 2;
