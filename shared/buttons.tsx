@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import { GestureResponderEvent, StyleSheet, TextStyle, ViewStyle } from "react-native";
-import { Layout, Button, Text, TopNavigationAction, ButtonGroup } from "@ui-kitten/components"
+import { Layout, Button, ButtonGroup, Text, TopNavigationAction } from "@ui-kitten/components"
 import { BackIcon, CloseIcon, DayIcon, GridIcon, NightIcon, SaveIcon, SubmitIcon } from "./icons";
 import { windowWidth } from "../utils/dimensions";
 
@@ -27,11 +27,11 @@ interface Styles {
 export const KittenButton:React.FC<ButtonProps> = ({ text, onPress, ...props }) => {
   return (
     <Button
-      style={styles.button}
-      onPress={onPress}
-      {...props}
+      style={ styles.button }
+      onPress={ onPress }
+      { ...props }
     >
-      <Text style={styles.text}>{text}</Text>
+      <Text style={ styles.text }>{ text }</Text>
     </Button>
   );
 };
@@ -40,43 +40,43 @@ export const CloseButton = ({ onPress, ...props }) => {
   return (
     <Button
       appearance='ghost'
-      accessoryRight={CloseIcon}
-      onPress={onPress}
-      {...props}
+      accessoryRight={ CloseIcon }
+      onPress={ onPress }
+      { ...props }
     />
   );
-};
+ };
 
 // Header Buttons
-export const ToggleButton = ( theme: string, toggleTheme: ((event: GestureResponderEvent) => void) | undefined, ...props: undefined[] ) => {
+export const ToggleButton = ( theme: string, toggleTheme: ((event: GestureResponderEvent) => void) | undefined, ...props: undefined[] ) => { 
   return (
     <Button
-      style={styles.toggle} 
+      style={ styles.toggle } 
+      accessoryRight={ theme == "light" ? DayIcon : NightIcon }
       onPress={ toggleTheme } 
-      accessoryRight={theme == "light" ? DayIcon : NightIcon}
-      {...props}
+      {...props }
     />
   );
 };
 
 export const BackAction = (navigateBack: () => void) => (
-  <TopNavigationAction icon={BackIcon} onPress={() => navigateBack()}/>
+  <TopNavigationAction icon={ BackIcon } onPress={ () => navigateBack() }/>
 );
 // Vision Modal Buttons
 export const ImageButtons = ({ pickImage, cameraImage, ...props }) => {
   return (
-    <ButtonGroup {...props}>
+    <ButtonGroup { ...props }>
       <Button
-        accessibilityLabel="Add Image From Gallery"
-        onPress={ pickImage }
         style={ styles.imgSelect }
+        onPress={ pickImage }
+        accessibilityLabel="Add Image From Gallery"
       >
         Add from Photos
       </Button>
       <Button
-        accessibilityLabel="Take A Picture"
-        onPress={ cameraImage }
         style={ styles.imgSelect }
+        onPress={ cameraImage }
+        accessibilityLabel="Take A Picture"
       >
         Take a Picture
       </Button>
@@ -87,10 +87,10 @@ export const ImageButtons = ({ pickImage, cameraImage, ...props }) => {
 export const SaveButton = ({ onPress, ...props }) => {
   return (
     <Button
-      style={ styles.edit}
-      accessoryRight={SaveIcon}
-      onPress={onPress}
-      {...props}
+      style={ styles.edit }
+      onPress={ onPress }
+      accessoryRight={ SaveIcon }
+      { ...props }
     >
       Save
     </Button>
@@ -100,9 +100,9 @@ export const SaveButton = ({ onPress, ...props }) => {
 export const CancelButton = ({ onPress, ...props }) => {
   return (
     <Button
-      style={ styles.delete}
+      style={ styles.delete }
       onPress={ onPress }
-      {...props}
+      { ...props }
     >
       Cancel
     </Button>
@@ -111,9 +111,9 @@ export const CancelButton = ({ onPress, ...props }) => {
 export const EditButton = ({ onPress, ...props }) => {
   return (
     <Button
-      style={ styles.edit}
+      style={ styles.edit }
       onPress={ onPress }
-      {...props}
+      { ...props }
     >
       Edit
     </Button>
@@ -122,9 +122,9 @@ export const EditButton = ({ onPress, ...props }) => {
 export const DeleteButton = ({ onPress, ...props }) => {
   return (
     <Button
-      style={ styles.delete}
+      style={ styles.delete }
       onPress={ onPress }
-      {...props}
+      { ...props }
     >
       Delete
     </Button>
@@ -134,11 +134,11 @@ export const DeleteButton = ({ onPress, ...props }) => {
 export const SubmitButton = ({ onPress, ...props }) => {
   return (
     <Button
-      style={styles.submit}
+      style={ styles.submit }
       appearance='ghost'
-      accessoryLeft={SubmitIcon}
-      onPress={onPress}
-      {...props}
+      accessoryLeft={ SubmitIcon }
+      onPress={ onPress }
+      { ...props }
     />
   );
 };
@@ -147,9 +147,9 @@ export const GridButton = ({ onPress, ...props }) => {
   return (
     <Button
       appearance='ghost'
-      accessoryLeft={GridIcon}
-      onPress={onPress}
-      {...props}
+      accessoryLeft={ GridIcon }
+      onPress={ onPress }
+      { ...props }
     />
   );
 };
@@ -171,20 +171,20 @@ export const FooterButtons = ({ context }) => {
   }
 
   return (
-    <Layout style={styles.footerContainer}>
-      {context._currentValue.toggleView != undefined
+    <Layout style={ styles.footerContainer }>
+      { context._currentValue.toggleView != undefined
         ?<>
-          <SubmitButton onPress={() => setModalOpen(true)} style={styles.footer}/>
-          <GridButton onPress={() => toggleView()} style={styles.footer}/>
+          <SubmitButton onPress={ () => setModalOpen(true) } style={ styles.footer }/>
+          <GridButton onPress={ () => toggleView() } style={ styles.footer }/>
         </>
         :<>
-          <SubmitButton onPress={() => toggleNoteModal()} style={styles.note}>
+          <SubmitButton onPress={ () => toggleNoteModal() } style={ styles.note }>
             Note
           </SubmitButton>
-          <SubmitButton onPress={() => toggleTodoModal()} style={styles.todo}>
+          <SubmitButton onPress={ () => toggleTodoModal() } style={ styles.todo }>
             Todo
           </SubmitButton>
-          </>
+        </>
       }
     </Layout>
   );
