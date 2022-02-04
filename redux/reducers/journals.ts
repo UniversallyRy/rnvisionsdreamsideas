@@ -78,13 +78,7 @@ const journalsReducer = createSlice({
     },
   },
   extraReducers: {
-  }
-  // .addCase(DELETE_JOURNAL, (state, action) => {
-  //   return state.filter((todo) => todo.id != action.payload.id);
-  //   })
-  // .addCase(EDIT_JOURNAL, (state, action) => {
-  //   return state;
-  // })
+  },
 })
 
 const { actions, reducer } = journalsReducer;

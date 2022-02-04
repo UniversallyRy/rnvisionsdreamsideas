@@ -16,7 +16,7 @@ const notes = createSlice( {
   initialState: initialNotes,
   reducers: {
     addNote: (state, action) => {
-    state.push({
+      state.push({
         name: action.payload.name,
         id: uuid.generate(),
       })
@@ -31,6 +31,6 @@ const notes = createSlice( {
   }
 })
 
-const { actions, reducer } = notes
+const { actions, reducer } = notes;
 export const { addNote, editNote, deleteNote} = actions;
 export default reducer;

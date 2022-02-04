@@ -1,5 +1,5 @@
 import uuid from "../../utils/uuid";
-import { createReducer, createSlice } from '@reduxjs/toolkit'
+import { createSlice } from '@reduxjs/toolkit'
 
 const initialValue = [
   {
@@ -86,25 +86,25 @@ const todos = createSlice( {
   reducers:{
     addList: (state, action) => {
       state.push({
-            name: action.payload.name,
-            id: uuid.generate(),
-            color: action.payload.color,
-            todos: [],
+        name: action.payload.name,
+        id: uuid.generate(),
+        color: action.payload.color,
+        todos: [],
       })
     },
     deleteList: (state, action) => {
       return state.filter((todo) => todo.id != action.payload.id);
     },
     addTodo: (state, action) => {
-        state.map((item) => {
-          if (item.id == action.payload.listid) {
-            item.todos.push({
-              title: action.payload.title,
-              id: uuid.generate(),
-              completed: false,
-            });
-          }
-        });
+      state.map((item) => {
+        if (item.id == action.payload.listid) {
+          item.todos.push({
+            title: action.payload.title,
+            id: uuid.generate(),
+            completed: false,
+          });
+        }
+      });
     },
     editTodo: (state, action) => {
       return state.filter((todo) => todo.id != action.payload.id);
@@ -121,16 +121,16 @@ const todos = createSlice( {
       });
     },
     deleteTodo: (state, action) => {
-        state.map((item) => {
-          if (item.id == action.payload.listid) {
-            item.todos = item.todos.filter((todo) => todo.id != action.payload.id);
-          }
-        });
-        return state;
+      state.map((item) => {
+        if (item.id == action.payload.listid) {
+          item.todos = item.todos.filter((todo) => todo.id != action.payload.id);
+        }
+      });
+      return state;
     },
   }
 });
 
-const { actions, reducer } = todos
+const { actions, reducer } = todos;
 export const { addList, deleteList, addTodo, editTodo, toggleTodo, deleteTodo} = actions;
-export default reducer
+export default reducer;

@@ -1,6 +1,5 @@
+import { createSlice } from '@reduxjs/toolkit';
 import uuid from "../../utils/uuid";
-import { createSlice } from '@reduxjs/toolkit'
-
 
 const initialVisions = Array.from({ length: 8 }).map((_, i) => {
   return {
@@ -11,14 +10,14 @@ const initialVisions = Array.from({ length: 8 }).map((_, i) => {
 });
 
 const visions = createSlice({
-    name: "Visions",
-    initialState: initialVisions,
-    reducers:{
-      addVision: (state, action) => {
+  name: "Visions",
+  initialState: initialVisions,
+  reducers: {
+    addVision: (state, action) => {
       state.unshift({
-          uri: action.payload.uri,
-          title: action.payload.title,
-          id: uuid.generate(),
+        uri: action.payload.uri,
+        title: action.payload.title,
+        id: uuid.generate(),
       })
     },
     editVision: (state, action) => {
@@ -28,7 +27,7 @@ const visions = createSlice({
       return state.filter((vision) => vision.id != action.payload.id);
     }
   }
-})
+});
 
 const { actions, reducer } = visions;
 export const { addVision, deleteVision, editVision} = actions;
