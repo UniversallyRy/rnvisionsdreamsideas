@@ -5,7 +5,6 @@ import { Input, Layout } from "@ui-kitten/components";
 import { AntDesign } from "@expo/vector-icons";
 import { Formik } from "formik";
 import { addNote } from "../../redux/reducers/note";
-import { globalStyles } from "../../styles/global";
 import KittenButton  from "../../shared/buttons";
 import * as yup from "yup";
 
@@ -17,6 +16,7 @@ interface Styles {
   container: ViewStyle;
   title: TextStyle;
   input: TextStyle;
+  errorText: TextStyle;
   colorSelect: ViewStyle;
 }
 
@@ -66,7 +66,7 @@ const AddNoteModal: FunctionComponent<ModalProps> = ({ closeModal }) => {
                   onBlur={ handleBlur("name") }
                 />
 
-                <Text style={ globalStyles.errorText }>
+                <Text style={ styles.errorText }>
                   { touched.name && errors.name }
                 </Text>
                 <KittenButton 
@@ -96,6 +96,13 @@ const styles = StyleSheet.create<Styles>({
   input: {
     marginTop: 8,
     paddingHorizontal: 18,
+  },
+  errorText: {
+    fontFamily: "roboto-bold",
+    color: "crimson",
+    marginBottom: 10,
+    marginTop: 6,
+    textAlign: "center",
   },
   colorSelect: {
     width: 30,
