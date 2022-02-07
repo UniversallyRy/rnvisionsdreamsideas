@@ -2,16 +2,16 @@ import "react-native-get-random-values";
 import React, { useState } from "react";
 import { AppRegistry, StatusBar } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
-import AppLoading from 'expo-app-loading';
-import * as Font from "expo-font";
 import { Provider } from "react-redux";
 import { store, /*persistor */ } from "./redux/store";
 import { ApplicationProvider, IconRegistry } from '@ui-kitten/components';
-import { EvaIconsPack } from '@ui-kitten/eva-icons';
 import * as eva from '@eva-design/eva';
-import { default as customTheme } from './styles/custom-theme.json'; 
+import { EvaIconsPack } from '@ui-kitten/eva-icons';
 import { ThemesContext } from "./ThemeContext";
+import { default as customTheme } from './styles/custom-theme.json'; 
 import BottomTabs from "./routes/drawer";
+import AppLoading from 'expo-app-loading';
+import * as Font from "expo-font";
 // import { PersistGate } from "redux-persist/integration/react";
 
 const getFonts = () =>
