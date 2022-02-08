@@ -6,7 +6,7 @@ import { Layout } from "@ui-kitten/components";
 import { windowHeight, windowWidth } from "../../utils/dimensions";
 import { FooterButtons } from "../../shared/buttons";
 import { VisionContext } from "../../screens/visionScreen";
-import { SPACING, THUMBNAIL_SIZE } from "../../constants";
+import { SPACING10, THUMBNAIL_SIZE } from "../../utils/constants";
 // import { deleteVision } from "../../redux/reducers/visions";
 
 // todos: add delete picture option back
@@ -35,9 +35,9 @@ const VisionListContainer: FC<ImageProps> = ({ navigation, state }) => {
       offset: index * windowWidth,
       animated: true
     })
-    if(index * (THUMBNAIL_SIZE + SPACING) - THUMBNAIL_SIZE / 2 > windowWidth / 2) {
+    if(index * (THUMBNAIL_SIZE + SPACING10) - THUMBNAIL_SIZE / 2 > windowWidth / 2) {
       thumbRef.current?.scrollToOffset({
-        offset: index * (THUMBNAIL_SIZE + SPACING) - windowWidth / 2 + THUMBNAIL_SIZE / 2,
+        offset: index * (THUMBNAIL_SIZE + SPACING10) - windowWidth / 2 + THUMBNAIL_SIZE / 2,
         animated: true,
       })
     } else {
@@ -75,7 +75,7 @@ const VisionListContainer: FC<ImageProps> = ({ navigation, state }) => {
         ref={ thumbRef }
         horizontal
         showsHorizontalScrollIndicator={ false }
-        contentContainerStyle={{ paddingHorizontal: SPACING }}
+        contentContainerStyle={{ paddingHorizontal: SPACING10 }}
         keyExtractor={ (_, index) => String(index) }
         renderItem={ ({item, index}: ItemProps) => {
           return (
@@ -89,7 +89,7 @@ const VisionListContainer: FC<ImageProps> = ({ navigation, state }) => {
                   width: THUMBNAIL_SIZE,
                   height: THUMBNAIL_SIZE,
                   borderRadius: 3,
-                  marginRight: SPACING,
+                  marginRight: SPACING10,
                   borderWidth: 1,
                   borderColor: activeIndex === index ? "#fff" : 'transparent'
                 }}
