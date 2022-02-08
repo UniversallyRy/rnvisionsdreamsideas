@@ -2,7 +2,7 @@ import { StyleSheet, TextStyle } from "react-native";
 
 interface Styles {
 }
-//global stylesheet, may want to move more styles to this file
+//global styles, need to decide on what to add here
 export const globalStyles = StyleSheet.create<Styles>({
 
 });
