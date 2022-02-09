@@ -20,6 +20,7 @@ interface VisionProps {
 interface Styles {
   container: ViewStyle;
   textinput: TextStyle;
+  errorText: TextStyle;
   visionAddToggle: ViewStyle;
   footer: ViewStyle;
   buttonStyle: ViewStyle;
@@ -82,7 +83,7 @@ const AddVisionModal: FunctionComponent<VisionProps> = ({ stateUri, setModalOpen
                 onBlur={ handleBlur("title") }
                 
               />
-              <Text style={ globalStyles.errorText }>
+              <Text style={ styles.errorText }>
                 { touched.title && errors.title }
               </Text>
               <SubmitButton
@@ -122,6 +123,13 @@ const styles = StyleSheet.create<Styles>({
     alignItems: "center",
     justifyContent: "center",
     bottom: 0,
+  },
+  errorText:{
+    fontFamily: "roboto-bold",
+    color: "crimson",
+    marginBottom: 10,
+    marginTop: 6,
+    textAlign: "center",
   },
 });
 

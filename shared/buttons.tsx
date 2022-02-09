@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { FormEvent, useContext } from "react";
 import { GestureResponderEvent, StyleSheet, TextStyle, ViewStyle } from "react-native";
 import { Layout, Button, ButtonGroup, Text, TopNavigationAction } from "@ui-kitten/components"
 import { BackIcon, CloseIcon, DayIcon, GridIcon, NightIcon, SaveIcon, SubmitIcon } from "./icons";
@@ -6,7 +6,17 @@ import { windowWidth } from "../utils/dimensions";
 
 type ButtonProps = {
   text?: string;
-  onPress: () => void;
+  onPress: (event: GestureResponderEvent) => void | undefined;
+}
+
+type FormProps = {
+  text?: string;
+  onPress: (e?: FormEvent<HTMLFormElement> | undefined) => void | ((event: GestureResponderEvent) => void )| undefined;
+}
+
+type ToggleProps = {
+  theme: string;
+  toggleTheme: (event: GestureResponderEvent) => void | ((e?: FormEvent<HTMLFormElement> | undefined) => void) | undefined;
 }
 
 interface Styles {
@@ -24,7 +34,7 @@ interface Styles {
 }
 
 // default export kittenui styled button
-export const KittenButton:React.FC<ButtonProps> = ({ text, onPress, ...props }) => {
+export const FormButton = ({ text, onPress, ...props }: FormProps) => {
   return (
     <Button
       style={ styles.button }
@@ -36,7 +46,7 @@ export const KittenButton:React.FC<ButtonProps> = ({ text, onPress, ...props }) 
   );
 };
 
-export const CloseButton = ({ onPress, ...props }) => {
+export const CloseButton:React.FC<ButtonProps>= ({ onPress, ...props }:ButtonProps) => {
   return (
     <Button
       appearance='ghost'
@@ -48,7 +58,7 @@ export const CloseButton = ({ onPress, ...props }) => {
  };
 
 // Header Buttons
-export const ToggleButton = ( theme: string, toggleTheme: ((event: GestureResponderEvent) => void) | undefined, ...props: undefined[] ) => { 
+export const ToggleButton = ({ theme, toggleTheme, ...props } : ToggleProps) => { 
   return (
     <Button
       style={ styles.toggle } 
@@ -245,5 +255,3 @@ const styles = StyleSheet.create<Styles>({
     marginHorizontal: 15,
   }
 });
-
-export default KittenButton;

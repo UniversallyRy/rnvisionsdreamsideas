@@ -5,7 +5,7 @@ import { Input, Layout } from "@ui-kitten/components";
 import { AntDesign } from "@expo/vector-icons";
 import { Formik } from "formik";
 import { addNote } from "../../redux/reducers/note";
-import KittenButton  from "../../shared/buttons";
+import { FormButton }  from "../../shared/buttons";
 import * as yup from "yup";
 
 type ModalProps = {
@@ -69,7 +69,7 @@ const AddNoteModal: FunctionComponent<ModalProps> = ({ closeModal }) => {
                 <Text style={ styles.errorText }>
                   { touched.name && errors.name }
                 </Text>
-                <KittenButton 
+                <FormButton 
                   onPress={ handleSubmit }
                   text="Add Note"
                 />

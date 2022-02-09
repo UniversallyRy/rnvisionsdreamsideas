@@ -1,10 +1,9 @@
 import React, { FunctionComponent } from "react";
-import { Text } from "react-native";
+import { StyleSheet, Text, TextStyle } from "react-native";
 import { useDispatch } from "react-redux";
 import { Input, Layout } from "@ui-kitten/components";
 import { Formik } from "formik";
 import { addJournal } from "../../redux/reducers/journals";
-import { globalStyles } from "../../styles/global";
 import { SubmitButton } from "../../shared/buttons";
 import * as yup from "yup";
 import { windowHeight } from "../../utils/dimensions";
@@ -13,6 +12,11 @@ import { windowHeight } from "../../utils/dimensions";
 type AddJournalProps = {
   setModalOpen: ((i:boolean) => void);
 }
+
+interface Styles {
+  errorText: TextStyle;
+}
+
 // require an entry into form input that's at least 4 letters
 const JournalSchema = yup.object({
   title: yup.string().required().min(4),
@@ -51,7 +55,7 @@ const AddJournal: FunctionComponent<AddJournalProps> = ({ setModalOpen }) => {
               onBlur={handleBlur("title")}
               accessibilityLabel="Input Journal Title Here"
             />
-            <Text style={globalStyles.errorText}>
+            <Text style={styles.errorText}>
               {/* Above <Text/> shows up only when input is focused and exited without requirements */}
               {touched.title && errors.title}
             </Text>
@@ -64,7 +68,7 @@ const AddJournal: FunctionComponent<AddJournalProps> = ({ setModalOpen }) => {
               onBlur={handleBlur("body")}
               accessibilityLabel="Input Journal body text Here"
             />
-            <Text style={globalStyles.errorText}>
+            <Text style={styles.errorText}>
               {touched.body && errors.body}
             </Text>
             <SubmitButton onPress={handleSubmit} accessibilityLabel="Clicking here adds journal entry">
@@ -76,5 +80,15 @@ const AddJournal: FunctionComponent<AddJournalProps> = ({ setModalOpen }) => {
     </Layout>
   );
 };
+
+const styles = StyleSheet.create<Styles>({
+  errorText:{
+    fontFamily: "roboto-bold",
+    color: "crimson",
+    marginBottom: 10,
+    marginTop: 6,
+    textAlign: "center",
+  },
+})
 
 export default AddJournal;

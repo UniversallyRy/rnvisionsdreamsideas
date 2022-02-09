@@ -6,7 +6,7 @@ import { AntDesign } from "@expo/vector-icons";
 import { Formik } from "formik";
 import { addList } from "../../redux/reducers/todos";
 import { globalStyles } from "../../styles/global";
-import KittenButton  from "../../shared/buttons";
+import { FormButton }  from "../../shared/buttons";
 import * as yup from "yup";
 
 type ModalProps = {
@@ -18,6 +18,7 @@ interface Styles {
   container: ViewStyle;
   title: TextStyle;
   input: TextStyle;
+  errorText: TextStyle;
   create: ViewStyle;
   colorSelect: ViewStyle;
 }
@@ -94,7 +95,7 @@ const AddTodoListModal: FunctionComponent<ModalProps> = ({ closeModal }) => {
                   onBlur={ handleBlur("name") }
                 />
 
-                <Text style={ globalStyles.errorText }>
+                <Text style={ styles.errorText }>
                   { touched.name && errors.name }
                 </Text>
                 <Layout
@@ -109,7 +110,7 @@ const AddTodoListModal: FunctionComponent<ModalProps> = ({ closeModal }) => {
                 <TouchableOpacity
                   style={ styles.create }
                 >
-                  <KittenButton text="Add List" onPress={ handleSubmit }/>
+                  <FormButton text="Add List" onPress={ handleSubmit }/>
                 </TouchableOpacity>
               </Layout>
             )}
@@ -145,6 +146,13 @@ const styles = StyleSheet.create<Styles>({
     height: 30,
     borderRadius: 2,
   },
+  errorText:{
+    fontFamily: "roboto-bold",
+    color: "crimson",
+    marginBottom: 10,
+    marginTop: 6,
+    textAlign: "center",
+  },
 });
 
 const mapStateToProps = (state:any) => {
@@ -152,6 +160,5 @@ const mapStateToProps = (state:any) => {
     state: state.todos,
   };
 };
-
 
 export default connect(mapStateToProps)(AddTodoListModal);
