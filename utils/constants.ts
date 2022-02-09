@@ -6,5 +6,5 @@ export const VISIBILITY_FILTERS: object = {
 
 export const THUMBNAIL_SIZE = 80;
 
-export const SPACING10 = 10;
+export const SPACING = 10;
 
