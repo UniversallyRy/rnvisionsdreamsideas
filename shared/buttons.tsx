@@ -6,17 +6,17 @@ import { windowWidth } from "../utils/dimensions";
 
 type ButtonProps = {
   text?: string;
-  onPress: (event: GestureResponderEvent) => void | undefined;
+  onPress: (event?: GestureResponderEvent | undefined) => void;
 }
 
 type FormProps = {
   text?: string;
-  onPress: (e?: FormEvent<HTMLFormElement> | undefined) => void | ((event: GestureResponderEvent) => void )| undefined;
+  onPress: () => void
 }
 
 type ToggleProps = {
   theme: string;
-  toggleTheme: (event: GestureResponderEvent) => void | ((e?: FormEvent<HTMLFormElement> | undefined) => void) | undefined;
+  toggleTheme: (event?: GestureResponderEvent | undefined) => void;
 }
 
 interface Styles {
