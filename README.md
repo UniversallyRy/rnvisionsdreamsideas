@@ -3,8 +3,8 @@
 ## Built With
 
 - [React Native](https://reactnative.dev/)
-- [TypeScript](https://www.typescriptlang.org/)
 - [React Redux](https://react-redux.js.org/)
+- [UI Kitten](https://akveo.github.io/react-native-ui-kitten/)
 
 ## Prerequisites
 
