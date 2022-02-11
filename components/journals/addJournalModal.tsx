@@ -7,7 +7,6 @@ import { addJournal } from "../../redux/reducers/journals";
 import { SubmitButton } from "../../shared/buttons";
 import * as yup from "yup";
 import { windowHeight } from "../../utils/dimensions";
-// import { addJournal } from "../../redux/actions";
 
 type AddJournalProps = {
   setModalOpen: ((i:boolean) => void);
