@@ -1,12 +1,13 @@
-import React, { FunctionComponent, useEffect } from "react";
-import { Text, TouchableOpacity, FlatList, Keyboard, StyleSheet, TextStyle, ViewStyle } from "react-native";
-import { connect, useDispatch } from "react-redux";
-import { Layout, Input, CheckBox } from "@ui-kitten/components";
-import { Formik } from "formik";
-import { addTodo, deleteTodo, toggleTodo } from "../../redux/reducers/todos";
-import { windowHeight, windowWidth } from "../../utils/dimensions";
-import { CloseButton, SubmitButton } from "../../shared/buttons";
-import * as yup from "yup"; 
+import React, { FunctionComponent, useEffect } from 'react';
+import { Text, TouchableOpacity, FlatList, Keyboard, StyleSheet, TextStyle, ViewStyle } from 'react-native';
+import { connect } from 'react-redux';
+import { Layout, Input, CheckBox } from '@ui-kitten/components';
+import { Formik } from 'formik';
+import * as yup from 'yup'; 
+import { addTodo, deleteTodo, toggleTodo } from '../../redux/reducers/todos';
+import { useAppDispatch } from '../../utils/hooks';
+import { windowHeight, windowWidth } from '../../utils/dimensions';
+import { CloseButton, SubmitButton } from '../../shared/buttons';
 
 
 type TodoModalProps = {
@@ -39,7 +40,7 @@ const TodosModal: FunctionComponent<TodoModalProps> = ({ completedList, item, cl
   const newTodos = item.todos;
   const taskCount = item.todos.length;
   const completedCount = newTodos.filter((todo:any) => todo.completed).length;
-  const dispatch = useDispatch()
+  const dispatch = useAppDispatch()
 
 
   useEffect(() => {
@@ -54,7 +55,7 @@ const TodosModal: FunctionComponent<TodoModalProps> = ({ completedList, item, cl
   
   const renderTodo = (todo:any, index:number) => {
     return (
-      <Layout style={ styles.todoContainer } level="1">
+      <Layout style={ styles.todoContainer } level='1'>
         <CheckBox
           checked={ todo.completed }
           style={{ width: 32 }}
@@ -64,8 +65,8 @@ const TodosModal: FunctionComponent<TodoModalProps> = ({ completedList, item, cl
           style={[
             styles.todo,
             {
-              textDecorationLine: todo.completed ? "line-through" : "none",
-              color: todo.completed ? "gray" : "black",
+              textDecorationLine: todo.completed ? 'line-through' : 'none',
+              color: todo.completed ? 'gray' : 'black',
             }
           ]}
         >
@@ -82,7 +83,7 @@ const TodosModal: FunctionComponent<TodoModalProps> = ({ completedList, item, cl
   return (
     <Layout style={ styles.container }>
       <TouchableOpacity
-        style={{ position: "absolute", top: 40, right: 32, zIndex: 10 }}
+        style={{ position: 'absolute', top: 40, right: 32, zIndex: 10 }}
       >
         <CloseButton
           onPress={ closeModal }
@@ -113,7 +114,7 @@ const TodosModal: FunctionComponent<TodoModalProps> = ({ completedList, item, cl
         />
       </TouchableOpacity>
       <Formik
-        initialValues={{ title: "", listid: "" }}
+        initialValues={{ title: '', listid: '' }}
         validationSchema={ todoSchema }
         onSubmit={ (values, actions) => {
           values.listid = item.id
@@ -135,14 +136,14 @@ const TodosModal: FunctionComponent<TodoModalProps> = ({ completedList, item, cl
           <Layout style={ styles.footer }>
             <Layout style={{ flexDirection: 'column' }}>
               <Input
-                textAlign="center"
+                textAlign='center'
                 enablesReturnKeyAutomatically={ true }
                 autoCorrect={ true }
                 style={ styles.todoInput }
-                placeholder="Enter Todo . . ."
-                onChangeText={ handleChange("title") }
+                placeholder='Enter Todo . . .'
+                onChangeText={ handleChange('title') }
                 value={ values.title }
-                onBlur={ handleBlur("title") }
+                onBlur={ handleBlur('title') }
               />
               <Text style={ styles.noteErrorText }>
                 { touched.title && errors.title }
@@ -167,30 +168,30 @@ const styles = StyleSheet.create<Styles>({
     margin:'auto',
   },
   section: {
-    alignSelf: "stretch",
+    alignSelf: 'stretch',
   },
   header: {
-    justifyContent: "flex-end",
+    justifyContent: 'flex-end',
     marginLeft: 20,
     borderBottomWidth: 4,
   },
   title: {
     marginTop: 100,
     fontSize: 30,
-    fontWeight: "800",
+    fontWeight: '800',
   },
   taskCount: {
     marginTop: 4,
     marginBottom: 16,
-    color: "gray",
-    fontWeight: "600",
+    color: 'gray',
+    fontWeight: '600',
   },
   footer: {
     position: 'absolute',
     bottom: 0,
     paddingHorizontal: 10,
     paddingVertical: 10,
-    flexDirection: "row",
+    flexDirection: 'row',
   },
   todoInput: {
     width: windowWidth * 0.75,
@@ -201,36 +202,36 @@ const styles = StyleSheet.create<Styles>({
   },
   noteErrorText:{
     fontSize: 10,
-    color: "crimson",
-    fontWeight: "bold",
+    color: 'crimson',
+    fontWeight: 'bold',
     marginBottom: 10,
     marginTop: 6,
-    textAlign: "center",
+    textAlign: 'center',
   },
   buttonStyle: {
     height: 20,
-    margin: "auto",
+    margin: 'auto',
     marginLeft: 2,
     borderRadius: 4,
   },
   todoContainer: {
-    flexDirection: "row",
-    alignItems: "center",
+    flexDirection: 'row',
+    alignItems: 'center',
     paddingVertical: 16,
   },
   todo: {
-    fontWeight: "700",
+    fontWeight: '700',
     fontSize: 16,
   },
   deleteButton: {
-    backgroundColor: "red",
-    justifyContent: "center",
-    alignItems: "center",
+    backgroundColor: 'red',
+    justifyContent: 'center',
+    alignItems: 'center',
     width: 80,
   },
   deleteTodoButton: {
-    marginLeft: "auto",
-    color: "red",
+    marginLeft: 'auto',
+    color: 'red',
     width: 30
   },
 });

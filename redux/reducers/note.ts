@@ -26,7 +26,7 @@ const notes = createSlice( {
       return newState;
     },
     deleteNote: (state, action) => {
-      state.filter(item => item.id != action.payload.id);
+      return state.filter((note) => note.id != action.payload.id);
     },
   }
 })

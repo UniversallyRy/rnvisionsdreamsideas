@@ -1,21 +1,20 @@
-import React, { FunctionComponent, useState } from "react";
-import { Text, TouchableOpacity, StyleSheet, TextStyle, ViewStyle } from "react-native";
-import { connect, useDispatch } from "react-redux";
-import { Input, Layout } from "@ui-kitten/components";
-import { AntDesign } from "@expo/vector-icons";
-import { Formik } from "formik";
-import { addList } from "../../redux/reducers/todos";
-import { globalStyles } from "../../styles/global";
-import { FormButton }  from "../../shared/buttons";
-import * as yup from "yup";
+import React, { FunctionComponent, useState } from 'react';
+import { Text, TouchableOpacity, StyleSheet, TextStyle, ViewStyle } from 'react-native';
+import { Input, Layout } from '@ui-kitten/components';
+import { Formik } from 'formik';
+import * as yup from 'yup';
+import { useAppDispatch } from '../../utils/hooks';
+import { addList } from '../../redux/reducers/todos';
+import { CloseButton, FormButton }  from '../../shared/buttons';
 
 type ModalProps = {
   closeModal: (() => void);
-  bgColors?: string;
 }
 
 interface Styles {
   container: ViewStyle;
+  close: ViewStyle;
+  form: ViewStyle;
   title: TextStyle;
   input: TextStyle;
   errorText: TextStyle;
@@ -28,15 +27,15 @@ const listSchema = yup.object({
 });
 // red, slate blue, black, dark gray, blueish gray, teal, tan
 const AddTodoListModal: FunctionComponent<ModalProps> = ({ closeModal }) => {
-  const dispatch = useDispatch()
+  const dispatch = useAppDispatch()
   const bgColors = [
-    "#FE1F14",
-    "#B9D3EE",
-    "#000000",
-    "#57575E",
-    "#2E4045",
-    "#83ADB5",
-    "#BFB5B2",
+    '#FE1F14',
+    '#B9D3EE',
+    '#000000',
+    '#57575E',
+    '#2E4045',
+    '#83ADB5',
+    '#BFB5B2',
   ];
   const [bgColor, setColor] = useState(bgColors[0]);
 
@@ -53,19 +52,16 @@ const AddTodoListModal: FunctionComponent<ModalProps> = ({ closeModal }) => {
   };
 
   return (
-    <Layout style={{ flex: 1 }}>
       <Layout style={ styles.container } >
-        <TouchableOpacity
-          style={{ position: "absolute", top: 64, right: 32 }}
-          onPress={ closeModal }
-        >
-          <AntDesign name="close" size={ 24 } color="black" />
-        </TouchableOpacity>
-
-        <Layout style={{ alignSelf: "stretch", marginHorizontal: 32 }}>
+        <CloseButton
+          style={ styles.close }
+          accessibilityLabel='Closes Modal'
+          onPress={ () => closeModal() }
+        />
+        <Layout style={ styles.form }>
           <Text style={ styles.title }>Create Todo List</Text>
           <Formik
-            initialValues={{ name: "", id: 0, color: "", todos: [] }}
+            initialValues={{ name: '', id: 0, color: '', todos: [] }}
             validationSchema={ listSchema }
             onSubmit={ (values, actions) => {
               let color = bgColor;
@@ -85,14 +81,14 @@ const AddTodoListModal: FunctionComponent<ModalProps> = ({ closeModal }) => {
             }) => (
               <Layout>
                 <Input
-                  textAlign="center"
+                  textAlign='center'
                   enablesReturnKeyAutomatically={ true }
                   autoCorrect={ true } 
                   style={ styles.input }
-                  placeholder="Enter A New List . . ."
-                  onChangeText={ handleChange("name") }
+                  placeholder='Enter A New List . . .'
+                  onChangeText={ handleChange('name') }
                   value={ values.name }
-                  onBlur={ handleBlur("name") }
+                  onBlur={ handleBlur('name') }
                 />
 
                 <Text style={ styles.errorText }>
@@ -100,8 +96,8 @@ const AddTodoListModal: FunctionComponent<ModalProps> = ({ closeModal }) => {
                 </Text>
                 <Layout
                   style={{
-                    flexDirection: "row",
-                    justifyContent: "space-between",
+                    flexDirection: 'row',
+                    justifyContent: 'space-between',
                     marginTop: 12,
                   }}
                 >
@@ -110,27 +106,35 @@ const AddTodoListModal: FunctionComponent<ModalProps> = ({ closeModal }) => {
                 <TouchableOpacity
                   style={ styles.create }
                 >
-                  <FormButton text="Add List" onPress={ handleSubmit }/>
+                  <FormButton text='Add List' onPress={ handleSubmit }/>
                 </TouchableOpacity>
               </Layout>
             )}
           </Formik>
         </Layout>
       </Layout>
-    </Layout>
   );
 };
 
 const styles = StyleSheet.create<Styles>({
   container: {
     flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  close: {
+    position: 'absolute', 
+    top: 64, 
+    right: 32
+  },
+  form: {
+    alignSelf: 'stretch', 
+    marginHorizontal: 32
   },
   title: {
     fontSize: 28,
-    fontWeight: "600",
-    alignSelf: "center",
+    fontWeight: '600',
+    alignSelf: 'center',
     marginBottom: 16,
   },
   input: {
@@ -147,18 +151,12 @@ const styles = StyleSheet.create<Styles>({
     borderRadius: 2,
   },
   errorText:{
-    fontFamily: "roboto-bold",
-    color: "crimson",
+    fontFamily: 'roboto-bold',
+    color: 'crimson',
     marginBottom: 10,
     marginTop: 6,
-    textAlign: "center",
+    textAlign: 'center',
   },
 });
 
-const mapStateToProps = (state:any) => {
-  return {
-    state: state.todos,
-  };
-};
-
-export default connect(mapStateToProps)(AddTodoListModal);
+export default AddTodoListModal;

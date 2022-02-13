@@ -1,24 +1,18 @@
 import React from "react";
 import { StyleSheet, ViewStyle } from "react-native";
-import { connect } from "react-redux";
 import { Layout } from "@ui-kitten/components";
-import NoteMain from "../components/notes/notesMain";
+import Container from "../components/notes";
 import Header from "../shared/header";
 // todo: draggable
-interface NoteProps {
-  stateNotes: object[];
-  stateTodos: object[];
-}
-
 interface Styles {
   noteScreenContainer: ViewStyle;
 }
 
-const NoteScreen:React.FC<NoteProps> = ({ stateNotes, stateTodos }) => {
+const NoteScreen = () => {
   return (
     <Layout style={ styles.noteScreenContainer }>
-      <Header name={ "Notes" }/>
-      <NoteMain stateNotes={ stateNotes } stateTodos={ stateTodos } />
+      <Header name="Notes" />
+      <Container />
     </Layout>
   );
 };
@@ -30,11 +24,4 @@ const styles = StyleSheet.create<Styles>({
   },
 });
 
-const mapStateToProps = (state:any) => {
-  return {
-    stateNotes: state.notes,
-    stateTodos: state.todos,
-  }
-};
-
-export default connect(mapStateToProps)(NoteScreen);
+export default NoteScreen;

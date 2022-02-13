@@ -1,10 +1,10 @@
-import React, { FunctionComponent, useState, useEffect } from "react";
-import { Modal, TextStyle, ViewStyle, StyleSheet } from "react-native";
-import { Card, Layout, Text } from "@ui-kitten/components";
-import { useDispatch } from "react-redux";
-import TodosModal from "./todosModal";
-import { deleteList } from "../../redux/reducers/todos";
-import { CloseButton } from "../../shared/buttons";
+import React, { FunctionComponent, useState, useEffect } from 'react';
+import { Modal, TextStyle, ViewStyle, StyleSheet } from 'react-native';
+import { Card, Layout, Text } from '@ui-kitten/components';
+import TodosModal from './TodosModal';
+import { CloseButton } from '../../shared/buttons';
+import { useAppDispatch } from '../../utils/hooks';
+import { deleteList } from '../../redux/reducers/todos';
 
 type TodoListsProps = {
   list: {
@@ -24,12 +24,13 @@ interface Styles {
   deleteButton: ViewStyle;
 }
 
-const TodoLists: FunctionComponent<TodoListsProps>= ({ list }) => {
+const TodoList: FunctionComponent<TodoListsProps>= ({ list }) => {
+  const { todos, name, id, color } = list;
   const [visible, setVisible] = useState(false);
   const [InitRemaining, setInitRemaining] = useState(0);
   const [InitCount, setInitCount] = useState(0);
   const [isMount, setIsMount] = useState(true);
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   const toggleListModal = () => {
     setVisible(!visible);
@@ -37,8 +38,8 @@ const TodoLists: FunctionComponent<TodoListsProps>= ({ list }) => {
 
   useEffect(()=>{
     if(isMount){
-      let completedCount = (filtered(list.todos, (todo:any) => todo.completed));
-      let remainingCount = (filtered(list.todos, (todo:any) => !todo.completed));
+      let completedCount = (filtered(todos, (todo:any) => todo.completed));
+      let remainingCount = (filtered(todos, (todo:any) => !todo.completed));
       setInitCount(Object.keys(completedCount).length);
       setInitRemaining(Object.keys(remainingCount).length);
       setIsMount(false);
@@ -65,16 +66,16 @@ const completedList = (remaining:number, completed:number) => {
 
   return (
     <Layout style={ styles.listContainer }>
-      <Card style={ [styles.cardContainer, { backgroundColor: list.color }] } onPress={ () => toggleListModal() }>
+      <Card style={ [styles.cardContainer, { backgroundColor: color }] } onPress={ () => toggleListModal() }>
         <Modal
-          animationType="slide"
+          animationType='slide'
           visible={ visible }
           onRequestClose={ () => toggleListModal() }
-          accessibilityLabel="CLicking here opens Todo Modal"
+          accessibilityLabel='CLicking here opens Todo Modal'
         >
           <TodosModal completedList={ completedList } item={ list } closeModal={ () => toggleListModal() } />
         </Modal>
-        <Text style={ styles.listTitle } numberOfLines={ 1 }> { list.name } </Text>
+        <Text style={ styles.listTitle } numberOfLines={ 1 }> { name } </Text>
         <Text style={ styles.count }>{ InitRemaining }</Text>
         <Text style={ styles.subtitle }>Remaining</Text>
         <Text style={ styles.count }>{ InitCount }</Text>
@@ -82,8 +83,8 @@ const completedList = (remaining:number, completed:number) => {
       </Card>
       <CloseButton
         style={ styles.deleteButton }
-        onPress={ () => dispatch(deleteList({id: list.id})) }
-        accessibilityLabel="Click here to delete list"
+        onPress={ () => dispatch(deleteList({id: id})) }
+        accessibilityLabel='Click here to delete list'
       >
         Delete
       </CloseButton>
@@ -94,7 +95,7 @@ const completedList = (remaining:number, completed:number) => {
 const styles = StyleSheet.create<Styles>({
   listContainer: {
     flex: 1,
-    alignItems: "center",
+    alignItems: 'center',
   },
   cardContainer: {
     width: 200,
@@ -102,23 +103,23 @@ const styles = StyleSheet.create<Styles>({
     elevation: 3,
   },
   listTitle: {
-    alignSelf: "center",
+    alignSelf: 'center',
     fontSize: 24,
-    fontWeight: "700",
+    fontWeight: '700',
     marginBottom: 16,
   },
   count: {
     fontSize: 40,
-    fontWeight: "200",
-    alignSelf: "center"
+    fontWeight: '200',
+    alignSelf: 'center'
   },
   subtitle: {
     fontSize: 10,
-    fontWeight: "700",
-    alignSelf: "center"
+    fontWeight: '700',
+    alignSelf: 'center'
   },
   deleteButton: {
-    alignItems: "center",
+    alignItems: 'center',
     width: 200,
     margin: 1,
     elevation: 2,
@@ -126,4 +127,4 @@ const styles = StyleSheet.create<Styles>({
 });
 
 
-export default TodoLists;
+export default TodoList;

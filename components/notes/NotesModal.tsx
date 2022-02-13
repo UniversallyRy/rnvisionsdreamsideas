@@ -1,22 +1,28 @@
-import React, { FunctionComponent } from "react";
-import { TouchableOpacity, FlatList, Text, Keyboard, StyleSheet, TextStyle, ViewStyle } from "react-native";
-import { connect, useDispatch } from "react-redux";
-import { Card, Input, Layout } from "@ui-kitten/components";
-import { Formik, FormikHelpers } from "formik";
-import { deleteNote, addNote } from "../../redux/reducers/note";
-import { windowHeight, windowWidth } from "../../utils/dimensions";
-import { CloseButton } from "../../shared/buttons";
-import * as yup from "yup";
+import React, { FunctionComponent } from 'react';
+import { FlatList, Text, Keyboard, StyleSheet, TextStyle, ViewStyle } from 'react-native';
+import { Card, Input, Layout, Divider } from '@ui-kitten/components';
+import { Formik, FormikHelpers } from 'formik';
+import * as yup from 'yup';
+import { CloseButton, SubmitButton } from '../../shared/buttons';
+import { useAppDispatch } from '../../utils/hooks';
+import { windowHeight, windowWidth } from '../../utils/dimensions';
+import { deleteNote, addNote } from '../../redux/reducers/note';
+
+interface Values {
+  name: string;
+  id: string;
+} 
 
 type NoteModalProps = {
-  notes: object[];
+  notes: Values[];
   closeModal: (() => void);
 }
 
 interface Styles {
   container: ViewStyle;
+  close: ViewStyle;
   header: TextStyle;
-  title: TextStyle;
+  divider: ViewStyle;
   taskCount: ViewStyle;
   footer: ViewStyle;
   noteInput:TextStyle;
@@ -26,55 +32,47 @@ interface Styles {
   noteErrorText:TextStyle;
 }
 
-interface Values {
-  name: string;
-  id: string;
-} 
-
 const noteSchema = yup.object({
   name: yup.string().required().min(6),
 });
 
-const NotesModal: FunctionComponent<NoteModalProps> = ({ notes, closeModal}) => {
-  const newNotes:any = notes;
-  const taskCount = newNotes.length;
-  const dispatch = useDispatch()
-  
-  const renderNote = ( note:any, index = 0) => {
+const NotesModal: FunctionComponent<NoteModalProps> = ({ notes, closeModal }) => {
+  const taskCount = notes.length;
+  const dispatch = useAppDispatch();
+
+  const renderNote = ( item:any) => {
+    const { name, id } = item;
     return (
         <Card 
           style={ styles.noteContainer }
         >
-          <Text>{ note.name }</Text>
+          <Text>{ name }</Text>
           <CloseButton
             style={styles.deleteNoteButton}
-            onPress={deleteNote}
+            onPress={ () => dispatch(deleteNote({ id })) }
           />
         </Card>
     );
   };
 
   return (
-    <Layout style={styles.container} >
-        <TouchableOpacity
-          style={{ position: "absolute", top: 40, right: 32, zIndex: 10 }}
-        >
-          <CloseButton
-            onPress={ closeModal }
-          />
-        </TouchableOpacity>
+    <Layout style={ styles.container } >
+      <CloseButton
+        style={ styles.close }
+        onPress={ closeModal }
+      />
         <Layout
           style={[
             styles.header,
-            { borderBottomColor: "red" },
+            { borderBottomColor: 'red' },
           ]}
         >
-          <Text style={ styles.title }>{ newNotes.name }</Text>
+          <Divider style={ styles.divider }/>
           <Text style={ styles.taskCount }>There are { taskCount } Notes</Text>
         </Layout>
         <Layout>
           <FlatList
-            data={ newNotes }
+            data={ notes }
             keyExtractor={ (_, index) => index.toString()  }
             contentContainerStyle={{
               paddingHorizontal: 32,
@@ -84,7 +82,7 @@ const NotesModal: FunctionComponent<NoteModalProps> = ({ notes, closeModal}) => 
           />
           </Layout>
           <Formik
-            initialValues={{ name: "", id: "" }}
+            initialValues={{ name: '', id: '' }}
             validationSchema={ noteSchema }
             onSubmit={ (values: Values, actions:FormikHelpers<Values>) => {
               dispatch(addNote(values));
@@ -103,24 +101,24 @@ const NotesModal: FunctionComponent<NoteModalProps> = ({ notes, closeModal}) => 
               <Layout style={ styles.footer }>
                 <Layout style={{ flexDirection: 'column' }}>
                   <Input
-                    textAlign="center"
+                    textAlign='center'
                     enablesReturnKeyAutomatically={ true }
                     autoCorrect={ true }
                     style={ styles.noteInput }
-                    placeholder="Enter Note . . ."
-                    onChangeText={ handleChange("name") }
+                    placeholder='Enter Note . . .'
+                    onChangeText={ handleChange('name') }
                     value={ values.name }
-                    onBlur={ handleBlur("name") }
+                    onBlur={ handleBlur('name') }
                   />
                   <Text style={ styles.noteErrorText }>
                     { touched.name && errors.name }
                   </Text>
                 </Layout>
-                <CloseButton
+                <SubmitButton
                   style={ styles.buttonStyle }
                   onPress={ handleSubmit }
                 >
-                </CloseButton>
+                </SubmitButton>
               </Layout>
             )}
           </Formik>   
@@ -131,31 +129,36 @@ const NotesModal: FunctionComponent<NoteModalProps> = ({ notes, closeModal}) => 
 const styles = StyleSheet.create<Styles>({
   container: {
     flex: 1,
-    flexDirection: "column",
+    flexDirection: 'column',
     width: windowWidth,
     height: windowHeight
+  },
+  close: {
+    position: 'absolute', 
+    top: 40, 
+    right: 32, 
+    zIndex: 10,
   },
   header: {
     marginTop: 10,
     marginLeft: 10,
     borderBottomWidth: 2,
   },
-  title: {
-    fontSize: 30,
-    fontWeight: "800",
+  divider: {
+    marginTop: 35,
   },
   taskCount: {
     marginTop: 4,
     marginBottom: 16,
-    color: "black",
-    fontWeight: "600",
+    color: 'black',
+    fontWeight: '600',
   },
   footer: {
     position: 'absolute',
     bottom: 0,
     paddingHorizontal: 10,
     paddingVertical: 5,
-    flexDirection: "row",
+    flexDirection: 'row',
   },
   noteInput: {
     width: windowWidth * 0.75,
@@ -166,32 +169,25 @@ const styles = StyleSheet.create<Styles>({
   },
   noteErrorText:{
     fontSize: 10,
-    color: "crimson",
-    fontWeight: "bold",
+    color: 'crimson',
+    fontWeight: 'bold',
     marginBottom: 10,
     marginTop: 6,
-    textAlign: "center",
+    textAlign: 'center',
   },
   buttonStyle: {
     height: 30,
-    margin: "auto",
+    margin: 'auto',
   },
   noteContainer: {
-    alignSelf: "center",
-    flexDirection: "column",
+    alignSelf: 'center',
+    flexDirection: 'column',
     width: windowWidth * 0.995,
   },
   deleteNoteButton: {
-    marginLeft: "auto",
+    marginLeft: 'auto',
     marginRight: 3,
-    color: "red",
   },
 });
 
-const mapStateToProps = (state:any) => {
-  return {
-    state: state.notes,
-  };
-};
-
-export default connect(mapStateToProps)(NotesModal);
+export default NotesModal;

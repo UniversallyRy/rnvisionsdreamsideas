@@ -1,15 +1,16 @@
-import React, { createContext, FunctionComponent, useState } from "react";
-import { StyleSheet, Text, FlatList, Modal, TextStyle, ViewStyle, View } from "react-native";
-import { Divider, Layout } from "@ui-kitten/components";
-import NoteList from "./noteList";
-import AddNoteModal from "./addNoteModal";
-import TodoLists from "./todoLists";
-import AddTodoListModal from "./addTodoListModal";
-import { FooterButtons } from "../../shared/buttons";
+import React, { createContext, FunctionComponent, useState } from 'react';
+import { StyleSheet, Text, FlatList, Modal, TextStyle, ViewStyle, View } from 'react-native';
+import { Divider, Layout } from '@ui-kitten/components';
+import NoteList from './NoteContainer';
+import NewNote from './NewNote';
+import TodoList from './TodosContainer';
+import NewTodoList from './NewTodoList';
+import { FooterButtons } from '../../shared/buttons';
+import { connect } from 'react-redux';
 
-type NoteMainProps = {
-  stateNotes: object[];
-  stateTodos: object[];
+type ContainerProps = {
+  notes: object[];
+  todos: object[];
 }
 
 type ContextProps = {
@@ -26,7 +27,7 @@ interface Styles {
 
 export const NoteContext = createContext<ContextProps>({toggleTodoModal: () => {}, toggleNoteModal: () => {}});
 
-const NoteMain: FunctionComponent<NoteMainProps> = ({ stateNotes, stateTodos }) => {
+const Container: FunctionComponent<ContainerProps> = ({ notes, todos }) => {
   const [todoModal, setTodoModal] = useState(false);
   const [noteModal, setNoteModal] = useState(false);
 
@@ -38,46 +39,44 @@ const NoteMain: FunctionComponent<NoteMainProps> = ({ stateNotes, stateTodos }) 
   };
 
   const renderList = (list) => {
-    return <TodoLists list={ list } />;
+    return <TodoList list={ list } />;
   };
 
   return (
     <Layout style={ styles.container }>
       <NoteContext.Provider value={{ toggleNoteModal, toggleTodoModal }}>
         <Modal
-          animationType="slide"
+          animationType='slide'
           visible={ todoModal }
-          onRequestClose={ () => toggleTodoModal() }
         >
-          <AddTodoListModal closeModal={ () => toggleTodoModal() } />
+          <NewTodoList closeModal={ () => toggleTodoModal() } />
         </Modal>
         <Modal
-          animationType="slide"
+          animationType='slide'
           visible={ noteModal }
-          onRequestClose={ () => toggleNoteModal() }
         >
-          <AddNoteModal closeModal={() => toggleNoteModal()} />
+          <NewNote closeModal={() => toggleNoteModal()} />
         </Modal>
           <Divider/>
           <Text style={ styles.title }>
-            Note{" "}
-            <Text style={{ fontWeight: "300", color: "lightgray" }}>Lists</Text>
+            Note{' '}
+            <Text style={{ fontWeight: '300', color: 'lightgray' }}>Lists</Text>
           </Text>
           <Divider/>
         <View
           style={{
             height: 450,
-            flexDirection: "row",
+            flexDirection: 'row',
           }}
           >
-          <NoteList notes={ stateNotes } key={ 1 } />
+          <NoteList notes={ notes } key={ 1 } />
           <FlatList
             keyExtractor={ (_, index) => index.toString() }  
-            data={ stateTodos }
+            data={ todos }
             horizontal={ true }
             showsHorizontalScrollIndicator={ false }
             renderItem={ ({ item }) => renderList(item) }
-            keyboardShouldPersistTaps="always"
+            keyboardShouldPersistTaps='always'
             />
         </View>
         <FooterButtons context={NoteContext}/>
@@ -89,23 +88,31 @@ const NoteMain: FunctionComponent<NoteMainProps> = ({ stateNotes, stateTodos }) 
 const styles = StyleSheet.create<Styles>({
   container: {
     flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   titleStyle: {
-    flexDirection: "row",
+    flexDirection: 'row',
     marginTop: 50,
   },
   title: {
     fontSize: 38,
-    fontWeight: "800",
+    fontWeight: '800',
     paddingHorizontal: 20,
   },
   addList: {
-    flexDirection: "row",
-    alignSelf: "center",
-    marginTop: "auto"
+    flexDirection: 'row',
+    alignSelf: 'center',
+    marginTop: 'auto'
   },
 });
 
-export default NoteMain;
+const mapStateToProps = (state:any) => {
+  const { notes, todos } = state;
+  return {
+    notes,
+    todos,
+  }
+};
+
+export default connect(mapStateToProps)(Container);
