@@ -1,10 +1,10 @@
 import React, {  useEffect, useState } from 'react';
 import { connect, useDispatch } from 'react-redux';
 import { StyleSheet, ViewStyle } from "react-native";
+import { Layout, IndexPath, Select, SelectItem } from '@ui-kitten/components';
 import months from '../../utils/months';
 import { windowWidth } from "../../utils/dimensions";
 import { changeMonth } from "../../redux/reducers/journals";
-import { Layout, IndexPath, Select, SelectItem } from '@ui-kitten/components';
 import { CloseIcon } from '../../shared/icons';
 
 type FilterProps = {
