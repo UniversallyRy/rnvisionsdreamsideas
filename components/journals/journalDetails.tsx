@@ -1,54 +1,55 @@
-import React, { FunctionComponent } from "react";
-import { StyleSheet, StyleProp, TextStyle, ViewStyle } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
+import React, { FunctionComponent } from 'react';
+import { SafeAreaView, StyleSheet, TextStyle, ViewStyle } from 'react-native';
 import { NavigationScreenProp } from 'react-navigation';
-import { Card, Layout, Text } from "@ui-kitten/components";
-import Header from "../../shared/header";
-import { windowHeight, windowWidth } from "../../utils/dimensions";
+import { Card, Layout, Text} from '@ui-kitten/components';
+import { windowHeight, windowWidth } from '../../utils/dimensions';
+import Header from '../../shared/header';
 
-export type JournalDProps = {
+export type DetailsProps = {
+  route: {
+    key: string;
+    name: string;
+    params: {
+      title: string;
+      body: string;
+      date: string;
+    },
+    path: undefined;
+  };
   navigation: NavigationScreenProp<string, object>;
-  route: any;
-  jDetailsContainer: StyleProp<ViewStyle>;
-  jDetailsCard: StyleProp<ViewStyle>;
-  jDetailsTitle: StyleProp<ViewStyle>;
-  divider: StyleProp<ViewStyle>;
-  jDetailsText: StyleProp<TextStyle>;
-  jDetailsDate: StyleProp<TextStyle>;
-  jDetailsButton: StyleProp<TextStyle>;
 }
 
 interface Styles {
+  detailsContainer: ViewStyle;
+  detailsCard: ViewStyle;
+  detailsTitle: ViewStyle;
+  detailsText: TextStyle;
+  detailsDate: TextStyle;
+  detailsButton: TextStyle;
   divider: ViewStyle;
-  jDetailsContainer: ViewStyle;
-  jDetailsCard: ViewStyle;
-  jDetailsTitle: ViewStyle;
-  jDetailsText: TextStyle;
-  jDetailsDate: TextStyle;
-  jDetailsButton: TextStyle;
 }
 
-const JournalDetails: FunctionComponent<JournalDProps> = ({ route, navigation }) => {
+const JournalDetails: FunctionComponent<DetailsProps> = ({ route, navigation }) => {
 
   const { title, body, date } = route.params;
 
   return (
-    <SafeAreaView style={styles.jDetailsContainer}>
-      <Header name="Vision Details" navigation={navigation}/>
-      <Card style={styles.jDetailsCard}>
-        <Text style={styles.jDetailsTitle}>
-          {" "}
-          {title}{" "}
+    <SafeAreaView style={styles.detailsContainer}>
+      <Header name='Vision Details' navigation={navigation}/>
+      <Card style={styles.detailsCard}>
+        <Text style={styles.detailsTitle}>
+          {' '}
+          {title}{' '}
         </Text>
         <Layout style={styles.divider} />
-        <Text style={styles.jDetailsText}>
-          {" "}
-          {body}{" "}
+        <Text style={styles.detailsText}>
+          {' '}
+          {body}{' '}
         </Text>
         <Layout style={styles.divider} />
-        <Text style={styles.jDetailsDate}>
-          {" "}
-          {date}{" "}
+        <Text style={styles.detailsDate}>
+          {' '}
+          {date}{' '}
         </Text>
       </Card>
     </SafeAreaView>
@@ -56,48 +57,48 @@ const JournalDetails: FunctionComponent<JournalDProps> = ({ route, navigation })
 };
 
 const styles = StyleSheet.create<Styles>({
-  jDetailsContainer: {
-    flexDirection: "column",
+  detailsContainer: {
+    flexDirection: 'column',
     width: windowWidth,
     height: windowHeight,
-    alignContent: "center",
+    alignContent: 'center',
   },
-  divider: {
-    backgroundColor: "black",
-    alignSelf: "center",
-    height: 0.3,
-    width: windowWidth * 0.98,
-    marginTop: 10,
-    marginBottom: 10,
-    opacity: 0.7,
+  detailsCard: {
+    alignSelf: 'center',
+    margin: 10,
+    width: windowWidth * 0.99,
+    height: windowHeight * 0.5
   },
-  jDetailsText: {
+  detailsTitle: {
+    fontFamily: 'roboto-bold',
+    fontSize: 18,
+    padding: 10,
+  },
+  detailsText: {
     fontSize: 14,
-    fontFamily: "roboto-regular",
+    fontFamily: 'roboto-regular',
     padding: 7,
     marginTop: 50,
     marginVertical: 18,
     lineHeight: 20,
   },
-  jDetailsTitle: {
-    fontFamily: "roboto-bold",
-    fontSize: 18,
-    padding: 10,
-  },
-  jDetailsDate: {
-    fontFamily: "roboto-italic",
+  detailsDate: {
+    fontFamily: 'roboto-italic',
     fontSize: 10,
     padding: 10,
   },
-  jDetailsButton: {
+  detailsButton: {
     fontSize: 40,
-    fontFamily: "roboto-black",
+    fontFamily: 'roboto-black',
   },
-  jDetailsCard: {
-    alignSelf: "center",
-    margin: 10,
-    width: windowWidth * 0.99,
-    height: windowHeight * 0.5
+  divider: {
+    backgroundColor: 'black',
+    alignSelf: 'center',
+    height: 0.3,
+    width: windowWidth * 0.98,
+    marginTop: 10,
+    marginBottom: 10,
+    opacity: 0.7,
   },
 });
 

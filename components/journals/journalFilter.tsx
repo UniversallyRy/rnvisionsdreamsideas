@@ -1,10 +1,11 @@
 import React, {  useEffect, useState } from 'react';
-import { connect, useDispatch } from 'react-redux';
-import { StyleSheet, ViewStyle } from "react-native";
-import { Layout, IndexPath, Select, SelectItem } from '@ui-kitten/components';
+import { StyleSheet, ViewStyle, TextStyle } from 'react-native';
+import { connect } from 'react-redux';
+import { Layout, Select, SelectItem, IndexPath } from '@ui-kitten/components';
+import { windowWidth } from '../../utils/dimensions';
+import { useAppDispatch } from '../../utils/hooks';
 import months from '../../utils/months';
-import { windowWidth } from "../../utils/dimensions";
-import { changeMonth } from "../../redux/reducers/journals";
+import { changeMonth } from '../../redux/reducers/journals';
 import { CloseIcon } from '../../shared/icons';
 
 type FilterProps = {
@@ -13,13 +14,13 @@ type FilterProps = {
 
 interface Styles {
   container: ViewStyle
-  listContainer: ViewStyle;
-  listItem: ViewStyle;
+  listGroup: ViewStyle;
+  listItem: TextStyle;
 }
 
 const JournalFilter: React.FC<FilterProps> = ({ state }) => {
   const [selectedIndex, setSelectedIndex] = useState(new IndexPath(0));
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const displayValue = months[selectedIndex.row];
 
   useEffect(() => {    
@@ -32,12 +33,12 @@ const JournalFilter: React.FC<FilterProps> = ({ state }) => {
   const MonthsList = () => {
     return (
       <Select
-      style={styles.listContainer}
-      value={displayValue}
-      label={"See All or A Month"}
-      selectedIndex={selectedIndex}
-      onSelect={handleItemPress}
-      accessibilityLabel="Dropdown of months to filter journal entries"
+        style={styles.listGroup}
+        value={displayValue}
+        label={'See All or A Month'}
+        selectedIndex={selectedIndex}
+        onSelect={handleItemPress}
+        accessibilityLabel='Dropdown of months to filter journal entries'
       >
         {months.map(item => {
           return(
@@ -55,7 +56,7 @@ const JournalFilter: React.FC<FilterProps> = ({ state }) => {
   };
 
   return (
-    <Layout style={styles.container} level="1">
+    <Layout style={styles.container} level='1'>
       <MonthsList/>
     </Layout>
   );
@@ -67,8 +68,8 @@ const styles = StyleSheet.create<Styles>({
     margin: 1,
     zIndex: 1,
   },
-  listContainer: {
-    justifyContent: "center",
+  listGroup: {
+    justifyContent: 'center',
     width: windowWidth,
   },
   listItem: {

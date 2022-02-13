@@ -1,26 +1,27 @@
-import React, { FunctionComponent } from "react";
-import { FlatList, StyleSheet, ViewStyle } from "react-native";
+import React, { FunctionComponent } from 'react';
+import { FlatList, StyleSheet, ViewStyle } from 'react-native';
 import { NavigationScreenProp } from 'react-navigation';
-import { connect } from "react-redux";
-import JournalItem from "./journalItem";
+import { connect } from 'react-redux';
+import { JournalStateProps } from '../../redux/reducers/journals';
+import JournalItem from './journalItem';
 
 type JournalListProps = {
+  list: [];
   month: string;
-  journals: [];
   navigation: NavigationScreenProp<string, object>;
  }
 
 interface Styles {
-  container: ViewStyle;
+  container: ViewStyle;   
 }
 
-const JournalList: FunctionComponent<JournalListProps> = ({ journals, month,  navigation }) => {
+const JournalList: FunctionComponent<JournalListProps> = ({ list, month, navigation }) => {
 
   return (
     <FlatList
       style={styles.container}
-      data={ journals }
-      accessibilityLabel="Contains Journal Entries"
+      data={ list }
+      accessibilityLabel='Contains Journal Entries'
       keyExtractor={ (_item, index) => index.toString() }
       renderItem={ ({ item }:any) => {
         if ((month != 'All') && !item.date.includes(month)) {
@@ -34,16 +35,14 @@ const JournalList: FunctionComponent<JournalListProps> = ({ journals, month,  na
 
 const styles = StyleSheet.create<Styles>({
   container: {
-    alignSelf: "center",
+    alignSelf: 'center',
   },
 });
 
-const mapStateToProps = (state:any) => {
+const mapStateToProps = (state): JournalStateProps => {
   const { journals } = state
-  return {
-    journals: journals.journals,
-    month: journals.monthFilter
-  };
+  const { month, list } = journals;
+  return { month, list };
 };
 
 export default connect(mapStateToProps)(JournalList);

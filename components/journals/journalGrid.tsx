@@ -1,57 +1,50 @@
-import { Card, Layout, Text } from "@ui-kitten/components";
-import React, { FunctionComponent} from "react";
-import { FlatList, StyleSheet, TextStyle, ViewStyle } from "react-native";
+import React, { FunctionComponent } from 'react';
+import { FlatList, StyleSheet, ViewStyle, TextStyle } from 'react-native';
 import { NavigationScreenProp } from 'react-navigation';
-import { connect } from "react-redux";
-import { windowHeight, windowWidth } from "../../utils/dimensions";
+import { connect } from 'react-redux';
+import { Card, Layout, Text } from '@ui-kitten/components';
+import { windowHeight, windowWidth } from '../../utils/dimensions';
 
 type GridProps = {
   navigation: NavigationScreenProp<string, object>;
-  journals: Object[]
+  journals: Object[];
   month: string;
 }
 
 interface Styles {
-  container: ViewStyle
-  gridContainer: ViewStyle;
+  container: ViewStyle;
+  grid: ViewStyle;
   gridItem: ViewStyle;
-  gridText: TextStyle;
+  itemDate: TextStyle;
 }
 
 const JournalGridContainer: FunctionComponent<GridProps> = ({ journals, month, navigation }) => {     
 
   return (
-    <Layout
-      style={ styles.container }
-    >
+    <Layout style={ styles.container }>
       <FlatList
-        numColumns={ 3 }
-        contentContainerStyle={ styles.gridContainer }
         scrollEnabled
+        numColumns={ 3 }
+        contentContainerStyle={ styles.grid }
         data={ journals }
-        accessibilityLabel="Journal List Entries in Grid Format"
-        renderItem={ ({ item }:any) => {
-          if ((month != 'All') && !item.date.includes(month)) {
+        accessibilityLabel='Journal List Entries in Grid Format'
+        renderItem={ ({ item }: any) => {
+          const { title, body, date } = item;
+          if ((month != 'All') && !date.includes(month)) {
             return null
           }else{
-          return (
-            <Card
-              key={item.title + '_key'}
-              style={ styles.gridItem }
-              onPress={ () => navigation.navigate("Journal Details", { title:item.title, body:item.body, date:item.date }) }
-            >
-                <Text>{ item.title }</Text>
-                <Text
-                  style={{
-                    marginTop: 30,
-                    top:100,
-                    right: 20,
-                  }}
-                >
-                  { item.date }
+            return (
+              <Card
+                key={ title + '_key' }
+                style={ styles.gridItem }
+                onPress={ () => navigation.navigate('Journal Details', { title, body, date }) }
+              >
+                <Text>{ title }</Text>
+                <Text style={ styles.itemDate }>
+                  { date }
                 </Text>
-            </Card>
-          );
+              </Card>
+            );
         }}}
       />
     </Layout>
@@ -64,7 +57,7 @@ const styles = StyleSheet.create<Styles>({
     marginTop: 2,
     paddingTop: 2,
   },
-  gridContainer: {
+  grid: {
     padding: 10,
   },
   gridItem: {
@@ -74,10 +67,10 @@ const styles = StyleSheet.create<Styles>({
     margin: 5,
     elevation: 5,
   },
-  gridText: {
-    height: windowHeight * 0.25,
-    width: windowWidth * 0.3,
-    paddingHorizontal: 10
+  itemDate: {
+    marginTop: 30,
+    top:100,
+    right: 20,
   },
 });
 

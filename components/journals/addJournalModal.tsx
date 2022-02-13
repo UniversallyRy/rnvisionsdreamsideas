@@ -1,35 +1,36 @@
-import React, { FunctionComponent } from "react";
-import { StyleSheet, Text, TextStyle } from "react-native";
-import { useDispatch } from "react-redux";
-import { Input, Layout } from "@ui-kitten/components";
-import { Formik } from "formik";
-import { addJournal } from "../../redux/reducers/journals";
-import { SubmitButton } from "../../shared/buttons";
-import * as yup from "yup";
-import { windowHeight } from "../../utils/dimensions";
+import React, { FunctionComponent } from 'react';
+import { StyleSheet, Text, ViewStyle, TextStyle } from 'react-native';
+import { Input, Layout } from '@ui-kitten/components';
+import { Formik } from 'formik';
+import * as yup from 'yup';
+import { windowHeight } from '../../utils/dimensions';
+import { useAppDispatch } from '../../utils/hooks';
+import { addJournal } from '../../redux/reducers/journals';
+import { SubmitButton } from '../../shared/buttons';
 
 type AddJournalProps = {
   setModalOpen: ((i:boolean) => void);
 }
 
 interface Styles {
+  modalContainer: ViewStyle;
   errorText: TextStyle;
 }
 
-// require an entry into form input that's at least 4 letters
+// schema to force form input values to have a minimum length of 4.
 const JournalSchema = yup.object({
   title: yup.string().required().min(4),
   body: yup.string().required().min(4),
 });
 
 const AddJournal: FunctionComponent<AddJournalProps> = ({ setModalOpen }) => {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   return (
-    <Layout style={{ height: windowHeight }}>
+    <Layout style={styles.modalContainer}>
       <Formik
-        // Control whether Formik should reset the form if initialValues changes
+        // Controls whether Formik should reset the form if initialValues changes
         enableReinitialize
-        initialValues={{ title: "", body: "" }}
+        initialValues={{ title: '', body: '' }}
         validationSchema={JournalSchema}
         onSubmit={(values, actions) => {
           dispatch(addJournal(values));
@@ -47,30 +48,30 @@ const AddJournal: FunctionComponent<AddJournalProps> = ({ setModalOpen }) => {
         }) => (
           <>
             <Input
-              textAlign="center"
-              placeholder="Journal Title"
-              onChangeText={handleChange("title")}
+              textAlign='center'
+              placeholder='Journal Title'
+              onChangeText={handleChange('title')}
               value={values.title}
-              onBlur={handleBlur("title")}
-              accessibilityLabel="Input Journal Title Here"
+              onBlur={handleBlur('title')}
+              accessibilityLabel='Input Journal Title Here'
             />
             <Text style={styles.errorText}>
-              {/* Above <Text/> shows up only when input is focused and exited without requirements */}
+              {/* when both are true, child with validation text shows. */}
               {touched.title && errors.title}
             </Text>
             <Input
-              textAlign="center"
+              textAlign='center'
               multiline
-              placeholder="Journal Body"
-              onChangeText={handleChange("body")}
+              placeholder='Journal Body'
+              onChangeText={handleChange('body')}
               value={values.body}
-              onBlur={handleBlur("body")}
-              accessibilityLabel="Input Journal body text Here"
+              onBlur={handleBlur('body')}
+              accessibilityLabel='Input Journal body text Here'
             />
             <Text style={styles.errorText}>
               {touched.body && errors.body}
             </Text>
-            <SubmitButton onPress={handleSubmit} accessibilityLabel="Clicking here adds journal entry">
+            <SubmitButton onPress={handleSubmit} accessibilityLabel='Clicking here adds journal entry'>
               Submit
             </SubmitButton>
           </>
@@ -81,13 +82,16 @@ const AddJournal: FunctionComponent<AddJournalProps> = ({ setModalOpen }) => {
 };
 
 const styles = StyleSheet.create<Styles>({
-  errorText:{
-    fontFamily: "roboto-bold",
-    color: "crimson",
+  modalContainer: {
+    height: windowHeight,
+  },
+  errorText: {
+    fontFamily: 'roboto-bold',
+    color: 'crimson',
     marginBottom: 10,
     marginTop: 6,
-    textAlign: "center",
+    textAlign: 'center',
   },
-})
+});
 
 export default AddJournal;

@@ -1,89 +1,89 @@
-import React, { FunctionComponent, useState } from "react";
-import { StyleSheet, TextStyle, ViewStyle } from "react-native";
+import React, { FunctionComponent, useState } from 'react';
+import { StyleSheet, TextStyle, ViewStyle } from 'react-native';
 import { NavigationScreenProp } from 'react-navigation';
-import { connect, useDispatch } from "react-redux";
-import { ButtonGroup, Card, Divider, Input, Layout, Text } from "@ui-kitten/components";
-import { CancelButton, DeleteButton, EditButton, SaveButton } from "../../shared/buttons";
-import { deleteJournal, editJournal, editJournalToggle } from "../../redux/reducers/journals";
-import { windowHeight, windowWidth } from "../../utils/dimensions";
+import { connect } from 'react-redux';
+import { ButtonGroup, Card, Divider, Input, Layout, Text } from '@ui-kitten/components';
+import { CancelButton, DeleteButton, EditButton, SaveButton } from '../../shared/buttons';
+import { deleteJournal, editJournal, editJournalToggle } from '../../redux/reducers/journals';
+import { useAppDispatch } from '../../utils/hooks';
+import { windowHeight, windowWidth } from '../../utils/dimensions';
 
-type JournalListProps = {
-  item: {
-    title: string
-    body: string
-    id: string
+export type Item = {
+    id: string;
+    title: string;
+    body: string;
     date: string;
     isEditing: boolean,
-  };
+}
+
+type JournalItemProps = {
+  item: Item;
   navigation: NavigationScreenProp<string, object>;
 }
 
 interface Styles {
-  journalCard: ViewStyle;
-  journalTitle: TextStyle;
-  journalParagraph: TextStyle;
-  journalText: TextStyle;
-  journalDate: TextStyle;
+  container: ViewStyle;
+  title: TextStyle;
+  paragraph: TextStyle;
+  text: TextStyle;
+  date: TextStyle;
 }
 
-const JournalItem: FunctionComponent<JournalListProps> = ({ item,  navigation }) => {
-  const dispatch = useDispatch();
-  const [textTitle, setTitle] = useState(item.title);
-  const [textBody, setBody] = useState(item.body);
+const JournalItem: FunctionComponent<JournalItemProps> = ({ item,  navigation }) => {
+  const { id, title, body, date, isEditing } = item;
+  const [textTitle, setTitle] = useState(title);
+  const [textBody, setBody] = useState(body);
+  const dispatch = useAppDispatch();
 
   const editHandler = (id) => {
-    dispatch(editJournal({id: id, title: textTitle , body: textBody, isEditing: false}));
-    
+    dispatch(editJournal({ id: id, title: textTitle, body: textBody, isEditing: false }));
   };
 
-  const {title, body, date} = item;
   return (
     <Card 
-      style={ styles.journalCard }
-      onPress={ () => navigation.navigate("Journal Details", { title, body, date })} 
-      accessibilityLabel="Card containing single Journal Entry" 
+      style={ styles.container }
+      onPress={ () => navigation.navigate('Journal Details', { title, body, date })} 
+      accessibilityLabel='Card containing single Journal Entry' 
     >
-      <Layout
-        style={ styles.journalText }
-      >
-        {item.isEditing
+      <Layout style={ styles.text }>
+        {isEditing
           ?<Input
-              label="Title"
+              label='Title'
               value={textTitle}
               onChangeText={text => setTitle(text)}
             />
-          :<Text style={ styles.journalTitle }>
-            { item.title }
+          :<Text style={ styles.title }>
+            { title }
             </Text>
         }
         <Divider />
-        {item.isEditing
+        {isEditing
           ?<Input
             label={'Body'}
             value={textBody}
             multiline={true}
             onChangeText={text => setBody(text)}
           />
-          :<Text style={ styles.journalParagraph }>
-            { item.body }
+          :<Text style={ styles.paragraph }>
+            { body }
           </Text>
         }
         <Divider />
       </Layout>
-      {item.isEditing 
+      {isEditing 
         ? null
-        :<Text style={ styles.journalDate }>
-          { item.date }
+        :<Text style={ styles.date }>
+          { date }
         </Text>
       }
-        {item.isEditing 
+        {isEditing 
           ?<ButtonGroup>
-            <SaveButton onPress={() => editHandler(item.id)}/>
-            <CancelButton onPress={() => dispatch(editJournalToggle({id: item.id}))}/>
+            <SaveButton onPress={() => editHandler(id)}/>
+            <CancelButton onPress={() => dispatch(editJournalToggle({ id: id }))}/>
           </ButtonGroup>
           :<ButtonGroup>
-            <EditButton onPress={() => dispatch(editJournalToggle({id: item.id}))}/>
-            <DeleteButton onPress={ () => dispatch(deleteJournal({ id: item.id })) }/>
+            <EditButton onPress={() => dispatch(editJournalToggle({ id: id }))}/>
+            <DeleteButton onPress={ () => dispatch(deleteJournal({ id: id })) }/>
           </ButtonGroup>
         }
     </Card>
@@ -91,29 +91,29 @@ const JournalItem: FunctionComponent<JournalListProps> = ({ item,  navigation })
 };
 
 const styles = StyleSheet.create<Styles>({
-  journalCard: {
+  container: {
     margin: 5,
     borderRadius: 3,
     width: windowWidth * 0.95,
     height: windowHeight * 0.35,
     elevation: 2,
   },
-  journalText: {
-    alignSelf: "center",
+  text: {
+    alignSelf: 'center',
     width: windowWidth * 0.92,
   },
-  journalTitle: {
-    fontFamily: "roboto-black",
+  title: {
+    fontFamily: 'roboto-black',
     fontSize: 20,
     marginBottom: 10,
   },
-  journalParagraph: {
-    fontFamily: "roboto-regular",
+  paragraph: {
+    fontFamily: 'roboto-regular',
     fontSize: 12,
     marginBottom: 10,
   },
-  journalDate: {
-    fontFamily: "roboto-italic",
+  date: {
+    fontFamily: 'roboto-italic',
     fontSize: 10,
     margin: 5,
   },
