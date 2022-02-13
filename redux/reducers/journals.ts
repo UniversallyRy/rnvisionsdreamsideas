@@ -14,7 +14,7 @@ export type JournalStateProps = {
   }[];
 }
 
-const initialJournals = {
+const initialState = {
   month: 'All',
   list: [
     {
@@ -43,8 +43,8 @@ const initialJournals = {
 
 const journalsReducer = createSlice({
   name:'Journals',
-  initialState: initialJournals,
-  reducers:{
+  initialState: initialState,
+  reducers: {
     addJournal: (state, action) => {
       state.list.push({
         title: action.payload.title,

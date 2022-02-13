@@ -1,6 +1,5 @@
 import React, {  useEffect, useState } from 'react';
 import { StyleSheet, ViewStyle, TextStyle } from 'react-native';
-import { connect } from 'react-redux';
 import { Layout, Select, SelectItem, IndexPath } from '@ui-kitten/components';
 import { windowWidth } from '../../utils/dimensions';
 import { useAppDispatch } from '../../utils/hooks';
@@ -8,9 +7,6 @@ import months from '../../utils/months';
 import { changeMonth } from '../../redux/reducers/journals';
 import { CloseIcon } from '../../shared/icons';
 
-type FilterProps = {
-  state: string;
-}
 
 interface Styles {
   container: ViewStyle
@@ -18,7 +14,7 @@ interface Styles {
   listItem: TextStyle;
 }
 
-const JournalFilter: React.FC<FilterProps> = ({ state }) => {
+const MonthSelect = () => {
   const [selectedIndex, setSelectedIndex] = useState(new IndexPath(0));
   const dispatch = useAppDispatch();
   const displayValue = months[selectedIndex.row];
@@ -30,34 +26,29 @@ const JournalFilter: React.FC<FilterProps> = ({ state }) => {
   const handleItemPress = (index) => {
     setSelectedIndex(index)
   }
-  const MonthsList = () => {
-    return (
+
+  return (
+    <Layout style={ styles.container } level='1'>
       <Select
-        style={styles.listGroup}
-        value={displayValue}
-        label={'See All or A Month'}
-        selectedIndex={selectedIndex}
-        onSelect={handleItemPress}
+        style={ styles.listGroup }
+        value={ displayValue }
+        label='See All or A Month'
+        selectedIndex={ selectedIndex }
+        onSelect={ handleItemPress }
         accessibilityLabel='Dropdown of months to filter journal entries'
       >
         {months.map(item => {
           return(
             <SelectItem  
-              style={styles.listItem} 
-              key={item} 
-              title={item}
-              accessoryRight={CloseIcon}
-              accessibilityLabel={`Dropdown text for ${item}`}
+              style={ styles.listItem } 
+              key={ item } 
+              title={ item }
+              accessoryRight={ CloseIcon }
+              accessibilityLabel={ `Dropdown text for ${ item }` }
             />
           )
         })}
       </Select>
-    );
-  };
-
-  return (
-    <Layout style={styles.container} level='1'>
-      <MonthsList/>
     </Layout>
   );
 };
@@ -76,11 +67,4 @@ const styles = StyleSheet.create<Styles>({
   }
 });
   
-
-const mapStateToProps = (state) => {
-  return {
-    state: state.journals.monthFilter,
-  };
-}
-
-export default connect(mapStateToProps)(JournalFilter);
+export default MonthSelect;

@@ -29,7 +29,7 @@ interface Styles {
   divider: ViewStyle;
 }
 
-const JournalDetails: FunctionComponent<DetailsProps> = ({ route, navigation }) => {
+const ItemDetails: FunctionComponent<DetailsProps> = ({ route, navigation }) => {
 
   const { title, body, date } = route.params;
 
@@ -102,4 +102,4 @@ const styles = StyleSheet.create<Styles>({
   },
 });
 
-export default JournalDetails;
+export default ItemDetails;

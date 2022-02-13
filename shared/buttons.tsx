@@ -1,11 +1,13 @@
 import React, { FormEvent, useContext } from "react";
-import { GestureResponderEvent, StyleSheet, TextStyle, ViewStyle } from "react-native";
+import { GestureResponderEvent, StyleProp, StyleSheet, TextStyle, ViewStyle } from "react-native";
 import { Layout, Button, ButtonGroup, Text, TopNavigationAction } from "@ui-kitten/components"
 import { BackIcon, CloseIcon, DayIcon, GridIcon, NightIcon, SaveIcon, SubmitIcon } from "./icons";
 import { windowWidth } from "../utils/dimensions";
 
 type ButtonProps = {
   text?: string;
+  style?: StyleProp<ViewStyle>;
+  accessibilityLabel?: string;
   onPress: (event?: GestureResponderEvent | undefined) => void;
 }
 

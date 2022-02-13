@@ -1,7 +1,6 @@
 import React, { FunctionComponent, useState } from 'react';
 import { StyleSheet, TextStyle, ViewStyle } from 'react-native';
 import { NavigationScreenProp } from 'react-navigation';
-import { connect } from 'react-redux';
 import { ButtonGroup, Card, Divider, Input, Layout, Text } from '@ui-kitten/components';
 import { CancelButton, DeleteButton, EditButton, SaveButton } from '../../shared/buttons';
 import { deleteJournal, editJournal, editJournalToggle } from '../../redux/reducers/journals';
@@ -29,7 +28,7 @@ interface Styles {
   date: TextStyle;
 }
 
-const JournalItem: FunctionComponent<JournalItemProps> = ({ item,  navigation }) => {
+const JournalListItem: FunctionComponent<JournalItemProps> = ({ item,  navigation }) => {
   const { id, title, body, date, isEditing } = item;
   const [textTitle, setTitle] = useState(title);
   const [textBody, setBody] = useState(body);
@@ -49,20 +48,20 @@ const JournalItem: FunctionComponent<JournalItemProps> = ({ item,  navigation })
         {isEditing
           ?<Input
               label='Title'
-              value={textTitle}
-              onChangeText={text => setTitle(text)}
+              value={ textTitle }
+              onChangeText={ text => setTitle(text) }
             />
           :<Text style={ styles.title }>
             { title }
-            </Text>
+           </Text>
         }
         <Divider />
         {isEditing
           ?<Input
-            label={'Body'}
-            value={textBody}
-            multiline={true}
-            onChangeText={text => setBody(text)}
+              label='Body'
+              value={ textBody }
+              multiline={ true }
+              onChangeText={ text => setBody(text) }
           />
           :<Text style={ styles.paragraph }>
             { body }
@@ -78,11 +77,11 @@ const JournalItem: FunctionComponent<JournalItemProps> = ({ item,  navigation })
       }
         {isEditing 
           ?<ButtonGroup>
-            <SaveButton onPress={() => editHandler(id)}/>
-            <CancelButton onPress={() => dispatch(editJournalToggle({ id: id }))}/>
+            <SaveButton onPress={ () => editHandler(id) }/>
+            <CancelButton onPress={ () => dispatch(editJournalToggle({ id: id })) }/>
           </ButtonGroup>
           :<ButtonGroup>
-            <EditButton onPress={() => dispatch(editJournalToggle({ id: id }))}/>
+            <EditButton onPress={ () => dispatch(editJournalToggle({ id: id })) }/>
             <DeleteButton onPress={ () => dispatch(deleteJournal({ id: id })) }/>
           </ButtonGroup>
         }
@@ -121,11 +120,4 @@ const styles = StyleSheet.create<Styles>({
 
 
 
-const mapStateToProps = (state:any) => {
-  const { journals } = state
-  return {
-    journals: journals.journals,
-  };
-};
-
-export default connect(mapStateToProps)(JournalItem);
+export default JournalListItem;

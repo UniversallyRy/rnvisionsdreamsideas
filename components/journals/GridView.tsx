@@ -7,7 +7,7 @@ import { windowHeight, windowWidth } from '../../utils/dimensions';
 
 type GridProps = {
   navigation: NavigationScreenProp<string, object>;
-  journals: Object[];
+  list: Object[];
   month: string;
 }
 
@@ -18,7 +18,7 @@ interface Styles {
   itemDate: TextStyle;
 }
 
-const JournalGridContainer: FunctionComponent<GridProps> = ({ journals, month, navigation }) => {     
+const JournalGridContainer: FunctionComponent<GridProps> = ({ list, month, navigation }) => {     
 
   return (
     <Layout style={ styles.container }>
@@ -26,7 +26,7 @@ const JournalGridContainer: FunctionComponent<GridProps> = ({ journals, month, n
         scrollEnabled
         numColumns={ 3 }
         contentContainerStyle={ styles.grid }
-        data={ journals }
+        data={ list }
         accessibilityLabel='Journal List Entries in Grid Format'
         renderItem={ ({ item }: any) => {
           const { title, body, date } = item;
@@ -75,10 +75,9 @@ const styles = StyleSheet.create<Styles>({
 });
 
 const mapStateToProps = (state:any) => {
-  return {
-    month: state.journals.monthFilter,
-    journals: state.journals.journals,
-  };
+  const { journals } = state
+  const { month, list } = journals;
+  return { month, list };
 };
 
 export default connect(mapStateToProps)(JournalGridContainer);

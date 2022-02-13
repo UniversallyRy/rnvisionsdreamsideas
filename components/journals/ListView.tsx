@@ -3,7 +3,7 @@ import { FlatList, StyleSheet, ViewStyle } from 'react-native';
 import { NavigationScreenProp } from 'react-navigation';
 import { connect } from 'react-redux';
 import { JournalStateProps } from '../../redux/reducers/journals';
-import JournalItem from './journalItem';
+import ListItem from './ListItem';
 
 type JournalListProps = {
   list: [];
@@ -19,7 +19,7 @@ const JournalList: FunctionComponent<JournalListProps> = ({ list, month, navigat
 
   return (
     <FlatList
-      style={styles.container}
+      style={ styles.container }
       data={ list }
       accessibilityLabel='Contains Journal Entries'
       keyExtractor={ (_item, index) => index.toString() }
@@ -27,7 +27,7 @@ const JournalList: FunctionComponent<JournalListProps> = ({ list, month, navigat
         if ((month != 'All') && !item.date.includes(month)) {
           return null
         }
-        return <JournalItem navigation={navigation} item={item}/>
+        return <ListItem navigation={ navigation } item={ item } />
       }}
     />
   );

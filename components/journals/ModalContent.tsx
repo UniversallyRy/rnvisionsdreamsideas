@@ -23,15 +23,15 @@ const JournalSchema = yup.object({
   body: yup.string().required().min(4),
 });
 
-const AddJournal: FunctionComponent<AddJournalProps> = ({ setModalOpen }) => {
+const ModalContent: FunctionComponent<AddJournalProps> = ({ setModalOpen }) => {
   const dispatch = useAppDispatch();
   return (
-    <Layout style={styles.modalContainer}>
+    <Layout style={ styles.modalContainer }>
       <Formik
         // Controls whether Formik should reset the form if initialValues changes
         enableReinitialize
         initialValues={{ title: '', body: '' }}
-        validationSchema={JournalSchema}
+        validationSchema={ JournalSchema }
         onSubmit={(values, actions) => {
           dispatch(addJournal(values));
           actions.resetForm();
@@ -51,8 +51,8 @@ const AddJournal: FunctionComponent<AddJournalProps> = ({ setModalOpen }) => {
               textAlign='center'
               placeholder='Journal Title'
               onChangeText={handleChange('title')}
-              value={values.title}
-              onBlur={handleBlur('title')}
+              value={ values.title }
+              onBlur={ handleBlur('title') }
               accessibilityLabel='Input Journal Title Here'
             />
             <Text style={styles.errorText}>
@@ -61,17 +61,17 @@ const AddJournal: FunctionComponent<AddJournalProps> = ({ setModalOpen }) => {
             </Text>
             <Input
               textAlign='center'
-              multiline
+              multiline={true}
               placeholder='Journal Body'
-              onChangeText={handleChange('body')}
-              value={values.body}
-              onBlur={handleBlur('body')}
+              onChangeText={ handleChange('body') }
+              value={ values.body }
+              onBlur={ handleBlur('body') }
               accessibilityLabel='Input Journal body text Here'
             />
-            <Text style={styles.errorText}>
-              {touched.body && errors.body}
+            <Text style={ styles.errorText }>
+              { touched.body && errors.body }
             </Text>
-            <SubmitButton onPress={handleSubmit} accessibilityLabel='Clicking here adds journal entry'>
+            <SubmitButton onPress={ handleSubmit } accessibilityLabel='Clicking here adds journal entry'>
               Submit
             </SubmitButton>
           </>
@@ -94,4 +94,4 @@ const styles = StyleSheet.create<Styles>({
   },
 });
 
-export default AddJournal;
+export default ModalContent;

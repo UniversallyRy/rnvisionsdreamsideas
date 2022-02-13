@@ -1,11 +1,11 @@
-import React, { FunctionComponent } from "react";
-import { createStackNavigator, StackNavigationProp } from "@react-navigation/stack";
-import JournalScreen from "../screens/journalScreen";
-import JournalDetails from "../components/journals/journalDetails";
+import React, { FunctionComponent } from 'react';
+import { createStackNavigator, StackNavigationProp } from '@react-navigation/stack';
+import JournalScreen from '../screens/journalScreen';
+import ItemDetails from '../components/journals/ItemDetails';
 
 export type JournalStackParamList = {
-  "Journal Entries": undefined;
-  "Journal Details": { 
+  'Journal Entries': undefined;
+  'Journal Details': { 
     title: string;
     body: string;
     date : string;
@@ -21,23 +21,23 @@ type NavProp = {
   navigation: JournalScreenNavigationProp;
 };
 
-const { Navigator,  Screen } = createStackNavigator<JournalStackParamList>()
+const { Navigator, Screen } = createStackNavigator<JournalStackParamList>()
 
 export const JournalStack: FunctionComponent<NavProp> = () => {
   return (
     <Navigator 
-      initialRouteName={ "Journal Entries" }
+      initialRouteName='Journal Entries'
       screenOptions={{
         headerShown: false,
       }}
     >
       <Screen
-        name={ "Journal Entries" }
+        name='Journal Entries'
         component={ JournalScreen }
       />
       <Screen
-        name={ "Journal Details" }
-        component={ JournalDetails }
+        name='Journal Details'
+        component={ ItemDetails }
       />
 
     </Navigator>

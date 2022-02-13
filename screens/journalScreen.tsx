@@ -1,16 +1,16 @@
-import React, { createContext, Dispatch, SetStateAction, useState } from "react";
-import { StyleSheet, TextStyle, ViewStyle } from "react-native";
+import React, { createContext, Dispatch, SetStateAction, useState } from 'react';
+import { StyleSheet, TextStyle, ViewStyle } from 'react-native';
 import { NavigationScreenProp } from 'react-navigation';
-import { Layout, Text, Modal } from "@ui-kitten/components";
-import Header from "../shared/header";
-import JournalList from "../components/journals/journalList";
-import JournalGridContainer from "../components/journals/journalGrid";
-import AddJournalModal from "../components/journals/addJournalModal";
-import JournalFilter from "../components/journals/journalFilter";
-import { CloseButton, FooterButtons } from "../shared/buttons";
-import { windowHeight, windowWidth } from "../utils/dimensions";
+import { Layout, Text, Modal } from '@ui-kitten/components';
+import ListView from '../components/journals/ListView';
+import GridView from '../components/journals/GridView';
+import ModalContent from '../components/journals/ModalContent';
+import MonthSelect from '../components/journals/MonthSelect';
+import Header from '../shared/header';
+import { CloseButton, FooterButtons } from '../shared/buttons';
+import { windowHeight, windowWidth } from '../utils/dimensions';
 // todo: add swipe to delete
-interface JournalProps {
+interface ScreenProps {
   navigation: NavigationScreenProp<string, object>;
 }
 
@@ -19,43 +19,42 @@ type ContextProps = {
   toggleView: () => void;
 }
 interface Styles {
-  journalContainer: ViewStyle;
-  addJournalTitle: TextStyle;
-  modalContent: ViewStyle;
-  closeModalContainer: ViewStyle;
+  screen: ViewStyle;
+  title: TextStyle;
+  close: ViewStyle;
 }
 
 export const JournalContext = createContext<ContextProps>({setModalOpen: () => {}, toggleView: () => {}});
 
-const JournalScreen: React.FC<JournalProps>= ({ navigation }) => {
+const JournalScreen: React.FC<ScreenProps>= ({ navigation }) => {
   const [modalOpen, setModalOpen] = useState(false);
-  const [gridView, setGridView] = useState(true);
+  const [view, setView] = useState(true);
 
   const toggleView = () => {
-    setGridView(!gridView);
+    setView(!view);
   };
 
   return (
-    <Layout style={ styles.journalContainer }>
-      <Header name={ "Journals" }/>
+    <Layout style={ styles.screen }>
+      <Header name='Journals' />
+      <MonthSelect />
       <Modal
-        style={{ backgroundColor: "white",...styles.journalContainer }}
+        style={{ backgroundColor: 'white', ...styles.screen }}
         visible={ modalOpen }
       >
-        <Text style={ styles.addJournalTitle }>Add A Journal Entry</Text>
-        <AddJournalModal setModalOpen={ setModalOpen } />
+        <Text style={ styles.title }>Add A Journal Entry</Text>
+        <ModalContent setModalOpen={ setModalOpen } />
         <CloseButton
-          style={{ position: "absolute", left: windowWidth * 0.45, bottom: 0 }}
-          accessibilityLabel={ "Closes Modal" }
+          style={ styles.close }
+          accessibilityLabel='Closes Modal'
           onPress={ () => setModalOpen(false) }
         />
       </Modal>
-      <JournalFilter/>
       
-      {gridView ? (
-        <JournalGridContainer navigation={navigation} />
+      {view ? (
+        <GridView navigation={ navigation } />
       ) : (
-        <JournalList navigation={navigation} />
+        <ListView navigation={ navigation } />
       )}
       
       <JournalContext.Provider value={{ setModalOpen, toggleView }}>
@@ -66,23 +65,22 @@ const JournalScreen: React.FC<JournalProps>= ({ navigation }) => {
 };
 
 const styles = StyleSheet.create<Styles>({
-  journalContainer:{
+  screen: {
     flex: 1,
     width: windowWidth,
     height: windowHeight,
-    fontFamily: "roboto-black",
+    fontFamily: 'roboto-black',
   },
-  addJournalTitle: {
-    alignSelf: "center",
+  title: {
+    alignSelf: 'center',
     padding: 20,
     fontSize: 18,
     borderRadius: 2,
   },
-  modalContent: {
-    height: windowHeight,
-  },
-  closeModalContainer: {
-    flex: 1,
+  close: {
+    position: 'absolute', 
+    left: windowWidth * 0.45, 
+    bottom: 0 
   },
 });
 
