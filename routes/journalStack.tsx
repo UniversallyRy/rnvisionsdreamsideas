@@ -1,7 +1,7 @@
 import React, { FunctionComponent } from 'react';
 import { createStackNavigator, StackNavigationProp } from '@react-navigation/stack';
-import JournalScreen from '../screens/journalScreen';
-import ItemDetails from '../components/journals/ItemDetails';
+import Journals from '../screens/journals';
+import Details from '../components/journals/ItemDetails';
 
 export type JournalStackParamList = {
   'Journal Entries': undefined;
@@ -12,13 +12,13 @@ export type JournalStackParamList = {
   };
 };
 
-type JournalScreenNavigationProp = StackNavigationProp<
+type JournalsNavigationProp = StackNavigationProp<
   JournalStackParamList,
   'Journal Entries'
 >;
 
 type NavProp = {
-  navigation: JournalScreenNavigationProp;
+  navigation: JournalsNavigationProp;
 };
 
 const { Navigator, Screen } = createStackNavigator<JournalStackParamList>()
@@ -33,11 +33,11 @@ export const JournalStack: FunctionComponent<NavProp> = () => {
     >
       <Screen
         name='Journal Entries'
-        component={ JournalScreen }
+        component={ Journals }
       />
       <Screen
         name='Journal Details'
-        component={ ItemDetails }
+        component={ Details }
       />
 
     </Navigator>

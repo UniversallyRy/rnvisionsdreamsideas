@@ -1,34 +1,34 @@
-import React, { FunctionComponent, useState, useEffect } from "react";
-import { Image, Platform, StyleSheet, ViewStyle, ImageStyle } from "react-native";
-import { Layout } from "@ui-kitten/components";
-import { ConnectedProps } from "react-redux";
-import { addPic } from "../../redux/reducers/newpic";
-import * as ImagePicker from "expo-image-picker";
-import { manipulateAsync, SaveFormat } from "expo-image-manipulator"
-import { ImageButtons } from "../../shared/buttons";
-import { windowWidth } from "../../utils/dimensions";
-import { useAppDispatch } from "../../utils/hooks";
+import React, { useState, useEffect } from 'react';
+import { Image, Platform, StyleSheet, ViewStyle, ImageStyle } from 'react-native';
+import { ConnectedProps } from 'react-redux';
+import * as ImagePicker from 'expo-image-picker';
+import { manipulateAsync, SaveFormat } from 'expo-image-manipulator'
+import { Layout } from '@ui-kitten/components';
+import { windowWidth } from '../../utils/dimensions';
+import { useAppDispatch } from '../../utils/hooks';
+import { addPic } from '../../redux/reducers/newpic';
+import { ImageButtons } from '../../shared/buttons';
 
 interface Styles {
   container: ViewStyle;
   image: ImageStyle;
 }
 
-const ImagePic: FunctionComponent = () => {
+const ImagePic = () => {
   const [image, setImage] = useState(``);
   const dispatch = useAppDispatch()
   useEffect(() => {
     (async () => {
-      if (Platform.OS !== "web") {
+      if (Platform.OS !== 'web') {
         const { status } =
           await ImagePicker.requestMediaLibraryPermissionsAsync();
         const { camStatus }:any = await ImagePicker.getCameraPermissionsAsync();
-        if (status !== "granted") {
-          alert("Sorry, we need gallery permissions to make this work!");
+        if (status !== 'granted') {
+          alert('Sorry, we need gallery permissions to make this work!');
         }
-        if (camStatus == "granted") {
+        if (camStatus == 'granted') {
           alert(
-            "Sorry, we need permissions from camera app to make this work!"
+            'Sorry, we need permissions from camera app to make this work!'
           );
         }
       }
@@ -68,7 +68,7 @@ const ImagePic: FunctionComponent = () => {
 
   return (
     <Layout style={ styles.container }>
-      { image != "" && (
+      { image != '' && (
         <Image source={{ uri: image }} style={ styles.image } />
       )}
       <ImageButtons
@@ -81,8 +81,8 @@ const ImagePic: FunctionComponent = () => {
 
 const styles = StyleSheet.create<Styles>({
   container:{
-    alignItems:"center",
-    justifyContent: "center",
+    alignItems:'center',
+    justifyContent: 'center',
     width: windowWidth,
     marginBottom: 40,
   },

@@ -1,13 +1,13 @@
-import React, { FC, useState, useRef } from "react";
-import { TouchableOpacity, FlatList, Image, StyleSheet } from "react-native";
+import React, { FC, useState, useRef } from 'react';
+import { TouchableOpacity, FlatList, Image, StyleSheet } from 'react-native';
 import { NavigationScreenProp } from 'react-navigation';
-import { connect, ConnectedProps } from "react-redux";
-import { Layout } from "@ui-kitten/components";
-import { windowHeight, windowWidth } from "../../utils/dimensions";
-import { FooterButtons } from "../../shared/buttons";
-import { VisionContext } from "../../screens/visionScreen";
-import { SPACING, THUMBNAIL_SIZE } from "../../utils/constants";
-// import { deleteVision } from "../../redux/reducers/visions";
+import { connect, ConnectedProps } from 'react-redux';
+import { Layout } from '@ui-kitten/components';
+import { windowHeight, windowWidth } from '../../utils/dimensions';
+import { FooterButtons } from '../../shared/buttons';
+import { VisionContext } from '../../screens/visions';
+import { SPACING, THUMBNAIL_SIZE } from '../../utils/constants';
+// import { deleteVision } from '../../redux/reducers/visions';
 
 // todos: add delete picture option back
 type ImageProps = {
@@ -71,7 +71,7 @@ const VisionListContainer: FC<ImageProps> = ({ navigation, state }) => {
       />
       <FlatList
         data={ state }
-        style={{ position: "absolute", bottom: THUMBNAIL_SIZE - 30 }}
+        style={{ position: 'absolute', bottom: THUMBNAIL_SIZE - 30 }}
         ref={ thumbRef }
         horizontal
         showsHorizontalScrollIndicator={ false }
@@ -81,7 +81,7 @@ const VisionListContainer: FC<ImageProps> = ({ navigation, state }) => {
           return (
             <TouchableOpacity
               onPress={ () => scrollActiveIndex(index) }
-              onLongPress={ () => navigation.navigate("Vision Details", { item }) }
+              onLongPress={ () => navigation.navigate('Vision Details', { item }) }
             >
               <Image
                 source={{ uri:item.uri }}
@@ -91,7 +91,7 @@ const VisionListContainer: FC<ImageProps> = ({ navigation, state }) => {
                   borderRadius: 3,
                   marginRight: SPACING,
                   borderWidth: 1,
-                  borderColor: activeIndex === index ? "#fff" : 'transparent'
+                  borderColor: activeIndex === index ? '#fff' : 'transparent'
                 }}
               />
             </TouchableOpacity>

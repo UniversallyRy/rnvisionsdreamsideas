@@ -1,18 +1,18 @@
 import React, { FunctionComponent } from "react";
 import { createStackNavigator, StackNavigationProp } from "@react-navigation/stack";
-import NoteScreen from "../screens/noteScreen";
+import Notes from "../screens/notes";
 
 type NoteStackParamList = {
   "Check Notes": undefined;
 }
 
-type NoteScreenNavigationProp = StackNavigationProp<
+type NotesNavigationProp = StackNavigationProp<
   NoteStackParamList,
   'Check Notes'
 >
 
 type NavProp = {
-  navigation: NoteScreenNavigationProp;
+  navigation: NotesNavigationProp;
 }
 
 const Stack = createStackNavigator<NoteStackParamList>()
@@ -26,7 +26,7 @@ const NoteStack: FunctionComponent<NavProp> = () => {
     >
       <Stack.Screen
         name={ "Check Notes" }
-        component={ NoteScreen }
+        component={ Notes }
       />
     </Stack.Navigator>
   );

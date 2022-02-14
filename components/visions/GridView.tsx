@@ -1,12 +1,12 @@
-import React, { FunctionComponent, useCallback, memo } from "react";
-import { Image, StyleSheet, ViewStyle, ImageStyle } from "react-native";
-import { FlatList, TouchableOpacity } from "react-native-gesture-handler";
-import { connect, ConnectedProps } from "react-redux";
+import React, { FunctionComponent, useCallback, memo } from 'react';
+import { Image, StyleSheet, ViewStyle, ImageStyle } from 'react-native';
+import { FlatList, TouchableOpacity } from 'react-native-gesture-handler';
+import { connect, ConnectedProps } from 'react-redux';
 import { NavigationScreenProp } from 'react-navigation';
-import { Layout } from "@ui-kitten/components";
-import { windowHeight, windowWidth } from "../../utils/dimensions";
-import { VisionContext } from "../../screens/visionScreen";
-import { FooterButtons } from "../../shared/buttons";
+import { Layout } from '@ui-kitten/components';
+import { windowHeight, windowWidth } from '../../utils/dimensions';
+import { VisionContext } from '../../screens/visions';
+import { FooterButtons } from '../../shared/buttons';
 
 type ListProps = {
   item: {
@@ -22,7 +22,7 @@ type GridProps = {
 }
 
 interface Styles {
-  gridContainer: ViewStyle;
+  grid: ViewStyle;
   gridItem: ImageStyle;
 }
 
@@ -32,8 +32,8 @@ const VisionGridContainer: FunctionComponent<GridProps> = ({ state, navigation }
     return (
       <TouchableOpacity
         style={{ margin: 4, borderRadius: 12, elevation: 2 }}
-        accessibilityLabel={ "Grid Item" }
-        onPress={ () => navigation.navigate("Vision Details", { item }) }
+        accessibilityLabel={ 'Grid Item' }
+        onPress={ () => navigation.navigate('Vision Details', { item }) }
         accessible  
       > 
         <Image
@@ -54,7 +54,7 @@ const VisionGridContainer: FunctionComponent<GridProps> = ({ state, navigation }
     <Layout style={{ flex: 1 }}>
       <FlatList
         numColumns={ 2 }
-        contentContainerStyle={ styles.gridContainer }
+        contentContainerStyle={ styles.grid }
         scrollEnabled
         data={ state }
         keyExtractor={ (_item, index) => index.toString() }
@@ -66,16 +66,16 @@ const VisionGridContainer: FunctionComponent<GridProps> = ({ state, navigation }
 };
 
 const styles = StyleSheet.create<Styles>({
-  gridContainer: {
+  grid: {
     flex: 1,
-    alignSelf: "center",
+    alignSelf: 'center',
     padding: 3,
   },
   gridItem: {
     height: windowHeight * 0.25,
     width: windowWidth * 0.45,
-    alignSelf: "center",
-    overflow: "hidden",
+    alignSelf: 'center',
+    overflow: 'hidden',
     borderRadius: 12,
     borderWidth: 1
   },
