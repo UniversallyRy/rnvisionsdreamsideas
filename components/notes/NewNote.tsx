@@ -25,7 +25,7 @@ const listSchema = yup.object({
   name: yup.string().required().min(4),
 });
 // red, slate blue, black, dark gray, blueish gray, teal, tan
-const AddNoteModal: FunctionComponent<ModalProps> = ({ closeModal }) => {
+const NewNoteModal: FunctionComponent<ModalProps> = ({ closeModal }) => {
   const dispatch = useAppDispatch()
   return (
       <Layout style={ styles.container }>
@@ -119,4 +119,4 @@ const styles = StyleSheet.create<Styles>({
   },
 });
 
-export default AddNoteModal;
+export default NewNoteModal;

@@ -8,13 +8,13 @@ import { useAppDispatch } from '../../utils/hooks';
 import { windowHeight, windowWidth } from '../../utils/dimensions';
 import { deleteNote, addNote } from '../../redux/reducers/note';
 
-interface Values {
+export type NoteProps = {
   name: string;
   id: string;
 } 
 
 type NoteModalProps = {
-  notes: Values[];
+  notes: NoteProps[];
   closeModal: (() => void);
 }
 
@@ -84,7 +84,7 @@ const NotesModal: FunctionComponent<NoteModalProps> = ({ notes, closeModal }) =>
           <Formik
             initialValues={{ name: '', id: '' }}
             validationSchema={ noteSchema }
-            onSubmit={ (values: Values, actions:FormikHelpers<Values>) => {
+            onSubmit={ (values: NoteProps, actions:FormikHelpers<NoteProps>) => {
               dispatch(addNote(values));
               actions.resetForm();
               Keyboard.dismiss();

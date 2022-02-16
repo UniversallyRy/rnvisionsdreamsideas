@@ -1,7 +1,7 @@
 import React, { FunctionComponent } from 'react';
 import { FlatList, StyleSheet, ViewStyle, TextStyle } from 'react-native';
 import { NavigationScreenProp } from 'react-navigation';
-import { connect } from 'react-redux';
+import { connect, ConnectedProps } from 'react-redux';
 import { Card, Layout, Text } from '@ui-kitten/components';
 import { windowHeight, windowWidth } from '../../utils/dimensions';
 
@@ -18,7 +18,7 @@ interface Styles {
   itemDate: TextStyle;
 }
 
-const JournalGridContainer: FunctionComponent<GridProps> = ({ list, month, navigation }) => {     
+const Grid: FunctionComponent<GridProps> = ({ list, month, navigation }) => {     
 
   return (
     <Layout style={ styles.container }>
@@ -80,4 +80,6 @@ const mapStateToProps = (state:any) => {
   return { month, list };
 };
 
-export default connect(mapStateToProps)(JournalGridContainer);
+export default connect(mapStateToProps)(Grid);
+
+export type PropsFromRedux = ConnectedProps<typeof Grid>

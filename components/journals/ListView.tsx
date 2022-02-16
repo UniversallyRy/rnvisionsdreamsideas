@@ -1,7 +1,7 @@
 import React, { FunctionComponent } from 'react';
 import { FlatList, StyleSheet, ViewStyle } from 'react-native';
 import { NavigationScreenProp } from 'react-navigation';
-import { connect } from 'react-redux';
+import { connect, ConnectedProps } from 'react-redux';
 import { JournalStateProps } from '../../redux/reducers/journals';
 import ListItem from './ListItem';
 
@@ -46,3 +46,6 @@ const mapStateToProps = (state): JournalStateProps => {
 };
 
 export default connect(mapStateToProps)(JournalList);
+
+export type PropsFromRedux = ConnectedProps<typeof JournalList>
+

@@ -24,7 +24,7 @@ type ItemProps = {
   index: number
 }
 
-const VisionListContainer: FC<ImageProps> = ({ navigation, state }) => {
+const ListView: FC<ImageProps> = ({ navigation, state }) => {
   const [activeIndex, setActiveIndex] = useState(0)
   const topRef = useRef<FlatList>(null);
   const thumbRef = useRef<FlatList>(null);
@@ -109,6 +109,6 @@ const mapStateToProps = (state: { visions: [] }) => {
   };
 };
 
-export default connect(mapStateToProps)(VisionListContainer);
+export default connect(mapStateToProps)(ListView);
 
-export type PropsFromRedux = ConnectedProps<typeof VisionListContainer>;
+export type PropsFromRedux = ConnectedProps<typeof ListView>;

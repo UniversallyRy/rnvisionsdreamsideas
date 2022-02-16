@@ -6,10 +6,11 @@ import NewNote from './NewNote';
 import TodoList from './TodosContainer';
 import NewTodoList from './NewTodoList';
 import { FooterButtons } from '../../shared/buttons';
-import { connect } from 'react-redux';
+import { connect, ConnectedProps } from 'react-redux';
+import { NoteProps } from './NotesModal';
 
 type ContainerProps = {
-  notes: object[];
+  notes: NoteProps[];
   todos: object[];
 }
 
@@ -116,3 +117,5 @@ const mapStateToProps = (state:any) => {
 };
 
 export default connect(mapStateToProps)(Container);
+
+export type PropsFromRedux = ConnectedProps<typeof Container>

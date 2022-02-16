@@ -31,3 +31,5 @@ function mapDispatchToProps(dispatch) {
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Test);
+
+export type PropsFromRedux = ConnectedProps<typeof Test>;

@@ -22,22 +22,24 @@ type GridProps = {
 }
 
 interface Styles {
+  container: ViewStyle;
   grid: ViewStyle;
-  gridItem: ImageStyle;
+  gridItem: ViewStyle;
+  img: ImageStyle;
 }
 
-const VisionGridContainer: FunctionComponent<GridProps> = ({ state, navigation }) => {
+const GridView: FunctionComponent<GridProps> = ({ state, navigation }) => {
   
   const VisionGridItem = memo(function GridImage({ item }:ListProps) {
     return (
       <TouchableOpacity
-        style={{ margin: 4, borderRadius: 12, elevation: 2 }}
+        style={ styles.gridItem }
         accessibilityLabel={ 'Grid Item' }
         onPress={ () => navigation.navigate('Vision Details', { item }) }
         accessible  
       > 
         <Image
-          style={ styles.gridItem }
+          style={ styles.img }
           source={{ uri: item.uri }}
           testID={ item.id }  
           resizeMode={ 'cover' }
@@ -51,7 +53,7 @@ const VisionGridContainer: FunctionComponent<GridProps> = ({ state, navigation }
   }, []);
 
   return (
-    <Layout style={{ flex: 1 }}>
+    <Layout style={ styles.container }>
       <FlatList
         numColumns={ 2 }
         contentContainerStyle={ styles.grid }
@@ -66,12 +68,20 @@ const VisionGridContainer: FunctionComponent<GridProps> = ({ state, navigation }
 };
 
 const styles = StyleSheet.create<Styles>({
+  container: {
+    flex: 1
+  },
   grid: {
     flex: 1,
     alignSelf: 'center',
     padding: 3,
   },
   gridItem: {
+    margin: 4, 
+    borderRadius: 12, 
+    elevation: 2,
+  },
+  img: {
     height: windowHeight * 0.25,
     width: windowWidth * 0.45,
     alignSelf: 'center',
@@ -87,7 +97,5 @@ const mapStateToProps = (state:any) => {
   };
 };
 
-export default connect(mapStateToProps)(VisionGridContainer);
-
-export type PropsFromRedux = ConnectedProps<typeof VisionGridContainer>
-
+export default connect(mapStateToProps)(GridView);
+export type PropsFromRedux = ConnectedProps<typeof GridView>;

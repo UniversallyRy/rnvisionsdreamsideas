@@ -1,10 +1,10 @@
 import { Card, Layout } from '@ui-kitten/components';
 import React, { FunctionComponent, useState } from 'react';
 import { Text, Modal, StyleSheet, TextStyle, ViewStyle } from 'react-native';
-import NotesModal from './NotesModal';
+import NotesModal, { NoteProps } from './NotesModal';
 
-type NoteListProps = {
-  notes: object[];
+type NoteContainerProps = {
+  notes: NoteProps[];
 }
 
 interface Styles {
@@ -14,7 +14,7 @@ interface Styles {
   subtitle: ViewStyle;
 }
 
-const NoteList: FunctionComponent<NoteListProps> = ({ notes }) => {
+const NoteContainer: FunctionComponent<NoteContainerProps> = ({ notes }) => {
   const [visible, setVisible] = useState(false);
   const noteCount = Object.keys(notes).length;
 
@@ -71,4 +71,4 @@ const styles = StyleSheet.create<Styles>({
   },
 });
 
-export default NoteList;
+export default NoteContainer;

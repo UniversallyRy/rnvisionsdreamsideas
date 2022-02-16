@@ -1,12 +1,11 @@
 import React, { FC } from 'react';
 import { Image, StyleSheet, TextStyle, ViewStyle, ImageStyle } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
 import { NavigationScreenProp } from 'react-navigation';
-import { Card, Text } from '@ui-kitten/components';
-import { windowHeight, windowWidth } from '../../utils/dimensions';
+import { Card, Text, Layout } from '@ui-kitten/components';
 import Header from '../../shared/header';
+import { windowHeight, windowWidth } from '../../utils/dimensions';
 
-type VisionProps = {
+type DetailsProps = {
   navigation: NavigationScreenProp<string, object>;
   route: {
     key: string;
@@ -29,17 +28,17 @@ interface Styles {
   card: ViewStyle;
 }
 
-const VisionDetails: FC<VisionProps> = ({ navigation, route }) => {
+const Details: FC<DetailsProps> = ({ navigation, route }) => {
   const { id, title, uri } = route.params.item;
 
   return (
-    <SafeAreaView style={ styles.container }>
+    <Layout style={ styles.container }>
       <Header name={ 'Vision Details' } navigation={ navigation }/>
       <Card style={ styles.card }>
           <Text style={ styles.title }>{ title }</Text>
           <Image key= { id } source={{ uri }} style={ styles.img } />
       </Card>
-    </SafeAreaView>
+    </Layout>
   );
 };
 
@@ -70,4 +69,4 @@ const styles = StyleSheet.create<Styles>({
   },
 });
 
-export default VisionDetails;
+export default Details;

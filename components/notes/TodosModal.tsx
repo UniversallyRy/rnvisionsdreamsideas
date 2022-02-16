@@ -1,6 +1,6 @@
 import React, { FunctionComponent, useEffect } from 'react';
 import { Text, TouchableOpacity, FlatList, Keyboard, StyleSheet, TextStyle, ViewStyle } from 'react-native';
-import { connect } from 'react-redux';
+import { connect, ConnectedProps } from 'react-redux';
 import { Layout, Input, CheckBox } from '@ui-kitten/components';
 import { Formik } from 'formik';
 import * as yup from 'yup'; 
@@ -243,3 +243,4 @@ const mapStateToProps = (state:any) => {
 };
 
 export default connect(mapStateToProps)(TodosModal);
+export type PropsFromRedux = ConnectedProps<typeof TodosModal>

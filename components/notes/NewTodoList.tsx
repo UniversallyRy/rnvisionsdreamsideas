@@ -19,6 +19,7 @@ interface Styles {
   input: TextStyle;
   errorText: TextStyle;
   create: ViewStyle;
+  colorContainer: ViewStyle;
   colorSelect: ViewStyle;
 }
 
@@ -26,7 +27,7 @@ const listSchema = yup.object({
   name: yup.string().required().min(4),
 });
 // red, slate blue, black, dark gray, blueish gray, teal, tan
-const AddTodoListModal: FunctionComponent<ModalProps> = ({ closeModal }) => {
+const NewTodoList: FunctionComponent<ModalProps> = ({ closeModal }) => {
   const dispatch = useAppDispatch()
   const bgColors = [
     '#FE1F14',
@@ -94,13 +95,7 @@ const AddTodoListModal: FunctionComponent<ModalProps> = ({ closeModal }) => {
                 <Text style={ styles.errorText }>
                   { touched.name && errors.name }
                 </Text>
-                <Layout
-                  style={{
-                    flexDirection: 'row',
-                    justifyContent: 'space-between',
-                    marginTop: 12,
-                  }}
-                >
+                <Layout style={ styles.colorContainer }>
                   { renderColors() }
                 </Layout>
                 <TouchableOpacity
@@ -145,6 +140,11 @@ const styles = StyleSheet.create<Styles>({
   create: {
     marginTop: 24,
   },
+  colorContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginTop: 12,
+  },
   colorSelect: {
     width: 30,
     height: 30,
@@ -159,4 +159,4 @@ const styles = StyleSheet.create<Styles>({
   },
 });
 
-export default AddTodoListModal;
+export default NewTodoList;

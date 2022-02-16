@@ -6,7 +6,7 @@ import { CloseButton } from '../../shared/buttons';
 import { useAppDispatch } from '../../utils/hooks';
 import { deleteList } from '../../redux/reducers/todos';
 
-type TodoListsProps = {
+type TodoContainerProps = {
   list: {
     todos: [];
     name: string;
@@ -24,7 +24,7 @@ interface Styles {
   deleteButton: ViewStyle;
 }
 
-const TodoList: FunctionComponent<TodoListsProps>= ({ list }) => {
+const TodoContainer: FunctionComponent<TodoContainerProps>= ({ list }) => {
   const { todos, name, id, color } = list;
   const [visible, setVisible] = useState(false);
   const [InitRemaining, setInitRemaining] = useState(0);
@@ -126,5 +126,4 @@ const styles = StyleSheet.create<Styles>({
   },
 });
 
-
-export default TodoList;
+export default TodoContainer;
