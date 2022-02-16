@@ -1,7 +1,7 @@
 import React, { FunctionComponent } from 'react';
 import { FlatList, StyleSheet, ViewStyle, TextStyle } from 'react-native';
-import { NavigationScreenProp } from 'react-navigation';
 import { connect, ConnectedProps } from 'react-redux';
+import { NavigationScreenProp } from 'react-navigation';
 import { Card, Layout, Text } from '@ui-kitten/components';
 import { windowHeight, windowWidth } from '../../utils/dimensions';
 
@@ -14,11 +14,11 @@ type GridProps = {
 interface Styles {
   container: ViewStyle;
   grid: ViewStyle;
-  gridItem: ViewStyle;
+  item: ViewStyle;
   itemDate: TextStyle;
 }
 
-const Grid: FunctionComponent<GridProps> = ({ list, month, navigation }) => {     
+const GridView: FunctionComponent<GridProps> = ({ list, month, navigation }) => {     
 
   return (
     <Layout style={ styles.container }>
@@ -36,7 +36,7 @@ const Grid: FunctionComponent<GridProps> = ({ list, month, navigation }) => {
             return (
               <Card
                 key={ title + '_key' }
-                style={ styles.gridItem }
+                style={ styles.item }
                 onPress={ () => navigation.navigate('Journal Details', { title, body, date }) }
               >
                 <Text>{ title }</Text>
@@ -60,7 +60,7 @@ const styles = StyleSheet.create<Styles>({
   grid: {
     padding: 10,
   },
-  gridItem: {
+  item: {
     borderRadius: 3,
     height: windowHeight * 0.25,
     width: windowWidth * 0.29,
@@ -80,6 +80,6 @@ const mapStateToProps = (state:any) => {
   return { month, list };
 };
 
-export default connect(mapStateToProps)(Grid);
+export default connect(mapStateToProps)(GridView);
 
-export type PropsFromRedux = ConnectedProps<typeof Grid>
+export type PropsFromRedux = ConnectedProps<typeof GridView>

@@ -1,9 +1,9 @@
 import React, { FunctionComponent } from 'react';
 import { FlatList, StyleSheet, ViewStyle } from 'react-native';
-import { NavigationScreenProp } from 'react-navigation';
 import { connect, ConnectedProps } from 'react-redux';
-import { JournalStateProps } from '../../redux/reducers/journals';
+import { NavigationScreenProp } from 'react-navigation';
 import ListItem from './ListItem';
+import { JournalStateProps } from '../../redux/reducers/journals';
 
 type JournalListProps = {
   list: [];
@@ -15,7 +15,7 @@ interface Styles {
   container: ViewStyle;   
 }
 
-const JournalList: FunctionComponent<JournalListProps> = ({ list, month, navigation }) => {
+const ListView: FunctionComponent<JournalListProps> = ({ list, month, navigation }) => {
 
   return (
     <FlatList
@@ -45,7 +45,7 @@ const mapStateToProps = (state): JournalStateProps => {
   return { month, list };
 };
 
-export default connect(mapStateToProps)(JournalList);
+export default connect(mapStateToProps)(ListView);
 
-export type PropsFromRedux = ConnectedProps<typeof JournalList>
+export type PropsFromRedux = ConnectedProps<typeof ListView>
 

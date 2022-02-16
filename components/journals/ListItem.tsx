@@ -3,9 +3,9 @@ import { StyleSheet, TextStyle, ViewStyle } from 'react-native';
 import { NavigationScreenProp } from 'react-navigation';
 import { ButtonGroup, Card, Divider, Input, Layout, Text } from '@ui-kitten/components';
 import { CancelButton, DeleteButton, EditButton, SaveButton } from '../../shared/buttons';
-import { deleteJournal, editJournal, editJournalToggle } from '../../redux/reducers/journals';
 import { useAppDispatch } from '../../utils/hooks';
 import { windowHeight, windowWidth } from '../../utils/dimensions';
+import { deleteJournal, editJournal, editJournalToggle } from '../../redux/reducers/journals';
 
 export type Item = {
     id: string;
@@ -15,20 +15,20 @@ export type Item = {
     isEditing: boolean,
 }
 
-type JournalItemProps = {
+type ItemProps = {
   item: Item;
   navigation: NavigationScreenProp<string, object>;
 }
 
 interface Styles {
   container: ViewStyle;
-  title: TextStyle;
-  paragraph: TextStyle;
-  text: TextStyle;
-  date: TextStyle;
+  textContainer: ViewStyle;
+  textTitle: TextStyle;
+  textBody: TextStyle;
+  textDate: TextStyle;
 }
 
-const JournalListItem: FunctionComponent<JournalItemProps> = ({ item,  navigation }) => {
+const ListItem: FunctionComponent<ItemProps> = ({ item,  navigation }) => {
   const { id, title, body, date, isEditing } = item;
   const [textTitle, setTitle] = useState(title);
   const [textBody, setBody] = useState(body);
@@ -44,14 +44,14 @@ const JournalListItem: FunctionComponent<JournalItemProps> = ({ item,  navigatio
       onPress={ () => navigation.navigate('Journal Details', { title, body, date })} 
       accessibilityLabel='Card containing single Journal Entry' 
     >
-      <Layout style={ styles.text }>
+      <Layout style={ styles.textContainer }>
         {isEditing
           ?<Input
               label='Title'
               value={ textTitle }
               onChangeText={ text => setTitle(text) }
             />
-          :<Text style={ styles.title }>
+          :<Text style={ styles.textTitle }>
             { title }
            </Text>
         }
@@ -63,7 +63,7 @@ const JournalListItem: FunctionComponent<JournalItemProps> = ({ item,  navigatio
               multiline={ true }
               onChangeText={ text => setBody(text) }
           />
-          :<Text style={ styles.paragraph }>
+          :<Text style={ styles.textBody }>
             { body }
           </Text>
         }
@@ -71,7 +71,7 @@ const JournalListItem: FunctionComponent<JournalItemProps> = ({ item,  navigatio
       </Layout>
       {isEditing 
         ? null
-        :<Text style={ styles.date }>
+        :<Text style={ styles.textDate }>
           { date }
         </Text>
       }
@@ -97,21 +97,21 @@ const styles = StyleSheet.create<Styles>({
     height: windowHeight * 0.35,
     elevation: 2,
   },
-  text: {
+  textContainer: {
     alignSelf: 'center',
     width: windowWidth * 0.92,
   },
-  title: {
+  textTitle: {
     fontFamily: 'roboto-black',
     fontSize: 20,
     marginBottom: 10,
   },
-  paragraph: {
+  textBody: {
     fontFamily: 'roboto-regular',
     fontSize: 12,
     marginBottom: 10,
   },
-  date: {
+  textDate: {
     fontFamily: 'roboto-italic',
     fontSize: 10,
     margin: 5,
@@ -120,4 +120,4 @@ const styles = StyleSheet.create<Styles>({
 
 
 
-export default JournalListItem;
+export default ListItem;

@@ -1,16 +1,15 @@
 import React, {  useEffect, useState } from 'react';
 import { StyleSheet, ViewStyle, TextStyle } from 'react-native';
 import { Layout, Select, SelectItem, IndexPath } from '@ui-kitten/components';
+import { CloseIcon } from '../../shared/icons';
+import months from '../../utils/months';
 import { windowWidth } from '../../utils/dimensions';
 import { useAppDispatch } from '../../utils/hooks';
-import months from '../../utils/months';
 import { changeMonth } from '../../redux/reducers/journals';
-import { CloseIcon } from '../../shared/icons';
-
 
 interface Styles {
   container: ViewStyle
-  listGroup: ViewStyle;
+  list: ViewStyle;
   listItem: TextStyle;
 }
 
@@ -30,7 +29,7 @@ const MonthSelect = () => {
   return (
     <Layout style={ styles.container } level='1'>
       <Select
-        style={ styles.listGroup }
+        style={ styles.list }
         value={ displayValue }
         label='See All or A Month'
         selectedIndex={ selectedIndex }
@@ -56,14 +55,15 @@ const MonthSelect = () => {
 const styles = StyleSheet.create<Styles>({
   container: {
     width: windowWidth,
-    margin: 1,
     zIndex: 1,
+    margin: 1,
   },
-  listGroup: {
+  list: {
     justifyContent: 'center',
     width: windowWidth,
   },
   listItem: {
+    fontSize: 12,
   }
 });
   

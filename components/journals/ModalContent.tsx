@@ -1,14 +1,14 @@
 import React, { FunctionComponent } from 'react';
-import { StyleSheet, Text, ViewStyle, TextStyle } from 'react-native';
-import { Input, Layout } from '@ui-kitten/components';
+import { Text, StyleSheet, ViewStyle, TextStyle } from 'react-native';
+import { Layout, Input } from '@ui-kitten/components';
 import { Formik } from 'formik';
 import * as yup from 'yup';
-import { windowHeight } from '../../utils/dimensions';
-import { useAppDispatch } from '../../utils/hooks';
-import { addJournal } from '../../redux/reducers/journals';
 import { SubmitButton } from '../../shared/buttons';
+import { useAppDispatch } from '../../utils/hooks';
+import { windowHeight } from '../../utils/dimensions';
+import { addJournal } from '../../redux/reducers/journals';
 
-type AddJournalProps = {
+type ModalProps = {
   setModalOpen: ((i:boolean) => void);
 }
 
@@ -23,7 +23,7 @@ const JournalSchema = yup.object({
   body: yup.string().required().min(4),
 });
 
-const ModalContent: FunctionComponent<AddJournalProps> = ({ setModalOpen }) => {
+const ModalContent: FunctionComponent<ModalProps> = ({ setModalOpen }) => {
   const dispatch = useAppDispatch();
   return (
     <Layout style={ styles.modalContainer }>
@@ -87,10 +87,10 @@ const styles = StyleSheet.create<Styles>({
   },
   errorText: {
     fontFamily: 'roboto-bold',
+    textAlign: 'center',
     color: 'crimson',
     marginBottom: 10,
     marginTop: 6,
-    textAlign: 'center',
   },
 });
 
