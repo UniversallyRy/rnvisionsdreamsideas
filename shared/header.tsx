@@ -31,7 +31,7 @@ const Header:React.FC<HeaderProps> = ({ name, navigation }) => {
         // Show a back button if on a nested detail screen
         alignment={ name.includes("Details") ? "center" : "start" } 
         accessoryLeft={ name.includes("Details") ? BackAction(navigateBack) : undefined } 
-        accessoryRight={ ToggleButton(theme, toggleTheme) } 
+        accessoryRight={ ToggleButton({ theme, toggleTheme }) } 
       />
       <Divider/>
     </Layout>

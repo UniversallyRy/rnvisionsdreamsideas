@@ -1,4 +1,4 @@
-import React, { FormEvent, useContext } from "react";
+import React, { useContext } from "react";
 import { GestureResponderEvent, StyleProp, StyleSheet, TextStyle, ViewStyle } from "react-native";
 import { Layout, Button, ButtonGroup, Text, TopNavigationAction } from "@ui-kitten/components"
 import { BackIcon, CloseIcon, DayIcon, GridIcon, NightIcon, SaveIcon, SubmitIcon } from "./icons";
@@ -169,10 +169,10 @@ export const GridButton = ({ onPress, ...props }) => {
 export const FooterButtons = ({ context }) => {
   const contextObj:any =  useContext(context);
 
-  let setModalOpen: (arg0: boolean) => any, 
-  toggleView: () => any, 
-  toggleNoteModal: () => any, 
-  toggleTodoModal: () => any
+  let setModalOpen: (arg0: boolean) => void, 
+  toggleView: () => void, 
+  toggleNoteModal: () => void, 
+  toggleTodoModal: () => void
 
   if(context._currentValue.hasOwnProperty('setModalOpen')){
     setModalOpen  = contextObj.setModalOpen
