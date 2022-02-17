@@ -4,10 +4,9 @@ import { connect, ConnectedProps } from 'react-redux';
 import { NavigationScreenProp } from 'react-navigation';
 import ListItem from './ListItem';
 import { JournalStateProps } from '../../redux/reducers/journals';
+import { StoreProps } from '../../redux/store';
 
-type JournalListProps = {
-  list: [];
-  month: string;
+interface ListProps extends JournalStateProps {
   navigation: NavigationScreenProp<string, object>;
  }
 
@@ -15,7 +14,7 @@ interface Styles {
   container: ViewStyle;   
 }
 
-const ListView: FunctionComponent<JournalListProps> = ({ list, month, navigation }) => {
+const ListView: FunctionComponent<ListProps> = ({ month, list, navigation }) => {
 
   return (
     <FlatList
@@ -39,7 +38,7 @@ const styles = StyleSheet.create<Styles>({
   },
 });
 
-const mapStateToProps = (state): JournalStateProps => {
+const mapStateToProps = (state: StoreProps) => {
   const { journals } = state
   const { month, list } = journals;
   return { month, list };

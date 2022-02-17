@@ -3,7 +3,7 @@ import { configureStore } from '@reduxjs/toolkit'
 // import { persistStore, persistReducer } from "redux-persist";
 import visions from "./reducers/visions";
 import pic from "./reducers/newpic";
-import journals from "./reducers/journals";
+import journals, { JournalStateProps } from "./reducers/journals";
 import notes from "./reducers/note";
 import todos from "./reducers/todos";
 
@@ -22,6 +22,15 @@ const persistConfig = {
 //   applyMiddleware(),
 //   window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
 // );
+
+export type StoreProps = {
+  visions: [], 
+  pic: [], 
+  journals: JournalStateProps, 
+  todos: [], 
+  notes: [] 
+}
+
 const store = configureStore({
   reducer: { 
     visions: visions, 

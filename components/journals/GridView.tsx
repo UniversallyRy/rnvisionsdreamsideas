@@ -4,11 +4,11 @@ import { connect, ConnectedProps } from 'react-redux';
 import { NavigationScreenProp } from 'react-navigation';
 import { Card, Layout, Text } from '@ui-kitten/components';
 import { windowHeight, windowWidth } from '../../utils/dimensions';
+import { JournalStateProps } from '../../redux/reducers/journals';
+import { StoreProps } from '../../redux/store';
 
-type GridProps = {
+interface GridProps extends JournalStateProps {
   navigation: NavigationScreenProp<string, object>;
-  list: Object[];
-  month: string;
 }
 
 interface Styles {
@@ -18,7 +18,7 @@ interface Styles {
   itemDate: TextStyle;
 }
 
-const GridView: FunctionComponent<GridProps> = ({ list, month, navigation }) => {     
+const GridView: FunctionComponent<GridProps> = ({ month, list, navigation }) => {     
 
   return (
     <Layout style={ styles.container }>
@@ -74,7 +74,7 @@ const styles = StyleSheet.create<Styles>({
   },
 });
 
-const mapStateToProps = (state:any) => {
+const mapStateToProps = (state:StoreProps)=> {
   const { journals } = state
   const { month, list } = journals;
   return { month, list };
