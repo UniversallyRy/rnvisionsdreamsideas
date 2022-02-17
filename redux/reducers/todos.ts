@@ -1,7 +1,18 @@
-import uuid from "../../utils/uuid";
 import { createSlice } from '@reduxjs/toolkit'
+import uuid from "../../utils/uuid";
 
-const initialValue = [
+export type TodoList = {
+  name: string;
+  id: string;
+  color: string;
+  todos: {
+    title: string;
+    id: string;
+    completed: boolean;
+  }[];
+}
+
+const initialListArr: TodoList[] = [
   {
     name: "Plan A Trip",
     id: uuid.generate(),
@@ -82,7 +93,7 @@ const initialValue = [
 
 const todos = createSlice( {
   name: "Todos",
-  initialState: initialValue,
+  initialState: initialListArr,
   reducers:{
     addList: (state, action) => {
       state.push({

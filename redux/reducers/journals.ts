@@ -11,7 +11,7 @@ export type JournalEntry = {
   isEditing: boolean;
 }
 
-export type JournalStateProps = {
+export type JournalEntries = {
   month: string;
   list: JournalEntry[];
 }

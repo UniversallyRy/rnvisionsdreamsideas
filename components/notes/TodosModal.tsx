@@ -8,6 +8,7 @@ import { addTodo, deleteTodo, toggleTodo } from '../../redux/reducers/todos';
 import { useAppDispatch } from '../../utils/hooks';
 import { windowHeight, windowWidth } from '../../utils/dimensions';
 import { CloseButton, SubmitButton } from '../../shared/buttons';
+import { StoreProps } from '../../redux/store';
 
 
 type TodoModalProps = {
@@ -236,7 +237,7 @@ const styles = StyleSheet.create<Styles>({
   },
 });
 
-const mapStateToProps = (state:any) => {
+const mapStateToProps = (state:StoreProps) => {
   return {
     state: state.todos,
   };

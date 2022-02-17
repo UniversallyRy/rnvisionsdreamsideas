@@ -3,9 +3,9 @@ import { configureStore } from '@reduxjs/toolkit'
 // import { persistStore, persistReducer } from "redux-persist";
 import visions from "./reducers/visions";
 import pic from "./reducers/newpic";
-import journals, { JournalStateProps } from "./reducers/journals";
-import notes from "./reducers/note";
-import todos from "./reducers/todos";
+import journals, { JournalEntries } from "./reducers/journals";
+import notes, { Notes } from "./reducers/note";
+import todos, { TodoList } from "./reducers/todos";
 
 const persistConfig = {
   // configuration object for redux-persist
@@ -26,9 +26,9 @@ const persistConfig = {
 export type StoreProps = {
   visions: [], 
   pic: [], 
-  journals: JournalStateProps, 
-  todos: [], 
-  notes: [] 
+  journals: JournalEntries, 
+  todos: TodoList[], 
+  notes: Notes[] 
 }
 
 const store = configureStore({

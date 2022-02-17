@@ -1,7 +1,8 @@
-import { Card, Layout } from '@ui-kitten/components';
 import React, { FunctionComponent, useState } from 'react';
-import { Text, Modal, StyleSheet, TextStyle, ViewStyle } from 'react-native';
-import NotesModal, { NoteProps } from './NotesModal';
+import { Modal, Text, StyleSheet, ViewStyle, TextStyle } from 'react-native';
+import { Card, Layout } from '@ui-kitten/components';
+import NotesModal from './NotesModal';
+import { NoteProps } from '../../redux/reducers/note';
 
 type NoteContainerProps = {
   notes: NoteProps[];

@@ -1,17 +1,19 @@
-import React, { createContext, FunctionComponent, useState } from 'react';
-import { StyleSheet, Text, FlatList, Modal, TextStyle, ViewStyle, View } from 'react-native';
-import { Divider, Layout } from '@ui-kitten/components';
+import React, { createContext, useState, FunctionComponent } from 'react';
+import { View, FlatList, Modal, Text, StyleSheet, ViewStyle, TextStyle } from 'react-native';
+import { connect, ConnectedProps } from 'react-redux';
+import { Layout, Divider } from '@ui-kitten/components';
 import NoteList from './NoteContainer';
 import NewNote from './NewNote';
-import TodoList from './TodosContainer';
+import TodoListsContainer from './TodoListsContainer';
 import NewTodoList from './NewTodoList';
 import { FooterButtons } from '../../shared/buttons';
-import { connect, ConnectedProps } from 'react-redux';
-import { NoteProps } from './NotesModal';
+import { Notes } from '../../redux/reducers/note';
+import { TodoList } from '../../redux/reducers/todos';
+import { StoreProps } from '../../redux/store';
 
 type ContainerProps = {
-  notes: NoteProps[];
-  todos: object[];
+  notes: Notes[];
+  todos: TodoList[];
 }
 
 type ContextProps = {
@@ -26,7 +28,7 @@ interface Styles {
   addList: ViewStyle;
 }
 
-export const NoteContext = createContext<ContextProps>({toggleTodoModal: () => {}, toggleNoteModal: () => {}});
+export const NoteContext = createContext<ContextProps>({ toggleTodoModal: () => {}, toggleNoteModal: () => {} });
 
 const Container: FunctionComponent<ContainerProps> = ({ notes, todos }) => {
   const [todoModal, setTodoModal] = useState(false);
@@ -40,7 +42,7 @@ const Container: FunctionComponent<ContainerProps> = ({ notes, todos }) => {
   };
 
   const renderList = (list) => {
-    return <TodoList list={ list } />;
+    return <TodoListsContainer list={ list } />;
   };
 
   return (
@@ -80,7 +82,7 @@ const Container: FunctionComponent<ContainerProps> = ({ notes, todos }) => {
             keyboardShouldPersistTaps='always'
             />
         </View>
-        <FooterButtons context={NoteContext}/>
+        <FooterButtons context={ NoteContext }/>
       </NoteContext.Provider>
     </Layout>
   );
@@ -108,12 +110,9 @@ const styles = StyleSheet.create<Styles>({
   },
 });
 
-const mapStateToProps = (state:any) => {
+const mapStateToProps = (state: StoreProps) => {
   const { notes, todos } = state;
-  return {
-    notes,
-    todos,
-  }
+  return { notes, todos };
 };
 
 export default connect(mapStateToProps)(Container);

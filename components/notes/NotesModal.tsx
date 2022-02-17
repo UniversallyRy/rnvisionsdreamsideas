@@ -6,12 +6,7 @@ import * as yup from 'yup';
 import { CloseButton, SubmitButton } from '../../shared/buttons';
 import { useAppDispatch } from '../../utils/hooks';
 import { windowHeight, windowWidth } from '../../utils/dimensions';
-import { deleteNote, addNote } from '../../redux/reducers/note';
-
-export type NoteProps = {
-  name: string;
-  id: string;
-} 
+import { deleteNote, addNote, NoteProps } from '../../redux/reducers/note';
 
 type NoteModalProps = {
   notes: NoteProps[];

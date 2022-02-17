@@ -1,7 +1,12 @@
 import uuid from "../../utils/uuid";
 import { createSlice } from '@reduxjs/toolkit'
 
-const initialNotes = [
+export type Notes = {
+  name: string;
+  id: string;
+}
+
+const initialNotes: Notes[] = [
   {
     name: "This is a default note",
     id: uuid.generate(),
