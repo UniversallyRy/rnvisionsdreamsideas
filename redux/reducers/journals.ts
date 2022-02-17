@@ -3,15 +3,17 @@ import moment from 'moment';
 import uuid from '../../utils/uuid';
 import lorem from '../../shared/lorem';
 
+export type JournalEntry = {
+  title: string;
+  body: string;
+  id: string;
+  date: string;
+  isEditing: boolean;
+}
+
 export type JournalStateProps = {
   month: string;
-  list: {
-    title: string;
-    body: string;
-    id: string;
-    date: string;
-    isEditing: boolean;
-  }[];
+  list: JournalEntry[];
 }
 
 const initialState = {
