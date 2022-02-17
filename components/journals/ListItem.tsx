@@ -5,18 +5,10 @@ import { ButtonGroup, Card, Divider, Input, Layout, Text } from '@ui-kitten/comp
 import { CancelButton, DeleteButton, EditButton, SaveButton } from '../../shared/buttons';
 import { useAppDispatch } from '../../utils/hooks';
 import { windowHeight, windowWidth } from '../../utils/dimensions';
-import { deleteJournal, editJournal, editJournalToggle } from '../../redux/reducers/journals';
-
-export type Item = {
-    id: string;
-    title: string;
-    body: string;
-    date: string;
-    isEditing: boolean,
-}
+import { JournalEntry, deleteJournal, editJournal, editJournalToggle } from '../../redux/reducers/journals';
 
 type ItemProps = {
-  item: Item;
+  item: JournalEntry;
   navigation: NavigationScreenProp<string, object>;
 }
 
@@ -34,7 +26,7 @@ const ListItem: FunctionComponent<ItemProps> = ({ item,  navigation }) => {
   const [textBody, setBody] = useState(body);
   const dispatch = useAppDispatch();
 
-  const editHandler = (id) => {
+  const saveHandler = (id) => {
     dispatch(editJournal({ id: id, title: textTitle, body: textBody, isEditing: false }));
   };
 
@@ -77,7 +69,7 @@ const ListItem: FunctionComponent<ItemProps> = ({ item,  navigation }) => {
       }
         {isEditing 
           ?<ButtonGroup>
-            <SaveButton onPress={ () => editHandler(id) }/>
+            <SaveButton onPress={ () => saveHandler(id) }/>
             <CancelButton onPress={ () => dispatch(editJournalToggle({ id: id })) }/>
           </ButtonGroup>
           :<ButtonGroup>
