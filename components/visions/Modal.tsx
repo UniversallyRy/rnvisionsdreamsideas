@@ -2,10 +2,10 @@ import React, { Dispatch, FC, SetStateAction } from 'react';
 import { Animated, Text, TouchableOpacity, StyleSheet, ViewStyle, TextStyle } from 'react-native';
 import { connect, ConnectedProps } from 'react-redux';
 import { useCardAnimation } from '@react-navigation/stack';
+import { Layout, Input } from '@ui-kitten/components';
 import { Formik } from 'formik';
 import * as yup from 'yup';
-import { Input, Layout } from '@ui-kitten/components';
-import ImagePic from './ImagePicker';
+import ModalImage from './ImagePicker';
 import { CloseButton, SubmitButton } from '../../shared/buttons';
 import { useAppDispatch } from '../../utils/hooks';
 import { windowHeight, windowWidth } from '../../utils/dimensions';
@@ -72,7 +72,7 @@ const ModalContent: FC<ModalProps> = ({ picInput, setModalOpen }) => {
             handleSubmit,
           }) => (
             <Layout style={styles.footer}> 
-              <ImagePic/>
+              <ModalImage />
               <Input
                 textAlign='center'
                 style={ styles.textinput }
