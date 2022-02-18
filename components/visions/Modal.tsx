@@ -1,18 +1,18 @@
 import React, { Dispatch, FC, SetStateAction } from 'react';
 import { Animated, Text, TouchableOpacity, StyleSheet, ViewStyle, TextStyle } from 'react-native';
-import { useCardAnimation } from '@react-navigation/stack';
 import { connect, ConnectedProps } from 'react-redux';
+import { useCardAnimation } from '@react-navigation/stack';
 import { Formik } from 'formik';
 import * as yup from 'yup';
 import { Input, Layout } from '@ui-kitten/components';
+import ImagePic from './ImagePicker';
+import { CloseButton, SubmitButton } from '../../shared/buttons';
 import { useAppDispatch } from '../../utils/hooks';
 import { windowHeight, windowWidth } from '../../utils/dimensions';
 import { addVision } from '../../redux/reducers/visions';
-import ImagePic from './ImagePicker';
-import { CloseButton, SubmitButton } from '../../shared/buttons';
 
-interface VisionProps {
-  stateUri: string;
+type ModalProps = {
+  picInput: string;
   setModalOpen: Dispatch<SetStateAction<boolean>>; 
 }
 
@@ -20,18 +20,18 @@ interface Styles {
   container: ViewStyle;
   textinput: TextStyle;
   errorText: TextStyle;
-  visionAddToggle: ViewStyle;
   footer: ViewStyle;
-  buttonStyle: ViewStyle;
+  button: ViewStyle;
 }
 
-const visionSchema = yup.object({
+const pictureSchema = yup.object({
   title: yup.string().required().min(4),
 });
 
-const ModalContent: FC<VisionProps> = ({ stateUri, setModalOpen }) => {
-  const dispatch = useAppDispatch()
+const ModalContent: FC<ModalProps> = ({ picInput, setModalOpen }) => {
+
   const { current } = useCardAnimation();
+  const dispatch = useAppDispatch()
   return (
     <Layout>
       <Animated.View 
@@ -55,8 +55,8 @@ const ModalContent: FC<VisionProps> = ({ stateUri, setModalOpen }) => {
         </TouchableOpacity>
         <Formik
           enableReinitialize={ true }
-          initialValues={{ uri: stateUri, title: '', id: null }}
-          validationSchema={ visionSchema }
+          initialValues={{ uri: picInput, title: '', id: null }}
+          validationSchema={ pictureSchema }
           onSubmit={ (values, actions) => {
             dispatch(addVision(values));
             actions.resetForm();
@@ -80,13 +80,12 @@ const ModalContent: FC<VisionProps> = ({ stateUri, setModalOpen }) => {
                 onChangeText={ handleChange('title') }
                 value={ values.title }
                 onBlur={ handleBlur('title') }
-                
               />
               <Text style={ styles.errorText }>
                 { touched.title && errors.title }
               </Text>
               <SubmitButton
-                style={ styles.buttonStyle }
+                style={ styles.button }
                 onPress={ handleSubmit }
               />
             </Layout>
@@ -104,16 +103,12 @@ const styles = StyleSheet.create<Styles>({
     margin:'auto',
     fontFamily: 'roboto-black',
   },
-  visionAddToggle: {
-    flexDirection: 'row',
-    alignSelf: 'center',
-  },
   textinput: {
     width: windowWidth * 0.75,
     height: 60,
     marginRight: 3,
   },
-  buttonStyle: {
+  button: {
     height: 25,
     width: 25,
   },
@@ -133,10 +128,9 @@ const styles = StyleSheet.create<Styles>({
 });
 
 const mapStateToProps = (state:any) => {
-  return {
-    stateUri: state.pic,
-  };
+  const { pic } = state;
+  return { picInput: pic };
 };
 
 export default connect(mapStateToProps)(ModalContent);
-export type PropsFromRedux = ConnectedProps<typeof ModalContent>
+export type PropsFromRedux = ConnectedProps<typeof ModalContent>;
