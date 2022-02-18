@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from 'react';
+import React, { FC } from 'react';
 import { FlatList, StyleSheet, ViewStyle } from 'react-native';
 import { connect, ConnectedProps } from 'react-redux';
 import { NavigationScreenProp } from 'react-navigation';
@@ -14,7 +14,7 @@ interface Styles {
   container: ViewStyle;   
 }
 
-const ListView: FunctionComponent<ListProps> = ({ month, list, navigation }) => {
+const ListView: FC<ListProps> = ({ month, list, navigation }) => {
 
   return (
     <FlatList

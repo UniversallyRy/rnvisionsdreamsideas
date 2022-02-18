@@ -1,4 +1,4 @@
-import React, { Dispatch, FunctionComponent, SetStateAction } from 'react';
+import React, { Dispatch, FC, SetStateAction } from 'react';
 import { Animated, Text, TouchableOpacity, StyleSheet, ViewStyle, TextStyle } from 'react-native';
 import { useCardAnimation } from '@react-navigation/stack';
 import { connect, ConnectedProps } from 'react-redux';
@@ -29,7 +29,7 @@ const visionSchema = yup.object({
   title: yup.string().required().min(4),
 });
 
-const ModalContent: FunctionComponent<VisionProps> = ({ stateUri, setModalOpen }) => {
+const ModalContent: FC<VisionProps> = ({ stateUri, setModalOpen }) => {
   const dispatch = useAppDispatch()
   const { current } = useCardAnimation();
   return (

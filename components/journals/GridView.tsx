@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from 'react';
+import React, { FC } from 'react';
 import { FlatList, StyleSheet, ViewStyle, TextStyle } from 'react-native';
 import { connect, ConnectedProps } from 'react-redux';
 import { NavigationScreenProp } from 'react-navigation';
@@ -18,7 +18,7 @@ interface Styles {
   itemDate: TextStyle;
 }
 
-const GridView: FunctionComponent<GridProps> = ({ month, list, navigation }) => {     
+const GridView: FC<GridProps> = ({ month, list, navigation }) => {     
 
   return (
     <Layout style={ styles.container }>

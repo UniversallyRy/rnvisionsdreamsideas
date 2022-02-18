@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
-import { Image, StyleSheet, TextStyle, ViewStyle, ImageStyle } from 'react-native';
+import { Image, StyleSheet, ViewStyle, TextStyle, ImageStyle } from 'react-native';
 import { NavigationScreenProp } from 'react-navigation';
-import { Card, Text, Layout } from '@ui-kitten/components';
+import { Layout, Card, Text } from '@ui-kitten/components';
 import Header from '../../shared/header';
 import { windowHeight, windowWidth } from '../../utils/dimensions';
 
@@ -18,14 +18,14 @@ type DetailsProps = {
       },
     },
     path: undefined;
-  };
+  }
 }
 
 interface Styles {
   container: ViewStyle;
-  title: TextStyle;
-  img: ImageStyle;
   card: ViewStyle;
+  img: ImageStyle;
+  title: TextStyle;
 }
 
 const Details: FC<DetailsProps> = ({ navigation, route }) => {

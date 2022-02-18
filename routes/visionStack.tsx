@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from "react";
+import React, { FC } from "react";
 import { createStackNavigator, StackNavigationProp, StackNavigationOptions, TransitionSpecs } from "@react-navigation/stack";
 import Visions from "../screens/visions";
 import Details from "../components/visions/Details";
@@ -51,7 +51,7 @@ const customTrans: StackNavigationOptions = {
   }
 }
 
-const VisionStack: FunctionComponent<NavProp> = () => {
+const VisionStack: FC<NavProp> = () => {
   return (
     <Navigator 
       initialRouteName={ "Vision Images" }

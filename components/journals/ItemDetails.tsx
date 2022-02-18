@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from 'react';
+import React, { FC } from 'react';
 import { StyleSheet, ViewStyle, TextStyle } from 'react-native';
 import { Layout, Card, Text, Divider } from '@ui-kitten/components';
 import { NavigationScreenProp } from 'react-navigation';
@@ -27,7 +27,7 @@ interface Styles {
   textDate: TextStyle;
 }
 
-const ItemDetails: FunctionComponent<DetailsProps> = ({ route, navigation }) => {
+const ItemDetails: FC<DetailsProps> = ({ route, navigation }) => {
 
   const { title, body, date } = route.params;
 

@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useState } from 'react';
+import React, { FC, useState } from 'react';
 import { Modal, Text, StyleSheet, ViewStyle, TextStyle } from 'react-native';
 import { Card, Layout } from '@ui-kitten/components';
 import NotesModal from './NotesModal';
@@ -15,7 +15,7 @@ interface Styles {
   subtitle: ViewStyle;
 }
 
-const NoteContainer: FunctionComponent<NoteContainerProps> = ({ notes }) => {
+const NoteContainer: FC<NoteContainerProps> = ({ notes }) => {
   const [visible, setVisible] = useState(false);
   const noteCount = Object.keys(notes).length;
 

@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useState, useEffect } from 'react';
+import React, { FC, useState, useEffect } from 'react';
 import { Modal, TextStyle, ViewStyle, StyleSheet } from 'react-native';
 import { Card, Layout, Text } from '@ui-kitten/components';
 import TodosModal from './TodosModal';
@@ -19,7 +19,7 @@ interface Styles {
   deleteButton: ViewStyle;
 }
 
-const TodoContainer: FunctionComponent<TodoListsProps>= ({ list }) => {
+const TodoContainer: FC<TodoListsProps>= ({ list }) => {
   const { todos, name, id, color } = list;
   const [visible, setVisible] = useState(false);
   const [InitRemaining, setInitRemaining] = useState(0);

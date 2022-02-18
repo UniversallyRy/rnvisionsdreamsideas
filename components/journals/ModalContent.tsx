@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from 'react';
+import React, { FC } from 'react';
 import { Text, StyleSheet, ViewStyle, TextStyle } from 'react-native';
 import { Layout, Input } from '@ui-kitten/components';
 import { Formik } from 'formik';
@@ -23,7 +23,7 @@ const JournalSchema = yup.object({
   body: yup.string().required().min(4),
 });
 
-const ModalContent: FunctionComponent<ModalProps> = ({ setModalOpen }) => {
+const ModalContent: FC<ModalProps> = ({ setModalOpen }) => {
   const dispatch = useAppDispatch();
   return (
     <Layout style={ styles.modalContainer }>

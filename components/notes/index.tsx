@@ -1,4 +1,4 @@
-import React, { createContext, useState, FunctionComponent } from 'react';
+import React, { createContext, useState, FC } from 'react';
 import { View, FlatList, Modal, Text, StyleSheet, ViewStyle, TextStyle } from 'react-native';
 import { connect, ConnectedProps } from 'react-redux';
 import { Layout, Divider } from '@ui-kitten/components';
@@ -30,7 +30,7 @@ interface Styles {
 
 export const NoteContext = createContext<ContextProps>({ toggleTodoModal: () => {}, toggleNoteModal: () => {} });
 
-const Container: FunctionComponent<ContainerProps> = ({ notes, todos }) => {
+const Container: FC<ContainerProps> = ({ notes, todos }) => {
   const [todoModal, setTodoModal] = useState(false);
   const [noteModal, setNoteModal] = useState(false);
 

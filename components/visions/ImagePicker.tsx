@@ -4,14 +4,14 @@ import { ConnectedProps } from 'react-redux';
 import * as ImagePicker from 'expo-image-picker';
 import { manipulateAsync, SaveFormat } from 'expo-image-manipulator'
 import { Layout } from '@ui-kitten/components';
+import { ImageButtons } from '../../shared/buttons';
 import { windowWidth } from '../../utils/dimensions';
 import { useAppDispatch } from '../../utils/hooks';
 import { addPic } from '../../redux/reducers/newpic';
-import { ImageButtons } from '../../shared/buttons';
 
 interface Styles {
   container: ViewStyle;
-  image: ImageStyle;
+  img: ImageStyle;
 }
 
 const ImagePic = () => {
@@ -69,7 +69,7 @@ const ImagePic = () => {
   return (
     <Layout style={ styles.container }>
       { image != '' && (
-        <Image source={{ uri: image }} style={ styles.image } />
+        <Image source={{ uri: image }} style={ styles.img } />
       )}
       <ImageButtons
         pickImage={ pickImage }
@@ -86,7 +86,7 @@ const styles = StyleSheet.create<Styles>({
     width: windowWidth,
     marginBottom: 40,
   },
-  image:{
+  img:{
     width: 500,
     height: 500,
     marginBottom: 80,

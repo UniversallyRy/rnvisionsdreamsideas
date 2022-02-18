@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from "react";
+import React, { FC } from "react";
 import { createStackNavigator, StackNavigationProp } from "@react-navigation/stack";
 import About from "../screens/about";
 
@@ -14,7 +14,7 @@ type NavProp = {
 
 const Stack = createStackNavigator<AboutStackParamList>();
 
-const AboutStack: FunctionComponent<NavProp> = () => {
+const AboutStack: FC<NavProp> = () => {
   return (
     <Stack.Navigator>
       <Stack.Screen

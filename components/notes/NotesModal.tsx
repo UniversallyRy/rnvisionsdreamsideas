@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from 'react';
+import React, { FC } from 'react';
 import { FlatList, Text, Keyboard, StyleSheet, TextStyle, ViewStyle } from 'react-native';
 import { Card, Input, Layout, Divider } from '@ui-kitten/components';
 import { Formik, FormikHelpers } from 'formik';
@@ -31,7 +31,7 @@ const noteSchema = yup.object({
   name: yup.string().required().min(6),
 });
 
-const NotesModal: FunctionComponent<NoteModalProps> = ({ notes, closeModal }) => {
+const NotesModal: FC<NoteModalProps> = ({ notes, closeModal }) => {
   const taskCount = notes.length;
   const dispatch = useAppDispatch();
 

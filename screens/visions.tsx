@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect, createContext, SetStateAction, Dispatch } from "react";
-import { Animated, Modal, ViewStyle, StyleSheet } from "react-native";
+import { Animated, Modal, StyleSheet, ViewStyle } from "react-native";
 import { NavigationScreenProp } from 'react-navigation';
 import { Layout } from "@ui-kitten/components";
 import Header from "../shared/header";

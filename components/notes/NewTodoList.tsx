@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useState } from 'react';
+import React, { FC, useState } from 'react';
 import { Text, TouchableOpacity, StyleSheet, TextStyle, ViewStyle } from 'react-native';
 import { Input, Layout } from '@ui-kitten/components';
 import { Formik } from 'formik';
@@ -27,7 +27,7 @@ const listSchema = yup.object({
   name: yup.string().required().min(4),
 });
 // red, slate blue, black, dark gray, blueish gray, teal, tan
-const NewTodoList: FunctionComponent<ModalProps> = ({ closeModal }) => {
+const NewTodoList: FC<ModalProps> = ({ closeModal }) => {
   const dispatch = useAppDispatch()
   const bgColors = [
     '#FE1F14',

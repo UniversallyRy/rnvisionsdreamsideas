@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from 'react';
+import React, { FC } from 'react';
 import { createStackNavigator, StackNavigationProp } from '@react-navigation/stack';
 import Journals from '../screens/journals';
 import Details from '../components/journals/ItemDetails';
@@ -23,7 +23,7 @@ type NavProp = {
 
 const { Navigator, Screen } = createStackNavigator<JournalStackParamList>()
 
-export const JournalStack: FunctionComponent<NavProp> = () => {
+export const JournalStack: FC<NavProp> = () => {
   return (
     <Navigator 
       initialRouteName='Journal Entries'

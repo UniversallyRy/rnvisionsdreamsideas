@@ -2,18 +2,17 @@ import { createSlice } from '@reduxjs/toolkit'
 
 const initialState = "";
 
-const newpic = createSlice({
+const picturePicker = createSlice({
   name:"New Pic",
   initialState,
   reducers: {
     addPic: (state, action) => {
       var uri = "";
-      var newUri = uri == action.payload.uri ? "" : action.payload.uri;
-      return newUri;
+      return uri == action.payload.uri ? "" : action.payload.uri;
     }
   }
 });
 
-const { actions, reducer } = newpic
+const { actions, reducer } = picturePicker;
 export const { addPic } = actions;
-export default reducer
+export default reducer;

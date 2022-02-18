@@ -1,24 +1,22 @@
-import React, { FunctionComponent, useCallback, memo } from 'react';
-import { Image, StyleSheet, ViewStyle, ImageStyle } from 'react-native';
-import { FlatList, TouchableOpacity } from 'react-native-gesture-handler';
+import React, { memo, useCallback, FC } from 'react';
+import { FlatList, Image, StyleSheet, ViewStyle, ImageStyle } from 'react-native';
 import { connect, ConnectedProps } from 'react-redux';
 import { NavigationScreenProp } from 'react-navigation';
-import { Layout } from '@ui-kitten/components';
-import { windowHeight, windowWidth } from '../../utils/dimensions';
-import { VisionContext } from '../../screens/visions';
+import { Card, Layout } from '@ui-kitten/components';
 import { FooterButtons } from '../../shared/buttons';
-
-type ListProps = {
-  item: {
-    id: string;
-    title: string;
-    uri: string;
-  }
-}
+import { VisionContext } from '../../screens/visions';
+import { windowHeight, windowWidth } from '../../utils/dimensions';
+import { VisionItem } from '../../redux/reducers/visions';
+import { StoreProps } from '../../redux/store';
 
 type GridProps = {
-  state: ListProps[];
+  visions: VisionItem[];
   navigation: NavigationScreenProp<string,object>;
+}
+
+type ItemProps = {
+  item: VisionItem;
+  index?: number;
 }
 
 interface Styles {
@@ -28,11 +26,11 @@ interface Styles {
   img: ImageStyle;
 }
 
-const GridView: FunctionComponent<GridProps> = ({ state, navigation }) => {
+const GridView: FC<GridProps> = ({ visions, navigation }) => {
   
-  const VisionGridItem = memo(function GridImage({ item }:ListProps) {
+  const GridItem = memo(function GridImage({ item }: ItemProps) {
     return (
-      <TouchableOpacity
+      <Card
         style={ styles.gridItem }
         accessibilityLabel={ 'Grid Item' }
         onPress={ () => navigation.navigate('Vision Details', { item }) }
@@ -44,13 +42,13 @@ const GridView: FunctionComponent<GridProps> = ({ state, navigation }) => {
           testID={ item.id }  
           resizeMode={ 'cover' }
         />
-      </TouchableOpacity>
+      </Card>
     );
   });
 
-  const renderList: FunctionComponent<ListProps> = useCallback(function renderList({ item }) {
-    return <VisionGridItem item={ item } />;
-  }, []);
+  const renderGridItem = useCallback(function fetchItem({ item }: ItemProps) {
+    return <GridItem item={ item } />;
+  }, [ visions ]);
 
   return (
     <Layout style={ styles.container }>
@@ -58,9 +56,9 @@ const GridView: FunctionComponent<GridProps> = ({ state, navigation }) => {
         numColumns={ 2 }
         contentContainerStyle={ styles.grid }
         scrollEnabled
-        data={ state }
+        data={ visions }
         keyExtractor={ (_item, index) => index.toString() }
-        renderItem={ renderList }
+        renderItem={ renderGridItem }
       />
       <FooterButtons context={VisionContext}/>
     </Layout>
@@ -91,10 +89,9 @@ const styles = StyleSheet.create<Styles>({
   },
 });
 
-const mapStateToProps = (state:any) => {
-  return {
-    state: state.visions,
-  };
+const mapStateToProps = (state:StoreProps) => {
+  const { visions } = state;
+  return { visions };
 };
 
 export default connect(mapStateToProps)(GridView);

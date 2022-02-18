@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useEffect } from 'react';
+import React, { FC, useEffect } from 'react';
 import { Text, TouchableOpacity, FlatList, Keyboard, StyleSheet, TextStyle, ViewStyle } from 'react-native';
 import { connect, ConnectedProps } from 'react-redux';
 import { Layout, Input, CheckBox } from '@ui-kitten/components';
@@ -37,7 +37,7 @@ const todoSchema = yup.object({
   title: yup.string().required().min(4),
 });
 
-const TodosModal: FunctionComponent<TodoModalProps> = ({ completedList, item, closeModal }) => {
+const TodosModal: FC<TodoModalProps> = ({ completedList, item, closeModal }) => {
   const newTodos = item.todos;
   const taskCount = item.todos.length;
   const completedCount = newTodos.filter((todo:any) => todo.completed).length;

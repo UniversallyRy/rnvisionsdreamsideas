@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useState } from 'react';
+import React, { FC, useState } from 'react';
 import { StyleSheet, TextStyle, ViewStyle } from 'react-native';
 import { NavigationScreenProp } from 'react-navigation';
 import { ButtonGroup, Card, Divider, Input, Layout, Text } from '@ui-kitten/components';
@@ -20,7 +20,7 @@ interface Styles {
   textDate: TextStyle;
 }
 
-const ListItem: FunctionComponent<ItemProps> = ({ item,  navigation }) => {
+const ListItem: FC<ItemProps> = ({ item,  navigation }) => {
   const { id, title, body, date, isEditing } = item;
   const [textTitle, setTitle] = useState(title);
   const [textBody, setBody] = useState(body);

@@ -1,7 +1,7 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { configureStore } from '@reduxjs/toolkit'
 // import { persistStore, persistReducer } from "redux-persist";
-import visions from "./reducers/visions";
+import visions, { VisionItem } from "./reducers/visions";
 import pic from "./reducers/newpic";
 import journals, { JournalEntries } from "./reducers/journals";
 import notes, { Notes } from "./reducers/note";
@@ -24,8 +24,8 @@ const persistConfig = {
 // );
 
 export type StoreProps = {
-  visions: [], 
-  pic: [], 
+  visions: VisionItem[], 
+  pic: '', 
   journals: JournalEntries, 
   todos: TodoList[], 
   notes: Notes[] 
