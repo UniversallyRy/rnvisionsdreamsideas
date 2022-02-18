@@ -1,7 +1,7 @@
 import React, { FC } from "react";
 import { createStackNavigator, StackNavigationProp, StackNavigationOptions, TransitionSpecs } from "@react-navigation/stack";
-import Visions from "../screens/visions";
-import Details from "../components/visions/Details";
+import VisionScreen from "../screens/Visions";
+import VisionDetails from "../screens/VisionDetails";
 
 type VisionStackParamList = {
   "Vision Images": undefined;
@@ -62,11 +62,11 @@ const VisionStack: FC<NavProp> = () => {
     >
       <Screen
         name={ "Vision Images" }
-        component= { Visions }
+        component= { VisionScreen }
       />
       <Screen
         name={ "Vision Details" }
-        component= { Details }
+        component= { VisionDetails }
       />
     </Navigator>
   );

@@ -3,7 +3,7 @@ import { FlatList, Image, StyleSheet } from 'react-native';
 import { NavigationScreenProp } from 'react-navigation';
 import { connect, ConnectedProps } from 'react-redux';
 import { Card, Layout } from '@ui-kitten/components';
-import { VisionContext } from '../../screens/visions';
+import { VisionContext } from '../../screens/Visions';
 import { FooterButtons } from '../../shared/buttons';
 import { windowHeight, windowWidth } from '../../utils/dimensions';
 import { SPACING, THUMBNAIL_SIZE } from '../../utils/constants';

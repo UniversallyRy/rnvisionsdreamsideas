@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import { createStackNavigator, StackNavigationProp } from '@react-navigation/stack';
-import Journals from '../screens/journals';
-import Details from '../components/journals/ItemDetails';
+import JournalScreen from '../screens/Journals';
+import JournalDetails from '../screens/JournalDetails';
 
 export type JournalStackParamList = {
   'Journal Entries': undefined;
@@ -33,11 +33,11 @@ export const JournalStack: FC<NavProp> = () => {
     >
       <Screen
         name='Journal Entries'
-        component={ Journals }
+        component={ JournalScreen }
       />
       <Screen
         name='Journal Details'
-        component={ Details }
+        component={ JournalDetails }
       />
 
     </Navigator>

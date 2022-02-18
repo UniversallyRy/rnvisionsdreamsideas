@@ -2,8 +2,8 @@ import React, { FC } from 'react';
 import { StyleSheet, ViewStyle, TextStyle } from 'react-native';
 import { Layout, Card, Text, Divider } from '@ui-kitten/components';
 import { NavigationScreenProp } from 'react-navigation';
-import Header from '../../shared/header';
-import { windowHeight, windowWidth } from '../../utils/dimensions';
+import Header from '../shared/header';
+import { windowHeight, windowWidth } from '../utils/dimensions';
 
 export type DetailsProps = {
   route: {
@@ -27,7 +27,7 @@ interface Styles {
   textDate: TextStyle;
 }
 
-const ItemDetails: FC<DetailsProps> = ({ route, navigation }) => {
+const JournalDetails: FC<DetailsProps> = ({ route, navigation }) => {
 
   const { title, body, date } = route.params;
 
@@ -84,4 +84,4 @@ const styles = StyleSheet.create<Styles>({
   },
 });
 
-export default ItemDetails;
+export default JournalDetails;

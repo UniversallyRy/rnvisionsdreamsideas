@@ -2,8 +2,8 @@ import React, { FC } from 'react';
 import { Image, StyleSheet, ViewStyle, TextStyle, ImageStyle } from 'react-native';
 import { NavigationScreenProp } from 'react-navigation';
 import { Layout, Card, Text } from '@ui-kitten/components';
-import Header from '../../shared/header';
-import { windowHeight, windowWidth } from '../../utils/dimensions';
+import Header from '../shared/header';
+import { windowHeight, windowWidth } from '../utils/dimensions';
 
 type DetailsProps = {
   navigation: NavigationScreenProp<string, object>;
@@ -28,7 +28,7 @@ interface Styles {
   title: TextStyle;
 }
 
-const Details: FC<DetailsProps> = ({ navigation, route }) => {
+const VisionDetails: FC<DetailsProps> = ({ navigation, route }) => {
   const { id, title, uri } = route.params.item;
 
   return (
@@ -69,4 +69,4 @@ const styles = StyleSheet.create<Styles>({
   },
 });
 
-export default Details;
+export default VisionDetails;

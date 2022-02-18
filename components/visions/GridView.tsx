@@ -4,7 +4,7 @@ import { connect, ConnectedProps } from 'react-redux';
 import { NavigationScreenProp } from 'react-navigation';
 import { Card, Layout } from '@ui-kitten/components';
 import { FooterButtons } from '../../shared/buttons';
-import { VisionContext } from '../../screens/visions';
+import { VisionContext } from '../../screens/Visions';
 import { windowHeight, windowWidth } from '../../utils/dimensions';
 import { VisionItem } from '../../redux/reducers/visions';
 import { StoreProps } from '../../redux/store';

@@ -1,6 +1,6 @@
 import React, { FC } from "react";
 import { createStackNavigator, StackNavigationProp } from "@react-navigation/stack";
-import About from "../screens/about";
+import AboutScreen from "../screens/About";
 
 type AboutStackParamList = {
   About: undefined;
@@ -19,7 +19,7 @@ const AboutStack: FC<NavProp> = () => {
     <Stack.Navigator>
       <Stack.Screen
         name="About"
-        component={ About }
+        component={ AboutScreen }
       />
     </Stack.Navigator>
   );

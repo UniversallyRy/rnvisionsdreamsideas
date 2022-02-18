@@ -1,6 +1,6 @@
 import React, { FC } from "react";
 import { createStackNavigator, StackNavigationProp } from "@react-navigation/stack";
-import Notes from "../screens/notes";
+import NoteScreen from "../screens/Notes";
 
 type NoteStackParamList = {
   "Check Notes": undefined;
@@ -26,7 +26,7 @@ const NoteStack: FC<NavProp> = () => {
     >
       <Stack.Screen
         name={ "Check Notes" }
-        component={ Notes }
+        component={ NoteScreen }
       />
     </Stack.Navigator>
   );

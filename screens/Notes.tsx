@@ -1,8 +1,8 @@
 import React from "react";
 import { StyleSheet, ViewStyle } from "react-native";
 import { Layout } from "@ui-kitten/components";
-import Container from "../components/notes";
 import Header from "../shared/header";
+import Container from "../components/notes";
 // todo: draggable
 interface Styles {
   noteScreenContainer: ViewStyle;
