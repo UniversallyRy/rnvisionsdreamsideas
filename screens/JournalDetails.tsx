@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import { StyleSheet, ViewStyle, TextStyle } from 'react-native';
-import { Layout, Card, Text, Divider } from '@ui-kitten/components';
 import { NavigationScreenProp } from 'react-navigation';
+import { Layout, Card, Text, Divider } from '@ui-kitten/components';
 import Header from '../shared/header';
 import { windowHeight, windowWidth } from '../utils/dimensions';
 
@@ -31,21 +31,24 @@ const JournalDetails: FC<DetailsProps> = ({ route, navigation }) => {
 
   const { title, body, date } = route.params;
 
+  const Details = ({ child, style }) => {
+    return (
+      <>
+        <Divider />
+        <Text style={ style }>
+          { child }
+        </Text>
+      </>
+    );
+  };
+
   return (
     <Layout style={ styles.container }>
       <Header name='Vision Details' navigation={ navigation }/>
       <Card style={ styles.card }>
-        <Text style={ styles.textTitle }>
-          { title }
-        </Text>
-        <Divider />
-        <Text style={ styles.textBody }>
-          { body }
-        </Text>
-        <Divider />
-        <Text style={ styles.textDate }>
-          { date }
-        </Text>
+        <Details child={ title } style={ styles.textTitle }/>
+        <Details child={ body } style={ styles.textBody }/>
+        <Details child={ date } style={ styles.textDate }/>
       </Card>
     </Layout>
   );
