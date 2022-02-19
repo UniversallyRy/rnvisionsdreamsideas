@@ -1,8 +1,8 @@
 import React, { memo, useCallback, FC } from 'react';
-import { FlatList, Image, StyleSheet, ViewStyle, ImageStyle } from 'react-native';
+import { FlatList, TouchableOpacity, Image, StyleSheet, ViewStyle, ImageStyle } from 'react-native';
 import { connect, ConnectedProps } from 'react-redux';
 import { NavigationScreenProp } from 'react-navigation';
-import { Card, Layout } from '@ui-kitten/components';
+import { Layout } from '@ui-kitten/components';
 import { FooterButtons } from '../../shared/buttons';
 import { VisionContext } from '../../screens/Visions';
 import { windowHeight, windowWidth } from '../../utils/dimensions';
@@ -20,7 +20,6 @@ type ItemProps = {
 }
 
 interface Styles {
-  container: ViewStyle;
   grid: ViewStyle;
   gridItem: ViewStyle;
   img: ImageStyle;
@@ -30,7 +29,7 @@ const GridView: FC<GridProps> = ({ visions, navigation }) => {
   
   const GridItem = memo(function GridImage({ item }: ItemProps) {
     return (
-      <Card
+      <TouchableOpacity
         style={ styles.gridItem }
         accessibilityLabel={ 'Grid Item' }
         onPress={ () => navigation.navigate('Vision Details', { item }) }
@@ -42,7 +41,7 @@ const GridView: FC<GridProps> = ({ visions, navigation }) => {
           testID={ item.id }  
           resizeMode={ 'cover' }
         />
-      </Card>
+      </TouchableOpacity>
     );
   });
 
@@ -51,7 +50,7 @@ const GridView: FC<GridProps> = ({ visions, navigation }) => {
   }, [ visions ]);
 
   return (
-    <Layout style={ styles.container }>
+    <Layout>
       <FlatList
         numColumns={ 2 }
         contentContainerStyle={ styles.grid }
@@ -66,26 +65,17 @@ const GridView: FC<GridProps> = ({ visions, navigation }) => {
 };
 
 const styles = StyleSheet.create<Styles>({
-  container: {
-    flex: 1
-  },
   grid: {
-    flex: 1,
     alignSelf: 'center',
-    padding: 3,
   },
   gridItem: {
     margin: 4, 
-    borderRadius: 12, 
     elevation: 2,
   },
   img: {
     height: windowHeight * 0.25,
     width: windowWidth * 0.45,
-    alignSelf: 'center',
-    overflow: 'hidden',
-    borderRadius: 12,
-    borderWidth: 1
+    borderRadius: 4,
   },
 });
 

@@ -1,16 +1,16 @@
 import React, { memo, useState, useRef, useCallback, FC } from 'react';
-import { FlatList, Image, StyleSheet } from 'react-native';
+import { FlatList, TouchableOpacity, Image, StyleSheet } from 'react-native';
 import { NavigationScreenProp } from 'react-navigation';
 import { connect, ConnectedProps } from 'react-redux';
-import { Card, Layout } from '@ui-kitten/components';
+import { Layout, Tooltip } from '@ui-kitten/components';
 import { VisionContext } from '../../screens/Visions';
-import { FooterButtons } from '../../shared/buttons';
+import { CloseButton, FooterButtons } from '../../shared/buttons';
 import { windowHeight, windowWidth } from '../../utils/dimensions';
 import { SPACING, THUMBNAIL_SIZE } from '../../utils/constants';
 import { VisionItem, deleteVision } from '../../redux/reducers/visions';
 import { StoreProps } from '../../redux/store';
+import { useAppDispatch } from '../../utils/hooks';
 
-// todos: add delete picture option back
 type ListProps = {
   visions: VisionItem[];
   navigation: NavigationScreenProp<string, object>;
@@ -26,10 +26,11 @@ type ThumbnailProps = {
 }
 
 const ListView: FC<ListProps> = ({ visions, navigation }) => {
-  
+  const [visible, setVisible] = useState(false);
   const [activeIndex, setActiveIndex] = useState(0)
   const topRef = useRef<FlatList>(null);
   const thumbRef = useRef<FlatList>(null);
+  const dispatch = useAppDispatch()
 
   const scrollActiveIndex = (index: number) => {
     setActiveIndex(index);
@@ -65,30 +66,41 @@ const ListView: FC<ListProps> = ({ visions, navigation }) => {
     return <BackgroundImage item={ item } />
   }, [ visions ]);
 
-  const ThumbNail = memo(function smallImage({ item, index }: ThumbnailProps) {
-    return (
-      <Card
-        onPress={ () => scrollActiveIndex(index) }
-        onLongPress={ () => navigation.navigate('Vision Details', { item }) }
-      >
-        <Image
-          source={{ uri:item.uri }}
-          style={{
-            width: THUMBNAIL_SIZE,
-            height: THUMBNAIL_SIZE,
-            borderRadius: 3,
-            marginRight: SPACING,
-            borderWidth: 1,
-            borderColor: activeIndex === index ? '#fff' : 'transparent'
-          }}
-        />
-      </Card>
-    )
-  });
+  const renderThumbnail = ({ item, index }: ThumbnailProps) => {
 
-  const renderThumbnail = useCallback(function thumb({ item, index }: ThumbnailProps) {
-    return <ThumbNail item={ item } index={ index } />
-  }, [ visions ]);
+    const thumbNail = () => {
+      return (
+        <TouchableOpacity
+          onPress={ () => scrollActiveIndex(index) }
+          // delayLongPress= { () => navigation.navigate('Vision Details', { item }) }
+          onLongPress={ activeIndex === index ? () => setVisible(true) : undefined }
+        >
+          <Image
+            source={{ uri:item.uri }}
+            style={{
+              width: THUMBNAIL_SIZE,
+              height: THUMBNAIL_SIZE,
+              borderRadius: 3,
+              marginRight: SPACING,
+              borderWidth: 1,
+              borderColor: activeIndex === index ? '#fff' : 'transparent'
+            }}
+            />
+        </TouchableOpacity>
+      );
+    };
+
+    return (
+      <Tooltip
+        anchor={ thumbNail }
+        placement='top'
+        visible={ activeIndex === index ? visible : false }
+        onBackdropPress={ () => setVisible(false) }
+      >
+        <CloseButton onPress={ () => dispatch(deleteVision(item)) }/>
+      </Tooltip>
+    );
+  };
 
   return (
     <Layout style={{ flex: 1 }}>
