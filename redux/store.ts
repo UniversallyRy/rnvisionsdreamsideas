@@ -2,10 +2,10 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { configureStore } from '@reduxjs/toolkit'
 // import { persistStore, persistReducer } from "redux-persist";
 import visions, { VisionItem } from "./reducers/visions";
-import pic from "./reducers/newpic";
 import journals, { JournalEntries } from "./reducers/journals";
 import notes, { Notes } from "./reducers/note";
 import todos, { TodoList } from "./reducers/todos";
+import pic from "./reducers/newpic";
 
 const persistConfig = {
   // configuration object for redux-persist
@@ -25,24 +25,24 @@ const persistConfig = {
 
 export type StoreProps = {
   visions: VisionItem[], 
-  pic: '', 
   journals: JournalEntries, 
+  notes: Notes[],
   todos: TodoList[], 
-  notes: Notes[] 
+  pic: '', 
 }
 
 const store = configureStore({
   reducer: { 
     visions: visions, 
-    pic: pic, 
     journals: journals, 
+    notes: notes, 
     todos: todos, 
-    notes: notes 
+    pic: pic, 
   }
 })
 
 // const persistor = persistStore(store);
 
 export { store };
-export type RootState = ReturnType<typeof store.getState>
-export type AppDispatch = typeof store.dispatch
+export type RootState = ReturnType<typeof store.getState>;
+export type AppDispatch = typeof store.dispatch;
