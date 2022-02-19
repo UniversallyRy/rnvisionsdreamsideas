@@ -3,10 +3,10 @@ import { FlatList, StyleSheet, ViewStyle } from 'react-native';
 import { connect, ConnectedProps } from 'react-redux';
 import { NavigationScreenProp } from 'react-navigation';
 import ListItem from './ListItem';
-import { JournalStateProps } from '../../redux/reducers/journals';
+import { JournalEntries } from '../../redux/reducers/journals';
 import { StoreProps } from '../../redux/store';
 
-interface ListProps extends JournalStateProps {
+interface ListProps extends JournalEntries {
   navigation: NavigationScreenProp<string, object>;
  }
 

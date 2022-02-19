@@ -6,10 +6,10 @@ import * as yup from 'yup';
 import { CloseButton, SubmitButton } from '../../shared/buttons';
 import { useAppDispatch } from '../../utils/hooks';
 import { windowHeight, windowWidth } from '../../utils/dimensions';
-import { deleteNote, addNote, NoteProps } from '../../redux/reducers/note';
+import { deleteIdea, addIdea, Ideas } from '../../redux/reducers/ideas';
 
 type NoteModalProps = {
-  notes: NoteProps[];
+  ideas: Ideas[];
   closeModal: (() => void);
 }
 
@@ -23,7 +23,7 @@ interface Styles {
   noteInput:TextStyle;
   buttonStyle:ViewStyle;
   noteContainer:ViewStyle;
-  deleteNoteButton:ViewStyle;
+  deleteIdeaButton:ViewStyle;
   noteErrorText:TextStyle;
 }
 
@@ -31,8 +31,8 @@ const noteSchema = yup.object({
   name: yup.string().required().min(6),
 });
 
-const NotesModal: FC<NoteModalProps> = ({ notes, closeModal }) => {
-  const taskCount = notes.length;
+const NotesModal: FC<NoteModalProps> = ({ ideas, closeModal }) => {
+  const taskCount = ideas.length;
   const dispatch = useAppDispatch();
 
   const renderNote = ( item:any) => {
@@ -43,8 +43,8 @@ const NotesModal: FC<NoteModalProps> = ({ notes, closeModal }) => {
         >
           <Text>{ name }</Text>
           <CloseButton
-            style={styles.deleteNoteButton}
-            onPress={ () => dispatch(deleteNote({ id })) }
+            style={styles.deleteIdeaButton}
+            onPress={ () => dispatch(deleteIdea({ id })) }
           />
         </Card>
     );
@@ -67,7 +67,7 @@ const NotesModal: FC<NoteModalProps> = ({ notes, closeModal }) => {
         </Layout>
         <Layout>
           <FlatList
-            data={ notes }
+            data={ ideas }
             keyExtractor={ (_, index) => index.toString()  }
             contentContainerStyle={{
               paddingHorizontal: 32,
@@ -79,8 +79,8 @@ const NotesModal: FC<NoteModalProps> = ({ notes, closeModal }) => {
           <Formik
             initialValues={{ name: '', id: '' }}
             validationSchema={ noteSchema }
-            onSubmit={ (values: NoteProps, actions:FormikHelpers<NoteProps>) => {
-              dispatch(addNote(values));
+            onSubmit={ (values: Ideas, actions:FormikHelpers<Ideas>) => {
+              dispatch(addIdea(values));
               actions.resetForm();
               Keyboard.dismiss();
             }}
@@ -179,7 +179,7 @@ const styles = StyleSheet.create<Styles>({
     flexDirection: 'column',
     width: windowWidth * 0.995,
   },
-  deleteNoteButton: {
+  deleteIdeaButton: {
     marginLeft: 'auto',
     marginRight: 3,
   },

@@ -3,13 +3,12 @@ import { FlatList, TouchableOpacity, Image, StyleSheet } from 'react-native';
 import { NavigationScreenProp } from 'react-navigation';
 import { connect, ConnectedProps } from 'react-redux';
 import { Layout, Tooltip } from '@ui-kitten/components';
-import { VisionContext } from '../../screens/Visions';
-import { CloseButton, FooterButtons } from '../../shared/buttons';
+import { CloseButton } from '../../shared/buttons';
 import { windowHeight, windowWidth } from '../../utils/dimensions';
 import { SPACING, THUMBNAIL_SIZE } from '../../utils/constants';
+import { useAppDispatch } from '../../utils/hooks';
 import { VisionItem, deleteVision } from '../../redux/reducers/visions';
 import { StoreProps } from '../../redux/store';
-import { useAppDispatch } from '../../utils/hooks';
 
 type ListProps = {
   visions: VisionItem[];
@@ -126,7 +125,6 @@ const ListView: FC<ListProps> = ({ visions, navigation }) => {
         keyExtractor={ (_, index) => String(index) }
         renderItem={ renderThumbnail }
       />
-      <FooterButtons context={ VisionContext }/>
     </Layout>
   );
 };

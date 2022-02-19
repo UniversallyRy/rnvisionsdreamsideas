@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React from "react";
 import { GestureResponderEvent, StyleProp, StyleSheet, TextStyle, ViewStyle } from "react-native";
 import { Layout, Button, ButtonGroup, Text, TopNavigationAction } from "@ui-kitten/components"
 import { BackIcon, CloseIcon, DayIcon, GridIcon, NightIcon, SaveIcon, SubmitIcon } from "./icons";
@@ -166,34 +166,20 @@ export const GridButton = ({ onPress, ...props }) => {
   );
 };
 
-export const FooterButtons = ({ context }) => {
-  const contextObj:any =  useContext(context);
-
-  let setModalOpen: (arg0: boolean) => void, 
-  toggleView: () => void, 
-  toggleNoteModal: () => void, 
-  toggleTodoModal: () => void
-
-  if(context._currentValue.hasOwnProperty('setModalOpen')){
-    setModalOpen  = contextObj.setModalOpen
-    toggleView  = contextObj.toggleView
-  }else{
-    toggleNoteModal = contextObj.toggleNoteModal
-    toggleTodoModal  = contextObj.toggleTodoModal
-  }
-
+export const FooterButtons = ({ left, right }) => {
   return (
     <Layout style={ styles.footerContainer }>
-      { context._currentValue.toggleView != undefined
+      {/*  if adjustable view, right button is a grid toggle */}
+      { right.name === 'toggleView'
         ?<>
-          <SubmitButton onPress={ () => setModalOpen(true) } style={ styles.footer }/>
-          <GridButton onPress={ () => toggleView() } style={ styles.footer }/>
+          <SubmitButton onPress={ () => left(true) } style={ styles.footer }/>
+          <GridButton onPress={ () => right() } style={ styles.footer }/>
         </>
         :<>
-          <SubmitButton onPress={ () => toggleNoteModal() } style={ styles.note }>
+          <SubmitButton onPress={ () => left(true) } style={ styles.note }>
             Note
           </SubmitButton>
-          <SubmitButton onPress={ () => toggleTodoModal() } style={ styles.todo }>
+          <SubmitButton onPress={ () => right(true) } style={ styles.todo }>
             Todo
           </SubmitButton>
         </>

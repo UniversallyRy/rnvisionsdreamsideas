@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit'
 import uuid from "../../utils/uuid";
 
-export type TodoList = {
+export type TodoListProps = {
   name: string;
   id: string;
   color: string;
@@ -12,7 +12,7 @@ export type TodoList = {
   }[];
 }
 
-const initialListArr: TodoList[] = [
+const initialListArr: TodoListProps[] = [
   {
     name: "Plan A Trip",
     id: uuid.generate(),

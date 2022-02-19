@@ -1,10 +1,10 @@
 import React, { FC } from 'react';
-import { Text, StyleSheet, TextStyle, ViewStyle } from 'react-native';
+import { Text, StyleSheet, ViewStyle, TextStyle } from 'react-native';
 import { Formik } from 'formik';
 import { Input, Layout } from '@ui-kitten/components';
 import * as yup from 'yup';
 import { useAppDispatch } from '../../utils/hooks';
-import { addNote } from '../../redux/reducers/note';
+import { addIdea } from '../../redux/reducers/ideas';
 import { CloseButton, FormButton }  from '../../shared/buttons';
 
 type ModalProps = {
@@ -25,7 +25,7 @@ const listSchema = yup.object({
   name: yup.string().required().min(4),
 });
 // red, slate blue, black, dark gray, blueish gray, teal, tan
-const NewNoteModal: FC<ModalProps> = ({ closeModal }) => {
+const IdeaModal: FC<ModalProps> = ({ closeModal }) => {
   const dispatch = useAppDispatch()
   return (
       <Layout style={ styles.container }>
@@ -40,7 +40,7 @@ const NewNoteModal: FC<ModalProps> = ({ closeModal }) => {
             initialValues={{ name: '', id: 0 }}
             validationSchema={ listSchema }
             onSubmit={ (values, actions) => {
-              dispatch(addNote(values));
+              dispatch(addIdea(values));
               actions.resetForm();
               closeModal();
             }}
@@ -119,4 +119,4 @@ const styles = StyleSheet.create<Styles>({
   },
 });
 
-export default NewNoteModal;
+export default IdeaModal;

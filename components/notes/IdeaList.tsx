@@ -1,50 +1,52 @@
 import React, { FC, useState } from 'react';
 import { Modal, Text, StyleSheet, ViewStyle, TextStyle } from 'react-native';
+import { connect, ConnectedProps } from 'react-redux';
 import { Card, Layout } from '@ui-kitten/components';
-import NotesModal from './NotesModal';
-import { NoteProps } from '../../redux/reducers/note';
+import IdeaModal from './IdeaModal';
+import { Ideas } from '../../redux/reducers/ideas';
+import { StoreProps } from '../../redux/store';
 
-type NoteContainerProps = {
-  notes: NoteProps[];
+type IdeaProps = {
+  ideas: Ideas[];
 }
 
 interface Styles {
-  noteContainer: ViewStyle;
-  noteTitle: TextStyle;
+  ideaContainer: ViewStyle;
+  ideaTitle: TextStyle;
   count: TextStyle;
   subtitle: ViewStyle;
 }
 
-const NoteContainer: FC<NoteContainerProps> = ({ notes }) => {
+const IdeaList: FC<IdeaProps> = ({ ideas }) => {
   const [visible, setVisible] = useState(false);
-  const noteCount = Object.keys(notes).length;
+  const ideaCount = Object.keys(ideas).length;
 
   const toggleListModal = () => {
     setVisible(!visible);
   };
 
   return (
-    <Card style={ [styles.noteContainer, { backgroundColor: 'green' }] } onPress={ () => toggleListModal() }>
+    <Card style={ [styles.ideaContainer, { backgroundColor: 'green' }] } onPress={ () => toggleListModal() }>
       <Modal
         animationType='slide'
         visible={ visible }
         onRequestClose={ () => toggleListModal() }
       >
-        <NotesModal notes={ notes } closeModal={ () => toggleListModal() }/>
+        <IdeaModal ideas={ ideas } closeModal={ () => toggleListModal() }/>
       </Modal>
-        <Text style={ styles.noteTitle } numberOfLines={ 1 }>
-          List of Notes
+        <Text style={ styles.ideaTitle } numberOfLines={ 1 }>
+          List of Ideas
         </Text>
         <Layout style={{ alignItems: 'center', bottom: 0, backgroundColor: 'transparent' }}>
-          <Text style={ styles.count }>{ noteCount }</Text>
-          <Text style={ styles.subtitle }>Notes</Text>
+          <Text style={ styles.count }>{ ideaCount }</Text>
+          <Text style={ styles.subtitle }>Ideas</Text>
         </Layout>
     </Card>
   );
 };
 
 const styles = StyleSheet.create<Styles>({
-  noteContainer: {
+  ideaContainer: {
     padding: 32,
     flexDirection: 'column',
     paddingHorizontal: 16,
@@ -55,7 +57,7 @@ const styles = StyleSheet.create<Styles>({
     height: 280,
     elevation: 2,
   },
-  noteTitle: {
+  ideaTitle: {
     alignSelf: 'center',
     fontSize: 16,
     fontWeight: '700',
@@ -72,4 +74,11 @@ const styles = StyleSheet.create<Styles>({
   },
 });
 
-export default NoteContainer;
+const mapStateToProps = (state: StoreProps) => {
+  const { ideas, todos } = state;
+  return { ideas, todos };
+};
+
+export default connect(mapStateToProps)(IdeaList);
+
+export type PropsFromRedux = ConnectedProps<typeof IdeaList>

@@ -4,10 +4,10 @@ import { Card, Layout, Text } from '@ui-kitten/components';
 import TodosModal from './TodosModal';
 import { CloseButton } from '../../shared/buttons';
 import { useAppDispatch } from '../../utils/hooks';
-import { deleteList, TodoList } from '../../redux/reducers/todos';
+import { deleteList, TodoListProps } from '../../redux/reducers/todos';
 
-type TodoListsProps = {
-  list: TodoList;
+type ListProps = {
+  list: TodoListProps;
 }
 
 interface Styles {
@@ -19,7 +19,7 @@ interface Styles {
   deleteButton: ViewStyle;
 }
 
-const TodoContainer: FC<TodoListsProps>= ({ list }) => {
+const TodoList: FC<ListProps>= ({ list }) => {
   const { todos, name, id, color } = list;
   const [visible, setVisible] = useState(false);
   const [InitRemaining, setInitRemaining] = useState(0);
@@ -121,4 +121,4 @@ const styles = StyleSheet.create<Styles>({
   },
 });
 
-export default TodoContainer;
+export default TodoList;

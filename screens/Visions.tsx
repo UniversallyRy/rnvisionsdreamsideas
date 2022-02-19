@@ -6,6 +6,7 @@ import Header from "../shared/header";
 import ListView from "../components/visions/ListView";
 import GridView from "../components/visions/GridView";
 import ModalContent from "../components/visions/Modal";
+import { FooterButtons } from "../shared/buttons";
 // todos: make visions drag and droppable, fix image reslolution/size
 
 interface VisionProps {
@@ -48,13 +49,12 @@ const Visions: React.FC<VisionProps> = ({ navigation }) => {
         <ModalContent setModalOpen={ setModalOpen } />  
       </Modal>
       {/* when gridview is toggled use gridContainer otherwise VisionsContainer */}
-      <VisionContext.Provider value={{ setModalOpen, toggleView }}>
       {view ? (
         <GridView navigation={ navigation } />
       ) : (
         <ListView navigation={ navigation } />
       )}
-      </VisionContext.Provider>
+        <FooterButtons left={ setModalOpen } right={ toggleView } />
     </Layout>
   );
 };

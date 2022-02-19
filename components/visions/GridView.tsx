@@ -3,8 +3,6 @@ import { FlatList, TouchableOpacity, Image, StyleSheet, ViewStyle, ImageStyle } 
 import { connect, ConnectedProps } from 'react-redux';
 import { NavigationScreenProp } from 'react-navigation';
 import { Layout } from '@ui-kitten/components';
-import { FooterButtons } from '../../shared/buttons';
-import { VisionContext } from '../../screens/Visions';
 import { windowHeight, windowWidth } from '../../utils/dimensions';
 import { VisionItem } from '../../redux/reducers/visions';
 import { StoreProps } from '../../redux/store';
@@ -59,7 +57,6 @@ const GridView: FC<GridProps> = ({ visions, navigation }) => {
         keyExtractor={ (_item, index) => index.toString() }
         renderItem={ renderGridItem }
       />
-      <FooterButtons context={VisionContext}/>
     </Layout>
   );
 };

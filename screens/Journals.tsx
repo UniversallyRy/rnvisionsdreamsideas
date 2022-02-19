@@ -1,4 +1,4 @@
-import React, { createContext, Dispatch, SetStateAction, useState } from 'react';
+import React, { useState } from 'react';
 import { StyleSheet, TextStyle, ViewStyle } from 'react-native';
 import { NavigationScreenProp } from 'react-navigation';
 import { Layout, Text, Modal } from '@ui-kitten/components';
@@ -13,18 +13,11 @@ import { windowHeight, windowWidth } from '../utils/dimensions';
 interface ScreenProps {
   navigation: NavigationScreenProp<string, object>;
 }
-
-type ContextProps = {
-  setModalOpen: Dispatch<SetStateAction<boolean>>; 
-  toggleView: () => void;
-}
 interface Styles {
   screen: ViewStyle;
   title: TextStyle;
   close: ViewStyle;
 }
-
-export const JournalContext = createContext<ContextProps>({setModalOpen: () => {}, toggleView: () => {}});
 
 const JournalScreen: React.FC<ScreenProps>= ({ navigation }) => {
   const [modalOpen, setModalOpen] = useState(false);
@@ -56,10 +49,7 @@ const JournalScreen: React.FC<ScreenProps>= ({ navigation }) => {
       ) : (
         <ListView navigation={ navigation } />
       )}
-      
-      <JournalContext.Provider value={{ setModalOpen, toggleView }}>
-        <FooterButtons context={ JournalContext }/>
-      </JournalContext.Provider>
+      <FooterButtons left={ setModalOpen } right={ toggleView } />
     </Layout>
   );
 };
