@@ -10,13 +10,10 @@ interface Styles {
 }
 
 const NoteScreen = () => {
-  const [todoModal, setTodoModal] = useState(false);
-  const [noteModal, setNoteModal] = useState(false);
   return (
     <Layout style={ styles.noteScreenContainer }>
       <Header name="Notes" />
       <NoteContent />
-      <FooterButtons left={ setTodoModal } right={ setNoteModal } />
     </Layout>
   );
 };

@@ -35,7 +35,7 @@ const IdeaModal: FC<ModalProps> = ({ closeModal }) => {
           onPress={ () => closeModal() }
         />
         <Layout style={ styles.form }>
-          <Text style={ styles.title }>Create A New Note</Text>
+          <Text style={ styles.title }>Type New Idea</Text>
           <Formik
             initialValues={{ name: '', id: 0 }}
             validationSchema={ listSchema }
@@ -58,7 +58,7 @@ const IdeaModal: FC<ModalProps> = ({ closeModal }) => {
                   textAlign='center'
                   enablesReturnKeyAutomatically={ true }
                   style={ styles.input }
-                  placeholder='Enter A New Note . . .'
+                  placeholder='Enter idea . . .'
                   onChangeText={ handleChange('name') }
                   value={ values.name }
                   onBlur={ handleBlur('name') }
@@ -70,7 +70,7 @@ const IdeaModal: FC<ModalProps> = ({ closeModal }) => {
                 </Text>
                 <FormButton 
                   onPress={ handleSubmit }
-                  text='Add Note'
+                  text='Add Idea'
                 />
               </Layout>
             )}

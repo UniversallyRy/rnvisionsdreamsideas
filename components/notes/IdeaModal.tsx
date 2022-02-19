@@ -8,7 +8,7 @@ import { useAppDispatch } from '../../utils/hooks';
 import { windowHeight, windowWidth } from '../../utils/dimensions';
 import { deleteIdea, addIdea, Ideas } from '../../redux/reducers/ideas';
 
-type NoteModalProps = {
+type IdeaModalProps = {
   ideas: Ideas[];
   closeModal: (() => void);
 }
@@ -20,26 +20,26 @@ interface Styles {
   divider: ViewStyle;
   taskCount: ViewStyle;
   footer: ViewStyle;
-  noteInput:TextStyle;
+  ideaInput:TextStyle;
   buttonStyle:ViewStyle;
-  noteContainer:ViewStyle;
+  ideaContainer:ViewStyle;
   deleteIdeaButton:ViewStyle;
-  noteErrorText:TextStyle;
+  ideaErrorText:TextStyle;
 }
 
-const noteSchema = yup.object({
+const ideaSchema = yup.object({
   name: yup.string().required().min(6),
 });
 
-const NotesModal: FC<NoteModalProps> = ({ ideas, closeModal }) => {
+const IdeasModal: FC<IdeaModalProps> = ({ ideas, closeModal }) => {
   const taskCount = ideas.length;
   const dispatch = useAppDispatch();
 
-  const renderNote = ( item:any) => {
+  const renderIdea = ( item:any) => {
     const { name, id } = item;
     return (
         <Card 
-          style={ styles.noteContainer }
+          style={ styles.ideaContainer }
         >
           <Text>{ name }</Text>
           <CloseButton
@@ -63,7 +63,7 @@ const NotesModal: FC<NoteModalProps> = ({ ideas, closeModal }) => {
           ]}
         >
           <Divider style={ styles.divider }/>
-          <Text style={ styles.taskCount }>There are { taskCount } Notes</Text>
+          <Text style={ styles.taskCount }>There are { taskCount } Ideas</Text>
         </Layout>
         <Layout>
           <FlatList
@@ -73,12 +73,12 @@ const NotesModal: FC<NoteModalProps> = ({ ideas, closeModal }) => {
               paddingHorizontal: 32,
               paddingVertical: 64,
             }}
-            renderItem={ ({ item }) => renderNote(item) }
+            renderItem={ ({ item }) => renderIdea(item) }
           />
           </Layout>
           <Formik
             initialValues={{ name: '', id: '' }}
-            validationSchema={ noteSchema }
+            validationSchema={ ideaSchema }
             onSubmit={ (values: Ideas, actions:FormikHelpers<Ideas>) => {
               dispatch(addIdea(values));
               actions.resetForm();
@@ -99,13 +99,13 @@ const NotesModal: FC<NoteModalProps> = ({ ideas, closeModal }) => {
                     textAlign='center'
                     enablesReturnKeyAutomatically={ true }
                     autoCorrect={ true }
-                    style={ styles.noteInput }
-                    placeholder='Enter Note . . .'
+                    style={ styles.ideaInput }
+                    placeholder='Enter Idea . . .'
                     onChangeText={ handleChange('name') }
                     value={ values.name }
                     onBlur={ handleBlur('name') }
                   />
-                  <Text style={ styles.noteErrorText }>
+                  <Text style={ styles.ideaErrorText }>
                     { touched.name && errors.name }
                   </Text>
                 </Layout>
@@ -155,14 +155,14 @@ const styles = StyleSheet.create<Styles>({
     paddingVertical: 5,
     flexDirection: 'row',
   },
-  noteInput: {
+  ideaInput: {
     width: windowWidth * 0.75,
     paddingLeft: 14,
     marginLeft: 5,
     marginRight: 5,
     elevation: 3,
   },
-  noteErrorText:{
+  ideaErrorText:{
     fontSize: 10,
     color: 'crimson',
     fontWeight: 'bold',
@@ -174,7 +174,7 @@ const styles = StyleSheet.create<Styles>({
     height: 30,
     margin: 'auto',
   },
-  noteContainer: {
+  ideaContainer: {
     alignSelf: 'center',
     flexDirection: 'column',
     width: windowWidth * 0.995,
@@ -185,4 +185,4 @@ const styles = StyleSheet.create<Styles>({
   },
 });
 
-export default NotesModal;
+export default IdeasModal;

@@ -1,10 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, } from 'react';
 import { View, Modal, StyleSheet, ViewStyle, TextStyle } from 'react-native';
 import { Layout } from '@ui-kitten/components';
 import IdeaList from './IdeaList';
 import NewIdea from './NewIdea';
 import TodoLists from './TodoLists';
 import NewTodoList from './NewTodoList';
+import { FooterButtons } from '../../shared/buttons';
 
 interface Styles {
   container: ViewStyle;
@@ -48,6 +49,7 @@ const NoteContent = () => {
         <IdeaList />
         <TodoLists />
       </View>
+      <FooterButtons left={ setIdeaModal } right={ setTodoModal } />
     </Layout>
   );
 };

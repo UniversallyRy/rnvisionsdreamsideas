@@ -30,7 +30,7 @@ interface Styles {
   todo:TextStyle;
   deleteButton:ViewStyle;
   deleteTodoButton:ViewStyle;
-  noteErrorText:TextStyle;
+  ideaErrorText:TextStyle;
 }
 
 const todoSchema = yup.object({
@@ -146,7 +146,7 @@ const TodosModal: FC<TodoModalProps> = ({ completedList, item, closeModal }) => 
                 value={ values.title }
                 onBlur={ handleBlur('title') }
               />
-              <Text style={ styles.noteErrorText }>
+              <Text style={ styles.ideaErrorText }>
                 { touched.title && errors.title }
               </Text>
             </Layout>
@@ -201,7 +201,7 @@ const styles = StyleSheet.create<Styles>({
     marginRight: 5,
     elevation: 3,
   },
-  noteErrorText:{
+  ideaErrorText:{
     fontSize: 10,
     color: 'crimson',
     fontWeight: 'bold',
