@@ -22,7 +22,7 @@ interface Styles {
 }
 
 const listSchema = yup.object({
-  name: yup.string().required().min(4),
+  inputValue: yup.string().required().min(4),
 });
 // red, slate blue, black, dark gray, blueish gray, teal, tan
 const IdeaModal: FC<ModalProps> = ({ closeModal }) => {
@@ -37,7 +37,7 @@ const IdeaModal: FC<ModalProps> = ({ closeModal }) => {
         <Layout style={ styles.form }>
           <Text style={ styles.title }>Type New Idea</Text>
           <Formik
-            initialValues={{ name: '', id: 0 }}
+            initialValues={{ inputValue: '', inputId: 0 }}
             validationSchema={ listSchema }
             onSubmit={ (values, actions) => {
               dispatch(addIdea(values));
@@ -59,14 +59,14 @@ const IdeaModal: FC<ModalProps> = ({ closeModal }) => {
                   enablesReturnKeyAutomatically={ true }
                   style={ styles.input }
                   placeholder='Enter idea . . .'
-                  onChangeText={ handleChange('name') }
-                  value={ values.name }
-                  onBlur={ handleBlur('name') }
+                  onChangeText={ handleChange('inputValue') }
+                  value={ values.inputValue }
+                  onBlur={ handleBlur('inputValue') }
                   autoCorrect
                 />
 
                 <Text style={ styles.errorText }>
-                  { touched.name && errors.name }
+                  { touched.inputValue && errors.inputValue }
                 </Text>
                 <FormButton 
                   onPress={ handleSubmit }

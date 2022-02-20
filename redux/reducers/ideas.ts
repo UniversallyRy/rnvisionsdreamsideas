@@ -1,19 +1,19 @@
-import uuid from "../../utils/uuid";
 import { createSlice } from '@reduxjs/toolkit';
+import uuid from "../../utils/uuid";
 
-export type Ideas = {
-  name: string;
-  id: string;
+export type Idea = {
+  inputValue: string;
+  inputId: string;
 }
 
-const initialIdeas: Ideas[] = [
+const initialIdeas: Idea[] = [
   {
-    name: "idea 1",
-    id: uuid.generate(),
+    inputValue: "idea 1",
+    inputId: uuid.generate(),
   },
   {
-    name: "idea 2",
-    id: uuid.generate(),
+    inputValue: "idea 2",
+    inputId: uuid.generate(),
   },
 ];
 
@@ -23,8 +23,8 @@ const ideas = createSlice( {
   reducers: {
     addIdea: (state, action) => {
       state.push({
-        name: action.payload.name,
-        id: uuid.generate(),
+        inputValue: action.payload.inputValue,
+        inputId: uuid.generate(),
       })
     },
     editIdea: (state, action) => {
@@ -32,7 +32,7 @@ const ideas = createSlice( {
       return newState;
     },
     deleteIdea: (state, action) => {
-      return state.filter((note) => note.id != action.payload.id);
+      return state.filter((idea) => idea.inputId != action.payload.inputId);
     },
   }
 });

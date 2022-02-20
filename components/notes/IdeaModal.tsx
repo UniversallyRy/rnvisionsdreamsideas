@@ -6,10 +6,10 @@ import * as yup from 'yup';
 import { CloseButton, SubmitButton } from '../../shared/buttons';
 import { useAppDispatch } from '../../utils/hooks';
 import { windowHeight, windowWidth } from '../../utils/dimensions';
-import { deleteIdea, addIdea, Ideas } from '../../redux/reducers/ideas';
+import { deleteIdea, addIdea, Idea } from '../../redux/reducers/ideas';
 
 type IdeaModalProps = {
-  ideas: Ideas[];
+  ideas: Idea[];
   closeModal: (() => void);
 }
 
@@ -28,23 +28,23 @@ interface Styles {
 }
 
 const ideaSchema = yup.object({
-  name: yup.string().required().min(6),
+  inputValue: yup.string().required().min(6),
 });
 
 const IdeasModal: FC<IdeaModalProps> = ({ ideas, closeModal }) => {
   const taskCount = ideas.length;
   const dispatch = useAppDispatch();
 
-  const renderIdea = ( item:any) => {
-    const { name, id } = item;
+  const renderIdea = ( item: Idea) => {
+    const { inputValue, inputId } = item;
     return (
         <Card 
           style={ styles.ideaContainer }
         >
-          <Text>{ name }</Text>
+          <Text>{ inputValue }</Text>
           <CloseButton
             style={styles.deleteIdeaButton}
-            onPress={ () => dispatch(deleteIdea({ id })) }
+            onPress={ () => dispatch(deleteIdea({ inputId })) }
           />
         </Card>
     );
@@ -77,9 +77,9 @@ const IdeasModal: FC<IdeaModalProps> = ({ ideas, closeModal }) => {
           />
           </Layout>
           <Formik
-            initialValues={{ name: '', id: '' }}
+            initialValues={{ inputValue: '', inputId: '' }}
             validationSchema={ ideaSchema }
-            onSubmit={ (values: Ideas, actions:FormikHelpers<Ideas>) => {
+            onSubmit={ (values: Idea, actions:FormikHelpers<Idea>) => {
               dispatch(addIdea(values));
               actions.resetForm();
               Keyboard.dismiss();
@@ -101,12 +101,12 @@ const IdeasModal: FC<IdeaModalProps> = ({ ideas, closeModal }) => {
                     autoCorrect={ true }
                     style={ styles.ideaInput }
                     placeholder='Enter Idea . . .'
-                    onChangeText={ handleChange('name') }
-                    value={ values.name }
-                    onBlur={ handleBlur('name') }
+                    onChangeText={ handleChange('inputValue') }
+                    value={ values.inputValue }
+                    onBlur={ handleBlur('inputValue') }
                   />
                   <Text style={ styles.ideaErrorText }>
-                    { touched.name && errors.name }
+                    { touched.inputValue && errors.inputValue }
                   </Text>
                 </Layout>
                 <SubmitButton

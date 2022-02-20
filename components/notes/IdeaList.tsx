@@ -3,11 +3,11 @@ import { Modal, Text, StyleSheet, ViewStyle, TextStyle } from 'react-native';
 import { connect, ConnectedProps } from 'react-redux';
 import { Card, Layout } from '@ui-kitten/components';
 import IdeaModal from './IdeaModal';
-import { Ideas } from '../../redux/reducers/ideas';
+import { Idea } from '../../redux/reducers/ideas';
 import { StoreProps } from '../../redux/store';
 
 type IdeaProps = {
-  ideas: Ideas[];
+  ideas: Idea[];
 }
 
 interface Styles {
@@ -80,5 +80,4 @@ const mapStateToProps = (state: StoreProps) => {
 };
 
 export default connect(mapStateToProps)(IdeaList);
-
-export type PropsFromRedux = ConnectedProps<typeof IdeaList>
+export type PropsFromRedux = ConnectedProps<typeof IdeaList>;
