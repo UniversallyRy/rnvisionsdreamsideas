@@ -3,8 +3,8 @@ import { configureStore } from '@reduxjs/toolkit'
 // import { persistStore, persistReducer } from "redux-persist";
 import visions, { VisionItem } from "./reducers/visions";
 import journals, { JournalEntries } from "./reducers/journals";
-import ideas, { Ideas } from "./reducers/ideas";
-import todos, { TodoListProps } from "./reducers/todos";
+import ideas, { Idea } from "./reducers/ideas";
+import todosLists, { TodoListProps } from "./reducers/todos";
 import pic from "./reducers/newpic";
 
 const persistConfig = {
@@ -26,8 +26,8 @@ const persistConfig = {
 export type StoreProps = {
   visions: VisionItem[], 
   journals: JournalEntries, 
-  ideas: Ideas[],
-  todos: TodoListProps[], 
+  ideas: Idea[],
+  todosLists: TodoListProps[], 
   pic: '', 
 }
 
@@ -36,7 +36,7 @@ const store = configureStore({
     visions: visions, 
     journals: journals, 
     ideas: ideas, 
-    todos: todos, 
+    todosLists: todosLists, 
     pic: pic, 
   }
 })

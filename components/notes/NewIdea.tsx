@@ -1,11 +1,12 @@
 import React, { FC } from 'react';
-import { Text, StyleSheet, ViewStyle, TextStyle } from 'react-native';
+import { StyleSheet, ViewStyle, TextStyle } from 'react-native';
 import { Formik } from 'formik';
-import { Input, Layout } from '@ui-kitten/components';
+import { Input, Layout, Text } from '@ui-kitten/components';
 import * as yup from 'yup';
 import { useAppDispatch } from '../../utils/hooks';
 import { addIdea } from '../../redux/reducers/ideas';
 import { CloseButton, FormButton }  from '../../shared/buttons';
+import { windowHeight, windowWidth } from '../../utils/dimensions';
 
 type ModalProps = {
   closeModal: (() => void);
@@ -66,11 +67,12 @@ const IdeaModal: FC<ModalProps> = ({ closeModal }) => {
                 />
 
                 <Text style={ styles.errorText }>
-                  { touched.inputValue && errors.inputValue }
+                  { touched.inputValue && errors.inputValue || '' }
                 </Text>
                 <FormButton 
                   onPress={ handleSubmit }
                   text='Add Idea'
+                  color='green'
                 />
               </Layout>
             )}
@@ -83,6 +85,8 @@ const IdeaModal: FC<ModalProps> = ({ closeModal }) => {
 const styles = StyleSheet.create<Styles>({
   container: {
     flex: 1,
+    width: windowWidth,
+    height: windowHeight,
     justifyContent: 'center',
     alignItems: 'center',
   },

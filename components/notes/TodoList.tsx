@@ -31,8 +31,8 @@ const TodoList: FC<ListProps>= ({ list }) => {
     setVisible(!visible);
   };
 
-  useEffect(()=>{
-    if(isMount){
+  useEffect(()=> {
+    if(isMount) {
       let completedCount = (filtered(todos, (todo:any) => todo.completed));
       let remainingCount = (filtered(todos, (todo:any) => !todo.completed));
       setInitCount(Object.keys(completedCount).length);
@@ -41,7 +41,7 @@ const TodoList: FC<ListProps>= ({ list }) => {
       return;
     }
     completedList(InitRemaining, InitCount);
-  }, [TodosModal])
+  }, [TodosModal]);
     
 const completedList = (remaining:number, completed:number) => {
   setInitRemaining(remaining);
@@ -66,7 +66,7 @@ const completedList = (remaining:number, completed:number) => {
           visible={ visible }
           accessibilityLabel='CLicking here opens Todo Modal'
         >
-          <TodosModal completedList={ completedList } item={ list } closeModal={ () => toggleListModal() } />
+          <TodosModal completedList={ completedList } list={ list } closeModal={ () => toggleListModal() } />
         </Modal>
         <Text style={ styles.listTitle } numberOfLines={ 1 }> { name } </Text>
         <Text style={ styles.count }>{ InitRemaining }</Text>

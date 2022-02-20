@@ -1,5 +1,4 @@
 import React, { FC } from 'react';
-import { StyleSheet, ViewStyle, TextStyle } from 'react-native';
 import { connect, ConnectedProps } from 'react-redux';
 import { List } from '@ui-kitten/components';
 import TodoList from './TodoList';
@@ -7,18 +6,10 @@ import { TodoListProps } from '../../redux/reducers/todos';
 import { StoreProps } from '../../redux/store';
 
 type ContentProps = {
-  todos: TodoListProps[];
+  todosLists: TodoListProps[];
 }
 
-interface Styles {
-  container: ViewStyle;
-  titleStyle: TextStyle;
-  title: TextStyle;
-  addList: ViewStyle;
-}
-
-const TodoLists: FC<ContentProps> = ({ todos }) => {
-
+const TodoLists: FC<ContentProps> = ({ todosLists }) => {
   const renderTodoLists = (list) => {
     return <TodoList list={ list } />;
   };
@@ -26,7 +17,7 @@ const TodoLists: FC<ContentProps> = ({ todos }) => {
   return (
     <List
       keyExtractor={ (_, index) => index.toString() }  
-      data={ todos }
+      data={ todosLists }
       horizontal={ true }
       showsHorizontalScrollIndicator={ false }
       renderItem={ ({ item }) => renderTodoLists(item) }
@@ -35,31 +26,10 @@ const TodoLists: FC<ContentProps> = ({ todos }) => {
   );
 };
 
-const styles = StyleSheet.create<Styles>({
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  titleStyle: {
-    flexDirection: 'row',
-    marginTop: 50,
-  },
-  title: {
-    fontSize: 38,
-    fontWeight: '800',
-    paddingHorizontal: 20,
-  },
-  addList: {
-    flexDirection: 'row',
-    alignSelf: 'center',
-    marginTop: 'auto'
-  },
-});
 
 const mapStateToProps = (state: StoreProps) => {
-  const { todos } = state;
-  return { todos };
+  const { todosLists } = state;
+  return { todosLists };
 };
 
 export default connect(mapStateToProps)(TodoLists);

@@ -1,11 +1,12 @@
 import React, { FC, useState } from 'react';
-import { Text, TouchableOpacity, StyleSheet, TextStyle, ViewStyle } from 'react-native';
-import { Input, Layout } from '@ui-kitten/components';
+import { StyleSheet, TextStyle, ViewStyle } from 'react-native';
+import { Layout, Button, Input, Text } from '@ui-kitten/components';
 import { Formik } from 'formik';
 import * as yup from 'yup';
 import { useAppDispatch } from '../../utils/hooks';
 import { addList } from '../../redux/reducers/todos';
 import { CloseButton, FormButton }  from '../../shared/buttons';
+import { windowHeight, windowWidth } from '../../utils/dimensions';
 
 type ModalProps = {
   closeModal: (() => void);
@@ -18,7 +19,6 @@ interface Styles {
   title: TextStyle;
   input: TextStyle;
   errorText: TextStyle;
-  create: ViewStyle;
   colorContainer: ViewStyle;
   colorSelect: ViewStyle;
 }
@@ -43,7 +43,7 @@ const NewTodoList: FC<ModalProps> = ({ closeModal }) => {
   const renderColors = () => {
     return bgColors.map((color) => {
       return (
-        <TouchableOpacity
+        <Button
           key={ color }
           style={ [styles.colorSelect, { backgroundColor: color }] }
           onPress={ () => setColor(color) }
@@ -92,14 +92,12 @@ const NewTodoList: FC<ModalProps> = ({ closeModal }) => {
                 />
 
                 <Text style={ styles.errorText }>
-                  { touched.name && errors.name }
+                  { touched.name && errors.name || '' }
                 </Text>
                 <Layout style={ styles.colorContainer }>
                   { renderColors() }
                 </Layout>
-                <TouchableOpacity style={ styles.create }>
                   <FormButton color={ bgColor } text='Add List' onPress={ handleSubmit }/>
-                </TouchableOpacity>
               </Layout>
             )}
           </Formik>
@@ -111,6 +109,8 @@ const NewTodoList: FC<ModalProps> = ({ closeModal }) => {
 const styles = StyleSheet.create<Styles>({
   container: {
     flex: 1,
+    width: windowWidth,
+    height: windowHeight,
     justifyContent: 'center',
     alignItems: 'center',
   },
@@ -149,11 +149,10 @@ const styles = StyleSheet.create<Styles>({
   colorSelect: {
     width: 30,
     height: 30,
-    borderRadius: 2,
-  },
-  create: {
-    marginTop: 24,
+    marginBottom: 10,
     borderWidth: 0,
+    borderRadius: 2,
+    elevation: 2,
   },
 });
 

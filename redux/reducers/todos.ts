@@ -1,15 +1,17 @@
 import { createSlice } from '@reduxjs/toolkit'
 import uuid from "../../utils/uuid";
 
+export type TodoProps = {
+    title: string;
+    id: string;
+    completed: boolean;
+}
+
 export type TodoListProps = {
   name: string;
   id: string;
   color: string;
-  todos: {
-    title: string;
-    id: string;
-    completed: boolean;
-  }[];
+  todos: TodoProps[];
 }
 
 const initialListArr: TodoListProps[] = [
@@ -91,7 +93,7 @@ const initialListArr: TodoListProps[] = [
   },
 ];
 
-const todos = createSlice( {
+const todosLists = createSlice( {
   name: "Todos",
   initialState: initialListArr,
   reducers:{
@@ -104,11 +106,11 @@ const todos = createSlice( {
       })
     },
     deleteList: (state, action) => {
-      return state.filter((todo) => todo.id != action.payload.id);
+      return state.filter((list) => list.id != action.payload.id);
     },
     addTodo: (state, action) => {
       state.map((item) => {
-        if (item.id == action.payload.listid) {
+        if (item.id == action.payload.listId) {
           item.todos.push({
             title: action.payload.title,
             id: uuid.generate(),
@@ -122,7 +124,7 @@ const todos = createSlice( {
     },
     toggleTodo: (state, action) => {
       state.map((item) => {
-        if (item.id == action.payload.listid ) {
+        if (item.id == action.payload.listId ) {
           item.todos.map((todo) => {
             if(todo.id == action.payload.id) {
               todo.completed = !todo.completed
@@ -133,7 +135,7 @@ const todos = createSlice( {
     },
     deleteTodo: (state, action) => {
       state.map((item) => {
-        if (item.id == action.payload.listid) {
+        if (item.id == action.payload.listId) {
           item.todos = item.todos.filter((todo) => todo.id != action.payload.id);
         }
       });
@@ -142,6 +144,6 @@ const todos = createSlice( {
   }
 });
 
-const { actions, reducer } = todos;
-export const { addList, deleteList, addTodo, editTodo, toggleTodo, deleteTodo} = actions;
+const { actions, reducer } = todosLists;
+export const { addList, deleteList, addTodo, editTodo, toggleTodo, deleteTodo } = actions;
 export default reducer;
