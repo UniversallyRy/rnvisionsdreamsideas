@@ -1,6 +1,7 @@
 import React, { FC } from 'react';
-import { FlatList, StyleSheet, ViewStyle, TextStyle } from 'react-native';
+import { StyleSheet, ViewStyle, TextStyle } from 'react-native';
 import { connect, ConnectedProps } from 'react-redux';
+import { List } from '@ui-kitten/components';
 import TodoList from './TodoList';
 import { TodoListProps } from '../../redux/reducers/todos';
 import { StoreProps } from '../../redux/store';
@@ -23,7 +24,7 @@ const TodoLists: FC<ContentProps> = ({ todos }) => {
   };
 
   return (
-    <FlatList
+    <List
       keyExtractor={ (_, index) => index.toString() }  
       data={ todos }
       horizontal={ true }

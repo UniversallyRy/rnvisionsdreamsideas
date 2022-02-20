@@ -1,7 +1,7 @@
 import React, { FC, useEffect } from 'react';
-import { Text, TouchableOpacity, FlatList, Keyboard, StyleSheet, TextStyle, ViewStyle } from 'react-native';
+import { TouchableOpacity, Keyboard, StyleSheet, TextStyle, ViewStyle } from 'react-native';
 import { connect, ConnectedProps } from 'react-redux';
-import { Layout, Input, CheckBox } from '@ui-kitten/components';
+import { Layout, List, Input, Text, CheckBox } from '@ui-kitten/components';
 import { Formik } from 'formik';
 import * as yup from 'yup'; 
 import { addTodo, deleteTodo, toggleTodo } from '../../redux/reducers/todos';
@@ -103,7 +103,7 @@ const TodosModal: FC<TodoModalProps> = ({ completedList, item, closeModal }) => 
         </Text>
       </Layout>
       <TouchableOpacity style={ styles.section }>
-        <FlatList
+        <List
           data={ item.todos }
           keyExtractor={ (_, index) => index.toString() }
           contentContainerStyle={{
@@ -147,7 +147,7 @@ const TodosModal: FC<TodoModalProps> = ({ completedList, item, closeModal }) => 
                 onBlur={ handleBlur('title') }
               />
               <Text style={ styles.ideaErrorText }>
-                { touched.title && errors.title }
+                { touched.title && errors.title || '' }
               </Text>
             </Layout>
             <SubmitButton

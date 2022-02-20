@@ -1,6 +1,6 @@
 import React, { FC, useState, useEffect } from 'react';
-import { Modal, TextStyle, ViewStyle, StyleSheet } from 'react-native';
-import { Card, Layout, Text } from '@ui-kitten/components';
+import { TextStyle, ViewStyle, StyleSheet } from 'react-native';
+import { Card, Layout, Modal, Text } from '@ui-kitten/components';
 import TodosModal from './TodosModal';
 import { CloseButton } from '../../shared/buttons';
 import { useAppDispatch } from '../../utils/hooks';
@@ -12,7 +12,7 @@ type ListProps = {
 
 interface Styles {
   listContainer: ViewStyle;
-  cardContainer: ViewStyle;
+  listModal: ViewStyle;
   listTitle: TextStyle;
   count: TextStyle;
   subtitle: TextStyle;
@@ -61,11 +61,9 @@ const completedList = (remaining:number, completed:number) => {
 
   return (
     <Layout style={ styles.listContainer }>
-      <Card style={ [styles.cardContainer, { backgroundColor: color }] } onPress={ () => toggleListModal() }>
+      <Card style={ [styles.listModal, { backgroundColor: color }] } onPress={ () => toggleListModal() }>
         <Modal
-          animationType='slide'
           visible={ visible }
-          onRequestClose={ () => toggleListModal() }
           accessibilityLabel='CLicking here opens Todo Modal'
         >
           <TodosModal completedList={ completedList } item={ list } closeModal={ () => toggleListModal() } />
@@ -92,7 +90,7 @@ const styles = StyleSheet.create<Styles>({
     flex: 1,
     alignItems: 'center',
   },
-  cardContainer: {
+  listModal: {
     width: 200,
     borderRadius: 6,
     elevation: 3,

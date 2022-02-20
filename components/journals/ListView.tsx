@@ -1,7 +1,8 @@
 import React, { FC } from 'react';
-import { FlatList, StyleSheet, ViewStyle } from 'react-native';
+import { StyleSheet, ViewStyle } from 'react-native';
 import { connect, ConnectedProps } from 'react-redux';
 import { NavigationScreenProp } from 'react-navigation';
+import { List } from '@ui-kitten/components';
 import ListItem from './ListItem';
 import { JournalEntries } from '../../redux/reducers/journals';
 import { StoreProps } from '../../redux/store';
@@ -17,7 +18,7 @@ interface Styles {
 const ListView: FC<ListProps> = ({ month, list, navigation }) => {
 
   return (
-    <FlatList
+    <List
       style={ styles.container }
       data={ list }
       accessibilityLabel='Contains Journal Entries'

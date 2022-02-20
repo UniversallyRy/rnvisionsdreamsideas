@@ -1,6 +1,6 @@
-import { Tooltip } from '@ui-kitten/components';
 import React, { FC, useState } from 'react';
-import { FlatList, Image, TouchableOpacity } from 'react-native';
+import { Image, TouchableOpacity } from 'react-native';
+import { List, Tooltip } from '@ui-kitten/components';
 import { deleteVision, VisionItem } from '../../redux/reducers/visions';
 import { CloseButton } from '../../shared/buttons';
 import { SPACING, THUMBNAIL_SIZE } from '../../utils/constants';
@@ -10,8 +10,8 @@ import { useAppDispatch } from '../../utils/hooks';
 type ThumbnailProps = {
     item: VisionItem;
     index: number;
-    topRef: React.RefObject<FlatList<any>>
-    thumbRef: React.RefObject<FlatList<any>>
+    topRef: React.RefObject<List<any>>
+    thumbRef: React.RefObject<List<any>>
 }
 
 const renderThumbnail:FC<ThumbnailProps> = ({ item, index, topRef, thumbRef }) => {

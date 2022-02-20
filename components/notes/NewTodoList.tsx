@@ -65,8 +65,7 @@ const NewTodoList: FC<ModalProps> = ({ closeModal }) => {
             initialValues={{ name: '', id: 0, color: '', todos: [] }}
             validationSchema={ listSchema }
             onSubmit={ (values, actions) => {
-              let color = bgColor;
-              values.color = color;
+              values.color = bgColor;
               dispatch(addList(values));
               actions.resetForm();
               closeModal();
@@ -98,10 +97,8 @@ const NewTodoList: FC<ModalProps> = ({ closeModal }) => {
                 <Layout style={ styles.colorContainer }>
                   { renderColors() }
                 </Layout>
-                <TouchableOpacity
-                  style={ styles.create }
-                >
-                  <FormButton text='Add List' onPress={ handleSubmit }/>
+                <TouchableOpacity style={ styles.create }>
+                  <FormButton color={ bgColor } text='Add List' onPress={ handleSubmit }/>
                 </TouchableOpacity>
               </Layout>
             )}
@@ -137,8 +134,12 @@ const styles = StyleSheet.create<Styles>({
     paddingHorizontal: 18,
     fontSize: 18,
   },
-  create: {
-    marginTop: 24,
+  errorText:{
+    fontFamily: 'roboto-bold',
+    color: 'crimson',
+    marginBottom: 10,
+    marginTop: 6,
+    textAlign: 'center',
   },
   colorContainer: {
     flexDirection: 'row',
@@ -150,12 +151,9 @@ const styles = StyleSheet.create<Styles>({
     height: 30,
     borderRadius: 2,
   },
-  errorText:{
-    fontFamily: 'roboto-bold',
-    color: 'crimson',
-    marginBottom: 10,
-    marginTop: 6,
-    textAlign: 'center',
+  create: {
+    marginTop: 24,
+    borderWidth: 0,
   },
 });
 

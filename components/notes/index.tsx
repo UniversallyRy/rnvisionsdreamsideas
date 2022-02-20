@@ -1,6 +1,6 @@
-import React, { useState, } from 'react';
-import { View, Modal, StyleSheet, ViewStyle, TextStyle } from 'react-native';
-import { Layout } from '@ui-kitten/components';
+import React, { useState } from 'react';
+import { View, StyleSheet, ViewStyle } from 'react-native';
+import { Layout, Modal } from '@ui-kitten/components';
 import IdeaList from './IdeaList';
 import NewIdea from './NewIdea';
 import TodoLists from './TodoLists';
@@ -9,12 +9,10 @@ import { FooterButtons } from '../../shared/buttons';
 
 interface Styles {
   container: ViewStyle;
-  titleStyle: TextStyle;
-  title: TextStyle;
-  addList: ViewStyle;
+  lists: ViewStyle;
 }
 
-const NoteContent = () => {
+const NotesContent = () => {
   const [ideaModal, setIdeaModal] = useState(false);
   const [todoModal, setTodoModal] = useState(false);
 
@@ -28,24 +26,13 @@ const NoteContent = () => {
 
   return (
     <Layout style={ styles.container }>
-      <Modal
-        animationType='slide'
-        visible={ ideaModal }
-      >
+      <Modal visible={ ideaModal }>
         <NewIdea closeModal={() => toggleIdeaModal()} />
       </Modal>
-      <Modal
-        animationType='slide'
-        visible={ todoModal }
-      >
+      <Modal visible={ todoModal }>
         <NewTodoList closeModal={ () => toggleTodoModal() } />
       </Modal>
-      <View
-        style={{
-          height: 450,
-          flexDirection: 'row',
-        }}
-      >
+      <View style={ styles.lists }>
         <IdeaList />
         <TodoLists />
       </View>
@@ -60,20 +47,10 @@ const styles = StyleSheet.create<Styles>({
     alignItems: 'center',
     justifyContent: 'center',
   },
-  titleStyle: {
+  lists: {
     flexDirection: 'row',
-    marginTop: 50,
-  },
-  title: {
-    fontSize: 38,
-    fontWeight: '800',
-    paddingHorizontal: 20,
-  },
-  addList: {
-    flexDirection: 'row',
-    alignSelf: 'center',
-    marginTop: 'auto'
-  },
+    height: 450,
+  }
 });
 
-export default NoteContent;
+export default NotesContent;

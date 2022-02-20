@@ -1,8 +1,8 @@
 import React, { memo, useState, useRef, useCallback, FC } from 'react';
-import { FlatList, TouchableOpacity, Image, StyleSheet } from 'react-native';
+import { TouchableOpacity, Image, StyleSheet } from 'react-native';
 import { NavigationScreenProp } from 'react-navigation';
 import { connect, ConnectedProps } from 'react-redux';
-import { Layout, Tooltip } from '@ui-kitten/components';
+import { Layout, List, Tooltip } from '@ui-kitten/components';
 import { CloseButton } from '../../shared/buttons';
 import { windowHeight, windowWidth } from '../../utils/dimensions';
 import { SPACING, THUMBNAIL_SIZE } from '../../utils/constants';
@@ -27,8 +27,8 @@ type ThumbnailProps = {
 const ListView: FC<ListProps> = ({ visions, navigation }) => {
   const [visible, setVisible] = useState(false);
   const [activeIndex, setActiveIndex] = useState(0)
-  const topRef = useRef<FlatList>(null);
-  const thumbRef = useRef<FlatList>(null);
+  const topRef = useRef<List>(null);
+  const thumbRef = useRef<List>(null);
   const dispatch = useAppDispatch()
 
   const scrollActiveIndex = (index: number) => {
@@ -103,7 +103,7 @@ const ListView: FC<ListProps> = ({ visions, navigation }) => {
 
   return (
     <Layout style={{ flex: 1 }}>
-      <FlatList
+      <List
         data={ visions }
         ref={ topRef }
         showsHorizontalScrollIndicator={ false }
@@ -115,7 +115,7 @@ const ListView: FC<ListProps> = ({ visions, navigation }) => {
         pagingEnabled
         renderItem={ renderBgImage }
       />
-      <FlatList
+      <List
         data={ visions }
         style={{ position: 'absolute', bottom: THUMBNAIL_SIZE - 30 }}
         ref={ thumbRef }

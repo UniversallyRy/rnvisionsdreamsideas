@@ -1,8 +1,8 @@
 import React, { FC } from 'react';
-import { FlatList, StyleSheet, ViewStyle, TextStyle } from 'react-native';
+import { StyleSheet, ViewStyle, TextStyle } from 'react-native';
 import { connect, ConnectedProps } from 'react-redux';
 import { NavigationScreenProp } from 'react-navigation';
-import { Card, Layout, Text } from '@ui-kitten/components';
+import { Layout, Card, List, Text } from '@ui-kitten/components';
 import { windowHeight, windowWidth } from '../../utils/dimensions';
 import { JournalEntries } from '../../redux/reducers/journals';
 import { StoreProps } from '../../redux/store';
@@ -22,7 +22,7 @@ const GridView: FC<GridProps> = ({ month, list, navigation }) => {
 
   return (
     <Layout style={ styles.container }>
-      <FlatList
+      <List
         scrollEnabled
         numColumns={ 3 }
         contentContainerStyle={ styles.grid }

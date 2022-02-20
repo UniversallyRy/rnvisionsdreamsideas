@@ -13,6 +13,7 @@ type ButtonProps = {
 
 type FormProps = {
   text?: string;
+  color: string;
   onPress: () => void
 }
 
@@ -36,10 +37,10 @@ interface Styles {
 }
 
 // default export kittenui styled button
-export const FormButton = ({ text, onPress, ...props }: FormProps) => {
+export const FormButton = ({ text, color, onPress, ...props }: FormProps) => {
   return (
     <Button
-      style={ styles.button }
+      style={ [ styles.button, { backgroundColor: color }] }
       onPress={ onPress }
       { ...props }
     >
@@ -192,17 +193,17 @@ const styles = StyleSheet.create<Styles>({
   button: {
     alignSelf: "center",
     width: 200,
-    borderRadius: 1,
+    borderWidth: 0,
     paddingVertical: 10,
     marginTop: 20,
     marginBottom: 10,
-    elevation: 1,
+    elevation: 2,
   },
   text: {
+    textAlign: "center",
+    fontSize: 16,
     fontWeight: "bold",
     textTransform: "uppercase",
-    fontSize: 16,
-    textAlign: "center",
   },
   edit: {
     width: windowWidth * 0.40,

@@ -1,14 +1,14 @@
 import React, { FC } from 'react';
-import { FlatList, Text, Keyboard, StyleSheet, TextStyle, ViewStyle } from 'react-native';
-import { Card, Input, Layout, Divider } from '@ui-kitten/components';
+import { View, Keyboard, StyleSheet, ViewStyle, TextStyle } from 'react-native';
+import { Layout, Card, List, Input, Text } from '@ui-kitten/components';
 import { Formik, FormikHelpers } from 'formik';
 import * as yup from 'yup';
 import { CloseButton, SubmitButton } from '../../shared/buttons';
 import { useAppDispatch } from '../../utils/hooks';
 import { windowHeight, windowWidth } from '../../utils/dimensions';
-import { deleteIdea, addIdea, Idea } from '../../redux/reducers/ideas';
+import { Idea, addIdea, deleteIdea } from '../../redux/reducers/ideas';
 
-type IdeaModalProps = {
+type ModalProps = {
   ideas: Idea[];
   closeModal: (() => void);
 }
@@ -16,14 +16,15 @@ type IdeaModalProps = {
 interface Styles {
   container: ViewStyle;
   close: ViewStyle;
-  header: TextStyle;
-  divider: ViewStyle;
-  taskCount: ViewStyle;
-  footer: ViewStyle;
+  header: ViewStyle;
+  headerText: TextStyle;
+  ideasList:ViewStyle;
+  idea:ViewStyle;
+  ideaContent:ViewStyle;
+  ideaText:TextStyle;
+  ideaDelete:ViewStyle;
+  footerInput: ViewStyle;
   ideaInput:TextStyle;
-  buttonStyle:ViewStyle;
-  ideaContainer:ViewStyle;
-  deleteIdeaButton:ViewStyle;
   ideaErrorText:TextStyle;
 }
 
@@ -31,21 +32,21 @@ const ideaSchema = yup.object({
   inputValue: yup.string().required().min(6),
 });
 
-const IdeasModal: FC<IdeaModalProps> = ({ ideas, closeModal }) => {
-  const taskCount = ideas.length;
+const IdeasModal: FC<ModalProps> = ({ ideas, closeModal }) => {
+  const ideaCount = ideas.length;
   const dispatch = useAppDispatch();
 
   const renderIdea = ( item: Idea) => {
     const { inputValue, inputId } = item;
     return (
-        <Card 
-          style={ styles.ideaContainer }
-        >
-          <Text>{ inputValue }</Text>
-          <CloseButton
-            style={styles.deleteIdeaButton}
-            onPress={ () => dispatch(deleteIdea({ inputId })) }
-          />
+        <Card style={ styles.idea }>
+          <View style={ styles.ideaContent }>
+            <Text style= { styles.ideaText}>{ inputValue }</Text>
+            <CloseButton
+              style={ styles.ideaDelete }
+              onPress={ () => dispatch(deleteIdea({ inputId })) }
+            />
+          </View>
         </Card>
     );
   };
@@ -56,23 +57,14 @@ const IdeasModal: FC<IdeaModalProps> = ({ ideas, closeModal }) => {
         style={ styles.close }
         onPress={ closeModal }
       />
-        <Layout
-          style={[
-            styles.header,
-            { borderBottomColor: 'red' },
-          ]}
-        >
-          <Divider style={ styles.divider }/>
-          <Text style={ styles.taskCount }>There are { taskCount } Ideas</Text>
+        <Layout style={ styles.header }>
+          <Text style={ styles.headerText }>There are { ideaCount } Ideas</Text>
         </Layout>
         <Layout>
-          <FlatList
+          <List
+            style={ styles.ideasList }
             data={ ideas }
-            keyExtractor={ (_, index) => index.toString()  }
-            contentContainerStyle={{
-              paddingHorizontal: 32,
-              paddingVertical: 64,
-            }}
+            keyExtractor={ (_, index) => index.toString() }
             renderItem={ ({ item }) => renderIdea(item) }
           />
           </Layout>
@@ -93,7 +85,7 @@ const IdeasModal: FC<IdeaModalProps> = ({ ideas, closeModal }) => {
               errors,
               handleSubmit,
             }) => (
-              <Layout style={ styles.footer }>
+              <Layout style={ styles.footerInput }>
                 <Layout style={{ flexDirection: 'column' }}>
                   <Input
                     textAlign='center'
@@ -106,11 +98,10 @@ const IdeasModal: FC<IdeaModalProps> = ({ ideas, closeModal }) => {
                     onBlur={ handleBlur('inputValue') }
                   />
                   <Text style={ styles.ideaErrorText }>
-                    { touched.inputValue && errors.inputValue }
+                    { touched.inputValue && errors.inputValue || ''}
                   </Text>
                 </Layout>
                 <SubmitButton
-                  style={ styles.buttonStyle }
                   onPress={ handleSubmit }
                 >
                 </SubmitButton>
@@ -124,36 +115,44 @@ const IdeasModal: FC<IdeaModalProps> = ({ ideas, closeModal }) => {
 const styles = StyleSheet.create<Styles>({
   container: {
     flex: 1,
-    flexDirection: 'column',
     width: windowWidth,
-    height: windowHeight
+    height: windowHeight,
   },
   close: {
     position: 'absolute', 
-    top: 40, 
-    right: 32, 
-    zIndex: 10,
+    alignSelf: 'flex-end', 
+    zIndex: 1,
   },
   header: {
-    marginTop: 10,
-    marginLeft: 10,
-    borderBottomWidth: 2,
+    borderBottomColor: 'green',
+    paddingTop: 10,
+    paddingLeft: 5,
+    borderBottomWidth: 3,
   },
-  divider: {
-    marginTop: 35,
-  },
-  taskCount: {
+  headerText: {
+    color: 'black',
     marginTop: 4,
     marginBottom: 16,
-    color: 'black',
-    fontWeight: '600',
   },
-  footer: {
-    position: 'absolute',
-    bottom: 0,
-    paddingHorizontal: 10,
-    paddingVertical: 5,
+  ideasList: {
+    marginTop: 10,
+  },
+  idea: {
+    alignSelf: 'center',
+    width: windowWidth * 0.99,
+    margin: 2,
+    elevation: 2,
+  },
+  
+  ideaContent:{
     flexDirection: 'row',
+    justifyContent: 'center'
+  },
+  ideaText:{
+    fontSize: 14,
+  },
+  ideaDelete: {
+    marginLeft: 'auto',
   },
   ideaInput: {
     width: windowWidth * 0.75,
@@ -163,25 +162,19 @@ const styles = StyleSheet.create<Styles>({
     elevation: 3,
   },
   ideaErrorText:{
+    textAlign: 'center',
     fontSize: 10,
-    color: 'crimson',
     fontWeight: 'bold',
+    color: 'crimson',
     marginBottom: 10,
     marginTop: 6,
-    textAlign: 'center',
   },
-  buttonStyle: {
-    height: 30,
-    margin: 'auto',
-  },
-  ideaContainer: {
-    alignSelf: 'center',
-    flexDirection: 'column',
-    width: windowWidth * 0.995,
-  },
-  deleteIdeaButton: {
-    marginLeft: 'auto',
-    marginRight: 3,
+  footerInput: {
+    position: 'absolute',
+    flexDirection: 'row',
+    paddingHorizontal: 10,
+    paddingVertical: 5,
+    bottom: 0,
   },
 });
 

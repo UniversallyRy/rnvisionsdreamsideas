@@ -1,23 +1,24 @@
 import React, { FC, useState } from 'react';
-import { Modal, Text, StyleSheet, ViewStyle, TextStyle } from 'react-native';
+import { StyleSheet, ViewStyle, TextStyle } from 'react-native';
 import { connect, ConnectedProps } from 'react-redux';
-import { Card, Layout } from '@ui-kitten/components';
-import IdeaModal from './IdeaModal';
+import { Layout, Modal, Card, Text } from '@ui-kitten/components';
+import IdeasModal from './IdeasModal';
 import { Idea } from '../../redux/reducers/ideas';
 import { StoreProps } from '../../redux/store';
 
-type IdeaProps = {
+type IdeasProps = {
   ideas: Idea[];
 }
 
 interface Styles {
-  ideaContainer: ViewStyle;
-  ideaTitle: TextStyle;
-  count: TextStyle;
-  subtitle: ViewStyle;
+  listContainer: ViewStyle;
+  listTitle: TextStyle;
+  listContent: TextStyle;
+  listCount: TextStyle;
+  listText: TextStyle;
 }
 
-const IdeaList: FC<IdeaProps> = ({ ideas }) => {
+const IdeaList: FC<IdeasProps> = ({ ideas }) => {
   const [visible, setVisible] = useState(false);
   const ideaCount = Object.keys(ideas).length;
 
@@ -26,49 +27,51 @@ const IdeaList: FC<IdeaProps> = ({ ideas }) => {
   };
 
   return (
-    <Card style={ [styles.ideaContainer, { backgroundColor: 'green' }] } onPress={ () => toggleListModal() }>
-      <Modal
-        animationType='slide'
-        visible={ visible }
-        onRequestClose={ () => toggleListModal() }
-      >
-        <IdeaModal ideas={ ideas } closeModal={ () => toggleListModal() }/>
+    <Card style={ styles.listContainer } onPress={ () => toggleListModal() }>
+      <Modal visible={ visible }>
+        <IdeasModal ideas={ ideas } closeModal={ () => toggleListModal() }/>
       </Modal>
-        <Text style={ styles.ideaTitle } numberOfLines={ 1 }>
+        <Text style={ styles.listTitle } numberOfLines={ 1 }>
           List of Ideas
         </Text>
-        <Layout style={{ alignItems: 'center', bottom: 0, backgroundColor: 'transparent' }}>
-          <Text style={ styles.count }>{ ideaCount }</Text>
-          <Text style={ styles.subtitle }>Ideas</Text>
+        <Layout style={ styles.listContent }>
+          <Text style={ styles.listCount }>{ ideaCount }</Text>
+          <Text style={ styles.listText }>Ideas</Text>
         </Layout>
     </Card>
   );
 };
 
 const styles = StyleSheet.create<Styles>({
-  ideaContainer: {
-    padding: 32,
+  listContainer: {
     flexDirection: 'column',
-    paddingHorizontal: 16,
-    borderRadius: 6,
-    marginHorizontal: 12,
     alignItems: 'center',
     width: 200,
     height: 280,
+    backgroundColor: 'green',
+    padding: 32,
+    paddingHorizontal: 16,
+    marginHorizontal: 12,
+    borderRadius: 6,
     elevation: 2,
   },
-  ideaTitle: {
+  listContent: { 
+    alignItems: 'center',
+    backgroundColor: 'transparent', 
+    bottom: 0 
+  },
+  listTitle: {
     alignSelf: 'center',
     fontSize: 16,
     fontWeight: '700',
     marginBottom: 16,
   },
-  count: {
-    marginTop: 40,
+  listCount: {
     fontSize: 48,
     fontWeight: '200',
+    marginTop: 40,
   },
-  subtitle: {
+  listText: {
     fontSize: 12,
     fontWeight: '700',
   },

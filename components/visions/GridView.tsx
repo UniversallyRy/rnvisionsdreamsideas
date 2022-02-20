@@ -1,8 +1,8 @@
 import React, { memo, useCallback, FC } from 'react';
-import { FlatList, TouchableOpacity, Image, StyleSheet, ViewStyle, ImageStyle } from 'react-native';
+import { TouchableOpacity, Image, StyleSheet, ViewStyle, ImageStyle } from 'react-native';
 import { connect, ConnectedProps } from 'react-redux';
 import { NavigationScreenProp } from 'react-navigation';
-import { Layout } from '@ui-kitten/components';
+import { Layout, List } from '@ui-kitten/components';
 import { windowHeight, windowWidth } from '../../utils/dimensions';
 import { VisionItem } from '../../redux/reducers/visions';
 import { StoreProps } from '../../redux/store';
@@ -49,7 +49,7 @@ const GridView: FC<GridProps> = ({ visions, navigation }) => {
 
   return (
     <Layout>
-      <FlatList
+      <List
         numColumns={ 2 }
         contentContainerStyle={ styles.grid }
         scrollEnabled

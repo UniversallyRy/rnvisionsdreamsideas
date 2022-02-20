@@ -1,8 +1,8 @@
 import React, { Dispatch, FC, SetStateAction } from 'react';
-import { Animated, Text, TouchableOpacity, StyleSheet, ViewStyle, TextStyle } from 'react-native';
+import { Animated, StyleSheet, ViewStyle, TextStyle } from 'react-native';
 import { connect, ConnectedProps } from 'react-redux';
 import { useCardAnimation } from '@react-navigation/stack';
-import { Layout, Input } from '@ui-kitten/components';
+import { Layout, Input, Text } from '@ui-kitten/components';
 import { Formik } from 'formik';
 import * as yup from 'yup';
 import ModalImage from './ImagePicker';
@@ -18,6 +18,7 @@ type ModalProps = {
 
 interface Styles {
   container: ViewStyle;
+  close: ViewStyle;
   textinput: TextStyle;
   errorText: TextStyle;
   footer: ViewStyle;
@@ -30,29 +31,28 @@ const pictureSchema = yup.object({
 
 const ModalContent: FC<ModalProps> = ({ picInput, setModalOpen }) => {
 
-  const { current } = useCardAnimation();
   const dispatch = useAppDispatch()
   return (
     <Layout>
       <Animated.View 
-        style={{
-          transform: [
-            {
-              scale: current.progress.interpolate({
-                inputRange: [0, 1],
-                outputRange: [0.9, 1],
-                extrapolate: 'clamp',
-              }),
-            },
-          ],
-          ...styles.container
-        }}
+      //   style={{
+      //     transform: [
+      //       {
+      //         scale: current.progress.interpolate({
+      //           inputRange: [0, 1],
+      //           outputRange: [0.9, 1],
+      //           extrapolate: 'clamp',
+      //         }),
+      //       },
+      //     ],
+      //   }}
+      // 
+      style={ styles.container }
       > 
-        <TouchableOpacity
-          style={{ position: 'absolute', top: 40, right: 32, zIndex: 10 }}
-        >
-          <CloseButton onPress={ () => setModalOpen(false) } />
-        </TouchableOpacity>
+        <CloseButton 
+          style={ styles.close } 
+          onPress={ () => setModalOpen(false) } 
+        />
         <Formik
           enableReinitialize={ true }
           initialValues={{ uri: picInput, title: '', id: null }}
@@ -82,7 +82,7 @@ const ModalContent: FC<ModalProps> = ({ picInput, setModalOpen }) => {
                 onBlur={ handleBlur('title') }
               />
               <Text style={ styles.errorText }>
-                { touched.title && errors.title }
+                { touched.title && errors.title || '' }
               </Text>
               <SubmitButton
                 style={ styles.button }
@@ -97,10 +97,15 @@ const ModalContent: FC<ModalProps> = ({ picInput, setModalOpen }) => {
 };
 
 const styles = StyleSheet.create<Styles>({
+  close: {
+    position: 'absolute', 
+    top: 40, 
+    right: 32, 
+    zIndex: 10
+  },
   container: {
     height: windowHeight,
     width: windowWidth,
-    margin:'auto',
     fontFamily: 'roboto-black',
   },
   textinput: {
