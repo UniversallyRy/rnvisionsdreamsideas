@@ -1,7 +1,7 @@
 import React, { FC, useState, useEffect } from 'react';
 import { TextStyle, ViewStyle, StyleSheet } from 'react-native';
 import { Card, Layout, Modal, Text } from '@ui-kitten/components';
-import TodosModal from './TodosModal';
+import TodosModal from './todosModal';
 import { CloseButton } from '../../shared/buttons';
 import { useAppDispatch } from '../../utils/hooks';
 import { deleteList, TodoListProps } from '../../redux/reducers/todos';

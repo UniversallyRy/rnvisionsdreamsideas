@@ -1,9 +1,9 @@
-import React, { FC } from 'react'
+import React, { FC } from 'react';
 import { StyleSheet, ViewStyle, TextStyle } from 'react-native';
-import { Layout, Text, CheckBox } from '@ui-kitten/components';
-import { deleteTodo, TodoProps, toggleTodo } from '../../redux/reducers/todos';
-import { CloseButton } from '../../shared/buttons';
-import { useAppDispatch } from '../../utils/hooks';
+import { ListItem, Text, CheckBox } from '@ui-kitten/components';
+import { TodoProps, toggleTodo, deleteTodo } from '../../../redux/reducers/todos';
+import { CloseButton } from '../../../shared/buttons';
+import { useAppDispatch } from '../../../utils/hooks';
 
 type SingleTodo = {
     item: TodoProps; 
@@ -21,7 +21,7 @@ const Todo:FC<SingleTodo> = ({ item, listId }) => {
     const dispatch = useAppDispatch()
 
     return (
-      <Layout style={ styles.todoContainer } level='1'>
+      <ListItem style={ styles.todoContainer } >
         <CheckBox
           checked={ completed }
           onChange={ () => dispatch(toggleTodo({ id: id, listId })) }
@@ -41,7 +41,7 @@ const Todo:FC<SingleTodo> = ({ item, listId }) => {
           style={ styles.deleteButton }
           onPress={ () => dispatch(deleteTodo({ id:id, listId: listId })) }
         />
-      </Layout>
+      </ListItem>
     );
 }
 

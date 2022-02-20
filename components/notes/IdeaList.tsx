@@ -2,7 +2,7 @@ import React, { FC, useState } from 'react';
 import { StyleSheet, ViewStyle, TextStyle } from 'react-native';
 import { connect, ConnectedProps } from 'react-redux';
 import { Layout, Modal, Card, Text } from '@ui-kitten/components';
-import IdeasModal from './IdeasModal';
+import IdeasModal from './ideasModal';
 import { Idea } from '../../redux/reducers/ideas';
 import { StoreProps } from '../../redux/store';
 
@@ -78,8 +78,8 @@ const styles = StyleSheet.create<Styles>({
 });
 
 const mapStateToProps = (state: StoreProps) => {
-  const { ideas, todos } = state;
-  return { ideas, todos };
+  const { ideas } = state;
+  return { ideas };
 };
 
 export default connect(mapStateToProps)(IdeaList);

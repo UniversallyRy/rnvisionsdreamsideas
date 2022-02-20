@@ -3,10 +3,10 @@ import { View, Keyboard, StyleSheet, ViewStyle, TextStyle } from 'react-native';
 import { Layout, Card, List, Input, Text } from '@ui-kitten/components';
 import { Formik, FormikHelpers } from 'formik';
 import * as yup from 'yup';
-import { CloseButton, SubmitButton } from '../../shared/buttons';
-import { useAppDispatch } from '../../utils/hooks';
-import { windowHeight, windowWidth } from '../../utils/dimensions';
-import { Idea, addIdea, deleteIdea } from '../../redux/reducers/ideas';
+import { CloseButton, SubmitButton } from '../../../shared/buttons';
+import { useAppDispatch } from '../../../utils/hooks';
+import { windowHeight, windowWidth } from '../../../utils/dimensions';
+import { Idea, addIdea, deleteIdea } from '../../../redux/reducers/ideas';
 
 type ModalProps = {
   ideas: Idea[];
