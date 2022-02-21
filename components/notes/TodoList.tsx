@@ -3,8 +3,8 @@ import { TextStyle, ViewStyle, StyleSheet } from 'react-native';
 import { Card, Layout, Modal, Text } from '@ui-kitten/components';
 import TodosModal from './todosModal';
 import { CloseButton } from '../../shared/buttons';
-import { useAppDispatch } from '../../utils/hooks';
-import { deleteList, TodoListProps } from '../../redux/reducers/todos';
+import { filtered, useAppDispatch } from '../../utils/hooks';
+import { deleteList, setCompleted, TodoListProps } from '../../redux/reducers/todos';
 
 type ListProps = {
   list: TodoListProps;
@@ -20,11 +20,10 @@ interface Styles {
 }
 
 const TodoList: FC<ListProps>= ({ list }) => {
-  const { todos, name, id, color } = list;
+  const { todos, name, id, color, completedCount } = list;
+  const [complete, changeCompleted] = useState(completedCount);
+  const remaining = Object.keys(todos).length - complete;
   const [visible, setVisible] = useState(false);
-  const [InitRemaining, setInitRemaining] = useState(0);
-  const [InitCount, setInitCount] = useState(0);
-  const [isMount, setIsMount] = useState(true);
   const dispatch = useAppDispatch();
 
   const toggleListModal = () => {
@@ -32,32 +31,10 @@ const TodoList: FC<ListProps>= ({ list }) => {
   };
 
   useEffect(()=> {
-    if(isMount) {
-      let completedCount = (filtered(todos, (todo:any) => todo.completed));
-      let remainingCount = (filtered(todos, (todo:any) => !todo.completed));
-      setInitCount(Object.keys(completedCount).length);
-      setInitRemaining(Object.keys(remainingCount).length);
-      setIsMount(false);
-      return;
-    }
-    completedList(InitRemaining, InitCount);
-  }, [TodosModal]);
+      setCompleted({ count: complete, listId: id });
+      changeCompleted(completedCount);
+  }, [completedCount]);
     
-const completedList = (remaining:number, completed:number) => {
-  setInitRemaining(remaining);
-  setInitCount(completed);
-}
-  
-  const filtered = (obj:object, predicate: any) => {
-    let result = {}, key: PropertyKey;
-    
-    for (key in obj) {
-      if (obj.hasOwnProperty(key) && !predicate(obj[key])) {
-        result[key] = obj[key];
-      }
-    }
-    return result;
-  };
 
   return (
     <Layout style={ styles.listContainer }>
@@ -66,17 +43,17 @@ const completedList = (remaining:number, completed:number) => {
           visible={ visible }
           accessibilityLabel='CLicking here opens Todo Modal'
         >
-          <TodosModal completedList={ completedList } list={ list } closeModal={ () => toggleListModal() } />
+          <TodosModal list={ list } closeModal={ () => toggleListModal() } />
         </Modal>
         <Text style={ styles.listTitle } numberOfLines={ 1 }> { name } </Text>
-        <Text style={ styles.count }>{ InitRemaining }</Text>
+        <Text style={ styles.count }>{ remaining }</Text>
         <Text style={ styles.subtitle }>Remaining</Text>
-        <Text style={ styles.count }>{ InitCount }</Text>
+        <Text style={ styles.count }>{ complete }</Text>
         <Text style={ styles.subtitle }>Completed</Text>
       </Card>
       <CloseButton
         style={ styles.deleteButton }
-        onPress={ () => dispatch(deleteList({id: id})) }
+        onPress={ () => dispatch(deleteList({ id: id })) }
         accessibilityLabel='Click here to delete list'
       >
         Delete
