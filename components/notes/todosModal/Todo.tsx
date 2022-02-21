@@ -17,14 +17,14 @@ interface Styles {
 }
 
 const Todo:FC<SingleTodo> = ({ item, listId }) => {
-    const { title, id, completed } = item;
+    const { inputValue, inputId, completed } = item;
     const dispatch = useAppDispatch()
 
     return (
       <ListItem style={ styles.todoContainer } >
         <CheckBox
           checked={ completed }
-          onChange={ () => dispatch(toggleTodo({ id: id, listId })) }
+          onChange={ () => dispatch(toggleTodo({ inputId, listId })) }
         />
         <Text
           style={[
@@ -35,11 +35,11 @@ const Todo:FC<SingleTodo> = ({ item, listId }) => {
             }
           ]}
         >
-          { title }
+          { inputValue }
         </Text>
         <CloseButton
           style={ styles.deleteButton }
-          onPress={ () => dispatch(deleteTodo({ id:id, listId: listId })) }
+          onPress={ () => dispatch(deleteTodo({ id:inputId, listId: listId })) }
         />
       </ListItem>
     );

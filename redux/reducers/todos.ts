@@ -1,10 +1,11 @@
 import { createSlice } from '@reduxjs/toolkit'
+import { filtered } from '../../utils/hooks';
 import uuid from "../../utils/uuid";
 
 export type TodoProps = {
-    title: string;
-    id: string;
-    completed: boolean;
+  inputValue: string;
+  inputId: string;
+  completed?: boolean;
 }
 
 export type TodoListProps = {
@@ -12,6 +13,7 @@ export type TodoListProps = {
   id: string;
   color: string;
   todos: TodoProps[];
+  completedCount: number;
 }
 
 const initialListArr: TodoListProps[] = [
@@ -21,26 +23,27 @@ const initialListArr: TodoListProps[] = [
     color: "#FE1F14",
     todos: [
       {
-        title: "Book Flight",
-        id: uuid.generate(),
+        inputValue: "Book Flight",
+        inputId: uuid.generate(),
         completed: false,
       },
       {
-        title: "Passport Check",
-        id: uuid.generate(),
+        inputValue: "Passport Check",
+        inputId: uuid.generate(),
         completed: false,
       },
       {
-        title: "Reserve Hotel",
-        id: uuid.generate(),
+        inputValue: "Reserve Hotel",
+        inputId: uuid.generate(),
         completed: true,
       },
       {
-        title: "Pack Luggage",
-        id: uuid.generate(),
+        inputValue: "Pack Luggage",
+        inputId: uuid.generate(),
         completed: false,
       },
     ],
+    completedCount: 1,
   },
   {
     name: "Errands",
@@ -48,26 +51,27 @@ const initialListArr: TodoListProps[] = [
     color: "#83ADB5",
     todos: [
       {
-        title: "Store",
-        id: uuid.generate(),
+        inputValue: "Store",
+        inputId: uuid.generate(),
         completed: true,
       },
       {
-        title: "Hike",
-        id: uuid.generate(),
+        inputValue: "Hike",
+        inputId: uuid.generate(),
         completed: false,
       },
       {
-        title: "Take a video",
-        id: uuid.generate(),
+        inputValue: "Take a video",
+        inputId: uuid.generate(),
         completed: true,
       },
       {
-        title: "Walk Dog",
-        id: uuid.generate(),
+        inputValue: "Walk Dog",
+        inputId: uuid.generate(),
         completed: true,
       },
     ],
+    completedCount: 3,
   },
   {
     name: "Party",
@@ -75,21 +79,22 @@ const initialListArr: TodoListProps[] = [
     color: "#2E4045",
     todos: [
       {
-        title: "Ballons",
-        id: uuid.generate(),
+        inputValue: "Ballons",
+        inputId: uuid.generate(),
         completed: false,
       },
       {
-        title: "Make Dinner",
-        id: uuid.generate(),
+        inputValue: "Make Dinner",
+        inputId: uuid.generate(),
         completed: false,
       },
       {
-        title: "Send Invites",
-        id: uuid.generate(),
+        inputValue: "Send Invites",
+        inputId: uuid.generate(),
         completed: true,
       },
     ],
+    completedCount: 1,
   },
 ];
 
@@ -103,17 +108,32 @@ const todosLists = createSlice( {
         id: uuid.generate(),
         color: action.payload.color,
         todos: [],
+        completedCount: 0,
       })
     },
+    setCompleted: (state, action) => {
+      state.map((item) => {
+        if (item.id == action.payload.listId) {
+          item.completedCount = action.payload.count
+        }
+      });
+    },
+    decreaseCompleted: (state, action) => {
+      state.map((item) => {
+        if (item.id == action.payload.listId) {
+          item.completedCount--;
+        }
+      });
+    },
     deleteList: (state, action) => {
-      return state.filter((list) => list.id != action.payload.id);
+      return state.filter((list) => list.id != action.payload.listId);
     },
     addTodo: (state, action) => {
       state.map((item) => {
         if (item.id == action.payload.listId) {
           item.todos.push({
-            title: action.payload.title,
-            id: uuid.generate(),
+            inputValue: action.payload.inputValue,
+            inputId: uuid.generate(),
             completed: false,
           });
         }
@@ -126,7 +146,7 @@ const todosLists = createSlice( {
       state.map((item) => {
         if (item.id == action.payload.listId ) {
           item.todos.map((todo) => {
-            if(todo.id == action.payload.id) {
+            if(todo.inputId == action.payload.inputId) {
               todo.completed = !todo.completed
             }
           })
@@ -136,7 +156,7 @@ const todosLists = createSlice( {
     deleteTodo: (state, action) => {
       state.map((item) => {
         if (item.id == action.payload.listId) {
-          item.todos = item.todos.filter((todo) => todo.id != action.payload.id);
+          item.todos = item.todos.filter((todo) => todo.inputId != action.payload.inputId);
         }
       });
       return state;
@@ -145,5 +165,5 @@ const todosLists = createSlice( {
 });
 
 const { actions, reducer } = todosLists;
-export const { addList, deleteList, addTodo, editTodo, toggleTodo, deleteTodo } = actions;
+export const { addList, setCompleted, decreaseCompleted, deleteList, addTodo, editTodo, toggleTodo, deleteTodo } = actions;
 export default reducer;

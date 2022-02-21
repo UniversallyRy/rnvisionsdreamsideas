@@ -1,15 +1,16 @@
 import React, { FC } from 'react';
-import { View, Keyboard, StyleSheet, ViewStyle, TextStyle } from 'react-native';
-import { Layout, Card, List, Input, Text } from '@ui-kitten/components';
-import { Formik, FormikHelpers } from 'formik';
+import { StyleSheet, ViewStyle, TextStyle } from 'react-native';
+import { Layout, List, Text } from '@ui-kitten/components';
 import * as yup from 'yup';
-import { CloseButton, SubmitButton } from '../../../shared/buttons';
+import Idea from './Idea';
+import { CloseButton } from '../../../shared/buttons';
+import { FooterInput } from '../../../shared/inputs';
 import { useAppDispatch } from '../../../utils/hooks';
 import { windowHeight, windowWidth } from '../../../utils/dimensions';
-import { Idea, addIdea, deleteIdea } from '../../../redux/reducers/ideas';
+import { Idea as IdeaType, addIdea } from '../../../redux/reducers/ideas';
 
 type ModalProps = {
-  ideas: Idea[];
+  ideas: IdeaType[];
   closeModal: (() => void);
 }
 
@@ -19,10 +20,6 @@ interface Styles {
   header: ViewStyle;
   headerText: TextStyle;
   ideasList:ViewStyle;
-  idea:ViewStyle;
-  ideaContent:ViewStyle;
-  ideaText:TextStyle;
-  ideaDelete:ViewStyle;
   footerInput: ViewStyle;
   ideaInput:TextStyle;
   ideaErrorText:TextStyle;
@@ -36,19 +33,9 @@ const IdeasModal: FC<ModalProps> = ({ ideas, closeModal }) => {
   const ideaCount = ideas.length;
   const dispatch = useAppDispatch();
 
-  const renderIdea = ( item: Idea) => {
+  const renderIdea = ( item: IdeaType) => {
     const { inputValue, inputId } = item;
-    return (
-        <Card style={ styles.idea }>
-          <View style={ styles.ideaContent }>
-            <Text style= { styles.ideaText}>{ inputValue }</Text>
-            <CloseButton
-              style={ styles.ideaDelete }
-              onPress={ () => dispatch(deleteIdea({ inputId })) }
-            />
-          </View>
-        </Card>
-    );
+    return <Idea inputValue={ inputValue } inputId={ inputId } />
   };
 
   return (
@@ -68,46 +55,11 @@ const IdeasModal: FC<ModalProps> = ({ ideas, closeModal }) => {
             renderItem={ ({ item }) => renderIdea(item) }
           />
           </Layout>
-          <Formik
-            initialValues={{ inputValue: '', inputId: '' }}
-            validationSchema={ ideaSchema }
-            onSubmit={ (values: Idea, actions:FormikHelpers<Idea>) => {
-              dispatch(addIdea(values));
-              actions.resetForm();
-              Keyboard.dismiss();
-            }}
-          >
-            {({
-              handleChange,
-              values,
-              handleBlur,
-              touched,
-              errors,
-              handleSubmit,
-            }) => (
-              <Layout style={ styles.footerInput }>
-                <Layout style={{ flexDirection: 'column' }}>
-                  <Input
-                    textAlign='center'
-                    enablesReturnKeyAutomatically={ true }
-                    autoCorrect={ true }
-                    style={ styles.ideaInput }
-                    placeholder='Enter Idea . . .'
-                    onChangeText={ handleChange('inputValue') }
-                    value={ values.inputValue }
-                    onBlur={ handleBlur('inputValue') }
-                  />
-                  <Text style={ styles.ideaErrorText }>
-                    { touched.inputValue && errors.inputValue || ''}
-                  </Text>
-                </Layout>
-                <SubmitButton
-                  onPress={ handleSubmit }
-                >
-                </SubmitButton>
-              </Layout>
-            )}
-          </Formik>   
+          <FooterInput 
+            inputName='Idea' 
+            reducerFunc={ addIdea } 
+            inputSchema={ ideaSchema }
+          />
     </Layout>
   );
 };
@@ -136,23 +88,6 @@ const styles = StyleSheet.create<Styles>({
   },
   ideasList: {
     marginTop: 10,
-  },
-  idea: {
-    alignSelf: 'center',
-    width: windowWidth * 0.99,
-    margin: 2,
-    elevation: 2,
-  },
-  
-  ideaContent:{
-    flexDirection: 'row',
-    justifyContent: 'center'
-  },
-  ideaText:{
-    fontSize: 14,
-  },
-  ideaDelete: {
-    marginLeft: 'auto',
   },
   ideaInput: {
     width: windowWidth * 0.75,

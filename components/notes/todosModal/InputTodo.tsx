@@ -19,7 +19,7 @@ const todoSchema = yup.object({
     title: yup.string().required().min(4),
 });
   
-const InputTodo = ({ listId, taskCount, completedCount, completedList }) => {
+const InputTodo = ({ listId, taskCount }) => {
   const dispatch = useAppDispatch();
 
   return (
@@ -28,9 +28,7 @@ const InputTodo = ({ listId, taskCount, completedCount, completedList }) => {
         validationSchema={ todoSchema }
         onSubmit={ (values, actions) => {
           values.listId = listId
-          let newNum = taskCount - completedCount
           dispatch(addTodo(values));
-          completedList(newNum, completedCount);
           actions.resetForm();
           Keyboard.dismiss();
         }}

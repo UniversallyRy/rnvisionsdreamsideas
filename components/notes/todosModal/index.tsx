@@ -11,23 +11,20 @@ import { TodoListProps } from '../../../redux/reducers/todos';
 type TodoModalProps = {
   list: TodoListProps;
   closeModal: (() => void);
-  completedList: ((count1: number, count2: number) => void);
 }
 
 interface Styles {
   container: ViewStyle;
 }
 
-const TodosModal: FC<TodoModalProps> = ({ completedList, list, closeModal }) => {
+const TodosModal: FC<TodoModalProps> = ({  list, closeModal }) => {
   const { todos, id } = list;
   const taskCount = todos.length;
-  const completedCount = todos.filter((todo:any) => todo.completed).length;
 
   return (
     <Layout style={ styles.container }>
       <Header 
         list={ list } 
-        completedList={ completedList } 
         closeModal={ closeModal }
       />
       <TodoList 
@@ -37,8 +34,6 @@ const TodosModal: FC<TodoModalProps> = ({ completedList, list, closeModal }) => 
       <InputTodo
         listId={ id } 
         taskCount={ taskCount } 
-        completedCount={ completedCount } 
-        completedList={ completedList }
       /> 
     </Layout>
   );

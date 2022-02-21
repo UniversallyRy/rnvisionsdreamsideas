@@ -1,29 +1,32 @@
-import React, { useEffect } from 'react'
+import React, { FC, useEffect } from 'react'
 import { StyleSheet, ViewStyle, TextStyle } from 'react-native';
 import { Layout, Text } from '@ui-kitten/components'
 import { CloseButton } from '../../../shared/buttons'
+import { TodoListProps } from '../../../redux/reducers/todos';
 
+type HeaderProps = {
+  list: TodoListProps;
+  closeModal: () => void;
+}
 interface Styles {
     close: ViewStyle;
     header: TextStyle;
     title: TextStyle;
     taskCount: ViewStyle;
 }
-const Header = ({ list, completedList, closeModal }) => {
+const Header: FC<HeaderProps> = ({ list, closeModal }) => {
     
-    const { name, todos, color } = list;
-    const completedCount = todos.filter((todo:any) => todo.completed).length;
+    const { name, todos, color, completedCount } = list;
     const taskCount = todos.length;
   
     useEffect(() => {
       const init = () => {
-        let newNum = taskCount - completedCount
-        completedList(newNum, completedCount);
+        return null;
       }
       return () => {
         init();
       }
-    }, [todos]);
+    }, [completedCount]);
 
     return (
         <>
