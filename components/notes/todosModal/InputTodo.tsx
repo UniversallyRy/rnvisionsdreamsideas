@@ -11,7 +11,7 @@ import { addTodo } from '../../../redux/reducers/todos';
 interface Styles {
     footer: ViewStyle;
     todoInput: ViewStyle;
-    ideaErrorText: TextStyle;
+    errorText: TextStyle;
     button: TextStyle;
 }
 
@@ -19,7 +19,7 @@ const todoSchema = yup.object({
     title: yup.string().required().min(4),
 });
   
-const InputTodo = ({ listId, taskCount }) => {
+const InputTodo = ({ listId }) => {
   const dispatch = useAppDispatch();
 
   return (
@@ -53,7 +53,7 @@ const InputTodo = ({ listId, taskCount }) => {
                 value={ values.title }
                 onBlur={ handleBlur('title') }
               />
-              <Text style={ styles.ideaErrorText }>
+              <Text style={ styles.errorText }>
                 { touched.title && errors.title || '' }
               </Text>
             </Layout>
@@ -82,7 +82,7 @@ const styles = StyleSheet.create<Styles>({
         marginRight: 5,
         elevation: 3,
     },
-    ideaErrorText:{
+    errorText:{
         fontSize: 10,
         color: 'crimson',
         fontWeight: 'bold',

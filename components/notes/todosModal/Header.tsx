@@ -9,46 +9,45 @@ type HeaderProps = {
   closeModal: () => void;
 }
 interface Styles {
-    close: ViewStyle;
-    header: TextStyle;
-    title: TextStyle;
-    taskCount: ViewStyle;
+  close: ViewStyle;
+  header: TextStyle;
+  title: TextStyle;
+  taskCount: TextStyle;
 }
 const Header: FC<HeaderProps> = ({ list, closeModal }) => {
-    
-    const { name, todos, color, completedCount } = list;
-    const taskCount = todos.length;
+  const { name, todos, color, completedCount } = list;
+  const taskCount = todos.length;
   
-    useEffect(() => {
-      const init = () => {
-        return null;
-      }
-      return () => {
-        init();
-      }
-    }, [completedCount]);
-
-    return (
-        <>
-            <CloseButton
-                style={ styles.close }
-                onPress={ closeModal }
-            />
-            <Layout
-                style={[
-                styles.header,
-                { borderBottomColor: color },
-                ]}
-            >
-                <Text style={ styles.title }>{ name }</Text>
-                <Text style={ styles.taskCount }>
-                Completed { completedCount } of { taskCount } tasks
-                </Text>
-            </Layout>
-        </>
+  useEffect(() => {
+    const init = () => {
+      return null;
+    }
+    return () => {
+      init();
+    }
+  }, [completedCount]);
+  
+  return (
+    <>
+      <CloseButton
+        style={ styles.close }
+        onPress={ closeModal }
+      />
+      <Layout
+        style={[
+          styles.header,
+          { borderBottomColor: color },
+        ]}
+      >
+        <Text style={ styles.title }>{ name }</Text>
+        <Text style={ styles.taskCount }>
+          Completed { completedCount } of { taskCount } tasks
+        </Text>
+      </Layout>
+    </>
   );
 };
-
+  
 const styles = StyleSheet.create<Styles>({
     close: {
       position: 'absolute', 

@@ -19,8 +19,7 @@ interface Styles {
 
 const TodosModal: FC<TodoModalProps> = ({  list, closeModal }) => {
   const { todos, id } = list;
-  const taskCount = todos.length;
-
+  // const taskCount = todos.length;
   return (
     <Layout style={ styles.container }>
       <Header 
@@ -33,7 +32,6 @@ const TodosModal: FC<TodoModalProps> = ({  list, closeModal }) => {
       />
       <InputTodo
         listId={ id } 
-        taskCount={ taskCount } 
       /> 
     </Layout>
   );

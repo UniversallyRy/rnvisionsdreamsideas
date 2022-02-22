@@ -11,7 +11,7 @@ type SingleTodo = {
 }  
 
 interface Styles {
-    todoContainer:ViewStyle;
+    container:ViewStyle;
     todo:TextStyle;
     deleteButton:ViewStyle;
 }
@@ -21,7 +21,7 @@ const Todo:FC<SingleTodo> = ({ item, listId }) => {
     const dispatch = useAppDispatch()
 
     return (
-      <ListItem style={ styles.todoContainer } >
+      <ListItem style={ styles.container } >
         <CheckBox
           checked={ completed }
           onChange={ () => dispatch(toggleTodo({ inputId, listId })) }
@@ -39,14 +39,14 @@ const Todo:FC<SingleTodo> = ({ item, listId }) => {
         </Text>
         <CloseButton
           style={ styles.deleteButton }
-          onPress={ () => dispatch(deleteTodo({ id:inputId, listId: listId })) }
+          onPress={ () => dispatch(deleteTodo({ id:inputId, listId })) }
         />
       </ListItem>
     );
 }
 
 const styles = StyleSheet.create<Styles>({
-    todoContainer: {
+    container: {
         flexDirection: 'row',
         alignItems: 'center',
         paddingVertical: 16,
