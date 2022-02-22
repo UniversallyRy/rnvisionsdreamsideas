@@ -7,10 +7,10 @@ import { windowWidth } from '../../../utils/dimensions';
 import { deleteIdea } from '../../../redux/reducers/ideas';
 
 interface Styles {
-    idea: ViewStyle;
-    ideaContent: ViewStyle;
-    ideaText: TextStyle;
-    ideaDelete: TextStyle;
+  idea: ViewStyle;
+  ideaContent: ViewStyle;
+  ideaText: TextStyle;
+  ideaDelete: TextStyle;
 }
 
 const Idea = ({ inputValue, inputId }) => {
@@ -18,13 +18,13 @@ const Idea = ({ inputValue, inputId }) => {
 
   return (
     <Card style={ styles.idea }>
-        <View style={ styles.ideaContent }>
-            <Text style= { styles.ideaText}>{ inputValue }</Text>
-            <CloseButton
-                style={ styles.ideaDelete }
-                onPress={ () => dispatch(deleteIdea({ inputId })) }
-            />
-        </View>
+      <View style={ styles.ideaContent }>
+        <Text style= { styles.ideaText}>{ inputValue }</Text>
+        <CloseButton
+          style={ styles.ideaDelete }
+          onPress={ () => dispatch(deleteIdea({ inputId })) }
+        />
+      </View>
     </Card>
   );
 };
@@ -48,6 +48,5 @@ const styles = StyleSheet.create<Styles>({
       marginLeft: 'auto',
     },
   });
-  
   
 export default Idea;

@@ -19,10 +19,7 @@ interface Styles {
   close: ViewStyle;
   header: ViewStyle;
   headerText: TextStyle;
-  ideasList:ViewStyle;
-  footerInput: ViewStyle;
-  ideaInput:TextStyle;
-  ideaErrorText:TextStyle;
+  list:ViewStyle;
 }
 
 const ideaSchema = yup.object({
@@ -49,7 +46,7 @@ const IdeasModal: FC<ModalProps> = ({ ideas, closeModal }) => {
         </Layout>
         <Layout>
           <List
-            style={ styles.ideasList }
+            style={ styles.list }
             data={ ideas }
             keyExtractor={ (_, index) => index.toString() }
             renderItem={ ({ item }) => renderIdea(item) }
@@ -86,30 +83,8 @@ const styles = StyleSheet.create<Styles>({
     marginTop: 4,
     marginBottom: 16,
   },
-  ideasList: {
+  list: {
     marginTop: 10,
-  },
-  ideaInput: {
-    width: windowWidth * 0.75,
-    paddingLeft: 14,
-    marginLeft: 5,
-    marginRight: 5,
-    elevation: 3,
-  },
-  ideaErrorText:{
-    textAlign: 'center',
-    fontSize: 10,
-    fontWeight: 'bold',
-    color: 'crimson',
-    marginBottom: 10,
-    marginTop: 6,
-  },
-  footerInput: {
-    position: 'absolute',
-    flexDirection: 'row',
-    paddingHorizontal: 10,
-    paddingVertical: 5,
-    bottom: 0,
   },
 });
 
