@@ -41,22 +41,22 @@ const IdeasModal: FC<ModalProps> = ({ ideas, closeModal }) => {
         style={ styles.close }
         onPress={ closeModal }
       />
-        <Layout style={ styles.header }>
-          <Text style={ styles.headerText }>There are { ideaCount } Ideas</Text>
-        </Layout>
-        <Layout>
-          <List
-            style={ styles.list }
-            data={ ideas }
-            keyExtractor={ (_, index) => index.toString() }
-            renderItem={ ({ item }) => renderIdea(item) }
-          />
-          </Layout>
-          <FooterInput 
-            inputName='Idea' 
-            reducerFunc={ addIdea } 
-            inputSchema={ ideaSchema }
-          />
+      <Layout style={ styles.header }>
+        <Text style={ styles.headerText }>There are { ideaCount } Ideas</Text>
+      </Layout>
+      <Layout>
+        <List
+          style={ styles.list }
+          data={ ideas }
+          keyExtractor={ (_, index) => index.toString() }
+          renderItem={ ({ item }) => renderIdea(item) }
+        />
+      </Layout>
+      <FooterInput 
+        inputName='Idea' 
+        reducerFunc={ addIdea } 
+        inputSchema={ ideaSchema }
+      />
     </Layout>
   );
 };
