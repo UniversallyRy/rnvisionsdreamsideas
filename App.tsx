@@ -3,15 +3,15 @@ import React, { useState } from "react";
 import { AppRegistry, StatusBar } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { Provider } from "react-redux";
-import { store, /*persistor */ } from "./redux/store";
-import { ApplicationProvider, IconRegistry } from '@ui-kitten/components';
-import * as eva from '@eva-design/eva';
-import { EvaIconsPack } from '@ui-kitten/eva-icons';
-import { ThemesContext } from "./ThemeContext";
-import { default as customTheme } from './styles/custom-theme.json'; 
-import BottomTabs from "./routes/drawer";
-import AppLoading from 'expo-app-loading';
 import * as Font from "expo-font";
+import AppLoading from 'expo-app-loading';
+import { ApplicationProvider, IconRegistry } from '@ui-kitten/components';
+import { EvaIconsPack } from '@ui-kitten/eva-icons';
+import * as eva from '@eva-design/eva';
+import { ThemesContext } from "./ThemeContext";
+import BottomTabs from "./routes/drawer";
+import { store, /*persistor */ } from "./redux/store";
+import { default as customTheme } from './styles/custom-theme.json'; 
 // import { PersistGate } from "redux-persist/integration/react";
 
 const getFonts = () =>
@@ -25,7 +25,7 @@ const getFonts = () =>
 
 const App = () => {
   const [fontsLoaded, setFontsLoaded] = useState(false);
-  const [persistLoaded, setPersistLoaded] = useState(true);
+  // const [persistLoaded, setPersistLoaded] = useState(true);
   const [theme, setTheme] = useState('light');
   const [evaTheme, setEvaTheme] = useState(eva.light);
 
@@ -52,12 +52,12 @@ const App = () => {
   } else {
     return (
       <AppLoading
-        startAsync={getFonts}
+        startAsync={ getFonts }
         onFinish={() => {
           setFontsLoaded(true);
-          setPersistLoaded(false);
+          // setPersistLoaded(false);
         }}  
-        onError={console.warn}
+        onError={ console.warn }
       />
     );
   }
