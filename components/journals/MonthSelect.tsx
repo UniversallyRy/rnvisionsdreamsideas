@@ -1,9 +1,8 @@
-import React, {  useEffect, useState } from 'react';
+import React, {  useState, useEffect } from 'react';
 import { StyleSheet, ViewStyle, TextStyle } from 'react-native';
 import { Layout, Select, SelectItem, IndexPath } from '@ui-kitten/components';
 import { CloseIcon } from '../../shared/icons';
-import months from '../../utils/months';
-import { windowWidth } from '../../utils/constants';
+import { MONTHS, windowWidth } from '../../utils/constants';
 import { useAppDispatch } from '../../utils/hooks';
 import { changeMonth } from '../../redux/reducers/journals';
 
@@ -16,7 +15,7 @@ interface Styles {
 const MonthSelect = () => {
   const [selectedIndex, setSelectedIndex] = useState(new IndexPath(0));
   const dispatch = useAppDispatch();
-  const displayValue = months[selectedIndex.row];
+  const displayValue = MONTHS[selectedIndex.row];
 
   useEffect(() => {    
     dispatch(changeMonth(displayValue))
@@ -36,7 +35,7 @@ const MonthSelect = () => {
         onSelect={ handleItemPress }
         accessibilityLabel='Dropdown of months to filter journal entries'
       >
-        {months.map(item => {
+        {MONTHS.map(item => {
           return(
             <SelectItem  
               style={ styles.listItem } 
@@ -54,7 +53,6 @@ const MonthSelect = () => {
 
 const styles = StyleSheet.create<Styles>({
   container: {
-    width: windowWidth,
     zIndex: 1,
     margin: 1,
   },

@@ -1,5 +1,5 @@
 import React, { FC, useState } from 'react';
-import { StyleSheet, TextStyle, ViewStyle } from 'react-native';
+import { StyleSheet, ViewStyle, TextStyle } from 'react-native';
 import { NavigationScreenProp } from 'react-navigation';
 import { ButtonGroup, Card, Divider, Input, Layout, Text } from '@ui-kitten/components';
 import { CancelButton, DeleteButton, EditButton, SaveButton } from '../../shared/buttons';
@@ -26,7 +26,7 @@ const ListItem: FC<ItemProps> = ({ item,  navigation }) => {
   const [textBody, setBody] = useState(body);
   const dispatch = useAppDispatch();
 
-  const saveHandler = (id) => {
+  const saveHandler = (id: string) => {
     dispatch(editJournal({ id: id, title: textTitle, body: textBody, isEditing: false }));
   };
 
@@ -70,11 +70,11 @@ const ListItem: FC<ItemProps> = ({ item,  navigation }) => {
         {isEditing 
           ?<ButtonGroup>
             <SaveButton onPress={ () => saveHandler(id) }/>
-            <CancelButton onPress={ () => dispatch(editJournalToggle({ id: id })) }/>
+            <CancelButton onPress={ () => dispatch(editJournalToggle({ id })) }/>
           </ButtonGroup>
           :<ButtonGroup>
-            <EditButton onPress={ () => dispatch(editJournalToggle({ id: id })) }/>
-            <DeleteButton onPress={ () => dispatch(deleteJournal({ id: id })) }/>
+            <EditButton onPress={ () => dispatch(editJournalToggle({ id })) }/>
+            <DeleteButton onPress={ () => dispatch(deleteJournal({ id })) }/>
           </ButtonGroup>
         }
     </Card>
@@ -109,7 +109,5 @@ const styles = StyleSheet.create<Styles>({
     margin: 5,
   },
 });
-
-
 
 export default ListItem;

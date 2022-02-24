@@ -12,5 +12,20 @@ export const THUMBNAIL_SIZE = 80;
 
 export const SPACING = 10;
 
+export const MONTHS = [
+  'All',
+  'Jan',
+  'Feb',
+  'Mar',
+  'Apr',
+  'May',
+  'Jun',
+  'Jul',
+  'Aug',
+  'Sep',
+  'Oct',
+  'Nov',
+  'Dec'
+];
 
 
