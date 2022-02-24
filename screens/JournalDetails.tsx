@@ -3,7 +3,7 @@ import { StyleSheet, ViewStyle, TextStyle } from 'react-native';
 import { NavigationScreenProp } from 'react-navigation';
 import { Layout, Card, Text, Divider } from '@ui-kitten/components';
 import Header from '../shared/header';
-import { windowHeight, windowWidth } from '../utils/dimensions';
+import { windowHeight, windowWidth } from '../utils/constants';
 
 export type DetailsProps = {
   route: {

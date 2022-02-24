@@ -3,7 +3,7 @@ import { StyleSheet, ViewStyle } from 'react-native';
 import { List } from '@ui-kitten/components';
 import Todo from './Todo';
 import { TodoProps } from '../../../redux/reducers/todos';
-import { windowHeight, windowWidth } from '../../../utils/dimensions';
+import { windowHeight, windowWidth } from '../../../utils/constants';
 
 type ListProps = {
   todos: TodoProps[];

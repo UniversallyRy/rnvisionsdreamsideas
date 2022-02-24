@@ -4,7 +4,7 @@ import { Layout } from '@ui-kitten/components';
 import Header from './Header';
 import TodoList from './TodoList';
 import InputTodo from './InputTodo';
-import { windowHeight, windowWidth } from '../../../utils/dimensions';
+import { windowHeight, windowWidth } from '../../../utils/constants';
 import { TodoListProps } from '../../../redux/reducers/todos';
 
 

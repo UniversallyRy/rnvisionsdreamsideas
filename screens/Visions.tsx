@@ -7,7 +7,7 @@ import ListView from "../components/visions/ListView";
 import GridView from "../components/visions/GridView";
 import ModalContent from "../components/visions/Modal";
 import { FooterButtons } from "../shared/buttons";
-import { windowHeight, windowWidth } from "../utils/dimensions";
+import { windowHeight, windowWidth } from "../utils/constants";
 // todos: make visions drag and droppable, fix image reslolution/size
 
 interface VisionProps {

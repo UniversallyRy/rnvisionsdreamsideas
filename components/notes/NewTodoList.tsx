@@ -6,7 +6,7 @@ import * as yup from 'yup';
 import { useAppDispatch } from '../../utils/hooks';
 import { addList } from '../../redux/reducers/todos';
 import { CloseButton, FormButton }  from '../../shared/buttons';
-import { windowHeight, windowWidth } from '../../utils/dimensions';
+import { windowHeight, windowWidth } from '../../utils/constants';
 
 type ModalProps = {
   closeModal: (() => void);

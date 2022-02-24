@@ -8,7 +8,7 @@ import ModalContent from '../components/journals/ModalContent';
 import MonthSelect from '../components/journals/MonthSelect';
 import Header from '../shared/header';
 import { CloseButton, FooterButtons } from '../shared/buttons';
-import { windowHeight, windowWidth } from '../utils/dimensions';
+import { windowHeight, windowWidth } from '../utils/constants';
 // todo: add swipe to delete
 interface ScreenProps {
   navigation: NavigationScreenProp<string, object>;

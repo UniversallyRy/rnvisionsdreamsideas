@@ -4,7 +4,7 @@ import { NavigationScreenProp } from 'react-navigation';
 import { ButtonGroup, Card, Divider, Input, Layout, Text } from '@ui-kitten/components';
 import { CancelButton, DeleteButton, EditButton, SaveButton } from '../../shared/buttons';
 import { useAppDispatch } from '../../utils/hooks';
-import { windowHeight, windowWidth } from '../../utils/dimensions';
+import { windowHeight, windowWidth } from '../../utils/constants';
 import { JournalEntry, deleteJournal, editJournal, editJournalToggle } from '../../redux/reducers/journals';
 
 type ItemProps = {

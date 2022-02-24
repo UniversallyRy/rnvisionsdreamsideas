@@ -4,7 +4,7 @@ import { List, Tooltip } from '@ui-kitten/components';
 import { deleteVision, VisionItem } from '../../redux/reducers/visions';
 import { CloseButton } from '../../shared/buttons';
 import { SPACING, THUMBNAIL_SIZE } from '../../utils/constants';
-import { windowWidth } from '../../utils/dimensions';
+import { windowWidth } from '../../utils/constants';
 import { useAppDispatch } from '../../utils/hooks';
 
 type ThumbnailProps = {

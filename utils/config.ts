@@ -1,5 +1,5 @@
 import { Easing } from "react-native-reanimated";
-import { windowWidth } from "../utils/dimensions";
+import { windowWidth } from "../utils/constants";
 
 export const MARGIN = 8;
 export const SIZE = windowWidth / 2 - MARGIN;

@@ -4,7 +4,7 @@ import { NavigationScreenProp } from 'react-navigation';
 import { connect, ConnectedProps } from 'react-redux';
 import { Layout, List, Tooltip } from '@ui-kitten/components';
 import { CloseButton } from '../../shared/buttons';
-import { windowHeight, windowWidth } from '../../utils/dimensions';
+import { windowHeight, windowWidth } from '../../utils/constants';
 import { SPACING, THUMBNAIL_SIZE } from '../../utils/constants';
 import { useAppDispatch } from '../../utils/hooks';
 import { VisionItem, deleteVision } from '../../redux/reducers/visions';

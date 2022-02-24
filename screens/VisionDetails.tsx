@@ -3,7 +3,7 @@ import { Image, StyleSheet, ViewStyle, TextStyle, ImageStyle } from 'react-nativ
 import { NavigationScreenProp } from 'react-navigation';
 import { Layout, Card, Text } from '@ui-kitten/components';
 import Header from '../shared/header';
-import { windowHeight, windowWidth } from '../utils/dimensions';
+import { windowHeight, windowWidth } from '../utils/constants';
 
 type DetailsProps = {
   navigation: NavigationScreenProp<string, object>;

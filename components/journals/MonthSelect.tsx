@@ -3,7 +3,7 @@ import { StyleSheet, ViewStyle, TextStyle } from 'react-native';
 import { Layout, Select, SelectItem, IndexPath } from '@ui-kitten/components';
 import { CloseIcon } from '../../shared/icons';
 import months from '../../utils/months';
-import { windowWidth } from '../../utils/dimensions';
+import { windowWidth } from '../../utils/constants';
 import { useAppDispatch } from '../../utils/hooks';
 import { changeMonth } from '../../redux/reducers/journals';
 

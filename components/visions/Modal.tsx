@@ -8,7 +8,7 @@ import * as yup from 'yup';
 import ModalImage from './ImagePicker';
 import { CloseButton, SubmitButton } from '../../shared/buttons';
 import { useAppDispatch } from '../../utils/hooks';
-import { windowHeight, windowWidth } from '../../utils/dimensions';
+import { windowHeight, windowWidth } from '../../utils/constants';
 import { addVision } from '../../redux/reducers/visions';
 
 type ModalProps = {

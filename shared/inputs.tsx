@@ -4,7 +4,7 @@ import { Input, Layout, Text } from '@ui-kitten/components';
 import { Formik, FormikHelpers } from 'formik';
 import { SubmitButton } from './buttons';
 import { useAppDispatch } from '../utils/hooks';
-import { windowWidth } from '../utils/dimensions';
+import { windowWidth } from '../utils/constants';
 import { Idea } from '../redux/reducers/ideas';
 import { TodoProps } from '../redux/reducers/todos';
 

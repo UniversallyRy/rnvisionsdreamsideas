@@ -5,7 +5,7 @@ import * as ImagePicker from 'expo-image-picker';
 import { manipulateAsync, SaveFormat } from 'expo-image-manipulator'
 import { Layout } from '@ui-kitten/components';
 import { ImageButtons } from '../../shared/buttons';
-import { windowWidth } from '../../utils/dimensions';
+import { windowWidth } from '../../utils/constants';
 import { useAppDispatch } from '../../utils/hooks';
 import { addPic } from '../../redux/reducers/newpic';
 

@@ -3,7 +3,7 @@ import { View, StyleSheet, ViewStyle, TextStyle } from 'react-native';
 import { Card, Text } from '@ui-kitten/components';
 import { CloseButton } from '../../../shared/buttons';
 import { useAppDispatch } from '../../../utils/hooks';
-import { windowWidth } from '../../../utils/dimensions';
+import { windowWidth } from '../../../utils/constants';
 import { deleteIdea } from '../../../redux/reducers/ideas';
 
 interface Styles {

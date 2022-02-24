@@ -6,7 +6,7 @@ import Idea from './Idea';
 import { CloseButton } from '../../../shared/buttons';
 import { FooterInput } from '../../../shared/inputs';
 import { useAppDispatch } from '../../../utils/hooks';
-import { windowHeight, windowWidth } from '../../../utils/dimensions';
+import { windowHeight, windowWidth } from '../../../utils/constants';
 import { Idea as IdeaType, addIdea } from '../../../redux/reducers/ideas';
 
 type ModalProps = {

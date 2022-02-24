@@ -5,7 +5,7 @@ import { Formik } from 'formik';
 import * as yup from 'yup';
 import { SubmitButton } from '../../shared/buttons';
 import { useAppDispatch } from '../../utils/hooks';
-import { windowHeight } from '../../utils/dimensions';
+import { windowHeight } from '../../utils/constants';
 import { addJournal } from '../../redux/reducers/journals';
 
 type ModalProps = {

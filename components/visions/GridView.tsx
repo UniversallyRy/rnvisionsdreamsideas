@@ -3,7 +3,7 @@ import { TouchableOpacity, Image, StyleSheet, ViewStyle, ImageStyle } from 'reac
 import { connect, ConnectedProps } from 'react-redux';
 import { NavigationScreenProp } from 'react-navigation';
 import { Layout, List } from '@ui-kitten/components';
-import { windowHeight, windowWidth } from '../../utils/dimensions';
+import { windowHeight, windowWidth } from '../../utils/constants';
 import { VisionItem } from '../../redux/reducers/visions';
 import { StoreProps } from '../../redux/store';
 
