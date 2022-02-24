@@ -1,12 +1,12 @@
 import { createSlice } from '@reduxjs/toolkit';
 import uuid from "../../utils/uuid";
 
-export type Idea = {
+export type IdeaType = {
   inputValue: string;
   inputId: string;
 }
 
-const initialIdeas: Idea[] = [
+const initialIdeas: IdeaType[] = [
   {
     inputValue: "idea 1",
     inputId: uuid.generate(),

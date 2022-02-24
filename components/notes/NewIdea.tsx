@@ -1,11 +1,11 @@
 import React, { FC } from 'react';
 import { StyleSheet, ViewStyle, TextStyle } from 'react-native';
 import { Formik } from 'formik';
-import { Input, Layout, Text } from '@ui-kitten/components';
+import { Layout, Input, Text } from '@ui-kitten/components';
 import * as yup from 'yup';
-import { useAppDispatch } from '../../utils/hooks';
-import { addIdea } from '../../redux/reducers/ideas';
 import { CloseButton, FormButton }  from '../../shared/buttons';
+import { useAppDispatch } from '../../utils/hooks';
+import { addIdea, IdeaType } from '../../redux/reducers/ideas';
 import { windowHeight, windowWidth } from '../../utils/constants';
 
 type ModalProps = {
@@ -38,9 +38,9 @@ const IdeaModal: FC<ModalProps> = ({ closeModal }) => {
         <Layout style={ styles.form }>
           <Text style={ styles.title }>Type New Idea</Text>
           <Formik
-            initialValues={{ inputValue: '', inputId: 0 }}
+            initialValues={{ inputValue: '', inputId: '' }}
             validationSchema={ listSchema }
-            onSubmit={ (values, actions) => {
+            onSubmit={ (values: IdeaType, actions) => {
               dispatch(addIdea(values));
               actions.resetForm();
               closeModal();
@@ -85,10 +85,10 @@ const IdeaModal: FC<ModalProps> = ({ closeModal }) => {
 const styles = StyleSheet.create<Styles>({
   container: {
     flex: 1,
-    width: windowWidth,
-    height: windowHeight,
     justifyContent: 'center',
     alignItems: 'center',
+    width: windowWidth,
+    height: windowHeight,
   },
   close: {
     position: 'absolute',

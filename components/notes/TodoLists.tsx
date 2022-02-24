@@ -2,11 +2,11 @@ import React, { FC } from 'react';
 import { connect, ConnectedProps } from 'react-redux';
 import { List } from '@ui-kitten/components';
 import TodoList from './TodoList';
-import { TodoListProps } from '../../redux/reducers/todos';
+import { TodoListType } from '../../redux/reducers/todos';
 import { StoreProps } from '../../redux/store';
 
 type ContentProps = {
-  todosLists: TodoListProps[];
+  todosLists: TodoListType[];
 }
 
 const TodoLists: FC<ContentProps> = ({ todosLists }) => {

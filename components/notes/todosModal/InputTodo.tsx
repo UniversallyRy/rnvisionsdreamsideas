@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { FC } from 'react'
 import { Keyboard, StyleSheet, ViewStyle, TextStyle } from 'react-native';
 import { Layout, Input, Text } from '@ui-kitten/components';
 import { Formik } from 'formik';
@@ -6,8 +6,11 @@ import * as yup from 'yup';
 import { SubmitButton } from '../../../shared/buttons';
 import { windowWidth } from '../../../utils/constants';
 import { useAppDispatch } from '../../../utils/hooks';
-import { addTodo } from '../../../redux/reducers/todos';
+import { addTodo, TodoType } from '../../../redux/reducers/todos';
 
+type InputProps = {
+  listId: string;
+}
 interface Styles {
     footer: ViewStyle;
     todoInput: ViewStyle;
@@ -19,15 +22,15 @@ const todoSchema = yup.object({
     title: yup.string().required().min(4),
 });
   
-const InputTodo = ({ listId }) => {
+const InputTodo: FC<InputProps> = ({ listId }) => {
   const dispatch = useAppDispatch();
 
   return (
     <Formik
-        initialValues={{ title: '', listId: '' }}
+        initialValues={{ inputValue: '', inputId: '' }}
         validationSchema={ todoSchema }
-        onSubmit={ (values, actions) => {
-          values.listId = listId
+        onSubmit={ (values:TodoType, actions) => {
+          values.listId = listId;
           dispatch(addTodo(values));
           actions.resetForm();
           Keyboard.dismiss();
@@ -50,11 +53,11 @@ const InputTodo = ({ listId }) => {
                 style={ styles.todoInput }
                 placeholder='Enter Todo . . .'
                 onChangeText={ handleChange('title') }
-                value={ values.title }
+                value={ values.inputValue }
                 onBlur={ handleBlur('title') }
               />
               <Text style={ styles.errorText }>
-                { touched.title && errors.title || '' }
+                { touched.inputValue && errors.inputValue || '' }
               </Text>
             </Layout>
             <SubmitButton
@@ -68,32 +71,32 @@ const InputTodo = ({ listId }) => {
 }
 
 const styles = StyleSheet.create<Styles>({
-    footer: {
-        flexDirection: 'row',
-        marginTop: "auto",
-        width: windowWidth,
-        paddingHorizontal: 10,
-        paddingVertical: 5,
-    },
-    todoInput: {
-        width: windowWidth * 0.75,
-        paddingLeft: 14,
-        marginLeft: 4,
-        marginRight: 5,
-        elevation: 3,
-    },
-    errorText:{
-        fontSize: 10,
-        color: 'crimson',
-        fontWeight: 'bold',
-        marginBottom: 10,
-        marginTop: 6,
-        textAlign: 'center',
-    },
-    button: {
-        height: 20,
-        marginLeft: 10,
-    },
-  });
+  footer: {
+    flexDirection: 'row',
+    width: windowWidth,
+    marginTop: "auto",
+    paddingHorizontal: 10,
+    paddingVertical: 5,
+  },
+  todoInput: {
+    width: windowWidth * 0.75,
+    marginLeft: 4,
+    marginRight: 5,
+    paddingLeft: 14,
+    elevation: 3,
+  },
+  errorText:{
+    textAlign: 'center',
+    fontSize: 10,
+    color: 'crimson',
+    fontWeight: 'bold',
+    marginBottom: 10,
+    marginTop: 6,
+  },
+  button: {
+    height: 20,
+    marginLeft: 10,
+  },
+});
   
 export default InputTodo;

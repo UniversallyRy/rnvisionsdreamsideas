@@ -2,11 +2,11 @@ import React, { FC } from 'react';
 import { StyleSheet, ViewStyle } from 'react-native';
 import { List } from '@ui-kitten/components';
 import Todo from './Todo';
-import { TodoProps } from '../../../redux/reducers/todos';
+import { TodoType } from '../../../redux/reducers/todos';
 import { windowHeight, windowWidth } from '../../../utils/constants';
 
 type ListProps = {
-  todos: TodoProps[];
+  todos: TodoType[];
   listId: string;
 }
 
@@ -17,14 +17,14 @@ interface Styles {
 
 const TodoList:FC<ListProps> = ({ todos, listId }) => {
 
-  const renderTodo = (todo: TodoProps, listId: string) => {
+  const renderTodo = (todo: TodoType, listId: string) => {
     return <Todo item={ todo } listId={ listId } />
   };
 
   return (
     <List
-      style={ styles.container }
       data={ todos }
+      style={ styles.container }
       keyExtractor={ (_, index) => index.toString() }
       renderItem={ ({ item }) => renderTodo(item, listId) }
     />

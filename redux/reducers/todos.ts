@@ -1,22 +1,22 @@
 import { createSlice } from '@reduxjs/toolkit'
-import { filtered } from '../../utils/hooks';
 import uuid from "../../utils/uuid";
 
-export type TodoProps = {
+export type TodoType = {
   inputValue: string;
   inputId: string;
   completed?: boolean;
+  listId?: string;
 }
 
-export type TodoListProps = {
+export type TodoListType = {
   name: string;
   id: string;
   color: string;
-  todos: TodoProps[];
+  todos: TodoType[];
   completedCount: number;
 }
 
-const initialListArr: TodoListProps[] = [
+const initialListArr: TodoListType[] = [
   {
     name: "Plan A Trip",
     id: uuid.generate(),

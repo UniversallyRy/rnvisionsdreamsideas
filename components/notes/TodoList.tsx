@@ -3,11 +3,11 @@ import { TextStyle, ViewStyle, StyleSheet } from 'react-native';
 import { Card, Layout, Modal, Text } from '@ui-kitten/components';
 import TodosModal from './todosModal';
 import { CloseButton } from '../../shared/buttons';
-import { filtered, useAppDispatch } from '../../utils/hooks';
-import { deleteList, setCompleted, TodoListProps } from '../../redux/reducers/todos';
+import { useAppDispatch } from '../../utils/hooks';
+import { deleteList, setCompleted, TodoListType } from '../../redux/reducers/todos';
 
 type ListProps = {
-  list: TodoListProps;
+  list: TodoListType;
 }
 
 interface Styles {

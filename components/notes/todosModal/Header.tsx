@@ -2,10 +2,10 @@ import React, { FC, useEffect } from 'react'
 import { StyleSheet, ViewStyle, TextStyle } from 'react-native';
 import { Layout, Text } from '@ui-kitten/components'
 import { CloseButton } from '../../../shared/buttons'
-import { TodoListProps } from '../../../redux/reducers/todos';
+import { TodoListType } from '../../../redux/reducers/todos';
 
 type HeaderProps = {
-  list: TodoListProps;
+  list: TodoListType;
   closeModal: () => void;
 }
 interface Styles {

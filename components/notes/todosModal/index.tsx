@@ -1,15 +1,14 @@
-import React, { FC, useEffect } from 'react';
+import React, { FC } from 'react';
 import { StyleSheet, ViewStyle } from 'react-native';
 import { Layout } from '@ui-kitten/components';
 import Header from './Header';
 import TodoList from './TodoList';
 import InputTodo from './InputTodo';
+import { TodoListType } from '../../../redux/reducers/todos';
 import { windowHeight, windowWidth } from '../../../utils/constants';
-import { TodoListProps } from '../../../redux/reducers/todos';
-
 
 type TodoModalProps = {
-  list: TodoListProps;
+  list: TodoListType;
   closeModal: (() => void);
 }
 

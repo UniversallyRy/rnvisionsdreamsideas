@@ -23,7 +23,7 @@ const MonthSelect = () => {
 
   const handleItemPress = (index) => {
     setSelectedIndex(index)
-  }
+  };
 
   return (
     <Layout style={ styles.container } level='1'>

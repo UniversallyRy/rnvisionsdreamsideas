@@ -1,13 +1,13 @@
-import React, { FC, useState } from 'react';
+import React, { useState, FC } from 'react';
 import { StyleSheet, ViewStyle, TextStyle } from 'react-native';
 import { connect, ConnectedProps } from 'react-redux';
 import { Layout, Modal, Card, Text } from '@ui-kitten/components';
 import IdeasModal from './ideasModal';
-import { Idea } from '../../redux/reducers/ideas';
+import { IdeaType } from '../../redux/reducers/ideas';
 import { StoreProps } from '../../redux/store';
 
 type IdeasProps = {
-  ideas: Idea[];
+  ideas: IdeaType[];
 }
 
 interface Styles {

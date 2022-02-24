@@ -3,9 +3,9 @@ import { StyleSheet, TextStyle, ViewStyle } from 'react-native';
 import { Layout, Button, Input, Text } from '@ui-kitten/components';
 import { Formik } from 'formik';
 import * as yup from 'yup';
-import { useAppDispatch } from '../../utils/hooks';
-import { addList } from '../../redux/reducers/todos';
 import { CloseButton, FormButton }  from '../../shared/buttons';
+import { addList } from '../../redux/reducers/todos';
+import { useAppDispatch } from '../../utils/hooks';
 import { windowHeight, windowWidth } from '../../utils/constants';
 
 type ModalProps = {
