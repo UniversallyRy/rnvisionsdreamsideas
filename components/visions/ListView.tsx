@@ -7,20 +7,20 @@ import { CloseButton } from '../../shared/buttons';
 import { windowHeight, windowWidth } from '../../utils/constants';
 import { SPACING, THUMBNAIL_SIZE } from '../../utils/constants';
 import { useAppDispatch } from '../../utils/hooks';
-import { VisionItem, deleteVision } from '../../redux/reducers/visions';
+import { VisionType, deleteVision } from '../../redux/reducers/visions';
 import { StoreProps } from '../../redux/store';
 
 type ListProps = {
-  visions: VisionItem[];
+  visions: VisionType[];
   navigation: NavigationScreenProp<string, object>;
 }
 
 type ItemProps = {
-  item: VisionItem;
+  item: VisionType;
 }
 
 type ThumbnailProps = {
-  item: VisionItem;
+  item: VisionType;
   index: number;
 }
 

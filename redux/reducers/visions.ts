@@ -1,13 +1,13 @@
 import { createSlice } from '@reduxjs/toolkit';
 import uuid from "../../utils/uuid";
 
-export type VisionItem = {
+export type VisionType = {
   uri: string;
   title: string;
   id: string;
 }
 
-const initialVisions: VisionItem[] = Array.from({ length: 8 }).map((_, i) => {
+const initialVisions: VisionType[] = Array.from({ length: 8 }).map((_, i) => {
   return {
     uri: `https://picsum.photos/200${i}`,
     title: `This is the title ${i + 1}!`,

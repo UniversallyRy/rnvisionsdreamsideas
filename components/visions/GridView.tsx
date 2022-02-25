@@ -4,16 +4,16 @@ import { connect, ConnectedProps } from 'react-redux';
 import { NavigationScreenProp } from 'react-navigation';
 import { Layout, List } from '@ui-kitten/components';
 import { windowHeight, windowWidth } from '../../utils/constants';
-import { VisionItem } from '../../redux/reducers/visions';
+import { VisionType } from '../../redux/reducers/visions';
 import { StoreProps } from '../../redux/store';
 
 type GridProps = {
-  visions: VisionItem[];
+  visions: VisionType[];
   navigation: NavigationScreenProp<string,object>;
 }
 
 type ItemProps = {
-  item: VisionItem;
+  item: VisionType;
   index?: number;
 }
 
