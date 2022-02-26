@@ -80,6 +80,5 @@ const mapStateToProps = (state:StoreProps)=> {
   return { month, list };
 };
 
-export default connect(mapStateToProps)(GridView);
-
 export type PropsFromRedux = ConnectedProps<typeof GridView>
+export default connect(mapStateToProps)(GridView);
