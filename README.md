@@ -1,4 +1,4 @@
-# Affirmation Taker
+# Affirmations, Journals and Notes
 
 ## Built With
 
@@ -37,7 +37,7 @@ expo start
 
 ## About
 
-A project that initially started as just a vision board, but expanded as my JavaScript knowledge grew. It now includes a dream journal and note taker/todo list combo.
+A project that initially started as just a vision board, but expanded as my JavaScript knowledge grew. It now includes a dream journal section and note taker/todo list combo.
 
 ## Demo
 
@@ -60,5 +60,3 @@ A project that initially started as just a vision board, but expanded as my Java
 
 - Twitter: [@universallyry](https://twitter.com/universallyry)
 - Github Profile: [@universallyry](https://github.com/universallyry)
-
----
