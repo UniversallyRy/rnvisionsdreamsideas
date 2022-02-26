@@ -7,8 +7,7 @@ const picturePicker = createSlice({
   initialState,
   reducers: {
     addPic: (state, action) => {
-      var uri = "";
-      return uri == action.payload.uri ? "" : action.payload.uri;
+      return state === action.payload.uri ? "" : action.payload.uri;
     }
   }
 });
