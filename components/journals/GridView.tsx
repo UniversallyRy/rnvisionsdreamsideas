@@ -4,10 +4,10 @@ import { connect, ConnectedProps } from 'react-redux';
 import { NavigationScreenProp } from 'react-navigation';
 import { Layout, Card, List, Text } from '@ui-kitten/components';
 import { windowHeight, windowWidth } from '../../utils/constants';
-import { JournalEntries } from '../../redux/reducers/journals';
+import { JournalListType } from '../../redux/reducers/journals';
 import { StoreProps } from '../../redux/store';
 
-interface GridProps extends JournalEntries {
+interface GridProps extends JournalListType {
   navigation: NavigationScreenProp<string, object>;
 }
 
