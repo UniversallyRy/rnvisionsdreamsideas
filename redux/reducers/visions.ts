@@ -19,19 +19,15 @@ const visions = createSlice({
   name: "Visions",
   initialState: initialVisions,
   reducers: {
-    addVision: (state, action) => {
+    addVision: (state, action): void => {
       state.unshift({
         uri: action.payload.uri,
         title: action.payload.title,
         id: uuid.generate(),
       })
     },
-    editVision: (state, action) => {
-      return state;
-    },
-    deleteVision: (state, action) => {
-      return state.filter((item) => item.id != action.payload.id); 
-    }
+    editVision: (state, action) => state,
+    deleteVision: (state, action) => state.filter((item) => item.id != action.payload.id)
   }
 });
 

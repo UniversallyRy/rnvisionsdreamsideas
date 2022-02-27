@@ -47,7 +47,7 @@ const journalsReducer = createSlice({
   name:'Journals',
   initialState: initialState,
   reducers: {
-    addJournal: (state, action) => {
+    addJournal: (state, action): void => {
       state.list.push({
         title: action.payload.title,
         body: action.payload.body,
@@ -56,17 +56,17 @@ const journalsReducer = createSlice({
         isEditing: false,
       })
     },
-    deleteJournal: (state, action) => {
+    deleteJournal: (state, action): void => {
        state.list = state.list.filter((item) => item.id != action.payload.id); 
     },
-    editJournal: (state, action) => {
+    editJournal: (state, action): void => {
       const index = state.list.findIndex(item => item.id === action.payload.id);
       state.list[index] = {
         ...state.list[index],
         ...action.payload,
       };
     },
-    editJournalToggle: (state, action) => {
+    editJournalToggle: (state, action): void => {
       state.list.map((item) => {
         if(item.id === action.payload.id){
           item.isEditing = !item.isEditing

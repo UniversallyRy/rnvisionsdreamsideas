@@ -102,7 +102,7 @@ const todosLists = createSlice( {
   name: "Todos",
   initialState: initialListArr,
   reducers:{
-    addList: (state, action) => {
+    addList: (state, action): void => {
       state.push({
         name: action.payload.name,
         id: uuid.generate(),
@@ -111,25 +111,23 @@ const todosLists = createSlice( {
         completedCount: 0,
       })
     },
-    setCompleted: (state, action) => {
-      state.map((item) => {
+    setCompleted: (state, action): void => {
+      state.map((item): void => {
         if (item.id == action.payload.listId) {
           item.completedCount = action.payload.count
         }
       });
     },
-    decreaseCompleted: (state, action) => {
-      state.map((item) => {
+    decreaseCompleted: (state, action): void => {
+      state.map((item): void => {
         if (item.id == action.payload.listId) {
           item.completedCount--;
         }
       });
     },
-    deleteList: (state, action) => {
-      return state.filter((list) => list.id != action.payload.listId);
-    },
-    addTodo: (state, action) => {
-      state.map((item) => {
+    deleteList: (state, action) => state.filter((list) => list.id != action.payload.listId),
+    addTodo: (state, action): void => {
+      state.map((item): void => {
         if (item.id == action.payload.listId) {
           item.todos.push({
             inputValue: action.payload.inputValue,
@@ -139,13 +137,11 @@ const todosLists = createSlice( {
         }
       });
     },
-    editTodo: (state, action) => {
-      return state.filter((todo) => todo.id != action.payload.id);
-    },
-    toggleTodo: (state, action) => {
-      state.map((item) => {
+    editTodo: (state, action) => state.filter((todo) => todo.id != action.payload.id),
+    toggleTodo: (state, action): void => {
+      state.map((item): void => {
         if (item.id == action.payload.listId ) {
-          item.todos.map((todo) => {
+          item.todos.map((todo): void => {
             if(todo.inputId == action.payload.inputId) {
               todo.completed = !todo.completed
             }
@@ -154,9 +150,9 @@ const todosLists = createSlice( {
       });
     },
     deleteTodo: (state, action) => {
-      state.map((item) => {
+      state.map((item): void => {
         if (item.id == action.payload.listId) {
-          item.todos = item.todos.filter((todo) => todo.inputId != action.payload.inputId);
+          item.todos = item.todos.filter((todo): boolean => todo.inputId != action.payload.inputId);
         }
       });
       return state;

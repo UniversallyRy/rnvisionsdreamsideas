@@ -21,19 +21,17 @@ const ideas = createSlice( {
   name:"ideas",
   initialState: initialIdeas,
   reducers: {
-    addIdea: (state, action) => {
+    addIdea: (state, action): void => {
       state.push({
         inputValue: action.payload.inputValue,
         inputId: uuid.generate(),
       })
     },
-    editIdea: (state, action) => {
+    editIdea: (state, action): void => {
       const newState = action.payload.draft;
       return newState;
     },
-    deleteIdea: (state, action) => {
-      return state.filter((idea) => idea.inputId != action.payload.inputId);
-    },
+    deleteIdea: (state, action) => state.filter((idea) => idea.inputId != action.payload.inputId),
   }
 });
 
