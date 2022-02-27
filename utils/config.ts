@@ -10,7 +10,7 @@ export const animationConfig = {
   duration: 350,
 };
 
-export const getPosition = (position: number) => {
+export const getPosition = (position: number): { x: number; y: number; } => {
   "worklet";
 
   return {
@@ -19,7 +19,7 @@ export const getPosition = (position: number) => {
   };
 };
 
-export const getOrder = (tx: number, ty: number, max: number) => {
+export const getOrder = ({ tx, ty, max }: { tx: number; ty: number; max: number; }): number => {
   "worklet";
 
   const x = Math.round(tx / SIZE) * SIZE;
