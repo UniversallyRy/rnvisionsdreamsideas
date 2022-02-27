@@ -1,12 +1,12 @@
 import React from "react";
-import { GestureResponderEvent, StyleProp, StyleSheet, TextStyle, ViewStyle } from "react-native";
+import { GestureResponderEvent, StyleSheet } from "react-native";
 import { Layout, Button, ButtonGroup, Text, TopNavigationAction } from "@ui-kitten/components"
 import { BackIcon, CloseIcon, DayIcon, GridIcon, NightIcon, SaveIcon, SubmitIcon } from "./icons";
 import { windowWidth } from "../utils/constants";
+import { ButtonStyles } from "./Styles";
 
 type ButtonProps = {
   text?: string;
-  style?: StyleProp<ViewStyle>;
   accessibilityLabel?: string;
   onPress: (event?: GestureResponderEvent | undefined) => void;
 }
@@ -20,20 +20,6 @@ type FormProps = {
 type ToggleProps = {
   theme: string;
   toggleTheme: (event?: GestureResponderEvent | undefined) => void;
-}
-
-interface Styles {
-  button: ViewStyle;
-  text: TextStyle;
-  toggle: ViewStyle;
-  imgSelect: ViewStyle;
-  edit: ViewStyle;
-  delete: ViewStyle;
-  submit: ViewStyle;
-  note: ViewStyle;
-  todo: ViewStyle;
-  footerContainer: ViewStyle;
-  footer: ViewStyle;
 }
 
 // default export kittenui styled button
@@ -168,7 +154,7 @@ export const FooterButtons = ({ left, right }): JSX.Element => (
   </Layout>
 );
 
-const styles = StyleSheet.create<Styles>({
+const styles = StyleSheet.create<ButtonStyles>({
   button: {
     alignSelf: "center",
     width: 200,

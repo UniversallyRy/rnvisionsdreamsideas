@@ -1,5 +1,5 @@
 import React from 'react'
-import { Keyboard, StyleSheet, TextStyle, ViewStyle } from 'react-native';
+import { Keyboard, StyleSheet } from 'react-native';
 import { Input, Layout, Text } from '@ui-kitten/components';
 import { Formik, FormikHelpers } from 'formik';
 import { SubmitButton } from './buttons';
@@ -7,14 +7,9 @@ import { useAppDispatch } from '../utils/hooks';
 import { windowWidth } from '../utils/constants';
 import { IdeaType } from '../redux/reducers/ideas';
 import { TodoType } from '../redux/reducers/todos';
+import { InputStyles } from './Styles';
 
 interface FooterProps extends IdeaType, TodoType{}
-
-interface Styles {
-    container: ViewStyle;
-    input:TextStyle;
-    errorText:TextStyle;
-}
 
 export const FooterInput = ({ inputName, reducerFunc, inputSchema }): JSX.Element => {
   const dispatch = useAppDispatch();
@@ -63,7 +58,7 @@ export const FooterInput = ({ inputName, reducerFunc, inputSchema }): JSX.Elemen
   );
 };
 
-const styles = StyleSheet.create<Styles>({
+const styles = StyleSheet.create<InputStyles>({
   container: {
     position: 'absolute',
     flexDirection: 'row',

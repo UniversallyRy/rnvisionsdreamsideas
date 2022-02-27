@@ -1,18 +1,16 @@
 import React, { useContext } from "react";
-import { StyleSheet, ViewStyle } from "react-native";
+import { StyleSheet } from "react-native";
 import { NavigationScreenProp } from 'react-navigation';
 import { Layout, Divider, TopNavigation } from "@ui-kitten/components";
 import { ThemesContext } from './../ThemeContext';
 import { BackAction, ToggleButton } from "./buttons";
+import { HeaderStyles } from "./Styles";
 
 export type HeaderProps = {
   name: string
   navigation?: NavigationScreenProp<string, object>;
 };
 
-interface Styles {
-  headerContainer: ViewStyle;
-}
 const Header:React.FC<HeaderProps> = ({ name, navigation }): JSX.Element => {
 
   const { theme, toggleTheme } = useContext(ThemesContext);
@@ -38,7 +36,7 @@ const Header:React.FC<HeaderProps> = ({ name, navigation }): JSX.Element => {
   );
 };
 
-const styles = StyleSheet.create<Styles>({
+const styles = StyleSheet.create<HeaderStyles>({
   headerContainer: {
     fontFamily: "roboto",
   },
