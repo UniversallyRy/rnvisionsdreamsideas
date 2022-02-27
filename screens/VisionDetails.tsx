@@ -34,6 +34,7 @@ const VisionDetails: FC<DetailsProps> = ({ navigation, route }): JSX.Element => 
       </Card>
     </Layout>
   );
+  
 };
 
 const styles = StyleSheet.create<VDetailsStyles>({

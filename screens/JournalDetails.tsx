@@ -43,6 +43,7 @@ const JournalDetails: FC<DetailsProps> = ({ route, navigation }): JSX.Element =>
       </Card>
     </Layout>
   );
+  
 };
 
 const styles = StyleSheet.create<JDetailsStyles>({

@@ -1,5 +1,5 @@
 import React from "react";
-import { GestureResponderEvent, StyleSheet } from "react-native";
+import { GestureResponderEvent, StyleProp, StyleSheet, ViewStyle } from "react-native";
 import { Layout, Button, ButtonGroup, Text, TopNavigationAction } from "@ui-kitten/components"
 import { BackIcon, CloseIcon, DayIcon, GridIcon, NightIcon, SaveIcon, SubmitIcon } from "./icons";
 import { windowWidth } from "../utils/constants";
@@ -7,6 +7,7 @@ import { ButtonStyles } from "./Styles";
 
 type ButtonProps = {
   text?: string;
+  style?: StyleProp<ViewStyle>;
   accessibilityLabel?: string;
   onPress: (event?: GestureResponderEvent | undefined) => void;
 }

@@ -10,7 +10,6 @@ import { FooterButtons } from "../shared/buttons";
 import { windowHeight, windowWidth } from "../utils/constants";
 import { VisionStyles } from "./Styles";
 // todos: make visions drag and droppable, fix image reslolution/size
-
 interface VisionProps {
   navigation: NavigationScreenProp<string, object>;
 }
@@ -26,7 +25,6 @@ const Visions: React.FC<VisionProps> = ({ navigation }): JSX.Element => {
   const scrollX = useRef(new Animated.Value(0)).current;
   const [modalOpen, setModalOpen] = useState(false);
   const [view, setView] = useState(false);
-  
 
   useEffect(() => {
     let isCancelled = false;
@@ -42,21 +40,26 @@ const Visions: React.FC<VisionProps> = ({ navigation }): JSX.Element => {
   const toggleModal = () => {
     setModalOpen(!modalOpen);
   };
+
   return (
     <Layout style={ styles.container }>
+
       <Header name={ "Visions" } />
       <Modal visible={ modalOpen }>
         <ModalContent setModalOpen={ toggleModal } />  
       </Modal>
       {/* when gridview is toggled use gridContainer otherwise VisionsContainer */}
+      
       {view ? (
         <GridView navigation={ navigation } />
       ) : (
         <ListView navigation={ navigation } />
       )}
-        <FooterButtons left={ toggleModal } right={ toggleView } />
+
+      <FooterButtons left={ toggleModal } right={ toggleView } />
     </Layout>
   );
+
 };
 
 const styles = StyleSheet.create<VisionStyles>({

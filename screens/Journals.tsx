@@ -27,10 +27,12 @@ const JournalScreen: React.FC<ScreenProps>= ({ navigation }): JSX.Element => {
     <Layout style={ styles.screen }>
       <Header name='Journals' />
       <MonthSelect />
+      
       <Modal
         style={{ backgroundColor: 'white', ...styles.screen }}
         visible={ modalOpen }
       >
+
         <Text style={ styles.title }>Add A Journal Entry</Text>
         <ModalContent setModalOpen={ setModalOpen } />
         <CloseButton
@@ -38,6 +40,7 @@ const JournalScreen: React.FC<ScreenProps>= ({ navigation }): JSX.Element => {
           accessibilityLabel='Closes Modal'
           onPress={ () => setModalOpen(false) }
         />
+
       </Modal>
       
       {view ? (
@@ -45,9 +48,11 @@ const JournalScreen: React.FC<ScreenProps>= ({ navigation }): JSX.Element => {
       ) : (
         <ListView navigation={ navigation } />
       )}
+
       <FooterButtons left={ setModalOpen } right={ toggleView } />
     </Layout>
   );
+
 };
 
 const styles = StyleSheet.create<JournalStyles>({

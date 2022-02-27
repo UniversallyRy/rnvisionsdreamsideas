@@ -10,8 +10,7 @@ const About = (): JSX.Element => (
   <Layout style={ styles.aboutContainer }>
     <Card style={ styles.textContainer }>
       <Text style={ styles.text }>
-        {" "}
-        { aboutText }{" "}
+        { aboutText }
       </Text>
     </Card>
   </Layout>

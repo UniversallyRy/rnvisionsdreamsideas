@@ -7,12 +7,14 @@ import { NoteStyles } from "./Styles";
 // todo: draggable
 
 const NoteScreen = () => {
+  
   return (
     <Layout style={ styles.noteScreenContainer }>
       <Header name="Notes" />
       <NoteContent />
     </Layout>
   );
+
 };
 
 const styles = StyleSheet.create<NoteStyles>({
