@@ -5,10 +5,10 @@ import { ButtonGroup, Card, Divider, Input, Layout, Text } from '@ui-kitten/comp
 import { CancelButton, DeleteButton, EditButton, SaveButton } from '../../shared/buttons';
 import { useAppDispatch } from '../../utils/hooks';
 import { windowHeight, windowWidth } from '../../utils/constants';
-import { JournalEntry, deleteJournal, editJournal, editJournalToggle } from '../../redux/reducers/journals';
+import { JournalType, deleteJournal, editJournal, editJournalToggle } from '../../redux/reducers/journals';
 
 type ItemProps = {
-  item: JournalEntry;
+  item: JournalType;
   navigation: NavigationScreenProp<string, object>;
 }
 
