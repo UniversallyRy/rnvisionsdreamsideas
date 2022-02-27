@@ -9,18 +9,16 @@ type ContentProps = {
   todosLists: TodoListType[];
 }
 
-const TodoLists: FC<ContentProps> = ({ todosLists }) => {
-  const renderTodoLists = (list) => {
-    return <TodoList list={ list } />;
-  };
+const TodoLists: FC<ContentProps> = ({ todosLists }): JSX.Element => {
+  const renderTodoLists = (list: TodoListType): JSX.Element => <TodoList list={list} />;
 
   return (
     <List
-      keyExtractor={ (_, index) => index.toString() }  
+      keyExtractor={ (_, index): string => index.toString() }  
       data={ todosLists }
       horizontal={ true }
       showsHorizontalScrollIndicator={ false }
-      renderItem={ ({ item }) => renderTodoLists(item) }
+      renderItem={ ({ item }): JSX.Element => renderTodoLists(item) }
       keyboardShouldPersistTaps='always'
     />
   );
@@ -32,6 +30,5 @@ const mapStateToProps = (state: StoreProps) => {
   return { todosLists };
 };
 
-export default connect(mapStateToProps)(TodoLists);
-
 export type PropsFromRedux = ConnectedProps<typeof TodoLists>
+export default connect(mapStateToProps)(TodoLists);

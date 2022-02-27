@@ -1,22 +1,17 @@
 import React, { FC } from 'react';
-import { StyleSheet, ViewStyle, TextStyle } from 'react-native';
+import { StyleSheet } from 'react-native';
 import { ListItem, CheckBox, Text } from '@ui-kitten/components';
 import { TodoType, toggleTodo, deleteTodo } from '../../../redux/reducers/todos';
 import { CloseButton } from '../../../shared/buttons';
 import { useAppDispatch } from '../../../utils/hooks';
+import { TodoStyles } from './Styles';
 
 type SingleTodo = {
   item: TodoType; 
   listId: string;   
 }  
 
-interface Styles {
-  container:ViewStyle;
-  todo:TextStyle;
-  deleteButton:ViewStyle;
-}
-
-const Todo:FC<SingleTodo> = ({ item, listId }) => {
+const Todo:FC<SingleTodo> = ({ item, listId }): JSX.Element => {
   const { inputValue, inputId, completed } = item;
   const dispatch = useAppDispatch()
 
@@ -39,13 +34,13 @@ const Todo:FC<SingleTodo> = ({ item, listId }) => {
       </Text>
       <CloseButton
         style={ styles.deleteButton }
-        onPress={ () => dispatch(deleteTodo({ id:inputId, listId })) }
+        onPress={ (): { payload: object; type: string; } => dispatch(deleteTodo({ id:inputId, listId })) }
       />
     </ListItem>
   );
 }
 
-const styles = StyleSheet.create<Styles>({
+const styles = StyleSheet.create<TodoStyles>({
   container: {
     flexDirection: 'row',
     alignItems: 'center',

@@ -1,20 +1,16 @@
 import React, { FC, useEffect } from 'react'
-import { StyleSheet, ViewStyle, TextStyle } from 'react-native';
+import { StyleSheet } from 'react-native';
 import { Layout, Text } from '@ui-kitten/components'
 import { CloseButton } from '../../../shared/buttons'
 import { TodoListType } from '../../../redux/reducers/todos';
+import { HeaderStyles } from './Styles';
 
 type HeaderProps = {
   list: TodoListType;
   closeModal: () => void;
 }
-interface Styles {
-  close: ViewStyle;
-  header: TextStyle;
-  title: TextStyle;
-  taskCount: TextStyle;
-}
-const Header: FC<HeaderProps> = ({ list, closeModal }) => {
+
+const Header: FC<HeaderProps> = ({ list, closeModal }): JSX.Element => {
   const { name, todos, color, completedCount } = list;
   const taskCount = todos.length;
   
@@ -48,28 +44,28 @@ const Header: FC<HeaderProps> = ({ list, closeModal }) => {
   );
 };
   
-const styles = StyleSheet.create<Styles>({
-    close: {
-      position: 'absolute', 
-      zIndex: 1, 
-      top: 0, 
-      right: 1, 
-    },
-    header: {
-      justifyContent: 'flex-end',
-      marginLeft: 10,
-      borderBottomWidth: 4,
-    },
-    title: {
-      fontSize: 30,
-      fontWeight: '800',
-      margin: 3,
-    },
-    taskCount: {
-      fontSize: 12,
-      marginTop: 5,
-      marginLeft: 20,
-    }
+const styles = StyleSheet.create<HeaderStyles>({
+  close: {
+    position: 'absolute', 
+    zIndex: 1, 
+    top: 0, 
+    right: 1, 
+  },
+  header: {
+    justifyContent: 'flex-end',
+    marginLeft: 10,
+    borderBottomWidth: 4,
+  },
+  title: {
+    fontSize: 30,
+    fontWeight: '800',
+    margin: 3,
+  },
+  taskCount: {
+    fontSize: 12,
+    marginTop: 5,
+    marginLeft: 20,
+  }
 });
 
 export default Header;

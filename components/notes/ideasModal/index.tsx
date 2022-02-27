@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { StyleSheet, ViewStyle, TextStyle } from 'react-native';
+import { StyleSheet } from 'react-native';
 import { Layout, List, Text } from '@ui-kitten/components';
 import * as yup from 'yup';
 import Idea from './Idea';
@@ -8,29 +8,22 @@ import { FooterInput } from '../../../shared/inputs';
 import { IdeaType, addIdea } from '../../../redux/reducers/ideas';
 import { useAppDispatch } from '../../../utils/hooks';
 import { windowHeight, windowWidth } from '../../../utils/constants';
+import { ModalStyles } from './Styles';
 
 type ModalProps = {
   ideas: IdeaType[];
   closeModal: (() => void);
 }
 
-interface Styles {
-  container: ViewStyle;
-  close: ViewStyle;
-  header: ViewStyle;
-  headerText: TextStyle;
-  list:ViewStyle;
-}
-
 const ideaSchema = yup.object({
   inputValue: yup.string().required().min(6),
 });
 
-const IdeasModal: FC<ModalProps> = ({ ideas, closeModal }) => {
+const IdeasModal: FC<ModalProps> = ({ ideas, closeModal }): JSX.Element => {
   const ideaCount = ideas.length;
   const dispatch = useAppDispatch();
 
-  const renderIdea = ( item: IdeaType) => {
+  const renderIdea = ( item: IdeaType): JSX.Element => {
     const { inputValue, inputId } = item;
     return <Idea inputValue={ inputValue } inputId={ inputId } />
   };
@@ -48,8 +41,8 @@ const IdeasModal: FC<ModalProps> = ({ ideas, closeModal }) => {
         <List
           style={ styles.list }
           data={ ideas }
-          keyExtractor={ (_, index) => index.toString() }
-          renderItem={ ({ item }) => renderIdea(item) }
+          keyExtractor={ (_, index): string => index.toString() }
+          renderItem={ ({ item }): JSX.Element => renderIdea(item) }
         />
       </Layout>
       <FooterInput 
@@ -61,7 +54,7 @@ const IdeasModal: FC<ModalProps> = ({ ideas, closeModal }) => {
   );
 };
 
-const styles = StyleSheet.create<Styles>({
+const styles = StyleSheet.create<ModalStyles>({
   container: {
     flex: 1,
     width: windowWidth,

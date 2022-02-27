@@ -1,5 +1,5 @@
 import React, { FC, useState } from 'react';
-import { StyleSheet, TextStyle, ViewStyle } from 'react-native';
+import { StyleSheet } from 'react-native';
 import { Layout, Button, Input, Text } from '@ui-kitten/components';
 import { Formik } from 'formik';
 import * as yup from 'yup';
@@ -7,27 +7,17 @@ import { CloseButton, FormButton }  from '../../shared/buttons';
 import { addList } from '../../redux/reducers/todos';
 import { useAppDispatch } from '../../utils/hooks';
 import { windowHeight, windowWidth } from '../../utils/constants';
+import { NewTodoStyles } from './Styles';
 
 type ModalProps = {
   closeModal: (() => void);
-}
-
-interface Styles {
-  container: ViewStyle;
-  close: ViewStyle;
-  form: ViewStyle;
-  title: TextStyle;
-  input: TextStyle;
-  errorText: TextStyle;
-  colorContainer: ViewStyle;
-  colorSelect: ViewStyle;
 }
 
 const listSchema = yup.object({
   name: yup.string().required().min(4),
 });
 // red, slate blue, black, dark gray, blueish gray, teal, tan
-const NewTodoList: FC<ModalProps> = ({ closeModal }) => {
+const NewTodoList: FC<ModalProps> = ({ closeModal }): JSX.Element => {
   const dispatch = useAppDispatch()
   const bgColors = [
     '#FE1F14',
@@ -40,17 +30,13 @@ const NewTodoList: FC<ModalProps> = ({ closeModal }) => {
   ];
   const [bgColor, setColor] = useState(bgColors[0]);
 
-  const renderColors = () => {
-    return bgColors.map((color) => {
-      return (
-        <Button
-          key={ color }
-          style={ [styles.colorSelect, { backgroundColor: color }] }
-          onPress={ () => setColor(color) }
-        />
-      );
-    });
-  };
+  const renderColors = (): JSX.Element[] => bgColors.map((color): JSX.Element => (
+    <Button
+      key={ color }
+      style={ [styles.colorSelect, { backgroundColor: color }] }
+      onPress={ (): void => setColor(color) } 
+    />
+  ));
 
   return (
       <Layout style={ styles.container } >
@@ -64,7 +50,7 @@ const NewTodoList: FC<ModalProps> = ({ closeModal }) => {
           <Formik
             initialValues={{ name: '', id: 0, color: '', todos: [] }}
             validationSchema={ listSchema }
-            onSubmit={ (values, actions) => {
+            onSubmit={ (values, actions): void => {
               values.color = bgColor;
               dispatch(addList(values));
               actions.resetForm();
@@ -78,7 +64,7 @@ const NewTodoList: FC<ModalProps> = ({ closeModal }) => {
               handleSubmit,
               touched,
               errors,
-            }) => (
+            }): JSX.Element => (
               <Layout>
                 <Input
                   textAlign='center'
@@ -106,7 +92,7 @@ const NewTodoList: FC<ModalProps> = ({ closeModal }) => {
   );
 };
 
-const styles = StyleSheet.create<Styles>({
+const styles = StyleSheet.create<NewTodoStyles>({
   container: {
     flex: 1,
     width: windowWidth,

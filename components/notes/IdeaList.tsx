@@ -1,35 +1,28 @@
 import React, { useState, FC } from 'react';
-import { StyleSheet, ViewStyle, TextStyle } from 'react-native';
+import { StyleSheet } from 'react-native';
 import { connect, ConnectedProps } from 'react-redux';
 import { Layout, Modal, Card, Text } from '@ui-kitten/components';
 import IdeasModal from './ideasModal';
 import { IdeaType } from '../../redux/reducers/ideas';
 import { StoreProps } from '../../redux/store';
+import { IdeaListStyles } from './Styles';
 
 type IdeasProps = {
   ideas: IdeaType[];
 }
 
-interface Styles {
-  listContainer: ViewStyle;
-  listTitle: TextStyle;
-  listContent: TextStyle;
-  listCount: TextStyle;
-  listText: TextStyle;
-}
-
-const IdeaList: FC<IdeasProps> = ({ ideas }) => {
+const IdeaList: FC<IdeasProps> = ({ ideas }): JSX.Element => {
   const [visible, setVisible] = useState(false);
   const ideaCount = Object.keys(ideas).length;
 
-  const toggleListModal = () => {
+  const toggleListModal = (): void => {
     setVisible(!visible);
   };
 
   return (
-    <Card style={ styles.listContainer } onPress={ () => toggleListModal() }>
+    <Card style={ styles.listContainer } onPress={ (): void => toggleListModal() }>
       <Modal visible={ visible }>
-        <IdeasModal ideas={ ideas } closeModal={ () => toggleListModal() }/>
+        <IdeasModal ideas={ ideas } closeModal={ (): void => toggleListModal() }/>
       </Modal>
         <Text style={ styles.listTitle } numberOfLines={ 1 }>
           List of Ideas
@@ -42,7 +35,7 @@ const IdeaList: FC<IdeasProps> = ({ ideas }) => {
   );
 };
 
-const styles = StyleSheet.create<Styles>({
+const styles = StyleSheet.create<IdeaListStyles>({
   listContainer: {
     flexDirection: 'column',
     alignItems: 'center',

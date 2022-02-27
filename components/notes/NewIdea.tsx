@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { StyleSheet, ViewStyle, TextStyle } from 'react-native';
+import { StyleSheet } from 'react-native';
 import { Formik } from 'formik';
 import { Layout, Input, Text } from '@ui-kitten/components';
 import * as yup from 'yup';
@@ -7,40 +7,31 @@ import { CloseButton, FormButton }  from '../../shared/buttons';
 import { useAppDispatch } from '../../utils/hooks';
 import { addIdea, IdeaType } from '../../redux/reducers/ideas';
 import { windowHeight, windowWidth } from '../../utils/constants';
+import { NewIdeaStyles } from './Styles';
 
 type ModalProps = {
   closeModal: (() => void);
-}
-
-interface Styles {
-  container: ViewStyle;
-  close: ViewStyle;
-  form: ViewStyle;
-  title: TextStyle;
-  input: TextStyle;
-  errorText: TextStyle;
-  colorSelect: ViewStyle;
 }
 
 const listSchema = yup.object({
   inputValue: yup.string().required().min(4),
 });
 // red, slate blue, black, dark gray, blueish gray, teal, tan
-const IdeaModal: FC<ModalProps> = ({ closeModal }) => {
+const IdeaModal: FC<ModalProps> = ({ closeModal }): JSX.Element => {
   const dispatch = useAppDispatch()
   return (
       <Layout style={ styles.container }>
         <CloseButton
           style={ styles.close }
           accessibilityLabel='Closes Modal'
-          onPress={ () => closeModal() }
+          onPress={ (): void => closeModal() }
         />
         <Layout style={ styles.form }>
           <Text style={ styles.title }>Type New Idea</Text>
           <Formik
             initialValues={{ inputValue: '', inputId: '' }}
             validationSchema={ listSchema }
-            onSubmit={ (values: IdeaType, actions) => {
+            onSubmit={ (values: IdeaType, actions): void => {
               dispatch(addIdea(values));
               actions.resetForm();
               closeModal();
@@ -53,7 +44,7 @@ const IdeaModal: FC<ModalProps> = ({ closeModal }) => {
               handleSubmit,
               touched,
               errors,
-            }) => (
+            }): JSX.Element => (
               <Layout>
                 <Input
                   textAlign='center'
@@ -82,7 +73,7 @@ const IdeaModal: FC<ModalProps> = ({ closeModal }) => {
   );
 };
 
-const styles = StyleSheet.create<Styles>({
+const styles = StyleSheet.create<NewIdeaStyles>({
   container: {
     flex: 1,
     justifyContent: 'center',

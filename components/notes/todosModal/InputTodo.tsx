@@ -1,5 +1,5 @@
 import React, { FC } from 'react'
-import { Keyboard, StyleSheet, ViewStyle, TextStyle } from 'react-native';
+import { Keyboard, StyleSheet } from 'react-native';
 import { Layout, Input, Text } from '@ui-kitten/components';
 import { Formik } from 'formik';
 import * as yup from 'yup'; 
@@ -7,29 +7,24 @@ import { SubmitButton } from '../../../shared/buttons';
 import { windowWidth } from '../../../utils/constants';
 import { useAppDispatch } from '../../../utils/hooks';
 import { addTodo, TodoType } from '../../../redux/reducers/todos';
+import { InputStyles } from './Styles';
 
 type InputProps = {
   listId: string;
-}
-interface Styles {
-    footer: ViewStyle;
-    todoInput: ViewStyle;
-    errorText: TextStyle;
-    button: TextStyle;
 }
 
 const todoSchema = yup.object({
     title: yup.string().required().min(4),
 });
   
-const InputTodo: FC<InputProps> = ({ listId }) => {
+const InputTodo: FC<InputProps> = ({ listId }): JSX.Element => {
   const dispatch = useAppDispatch();
 
   return (
     <Formik
         initialValues={{ inputValue: '', inputId: '' }}
         validationSchema={ todoSchema }
-        onSubmit={ (values:TodoType, actions) => {
+        onSubmit={ (values:TodoType, actions): void => {
           values.listId = listId;
           dispatch(addTodo(values));
           actions.resetForm();
@@ -43,7 +38,7 @@ const InputTodo: FC<InputProps> = ({ listId }) => {
           touched,
           errors,
           handleSubmit,
-        }) => (
+        }): JSX.Element => (
           <Layout style={ styles.footer }>
             <Layout style={{ flexDirection: 'column' }}>
               <Input
@@ -70,7 +65,7 @@ const InputTodo: FC<InputProps> = ({ listId }) => {
   )
 }
 
-const styles = StyleSheet.create<Styles>({
+const styles = StyleSheet.create<InputStyles>({
   footer: {
     flexDirection: 'row',
     width: windowWidth,
