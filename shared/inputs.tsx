@@ -5,10 +5,10 @@ import { Formik, FormikHelpers } from 'formik';
 import { SubmitButton } from './buttons';
 import { useAppDispatch } from '../utils/hooks';
 import { windowWidth } from '../utils/constants';
-import { Idea } from '../redux/reducers/ideas';
-import { TodoProps } from '../redux/reducers/todos';
+import { IdeaType } from '../redux/reducers/ideas';
+import { TodoType } from '../redux/reducers/todos';
 
-interface FooterProps extends Idea, TodoProps{}
+interface FooterProps extends IdeaType, TodoType{}
 
 interface Styles {
     container: ViewStyle;
@@ -16,14 +16,14 @@ interface Styles {
     errorText:TextStyle;
 }
 
-export const FooterInput = ({ inputName, reducerFunc, inputSchema }) => {
+export const FooterInput = ({ inputName, reducerFunc, inputSchema }): JSX.Element => {
   const dispatch = useAppDispatch();
 
   return (
     <Formik
         initialValues={{ inputValue: '', inputId: '' }}
         validationSchema={ inputSchema }
-        onSubmit={ (values: FooterProps, actions:FormikHelpers<FooterProps>) => {
+        onSubmit={ (values: FooterProps, actions:FormikHelpers<FooterProps>): void => {
           dispatch(reducerFunc(values));
           actions.resetForm();
           Keyboard.dismiss();
@@ -36,7 +36,7 @@ export const FooterInput = ({ inputName, reducerFunc, inputSchema }) => {
           touched,
           errors,
           handleSubmit,
-        }) => (
+        }): JSX.Element => (
           <Layout style={ styles.container }>
             <Layout style={{ flexDirection: 'column' }}>
               <Input
@@ -64,27 +64,27 @@ export const FooterInput = ({ inputName, reducerFunc, inputSchema }) => {
 };
 
 const styles = StyleSheet.create<Styles>({
-    container: {
-        position: 'absolute',
-        flexDirection: 'row',
-        paddingHorizontal: 10,
-        paddingVertical: 5,
-        bottom: 0,
-      },
-    input: {
-      width: windowWidth * 0.75,
-      paddingLeft: 14,
-      marginLeft: 5,
-      marginRight: 5,
-      elevation: 3,
+  container: {
+    position: 'absolute',
+    flexDirection: 'row',
+    paddingHorizontal: 10,
+    paddingVertical: 5,
+    bottom: 0,
     },
-    errorText:{
-      textAlign: 'center',
-      fontSize: 10,
-      fontWeight: 'bold',
-      color: 'crimson',
-      marginBottom: 10,
-      marginTop: 6,
-    },
-  });
+  input: {
+    width: windowWidth * 0.75,
+    paddingLeft: 14,
+    marginLeft: 5,
+    marginRight: 5,
+    elevation: 3,
+  },
+  errorText:{
+    textAlign: 'center',
+    fontSize: 10,
+    fontWeight: 'bold',
+    color: 'crimson',
+    marginBottom: 10,
+    marginTop: 6,
+  },
+});
   

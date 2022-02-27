@@ -1,33 +1,33 @@
-import React from 'react';
+import React, { ReactNode } from 'react';
 import { Icon } from '@ui-kitten/components';
 
-export const CloseIcon = (props) => (
+export const CloseIcon = (props: ReactNode): JSX.Element => (
     <Icon { ...props } name='close-outline'/>
 );
 // Footer Icons
-export const SubmitIcon = (props) => (
+export const SubmitIcon = (props: ReactNode): JSX.Element => (
     <Icon { ...props } name='plus-outline'/>
 );
-export const GridIcon = (props) => (
+export const GridIcon = (props: ReactNode): JSX.Element => (
     <Icon { ...props } name='grid'/>
 );
 // Journal Card Icons
-export const EditIcon = (props) => (
+export const EditIcon = (props: ReactNode): JSX.Element => (
     <Icon { ...props } name='edit'/>
 );
-export const SaveIcon = (props) => (
+export const SaveIcon = (props: ReactNode): JSX.Element => (
     <Icon { ...props } name='save-outline'/>
 );
-export const DeleteIcon = (props) => (
+export const DeleteIcon = (props: ReactNode): JSX.Element => (
     <Icon { ...props } name='trash-outline'/>
 );  
 // Tab Bar Icons
-export const DayIcon = (props) => (
+export const DayIcon = (props: ReactNode): JSX.Element => (
     <Icon { ...props } name='sun' />
 );
-export const NightIcon = (props) => (
+export const NightIcon = (props: ReactNode): JSX.Element => (
     <Icon { ...props } name='moon' />
 );  
-export const BackIcon = (props) => (
+export const BackIcon = (props: ReactNode): JSX.Element => (
     <Icon { ...props } name='arrow-back' />
 );

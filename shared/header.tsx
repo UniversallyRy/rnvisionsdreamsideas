@@ -13,13 +13,13 @@ export type HeaderProps = {
 interface Styles {
   headerContainer: ViewStyle;
 }
-const Header:React.FC<HeaderProps> = ({ name, navigation }) => {
+const Header:React.FC<HeaderProps> = ({ name, navigation }): JSX.Element => {
 
   const { theme, toggleTheme } = useContext(ThemesContext);
   let navigateBack;
 
   if(navigation != undefined) {
-    navigateBack = () => {
+    navigateBack = (): void => {
       navigation.goBack();
     };
   }
