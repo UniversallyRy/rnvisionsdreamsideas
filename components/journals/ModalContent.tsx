@@ -1,20 +1,16 @@
 import React, { FC } from 'react';
-import { Text, StyleSheet, ViewStyle, TextStyle } from 'react-native';
-import { Layout, Input } from '@ui-kitten/components';
+import { StyleSheet } from 'react-native';
+import { Layout, Input, Text } from '@ui-kitten/components';
 import { Formik } from 'formik';
 import * as yup from 'yup';
 import { SubmitButton } from '../../shared/buttons';
 import { useAppDispatch } from '../../utils/hooks';
 import { windowHeight } from '../../utils/constants';
 import { addJournal } from '../../redux/reducers/journals';
+import { ModalStyles } from './Styles';
 
 type ModalProps = {
   setModalOpen: ((i:boolean) => void);
-}
-
-interface Styles {
-  modalContainer: ViewStyle;
-  errorText: TextStyle;
 }
 
 // schema to force form input values to have a minimum length of 4.
@@ -23,7 +19,7 @@ const JournalSchema = yup.object({
   body: yup.string().required().min(4),
 });
 
-const ModalContent: FC<ModalProps> = ({ setModalOpen }) => {
+const ModalContent: FC<ModalProps> = ({ setModalOpen }): JSX.Element => {
   const dispatch = useAppDispatch();
   return (
     <Layout style={ styles.modalContainer }>
@@ -32,7 +28,7 @@ const ModalContent: FC<ModalProps> = ({ setModalOpen }) => {
         enableReinitialize
         initialValues={{ title: '', body: '' }}
         validationSchema={ JournalSchema }
-        onSubmit={(values, actions) => {
+        onSubmit={(values, actions): void => {
           dispatch(addJournal(values));
           actions.resetForm();
           setModalOpen(false);
@@ -45,7 +41,7 @@ const ModalContent: FC<ModalProps> = ({ setModalOpen }) => {
           handleSubmit,
           touched,
           errors,
-        }) => (
+        }): JSX.Element => (
           <>
             <Input
               textAlign='center'
@@ -57,7 +53,7 @@ const ModalContent: FC<ModalProps> = ({ setModalOpen }) => {
             />
             <Text style={styles.errorText}>
               {/* when both are true, child with validation text shows. */}
-              {touched.title && errors.title}
+              { touched.title && errors.title || '' }
             </Text>
             <Input
               textAlign='center'
@@ -69,7 +65,7 @@ const ModalContent: FC<ModalProps> = ({ setModalOpen }) => {
               accessibilityLabel='Input Journal body text Here'
             />
             <Text style={ styles.errorText }>
-              { touched.body && errors.body }
+              { touched.body && errors.body || '' }
             </Text>
             <SubmitButton onPress={ handleSubmit } accessibilityLabel='Clicking here adds journal entry'>
               Submit
@@ -81,7 +77,7 @@ const ModalContent: FC<ModalProps> = ({ setModalOpen }) => {
   );
 };
 
-const styles = StyleSheet.create<Styles>({
+const styles = StyleSheet.create<ModalStyles>({
   modalContainer: {
     height: windowHeight,
   },

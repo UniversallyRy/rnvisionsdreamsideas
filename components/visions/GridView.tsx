@@ -1,11 +1,12 @@
 import React, { memo, useCallback, FC } from 'react';
-import { TouchableOpacity, Image, StyleSheet, ViewStyle, ImageStyle } from 'react-native';
+import { TouchableOpacity, Image, StyleSheet } from 'react-native';
 import { connect, ConnectedProps } from 'react-redux';
 import { NavigationScreenProp } from 'react-navigation';
 import { Layout, List } from '@ui-kitten/components';
 import { windowHeight, windowWidth } from '../../utils/constants';
 import { VisionType } from '../../redux/reducers/visions';
 import { StoreProps } from '../../redux/store';
+import { GridStyles } from './Styles';
 
 type GridProps = {
   visions: VisionType[];
@@ -17,35 +18,26 @@ type ItemProps = {
   index?: number;
 }
 
-interface Styles {
-  grid: ViewStyle;
-  gridItem: ViewStyle;
-  img: ImageStyle;
-}
+const GridView: FC<GridProps> = ({ visions, navigation }): JSX.Element => {
+  const GridItem = memo(({ item }: ItemProps): JSX.Element => (
+    <TouchableOpacity
+      style={ styles.gridItem }
+      accessibilityLabel={ 'Grid Item' }
+      onPress={ () => navigation.navigate('Vision Details', { item }) }
+      accessible
+    >
+      <Image
+        style={ styles.img }
+        source={{ uri: item.uri }}
+        testID={ item.id }
+        resizeMode={ 'cover' } 
+      />
+    </TouchableOpacity>
+  ));
 
-const GridView: FC<GridProps> = ({ visions, navigation }) => {
-  
-  const GridItem = memo(function GridImage({ item }: ItemProps) {
-    return (
-      <TouchableOpacity
-        style={ styles.gridItem }
-        accessibilityLabel={ 'Grid Item' }
-        onPress={ () => navigation.navigate('Vision Details', { item }) }
-        accessible  
-      > 
-        <Image
-          style={ styles.img }
-          source={{ uri: item.uri }}
-          testID={ item.id }  
-          resizeMode={ 'cover' }
-        />
-      </TouchableOpacity>
-    );
-  });
-
-  const renderGridItem = useCallback(function fetchItem({ item }: ItemProps) {
-    return <GridItem item={ item } />;
-  }, [ visions ]);
+  const renderGridItem = useCallback(({ item }: ItemProps): JSX.Element => (
+    <GridItem item={item} />
+    ), [ visions ]);
 
   return (
     <Layout>
@@ -54,14 +46,14 @@ const GridView: FC<GridProps> = ({ visions, navigation }) => {
         contentContainerStyle={ styles.grid }
         scrollEnabled
         data={ visions }
-        keyExtractor={ (_item, index) => index.toString() }
+        keyExtractor={ (_item, index): string => index.toString() }
         renderItem={ renderGridItem }
       />
     </Layout>
   );
 };
 
-const styles = StyleSheet.create<Styles>({
+const styles = StyleSheet.create<GridStyles>({
   grid: {
     alignSelf: 'center',
   },

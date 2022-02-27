@@ -1,32 +1,25 @@
 import React, { FC, useState } from 'react';
-import { StyleSheet, ViewStyle, TextStyle } from 'react-native';
+import { StyleSheet } from 'react-native';
 import { NavigationScreenProp } from 'react-navigation';
 import { ButtonGroup, Card, Divider, Input, Layout, Text } from '@ui-kitten/components';
 import { CancelButton, DeleteButton, EditButton, SaveButton } from '../../shared/buttons';
 import { useAppDispatch } from '../../utils/hooks';
 import { windowHeight, windowWidth } from '../../utils/constants';
 import { JournalType, deleteJournal, editJournal, editJournalToggle } from '../../redux/reducers/journals';
+import { ListItemStyles } from './Styles';
 
 type ItemProps = {
   item: JournalType;
   navigation: NavigationScreenProp<string, object>;
 }
 
-interface Styles {
-  container: ViewStyle;
-  textContainer: ViewStyle;
-  textTitle: TextStyle;
-  textBody: TextStyle;
-  textDate: TextStyle;
-}
-
-const ListItem: FC<ItemProps> = ({ item,  navigation }) => {
+const ListItem: FC<ItemProps> = ({ item,  navigation }): JSX.Element => {
   const { id, title, body, date, isEditing } = item;
   const [textTitle, setTitle] = useState(title);
   const [textBody, setBody] = useState(body);
   const dispatch = useAppDispatch();
 
-  const saveHandler = (id: string) => {
+  const saveHandler = (id: string): void => {
     dispatch(editJournal({ id: id, title: textTitle, body: textBody, isEditing: false }));
   };
 
@@ -81,7 +74,7 @@ const ListItem: FC<ItemProps> = ({ item,  navigation }) => {
   );
 };
 
-const styles = StyleSheet.create<Styles>({
+const styles = StyleSheet.create<ListItemStyles>({
   container: {
     margin: 5,
     borderRadius: 3,

@@ -9,6 +9,7 @@ import { SPACING, THUMBNAIL_SIZE } from '../../utils/constants';
 import { useAppDispatch } from '../../utils/hooks';
 import { VisionType, deleteVision } from '../../redux/reducers/visions';
 import { StoreProps } from '../../redux/store';
+import { ListStyles } from './Styles';
 
 type ListProps = {
   visions: VisionType[];
@@ -24,14 +25,14 @@ type ThumbnailProps = {
   index: number;
 }
 
-const ListView: FC<ListProps> = ({ visions, navigation }) => {
+const ListView: FC<ListProps> = ({ visions, navigation }): JSX.Element => {
   const [visible, setVisible] = useState(false);
-  const [activeIndex, setActiveIndex] = useState(0)
+  const [activeIndex, setActiveIndex] = useState(0);
   const topRef = useRef<List>(null);
   const thumbRef = useRef<List>(null);
-  const dispatch = useAppDispatch()
+  const dispatch = useAppDispatch();
 
-  const scrollActiveIndex = (index: number) => {
+  const scrollActiveIndex = (index: number): void => {
     setActiveIndex(index);
     topRef.current?.scrollToOffset({
       offset: index * windowWidth,
@@ -48,46 +49,38 @@ const ListView: FC<ListProps> = ({ visions, navigation }) => {
         animated: true,
       })
     }
-  }
+  };
 
-  const BackgroundImage = memo(function GridImage({ item }: ItemProps) {
-    return (
-      <Layout style={{ width:windowWidth, height:windowHeight }}>
+  const BackgroundImage = memo(({ item }: ItemProps): JSX.Element => (
+      <Layout style={ styles.bgImg }>
         <Image
-          source={ { uri:item.uri } }
-          style={ [StyleSheet.absoluteFill] }
+          source={{ uri: item.uri }}
+          style={[StyleSheet.absoluteFill]} 
         />
       </Layout>
+  ));
+
+  const renderBgImage = useCallback(({ item }: ItemProps): JSX.Element => (
+    <BackgroundImage item={ item } />
+  ), [ visions ]);
+
+  const renderThumbnail = ({ item, index }: ThumbnailProps): JSX.Element => {
+
+    const thumbNail = (): JSX.Element => (
+      <TouchableOpacity
+        onPress={ () => scrollActiveIndex(index)}
+        // delayLongPress= { () => navigation.navigate('Vision Details', { item }) }
+        onLongPress={activeIndex === index ? () => setVisible(true) : undefined}
+      >
+        <Image
+          source={{ uri: item.uri }}
+          style={{
+            ...styles.thumbImg,
+            borderColor: activeIndex === index ? '#fff' : 'transparent'
+          }} 
+        />
+      </TouchableOpacity>
     );
-  });
-
-  const renderBgImage = useCallback(function renderBG({ item }: ItemProps) {
-    return <BackgroundImage item={ item } />
-  }, [ visions ]);
-
-  const renderThumbnail = ({ item, index }: ThumbnailProps) => {
-
-    const thumbNail = () => {
-      return (
-        <TouchableOpacity
-          onPress={ () => scrollActiveIndex(index) }
-          // delayLongPress= { () => navigation.navigate('Vision Details', { item }) }
-          onLongPress={ activeIndex === index ? () => setVisible(true) : undefined }
-        >
-          <Image
-            source={{ uri:item.uri }}
-            style={{
-              width: THUMBNAIL_SIZE,
-              height: THUMBNAIL_SIZE,
-              borderRadius: 3,
-              marginRight: SPACING,
-              borderWidth: 1,
-              borderColor: activeIndex === index ? '#fff' : 'transparent'
-            }}
-            />
-        </TouchableOpacity>
-      );
-    };
 
     return (
       <Tooltip
@@ -99,10 +92,11 @@ const ListView: FC<ListProps> = ({ visions, navigation }) => {
         <CloseButton onPress={ () => dispatch(deleteVision(item)) }/>
       </Tooltip>
     );
+
   };
 
   return (
-    <Layout style={{ flex: 1 }}>
+    <Layout style={styles.container}>
       <List
         data={ visions }
         ref={ topRef }
@@ -117,17 +111,38 @@ const ListView: FC<ListProps> = ({ visions, navigation }) => {
       />
       <List
         data={ visions }
-        style={{ position: 'absolute', bottom: THUMBNAIL_SIZE - 30 }}
+        style={ styles.imgList }
         ref={ thumbRef }
         horizontal
         showsHorizontalScrollIndicator={ false }
         contentContainerStyle={{ paddingHorizontal: SPACING }}
-        keyExtractor={ (_, index) => String(index) }
+        keyExtractor={ (_, index): string => String(index) }
         renderItem={ renderThumbnail }
       />
     </Layout>
   );
 };
+
+const styles = StyleSheet.create<ListStyles>({
+  container: {
+    flex: 1
+  },
+  imgList: {
+    position: 'absolute', 
+    bottom: THUMBNAIL_SIZE - 30
+  },
+  bgImg:{
+    width:windowWidth, 
+    height:windowHeight
+  },
+  thumbImg:{
+    width: THUMBNAIL_SIZE,
+    height: THUMBNAIL_SIZE,
+    borderRadius: 3,
+    marginRight: SPACING,
+    borderWidth: 1,
+  }
+});
 
 const mapStateToProps = (state: StoreProps) => {
   const { visions } = state;

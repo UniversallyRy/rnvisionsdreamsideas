@@ -1,18 +1,13 @@
 import React, {  useState, useEffect } from 'react';
-import { StyleSheet, ViewStyle, TextStyle } from 'react-native';
+import { StyleSheet } from 'react-native';
 import { Layout, Select, SelectItem, IndexPath } from '@ui-kitten/components';
 import { CloseIcon } from '../../shared/icons';
 import { MONTHS, windowWidth } from '../../utils/constants';
 import { useAppDispatch } from '../../utils/hooks';
 import { changeMonth } from '../../redux/reducers/journals';
+import { MonthStyles } from './Styles';
 
-interface Styles {
-  container: ViewStyle
-  list: ViewStyle;
-  listItem: TextStyle;
-}
-
-const MonthSelect = () => {
+const MonthSelect = (): JSX.Element => {
   const [selectedIndex, setSelectedIndex] = useState(new IndexPath(0));
   const dispatch = useAppDispatch();
   const displayValue = MONTHS[selectedIndex.row];
@@ -21,7 +16,7 @@ const MonthSelect = () => {
     dispatch(changeMonth(displayValue))
   }, [displayValue]);
 
-  const handleItemPress = (index) => {
+  const handleItemPress = (index): void => {
     setSelectedIndex(index)
   };
 
@@ -35,23 +30,21 @@ const MonthSelect = () => {
         onSelect={ handleItemPress }
         accessibilityLabel='Dropdown of months to filter journal entries'
       >
-        {MONTHS.map(item => {
-          return(
-            <SelectItem  
-              style={ styles.listItem } 
-              key={ item } 
-              title={ item }
-              accessoryRight={ CloseIcon }
-              accessibilityLabel={ `Dropdown text for ${ item }` }
-            />
-          )
-        })}
+        {MONTHS.map(item => (
+          <SelectItem
+            style={ styles.listItem }
+            key={ item }
+            title={ item }
+            accessoryRight={ CloseIcon }
+            accessibilityLabel={ `Dropdown text for ${ item }` } 
+          />
+        ))}
       </Select>
     </Layout>
   );
 };
 
-const styles = StyleSheet.create<Styles>({
+const styles = StyleSheet.create<MonthStyles>({
   container: {
     zIndex: 1,
     margin: 1,

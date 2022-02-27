@@ -1,57 +1,48 @@
 import React, { FC } from 'react';
-import { StyleSheet, ViewStyle, TextStyle } from 'react-native';
+import { StyleSheet } from 'react-native';
 import { connect, ConnectedProps } from 'react-redux';
 import { NavigationScreenProp } from 'react-navigation';
 import { Layout, Card, List, Text } from '@ui-kitten/components';
 import { windowHeight, windowWidth } from '../../utils/constants';
 import { JournalListType } from '../../redux/reducers/journals';
 import { StoreProps } from '../../redux/store';
+import { GridStyles } from './Styles';
 
 interface GridProps extends JournalListType {
   navigation: NavigationScreenProp<string, object>;
 }
 
-interface Styles {
-  container: ViewStyle;
-  grid: ViewStyle;
-  item: ViewStyle;
-  itemDate: TextStyle;
-}
+const GridView: FC<GridProps> = ({ month, list, navigation }): JSX.Element => (
+  <Layout style={styles.container}>
+    <List
+      scrollEnabled
+      numColumns={3}
+      contentContainerStyle={styles.grid}
+      data={list}
+      accessibilityLabel='Journal List Entries in Grid Format'
+      renderItem={({ item }: any) => {
+        const { title, body, date } = item;
+        if ((month != 'All') && !date.includes(month)) {
+          return null;
+        } else {
+          return (
+            <Card
+              key={title + '_key'}
+              style={styles.item}
+              onPress={() => navigation.navigate('Journal Details', { title, body, date })}
+            >
+              <Text>{title}</Text>
+              <Text style={styles.itemDate}>
+                {date}
+              </Text>
+            </Card>
+          );
+        }
+      } } />
+  </Layout>
+);
 
-const GridView: FC<GridProps> = ({ month, list, navigation }) => {     
-
-  return (
-    <Layout style={ styles.container }>
-      <List
-        scrollEnabled
-        numColumns={ 3 }
-        contentContainerStyle={ styles.grid }
-        data={ list }
-        accessibilityLabel='Journal List Entries in Grid Format'
-        renderItem={ ({ item }: any) => {
-          const { title, body, date } = item;
-          if ((month != 'All') && !date.includes(month)) {
-            return null
-          }else{
-            return (
-              <Card
-                key={ title + '_key' }
-                style={ styles.item }
-                onPress={ () => navigation.navigate('Journal Details', { title, body, date }) }
-              >
-                <Text>{ title }</Text>
-                <Text style={ styles.itemDate }>
-                  { date }
-                </Text>
-              </Card>
-            );
-        }}}
-      />
-    </Layout>
-  );
-};
-
-const styles = StyleSheet.create<Styles>({
+const styles = StyleSheet.create<GridStyles>({
   container: {
     height: windowHeight,
     marginTop: 2,
@@ -75,7 +66,7 @@ const styles = StyleSheet.create<Styles>({
 });
 
 const mapStateToProps = (state:StoreProps)=> {
-  const { journals } = state
+  const { journals } = state;
   const { month, list } = journals;
   return { month, list };
 };

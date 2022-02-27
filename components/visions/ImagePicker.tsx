@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Image, Platform, StyleSheet, ViewStyle, ImageStyle } from 'react-native';
+import { Platform, Image, StyleSheet } from 'react-native';
 import { ConnectedProps } from 'react-redux';
 import * as ImagePicker from 'expo-image-picker';
 import { manipulateAsync, SaveFormat } from 'expo-image-manipulator'
@@ -8,20 +8,16 @@ import { ImageButtons } from '../../shared/buttons';
 import { windowWidth } from '../../utils/constants';
 import { useAppDispatch } from '../../utils/hooks';
 import { addPic } from '../../redux/reducers/newpic';
+import { ImageStyles } from './Styles';
 
-interface Styles {
-  container: ViewStyle;
-  img: ImageStyle;
-}
-
-const ImagePic = () => {
+const ImagePic = (): JSX.Element => {
   const [image, setImage] = useState(``);
   const dispatch = useAppDispatch()
+
   useEffect(() => {
-    (async () => {
+    (async (): Promise<void> => {
       if (Platform.OS !== 'web') {
-        const { status } =
-          await ImagePicker.requestMediaLibraryPermissionsAsync();
+        const { status } = await ImagePicker.requestMediaLibraryPermissionsAsync();
         const { camStatus }:any = await ImagePicker.getCameraPermissionsAsync();
         if (status !== 'granted') {
           alert('Sorry, we need gallery permissions to make this work!');
@@ -35,7 +31,7 @@ const ImagePic = () => {
     })();
   }, []);
 
-  const pickImage = async () => {
+  const pickImage = async (): Promise<undefined> => {
     // result variable saves image you pick from phone's gallery
     const result = await ImagePicker.launchImageLibraryAsync({
       mediaTypes: ImagePicker.MediaTypeOptions.Images,
@@ -55,7 +51,7 @@ const ImagePic = () => {
     }
   };
 
-  const cameraImage = async () => {
+  const cameraImage = async (): Promise<void> => {
     let result = await ImagePicker.launchCameraAsync({
       mediaTypes: ImagePicker.MediaTypeOptions.Images,
       allowsEditing: true,
@@ -79,7 +75,7 @@ const ImagePic = () => {
   );
 };
 
-const styles = StyleSheet.create<Styles>({
+const styles = StyleSheet.create<ImageStyles>({
   container:{
     alignItems:'center',
     justifyContent: 'center',
@@ -94,5 +90,5 @@ const styles = StyleSheet.create<Styles>({
   }
 });
 
+export type PropsFromRedux = ConnectedProps<typeof ImagePic>;
 export default ImagePic;
-export type PropsFromRedux = ConnectedProps<typeof ImagePic>

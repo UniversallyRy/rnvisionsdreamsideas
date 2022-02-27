@@ -1,10 +1,11 @@
 import React, { useState, FC } from 'react';
-import { TouchableOpacity, Image, StyleSheet, ImageStyle } from 'react-native';
+import { TouchableOpacity, Image, StyleSheet } from 'react-native';
 import { List, Tooltip } from '@ui-kitten/components';
 import { deleteVision, VisionType } from '../../redux/reducers/visions';
 import { CloseButton } from '../../shared/buttons';
 import { SPACING, THUMBNAIL_SIZE, windowWidth } from '../../utils/constants';
 import { useAppDispatch } from '../../utils/hooks';
+import { ThumbStyles } from './Styles';
 
 type ThumbnailProps = {
   item: VisionType;
@@ -13,16 +14,12 @@ type ThumbnailProps = {
   thumbRef: React.RefObject<List<any>>
 }
 
-interface Styles {
-  thumbImg: ImageStyle;
-}
-
-const renderThumbnail:FC<ThumbnailProps> = ({ item, index, topRef, thumbRef }) => {
+const renderThumbnail:FC<ThumbnailProps> = ({ item, index, topRef, thumbRef }): JSX.Element => {
   const [visible, setVisible] = useState(false);
   const dispatch = useAppDispatch();
   const [activeIndex, setActiveIndex] = useState(0)
 
-  const scrollActiveIndex = (index: number) => {
+  const scrollActiveIndex = (index: number): void => {
     setActiveIndex(index);
     topRef.current?.scrollToOffset({
       offset: index * windowWidth,
@@ -41,37 +38,35 @@ const renderThumbnail:FC<ThumbnailProps> = ({ item, index, topRef, thumbRef }) =
     }
   };
 
-  const ThumbNail = () => {
-    return (
-      <TouchableOpacity
-        onPress={ () => scrollActiveIndex(index) }
-        // delayLongPress= { () => navigation.navigate('Vision Details', { item }) }
-        onLongPress={ activeIndex === index ? () => setVisible(true) : undefined }
-      >
-        <Image
-          source={{ uri:item.uri }}
-          style={{  
-            borderColor: activeIndex === index ? '#fff' : 'transparent', 
-            ...styles.thumbImg
-          }}
-        />
-      </TouchableOpacity>
-    );
-  };
+  const ThumbNail = (): JSX.Element => (
+    <TouchableOpacity
+      onPress={ () => scrollActiveIndex(index) }
+      // delayLongPress= { () => navigation.navigate('Vision Details', { item }) }
+      onLongPress={ activeIndex === index ? () => setVisible(true) : undefined }
+    >
+      <Image
+        source={{ uri: item.uri }}
+        style={{
+          borderColor: activeIndex === index ? '#fff' : 'transparent',
+          ...styles.thumbImg
+        }} 
+      />
+    </TouchableOpacity>
+  );
 
   return (
     <Tooltip
       anchor={ ThumbNail }
       placement='top'
       visible={ activeIndex === index ? visible : false }
-      onBackdropPress={ () => setVisible(false) }
+      onBackdropPress={ (): void => setVisible(false) }
     >
-      <CloseButton onPress={ () => dispatch(deleteVision(item)) }/>
+      <CloseButton onPress={ (): { payload: VisionType; type: string; } => dispatch(deleteVision(item)) }/>
     </Tooltip>
   );
 };
 
-const styles = StyleSheet.create<Styles>({
+const styles = StyleSheet.create<ThumbStyles>({
   thumbImg: {
     width: THUMBNAIL_SIZE,
     height: THUMBNAIL_SIZE,

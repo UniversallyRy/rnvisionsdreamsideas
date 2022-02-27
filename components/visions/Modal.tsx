@@ -1,7 +1,7 @@
 import React, { Dispatch, FC, SetStateAction } from 'react';
-import { Animated, StyleSheet, ViewStyle, TextStyle } from 'react-native';
+import { Animated, StyleSheet } from 'react-native';
 import { connect, ConnectedProps } from 'react-redux';
-import { useCardAnimation } from '@react-navigation/stack';
+// import { useCardAnimation } from '@react-navigation/stack';
 import { Layout, Input, Text } from '@ui-kitten/components';
 import { Formik } from 'formik';
 import * as yup from 'yup';
@@ -10,26 +10,19 @@ import { CloseButton, SubmitButton } from '../../shared/buttons';
 import { useAppDispatch } from '../../utils/hooks';
 import { windowHeight, windowWidth } from '../../utils/constants';
 import { addVision } from '../../redux/reducers/visions';
+import { StoreProps } from '../../redux/store';
+import { ModalStyles } from './Styles';
 
 type ModalProps = {
   picInput: string;
   setModalOpen: Dispatch<SetStateAction<boolean>>; 
 }
 
-interface Styles {
-  container: ViewStyle;
-  close: ViewStyle;
-  textinput: TextStyle;
-  errorText: TextStyle;
-  footer: ViewStyle;
-  button: ViewStyle;
-}
-
 const pictureSchema = yup.object({
   title: yup.string().required().min(4),
 });
 
-const ModalContent: FC<ModalProps> = ({ picInput, setModalOpen }) => {
+const ModalContent: FC<ModalProps> = ({ picInput, setModalOpen }): JSX.Element => {
 
   const dispatch = useAppDispatch()
   return (
@@ -51,13 +44,13 @@ const ModalContent: FC<ModalProps> = ({ picInput, setModalOpen }) => {
       > 
         <CloseButton 
           style={ styles.close } 
-          onPress={ () => setModalOpen(false) } 
+          onPress={ (): void => setModalOpen(false) } 
         />
         <Formik
           enableReinitialize={ true }
           initialValues={{ uri: picInput, title: '', id: null }}
           validationSchema={ pictureSchema }
-          onSubmit={ (values, actions) => {
+          onSubmit={ (values, actions): void => {
             dispatch(addVision(values));
             actions.resetForm();
             setModalOpen(false);
@@ -70,8 +63,8 @@ const ModalContent: FC<ModalProps> = ({ picInput, setModalOpen }) => {
             touched,
             errors,
             handleSubmit,
-          }) => (
-            <Layout style={styles.footer}> 
+          }): JSX.Element => (
+            <Layout style={ styles.footer }> 
               <ModalImage />
               <Input
                 textAlign='center'
@@ -96,7 +89,7 @@ const ModalContent: FC<ModalProps> = ({ picInput, setModalOpen }) => {
   );
 };
 
-const styles = StyleSheet.create<Styles>({
+const styles = StyleSheet.create<ModalStyles>({
   close: {
     position: 'absolute', 
     top: 40, 
@@ -132,7 +125,7 @@ const styles = StyleSheet.create<Styles>({
   },
 });
 
-const mapStateToProps = (state:any) => {
+const mapStateToProps = (state:StoreProps) => {
   const { pic } = state;
   return { picInput: pic };
 };
