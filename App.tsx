@@ -14,22 +14,23 @@ import { store, /*persistor */ } from "./redux/store";
 import { default as customTheme } from './styles/custom-theme.json'; 
 // import { PersistGate } from "redux-persist/integration/react";
 
-const getFonts = () =>
-  Font.loadAsync({
+const getFonts = (): Promise<void> => {
+  return Font.loadAsync({
     "roboto-black": require("./assets/fonts/Roboto-Black.ttf"),
     "roboto-bold": require("./assets/fonts/Roboto-Bold.ttf"),
     "roboto-italic": require("./assets/fonts/Roboto-Italic.ttf"),
     "roboto-medium": require("./assets/fonts/Roboto-Medium.ttf"),
     "roboto-regular": require("./assets/fonts/Roboto-Regular.ttf"),
   });
+};
 
-const App = () => {
+const App = (): JSX.Element => {
   const [fontsLoaded, setFontsLoaded] = useState(false);
   // const [persistLoaded, setPersistLoaded] = useState(true);
   const [theme, setTheme] = useState('light');
   const [evaTheme, setEvaTheme] = useState(eva.light);
 
-  const toggleTheme = () => {
+  const toggleTheme = (): void => {
     const nextTheme = theme === 'light' ? 'dark' : 'light';
     nextTheme === 'light' ? setEvaTheme(eva.light) : setEvaTheme(eva.dark);  
     setTheme(nextTheme);
@@ -53,7 +54,7 @@ const App = () => {
     return (
       <AppLoading
         startAsync={ getFonts }
-        onFinish={() => {
+        onFinish={(): void => {
           setFontsLoaded(true);
           // setPersistLoaded(false);
         }}  
