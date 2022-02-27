@@ -1,9 +1,9 @@
-import React, { FC } from "react";
-import { createStackNavigator, StackNavigationProp } from "@react-navigation/stack";
-import NoteScreen from "../screens/Notes";
+import React, { FC } from 'react';
+import { createStackNavigator, StackNavigationProp } from '@react-navigation/stack';
+import NoteScreen from '../screens/Notes';
 
 type NoteStackParamList = {
-  "Check Notes": undefined;
+  'Check Notes': undefined;
 }
 
 type NotesNavigationProp = StackNavigationProp<
@@ -17,19 +17,15 @@ type NavProp = {
 
 const Stack = createStackNavigator<NoteStackParamList>()
 
-const NoteStack: FC<NavProp> = () => {
-  return (
-    <Stack.Navigator
-      screenOptions= {{
-        headerShown: false,
-      }}
-    >
-      <Stack.Screen
-        name={ "Check Notes" }
-        component={ NoteScreen }
-      />
-    </Stack.Navigator>
-  );
-};
+const NoteStack: FC<NavProp> = (): JSX.Element => (
+  <Stack.Navigator
+    screenOptions={{ headerShown: false }}
+  >
+    <Stack.Screen
+      name='Check Notes'
+      component={ NoteScreen } 
+    />
+  </Stack.Navigator>
+);
 
-export default NoteStack
+export default NoteStack;

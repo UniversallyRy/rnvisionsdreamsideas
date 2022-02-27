@@ -21,27 +21,22 @@ type NavProp = {
   navigation: JournalsNavigationProp;
 };
 
-const { Navigator, Screen } = createStackNavigator<JournalStackParamList>()
+const { Navigator, Screen } = createStackNavigator<JournalStackParamList>();
 
-export const JournalStack: FC<NavProp> = () => {
-  return (
-    <Navigator 
-      initialRouteName='Journal Entries'
-      screenOptions={{
-        headerShown: false,
-      }}
-    >
-      <Screen
-        name='Journal Entries'
-        component={ JournalScreen }
-      />
-      <Screen
-        name='Journal Details'
-        component={ JournalDetails }
-      />
-
-    </Navigator>
-  );
-};
+export const JournalStack: FC<NavProp> = (): JSX.Element => (
+  <Navigator
+    initialRouteName='Journal Entries'
+    screenOptions={{ headerShown: false }}
+  >
+    <Screen
+      name='Journal Entries'
+      component={ JournalScreen } 
+    />
+    <Screen
+      name='Journal Details'
+      component={ JournalDetails } 
+    />
+  </Navigator>
+);
 
 export default JournalStack;
