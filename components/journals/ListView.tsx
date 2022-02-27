@@ -4,17 +4,12 @@ import { connect, ConnectedProps } from 'react-redux';
 import { NavigationScreenProp } from 'react-navigation';
 import { List } from '@ui-kitten/components';
 import ListItem from './ListItem';
-import { JournalListType, JournalType } from '../../redux/reducers/journals';
+import { JournalListType } from '../../redux/reducers/journals';
 import { StoreProps } from '../../redux/store';
 import { ListStyles } from './Styles';
 
-
 interface ListProps extends JournalListType {
   navigation: NavigationScreenProp<string, object>;
- }
-
-type RenderProp = {
-  item: JournalType
 }
 
 const ListView: FC<ListProps> = ({ month, list, navigation }): JSX.Element => (
@@ -23,7 +18,7 @@ const ListView: FC<ListProps> = ({ month, list, navigation }): JSX.Element => (
     data={ list }
     accessibilityLabel='Contains Journal Entries'
     keyExtractor={ (_item, index) => index.toString() }
-    renderItem={ ({ item }: RenderProp): JSX.Element | null => {
+    renderItem={ ({ item }): JSX.Element | null => {
       if ((month != 'All') && !item.date.includes(month)) {
         return null;
       }

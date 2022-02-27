@@ -13,32 +13,33 @@ interface GridProps extends JournalListType {
 }
 
 const GridView: FC<GridProps> = ({ month, list, navigation }): JSX.Element => (
-  <Layout style={styles.container}>
+  <Layout style={ styles.container }>
     <List
       scrollEnabled
-      numColumns={3}
-      contentContainerStyle={styles.grid}
-      data={list}
+      numColumns={ 3 }
+      contentContainerStyle={ styles.grid }
+      data={ list }
       accessibilityLabel='Journal List Entries in Grid Format'
-      renderItem={({ item }: any) => {
+      renderItem={({ item }): JSX.Element | null => {
         const { title, body, date } = item;
         if ((month != 'All') && !date.includes(month)) {
           return null;
         } else {
           return (
             <Card
-              key={title + '_key'}
-              style={styles.item}
-              onPress={() => navigation.navigate('Journal Details', { title, body, date })}
+              key={ title + '_key' }
+              style={ styles.item }
+              onPress={ (): boolean => navigation.navigate('Journal Details', { title, body, date }) }
             >
-              <Text>{title}</Text>
-              <Text style={styles.itemDate}>
-                {date}
+              <Text>{ title }</Text>
+              <Text style={ styles.itemDate }>
+                { date }
               </Text>
             </Card>
           );
         }
-      } } />
+      }} 
+    />
   </Layout>
 );
 
