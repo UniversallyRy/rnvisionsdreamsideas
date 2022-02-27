@@ -20,16 +20,13 @@ const Test = (state) => {
   return <Button onPress={() => onPurgeStoredState(state)}></Button>;
 };
 
-const mapStateToProps = (state, ownProps) => {
-  return {
-    state: state.notes,
-  };
-};
+const mapStateToProps = (state, ownProps) => ({
+  state: state.notes,
+});
 
-function mapDispatchToProps(dispatch) {
-  return { dispatch }; // Map dispatch method to this.props.dispatch
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(Test);
+const mapDispatchToProps = (dispatch) => ({
+  dispatch,
+}); /* Map dispatch method to this.props.dispatch*/
 
 export type PropsFromRedux = ConnectedProps<typeof Test>;
+export default connect(mapStateToProps, mapDispatchToProps)(Test);
