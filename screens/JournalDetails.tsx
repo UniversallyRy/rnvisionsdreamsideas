@@ -1,9 +1,10 @@
 import React, { FC } from 'react';
-import { StyleSheet, ViewStyle, TextStyle } from 'react-native';
+import { StyleSheet } from 'react-native';
 import { NavigationScreenProp } from 'react-navigation';
 import { Layout, Card, Text, Divider } from '@ui-kitten/components';
 import Header from '../shared/header';
 import { windowHeight, windowWidth } from '../utils/constants';
+import { JDetailsStyles } from "./Styles";
 
 export type DetailsProps = {
   route: {
@@ -19,28 +20,18 @@ export type DetailsProps = {
   navigation: NavigationScreenProp<string, object>;
 }
 
-interface Styles {
-  container: ViewStyle;
-  card: ViewStyle;
-  textTitle: TextStyle;
-  textBody: TextStyle;
-  textDate: TextStyle;
-}
-
-const JournalDetails: FC<DetailsProps> = ({ route, navigation }) => {
+const JournalDetails: FC<DetailsProps> = ({ route, navigation }): JSX.Element => {
 
   const { title, body, date } = route.params;
 
-  const Details = ({ child, style }) => {
-    return (
-      <>
-        <Divider />
-        <Text style={ style }>
-          { child }
-        </Text>
-      </>
-    );
-  };
+  const Details = ({ child, style }): JSX.Element => (
+    <>
+      <Divider />
+      <Text style={ style }>
+        { child }
+      </Text>
+    </>
+  );
 
   return (
     <Layout style={ styles.container }>
@@ -54,7 +45,7 @@ const JournalDetails: FC<DetailsProps> = ({ route, navigation }) => {
   );
 };
 
-const styles = StyleSheet.create<Styles>({
+const styles = StyleSheet.create<JDetailsStyles>({
   container: {
     flexDirection: 'column',
     width: windowWidth,

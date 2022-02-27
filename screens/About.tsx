@@ -1,30 +1,23 @@
 import React from "react";
-import { StyleSheet, TextStyle, ViewStyle } from "react-native";
+import { StyleSheet } from "react-native";
 import { Card, Layout, Text } from "@ui-kitten/components";
-
-interface Styles {
-  textContainer: ViewStyle;
-  aboutContainer: ViewStyle;
-  text: TextStyle;
-}
+import { AboutStyles } from "./Styles";
 
 const aboutText: string =
   "This is an ongoing App based on charting any visions or dreams you may have. Notes tab for thoughts and todos.";
 
-const About = () => {
-  return (
-    <Layout style={ styles.aboutContainer }>
-      <Card style={ styles.textContainer }>
-        <Text style={ styles.text }>
-          { " " }
-          { aboutText }{ " " }
-        </Text>
-      </Card>
-    </Layout>
-  );
-};
+const About = (): JSX.Element => (
+  <Layout style={ styles.aboutContainer }>
+    <Card style={ styles.textContainer }>
+      <Text style={ styles.text }>
+        {" "}
+        { aboutText }{" "}
+      </Text>
+    </Card>
+  </Layout>
+);
 
-const styles = StyleSheet.create<Styles>({
+const styles = StyleSheet.create<AboutStyles>({
   aboutContainer:{
     flex: 1,
     margin: 1,

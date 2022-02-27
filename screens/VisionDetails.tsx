@@ -1,9 +1,10 @@
 import React, { FC } from 'react';
-import { Image, StyleSheet, ViewStyle, TextStyle, ImageStyle } from 'react-native';
+import { Image, StyleSheet } from 'react-native';
 import { NavigationScreenProp } from 'react-navigation';
 import { Layout, Card, Text } from '@ui-kitten/components';
 import Header from '../shared/header';
 import { windowHeight, windowWidth } from '../utils/constants';
+import { VDetailsStyles } from './Styles';
 
 type DetailsProps = {
   navigation: NavigationScreenProp<string, object>;
@@ -21,14 +22,7 @@ type DetailsProps = {
   }
 }
 
-interface Styles {
-  container: ViewStyle;
-  card: ViewStyle;
-  img: ImageStyle;
-  title: TextStyle;
-}
-
-const VisionDetails: FC<DetailsProps> = ({ navigation, route }) => {
+const VisionDetails: FC<DetailsProps> = ({ navigation, route }): JSX.Element => {
   const { id, title, uri } = route.params.item;
 
   return (
@@ -42,7 +36,7 @@ const VisionDetails: FC<DetailsProps> = ({ navigation, route }) => {
   );
 };
 
-const styles = StyleSheet.create<Styles>({
+const styles = StyleSheet.create<VDetailsStyles>({
   container: {
     flex: 1,  
     fontFamily: 'roboto-black',

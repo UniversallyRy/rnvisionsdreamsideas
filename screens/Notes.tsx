@@ -1,13 +1,10 @@
-import React, { useState } from "react";
-import { StyleSheet, ViewStyle } from "react-native";
+import React from "react";
+import { StyleSheet } from "react-native";
 import { Layout } from "@ui-kitten/components";
 import Header from "../shared/header";
 import NoteContent from "../components/notes";
-import { FooterButtons } from "../shared/buttons";
+import { NoteStyles } from "./Styles";
 // todo: draggable
-interface Styles {
-  noteScreenContainer: ViewStyle;
-}
 
 const NoteScreen = () => {
   return (
@@ -18,7 +15,7 @@ const NoteScreen = () => {
   );
 };
 
-const styles = StyleSheet.create<Styles>({
+const styles = StyleSheet.create<NoteStyles>({
   noteScreenContainer: {
     flex: 1,
     fontFamily: "roboto-black",
