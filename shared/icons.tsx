@@ -18,6 +18,9 @@ export const EditIcon = (props: ReactNode): JSX.Element => (
 export const SaveIcon = (props: ReactNode): JSX.Element => (
     <Icon { ...props } name='save-outline'/>
 );
+export const FavIcon = (props: ReactNode): JSX.Element => (
+    <Icon { ...props } name='heart-outline'/>
+);
 export const DeleteIcon = (props: ReactNode): JSX.Element => (
     <Icon { ...props } name='trash-outline'/>
 );  

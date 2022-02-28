@@ -7,6 +7,7 @@ import { useAppDispatch } from '../../utils/hooks';
 import { windowHeight, windowWidth } from '../../utils/constants';
 import { JournalType, deleteJournal, editJournal, editJournalToggle } from '../../redux/reducers/journals';
 import { ListItemStyles } from './Styles';
+import { FavIcon } from '../../shared/icons';
 
 type ItemProps = {
   item: JournalType;
@@ -68,6 +69,7 @@ const ListItem: FC<ItemProps> = ({ item,  navigation }): JSX.Element => {
           :<ButtonGroup>
             <EditButton onPress={ () => dispatch(editJournalToggle({ id })) }/>
             <DeleteButton onPress={ () => dispatch(deleteJournal({ id })) }/>
+            <FavIcon/>
           </ButtonGroup>
         }
     </Card>

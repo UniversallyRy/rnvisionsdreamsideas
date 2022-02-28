@@ -1,7 +1,7 @@
 import React from "react";
 import { GestureResponderEvent, StyleProp, StyleSheet, ViewStyle } from "react-native";
 import { Layout, Button, ButtonGroup, Text, TopNavigationAction } from "@ui-kitten/components"
-import { BackIcon, CloseIcon, DayIcon, GridIcon, NightIcon, SaveIcon, SubmitIcon } from "./icons";
+import { BackIcon, CloseIcon, DayIcon, FavIcon, GridIcon, NightIcon, SaveIcon, SubmitIcon } from "./icons";
 import { windowWidth } from "../utils/constants";
 import { ButtonStyles } from "./Styles";
 
@@ -26,9 +26,9 @@ type ToggleProps = {
 // default export kittenui styled button
 export const FormButton = ({ text, color, onPress, ...props }: FormProps): JSX.Element => (
   <Button
-    style={[styles.button, { backgroundColor: color }]}
-    onPress={onPress}
-    {...props}
+    style={ [styles.button, { backgroundColor: color }] }
+    onPress={ onPress }
+    { ...props }
   >
     <Text style={ styles.text }>{ text }</Text>
   </Button>
@@ -37,9 +37,9 @@ export const FormButton = ({ text, color, onPress, ...props }: FormProps): JSX.E
 export const CloseButton:React.FC<ButtonProps>= ({ onPress, ...props }:ButtonProps): JSX.Element => (
   <Button
     appearance='ghost'
-    accessoryRight={CloseIcon}
-    onPress={onPress}
-    {...props} 
+    accessoryRight={ CloseIcon }
+    onPress={ onPress }
+    { ...props } 
   />
 );
 
@@ -105,6 +105,14 @@ export const EditButton = ({ onPress, ...props }): JSX.Element => (
   >
     Edit
   </Button>
+);
+
+export const FavButton = ({ onPress, ...props }): JSX.Element => (
+  <Button
+    accessoryRight={ FavIcon } 
+    onPress={ onPress }
+    { ...props }
+  />
 );
 
 export const DeleteButton = ({ onPress, ...props }): JSX.Element => (
