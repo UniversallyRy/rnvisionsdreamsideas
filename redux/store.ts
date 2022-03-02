@@ -39,7 +39,7 @@ const store = configureStore({
     todosLists: todosLists, 
     pic: pic, 
   }
-})
+});
 
 // const persistor = persistStore(store);
 

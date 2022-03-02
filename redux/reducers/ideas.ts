@@ -17,7 +17,7 @@ const initialIdeas: IdeaType[] = [
   },
 ];
 
-const ideas = createSlice( {
+const ideas = createSlice({
   name:"ideas",
   initialState: initialIdeas,
   reducers: {
@@ -27,11 +27,13 @@ const ideas = createSlice( {
         inputId: uuid.generate(),
       })
     },
-    editIdea: (state, action): void => {
+    editIdea: (_state, action): void => {
       const newState = action.payload.draft;
       return newState;
     },
-    deleteIdea: (state, action) => state.filter((idea) => idea.inputId != action.payload.inputId),
+    deleteIdea: (state, action) => {
+      return state.filter((idea) => idea.inputId != action.payload.inputId);
+    },
   }
 });
 

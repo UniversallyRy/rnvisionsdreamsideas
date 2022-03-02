@@ -78,8 +78,6 @@ const journalsReducer = createSlice({
       return state;
     },
   },
-  extraReducers: {
-  },
 })
 
 const { actions, reducer } = journalsReducer;
