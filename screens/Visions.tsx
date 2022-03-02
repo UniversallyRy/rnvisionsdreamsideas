@@ -5,7 +5,7 @@ import { Layout, Modal } from "@ui-kitten/components";
 import Header from "../shared/header";
 import ListView from "../components/visions/ListView";
 import GridView from "../components/visions/GridView";
-import ModalContent from "../components/visions/Modal";
+import NewEntry from "../components/visions/NewEntry";
 import { FooterButtons } from "../shared/buttons";
 import { windowHeight, windowWidth } from "../utils/constants";
 import { VisionStyles } from "./Styles";
@@ -46,7 +46,7 @@ const Visions: React.FC<VisionProps> = ({ navigation }): JSX.Element => {
 
       <Header name={ "Visions" } />
       <Modal visible={ modalOpen }>
-        <ModalContent setModalOpen={ toggleModal } />  
+        <NewEntry setModalOpen={ toggleModal } />  
       </Modal>
       {/* when gridview is toggled use gridContainer otherwise VisionsContainer */}
       

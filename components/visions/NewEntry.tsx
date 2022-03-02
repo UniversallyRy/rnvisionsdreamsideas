@@ -22,7 +22,7 @@ const pictureSchema = yup.object({
   title: yup.string().required().min(4),
 });
 
-const ModalContent: FC<ModalProps> = ({ picInput, setModalOpen }): JSX.Element => {
+const NewEntry: FC<ModalProps> = ({ picInput, setModalOpen }): JSX.Element => {
 
   const dispatch = useAppDispatch()
   return (
@@ -130,5 +130,5 @@ const mapStateToProps = (state:StoreProps) => {
   return { picInput: pic };
 };
 
-export default connect(mapStateToProps)(ModalContent);
-export type PropsFromRedux = ConnectedProps<typeof ModalContent>;
+export default connect(mapStateToProps)(NewEntry);
+export type PropsFromRedux = ConnectedProps<typeof NewEntry>;
