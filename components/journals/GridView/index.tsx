@@ -7,7 +7,7 @@ import { windowHeight, windowWidth } from '../../../utils/constants';
 import { JournalListType } from '../../../redux/reducers/journals';
 import { StoreProps } from '../../../redux/store';
 import { GridStyles } from '../Styles';
-
+//todos: add draggability
 interface GridProps extends JournalListType {
   navigation: NavigationScreenProp<string, object>;
 }

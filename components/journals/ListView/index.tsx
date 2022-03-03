@@ -7,6 +7,7 @@ import ListItem from '../ListItem';
 import { JournalListType } from '../../../redux/reducers/journals';
 import { StoreProps } from '../../../redux/store';
 import { ListStyles } from '../Styles';
+//todos: add draggability
 
 interface ListProps extends JournalListType {
   navigation: NavigationScreenProp<string, object>;
