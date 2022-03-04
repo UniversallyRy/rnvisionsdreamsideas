@@ -18,7 +18,7 @@ const JournalSchema = yup.object({
   body: yup.string().required().min(4),
 });
 
-const NewEntry: FC<ModalProps> = ({ setModalOpen }): JSX.Element => {
+const NewJournalModal: FC<ModalProps> = ({ setModalOpen }): JSX.Element => {
   const dispatch = useAppDispatch();
   return (
     <Layout style={ styles.modalContainer }>
@@ -89,4 +89,4 @@ const styles = StyleSheet.create<ModalStyles>({
   },
 });
 
-export default NewEntry;
+export default NewJournalModal;

@@ -4,7 +4,7 @@ import { NavigationScreenProp } from 'react-navigation';
 import { Layout, Text, Modal } from '@ui-kitten/components';
 import ListView from '../components/journals/ListView';
 import GridView from '../components/journals/GridView';
-import NewEntry from '../components/journals/NewEntry';
+import NewJournalModal from '../components/journals/NewJournalModal';
 import MonthSelect from '../components/journals/MonthSelect';
 import Header from '../shared/header';
 import { CloseButton, FooterButtons } from '../shared/buttons';
@@ -34,7 +34,7 @@ const JournalScreen: React.FC<ScreenProps>= ({ navigation }): JSX.Element => {
       >
 
         <Text style={ styles.title }>Add A Journal Entry</Text>
-        <NewEntry setModalOpen={ setModalOpen } />
+        <NewJournalModal setModalOpen={ setModalOpen } />
         <CloseButton
           style={ styles.close }
           accessibilityLabel='Closes Modal'
