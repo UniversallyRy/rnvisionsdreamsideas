@@ -3,10 +3,10 @@ import { StyleSheet } from 'react-native';
 import { connect, ConnectedProps } from 'react-redux';
 import { NavigationScreenProp } from 'react-navigation';
 import { Layout, List } from '@ui-kitten/components';
-import { VisionType } from '../../redux/reducers/visions';
-import { StoreProps } from '../../redux/store';
-import { GridStyles } from './Styles';
 import GridItem from './GridItem';
+import { GridStyles } from '../Styles';
+import { VisionType } from '../../../redux/reducers/visions';
+import { StoreProps } from '../../../redux/store';
 
 type GridProps = {
   visions: VisionType[];

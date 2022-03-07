@@ -1,11 +1,11 @@
 import React, { useState, FC } from 'react';
 import { TouchableOpacity, Image, StyleSheet } from 'react-native';
 import { List, Tooltip } from '@ui-kitten/components';
-import { deleteVision, VisionType } from '../../redux/reducers/visions';
-import { CloseButton } from '../../shared/buttons';
-import { SPACING, THUMBNAIL_SIZE, windowWidth } from '../../utils/constants';
-import { useAppDispatch } from '../../utils/hooks';
-import { ThumbStyles } from './Styles';
+import { deleteVision, VisionType } from '../../../redux/reducers/visions';
+import { useAppDispatch } from '../../../utils/hooks';
+import { SPACING, THUMBNAIL_SIZE, windowWidth } from '../../../utils/constants';
+import { CloseButton } from '../../../shared/buttons';
+import { ThumbStyles } from '../Styles';
 
 type ThumbnailProps = {
   item: VisionType;
