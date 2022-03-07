@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect, createContext, SetStateAction, Dispatch } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { Animated, StyleSheet } from "react-native";
 import { NavigationScreenProp } from 'react-navigation';
 import { Layout, Modal } from "@ui-kitten/components";
@@ -13,13 +13,6 @@ import { VisionStyles } from "./Styles";
 interface VisionProps {
   navigation: NavigationScreenProp<string, object>;
 }
-
-type ContextProps = {
-  setModalOpen: Dispatch<SetStateAction<boolean>>; 
-  toggleView: () => void;
-}
-// Context for methods to add vision and change view buttons
-export const VisionContext = createContext<ContextProps>({setModalOpen: () => {}, toggleView: () => {}});
 
 const Visions: React.FC<VisionProps> = ({ navigation }): JSX.Element => {
   const scrollX = useRef(new Animated.Value(0)).current;

@@ -1,42 +1,22 @@
-import React, { useState, FC } from 'react';
+import React, { useState, FC, useContext } from 'react';
 import { TouchableOpacity, Image, StyleSheet } from 'react-native';
-import { List, Tooltip } from '@ui-kitten/components';
+import { Tooltip } from '@ui-kitten/components';
 import { deleteVision, VisionType } from '../../../redux/reducers/visions';
 import { useAppDispatch } from '../../../utils/hooks';
-import { SPACING, THUMBNAIL_SIZE, windowWidth } from '../../../utils/constants';
+import { SPACING, THUMBNAIL_SIZE } from '../../../utils/constants';
 import { CloseButton } from '../../../shared/buttons';
 import { ThumbStyles } from '../Styles';
+import { IndexContext } from '.';
 
 type ThumbnailProps = {
   item: VisionType;
   index: number;
-  topRef: React.RefObject<List<any>>
-  thumbRef: React.RefObject<List<any>>
 }
 
-const renderThumbnail:FC<ThumbnailProps> = ({ item, index, topRef, thumbRef }): JSX.Element => {
+const renderThumbnail:FC<ThumbnailProps> = ({ item, index }): JSX.Element => {
   const [visible, setVisible] = useState(false);
+  const { activeIndex, scrollActiveIndex } = useContext(IndexContext);
   const dispatch = useAppDispatch();
-  const [activeIndex, setActiveIndex] = useState(0)
-
-  const scrollActiveIndex = (index: number): void => {
-    setActiveIndex(index);
-    topRef.current?.scrollToOffset({
-      offset: index * windowWidth,
-      animated: true
-    });
-    if(index * (THUMBNAIL_SIZE + SPACING) - THUMBNAIL_SIZE / 2 > windowWidth / 2) {
-      thumbRef.current?.scrollToOffset({
-        offset: index * (THUMBNAIL_SIZE + SPACING) - windowWidth / 2 + THUMBNAIL_SIZE / 2,
-        animated: true,
-      });
-    } else {
-      thumbRef.current?.scrollToOffset({
-        offset: 0,
-        animated: true,
-      });
-    }
-  };
 
   const ThumbNail = (): JSX.Element => (
     <TouchableOpacity

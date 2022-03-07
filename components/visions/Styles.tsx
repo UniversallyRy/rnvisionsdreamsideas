@@ -18,8 +18,10 @@ export interface ImageStyles {
 export interface ListStyles {
     container: ViewStyle;
     imgList: ViewStyle;
+}
+
+export interface ScreenImgStyles {
     bgImg: ImageStyle;
-    thumbImg: ImageStyle;
 }
   
 export interface ModalStyles {
