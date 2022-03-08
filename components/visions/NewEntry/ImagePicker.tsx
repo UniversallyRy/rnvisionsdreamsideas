@@ -4,11 +4,11 @@ import { ConnectedProps } from 'react-redux';
 import * as ImagePicker from 'expo-image-picker';
 import { manipulateAsync, SaveFormat } from 'expo-image-manipulator'
 import { Layout } from '@ui-kitten/components';
-import { ImageButtons } from '../../shared/buttons';
-import { windowWidth } from '../../utils/constants';
-import { useAppDispatch } from '../../utils/hooks';
-import { addPic } from '../../redux/reducers/newpic';
-import { ImageStyles } from './Styles';
+import { ImageButtons } from '../../../shared/buttons';
+import { windowWidth } from '../../../utils/constants';
+import { useAppDispatch } from '../../../utils/hooks';
+import { addPic } from '../../../redux/reducers/newpic';
+import { ImageStyles } from '../Styles';
 
 const ImagePic = (): JSX.Element => {
   const [image, setImage] = useState(``);

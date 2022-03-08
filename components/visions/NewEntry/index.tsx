@@ -5,13 +5,13 @@ import { connect, ConnectedProps } from 'react-redux';
 import { Layout, Input, Text } from '@ui-kitten/components';
 import { Formik } from 'formik';
 import * as yup from 'yup';
-import ModalImage from './ImagePicker';
-import { CloseButton, SubmitButton } from '../../shared/buttons';
-import { useAppDispatch } from '../../utils/hooks';
-import { windowHeight, windowWidth } from '../../utils/constants';
-import { addVision } from '../../redux/reducers/visions';
-import { StoreProps } from '../../redux/store';
-import { ModalStyles } from './Styles';
+import ImagePicker from './ImagePicker';
+import { CloseButton, SubmitButton } from '../../../shared/buttons';
+import { useAppDispatch } from '../../../utils/hooks';
+import { windowHeight, windowWidth } from '../../../utils/constants';
+import { addVision } from '../../../redux/reducers/visions';
+import { StoreProps } from '../../../redux/store';
+import { ModalStyles } from '../Styles';
 
 type ModalProps = {
   picInput: string;
@@ -65,7 +65,7 @@ const NewEntry: FC<ModalProps> = ({ picInput, setModalOpen }): JSX.Element => {
             handleSubmit,
           }): JSX.Element => (
             <Layout style={ styles.footer }> 
-              <ModalImage />
+              <ImagePicker />
               <Input
                 textAlign='center'
                 style={ styles.textinput }
