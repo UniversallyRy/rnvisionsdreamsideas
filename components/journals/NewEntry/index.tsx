@@ -3,11 +3,11 @@ import { StyleSheet } from 'react-native';
 import { Layout, Input, Text } from '@ui-kitten/components';
 import { Formik } from 'formik';
 import * as yup from 'yup';
-import { SubmitButton } from '../../shared/buttons';
-import { useAppDispatch } from '../../utils/hooks';
-import { windowHeight } from '../../utils/constants';
-import { addJournal } from '../../redux/reducers/journals';
-import { ModalStyles } from './Styles';
+import { SubmitButton } from '../../../shared/buttons';
+import { useAppDispatch } from '../../../utils/hooks';
+import { windowHeight } from '../../../utils/constants';
+import { addJournal } from '../../../redux/reducers/journals';
+import { ModalStyles } from '../Styles';
 
 type ModalProps = {
   setModalOpen: ((i:boolean) => void);
