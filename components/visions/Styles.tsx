@@ -1,14 +1,13 @@
 import { ViewStyle, TextStyle, ImageStyle } from 'react-native';
 
 export interface GridStyles {
-  grid: ViewStyle;
+    grid: ViewStyle;
 }
-
 
 export interface ItemStyles {
     gridItem: ViewStyle;
     img: ImageStyle;
-  }
+}
 
 export interface ImageStyles {
     container: ViewStyle;
