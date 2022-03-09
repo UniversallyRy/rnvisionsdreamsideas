@@ -3,7 +3,7 @@ import { StyleSheet } from 'react-native';
 import { connect, ConnectedProps } from 'react-redux';
 import { NavigationScreenProp } from 'react-navigation';
 import { List } from '@ui-kitten/components';
-import ListItem from '../ListItem';
+import ListItem from './ListItem';
 import { JournalListType } from '../../../redux/reducers/journals';
 import { StoreProps } from '../../../redux/store';
 import { ListStyles } from '../Styles';

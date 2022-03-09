@@ -2,12 +2,12 @@ import React, { FC, useState } from 'react';
 import { StyleSheet } from 'react-native';
 import { NavigationScreenProp } from 'react-navigation';
 import { ButtonGroup, Card, Divider, Input, Layout, Text } from '@ui-kitten/components';
-import { CancelButton, DeleteButton, EditButton, SaveButton } from '../../shared/buttons';
-import { useAppDispatch } from '../../utils/hooks';
-import { windowHeight, windowWidth } from '../../utils/constants';
-import { JournalType, deleteJournal, editJournal, editJournalToggle } from '../../redux/reducers/journals';
-import { ListItemStyles } from './Styles';
-import { FavIcon } from '../../shared/icons';
+import { CancelButton, DeleteButton, EditButton, SaveButton } from '../../../shared/buttons';
+import { useAppDispatch } from '../../../utils/hooks';
+import { windowHeight, windowWidth } from '../../../utils/constants';
+import { JournalType, deleteJournal, editJournal, editJournalToggle } from '../../../redux/reducers/journals';
+import { ListItemStyles } from '../Styles';
+import { FavIcon } from '../../../shared/icons';
 
 type ItemProps = {
   item: JournalType;
