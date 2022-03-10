@@ -4,9 +4,9 @@ import { Layout } from '@ui-kitten/components';
 import Header from './Header';
 import TodoList from './TodoList';
 import InputTodo from './InputTodo';
+import { HomeStyles } from './Styles';
 import { TodoListType } from '../../../redux/reducers/todos';
 import { windowHeight, windowWidth } from '../../../utils/constants';
-import { HomeStyles } from './Styles';
 
 type TodoModalProps = {
   list: TodoListType;
@@ -14,6 +14,7 @@ type TodoModalProps = {
 }
 
 const TodosModal: FC<TodoModalProps> = ({  list, closeModal }): JSX.Element => {
+
   const { todos, id } = list;
   // const taskCount = todos.length;
   return (
@@ -31,6 +32,7 @@ const TodosModal: FC<TodoModalProps> = ({  list, closeModal }): JSX.Element => {
       /> 
     </Layout>
   );
+  
 };
 
 const styles = StyleSheet.create<HomeStyles>({

@@ -8,7 +8,6 @@ import { JournalListType } from '../../../redux/reducers/journals';
 import { StoreProps } from '../../../redux/store';
 import { ListStyles } from '../Styles';
 //todos: add draggability
-
 interface ListProps extends JournalListType {
   navigation: NavigationScreenProp<string, object>;
 }
@@ -37,6 +36,7 @@ const styles = StyleSheet.create<ListStyles>({
 const mapStateToProps = (state: StoreProps) => {
   const { journals } = state
   const { month, list } = journals;
+  
   return { month, list };
 };
 

@@ -1,13 +1,14 @@
 import React, { FC } from 'react';
 import { View, StyleSheet } from 'react-native';
 import { Card, Text } from '@ui-kitten/components';
+import { IdeaStyles } from './Styles';
 import { CloseButton } from '../../../shared/buttons';
 import { deleteIdea, IdeaType } from '../../../redux/reducers/ideas';
 import { useAppDispatch } from '../../../utils/hooks';
 import { windowWidth } from '../../../utils/constants';
-import { IdeaStyles } from './Styles';
 
 const Idea: FC<IdeaType> = ({ inputValue, inputId }): JSX.Element => {
+
   const dispatch = useAppDispatch();
 
   return (
@@ -21,6 +22,7 @@ const Idea: FC<IdeaType> = ({ inputValue, inputId }): JSX.Element => {
       </View>
     </Card>
   );
+  
 };
 
 const styles = StyleSheet.create<IdeaStyles>({

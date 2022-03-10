@@ -2,9 +2,9 @@ import React, { FC } from 'react';
 import { StyleSheet } from 'react-native';
 import { NavigationScreenProp } from 'react-navigation';
 import { Layout, Card, Text, Divider } from '@ui-kitten/components';
+import { JDetailsStyles } from "./Styles";
 import Header from '../shared/header';
 import { windowHeight, windowWidth } from '../utils/constants';
-import { JDetailsStyles } from "./Styles";
 
 export type DetailsProps = {
   route: {

@@ -1,4 +1,4 @@
-import { createSlice } from '@reduxjs/toolkit'
+import { createSlice } from '@reduxjs/toolkit';
 import moment from 'moment';
 import uuid from '../../utils/uuid';
 import lorem from '../../shared/lorem';

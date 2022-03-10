@@ -1,13 +1,12 @@
 import React, { useState, useRef, FC, createContext } from 'react';
 import { StyleSheet } from 'react-native';
-import { NavigationScreenProp } from 'react-navigation';
 import { connect, ConnectedProps } from 'react-redux';
+import { NavigationScreenProp } from 'react-navigation';
 import { Layout, List } from '@ui-kitten/components';
 import { renderBgImage } from './ScreenImage';
 import renderThumbnail from './ThumbNails';
 import { ListStyles } from '../Styles';
-import { windowWidth } from '../../../utils/constants';
-import { SPACING, THUMBNAIL_SIZE } from '../../../utils/constants';
+import { SPACING, THUMBNAIL_SIZE, windowWidth } from '../../../utils/constants';
 import { VisionType } from '../../../redux/reducers/visions';
 import { StoreProps } from '../../../redux/store';
 
@@ -22,6 +21,7 @@ export const IndexContext = createContext({
 });
 
 const ListView: FC<ListProps> = ({ visions, navigation }): JSX.Element => {
+
   const [activeIndex, setActiveIndex] = useState(0);
   const topRef = useRef<List>(null);
   const thumbRef = useRef<List>(null);
@@ -73,6 +73,7 @@ const ListView: FC<ListProps> = ({ visions, navigation }): JSX.Element => {
       </IndexContext.Provider>
     </Layout>
   );
+  
 };
 
 const styles = StyleSheet.create<ListStyles>({

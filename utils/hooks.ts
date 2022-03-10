@@ -7,6 +7,7 @@ export const useAppDispatch = () => useDispatch<AppDispatch>();
 export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector;
 
 export const filtered = ({ obj, predicate }: { obj: object; predicate: (obj: PropertyKey) => boolean; }): {} => {
+
   let result = {}, key: PropertyKey;
     
   for (key in obj) {
@@ -14,5 +15,7 @@ export const filtered = ({ obj, predicate }: { obj: object; predicate: (obj: Pro
       result[key] = obj[key];
     }
   }
+
   return result;
+  
 };

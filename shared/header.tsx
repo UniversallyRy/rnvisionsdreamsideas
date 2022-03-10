@@ -13,8 +13,8 @@ export type HeaderProps = {
 
 const Header:React.FC<HeaderProps> = ({ name, navigation }): JSX.Element => {
 
-  const { theme, toggleTheme } = useContext(ThemesContext);
   let navigateBack;
+  const { theme, toggleTheme } = useContext(ThemesContext);
 
   if(navigation != undefined) {
     navigateBack = (): void => {

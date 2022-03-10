@@ -8,6 +8,7 @@ export const CloseIcon = (props: ReactNode): JSX.Element => (
 export const SubmitIcon = (props: ReactNode): JSX.Element => (
     <Icon { ...props } name='plus-outline'/>
 );
+
 export const GridIcon = (props: ReactNode): JSX.Element => (
     <Icon { ...props } name='grid'/>
 );
@@ -15,12 +16,15 @@ export const GridIcon = (props: ReactNode): JSX.Element => (
 export const EditIcon = (props: ReactNode): JSX.Element => (
     <Icon { ...props } name='edit'/>
 );
+
 export const SaveIcon = (props: ReactNode): JSX.Element => (
     <Icon { ...props } name='save-outline'/>
 );
+
 export const FavIcon = (props: ReactNode): JSX.Element => (
     <Icon { ...props } name='heart-outline'/>
 );
+
 export const DeleteIcon = (props: ReactNode): JSX.Element => (
     <Icon { ...props } name='trash-outline'/>
 );  
@@ -28,9 +32,11 @@ export const DeleteIcon = (props: ReactNode): JSX.Element => (
 export const DayIcon = (props: ReactNode): JSX.Element => (
     <Icon { ...props } name='sun' />
 );
+
 export const NightIcon = (props: ReactNode): JSX.Element => (
     <Icon { ...props } name='moon' />
-);  
+);
+  
 export const BackIcon = (props: ReactNode): JSX.Element => (
     <Icon { ...props } name='arrow-back' />
 );

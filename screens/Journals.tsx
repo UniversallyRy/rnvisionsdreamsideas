@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { StyleSheet } from 'react-native';
 import { NavigationScreenProp } from 'react-navigation';
 import { Layout, Text, Modal } from '@ui-kitten/components';
+import { JournalStyles } from "./Styles";
 import ListView from '../components/journals/ListView';
 import GridView from '../components/journals/GridView';
 import NewEntry from '../components/journals/NewEntry';
@@ -9,13 +10,13 @@ import MonthSelect from '../components/journals/MonthSelect';
 import Header from '../shared/header';
 import { CloseButton, FooterButtons } from '../shared/buttons';
 import { windowHeight, windowWidth } from '../utils/constants';
-import { JournalStyles } from "./Styles";
 // todo: add swipe to delete
 interface ScreenProps {
   navigation: NavigationScreenProp<string, object>;
 }
 
 const JournalScreen: React.FC<ScreenProps>= ({ navigation }): JSX.Element => {
+
   const [modalOpen, setModalOpen] = useState(false);
   const [view, setView] = useState(true);
 

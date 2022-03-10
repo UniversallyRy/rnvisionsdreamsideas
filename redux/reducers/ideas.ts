@@ -38,5 +38,6 @@ const ideas = createSlice({
 });
 
 const { actions, reducer } = ideas;
+
 export const { addIdea, editIdea, deleteIdea } = actions;
 export default reducer;

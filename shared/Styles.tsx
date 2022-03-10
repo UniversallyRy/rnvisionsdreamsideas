@@ -1,4 +1,4 @@
-import { TextStyle, ViewStyle } from "react-native";
+import { ViewStyle, TextStyle } from "react-native";
 
 export interface ButtonStyles {
   button: ViewStyle;
@@ -15,11 +15,11 @@ export interface ButtonStyles {
 }
 
 export interface HeaderStyles {
-    headerContainer: ViewStyle;
+  headerContainer: ViewStyle;
 }
 
 export interface InputStyles {
-    container: ViewStyle;
-    input:TextStyle;
-    errorText:TextStyle;
+  container: ViewStyle;
+  input:TextStyle;
+  errorText:TextStyle;
 }

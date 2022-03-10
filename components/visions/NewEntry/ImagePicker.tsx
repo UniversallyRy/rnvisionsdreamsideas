@@ -4,15 +4,52 @@ import { ConnectedProps } from 'react-redux';
 import * as ImagePicker from 'expo-image-picker';
 import { manipulateAsync, SaveFormat } from 'expo-image-manipulator'
 import { Layout } from '@ui-kitten/components';
+import { ImageStyles } from '../Styles';
 import { ImageButtons } from '../../../shared/buttons';
 import { windowWidth } from '../../../utils/constants';
 import { useAppDispatch } from '../../../utils/hooks';
 import { addPic } from '../../../redux/reducers/newpic';
-import { ImageStyles } from '../Styles';
 
 const ImagePic = (): JSX.Element => {
+
   const [image, setImage] = useState(``);
   const dispatch = useAppDispatch()
+
+  const pickImage = async (): Promise<undefined> => {
+    // result variable saves image you pick from phone's gallery
+    const result = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.Images,
+      allowsEditing: true,
+      quality: 1,
+    });
+
+    if (!result.cancelled) {
+      let manipResult = await manipulateAsync(
+        result.uri,
+        [{ resize: { width: 425} }],
+        { compress: 1, format: SaveFormat.PNG }
+      );
+      setImage(manipResult.uri);
+      dispatch(addPic({ uri: manipResult.uri }));
+    }else {
+      return undefined;
+    }
+    
+  };
+
+  const cameraImage = async (): Promise<void> => {
+
+    let result = await ImagePicker.launchCameraAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.Images,
+      allowsEditing: true,
+    });
+
+    if (!result.cancelled) {
+      setImage(result.uri);
+      dispatch(addPic({ uri: result.uri }));
+    }
+
+  };
 
   useEffect(() => {
     (async (): Promise<void> => {
@@ -31,37 +68,6 @@ const ImagePic = (): JSX.Element => {
     })();
   }, []);
 
-  const pickImage = async (): Promise<undefined> => {
-    // result variable saves image you pick from phone's gallery
-    const result = await ImagePicker.launchImageLibraryAsync({
-      mediaTypes: ImagePicker.MediaTypeOptions.Images,
-      allowsEditing: true,
-      quality: 1,
-    });
-    if (!result.cancelled) {
-      let manipResult = await manipulateAsync(
-        result.uri,
-        [{ resize: { width: 425} }],
-        { compress: 1, format: SaveFormat.PNG }
-      );
-      setImage(manipResult.uri);
-      dispatch(addPic({ uri: manipResult.uri }));
-    }else {
-      return undefined;
-    }
-  };
-
-  const cameraImage = async (): Promise<void> => {
-    let result = await ImagePicker.launchCameraAsync({
-      mediaTypes: ImagePicker.MediaTypeOptions.Images,
-      allowsEditing: true,
-    });
-    if (!result.cancelled) {
-      setImage(result.uri);
-      dispatch(addPic({ uri: result.uri }));
-    }
-  };
-
   return (
     <Layout style={ styles.container }>
       { image != '' && (
@@ -73,6 +79,7 @@ const ImagePic = (): JSX.Element => {
       />
     </Layout>
   );
+
 };
 
 const styles = StyleSheet.create<ImageStyles>({

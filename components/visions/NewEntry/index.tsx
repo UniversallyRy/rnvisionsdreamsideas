@@ -2,16 +2,16 @@ import React, { Dispatch, FC, SetStateAction } from 'react';
 import { Animated, StyleSheet } from 'react-native';
 import { connect, ConnectedProps } from 'react-redux';
 // import { useCardAnimation } from '@react-navigation/stack';
-import { Layout, Input, Text } from '@ui-kitten/components';
 import { Formik } from 'formik';
 import * as yup from 'yup';
+import { Layout, Input, Text } from '@ui-kitten/components';
 import ImagePicker from './ImagePicker';
+import { ModalStyles } from '../Styles';
 import { CloseButton, SubmitButton } from '../../../shared/buttons';
 import { useAppDispatch } from '../../../utils/hooks';
 import { windowHeight, windowWidth } from '../../../utils/constants';
 import { addVision } from '../../../redux/reducers/visions';
 import { StoreProps } from '../../../redux/store';
-import { ModalStyles } from '../Styles';
 
 type ModalProps = {
   picInput: string;
@@ -24,7 +24,8 @@ const pictureSchema = yup.object({
 
 const NewEntry: FC<ModalProps> = ({ picInput, setModalOpen }): JSX.Element => {
 
-  const dispatch = useAppDispatch()
+  const dispatch = useAppDispatch();
+
   return (
     <Layout>
       <Animated.View 
@@ -87,6 +88,7 @@ const NewEntry: FC<ModalProps> = ({ picInput, setModalOpen }): JSX.Element => {
       </Animated.View>
     </Layout>
   );
+  
 };
 
 const styles = StyleSheet.create<ModalStyles>({

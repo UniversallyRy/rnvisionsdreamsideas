@@ -1,12 +1,12 @@
 import React, { useState, FC, useContext } from 'react';
 import { TouchableOpacity, Image, StyleSheet } from 'react-native';
 import { Tooltip } from '@ui-kitten/components';
+import { IndexContext } from '.';
+import { ThumbStyles } from '../Styles';
 import { deleteVision, VisionType } from '../../../redux/reducers/visions';
 import { useAppDispatch } from '../../../utils/hooks';
 import { SPACING, THUMBNAIL_SIZE } from '../../../utils/constants';
 import { CloseButton } from '../../../shared/buttons';
-import { ThumbStyles } from '../Styles';
-import { IndexContext } from '.';
 
 type ThumbnailProps = {
   item: VisionType;
@@ -14,9 +14,10 @@ type ThumbnailProps = {
 }
 
 const renderThumbnail:FC<ThumbnailProps> = ({ item, index }): JSX.Element => {
+
+  const dispatch = useAppDispatch();
   const [visible, setVisible] = useState(false);
   const { activeIndex, scrollActiveIndex } = useContext(IndexContext);
-  const dispatch = useAppDispatch();
 
   const ThumbNail = (): JSX.Element => (
     <TouchableOpacity
@@ -44,6 +45,7 @@ const renderThumbnail:FC<ThumbnailProps> = ({ item, index }): JSX.Element => {
       <CloseButton onPress={ (): { payload: VisionType; type: string; } => dispatch(deleteVision(item)) }/>
     </Tooltip>
   );
+  
 };
 
 const styles = StyleSheet.create<ThumbStyles>({

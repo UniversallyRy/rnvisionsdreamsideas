@@ -1,17 +1,18 @@
 import React from 'react'
 import { Keyboard, StyleSheet } from 'react-native';
-import { Input, Layout, Text } from '@ui-kitten/components';
 import { Formik, FormikHelpers } from 'formik';
+import { Input, Layout, Text } from '@ui-kitten/components';
 import { SubmitButton } from './buttons';
+import { InputStyles } from './Styles';
 import { useAppDispatch } from '../utils/hooks';
 import { windowWidth } from '../utils/constants';
 import { IdeaType } from '../redux/reducers/ideas';
 import { TodoType } from '../redux/reducers/todos';
-import { InputStyles } from './Styles';
 
 interface FooterProps extends IdeaType, TodoType{}
 
 export const FooterInput = ({ inputName, reducerFunc, inputSchema }): JSX.Element => {
+
   const dispatch = useAppDispatch();
 
   return (
@@ -56,6 +57,7 @@ export const FooterInput = ({ inputName, reducerFunc, inputSchema }): JSX.Elemen
         )}
     </Formik>  
   );
+  
 };
 
 const styles = StyleSheet.create<InputStyles>({

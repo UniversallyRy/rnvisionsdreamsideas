@@ -1,4 +1,4 @@
-import { createSlice } from '@reduxjs/toolkit'
+import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = "";
 
@@ -13,5 +13,6 @@ const picturePicker = createSlice({
 });
 
 const { actions, reducer } = picturePicker;
+
 export const { addPic } = actions;
 export default reducer;

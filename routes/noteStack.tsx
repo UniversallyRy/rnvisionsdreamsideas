@@ -15,7 +15,7 @@ type NavProp = {
   navigation: NotesNavigationProp;
 }
 
-const Stack = createStackNavigator<NoteStackParamList>()
+const Stack = createStackNavigator<NoteStackParamList>();
 
 const NoteStack: FC<NavProp> = (): JSX.Element => (
   <Stack.Navigator

@@ -1,13 +1,13 @@
 import React, { FC } from 'react'
 import { Keyboard, StyleSheet } from 'react-native';
-import { Layout, Input, Text } from '@ui-kitten/components';
 import { Formik } from 'formik';
 import * as yup from 'yup'; 
+import { Layout, Input, Text } from '@ui-kitten/components';
+import { InputStyles } from './Styles';
 import { SubmitButton } from '../../../shared/buttons';
 import { windowWidth } from '../../../utils/constants';
 import { useAppDispatch } from '../../../utils/hooks';
 import { addTodo, TodoType } from '../../../redux/reducers/todos';
-import { InputStyles } from './Styles';
 
 type InputProps = {
   listId: string;
@@ -18,6 +18,7 @@ const todoSchema = yup.object({
 });
   
 const InputTodo: FC<InputProps> = ({ listId }): JSX.Element => {
+
   const dispatch = useAppDispatch();
 
   return (
@@ -62,8 +63,9 @@ const InputTodo: FC<InputProps> = ({ listId }): JSX.Element => {
           </Layout>
         )}
       </Formik>
-  )
-}
+  );
+
+};
 
 const styles = StyleSheet.create<InputStyles>({
   footer: {

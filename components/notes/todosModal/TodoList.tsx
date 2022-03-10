@@ -2,9 +2,9 @@ import React, { FC } from 'react';
 import { StyleSheet } from 'react-native';
 import { List } from '@ui-kitten/components';
 import Todo from './Todo';
+import { TodoListStyles } from './Styles';
 import { TodoType } from '../../../redux/reducers/todos';
 import { windowHeight, windowWidth } from '../../../utils/constants';
-import { TodoListStyles } from './Styles';
 
 type ListProps = {
   todos: TodoType[];
@@ -25,6 +25,7 @@ const TodoList:FC<ListProps> = ({ todos, listId }): JSX.Element => {
       renderItem={ ({ item }): JSX.Element => renderTodo({ todo: item, listId }) }
     />
   );
+  
 }
 
 const styles = StyleSheet.create<TodoListStyles>({

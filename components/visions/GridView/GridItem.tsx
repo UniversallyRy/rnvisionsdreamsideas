@@ -1,9 +1,9 @@
 import React, { memo } from 'react'
 import { StyleSheet,TouchableOpacity, Image } from 'react-native'
 import { NavigationScreenProp } from 'react-navigation';
+import { ItemStyles } from '../Styles';
 import { VisionType } from '../../../redux/reducers/visions';
 import { windowHeight, windowWidth } from '../../../utils/constants';
-import { ItemStyles } from '../Styles';
 
 type ItemProps = {
     item: VisionType;

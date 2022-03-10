@@ -8,11 +8,13 @@ export type VisionType = {
 }
 
 const initialVisions: VisionType[] = Array.from({ length: 8 }).map((_, i) => {
+
   return {
     uri: `https://picsum.photos/200${i}`,
     title: `This is the title ${i + 1}!`,
     id: uuid.generate(),
   };
+  
 });
 
 const visions = createSlice({
@@ -32,5 +34,6 @@ const visions = createSlice({
 });
 
 const { actions, reducer } = visions;
+
 export const { addVision, deleteVision, editVision } = actions;
 export default reducer;

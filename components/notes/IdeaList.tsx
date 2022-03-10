@@ -3,15 +3,16 @@ import { StyleSheet } from 'react-native';
 import { connect, ConnectedProps } from 'react-redux';
 import { Layout, Modal, Card, Text } from '@ui-kitten/components';
 import IdeasModal from './ideasModal';
+import { IdeaListStyles } from './Styles';
 import { IdeaType } from '../../redux/reducers/ideas';
 import { StoreProps } from '../../redux/store';
-import { IdeaListStyles } from './Styles';
 
 type IdeasProps = {
   ideas: IdeaType[];
 }
 
 const IdeaList: FC<IdeasProps> = ({ ideas }): JSX.Element => {
+  
   const [visible, setVisible] = useState(false);
   const ideaCount = Object.keys(ideas).length;
 
@@ -33,6 +34,7 @@ const IdeaList: FC<IdeasProps> = ({ ideas }): JSX.Element => {
         </Layout>
     </Card>
   );
+
 };
 
 const styles = StyleSheet.create<IdeaListStyles>({

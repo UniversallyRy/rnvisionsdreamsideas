@@ -1,7 +1,7 @@
 import { TextStyle, ViewStyle } from 'react-native';
 
 export interface HomeStyles {
-  container: ViewStyle;
+    container: ViewStyle;
 }
 
 export interface HeaderStyles {

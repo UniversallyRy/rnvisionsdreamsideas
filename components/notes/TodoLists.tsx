@@ -10,6 +10,7 @@ type ContentProps = {
 }
 
 const TodoLists: FC<ContentProps> = ({ todosLists }): JSX.Element => {
+
   const renderTodoLists = (list: TodoListType): JSX.Element => <TodoList list={list} />;
 
   return (
@@ -22,13 +23,15 @@ const TodoLists: FC<ContentProps> = ({ todosLists }): JSX.Element => {
       keyboardShouldPersistTaps='always'
     />
   );
+
 };
 
 
 const mapStateToProps = (state: StoreProps) => {
   const { todosLists } = state;
+
   return { todosLists };
 };
 
-export type PropsFromRedux = ConnectedProps<typeof TodoLists>
+export type PropsFromRedux = ConnectedProps<typeof TodoLists>;
 export default connect(mapStateToProps)(TodoLists);

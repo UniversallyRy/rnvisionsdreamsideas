@@ -1,8 +1,8 @@
 import { TextStyle, ViewStyle } from 'react-native';
 
 export interface HomeStyles {
-    container: ViewStyle;
-    lists: ViewStyle;
+  container: ViewStyle;
+  lists: ViewStyle;
 }
 
 export interface ListStyles {
@@ -15,30 +15,30 @@ export interface ListStyles {
 }
 
 export interface IdeaListStyles {
-    listContainer: ViewStyle;
-    listTitle: TextStyle;
-    listContent: TextStyle;
-    listCount: TextStyle;
-    listText: TextStyle;
+  listContainer: ViewStyle;
+  listTitle: TextStyle;
+  listContent: TextStyle;
+  listCount: TextStyle;
+  listText: TextStyle;
   }
 
 export interface NewTodoStyles {
-    container: ViewStyle;
-    close: ViewStyle;
-    form: ViewStyle;
-    title: TextStyle;
-    input: TextStyle;
-    errorText: TextStyle;
-    colorContainer: ViewStyle;
-    colorSelect: ViewStyle;
+  container: ViewStyle;
+  close: ViewStyle;
+  form: ViewStyle;
+  title: TextStyle;
+  input: TextStyle;
+  errorText: TextStyle;
+  colorContainer: ViewStyle;
+  colorSelect: ViewStyle;
 }
 
 export interface NewIdeaStyles {
-    container: ViewStyle;
-    close: ViewStyle;
-    form: ViewStyle;
-    title: TextStyle;
-    input: TextStyle;
-    errorText: TextStyle;
-    colorSelect: ViewStyle;
+  container: ViewStyle;
+  close: ViewStyle;
+  form: ViewStyle;
+  title: TextStyle;
+  input: TextStyle;
+  errorText: TextStyle;
+  colorSelect: ViewStyle;
 }

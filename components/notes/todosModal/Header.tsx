@@ -1,9 +1,9 @@
 import React, { FC, useEffect } from 'react'
 import { StyleSheet } from 'react-native';
 import { Layout, Text } from '@ui-kitten/components'
+import { HeaderStyles } from './Styles';
 import { CloseButton } from '../../../shared/buttons'
 import { TodoListType } from '../../../redux/reducers/todos';
-import { HeaderStyles } from './Styles';
 
 type HeaderProps = {
   list: TodoListType;
@@ -11,6 +11,7 @@ type HeaderProps = {
 }
 
 const Header: FC<HeaderProps> = ({ list, closeModal }): JSX.Element => {
+
   const { name, todos, color, completedCount } = list;
   const taskCount = todos.length;
   
@@ -42,6 +43,7 @@ const Header: FC<HeaderProps> = ({ list, closeModal }): JSX.Element => {
       </Layout>
     </>
   );
+  
 };
   
 const styles = StyleSheet.create<HeaderStyles>({

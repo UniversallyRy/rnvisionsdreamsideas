@@ -37,6 +37,7 @@ const GridView: FC<GridProps> = ({ visions, navigation }): JSX.Element => {
       />
     </Layout>
   );
+
 };
 
 const styles = StyleSheet.create<GridStyles>({
@@ -47,6 +48,7 @@ const styles = StyleSheet.create<GridStyles>({
 
 const mapStateToProps = (state:StoreProps) => {
   const { visions } = state;
+  
   return { visions };
 };
 

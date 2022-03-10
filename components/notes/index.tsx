@@ -5,10 +5,11 @@ import IdeaList from './IdeaList';
 import NewIdea from './NewIdea';
 import TodoLists from './TodoLists';
 import NewTodoList from './NewTodoList';
-import { FooterButtons } from '../../shared/buttons';
 import { HomeStyles } from './Styles';
+import { FooterButtons } from '../../shared/buttons';
 
 const NotesContent = (): JSX.Element => {
+
   const [ideaModal, setIdeaModal] = useState(false);
   const [todoModal, setTodoModal] = useState(false);
 
@@ -35,6 +36,7 @@ const NotesContent = (): JSX.Element => {
       <FooterButtons left={ setIdeaModal } right={ setTodoModal } />
     </Layout>
   );
+  
 };
 
 const styles = StyleSheet.create<HomeStyles>({

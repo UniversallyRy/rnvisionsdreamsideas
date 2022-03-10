@@ -1,10 +1,10 @@
 import React, { FC } from 'react';
 import { StyleSheet } from 'react-native';
 import { ListItem, CheckBox, Text } from '@ui-kitten/components';
+import { TodoStyles } from './Styles';
 import { TodoType, toggleTodo, deleteTodo } from '../../../redux/reducers/todos';
 import { CloseButton } from '../../../shared/buttons';
 import { useAppDispatch } from '../../../utils/hooks';
-import { TodoStyles } from './Styles';
 
 type SingleTodo = {
   item: TodoType; 
@@ -12,8 +12,9 @@ type SingleTodo = {
 }  
 
 const Todo:FC<SingleTodo> = ({ item, listId }): JSX.Element => {
-  const { inputValue, inputId, completed } = item;
+
   const dispatch = useAppDispatch()
+  const { inputValue, inputId, completed } = item;
 
   return (
     <ListItem style={ styles.container } >
@@ -38,6 +39,7 @@ const Todo:FC<SingleTodo> = ({ item, listId }): JSX.Element => {
       />
     </ListItem>
   );
+
 }
 
 const styles = StyleSheet.create<TodoStyles>({

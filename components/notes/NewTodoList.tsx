@@ -1,13 +1,13 @@
 import React, { FC, useState } from 'react';
 import { StyleSheet } from 'react-native';
-import { Layout, Button, Input, Text } from '@ui-kitten/components';
 import { Formik } from 'formik';
 import * as yup from 'yup';
+import { Layout, Button, Input, Text } from '@ui-kitten/components';
+import { NewTodoStyles } from './Styles';
 import { CloseButton, FormButton }  from '../../shared/buttons';
 import { addList } from '../../redux/reducers/todos';
 import { useAppDispatch } from '../../utils/hooks';
 import { windowHeight, windowWidth } from '../../utils/constants';
-import { NewTodoStyles } from './Styles';
 
 type ModalProps = {
   closeModal: (() => void);
@@ -18,6 +18,7 @@ const listSchema = yup.object({
 });
 // red, slate blue, black, dark gray, blueish gray, teal, tan
 const NewTodoList: FC<ModalProps> = ({ closeModal }): JSX.Element => {
+
   const dispatch = useAppDispatch()
   const bgColors = [
     '#FE1F14',
@@ -90,6 +91,7 @@ const NewTodoList: FC<ModalProps> = ({ closeModal }): JSX.Element => {
         </Layout>
       </Layout>
   );
+  
 };
 
 const styles = StyleSheet.create<NewTodoStyles>({

@@ -8,9 +8,9 @@ export interface IdeaStyles {
 }
 
 export interface ModalStyles {
-    container: ViewStyle;
-    close: ViewStyle;
-    header: ViewStyle;
-    headerText: TextStyle;
-    list:ViewStyle;
+  container: ViewStyle;
+  close: ViewStyle;
+  header: ViewStyle;
+  headerText: TextStyle;
+  list:ViewStyle;
 }

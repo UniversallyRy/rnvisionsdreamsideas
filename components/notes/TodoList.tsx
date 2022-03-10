@@ -2,21 +2,22 @@ import React, { FC, useState, useEffect } from 'react';
 import { StyleSheet } from 'react-native';
 import { Card, Layout, Modal, Text } from '@ui-kitten/components';
 import TodosModal from './todosModal';
+import { ListStyles } from './Styles';
 import { CloseButton } from '../../shared/buttons';
 import { useAppDispatch } from '../../utils/hooks';
 import { deleteList, setCompleted, TodoListType } from '../../redux/reducers/todos';
-import { ListStyles } from './Styles';
 
 type ListProps = {
   list: TodoListType;
 }
 
 const TodoList: FC<ListProps>= ({ list }): JSX.Element => {
+
+  const dispatch = useAppDispatch();
   const { todos, name, id, color, completedCount } = list;
+  const [visible, setVisible] = useState(false);
   const [complete, changeCompleted] = useState(completedCount);
   const remaining = Object.keys(todos).length - complete;
-  const [visible, setVisible] = useState(false);
-  const dispatch = useAppDispatch();
 
   const toggleListModal = (): void => {
     setVisible(!visible);
@@ -26,7 +27,6 @@ const TodoList: FC<ListProps>= ({ list }): JSX.Element => {
       setCompleted({ count: complete, listId: id });
       changeCompleted(completedCount);
   }, [completedCount]);
-    
 
   return (
     <Layout style={ styles.listContainer }>
@@ -52,6 +52,7 @@ const TodoList: FC<ListProps>= ({ list }): JSX.Element => {
       </CloseButton>
     </Layout>
   );
+  
 };
 
 const styles = StyleSheet.create<ListStyles>({

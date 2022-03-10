@@ -2,10 +2,10 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { configureStore } from '@reduxjs/toolkit'
 // import { persistStore, persistReducer } from "redux-persist";
 import visions, { VisionType } from "./reducers/visions";
+import pic from "./reducers/newpic";
 import journals, { JournalListType } from "./reducers/journals";
 import ideas, { IdeaType } from "./reducers/ideas";
 import todosLists, { TodoListType } from "./reducers/todos";
-import pic from "./reducers/newpic";
 
 const persistConfig = {
   // configuration object for redux-persist

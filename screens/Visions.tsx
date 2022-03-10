@@ -2,29 +2,23 @@ import React, { useState, useRef, useEffect } from "react";
 import { Animated, StyleSheet } from "react-native";
 import { NavigationScreenProp } from 'react-navigation';
 import { Layout, Modal } from "@ui-kitten/components";
+import { VisionStyles } from "./Styles";
 import Header from "../shared/header";
 import ListView from "../components/visions/ListView";
 import GridView from "../components/visions/GridView";
 import NewEntry from "../components/visions/NewEntry";
 import { FooterButtons } from "../shared/buttons";
 import { windowHeight, windowWidth } from "../utils/constants";
-import { VisionStyles } from "./Styles";
 // todos: make visions drag and droppable, fix image reslolution/size
 interface VisionProps {
   navigation: NavigationScreenProp<string, object>;
 }
 
 const Visions: React.FC<VisionProps> = ({ navigation }): JSX.Element => {
+
   const scrollX = useRef(new Animated.Value(0)).current;
   const [modalOpen, setModalOpen] = useState(false);
   const [view, setView] = useState(false);
-
-  useEffect(() => {
-    let isCancelled = false;
-
-    if (!isCancelled) {}
-    return () => { isCancelled = true };
-  }, []);
 
   const toggleView = () => {
     setView(!view);
@@ -33,6 +27,13 @@ const Visions: React.FC<VisionProps> = ({ navigation }): JSX.Element => {
   const toggleModal = () => {
     setModalOpen(!modalOpen);
   };
+
+  useEffect(() => {
+    let isCancelled = false;
+
+    if (!isCancelled) {}
+    return () => { isCancelled = true };
+  }, []);
 
   return (
     <Layout style={ styles.container }>

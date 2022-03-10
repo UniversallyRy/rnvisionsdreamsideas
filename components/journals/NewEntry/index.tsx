@@ -1,13 +1,13 @@
 import React, { FC } from 'react';
 import { StyleSheet } from 'react-native';
-import { Layout, Input, Text } from '@ui-kitten/components';
 import { Formik } from 'formik';
 import * as yup from 'yup';
+import { Layout, Input, Text } from '@ui-kitten/components';
+import { ModalStyles } from '../Styles';
 import { SubmitButton } from '../../../shared/buttons';
 import { useAppDispatch } from '../../../utils/hooks';
 import { windowHeight } from '../../../utils/constants';
 import { addJournal } from '../../../redux/reducers/journals';
-import { ModalStyles } from '../Styles';
 
 type ModalProps = {
   setModalOpen: ((i:boolean) => void);
@@ -19,7 +19,9 @@ const JournalSchema = yup.object({
 });
 
 const NewJournalModal: FC<ModalProps> = ({ setModalOpen }): JSX.Element => {
+
   const dispatch = useAppDispatch();
+  
   return (
     <Layout style={ styles.modalContainer }>
       <Formik
@@ -74,6 +76,7 @@ const NewJournalModal: FC<ModalProps> = ({ setModalOpen }): JSX.Element => {
       </Formik>
     </Layout>
   );
+  
 };
 
 const styles = StyleSheet.create<ModalStyles>({

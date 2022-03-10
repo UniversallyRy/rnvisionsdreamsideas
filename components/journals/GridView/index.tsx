@@ -3,10 +3,10 @@ import { StyleSheet } from 'react-native';
 import { connect, ConnectedProps } from 'react-redux';
 import { NavigationScreenProp } from 'react-navigation';
 import { Layout, Card, List, Text } from '@ui-kitten/components';
+import { GridStyles } from '../Styles';
 import { windowHeight, windowWidth } from '../../../utils/constants';
 import { JournalListType } from '../../../redux/reducers/journals';
 import { StoreProps } from '../../../redux/store';
-import { GridStyles } from '../Styles';
 //todos: add draggability
 interface GridProps extends JournalListType {
   navigation: NavigationScreenProp<string, object>;
@@ -69,8 +69,9 @@ const styles = StyleSheet.create<GridStyles>({
 const mapStateToProps = (state:StoreProps)=> {
   const { journals } = state;
   const { month, list } = journals;
+
   return { month, list };
 };
 
-export type PropsFromRedux = ConnectedProps<typeof GridView>
+export type PropsFromRedux = ConnectedProps<typeof GridView>;
 export default connect(mapStateToProps)(GridView);
