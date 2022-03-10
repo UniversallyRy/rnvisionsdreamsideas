@@ -1,10 +1,10 @@
 import React, { useContext } from "react";
 import { StyleSheet } from "react-native";
 import { NavigationScreenProp } from 'react-navigation';
-import { Layout, Divider, TopNavigation } from "@ui-kitten/components";
-import { ThemesContext } from './../ThemeContext';
-import { BackAction, ToggleButton } from "./buttons";
+import { Layout, TopNavigation, Divider } from "@ui-kitten/components";
+import { ToggleButton, BackAction } from "./buttons";
 import { HeaderStyles } from "./Styles";
+import { ThemesContext } from './../ThemeContext';
 
 export type HeaderProps = {
   name: string
@@ -34,6 +34,7 @@ const Header:React.FC<HeaderProps> = ({ name, navigation }): JSX.Element => {
       <Divider/>
     </Layout>
   );
+  
 };
 
 const styles = StyleSheet.create<HeaderStyles>({
