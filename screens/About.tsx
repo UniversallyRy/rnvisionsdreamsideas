@@ -2,7 +2,7 @@ import React from "react";
 import { StyleSheet } from "react-native";
 import { Card, Layout, Text } from "@ui-kitten/components";
 import { AboutStyles } from "./Styles";
-
+// style about
 const aboutText: string =
   "This is an ongoing App based on charting any visions or dreams you may have. Notes tab for thoughts and todos.";
 
