@@ -4,7 +4,7 @@ import { Layout } from "@ui-kitten/components";
 import Header from "../shared/header";
 import NoteContent from "../components/notes";
 import { NoteStyles } from "./Styles";
-// todo: draggable
+// todo: draggable item, resort as well
 
 const NoteScreen = () => {
   

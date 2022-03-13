@@ -9,7 +9,7 @@ import GridView from "../components/visions/GridView";
 import NewEntry from "../components/visions/NewEntry";
 import { FooterButtons } from "../shared/buttons";
 import { windowHeight, windowWidth } from "../utils/constants";
-// todos: make visions drag and droppable, fix image reslolution/size
+// todos: make visions drag and droppable, fix image reslolution/size, opacity changes
 interface VisionProps {
   navigation: NavigationScreenProp<string, object>;
 }

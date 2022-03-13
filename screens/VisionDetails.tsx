@@ -5,7 +5,7 @@ import { Layout, Card, Text } from '@ui-kitten/components';
 import { VDetailsStyles } from './Styles';
 import Header from '../shared/header';
 import { windowHeight, windowWidth } from '../utils/constants';
-
+// todos: opacity changes, styling  
 type DetailsProps = {
   navigation: NavigationScreenProp<string, object>;
   route: {
