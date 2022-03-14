@@ -5,7 +5,7 @@ import { Layout, Card, Text, Divider } from '@ui-kitten/components';
 import { JDetailsStyles } from "./Styles";
 import Header from '../shared/header';
 import { windowHeight, windowWidth } from '../utils/constants';
-// more detail options
+// more detail options, edit editing from details.
 export type DetailsProps = {
   route: {
     key: string;
