@@ -6,7 +6,8 @@ import { BottomTabNavigationEventMap } from '@react-navigation/bottom-tabs/lib/t
 import VisionStack from './visionStack';
 import JournalStack from './journalStack';
 import NoteStack from './noteStack';
-// import { AboutStack } from './aboutStack';
+// import { AboutStack } from './aboutStack'
+// add settings icon with connection to about
 
 type NavigationProp = NavigationHelpers<ParamListBase, BottomTabNavigationEventMap>;
 export interface TabProps {
