@@ -30,7 +30,7 @@ const ListView: FC<ListProps> = ({ month, list, navigation }): JSX.Element => (
 const styles = StyleSheet.create<ListStyles>({
   container: {
     alignSelf: 'center',
-  },
+  }
 });
 
 const mapStateToProps = (state: StoreProps) => {
