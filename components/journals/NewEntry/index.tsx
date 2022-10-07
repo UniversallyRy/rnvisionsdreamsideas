@@ -10,7 +10,7 @@ import { windowHeight } from '../../../utils/constants';
 import { addJournal } from '../../../redux/reducers/journals';
 
 type ModalProps = {
-  setModalOpen: ((i:boolean) => void);
+  setModalOpen: ((_i:boolean) => void);
 }
 // schema to force form input values to have a minimum length of 4.
 const JournalSchema = yup.object({
@@ -21,7 +21,7 @@ const JournalSchema = yup.object({
 const NewJournalModal: FC<ModalProps> = ({ setModalOpen }): JSX.Element => {
 
   const dispatch = useAppDispatch();
-  
+
   return (
     <Layout style={ styles.modalContainer }>
       <Formik
@@ -76,7 +76,7 @@ const NewJournalModal: FC<ModalProps> = ({ setModalOpen }): JSX.Element => {
       </Formik>
     </Layout>
   );
-  
+
 };
 
 const styles = StyleSheet.create<ModalStyles>({

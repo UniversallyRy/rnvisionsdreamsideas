@@ -1,5 +1,5 @@
-import React, { useState, useRef, useEffect } from "react";
-import { Animated, StyleSheet } from "react-native";
+import React, { useState, useEffect } from "react";
+import { StyleSheet } from "react-native";
 import { NavigationScreenProp } from 'react-navigation';
 import { Layout, Modal } from "@ui-kitten/components";
 import { VisionStyles } from "./Styles";
@@ -16,7 +16,7 @@ interface VisionProps {
 
 const Visions: React.FC<VisionProps> = ({ navigation }): JSX.Element => {
 
-  const scrollX = useRef(new Animated.Value(0)).current;
+  //const scrollX = useRef(new Animated.Value(0)).current;
   const [modalOpen, setModalOpen] = useState(false);
   const [view, setView] = useState(false);
 
@@ -31,7 +31,7 @@ const Visions: React.FC<VisionProps> = ({ navigation }): JSX.Element => {
   useEffect(() => {
     let isCancelled = false;
 
-    if (!isCancelled) {}
+    if (!isCancelled) return
     return () => { isCancelled = true };
   }, []);
 
@@ -40,10 +40,10 @@ const Visions: React.FC<VisionProps> = ({ navigation }): JSX.Element => {
 
       <Header name={ "Visions" } />
       <Modal visible={ modalOpen }>
-        <NewEntry setModalOpen={ toggleModal } />  
+        <NewEntry setModalOpen={ toggleModal } />
       </Modal>
       {/* when gridview is toggled use gridContainer otherwise VisionsContainer */}
-      
+
       {view ? (
         <GridView navigation={ navigation } />
       ) : (

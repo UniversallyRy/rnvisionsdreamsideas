@@ -34,7 +34,7 @@ const ImagePic = (): JSX.Element => {
     }else {
       return undefined;
     }
-    
+
   };
 
   const cameraImage = async (): Promise<void> => {

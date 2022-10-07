@@ -52,7 +52,7 @@ const TodoList: FC<ListProps>= ({ list }): JSX.Element => {
       </CloseButton>
     </Layout>
   );
-  
+
 };
 
 const styles = StyleSheet.create<ListStyles>({

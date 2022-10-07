@@ -1,7 +1,7 @@
 import React, { FC } from 'react'
 import { Keyboard, StyleSheet } from 'react-native';
 import { Formik } from 'formik';
-import * as yup from 'yup'; 
+import * as yup from 'yup';
 import { Layout, Input, Text } from '@ui-kitten/components';
 import { InputStyles } from './Styles';
 import { SubmitButton } from '../../../shared/buttons';
@@ -16,7 +16,7 @@ type InputProps = {
 const todoSchema = yup.object({
     title: yup.string().required().min(4),
 });
-  
+
 const InputTodo: FC<InputProps> = ({ listId }): JSX.Element => {
 
   const dispatch = useAppDispatch();
@@ -95,5 +95,5 @@ const styles = StyleSheet.create<InputStyles>({
     marginLeft: 10,
   },
 });
-  
+
 export default InputTodo;

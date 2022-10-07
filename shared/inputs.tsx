@@ -8,10 +8,17 @@ import { useAppDispatch } from '../utils/hooks';
 import { windowWidth } from '../utils/constants';
 import { IdeaType } from '../redux/reducers/ideas';
 import { TodoType } from '../redux/reducers/todos';
+import { AnyAction } from 'redux';
 
 interface FooterProps extends IdeaType, TodoType{}
 
-export const FooterInput = ({ inputName, reducerFunc, inputSchema }): JSX.Element => {
+type InputProps = {
+  inputName: string;
+  reducerFunc: (_values: FooterProps ) => AnyAction;
+  inputSchema: string;
+}
+
+export const FooterInput = ({ inputName, reducerFunc, inputSchema }: InputProps): JSX.Element => {
 
   const dispatch = useAppDispatch();
 
@@ -55,9 +62,9 @@ export const FooterInput = ({ inputName, reducerFunc, inputSchema }): JSX.Elemen
             </SubmitButton>
           </Layout>
         )}
-    </Formik>  
+    </Formik>
   );
-  
+
 };
 
 const styles = StyleSheet.create<InputStyles>({
@@ -84,4 +91,3 @@ const styles = StyleSheet.create<InputStyles>({
     marginTop: 6,
   },
 });
-  

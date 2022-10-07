@@ -5,7 +5,7 @@
     "esModuleInterop": true,
     "skipLibCheck": false,
     "isolatedModules": true,
-    "module": "commonjs",
+    "module": "es6",
     "lib": [
       "esnext",
       "dom"

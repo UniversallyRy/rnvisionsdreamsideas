@@ -30,7 +30,7 @@ const renderThumbnail:FC<ThumbnailProps> = ({ item, index }): JSX.Element => {
         style={{
           borderColor: activeIndex === index ? '#fff' : 'transparent',
           ...styles.thumbImg
-        }} 
+        }}
       />
     </TouchableOpacity>
   );
@@ -45,7 +45,7 @@ const renderThumbnail:FC<ThumbnailProps> = ({ item, index }): JSX.Element => {
       <CloseButton onPress={ (): { payload: VisionType; type: string; } => dispatch(deleteVision(item)) }/>
     </Tooltip>
   );
-  
+
 };
 
 const styles = StyleSheet.create<ThumbStyles>({
@@ -57,5 +57,5 @@ const styles = StyleSheet.create<ThumbStyles>({
     borderWidth: 1,
   },
 });
-  
+
 export default renderThumbnail;

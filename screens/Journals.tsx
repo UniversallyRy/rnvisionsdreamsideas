@@ -28,7 +28,7 @@ const JournalScreen: React.FC<ScreenProps>= ({ navigation }): JSX.Element => {
     <Layout style={ styles.screen }>
       <Header name='Journals' />
       <MonthSelect />
-      
+
       <Modal
         style={{ backgroundColor: 'white', ...styles.screen }}
         visible={ modalOpen }
@@ -43,7 +43,7 @@ const JournalScreen: React.FC<ScreenProps>= ({ navigation }): JSX.Element => {
         />
 
       </Modal>
-      
+
       {view ? (
         <GridView navigation={ navigation } />
       ) : (
@@ -70,9 +70,9 @@ const styles = StyleSheet.create<JournalStyles>({
     borderRadius: 2,
   },
   close: {
-    position: 'absolute', 
-    left: windowWidth * 0.45, 
-    bottom: 0 
+    position: 'absolute',
+    left: windowWidth * 0.45,
+    bottom: 0
   },
 });
 

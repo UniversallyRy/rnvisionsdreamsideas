@@ -22,14 +22,16 @@ const GridItem = memo(({ item, navigation }: ItemProps): JSX.Element => (
         style={ styles.img }
         source={{ uri: item.uri }}
         testID={ item.id }
-        resizeMode={ 'cover' } 
+        resizeMode={ 'cover' }
       />
     </TouchableOpacity>
 ));
 
+GridItem.displayName = 'GridItem';
+
 const styles = StyleSheet.create<ItemStyles>({
     gridItem: {
-        margin: 4, 
+        margin: 4,
         elevation: 2,
     },
     img: {

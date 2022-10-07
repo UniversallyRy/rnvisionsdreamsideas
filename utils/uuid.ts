@@ -3,6 +3,6 @@ class uuid {
     generate(): string {
         return uuidv4();
     }
-};
+}
 
-export default new uuid();  
+export default new uuid();

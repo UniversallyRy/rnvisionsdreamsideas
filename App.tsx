@@ -11,7 +11,7 @@ import * as eva from '@eva-design/eva';
 import { ThemesContext } from "./ThemeContext";
 import BottomTabs from "./routes/drawer";
 import { store, /*persistor */ } from "./redux/store";
-import { default as customTheme } from './styles/custom-theme.json'; 
+import { default as customTheme } from './styles/custom-theme.json';
 // import { PersistGate } from "redux-persist/integration/react";
 
 const getFonts = (): Promise<void> => {
@@ -32,7 +32,7 @@ const App = (): JSX.Element => {
 
   const toggleTheme = (): void => {
     const nextTheme = theme === 'light' ? 'dark' : 'light';
-    nextTheme === 'light' ? setEvaTheme(eva.light) : setEvaTheme(eva.dark);  
+    nextTheme === 'light' ? setEvaTheme(eva.light) : setEvaTheme(eva.dark);
     setTheme(nextTheme);
   };
 
@@ -57,7 +57,7 @@ const App = (): JSX.Element => {
         onFinish={(): void => {
           setFontsLoaded(true);
           // setPersistLoaded(false);
-        }}  
+        }}
         onError={ console.warn }
       />
     );

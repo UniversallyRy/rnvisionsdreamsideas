@@ -7,9 +7,9 @@ import { CloseButton } from '../../../shared/buttons';
 import { useAppDispatch } from '../../../utils/hooks';
 
 type SingleTodo = {
-  item: TodoType; 
-  listId: string;   
-}  
+  item: TodoType;
+  listId: string;
+}
 
 const Todo:FC<SingleTodo> = ({ item, listId }): JSX.Element => {
 

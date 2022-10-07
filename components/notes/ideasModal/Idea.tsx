@@ -22,7 +22,7 @@ const Idea: FC<IdeaType> = ({ inputValue, inputId }): JSX.Element => {
       </View>
     </Card>
   );
-  
+
 };
 
 const styles = StyleSheet.create<IdeaStyles>({
@@ -43,5 +43,5 @@ const styles = StyleSheet.create<IdeaStyles>({
     marginLeft: 'auto',
   },
 });
-  
+
 export default Idea;

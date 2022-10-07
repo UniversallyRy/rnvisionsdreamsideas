@@ -15,7 +15,7 @@ import { StoreProps } from '../../../redux/store';
 
 type ModalProps = {
   picInput: string;
-  setModalOpen: Dispatch<SetStateAction<boolean>>; 
+  setModalOpen: Dispatch<SetStateAction<boolean>>;
 }
 
 const pictureSchema = yup.object({
@@ -28,7 +28,7 @@ const NewEntry: FC<ModalProps> = ({ picInput, setModalOpen }): JSX.Element => {
 
   return (
     <Layout>
-      <Animated.View 
+      <Animated.View
       //   style={{
       //     transform: [
       //       {
@@ -40,12 +40,12 @@ const NewEntry: FC<ModalProps> = ({ picInput, setModalOpen }): JSX.Element => {
       //       },
       //     ],
       //   }}
-      // 
+      //
       style={ styles.container }
-      > 
-        <CloseButton 
-          style={ styles.close } 
-          onPress={ (): void => setModalOpen(false) } 
+      >
+        <CloseButton
+          style={ styles.close }
+          onPress={ (): void => setModalOpen(false) }
         />
         <Formik
           enableReinitialize={ true }
@@ -65,7 +65,7 @@ const NewEntry: FC<ModalProps> = ({ picInput, setModalOpen }): JSX.Element => {
             errors,
             handleSubmit,
           }): JSX.Element => (
-            <Layout style={ styles.footer }> 
+            <Layout style={ styles.footer }>
               <ImagePicker />
               <Input
                 textAlign='center'
@@ -88,14 +88,14 @@ const NewEntry: FC<ModalProps> = ({ picInput, setModalOpen }): JSX.Element => {
       </Animated.View>
     </Layout>
   );
-  
+
 };
 
 const styles = StyleSheet.create<ModalStyles>({
   close: {
-    position: 'absolute', 
-    top: 40, 
-    right: 32, 
+    position: 'absolute',
+    top: 40,
+    right: 32,
     zIndex: 10
   },
   container: {

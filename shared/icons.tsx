@@ -27,7 +27,7 @@ export const FavIcon = (props: ReactNode): JSX.Element => (
 
 export const DeleteIcon = (props: ReactNode): JSX.Element => (
     <Icon { ...props } name='trash-outline'/>
-);  
+);
 // Tab Bar Icons
 export const DayIcon = (props: ReactNode): JSX.Element => (
     <Icon { ...props } name='sun' />
@@ -36,7 +36,7 @@ export const DayIcon = (props: ReactNode): JSX.Element => (
 export const NightIcon = (props: ReactNode): JSX.Element => (
     <Icon { ...props } name='moon' />
 );
-  
+
 export const BackIcon = (props: ReactNode): JSX.Element => (
     <Icon { ...props } name='arrow-back' />
 );

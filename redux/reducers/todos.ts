@@ -162,15 +162,15 @@ const todosLists = createSlice( {
 
 const { actions, reducer } = todosLists;
 
-export const { 
-  addList, 
-  setCompleted, 
-  decreaseCompleted, 
-  deleteList, 
-  addTodo, 
-  editTodo, 
-  toggleTodo, 
-  deleteTodo 
+export const {
+  addList,
+  setCompleted,
+  decreaseCompleted,
+  deleteList,
+  addTodo,
+  editTodo,
+  toggleTodo,
+  deleteTodo
 } = actions;
 
 export default reducer;

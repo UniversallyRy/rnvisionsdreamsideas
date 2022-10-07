@@ -25,10 +25,10 @@ const ListItem: FC<ItemProps> = ({ item,  navigation }): JSX.Element => {
   };
 
   return (
-    <Card 
+    <Card
       style={ styles.container }
-      onPress={ () => navigation.navigate('Journal Details', { title, body, date })} 
-      accessibilityLabel='Card containing single Journal Entry' 
+      onPress={ () => navigation.navigate('Journal Details', { title, body, date })}
+      accessibilityLabel='Card containing single Journal Entry'
     >
       <Layout style={ styles.textContainer }>
         {isEditing
@@ -55,13 +55,13 @@ const ListItem: FC<ItemProps> = ({ item,  navigation }): JSX.Element => {
         }
         <Divider />
       </Layout>
-      {isEditing 
+      {isEditing
         ? null
         :<Text style={ styles.textDate }>
           { date }
         </Text>
       }
-        {isEditing 
+        {isEditing
           ?<ButtonGroup>
             <SaveButton onPress={ () => saveHandler(id) }/>
             <CancelButton onPress={ () => dispatch(editJournalToggle({ id })) }/>

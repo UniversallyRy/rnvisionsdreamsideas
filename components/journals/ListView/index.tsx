@@ -23,7 +23,7 @@ const ListView: FC<ListProps> = ({ month, list, navigation }): JSX.Element => (
         return null;
       }
       return <ListItem navigation={ navigation } item={ item } />;
-    }} 
+    }}
   />
 );
 
@@ -36,7 +36,7 @@ const styles = StyleSheet.create<ListStyles>({
 const mapStateToProps = (state: StoreProps) => {
   const { journals } = state
   const { month, list } = journals;
-  
+
   return { month, list };
 };
 

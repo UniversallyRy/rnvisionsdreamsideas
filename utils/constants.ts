@@ -27,5 +27,3 @@ export const MONTHS = [
   'Nov',
   'Dec'
 ];
-
-

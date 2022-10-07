@@ -1,5 +1,5 @@
-import React, { FC } from 'react';
-import { StyleSheet } from 'react-native';
+import React, { FC, ReactElement } from 'react';
+import { StyleProp, StyleSheet, TextProps, TextStyle } from 'react-native';
 import { NavigationScreenProp } from 'react-navigation';
 import { Layout, Card, Text, Divider } from '@ui-kitten/components';
 import { JDetailsStyles } from "./Styles";
@@ -12,7 +12,7 @@ export type DetailsProps = {
     name: string;
     params: {
       title: string;
-      body: string;
+      body: string
       date: string;
     },
     path: undefined;
@@ -20,11 +20,16 @@ export type DetailsProps = {
   navigation: NavigationScreenProp<string, object>;
 }
 
+export interface TexProps extends TextProps {
+  child: string;
+  style:StyleProp<TextStyle>;
+}
+
 const JournalDetails: FC<DetailsProps> = ({ route, navigation }): JSX.Element => {
 
   const { title, body, date } = route.params;
 
-  const Details = ({ child, style }): JSX.Element => (
+  const Details = ({ child, style }: TexProps):ReactElement => (
     <>
       <Divider />
       <Text style={ style }>
@@ -43,7 +48,7 @@ const JournalDetails: FC<DetailsProps> = ({ route, navigation }): JSX.Element =>
       </Card>
     </Layout>
   );
-  
+
 };
 
 const styles = StyleSheet.create<JDetailsStyles>({

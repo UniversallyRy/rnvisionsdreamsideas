@@ -5,7 +5,7 @@ import { Layout, Card, Text } from '@ui-kitten/components';
 import { VDetailsStyles } from './Styles';
 import Header from '../shared/header';
 import { windowHeight, windowWidth } from '../utils/constants';
-// todos: opacity changes, styling  
+// todos: opacity changes, styling
 type DetailsProps = {
   navigation: NavigationScreenProp<string, object>;
   route: {
@@ -35,12 +35,12 @@ const VisionDetails: FC<DetailsProps> = ({ navigation, route }): JSX.Element => 
       </Card>
     </Layout>
   );
-  
+
 };
 
 const styles = StyleSheet.create<VDetailsStyles>({
   container: {
-    flex: 1,  
+    flex: 1,
     fontFamily: 'roboto-black',
     flexDirection: 'column',
   },

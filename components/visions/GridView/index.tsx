@@ -48,7 +48,7 @@ const styles = StyleSheet.create<GridStyles>({
 
 const mapStateToProps = (state:StoreProps) => {
   const { visions } = state;
-  
+
   return { visions };
 };
 

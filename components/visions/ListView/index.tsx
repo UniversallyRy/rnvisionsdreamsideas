@@ -16,7 +16,7 @@ type ListProps = {
 }
 
 export const IndexContext = createContext({
-  activeIndex: 0, 
+  activeIndex: 0,
   scrollActiveIndex: (_index: number | undefined) => {},
 });
 
@@ -73,7 +73,7 @@ const ListView: FC<ListProps> = ({ visions, navigation }): JSX.Element => {
       </IndexContext.Provider>
     </Layout>
   );
-  
+
 };
 
 const styles = StyleSheet.create<ListStyles>({
@@ -81,7 +81,7 @@ const styles = StyleSheet.create<ListStyles>({
     flex: 1
   },
   imgList: {
-    position: 'absolute', 
+    position: 'absolute',
     bottom: THUMBNAIL_SIZE - 30
   },
 });

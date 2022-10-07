@@ -13,11 +13,11 @@ const MonthSelect = (): JSX.Element => {
   const [selectedIndex, setSelectedIndex] = useState(new IndexPath(0));
   const displayValue = MONTHS[selectedIndex.row];
 
-  const handleItemPress = (index): void => {
+  const handleItemPress = (index: IndexPath): void => {
     setSelectedIndex(index)
   };
 
-  useEffect(() => {    
+  useEffect(() => {
     dispatch(changeMonth(displayValue))
   }, [displayValue]);
 
@@ -37,7 +37,7 @@ const MonthSelect = (): JSX.Element => {
             key={ item }
             title={ item }
             accessoryRight={ CloseIcon }
-            accessibilityLabel={ `Dropdown text for ${ item }` } 
+            accessibilityLabel={ `Dropdown text for ${ item }` }
           />
         ))}
       </Select>
@@ -59,5 +59,5 @@ const styles = StyleSheet.create<MonthStyles>({
     fontSize: 12,
   }
 });
-  
+
 export default MonthSelect;

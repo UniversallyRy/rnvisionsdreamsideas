@@ -1,6 +1,6 @@
 import React from "react";
 import { PURGE } from "redux-persist";
-import { connect } from "react-redux";
+import { connect, ConnectedProps } from "react-redux";
 import { Button } from "@ui-kitten/components";
 
 // Generate <TestComponent /> with a button that will purge the persisted store

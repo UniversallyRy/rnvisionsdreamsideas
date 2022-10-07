@@ -12,7 +12,7 @@ type IdeasProps = {
 }
 
 const IdeaList: FC<IdeasProps> = ({ ideas }): JSX.Element => {
-  
+
   const [visible, setVisible] = useState(false);
   const ideaCount = Object.keys(ideas).length;
 
@@ -50,10 +50,10 @@ const styles = StyleSheet.create<IdeaListStyles>({
     borderRadius: 6,
     elevation: 2,
   },
-  listContent: { 
+  listContent: {
     alignItems: 'center',
-    backgroundColor: 'transparent', 
-    bottom: 0 
+    backgroundColor: 'transparent',
+    bottom: 0
   },
   listTitle: {
     alignSelf: 'center',

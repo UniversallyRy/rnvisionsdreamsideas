@@ -14,7 +14,7 @@ const initialVisions: VisionType[] = Array.from({ length: 8 }).map((_, i) => {
     title: `This is the title ${i + 1}!`,
     id: uuid.generate(),
   };
-  
+
 });
 
 const visions = createSlice({
@@ -28,7 +28,7 @@ const visions = createSlice({
         id: uuid.generate(),
       })
     },
-    editVision: (state, action) => state,
+    editVision: (state, _action) => state,
     deleteVision: (state, action) => state.filter((item) => item.id != action.payload.id)
   }
 });

@@ -5,7 +5,7 @@ import JournalDetails from '../screens/JournalDetails';
 
 export type JournalStackParamList = {
   'Journal Entries': undefined;
-  'Journal Details': { 
+  'Journal Details': {
     title: string;
     body: string;
     date : string;
@@ -30,11 +30,11 @@ export const JournalStack: FC<NavProp> = (): JSX.Element => (
   >
     <Screen
       name='Journal Entries'
-      component={ JournalScreen } 
+      component={ JournalScreen }
     />
     <Screen
       name='Journal Details'
-      component={ JournalDetails } 
+      component={ JournalDetails }
     />
   </Navigator>
 );

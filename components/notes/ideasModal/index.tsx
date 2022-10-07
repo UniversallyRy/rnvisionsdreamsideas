@@ -7,7 +7,7 @@ import { ModalStyles } from './Styles';
 import { CloseButton } from '../../../shared/buttons';
 import { FooterInput } from '../../../shared/inputs';
 import { IdeaType, addIdea } from '../../../redux/reducers/ideas';
-import { useAppDispatch } from '../../../utils/hooks';
+//import { useAppDispatch } from '../../../utils/hooks';
 import { windowHeight, windowWidth } from '../../../utils/constants';
 
 type ModalProps = {
@@ -21,7 +21,7 @@ const ideaSchema = yup.object({
 
 const IdeasModal: FC<ModalProps> = ({ ideas, closeModal }): JSX.Element => {
 
-  const dispatch = useAppDispatch();
+ // const dispatch = useAppDispatch();
   const ideaCount = ideas.length;
 
   const renderIdea = ( item: IdeaType): JSX.Element => {
@@ -46,14 +46,14 @@ const IdeasModal: FC<ModalProps> = ({ ideas, closeModal }): JSX.Element => {
           renderItem={ ({ item }): JSX.Element => renderIdea(item) }
         />
       </Layout>
-      <FooterInput 
-        inputName='Idea' 
-        reducerFunc={ addIdea } 
+      <FooterInput
+        inputName='Idea'
+        reducerFunc={ addIdea }
         inputSchema={ ideaSchema }
       />
     </Layout>
   );
-  
+
 };
 
 const styles = StyleSheet.create<ModalStyles>({
@@ -63,8 +63,8 @@ const styles = StyleSheet.create<ModalStyles>({
     height: windowHeight,
   },
   close: {
-    position: 'absolute', 
-    alignSelf: 'flex-end', 
+    position: 'absolute',
+    alignSelf: 'flex-end',
     zIndex: 1,
   },
   header: {

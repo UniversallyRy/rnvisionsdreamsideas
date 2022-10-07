@@ -13,7 +13,7 @@ export interface ImageStyles {
     container: ViewStyle;
     img: ImageStyle;
 }
-  
+
 export interface ListStyles {
     container: ViewStyle;
     imgList: ViewStyle;
@@ -22,7 +22,7 @@ export interface ListStyles {
 export interface ScreenImgStyles {
     bgImg: ImageStyle;
 }
-  
+
 export interface ModalStyles {
     container: ViewStyle;
     close: ViewStyle;

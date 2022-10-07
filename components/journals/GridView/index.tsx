@@ -38,7 +38,7 @@ const GridView: FC<GridProps> = ({ month, list, navigation }): JSX.Element => (
             </Card>
           );
         }
-      }} 
+      }}
     />
   </Layout>
 );

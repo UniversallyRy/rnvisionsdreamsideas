@@ -25,7 +25,7 @@ const TodoList:FC<ListProps> = ({ todos, listId }): JSX.Element => {
       renderItem={ ({ item }): JSX.Element => renderTodo({ todo: item, listId }) }
     />
   );
-  
+
 }
 
 const styles = StyleSheet.create<TodoListStyles>({

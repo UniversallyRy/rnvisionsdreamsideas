@@ -19,20 +19,20 @@ const TodosModal: FC<TodoModalProps> = ({  list, closeModal }): JSX.Element => {
   // const taskCount = todos.length;
   return (
     <Layout style={ styles.container }>
-      <Header 
-        list={ list } 
+      <Header
+        list={ list }
         closeModal={ closeModal }
       />
-      <TodoList 
-        todos={ todos } 
-        listId={ id } 
+      <TodoList
+        todos={ todos }
+        listId={ id }
       />
       <InputTodo
-        listId={ id } 
-      /> 
+        listId={ id }
+      />
     </Layout>
   );
-  
+
 };
 
 const styles = StyleSheet.create<HomeStyles>({

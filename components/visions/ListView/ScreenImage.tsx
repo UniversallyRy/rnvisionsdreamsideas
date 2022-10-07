@@ -13,10 +13,12 @@ const ScreenImage = memo(({ item }: ItemProps): JSX.Element => (
     <Layout style={ styles.bgImg }>
       <Image
         source={{ uri: item.uri }}
-        style={[StyleSheet.absoluteFill]} 
+        style={[StyleSheet.absoluteFill]}
       />
     </Layout>
 ));
+
+ScreenImage.displayName = "ScreenImage";
 
 export const renderBgImage = useCallback(({ item }: ItemProps): JSX.Element => (
   <ScreenImage item={ item } />
@@ -24,7 +26,7 @@ export const renderBgImage = useCallback(({ item }: ItemProps): JSX.Element => (
 
 const styles = StyleSheet.create<ScreenImgStyles>({
     bgImg:{
-        width: windowWidth, 
+        width: windowWidth,
         height: windowHeight
     },
 })

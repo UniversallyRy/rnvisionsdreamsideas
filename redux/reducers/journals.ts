@@ -57,7 +57,7 @@ const journalsReducer = createSlice({
       })
     },
     deleteJournal: (state, action): void => {
-       state.list = state.list.filter((item) => item.id != action.payload.id); 
+       state.list = state.list.filter((item) => item.id != action.payload.id);
     },
     editJournal: (state, action): void => {
       const index = state.list.findIndex(item => item.id === action.payload.id);

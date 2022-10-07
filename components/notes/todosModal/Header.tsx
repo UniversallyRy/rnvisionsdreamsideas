@@ -14,7 +14,7 @@ const Header: FC<HeaderProps> = ({ list, closeModal }): JSX.Element => {
 
   const { name, todos, color, completedCount } = list;
   const taskCount = todos.length;
-  
+
   useEffect(() => {
     const init = () => {
       return null;
@@ -23,7 +23,7 @@ const Header: FC<HeaderProps> = ({ list, closeModal }): JSX.Element => {
       init();
     }
   }, [completedCount]);
-  
+
   return (
     <>
       <CloseButton
@@ -43,15 +43,15 @@ const Header: FC<HeaderProps> = ({ list, closeModal }): JSX.Element => {
       </Layout>
     </>
   );
-  
+
 };
-  
+
 const styles = StyleSheet.create<HeaderStyles>({
   close: {
-    position: 'absolute', 
-    zIndex: 1, 
-    top: 0, 
-    right: 1, 
+    position: 'absolute',
+    zIndex: 1,
+    top: 0,
+    right: 1,
   },
   header: {
     justifyContent: 'flex-end',

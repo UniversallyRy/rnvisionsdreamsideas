@@ -15,7 +15,7 @@ const TodoLists: FC<ContentProps> = ({ todosLists }): JSX.Element => {
 
   return (
     <List
-      keyExtractor={ (_, index): string => index.toString() }  
+      keyExtractor={ (_, index): string => index.toString() }
       data={ todosLists }
       horizontal={ true }
       showsHorizontalScrollIndicator={ false }

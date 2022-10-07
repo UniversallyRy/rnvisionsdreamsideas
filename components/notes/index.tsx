@@ -36,7 +36,7 @@ const NotesContent = (): JSX.Element => {
       <FooterButtons left={ setIdeaModal } right={ setTodoModal } />
     </Layout>
   );
-  
+
 };
 
 const styles = StyleSheet.create<HomeStyles>({

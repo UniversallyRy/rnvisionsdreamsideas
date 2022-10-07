@@ -24,20 +24,20 @@ const persistConfig = {
 // );
 
 export type StoreProps = {
-  visions: VisionType[], 
-  journals: JournalListType, 
+  visions: VisionType[],
+  journals: JournalListType,
   ideas: IdeaType[],
-  todosLists: TodoListType[], 
-  pic: '', 
+  todosLists: TodoListType[],
+  pic: '',
 }
 
 const store = configureStore({
-  reducer: { 
-    visions: visions, 
-    journals: journals, 
-    ideas: ideas, 
-    todosLists: todosLists, 
-    pic: pic, 
+  reducer: {
+    visions: visions,
+    journals: journals,
+    ideas: ideas,
+    todosLists: todosLists,
+    pic: pic,
   }
 });
 

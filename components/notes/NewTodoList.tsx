@@ -35,7 +35,7 @@ const NewTodoList: FC<ModalProps> = ({ closeModal }): JSX.Element => {
     <Button
       key={ color }
       style={ [styles.colorSelect, { backgroundColor: color }] }
-      onPress={ (): void => setColor(color) } 
+      onPress={ (): void => setColor(color) }
     />
   ));
 
@@ -70,7 +70,7 @@ const NewTodoList: FC<ModalProps> = ({ closeModal }): JSX.Element => {
                 <Input
                   textAlign='center'
                   enablesReturnKeyAutomatically={ true }
-                  autoCorrect={ true } 
+                  autoCorrect={ true }
                   style={ styles.input }
                   placeholder='Enter A New List . . .'
                   onChangeText={ handleChange('name') }
@@ -91,7 +91,7 @@ const NewTodoList: FC<ModalProps> = ({ closeModal }): JSX.Element => {
         </Layout>
       </Layout>
   );
-  
+
 };
 
 const styles = StyleSheet.create<NewTodoStyles>({
@@ -103,12 +103,12 @@ const styles = StyleSheet.create<NewTodoStyles>({
     alignItems: 'center',
   },
   close: {
-    position: 'absolute', 
-    top: 64, 
+    position: 'absolute',
+    top: 64,
     right: 32
   },
   form: {
-    alignSelf: 'stretch', 
+    alignSelf: 'stretch',
     marginHorizontal: 32
   },
   title: {

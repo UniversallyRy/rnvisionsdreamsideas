@@ -6,16 +6,16 @@ export const useAppDispatch = () => useDispatch<AppDispatch>();
 
 export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector;
 
-export const filtered = ({ obj, predicate }: { obj: object; predicate: (obj: PropertyKey) => boolean; }): {} => {
+export const filtered = ({ obj, predicate }: { obj: object; predicate: (_obj: PropertyKey) => boolean; }): {} => {
 
   let result = {}, key: PropertyKey;
-    
+
   for (key in obj) {
-    if (obj.hasOwnProperty(key) && !predicate(obj[key])) {
+    if (Object.prototype.hasOwnProperty.call(obj, key) && !predicate(obj[key])) {
       result[key] = obj[key];
     }
   }
 
   return result;
-  
+
 };

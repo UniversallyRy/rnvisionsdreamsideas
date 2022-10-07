@@ -1,5 +1,5 @@
 import React from "react";
-import { GestureResponderEvent, StyleProp, StyleSheet, ViewStyle } from "react-native";
+import { StyleProp, StyleSheet, ViewStyle } from "react-native";
 import { Layout, Button, ButtonGroup, Text, TopNavigationAction } from "@ui-kitten/components"
 import { BackIcon, CloseIcon, DayIcon, FavIcon, GridIcon, NightIcon, SaveIcon, SubmitIcon } from "./icons";
 import { windowWidth } from "../utils/constants";
@@ -9,18 +9,18 @@ type ButtonProps = {
   text?: string;
   style?: StyleProp<ViewStyle>;
   accessibilityLabel?: string;
-  onPress: (event?: GestureResponderEvent | undefined) => void;
+  onPress(): void;
 }
 
 type FormProps = {
   text?: string;
   color: string;
-  onPress: () => void
+  onPress(): void;
 }
 
 type ToggleProps = {
   theme: string;
-  toggleTheme: (event?: GestureResponderEvent | undefined) => void;
+  toggleTheme(): void;
 }
 
 // default export kittenui styled button
@@ -39,7 +39,7 @@ export const CloseButton:React.FC<ButtonProps>= ({ onPress, ...props }:ButtonPro
     appearance='ghost'
     accessoryRight={ CloseIcon }
     onPress={ onPress }
-    { ...props } 
+    { ...props }
   />
 );
 
@@ -49,7 +49,7 @@ export const ToggleButton = ({ theme, toggleTheme, ...props } : ToggleProps): JS
     style={ styles.toggle }
     accessoryRight={ theme == "light" ? DayIcon : NightIcon }
     onPress={ toggleTheme }
-    { ...props } 
+    { ...props }
   />
 );
 
@@ -57,7 +57,7 @@ export const BackAction = (navigateBack: () => void): JSX.Element => (
   <TopNavigationAction icon={ BackIcon } onPress={ () => navigateBack() }/>
 );
 // Vision Modal Buttons
-export const ImageButtons = ({ pickImage, cameraImage, ...props }): JSX.Element => (
+export const ImageButtons = ({ pickImage, cameraImage, ...props }: {pickImage: () => void, cameraImage: () => void}): JSX.Element => (
   <ButtonGroup { ...props }>
     <Button
       style={ styles.imgSelect }
@@ -76,18 +76,18 @@ export const ImageButtons = ({ pickImage, cameraImage, ...props }): JSX.Element 
   </ButtonGroup>
 );
 // Journal Buttons
-export const SaveButton = ({ onPress, ...props }): JSX.Element => (
+export const SaveButton = ({ onPress, ...props } :ButtonProps): JSX.Element => (
   <Button
     style={ styles.edit }
     onPress={ onPress }
-    accessoryRight={ SaveIcon } 
+    accessoryRight={ SaveIcon }
     { ...props }
   >
     Save
   </Button>
 );
 
-export const CancelButton = ({ onPress, ...props }): JSX.Element => (
+export const CancelButton = ({ onPress, ...props } :ButtonProps): JSX.Element => (
   <Button
     style={ styles.delete }
     onPress={ onPress }
@@ -97,7 +97,7 @@ export const CancelButton = ({ onPress, ...props }): JSX.Element => (
   </Button>
 );
 
-export const EditButton = ({ onPress, ...props }): JSX.Element => (
+export const EditButton = ({ onPress, ...props } :ButtonProps): JSX.Element => (
   <Button
     style={ styles.edit }
     onPress={ onPress }
@@ -107,15 +107,15 @@ export const EditButton = ({ onPress, ...props }): JSX.Element => (
   </Button>
 );
 
-export const FavButton = ({ onPress, ...props }): JSX.Element => (
+export const FavButton = ({ onPress, ...props } :ButtonProps): JSX.Element => (
   <Button
-    accessoryRight={ FavIcon } 
+    accessoryRight={ FavIcon }
     onPress={ onPress }
     { ...props }
   />
 );
 
-export const DeleteButton = ({ onPress, ...props }): JSX.Element => (
+export const DeleteButton = ({ onPress, ...props } :ButtonProps): JSX.Element => (
   <Button
     style={ styles.delete }
     onPress={ onPress }
@@ -125,26 +125,26 @@ export const DeleteButton = ({ onPress, ...props }): JSX.Element => (
   </Button>
 );
 // Footer Buttons
-export const SubmitButton = ({ onPress, ...props }): JSX.Element => (
+export const SubmitButton = ({ onPress, ...props } :any): JSX.Element => (
   <Button
     style={ styles.submit }
     appearance='ghost'
-    accessoryLeft={ SubmitIcon } 
+    accessoryLeft={ SubmitIcon }
     onPress={ onPress }
-    { ...props } 
+    { ...props }
   />
 );
 
-export const GridButton = ({ onPress, ...props }): JSX.Element => (
+export const GridButton = ({ onPress, ...props } :ButtonProps): JSX.Element => (
   <Button
     appearance='ghost'
     accessoryLeft={ GridIcon }
     onPress={ onPress }
-    { ...props } 
+    { ...props }
   />
 );
 
-export const FooterButtons = ({ left, right }): JSX.Element => (
+export const FooterButtons = ({ left, right }:any): JSX.Element => (
   <Layout style={ styles.footerContainer }>
     {/*  if adjustable view, right button is a grid toggle */}
     {right.name === 'toggleView'
@@ -199,7 +199,7 @@ const styles = StyleSheet.create<ButtonStyles>({
   },
   toggle: {
     alignItems: "center",
-    margin: 4 
+    margin: 4
   },
   footerContainer: {
     flexDirection: "row",

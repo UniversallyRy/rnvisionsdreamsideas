@@ -62,7 +62,7 @@ const IdeaModal: FC<ModalProps> = ({ closeModal }): JSX.Element => {
                 <Text style={ styles.errorText }>
                   { touched.inputValue && errors.inputValue || '' }
                 </Text>
-                <FormButton 
+                <FormButton
                   onPress={ handleSubmit }
                   text='Add Idea'
                   color='green'
@@ -73,7 +73,7 @@ const IdeaModal: FC<ModalProps> = ({ closeModal }): JSX.Element => {
         </Layout>
       </Layout>
   );
-  
+
 };
 
 const styles = StyleSheet.create<NewIdeaStyles>({
@@ -86,11 +86,11 @@ const styles = StyleSheet.create<NewIdeaStyles>({
   },
   close: {
     position: 'absolute',
-    top: 64, 
-    right: 32, 
+    top: 64,
+    right: 32,
   },
   form: {
-    alignSelf: 'stretch', 
+    alignSelf: 'stretch',
     marginHorizontal: 32,
   },
   title: {

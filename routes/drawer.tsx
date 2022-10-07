@@ -28,10 +28,10 @@ const BottomTabBar: FC<TabProps>= ({ navigation, state }): JSX.Element => (
     <BottomNavigationTab title='Journals' />
     <BottomNavigationTab title='Notes' />
   </BottomNavigation>
-);  
+);
 
 const BottomTabs = (): JSX.Element => (
-  <Navigator 
+  <Navigator
     screenOptions={{ headerShown:false }}
     tabBar={ (props): JSX.Element => <BottomTabBar { ...props } /> }
   >

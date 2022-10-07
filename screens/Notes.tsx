@@ -7,7 +7,7 @@ import { NoteStyles } from "./Styles";
 // todo: draggable item, resort as well, opacity change, smoother transitions
 
 const NoteScreen = () => {
-  
+
   return (
     <Layout style={ styles.noteScreenContainer }>
       <Header name="Notes" />

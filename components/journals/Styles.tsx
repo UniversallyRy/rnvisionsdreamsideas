@@ -16,7 +16,7 @@ export interface ListItemStyles {
 }
 
 export interface ListStyles {
-    container: ViewStyle;   
+    container: ViewStyle;
 }
 
 export interface ModalStyles {

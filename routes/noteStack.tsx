@@ -23,7 +23,7 @@ const NoteStack: FC<NavProp> = (): JSX.Element => (
   >
     <Stack.Screen
       name='Check Notes'
-      component={ NoteScreen } 
+      component={ NoteScreen }
     />
   </Stack.Navigator>
 );
