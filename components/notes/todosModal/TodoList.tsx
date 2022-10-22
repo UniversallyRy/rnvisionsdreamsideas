@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React from 'react';
 import { StyleSheet } from 'react-native';
 import { List } from '@ui-kitten/components';
 import Todo from './Todo';
@@ -11,7 +11,7 @@ type ListProps = {
   listId: string;
 }
 
-const TodoList:FC<ListProps> = ({ todos, listId }): JSX.Element => {
+const TodoList: React.FunctionComponent<ListProps> = ({ todos, listId }): JSX.Element => {
 
   const renderTodo = ({ todo, listId }: { todo: TodoType; listId: string }): JSX.Element => {
     return <Todo item={todo} listId={listId} />;
@@ -19,10 +19,10 @@ const TodoList:FC<ListProps> = ({ todos, listId }): JSX.Element => {
 
   return (
     <List
-      data={ todos }
-      style={ styles.container }
-      keyExtractor={ (_, index): string => index.toString() }
-      renderItem={ ({ item }): JSX.Element => renderTodo({ todo: item, listId }) }
+      data={todos}
+      style={styles.container}
+      keyExtractor={(_, index): string => index.toString()}
+      renderItem={({ item }): JSX.Element => renderTodo({ todo: item, listId })}
     />
   );
 

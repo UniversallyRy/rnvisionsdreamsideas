@@ -1,4 +1,4 @@
-import React, { useState, FC } from 'react';
+import React, { useState } from 'react';
 import { StyleSheet } from 'react-native';
 import { connect, ConnectedProps } from 'react-redux';
 import { Layout, Modal, Card, Text } from '@ui-kitten/components';
@@ -11,7 +11,7 @@ type IdeasProps = {
   ideas: IdeaType[];
 }
 
-const IdeaList: FC<IdeasProps> = ({ ideas }): JSX.Element => {
+const IdeaList: React.FunctionComponent<IdeasProps> = ({ ideas }): JSX.Element => {
 
   const [visible, setVisible] = useState(false);
   const ideaCount = Object.keys(ideas).length;
@@ -21,17 +21,17 @@ const IdeaList: FC<IdeasProps> = ({ ideas }): JSX.Element => {
   };
 
   return (
-    <Card style={ styles.listContainer } onPress={ (): void => toggleListModal() }>
-      <Modal visible={ visible }>
-        <IdeasModal ideas={ ideas } closeModal={ (): void => toggleListModal() }/>
+    <Card style={styles.listContainer} onPress={(): void => toggleListModal()}>
+      <Modal visible={visible}>
+        <IdeasModal ideas={ideas} closeModal={(): void => toggleListModal()} />
       </Modal>
-        <Text style={ styles.listTitle } numberOfLines={ 1 }>
-          List of Ideas
-        </Text>
-        <Layout style={ styles.listContent }>
-          <Text style={ styles.listCount }>{ ideaCount }</Text>
-          <Text style={ styles.listText }>Ideas</Text>
-        </Layout>
+      <Text style={styles.listTitle} numberOfLines={1}>
+        List of Ideas
+      </Text>
+      <Layout style={styles.listContent}>
+        <Text style={styles.listCount}>{ideaCount}</Text>
+        <Text style={styles.listText}>Ideas</Text>
+      </Layout>
     </Card>
   );
 

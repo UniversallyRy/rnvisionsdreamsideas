@@ -8,7 +8,7 @@ import NewTodoList from './NewTodoList';
 import { HomeStyles } from './Styles';
 import { FooterButtons } from '../../shared/buttons';
 
-const NotesContent = (): JSX.Element => {
+const NotesContent: React.FunctionComponent = (): JSX.Element => {
 
   const [ideaModal, setIdeaModal] = useState(false);
   const [todoModal, setTodoModal] = useState(false);
@@ -22,18 +22,18 @@ const NotesContent = (): JSX.Element => {
   };
 
   return (
-    <Layout style={ styles.container }>
-      <Modal visible={ ideaModal }>
-        <NewIdea closeModal={ (): void => toggleIdeaModal() } />
+    <Layout style={styles.container}>
+      <Modal visible={ideaModal}>
+        <NewIdea closeModal={(): void => toggleIdeaModal()} />
       </Modal>
-      <Modal visible={ todoModal }>
-        <NewTodoList closeModal={ (): void => toggleTodoModal() } />
+      <Modal visible={todoModal}>
+        <NewTodoList closeModal={(): void => toggleTodoModal()} />
       </Modal>
-      <View style={ styles.lists }>
+      <View style={styles.lists}>
         <IdeaList />
         <TodoLists />
       </View>
-      <FooterButtons left={ setIdeaModal } right={ setTodoModal } />
+      <FooterButtons left={setIdeaModal} right={setTodoModal} />
     </Layout>
   );
 

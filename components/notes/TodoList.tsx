@@ -1,4 +1,4 @@
-import React, { FC, useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { StyleSheet } from 'react-native';
 import { Card, Layout, Modal, Text } from '@ui-kitten/components';
 import TodosModal from './todosModal';
@@ -11,7 +11,7 @@ type ListProps = {
   list: TodoListType;
 }
 
-const TodoList: FC<ListProps>= ({ list }): JSX.Element => {
+const TodoList: React.FunctionComponent<ListProps> = ({ list }): JSX.Element => {
 
   const dispatch = useAppDispatch();
   const { todos, name, id, color, completedCount } = list;
@@ -23,29 +23,29 @@ const TodoList: FC<ListProps>= ({ list }): JSX.Element => {
     setVisible(!visible);
   };
 
-  useEffect((): void=> {
-      setCompleted({ count: complete, listId: id });
-      changeCompleted(completedCount);
+  useEffect((): void => {
+    setCompleted({ count: complete, listId: id });
+    changeCompleted(completedCount);
   }, [completedCount]);
 
   return (
-    <Layout style={ styles.listContainer }>
-      <Card style={ [styles.listModal, { backgroundColor: color }] } onPress={ (): void => toggleListModal() }>
+    <Layout style={styles.listContainer}>
+      <Card style={[styles.listModal, { backgroundColor: color }]} onPress={(): void => toggleListModal()}>
         <Modal
-          visible={ visible }
+          visible={visible}
           accessibilityLabel='CLicking here opens Todo Modal'
         >
-          <TodosModal list={ list } closeModal={ (): void => toggleListModal() } />
+          <TodosModal list={list} closeModal={(): void => toggleListModal()} />
         </Modal>
-        <Text style={ styles.listTitle } numberOfLines={ 1 }> { name } </Text>
-        <Text style={ styles.count }>{ remaining }</Text>
-        <Text style={ styles.subtitle }>Remaining</Text>
-        <Text style={ styles.count }>{ complete }</Text>
-        <Text style={ styles.subtitle }>Completed</Text>
+        <Text style={styles.listTitle} numberOfLines={1}> {name} </Text>
+        <Text style={styles.count}>{remaining}</Text>
+        <Text style={styles.subtitle}>Remaining</Text>
+        <Text style={styles.count}>{complete}</Text>
+        <Text style={styles.subtitle}>Completed</Text>
       </Card>
       <CloseButton
-        style={ styles.deleteButton }
-        onPress={ (): { payload: TodoListType; type: string; } => dispatch(deleteList({ id: id })) }
+        style={styles.deleteButton}
+        onPress={(): { payload: TodoListType; type: string; } => dispatch(deleteList({ id: id }))}
         accessibilityLabel='Click here to delete list'
       >
         Delete

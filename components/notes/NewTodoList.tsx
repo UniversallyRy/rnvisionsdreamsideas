@@ -1,10 +1,10 @@
-import React, { FC, useState } from 'react';
+import React, { useState } from 'react';
 import { StyleSheet } from 'react-native';
 import { Formik } from 'formik';
 import * as yup from 'yup';
 import { Layout, Button, Input, Text } from '@ui-kitten/components';
 import { NewTodoStyles } from './Styles';
-import { CloseButton, FormButton }  from '../../shared/buttons';
+import { CloseButton, FormButton } from '../../shared/buttons';
 import { addList } from '../../redux/reducers/todos';
 import { useAppDispatch } from '../../utils/hooks';
 import { windowHeight, windowWidth } from '../../utils/constants';
@@ -17,7 +17,7 @@ const listSchema = yup.object({
   name: yup.string().required().min(4),
 });
 // red, slate blue, black, dark gray, blueish gray, teal, tan
-const NewTodoList: FC<ModalProps> = ({ closeModal }): JSX.Element => {
+const NewTodoList: React.FunctionComponent<ModalProps> = ({ closeModal }): JSX.Element => {
 
   const dispatch = useAppDispatch()
   const bgColors = [
@@ -33,63 +33,63 @@ const NewTodoList: FC<ModalProps> = ({ closeModal }): JSX.Element => {
 
   const renderColors = (): JSX.Element[] => bgColors.map((color): JSX.Element => (
     <Button
-      key={ color }
-      style={ [styles.colorSelect, { backgroundColor: color }] }
-      onPress={ (): void => setColor(color) }
+      key={color}
+      style={[styles.colorSelect, { backgroundColor: color }]}
+      onPress={(): void => setColor(color)}
     />
   ));
 
   return (
-      <Layout style={ styles.container } >
-        <CloseButton
-          style={ styles.close }
-          accessibilityLabel='Closes Modal'
-          onPress={ () => closeModal() }
-        />
-        <Layout style={ styles.form }>
-          <Text style={ styles.title }>Create Todo List</Text>
-          <Formik
-            initialValues={{ name: '', id: 0, color: '', todos: [] }}
-            validationSchema={ listSchema }
-            onSubmit={ (values, actions): void => {
-              values.color = bgColor;
-              dispatch(addList(values));
-              actions.resetForm();
-              closeModal();
-            }}
-          >
-            {({
-              handleChange,
-              values,
-              handleBlur,
-              handleSubmit,
-              touched,
-              errors,
-            }): JSX.Element => (
-              <Layout>
-                <Input
-                  textAlign='center'
-                  enablesReturnKeyAutomatically={ true }
-                  autoCorrect={ true }
-                  style={ styles.input }
-                  placeholder='Enter A New List . . .'
-                  onChangeText={ handleChange('name') }
-                  value={ values.name }
-                  onBlur={ handleBlur('name') }
-                />
+    <Layout style={styles.container} >
+      <CloseButton
+        style={styles.close}
+        accessibilityLabel='Closes Modal'
+        onPress={() => closeModal()}
+      />
+      <Layout style={styles.form}>
+        <Text style={styles.title}>Create Todo List</Text>
+        <Formik
+          initialValues={{ name: '', id: 0, color: '', todos: [] }}
+          validationSchema={listSchema}
+          onSubmit={(values, actions): void => {
+            values.color = bgColor;
+            dispatch(addList(values));
+            actions.resetForm();
+            closeModal();
+          }}
+        >
+          {({
+            handleChange,
+            values,
+            handleBlur,
+            handleSubmit,
+            touched,
+            errors,
+          }): JSX.Element => (
+            <Layout>
+              <Input
+                textAlign='center'
+                enablesReturnKeyAutomatically={true}
+                autoCorrect={true}
+                style={styles.input}
+                placeholder='Enter A New List . . .'
+                onChangeText={handleChange('name')}
+                value={values.name}
+                onBlur={handleBlur('name')}
+              />
 
-                <Text style={ styles.errorText }>
-                  { touched.name && errors.name || '' }
-                </Text>
-                <Layout style={ styles.colorContainer }>
-                  { renderColors() }
-                </Layout>
-                  <FormButton color={ bgColor } text='Add List' onPress={ handleSubmit }/>
+              <Text style={styles.errorText}>
+                {touched.name && errors.name || ''}
+              </Text>
+              <Layout style={styles.colorContainer}>
+                {renderColors()}
               </Layout>
-            )}
-          </Formik>
-        </Layout>
+              <FormButton color={bgColor} text='Add List' onPress={handleSubmit} />
+            </Layout>
+          )}
+        </Formik>
       </Layout>
+    </Layout>
   );
 
 };
@@ -122,7 +122,7 @@ const styles = StyleSheet.create<NewTodoStyles>({
     paddingHorizontal: 18,
     fontSize: 18,
   },
-  errorText:{
+  errorText: {
     fontFamily: 'roboto-bold',
     color: 'crimson',
     marginBottom: 10,

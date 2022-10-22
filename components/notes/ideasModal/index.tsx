@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React from 'react';
 import { StyleSheet } from 'react-native';
 import * as yup from 'yup';
 import { Layout, List, Text } from '@ui-kitten/components';
@@ -19,37 +19,37 @@ const ideaSchema = yup.object({
   inputValue: yup.string().required().min(6),
 });
 
-const IdeasModal: FC<ModalProps> = ({ ideas, closeModal }): JSX.Element => {
+const IdeasModal: React.FunctionComponent<ModalProps> = ({ ideas, closeModal }): JSX.Element => {
 
- // const dispatch = useAppDispatch();
+  // const dispatch = useAppDispatch();
   const ideaCount = ideas.length;
 
-  const renderIdea = ( item: IdeaType): JSX.Element => {
+  const renderIdea = (item: IdeaType): JSX.Element => {
     const { inputValue, inputId } = item;
-    return <Idea inputValue={ inputValue } inputId={ inputId } />
+    return <Idea inputValue={inputValue} inputId={inputId} />
   };
 
   return (
-    <Layout style={ styles.container } >
+    <Layout style={styles.container} >
       <CloseButton
-        style={ styles.close }
-        onPress={ closeModal }
+        style={styles.close}
+        onPress={closeModal}
       />
-      <Layout style={ styles.header }>
-        <Text style={ styles.headerText }>There are { ideaCount } Ideas</Text>
+      <Layout style={styles.header}>
+        <Text style={styles.headerText}>There are {ideaCount} Ideas</Text>
       </Layout>
       <Layout>
         <List
-          style={ styles.list }
-          data={ ideas }
-          keyExtractor={ (_, index): string => index.toString() }
-          renderItem={ ({ item }): JSX.Element => renderIdea(item) }
+          style={styles.list}
+          data={ideas}
+          keyExtractor={(_, index): string => index.toString()}
+          renderItem={({ item }): JSX.Element => renderIdea(item)}
         />
       </Layout>
       <FooterInput
         inputName='Idea'
-        reducerFunc={ addIdea }
-        inputSchema={ ideaSchema }
+        reducerFunc={addIdea}
+        inputSchema={ideaSchema}
       />
     </Layout>
   );

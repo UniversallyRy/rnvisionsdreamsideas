@@ -1,4 +1,4 @@
-import React, { useCallback, FC } from 'react';
+import React, { useCallback } from 'react';
 import { StyleSheet } from 'react-native';
 import { connect, ConnectedProps } from 'react-redux';
 import { NavigationScreenProp } from 'react-navigation';
@@ -10,30 +10,30 @@ import { StoreProps } from '../../../redux/store';
 
 type GridProps = {
   visions: VisionType[];
-  navigation: NavigationScreenProp<string,object>;
+  navigation: NavigationScreenProp<string, object>;
 }
 
 type ItemProps = {
   item: VisionType;
-  navigation?: NavigationScreenProp<string,object>;
+  navigation?: NavigationScreenProp<string, object>;
   index?: number;
 }
 
-const GridView: FC<GridProps> = ({ visions, navigation }): JSX.Element => {
+const GridView: React.FunctionComponent<GridProps> = ({ visions, navigation }): JSX.Element => {
 
   const renderGridItem = useCallback(({ item }: ItemProps): JSX.Element => (
-    <GridItem item={ item } navigation={ navigation }/>
-    ), [ visions ]);
+    <GridItem item={item} navigation={navigation} />
+  ), [visions]);
 
   return (
     <Layout>
       <List
-        numColumns={ 2 }
-        contentContainerStyle={ styles.grid }
+        numColumns={2}
+        contentContainerStyle={styles.grid}
         scrollEnabled
-        data={ visions }
-        keyExtractor={ (_item, index): string => index.toString() }
-        renderItem={ renderGridItem }
+        data={visions}
+        keyExtractor={(_item, index): string => index.toString()}
+        renderItem={renderGridItem}
       />
     </Layout>
   );
@@ -46,7 +46,7 @@ const styles = StyleSheet.create<GridStyles>({
   },
 });
 
-const mapStateToProps = (state:StoreProps) => {
+const mapStateToProps = (state: StoreProps) => {
   const { visions } = state;
 
   return { visions };

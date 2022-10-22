@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React from 'react';
 import { Image, StyleSheet } from 'react-native';
 import { NavigationScreenProp } from 'react-navigation';
 import { Layout, Card, Text } from '@ui-kitten/components';
@@ -22,16 +22,16 @@ type DetailsProps = {
   }
 }
 
-const VisionDetails: FC<DetailsProps> = ({ navigation, route }): JSX.Element => {
+const VisionDetails: React.FunctionComponent<DetailsProps> = ({ navigation, route }): JSX.Element => {
 
   const { id, title, uri } = route.params.item;
 
   return (
-    <Layout style={ styles.container }>
-      <Header name={ 'Vision Details' } navigation={ navigation }/>
-      <Card style={ styles.card }>
-          <Text style={ styles.title }>{ title }</Text>
-          <Image key= { id } source={{ uri }} style={ styles.img } />
+    <Layout style={styles.container}>
+      <Header name={'Vision Details'} navigation={navigation} />
+      <Card style={styles.card}>
+        <Text style={styles.title}>{title}</Text>
+        <Image key={id} source={{ uri }} style={styles.img} />
       </Card>
     </Layout>
   );

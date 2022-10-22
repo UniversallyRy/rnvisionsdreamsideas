@@ -10,7 +10,7 @@ import { windowWidth } from '../../../utils/constants';
 import { useAppDispatch } from '../../../utils/hooks';
 import { addPic } from '../../../redux/reducers/newpic';
 
-const ImagePic = (): JSX.Element => {
+const ImagePic: React.FunctionComponent = (): JSX.Element => {
 
   const [image, setImage] = useState(``);
   const dispatch = useAppDispatch()
@@ -26,12 +26,12 @@ const ImagePic = (): JSX.Element => {
     if (!result.cancelled) {
       let manipResult = await manipulateAsync(
         result.uri,
-        [{ resize: { width: 425} }],
+        [{ resize: { width: 425 } }],
         { compress: 1, format: SaveFormat.PNG }
       );
       setImage(manipResult.uri);
       dispatch(addPic({ uri: manipResult.uri }));
-    }else {
+    } else {
       return undefined;
     }
 
@@ -55,7 +55,7 @@ const ImagePic = (): JSX.Element => {
     (async (): Promise<void> => {
       if (Platform.OS !== 'web') {
         const { status } = await ImagePicker.requestMediaLibraryPermissionsAsync();
-        const { camStatus }:any = await ImagePicker.getCameraPermissionsAsync();
+        const { camStatus }: any = await ImagePicker.getCameraPermissionsAsync();
         if (status !== 'granted') {
           alert('Sorry, we need gallery permissions to make this work!');
         }
@@ -69,13 +69,13 @@ const ImagePic = (): JSX.Element => {
   }, []);
 
   return (
-    <Layout style={ styles.container }>
-      { image != '' && (
-        <Image source={{ uri: image }} style={ styles.img } />
+    <Layout style={styles.container}>
+      {image != '' && (
+        <Image source={{ uri: image }} style={styles.img} />
       )}
       <ImageButtons
-        pickImage={ pickImage }
-        cameraImage={ cameraImage }
+        pickImage={pickImage}
+        cameraImage={cameraImage}
       />
     </Layout>
   );
@@ -83,13 +83,13 @@ const ImagePic = (): JSX.Element => {
 };
 
 const styles = StyleSheet.create<ImageStyles>({
-  container:{
-    alignItems:'center',
+  container: {
+    alignItems: 'center',
     justifyContent: 'center',
     width: windowWidth,
     marginBottom: 40,
   },
-  img:{
+  img: {
     width: 500,
     height: 500,
     marginBottom: 80,

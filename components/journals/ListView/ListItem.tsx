@@ -1,4 +1,4 @@
-import React, { FC, useState } from 'react';
+import React, { useState } from 'react';
 import { StyleSheet } from 'react-native';
 import { NavigationScreenProp } from 'react-navigation';
 import { ButtonGroup, Card, Divider, Input, Layout, Text } from '@ui-kitten/components';
@@ -14,7 +14,7 @@ type ItemProps = {
   navigation: NavigationScreenProp<string, object>;
 }
 
-const ListItem: FC<ItemProps> = ({ item,  navigation }): JSX.Element => {
+const ListItem: React.FunctionComponent<ItemProps> = ({ item, navigation }): JSX.Element => {
   const { id, title, body, date, isEditing } = item;
   const [textTitle, setTitle] = useState(title);
   const [textBody, setBody] = useState(body);
@@ -26,52 +26,52 @@ const ListItem: FC<ItemProps> = ({ item,  navigation }): JSX.Element => {
 
   return (
     <Card
-      style={ styles.container }
-      onPress={ () => navigation.navigate('Journal Details', { title, body, date })}
+      style={styles.container}
+      onPress={() => navigation.navigate('Journal Details', { title, body, date })}
       accessibilityLabel='Card containing single Journal Entry'
     >
-      <Layout style={ styles.textContainer }>
+      <Layout style={styles.textContainer}>
         {isEditing
-          ?<Input
-              label='Title'
-              value={ textTitle }
-              onChangeText={ text => setTitle(text) }
-            />
-          :<Text style={ styles.textTitle }>
-            { title }
-           </Text>
+          ? <Input
+            label='Title'
+            value={textTitle}
+            onChangeText={text => setTitle(text)}
+          />
+          : <Text style={styles.textTitle}>
+            {title}
+          </Text>
         }
         <Divider />
         {isEditing
-          ?<Input
-              label='Body'
-              value={ textBody }
-              multiline={ true }
-              onChangeText={ text => setBody(text) }
+          ? <Input
+            label='Body'
+            value={textBody}
+            multiline={true}
+            onChangeText={text => setBody(text)}
           />
-          :<Text style={ styles.textBody }>
-            { body }
+          : <Text style={styles.textBody}>
+            {body}
           </Text>
         }
         <Divider />
       </Layout>
       {isEditing
         ? null
-        :<Text style={ styles.textDate }>
-          { date }
+        : <Text style={styles.textDate}>
+          {date}
         </Text>
       }
-        {isEditing
-          ?<ButtonGroup>
-            <SaveButton onPress={ () => saveHandler(id) }/>
-            <CancelButton onPress={ () => dispatch(editJournalToggle({ id })) }/>
-          </ButtonGroup>
-          :<ButtonGroup>
-            <EditButton onPress={ () => dispatch(editJournalToggle({ id })) }/>
-            <DeleteButton onPress={ () => dispatch(deleteJournal({ id })) }/>
-            <FavIcon/>
-          </ButtonGroup>
-        }
+      {isEditing
+        ? <ButtonGroup>
+          <SaveButton onPress={() => saveHandler(id)} />
+          <CancelButton onPress={() => dispatch(editJournalToggle({ id }))} />
+        </ButtonGroup>
+        : <ButtonGroup>
+          <EditButton onPress={() => dispatch(editJournalToggle({ id }))} />
+          <DeleteButton onPress={() => dispatch(deleteJournal({ id }))} />
+          <FavIcon />
+        </ButtonGroup>
+      }
     </Card>
   );
 };

@@ -6,10 +6,10 @@ import NoteContent from "../components/notes";
 import { NoteStyles } from "./Styles";
 // todo: draggable item, resort as well, opacity change, smoother transitions
 
-const NoteScreen = () => {
+const NoteScreen: React.FunctionComponent = () => {
 
   return (
-    <Layout style={ styles.noteScreenContainer }>
+    <Layout style={styles.noteScreenContainer}>
       <Header name="Notes" />
       <NoteContent />
     </Layout>

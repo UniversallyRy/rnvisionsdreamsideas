@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React from 'react';
 import { StyleSheet } from 'react-native';
 import { connect, ConnectedProps } from 'react-redux';
 import { NavigationScreenProp } from 'react-navigation';
@@ -12,13 +12,13 @@ interface GridProps extends JournalListType {
   navigation: NavigationScreenProp<string, object>;
 }
 
-const GridView: FC<GridProps> = ({ month, list, navigation }): JSX.Element => (
-  <Layout style={ styles.container }>
+const GridView: React.FunctionComponent<GridProps> = ({ month, list, navigation }): JSX.Element => (
+  <Layout style={styles.container}>
     <List
       scrollEnabled
-      numColumns={ 3 }
-      contentContainerStyle={ styles.grid }
-      data={ list }
+      numColumns={3}
+      contentContainerStyle={styles.grid}
+      data={list}
       accessibilityLabel='Journal List Entries in Grid Format'
       renderItem={({ item }): JSX.Element | null => {
         const { title, body, date } = item;
@@ -27,13 +27,13 @@ const GridView: FC<GridProps> = ({ month, list, navigation }): JSX.Element => (
         } else {
           return (
             <Card
-              key={ title + '_key' }
-              style={ styles.item }
-              onPress={ (): boolean => navigation.navigate('Journal Details', { title, body, date }) }
+              key={title + '_key'}
+              style={styles.item}
+              onPress={(): boolean => navigation.navigate('Journal Details', { title, body, date })}
             >
-              <Text>{ title }</Text>
-              <Text style={ styles.itemDate }>
-                { date }
+              <Text>{title}</Text>
+              <Text style={styles.itemDate}>
+                {date}
               </Text>
             </Card>
           );
@@ -61,12 +61,12 @@ const styles = StyleSheet.create<GridStyles>({
   },
   itemDate: {
     marginTop: 30,
-    top:100,
+    top: 100,
     right: 20,
   },
 });
 
-const mapStateToProps = (state:StoreProps)=> {
+const mapStateToProps = (state: StoreProps) => {
   const { journals } = state;
   const { month, list } = journals;
 

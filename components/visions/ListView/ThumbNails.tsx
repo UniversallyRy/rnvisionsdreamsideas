@@ -1,4 +1,4 @@
-import React, { useState, FC, useContext } from 'react';
+import React, { useState, useContext } from 'react';
 import { TouchableOpacity, Image, StyleSheet } from 'react-native';
 import { Tooltip } from '@ui-kitten/components';
 import { IndexContext } from '.';
@@ -13,7 +13,7 @@ type ThumbnailProps = {
   index: number;
 }
 
-const renderThumbnail:FC<ThumbnailProps> = ({ item, index }): JSX.Element => {
+const renderThumbnail: React.FunctionComponent<ThumbnailProps> = ({ item, index }): JSX.Element => {
 
   const dispatch = useAppDispatch();
   const [visible, setVisible] = useState(false);
@@ -21,9 +21,9 @@ const renderThumbnail:FC<ThumbnailProps> = ({ item, index }): JSX.Element => {
 
   const ThumbNail = (): JSX.Element => (
     <TouchableOpacity
-      onPress={ () => scrollActiveIndex(index) }
+      onPress={() => scrollActiveIndex(index)}
       // delayLongPress= { () => navigation.navigate('Vision Details', { item }) }
-      onLongPress={ activeIndex === index ? () => setVisible(true) : undefined }
+      onLongPress={activeIndex === index ? () => setVisible(true) : undefined}
     >
       <Image
         source={{ uri: item.uri }}
@@ -37,12 +37,12 @@ const renderThumbnail:FC<ThumbnailProps> = ({ item, index }): JSX.Element => {
 
   return (
     <Tooltip
-      anchor={ ThumbNail }
+      anchor={ThumbNail}
       placement='top'
-      visible={ activeIndex === index ? visible : false }
-      onBackdropPress={ (): void => setVisible(false) }
+      visible={activeIndex === index ? visible : false}
+      onBackdropPress={(): void => setVisible(false)}
     >
-      <CloseButton onPress={ (): { payload: VisionType; type: string; } => dispatch(deleteVision(item)) }/>
+      <CloseButton onPress={(): { payload: VisionType; type: string; } => dispatch(deleteVision(item))} />
     </Tooltip>
   );
 

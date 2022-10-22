@@ -1,4 +1,4 @@
-import React, {  useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { StyleSheet } from 'react-native';
 import { Layout, Select, SelectItem, IndexPath } from '@ui-kitten/components';
 import { MonthStyles } from './Styles';
@@ -7,7 +7,7 @@ import { MONTHS, windowWidth } from '../../utils/constants';
 import { useAppDispatch } from '../../utils/hooks';
 import { changeMonth } from '../../redux/reducers/journals';
 
-const MonthSelect = (): JSX.Element => {
+const MonthSelect: React.FunctionComponent = (): JSX.Element => {
 
   const dispatch = useAppDispatch();
   const [selectedIndex, setSelectedIndex] = useState(new IndexPath(0));
@@ -22,22 +22,22 @@ const MonthSelect = (): JSX.Element => {
   }, [displayValue]);
 
   return (
-    <Layout style={ styles.container } level='1'>
+    <Layout style={styles.container} level='1'>
       <Select
-        style={ styles.list }
-        value={ displayValue }
+        style={styles.list}
+        value={displayValue}
         label='See All or A Month'
-        selectedIndex={ selectedIndex }
-        onSelect={ handleItemPress }
+        selectedIndex={selectedIndex}
+        onSelect={handleItemPress}
         accessibilityLabel='Dropdown of months to filter journal entries'
       >
         {MONTHS.map(item => (
           <SelectItem
-            style={ styles.listItem }
-            key={ item }
-            title={ item }
-            accessoryRight={ CloseIcon }
-            accessibilityLabel={ `Dropdown text for ${ item }` }
+            style={styles.listItem}
+            key={item}
+            title={item}
+            accessoryRight={CloseIcon}
+            accessibilityLabel={`Dropdown text for ${item}`}
           />
         ))}
       </Select>

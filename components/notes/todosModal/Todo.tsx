@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React from 'react';
 import { StyleSheet } from 'react-native';
 import { ListItem, CheckBox, Text } from '@ui-kitten/components';
 import { TodoStyles } from './Styles';
@@ -11,16 +11,16 @@ type SingleTodo = {
   listId: string;
 }
 
-const Todo:FC<SingleTodo> = ({ item, listId }): JSX.Element => {
+const Todo: React.FunctionComponent<SingleTodo> = ({ item, listId }): JSX.Element => {
 
   const dispatch = useAppDispatch()
   const { inputValue, inputId, completed } = item;
 
   return (
-    <ListItem style={ styles.container } >
+    <ListItem style={styles.container} >
       <CheckBox
-        checked={ completed }
-        onChange={ () => dispatch(toggleTodo({ inputId, listId })) }
+        checked={completed}
+        onChange={() => dispatch(toggleTodo({ inputId, listId }))}
       />
       <Text
         style={[
@@ -31,11 +31,11 @@ const Todo:FC<SingleTodo> = ({ item, listId }): JSX.Element => {
           }
         ]}
       >
-        { inputValue }
+        {inputValue}
       </Text>
       <CloseButton
-        style={ styles.deleteButton }
-        onPress={ (): { payload: object; type: string; } => dispatch(deleteTodo({ id:inputId, listId })) }
+        style={styles.deleteButton}
+        onPress={(): { payload: object; type: string; } => dispatch(deleteTodo({ id: inputId, listId }))}
       />
     </ListItem>
   );

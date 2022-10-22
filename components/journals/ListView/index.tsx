@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React from 'react';
 import { StyleSheet } from 'react-native';
 import { connect, ConnectedProps } from 'react-redux';
 import { NavigationScreenProp } from 'react-navigation';
@@ -12,17 +12,17 @@ interface ListProps extends JournalListType {
   navigation: NavigationScreenProp<string, object>;
 }
 
-const ListView: FC<ListProps> = ({ month, list, navigation }): JSX.Element => (
+const ListView: React.FunctionComponent<ListProps> = ({ month, list, navigation }): JSX.Element => (
   <List
-    style={ styles.container }
-    data={ list }
+    style={styles.container}
+    data={list}
     accessibilityLabel='Contains Journal Entries'
-    keyExtractor={ (_item, index) => index.toString() }
-    renderItem={ ({ item }): JSX.Element | null => {
+    keyExtractor={(_item, index) => index.toString()}
+    renderItem={({ item }): JSX.Element | null => {
       if ((month != 'All') && !item.date.includes(month)) {
         return null;
       }
-      return <ListItem navigation={ navigation } item={ item } />;
+      return <ListItem navigation={navigation} item={item} />;
     }}
   />
 );

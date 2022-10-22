@@ -6,18 +6,18 @@ import { AboutStyles } from "./Styles";
 const aboutText: string =
   "This is an ongoing App based on charting any visions or dreams you may have. Notes tab for thoughts and todos.";
 
-const About = (): JSX.Element => (
-  <Layout style={ styles.aboutContainer }>
-    <Card style={ styles.textContainer }>
-      <Text style={ styles.text }>
-        { aboutText }
+const About: React.FunctionComponent = (): JSX.Element => (
+  <Layout style={styles.aboutContainer}>
+    <Card style={styles.textContainer}>
+      <Text style={styles.text}>
+        {aboutText}
       </Text>
     </Card>
   </Layout>
 );
 
 const styles = StyleSheet.create<AboutStyles>({
-  aboutContainer:{
+  aboutContainer: {
     flex: 1,
     margin: 1,
     alignItems: "center",

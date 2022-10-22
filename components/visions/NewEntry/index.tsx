@@ -1,4 +1,4 @@
-import React, { Dispatch, FC, SetStateAction } from 'react';
+import React, { Dispatch, SetStateAction } from 'react';
 import { Animated, StyleSheet } from 'react-native';
 import { connect, ConnectedProps } from 'react-redux';
 // import { useCardAnimation } from '@react-navigation/stack';
@@ -22,36 +22,36 @@ const pictureSchema = yup.object({
   title: yup.string().required().min(4),
 });
 
-const NewEntry: FC<ModalProps> = ({ picInput, setModalOpen }): JSX.Element => {
+const NewEntry: React.FunctionComponent<ModalProps> = ({ picInput, setModalOpen }): JSX.Element => {
 
   const dispatch = useAppDispatch();
 
   return (
     <Layout>
       <Animated.View
-      //   style={{
-      //     transform: [
-      //       {
-      //         scale: current.progress.interpolate({
-      //           inputRange: [0, 1],
-      //           outputRange: [0.9, 1],
-      //           extrapolate: 'clamp',
-      //         }),
-      //       },
-      //     ],
-      //   }}
-      //
-      style={ styles.container }
+        //   style={{
+        //     transform: [
+        //       {
+        //         scale: current.progress.interpolate({
+        //           inputRange: [0, 1],
+        //           outputRange: [0.9, 1],
+        //           extrapolate: 'clamp',
+        //         }),
+        //       },
+        //     ],
+        //   }}
+        //
+        style={styles.container}
       >
         <CloseButton
-          style={ styles.close }
-          onPress={ (): void => setModalOpen(false) }
+          style={styles.close}
+          onPress={(): void => setModalOpen(false)}
         />
         <Formik
-          enableReinitialize={ true }
+          enableReinitialize={true}
           initialValues={{ uri: picInput, title: '', id: null }}
-          validationSchema={ pictureSchema }
-          onSubmit={ (values, actions): void => {
+          validationSchema={pictureSchema}
+          onSubmit={(values, actions): void => {
             dispatch(addVision(values));
             actions.resetForm();
             setModalOpen(false);
@@ -65,25 +65,25 @@ const NewEntry: FC<ModalProps> = ({ picInput, setModalOpen }): JSX.Element => {
             errors,
             handleSubmit,
           }): JSX.Element => (
-            <Layout style={ styles.footer }>
+            <Layout style={styles.footer}>
               <ImagePicker />
               <Input
                 textAlign='center'
-                style={ styles.textinput }
+                style={styles.textinput}
                 placeholder='Vision Title'
-                onChangeText={ handleChange('title') }
-                value={ values.title }
-                onBlur={ handleBlur('title') }
+                onChangeText={handleChange('title')}
+                value={values.title}
+                onBlur={handleBlur('title')}
               />
-              <Text style={ styles.errorText }>
-                { touched.title && errors.title || '' }
+              <Text style={styles.errorText}>
+                {touched.title && errors.title || ''}
               </Text>
               <SubmitButton
-                style={ styles.button }
-                onPress={ handleSubmit }
+                style={styles.button}
+                onPress={handleSubmit}
               />
             </Layout>
-        )}
+          )}
         </Formik>
       </Animated.View>
     </Layout>
@@ -118,7 +118,7 @@ const styles = StyleSheet.create<ModalStyles>({
     justifyContent: 'center',
     bottom: 0,
   },
-  errorText:{
+  errorText: {
     fontFamily: 'roboto-bold',
     color: 'crimson',
     marginBottom: 10,
@@ -127,7 +127,7 @@ const styles = StyleSheet.create<ModalStyles>({
   },
 });
 
-const mapStateToProps = (state:StoreProps) => {
+const mapStateToProps = (state: StoreProps) => {
   const { pic } = state;
   return { picInput: pic };
 };

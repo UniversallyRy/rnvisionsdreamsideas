@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React from 'react';
 import { createStackNavigator, StackNavigationProp, StackNavigationOptions, TransitionSpecs } from '@react-navigation/stack';
 import VisionScreen from '../screens/Visions';
 import VisionDetails from '../screens/VisionDetails';
@@ -8,7 +8,7 @@ type VisionStackParamList = {
   'Vision Details': undefined;
 };
 
-type VisionScreenNavigationProp = StackNavigationProp<VisionStackParamList,'Vision Images'>;
+type VisionScreenNavigationProp = StackNavigationProp<VisionStackParamList, 'Vision Images'>;
 
 type NavProp = { navigation: VisionScreenNavigationProp };
 
@@ -49,7 +49,7 @@ const customTrans: StackNavigationOptions = {
   })
 }
 
-const VisionStack: FC<NavProp> = (): JSX.Element => (
+const VisionStack: React.FunctionComponent<NavProp> = (): JSX.Element => (
   <Navigator
     initialRouteName='Vision Images'
     screenOptions={{
@@ -59,10 +59,10 @@ const VisionStack: FC<NavProp> = (): JSX.Element => (
   >
     <Screen
       name='Vision Images'
-      component={ VisionScreen } />
+      component={VisionScreen} />
     <Screen
       name='Vision Details'
-      component={ VisionDetails } />
+      component={VisionDetails} />
   </Navigator>
 );
 

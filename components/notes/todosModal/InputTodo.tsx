@@ -1,4 +1,4 @@
-import React, { FC } from 'react'
+import React from 'react'
 import { Keyboard, StyleSheet } from 'react-native';
 import { Formik } from 'formik';
 import * as yup from 'yup';
@@ -14,55 +14,55 @@ type InputProps = {
 }
 
 const todoSchema = yup.object({
-    title: yup.string().required().min(4),
+  title: yup.string().required().min(4),
 });
 
-const InputTodo: FC<InputProps> = ({ listId }): JSX.Element => {
+const InputTodo: React.FunctionComponent<InputProps> = ({ listId }): JSX.Element => {
 
   const dispatch = useAppDispatch();
 
   return (
     <Formik
-        initialValues={{ inputValue: '', inputId: '' }}
-        validationSchema={ todoSchema }
-        onSubmit={ (values:TodoType, actions): void => {
-          values.listId = listId;
-          dispatch(addTodo(values));
-          actions.resetForm();
-          Keyboard.dismiss();
-        }}
-      >
-        {({
-          handleChange,
-          values,
-          handleBlur,
-          touched,
-          errors,
-          handleSubmit,
-        }): JSX.Element => (
-          <Layout style={ styles.footer }>
-            <Layout style={{ flexDirection: 'column' }}>
-              <Input
-                textAlign='center'
-                enablesReturnKeyAutomatically={ true }
-                autoCorrect={ true }
-                style={ styles.todoInput }
-                placeholder='Enter Todo . . .'
-                onChangeText={ handleChange('title') }
-                value={ values.inputValue }
-                onBlur={ handleBlur('title') }
-              />
-              <Text style={ styles.errorText }>
-                { touched.inputValue && errors.inputValue || '' }
-              </Text>
-            </Layout>
-            <SubmitButton
-              style={ styles.button }
-              onPress={ handleSubmit }
+      initialValues={{ inputValue: '', inputId: '' }}
+      validationSchema={todoSchema}
+      onSubmit={(values: TodoType, actions): void => {
+        values.listId = listId;
+        dispatch(addTodo(values));
+        actions.resetForm();
+        Keyboard.dismiss();
+      }}
+    >
+      {({
+        handleChange,
+        values,
+        handleBlur,
+        touched,
+        errors,
+        handleSubmit,
+      }): JSX.Element => (
+        <Layout style={styles.footer}>
+          <Layout style={{ flexDirection: 'column' }}>
+            <Input
+              textAlign='center'
+              enablesReturnKeyAutomatically={true}
+              autoCorrect={true}
+              style={styles.todoInput}
+              placeholder='Enter Todo . . .'
+              onChangeText={handleChange('title')}
+              value={values.inputValue}
+              onBlur={handleBlur('title')}
             />
+            <Text style={styles.errorText}>
+              {touched.inputValue && errors.inputValue || ''}
+            </Text>
           </Layout>
-        )}
-      </Formik>
+          <SubmitButton
+            style={styles.button}
+            onPress={handleSubmit}
+          />
+        </Layout>
+      )}
+    </Formik>
   );
 
 };
@@ -82,7 +82,7 @@ const styles = StyleSheet.create<InputStyles>({
     paddingLeft: 14,
     elevation: 3,
   },
-  errorText:{
+  errorText: {
     textAlign: 'center',
     fontSize: 10,
     color: 'crimson',

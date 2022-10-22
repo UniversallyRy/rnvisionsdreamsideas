@@ -1,4 +1,4 @@
-import React, { FC, ReactElement } from 'react';
+import React, { ReactElement } from 'react';
 import { StyleProp, StyleSheet, TextProps, TextStyle } from 'react-native';
 import { NavigationScreenProp } from 'react-navigation';
 import { Layout, Card, Text, Divider } from '@ui-kitten/components';
@@ -22,29 +22,29 @@ export type DetailsProps = {
 
 export interface TexProps extends TextProps {
   child: string;
-  style:StyleProp<TextStyle>;
+  style: StyleProp<TextStyle>;
 }
 
-const JournalDetails: FC<DetailsProps> = ({ route, navigation }): JSX.Element => {
+const JournalDetails: React.FunctionComponent<DetailsProps> = ({ route, navigation }): JSX.Element => {
 
   const { title, body, date } = route.params;
 
-  const Details = ({ child, style }: TexProps):ReactElement => (
+  const Details = ({ child, style }: TexProps): ReactElement => (
     <>
       <Divider />
-      <Text style={ style }>
-        { child }
+      <Text style={style}>
+        {child}
       </Text>
     </>
   );
 
   return (
-    <Layout style={ styles.container }>
-      <Header name='Vision Details' navigation={ navigation }/>
-      <Card style={ styles.card }>
-        <Details child={ title } style={ styles.textTitle }/>
-        <Details child={ body } style={ styles.textBody }/>
-        <Details child={ date } style={ styles.textDate }/>
+    <Layout style={styles.container}>
+      <Header name='Vision Details' navigation={navigation} />
+      <Card style={styles.card}>
+        <Details child={title} style={styles.textTitle} />
+        <Details child={body} style={styles.textBody} />
+        <Details child={date} style={styles.textDate} />
       </Card>
     </Layout>
   );

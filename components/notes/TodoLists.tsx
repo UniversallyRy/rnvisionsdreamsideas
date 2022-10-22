@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React from 'react';
 import { connect, ConnectedProps } from 'react-redux';
 import { List } from '@ui-kitten/components';
 import TodoList from './TodoList';
@@ -9,17 +9,17 @@ type ContentProps = {
   todosLists: TodoListType[];
 }
 
-const TodoLists: FC<ContentProps> = ({ todosLists }): JSX.Element => {
+const TodoLists: React.FunctionComponent<ContentProps> = ({ todosLists }): JSX.Element => {
 
   const renderTodoLists = (list: TodoListType): JSX.Element => <TodoList list={list} />;
 
   return (
     <List
-      keyExtractor={ (_, index): string => index.toString() }
-      data={ todosLists }
-      horizontal={ true }
-      showsHorizontalScrollIndicator={ false }
-      renderItem={ ({ item }): JSX.Element => renderTodoLists(item) }
+      keyExtractor={(_, index): string => index.toString()}
+      data={todosLists}
+      horizontal={true}
+      showsHorizontalScrollIndicator={false}
+      renderItem={({ item }): JSX.Element => renderTodoLists(item)}
       keyboardShouldPersistTaps='always'
     />
   );

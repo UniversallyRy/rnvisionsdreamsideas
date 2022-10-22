@@ -11,27 +11,27 @@ export type HeaderProps = {
   navigation?: NavigationScreenProp<string, object>;
 };
 
-const Header:React.FC<HeaderProps> = ({ name, navigation }): JSX.Element => {
+const Header: React.FunctionComponent<HeaderProps> = ({ name, navigation }): JSX.Element => {
 
   let navigateBack;
   const { theme, toggleTheme } = useContext(ThemesContext);
 
-  if(navigation != undefined) {
+  if (navigation != undefined) {
     navigateBack = (): void => {
       navigation.goBack();
     };
   }
 
   return (
-    <Layout style={ styles.headerContainer }>
+    <Layout style={styles.headerContainer}>
       <TopNavigation
-        title={ name }
+        title={name}
         // Show a back button if on a nested detail screen
-        alignment={ name.includes("Details") ? "center" : "start" }
-        accessoryLeft={ name.includes("Details") ? BackAction(navigateBack) : undefined }
-        accessoryRight={ ToggleButton({ theme, toggleTheme }) }
+        alignment={name.includes("Details") ? "center" : "start"}
+        accessoryLeft={name.includes("Details") ? BackAction(navigateBack) : undefined}
+        accessoryRight={ToggleButton({ theme, toggleTheme })}
       />
-      <Divider/>
+      <Divider />
     </Layout>
   );
 

@@ -18,7 +18,7 @@ const initialIdeas: IdeaType[] = [
 ];
 
 const ideas = createSlice({
-  name:"ideas",
+  name: "ideas",
   initialState: initialIdeas,
   reducers: {
     addIdea: (state, action): void => {

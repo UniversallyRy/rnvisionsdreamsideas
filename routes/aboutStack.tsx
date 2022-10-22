@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React from 'react';
 import { createStackNavigator, StackNavigationProp } from '@react-navigation/stack';
 import AboutScreen from '../screens/About';
 
@@ -14,11 +14,11 @@ type NavProp = {
 
 const Stack = createStackNavigator<AboutStackParamList>();
 
-const AboutStack: FC<NavProp> = (): JSX.Element => (
+const AboutStack: React.FunctionComponent<NavProp> = (): JSX.Element => (
   <Stack.Navigator>
     <Stack.Screen
       name='About'
-      component={ AboutScreen } />
+      component={AboutScreen} />
   </Stack.Navigator>
 );
 

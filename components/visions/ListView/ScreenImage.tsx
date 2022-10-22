@@ -1,4 +1,4 @@
-import React, { memo, useCallback } from 'react';
+import React, { memo, MemoExoticComponent, useCallback } from 'react';
 import { Image, StyleSheet } from 'react-native';
 import { Layout } from '@ui-kitten/components';
 import { ScreenImgStyles } from '../Styles';
@@ -6,27 +6,27 @@ import { VisionType } from '../../../redux/reducers/visions';
 import { windowHeight, windowWidth } from '../../../utils/constants';
 
 type ItemProps = {
-    item: VisionType;
+  item: VisionType;
 }
 
-const ScreenImage = memo(({ item }: ItemProps): JSX.Element => (
-    <Layout style={ styles.bgImg }>
-      <Image
-        source={{ uri: item.uri }}
-        style={[StyleSheet.absoluteFill]}
-      />
-    </Layout>
+const ScreenImage: MemoExoticComponent<any> = memo(({ item }: ItemProps): JSX.Element => (
+  <Layout style={styles.bgImg}>
+    <Image
+      source={{ uri: item.uri }}
+      style={[StyleSheet.absoluteFill]}
+    />
+  </Layout>
 ));
 
 ScreenImage.displayName = "ScreenImage";
 
 export const renderBgImage = useCallback(({ item }: ItemProps): JSX.Element => (
-  <ScreenImage item={ item } />
+  <ScreenImage item={item} />
 ), []);
 
 const styles = StyleSheet.create<ScreenImgStyles>({
-    bgImg:{
-        width: windowWidth,
-        height: windowHeight
-    },
+  bgImg: {
+    width: windowWidth,
+    height: windowHeight
+  },
 })

@@ -24,7 +24,7 @@ const getFonts = (): Promise<void> => {
   });
 };
 
-const App = (): JSX.Element => {
+const App: React.FunctionComponent = (): JSX.Element => {
   const [fontsLoaded, setFontsLoaded] = useState(false);
   // const [persistLoaded, setPersistLoaded] = useState(true);
   const [theme, setTheme] = useState('light');
@@ -38,11 +38,11 @@ const App = (): JSX.Element => {
 
   if (fontsLoaded) {
     return (
-      <Provider store={ store }>
+      <Provider store={store}>
         <ThemesContext.Provider value={{ theme, toggleTheme }}>
-          <IconRegistry icons={ EvaIconsPack }/>
-          <ApplicationProvider { ...eva } theme={{ ...evaTheme, ...customTheme }}>
-            <StatusBar animated={ true } />
+          <IconRegistry icons={EvaIconsPack} />
+          <ApplicationProvider {...eva} theme={{ ...evaTheme, ...customTheme }}>
+            <StatusBar animated={true} />
             <NavigationContainer>
               <BottomTabs />
             </NavigationContainer>
@@ -53,12 +53,12 @@ const App = (): JSX.Element => {
   } else {
     return (
       <AppLoading
-        startAsync={ getFonts }
+        startAsync={getFonts}
         onFinish={(): void => {
           setFontsLoaded(true);
           // setPersistLoaded(false);
         }}
-        onError={ console.warn }
+        onError={console.warn}
       />
     );
   }

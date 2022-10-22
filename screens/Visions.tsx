@@ -14,7 +14,7 @@ interface VisionProps {
   navigation: NavigationScreenProp<string, object>;
 }
 
-const Visions: React.FC<VisionProps> = ({ navigation }): JSX.Element => {
+const Visions: React.FunctionComponent<VisionProps> = ({ navigation }): JSX.Element => {
 
   //const scrollX = useRef(new Animated.Value(0)).current;
   const [modalOpen, setModalOpen] = useState(false);
@@ -36,21 +36,21 @@ const Visions: React.FC<VisionProps> = ({ navigation }): JSX.Element => {
   }, []);
 
   return (
-    <Layout style={ styles.container }>
+    <Layout style={styles.container}>
 
-      <Header name={ "Visions" } />
-      <Modal visible={ modalOpen }>
-        <NewEntry setModalOpen={ toggleModal } />
+      <Header name={"Visions"} />
+      <Modal visible={modalOpen}>
+        <NewEntry setModalOpen={toggleModal} />
       </Modal>
       {/* when gridview is toggled use gridContainer otherwise VisionsContainer */}
 
       {view ? (
-        <GridView navigation={ navigation } />
+        <GridView navigation={navigation} />
       ) : (
-        <ListView navigation={ navigation } />
+        <ListView navigation={navigation} />
       )}
 
-      <FooterButtons left={ toggleModal } right={ toggleView } />
+      <FooterButtons left={toggleModal} right={toggleView} />
     </Layout>
   );
 

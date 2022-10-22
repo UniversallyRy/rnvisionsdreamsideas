@@ -1,4 +1,4 @@
-import React, { FC, useEffect } from 'react'
+import React, { useEffect } from 'react'
 import { StyleSheet } from 'react-native';
 import { Layout, Text } from '@ui-kitten/components'
 import { HeaderStyles } from './Styles';
@@ -10,7 +10,7 @@ type HeaderProps = {
   closeModal: () => void;
 }
 
-const Header: FC<HeaderProps> = ({ list, closeModal }): JSX.Element => {
+const Header: React.FunctionComponent<HeaderProps> = ({ list, closeModal }): JSX.Element => {
 
   const { name, todos, color, completedCount } = list;
   const taskCount = todos.length;
@@ -27,8 +27,8 @@ const Header: FC<HeaderProps> = ({ list, closeModal }): JSX.Element => {
   return (
     <>
       <CloseButton
-        style={ styles.close }
-        onPress={ closeModal }
+        style={styles.close}
+        onPress={closeModal}
       />
       <Layout
         style={[
@@ -36,9 +36,9 @@ const Header: FC<HeaderProps> = ({ list, closeModal }): JSX.Element => {
           { borderBottomColor: color },
         ]}
       >
-        <Text style={ styles.title }>{ name }</Text>
-        <Text style={ styles.taskCount }>
-          Completed { completedCount } of { taskCount } tasks
+        <Text style={styles.title}>{name}</Text>
+        <Text style={styles.taskCount}>
+          Completed {completedCount} of {taskCount} tasks
         </Text>
       </Layout>
     </>

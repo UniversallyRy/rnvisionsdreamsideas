@@ -1,4 +1,4 @@
-import React, { useState, useRef, FC, createContext } from 'react';
+import React, { useState, useRef, createContext } from 'react';
 import { StyleSheet } from 'react-native';
 import { connect, ConnectedProps } from 'react-redux';
 import { NavigationScreenProp } from 'react-navigation';
@@ -17,10 +17,10 @@ type ListProps = {
 
 export const IndexContext = createContext({
   activeIndex: 0,
-  scrollActiveIndex: (_index: number | undefined) => {},
+  scrollActiveIndex: (_index: number | undefined) => { },
 });
 
-const ListView: FC<ListProps> = ({ visions, navigation }): JSX.Element => {
+const ListView: React.FunctionComponent<ListProps> = ({ visions }): JSX.Element => {
 
   const [activeIndex, setActiveIndex] = useState(0);
   const topRef = useRef<List>(null);
@@ -32,7 +32,7 @@ const ListView: FC<ListProps> = ({ visions, navigation }): JSX.Element => {
       offset: index * windowWidth,
       animated: true
     })
-    if(index * (THUMBNAIL_SIZE + SPACING) - THUMBNAIL_SIZE / 2 > windowWidth / 2) {
+    if (index * (THUMBNAIL_SIZE + SPACING) - THUMBNAIL_SIZE / 2 > windowWidth / 2) {
       thumbRef.current?.scrollToOffset({
         offset: index * (THUMBNAIL_SIZE + SPACING) - windowWidth / 2 + THUMBNAIL_SIZE / 2,
         animated: true,
@@ -49,26 +49,26 @@ const ListView: FC<ListProps> = ({ visions, navigation }): JSX.Element => {
     <Layout style={styles.container}>
       <IndexContext.Provider value={{ activeIndex, scrollActiveIndex }}>
         <List
-          data={ visions }
-          ref={ topRef }
-          showsHorizontalScrollIndicator={ false }
+          data={visions}
+          ref={topRef}
+          showsHorizontalScrollIndicator={false}
           onMomentumScrollEnd={ev => {
-            scrollActiveIndex(Math.floor(ev.nativeEvent.contentOffset.x/ windowWidth))
+            scrollActiveIndex(Math.floor(ev.nativeEvent.contentOffset.x / windowWidth))
           }}
-          keyExtractor={ (_, index) => String(index) }
+          keyExtractor={(_, index) => String(index)}
           horizontal
           pagingEnabled
-          renderItem={ renderBgImage }
+          renderItem={renderBgImage}
         />
         <List
-          data={ visions }
-          style={ styles.imgList }
-          ref={ thumbRef }
+          data={visions}
+          style={styles.imgList}
+          ref={thumbRef}
           horizontal
-          showsHorizontalScrollIndicator={ false }
+          showsHorizontalScrollIndicator={false}
           contentContainerStyle={{ paddingHorizontal: SPACING }}
-          keyExtractor={ (_, index): string => String(index) }
-          renderItem={ renderThumbnail }
+          keyExtractor={(_, index): string => String(index)}
+          renderItem={renderThumbnail}
         />
       </IndexContext.Provider>
     </Layout>

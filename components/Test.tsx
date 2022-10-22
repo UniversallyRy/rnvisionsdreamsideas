@@ -2,6 +2,7 @@ import React from "react";
 import { PURGE } from "redux-persist";
 import { connect, ConnectedProps } from "react-redux";
 import { Button } from "@ui-kitten/components";
+import { IdeaType } from "../redux/reducers/ideas";
 
 // Generate <TestComponent /> with a button that will purge the persisted store
 const Test = (state) => {
@@ -20,7 +21,7 @@ const Test = (state) => {
   return <Button onPress={() => onPurgeStoredState(state)}></Button>;
 };
 
-const mapStateToProps = (state, ownProps) => ({
+const mapStateToProps = (state: { notes: IdeaType[] }) => ({
   state: state.notes,
 });
 

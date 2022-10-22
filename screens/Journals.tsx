@@ -15,7 +15,7 @@ interface ScreenProps {
   navigation: NavigationScreenProp<string, object>;
 }
 
-const JournalScreen: React.FC<ScreenProps>= ({ navigation }): JSX.Element => {
+const JournalScreen: React.FunctionComponent<ScreenProps> = ({ navigation }): JSX.Element => {
 
   const [modalOpen, setModalOpen] = useState(false);
   const [view, setView] = useState(true);
@@ -25,32 +25,32 @@ const JournalScreen: React.FC<ScreenProps>= ({ navigation }): JSX.Element => {
   };
 
   return (
-    <Layout style={ styles.screen }>
+    <Layout style={styles.screen}>
       <Header name='Journals' />
       <MonthSelect />
 
       <Modal
         style={{ backgroundColor: 'white', ...styles.screen }}
-        visible={ modalOpen }
+        visible={modalOpen}
       >
 
-        <Text style={ styles.title }>Add A Journal Entry</Text>
-        <NewEntry setModalOpen={ setModalOpen } />
+        <Text style={styles.title}>Add A Journal Entry</Text>
+        <NewEntry setModalOpen={setModalOpen} />
         <CloseButton
-          style={ styles.close }
+          style={styles.close}
           accessibilityLabel='Closes Modal'
-          onPress={ () => setModalOpen(false) }
+          onPress={() => setModalOpen(false)}
         />
 
       </Modal>
 
       {view ? (
-        <GridView navigation={ navigation } />
+        <GridView navigation={navigation} />
       ) : (
-        <ListView navigation={ navigation } />
+        <ListView navigation={navigation} />
       )}
 
-      <FooterButtons left={ setModalOpen } right={ toggleView } />
+      <FooterButtons left={setModalOpen} right={toggleView} />
     </Layout>
   );
 

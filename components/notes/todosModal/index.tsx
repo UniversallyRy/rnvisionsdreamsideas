@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React from 'react';
 import { StyleSheet } from 'react-native';
 import { Layout } from '@ui-kitten/components';
 import Header from './Header';
@@ -13,22 +13,22 @@ type TodoModalProps = {
   closeModal: (() => void);
 }
 
-const TodosModal: FC<TodoModalProps> = ({  list, closeModal }): JSX.Element => {
+const TodosModal: React.FunctionComponent<TodoModalProps> = ({ list, closeModal }): JSX.Element => {
 
   const { todos, id } = list;
   // const taskCount = todos.length;
   return (
-    <Layout style={ styles.container }>
+    <Layout style={styles.container}>
       <Header
-        list={ list }
-        closeModal={ closeModal }
+        list={list}
+        closeModal={closeModal}
       />
       <TodoList
-        todos={ todos }
-        listId={ id }
+        todos={todos}
+        listId={id}
       />
       <InputTodo
-        listId={ id }
+        listId={id}
       />
     </Layout>
   );

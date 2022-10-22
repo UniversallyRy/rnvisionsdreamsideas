@@ -24,51 +24,51 @@ type ToggleProps = {
 }
 
 // default export kittenui styled button
-export const FormButton = ({ text, color, onPress, ...props }: FormProps): JSX.Element => (
+export const FormButton: React.FunctionComponent<FormProps> = ({ text, color, onPress, ...props }): JSX.Element => (
   <Button
-    style={ [styles.button, { backgroundColor: color }] }
-    onPress={ onPress }
-    { ...props }
+    style={[styles.button, { backgroundColor: color }]}
+    onPress={onPress}
+    {...props}
   >
-    <Text style={ styles.text }>{ text }</Text>
+    <Text style={styles.text}>{text}</Text>
   </Button>
 );
 
-export const CloseButton:React.FC<ButtonProps>= ({ onPress, ...props }:ButtonProps): JSX.Element => (
+export const CloseButton: React.FunctionComponent<ButtonProps> = ({ onPress, ...props }: ButtonProps): JSX.Element => (
   <Button
     appearance='ghost'
-    accessoryRight={ CloseIcon }
-    onPress={ onPress }
-    { ...props }
+    accessoryRight={CloseIcon}
+    onPress={onPress}
+    {...props}
   />
 );
 
 // Header Buttons
-export const ToggleButton = ({ theme, toggleTheme, ...props } : ToggleProps): JSX.Element => (
+export const ToggleButton: React.FunctionComponent<ToggleProps> = ({ theme, toggleTheme, ...props }: ToggleProps): JSX.Element => (
   <Button
-    style={ styles.toggle }
-    accessoryRight={ theme == "light" ? DayIcon : NightIcon }
-    onPress={ toggleTheme }
-    { ...props }
+    style={styles.toggle}
+    accessoryRight={theme == "light" ? DayIcon : NightIcon}
+    onPress={toggleTheme}
+    {...props}
   />
 );
 
-export const BackAction = (navigateBack: () => void): JSX.Element => (
-  <TopNavigationAction icon={ BackIcon } onPress={ () => navigateBack() }/>
+export const BackAction: React.FunctionComponent<() => void> = (navigateBack): JSX.Element => (
+  <TopNavigationAction icon={BackIcon} onPress={() => navigateBack()} />
 );
 // Vision Modal Buttons
-export const ImageButtons = ({ pickImage, cameraImage, ...props }: {pickImage: () => void, cameraImage: () => void}): JSX.Element => (
-  <ButtonGroup { ...props }>
+export const ImageButtons: React.FunctionComponent<{ pickImage: () => void, cameraImage: () => void }> = ({ pickImage, cameraImage, ...props }): JSX.Element => (
+  <ButtonGroup {...props}>
     <Button
-      style={ styles.imgSelect }
-      onPress={ pickImage }
+      style={styles.imgSelect}
+      onPress={pickImage}
       accessibilityLabel="Add Image From Gallery"
     >
       Add from Photos
     </Button>
     <Button
-      style={ styles.imgSelect }
-      onPress={ cameraImage }
+      style={styles.imgSelect}
+      onPress={cameraImage}
       accessibilityLabel="Take A Picture"
     >
       Take a Picture
@@ -76,87 +76,87 @@ export const ImageButtons = ({ pickImage, cameraImage, ...props }: {pickImage: (
   </ButtonGroup>
 );
 // Journal Buttons
-export const SaveButton = ({ onPress, ...props } :ButtonProps): JSX.Element => (
+export const SaveButton: React.FunctionComponent<ButtonProps> = ({ onPress, ...props }): JSX.Element => (
   <Button
-    style={ styles.edit }
-    onPress={ onPress }
-    accessoryRight={ SaveIcon }
-    { ...props }
+    style={styles.edit}
+    onPress={onPress}
+    accessoryRight={SaveIcon}
+    {...props}
   >
     Save
   </Button>
 );
 
-export const CancelButton = ({ onPress, ...props } :ButtonProps): JSX.Element => (
+export const CancelButton: React.FunctionComponent<ButtonProps> = ({ onPress, ...props }): JSX.Element => (
   <Button
-    style={ styles.delete }
-    onPress={ onPress }
-    { ...props }
+    style={styles.delete}
+    onPress={onPress}
+    {...props}
   >
     Cancel
   </Button>
 );
 
-export const EditButton = ({ onPress, ...props } :ButtonProps): JSX.Element => (
+export const EditButton: React.FunctionComponent<ButtonProps> = ({ onPress, ...props }): JSX.Element => (
   <Button
-    style={ styles.edit }
-    onPress={ onPress }
-    { ...props }
+    style={styles.edit}
+    onPress={onPress}
+    {...props}
   >
     Edit
   </Button>
 );
 
-export const FavButton = ({ onPress, ...props } :ButtonProps): JSX.Element => (
+export const FavButton: React.FunctionComponent<ButtonProps> = ({ onPress, ...props }: ButtonProps): JSX.Element => (
   <Button
-    accessoryRight={ FavIcon }
-    onPress={ onPress }
-    { ...props }
+    accessoryRight={FavIcon}
+    onPress={onPress}
+    {...props}
   />
 );
 
-export const DeleteButton = ({ onPress, ...props } :ButtonProps): JSX.Element => (
+export const DeleteButton: React.FunctionComponent<ButtonProps> = ({ onPress, ...props }): JSX.Element => (
   <Button
-    style={ styles.delete }
-    onPress={ onPress }
-    { ...props }
+    style={styles.delete}
+    onPress={onPress}
+    {...props}
   >
     Delete
   </Button>
 );
 // Footer Buttons
-export const SubmitButton = ({ onPress, ...props } :any): JSX.Element => (
+export const SubmitButton: React.FunctionComponent<ButtonProps> = ({ onPress, ...props }: ButtonProps): JSX.Element => (
   <Button
-    style={ styles.submit }
+    style={styles.submit}
     appearance='ghost'
-    accessoryLeft={ SubmitIcon }
-    onPress={ onPress }
-    { ...props }
+    accessoryLeft={SubmitIcon}
+    onPress={onPress}
+    {...props}
   />
 );
 
-export const GridButton = ({ onPress, ...props } :ButtonProps): JSX.Element => (
+export const GridButton: React.FunctionComponent<ButtonProps> = ({ onPress, ...props }: ButtonProps): JSX.Element => (
   <Button
     appearance='ghost'
-    accessoryLeft={ GridIcon }
-    onPress={ onPress }
-    { ...props }
+    accessoryLeft={GridIcon}
+    onPress={onPress}
+    {...props}
   />
 );
 
-export const FooterButtons = ({ left, right }:any): JSX.Element => (
-  <Layout style={ styles.footerContainer }>
+export const FooterButtons: React.FunctionComponent<ButtonProps> = ({ left, right }: any): JSX.Element => (
+  <Layout style={styles.footerContainer}>
     {/*  if adjustable view, right button is a grid toggle */}
     {right.name === 'toggleView'
       ? <>
-        <SubmitButton onPress={(): boolean => left(true)} style={ styles.footer } />
-        <GridButton onPress={(): boolean => right()} style={ styles.footer } />
+        <SubmitButton onPress={(): boolean => left(true)} style={styles.footer} />
+        <GridButton onPress={(): boolean => right()} style={styles.footer} />
       </>
       : <>
-        <SubmitButton onPress={(): boolean => left(true)} style={ styles.note }>
+        <SubmitButton onPress={(): boolean => left(true)} style={styles.note}>
           Note
         </SubmitButton>
-        <SubmitButton onPress={(): boolean => right(true)} style={ styles.todo }>
+        <SubmitButton onPress={(): boolean => right(true)} style={styles.todo}>
           Todo
         </SubmitButton>
       </>}
