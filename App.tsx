@@ -14,16 +14,6 @@ import { store, /*persistor */ } from "./redux/store";
 import { default as customTheme } from './styles/custom-theme.json';
 // import { PersistGate } from "redux-persist/integration/react";
 
-const getFonts = (): Promise<void> => {
-  return Font.loadAsync({
-    "roboto-black": require("./assets/fonts/Roboto-Black.ttf"),
-    "roboto-bold": require("./assets/fonts/Roboto-Bold.ttf"),
-    "roboto-italic": require("./assets/fonts/Roboto-Italic.ttf"),
-    "roboto-medium": require("./assets/fonts/Roboto-Medium.ttf"),
-    "roboto-regular": require("./assets/fonts/Roboto-Regular.ttf"),
-  });
-};
-
 const App = (): JSX.Element => {
   const [fontsLoaded, setFontsLoaded] = useState(false);
   // const [persistLoaded, setPersistLoaded] = useState(true);
@@ -34,6 +24,16 @@ const App = (): JSX.Element => {
     const nextTheme = theme === 'light' ? 'dark' : 'light';
     nextTheme === 'light' ? setEvaTheme(eva.light) : setEvaTheme(eva.dark);
     setTheme(nextTheme);
+  };
+
+  const getFonts = (): Promise<void> => {
+    return Font.loadAsync({
+      "roboto-black": require("./assets/fonts/Roboto-Black.ttf"),
+      "roboto-bold": require("./assets/fonts/Roboto-Bold.ttf"),
+      "roboto-italic": require("./assets/fonts/Roboto-Italic.ttf"),
+      "roboto-medium": require("./assets/fonts/Roboto-Medium.ttf"),
+      "roboto-regular": require("./assets/fonts/Roboto-Regular.ttf"),
+    });
   };
 
   if (fontsLoaded) {
