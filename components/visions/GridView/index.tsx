@@ -4,9 +4,9 @@ import { connect, ConnectedProps } from 'react-redux';
 import { NavigationScreenProp } from 'react-navigation';
 import { Layout, List } from '@ui-kitten/components';
 import GridItem from './GridItem';
-import { GridStyles } from '../Styles';
 import { VisionType } from '../../../redux/reducers/visions';
 import { StoreProps } from '../../../redux/store';
+import { GridStyles } from '../styles';
 
 type GridProps = {
   visions: VisionType[];
@@ -19,12 +19,10 @@ type ItemProps = {
   index?: number;
 }
 
-const GridView: React.FunctionComponent<GridProps> = ({ visions, navigation }): JSX.Element => {
-
+const GridView = ({ visions, navigation }: GridProps): JSX.Element => {
   const renderGridItem = useCallback(({ item }: ItemProps): JSX.Element => (
     <GridItem item={item} navigation={navigation} />
   ), [visions]);
-
   return (
     <Layout>
       <List
@@ -37,7 +35,6 @@ const GridView: React.FunctionComponent<GridProps> = ({ visions, navigation }): 
       />
     </Layout>
   );
-
 };
 
 const styles = StyleSheet.create<GridStyles>({
@@ -48,7 +45,6 @@ const styles = StyleSheet.create<GridStyles>({
 
 const mapStateToProps = (state: StoreProps) => {
   const { visions } = state;
-
   return { visions };
 };
 

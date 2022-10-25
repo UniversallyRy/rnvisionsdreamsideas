@@ -2,20 +2,19 @@ import React, { useState, useEffect } from "react";
 import { StyleSheet } from "react-native";
 import { NavigationScreenProp } from 'react-navigation';
 import { Layout, Modal } from "@ui-kitten/components";
-import { VisionStyles } from "./Styles";
-import Header from "../shared/header";
+import Header from "../shared/Header";
+import { FooterButtons } from "../shared/Buttons";
 import ListView from "../components/visions/ListView";
 import GridView from "../components/visions/GridView";
 import NewEntry from "../components/visions/NewEntry";
-import { FooterButtons } from "../shared/buttons";
 import { windowHeight, windowWidth } from "../utils/constants";
+import { VisionStyles } from "./styles";
 // todos: make visions drag and droppable, fix image reslolution/size, opacity changes
 interface VisionProps {
   navigation: NavigationScreenProp<string, object>;
 }
 
-const Visions: React.FunctionComponent<VisionProps> = ({ navigation }): JSX.Element => {
-
+const Visions = ({ navigation }: VisionProps): JSX.Element => {
   //const scrollX = useRef(new Animated.Value(0)).current;
   const [modalOpen, setModalOpen] = useState(false);
   const [view, setView] = useState(false);
@@ -37,7 +36,6 @@ const Visions: React.FunctionComponent<VisionProps> = ({ navigation }): JSX.Elem
 
   return (
     <Layout style={styles.container}>
-
       <Header name={"Visions"} />
       <Modal visible={modalOpen}>
         <NewEntry setModalOpen={toggleModal} />
@@ -49,7 +47,6 @@ const Visions: React.FunctionComponent<VisionProps> = ({ navigation }): JSX.Elem
       ) : (
         <ListView navigation={navigation} />
       )}
-
       <FooterButtons left={toggleModal} right={toggleView} />
     </Layout>
   );

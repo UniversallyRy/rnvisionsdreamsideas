@@ -2,7 +2,7 @@ import React from 'react';
 import { StyleSheet } from 'react-native';
 import { List } from '@ui-kitten/components';
 import Todo from './Todo';
-import { TodoListStyles } from './Styles';
+import { TodoListStyles } from './styles';
 import { TodoType } from '../../../redux/reducers/todos';
 import { windowHeight, windowWidth } from '../../../utils/constants';
 
@@ -11,7 +11,7 @@ type ListProps = {
   listId: string;
 }
 
-const TodoList: React.FunctionComponent<ListProps> = ({ todos, listId }): JSX.Element => {
+const TodoList = ({ todos, listId }: ListProps): JSX.Element => {
 
   const renderTodo = ({ todo, listId }: { todo: TodoType; listId: string }): JSX.Element => {
     return <Todo item={todo} listId={listId} />;

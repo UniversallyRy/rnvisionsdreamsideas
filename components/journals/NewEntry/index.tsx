@@ -3,8 +3,8 @@ import { StyleSheet } from 'react-native';
 import { Formik } from 'formik';
 import * as yup from 'yup';
 import { Layout, Input, Text } from '@ui-kitten/components';
-import { ModalStyles } from '../Styles';
-import { SubmitButton } from '../../../shared/buttons';
+import { SubmitButton } from '../../../shared/Buttons';
+import { ModalStyles } from '../styles';
 import { useAppDispatch } from '../../../utils/hooks';
 import { windowHeight } from '../../../utils/constants';
 import { addJournal } from '../../../redux/reducers/journals';
@@ -18,7 +18,7 @@ const JournalSchema = yup.object({
   body: yup.string().required().min(4),
 });
 
-const NewJournalModal: React.FunctionComponent<ModalProps> = ({ setModalOpen }): JSX.Element => {
+const NewJournalModal = ({ setModalOpen }: ModalProps): JSX.Element => {
 
   const dispatch = useAppDispatch();
 

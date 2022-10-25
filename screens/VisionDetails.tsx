@@ -2,9 +2,9 @@ import React from 'react';
 import { Image, StyleSheet } from 'react-native';
 import { NavigationScreenProp } from 'react-navigation';
 import { Layout, Card, Text } from '@ui-kitten/components';
-import { VDetailsStyles } from './Styles';
-import Header from '../shared/header';
+import Header from '../shared/Header';
 import { windowHeight, windowWidth } from '../utils/constants';
+import { VDetailsStyles } from './styles';
 // todos: opacity changes, styling
 type DetailsProps = {
   navigation: NavigationScreenProp<string, object>;
@@ -22,7 +22,7 @@ type DetailsProps = {
   }
 }
 
-const VisionDetails: React.FunctionComponent<DetailsProps> = ({ navigation, route }): JSX.Element => {
+const VisionDetails = ({ navigation, route }: DetailsProps): JSX.Element => {
 
   const { id, title, uri } = route.params.item;
 

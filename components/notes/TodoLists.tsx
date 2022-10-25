@@ -9,10 +9,8 @@ type ContentProps = {
   todosLists: TodoListType[];
 }
 
-const TodoLists: React.FunctionComponent<ContentProps> = ({ todosLists }): JSX.Element => {
-
+const TodoLists = ({ todosLists }: ContentProps): JSX.Element => {
   const renderTodoLists = (list: TodoListType): JSX.Element => <TodoList list={list} />;
-
   return (
     <List
       keyExtractor={(_, index): string => index.toString()}
@@ -23,13 +21,10 @@ const TodoLists: React.FunctionComponent<ContentProps> = ({ todosLists }): JSX.E
       keyboardShouldPersistTaps='always'
     />
   );
-
 };
-
 
 const mapStateToProps = (state: StoreProps) => {
   const { todosLists } = state;
-
   return { todosLists };
 };
 

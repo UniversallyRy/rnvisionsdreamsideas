@@ -1,12 +1,12 @@
 import React from "react";
 import { StyleSheet } from "react-native";
 import { Card, Layout, Text } from "@ui-kitten/components";
-import { AboutStyles } from "./Styles";
+import { AboutStyles } from "./styles";
 // style about
 const aboutText: string =
   "This is an ongoing App based on charting any visions or dreams you may have. Notes tab for thoughts and todos.";
 
-const About: React.FunctionComponent = (): JSX.Element => (
+const About = (): JSX.Element => (
   <Layout style={styles.aboutContainer}>
     <Card style={styles.textContainer}>
       <Text style={styles.text}>

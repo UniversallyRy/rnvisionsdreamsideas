@@ -1,17 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import { StyleSheet } from 'react-native';
 import { Card, Layout, Modal, Text } from '@ui-kitten/components';
-import TodosModal from './todosModal';
-import { ListStyles } from './Styles';
-import { CloseButton } from '../../shared/buttons';
+import TodosModal from './TodosModal';
+import { CloseButton } from '../../shared/Buttons';
 import { useAppDispatch } from '../../utils/hooks';
 import { deleteList, setCompleted, TodoListType } from '../../redux/reducers/todos';
+import { ListStyles } from './styles';
 
 type ListProps = {
   list: TodoListType;
 }
 
-const TodoList: React.FunctionComponent<ListProps> = ({ list }): JSX.Element => {
+const TodoList = ({ list }: ListProps): JSX.Element => {
 
   const dispatch = useAppDispatch();
   const { todos, name, id, color, completedCount } = list;

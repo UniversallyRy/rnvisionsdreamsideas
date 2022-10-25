@@ -1,9 +1,9 @@
 import React from 'react';
 import { StyleSheet } from 'react-native';
 import { ListItem, CheckBox, Text } from '@ui-kitten/components';
-import { TodoStyles } from './Styles';
+import { TodoStyles } from './styles';
 import { TodoType, toggleTodo, deleteTodo } from '../../../redux/reducers/todos';
-import { CloseButton } from '../../../shared/buttons';
+import { CloseButton } from '../../../shared/Buttons';
 import { useAppDispatch } from '../../../utils/hooks';
 
 type SingleTodo = {
@@ -11,7 +11,7 @@ type SingleTodo = {
   listId: string;
 }
 
-const Todo: React.FunctionComponent<SingleTodo> = ({ item, listId }): JSX.Element => {
+const Todo = ({ item, listId }: SingleTodo): JSX.Element => {
 
   const dispatch = useAppDispatch()
   const { inputValue, inputId, completed } = item;

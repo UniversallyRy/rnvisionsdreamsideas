@@ -2,9 +2,9 @@ import React, { ReactElement } from 'react';
 import { StyleProp, StyleSheet, TextProps, TextStyle } from 'react-native';
 import { NavigationScreenProp } from 'react-navigation';
 import { Layout, Card, Text, Divider } from '@ui-kitten/components';
-import { JDetailsStyles } from "./Styles";
-import Header from '../shared/header';
+import Header from '../shared/Header';
 import { windowHeight, windowWidth } from '../utils/constants';
+import { JDetailsStyles } from "./styles";
 // more detail options, edit editing from details.
 export type DetailsProps = {
   route: {
@@ -25,7 +25,7 @@ export interface TexProps extends TextProps {
   style: StyleProp<TextStyle>;
 }
 
-const JournalDetails: React.FunctionComponent<DetailsProps> = ({ route, navigation }): JSX.Element => {
+const JournalDetails = ({ route, navigation }: DetailsProps): JSX.Element => {
 
   const { title, body, date } = route.params;
 

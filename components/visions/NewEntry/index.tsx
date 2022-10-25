@@ -6,12 +6,12 @@ import { Formik } from 'formik';
 import * as yup from 'yup';
 import { Layout, Input, Text } from '@ui-kitten/components';
 import ImagePicker from './ImagePicker';
-import { ModalStyles } from '../Styles';
-import { CloseButton, SubmitButton } from '../../../shared/buttons';
+import { CloseButton, SubmitButton } from '../../../shared/Buttons';
 import { useAppDispatch } from '../../../utils/hooks';
 import { windowHeight, windowWidth } from '../../../utils/constants';
 import { addVision } from '../../../redux/reducers/visions';
 import { StoreProps } from '../../../redux/store';
+import { ModalStyles } from '../styles';
 
 type ModalProps = {
   picInput: string;
@@ -22,7 +22,7 @@ const pictureSchema = yup.object({
   title: yup.string().required().min(4),
 });
 
-const NewEntry: React.FunctionComponent<ModalProps> = ({ picInput, setModalOpen }): JSX.Element => {
+const NewEntry = ({ picInput, setModalOpen }: ModalProps): JSX.Element => {
 
   const dispatch = useAppDispatch();
 

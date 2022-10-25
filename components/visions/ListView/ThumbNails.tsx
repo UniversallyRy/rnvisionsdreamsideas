@@ -1,19 +1,19 @@
 import React, { useState, useContext } from 'react';
 import { TouchableOpacity, Image, StyleSheet } from 'react-native';
 import { Tooltip } from '@ui-kitten/components';
+import { CloseButton } from '../../../shared/Buttons';
 import { IndexContext } from '.';
-import { ThumbStyles } from '../Styles';
 import { deleteVision, VisionType } from '../../../redux/reducers/visions';
 import { useAppDispatch } from '../../../utils/hooks';
 import { SPACING, THUMBNAIL_SIZE } from '../../../utils/constants';
-import { CloseButton } from '../../../shared/buttons';
+import { ThumbStyles } from '../styles';
 
 type ThumbnailProps = {
   item: VisionType;
   index: number;
 }
 
-const renderThumbnail: React.FunctionComponent<ThumbnailProps> = ({ item, index }): JSX.Element => {
+const renderThumbnail = ({ item, index }: ThumbnailProps): JSX.Element => {
 
   const dispatch = useAppDispatch();
   const [visible, setVisible] = useState(false);

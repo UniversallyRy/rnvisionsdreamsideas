@@ -1,20 +1,18 @@
 import React from "react";
 import { StyleSheet } from "react-native";
 import { Layout } from "@ui-kitten/components";
-import Header from "../shared/header";
+import Header from "../shared/Header";
 import NoteContent from "../components/notes";
-import { NoteStyles } from "./Styles";
+import { NoteStyles } from "./styles";
 // todo: draggable item, resort as well, opacity change, smoother transitions
 
-const NoteScreen: React.FunctionComponent = () => {
-
+const NoteScreen = () => {
   return (
     <Layout style={styles.noteScreenContainer}>
       <Header name="Notes" />
       <NoteContent />
     </Layout>
   );
-
 };
 
 const styles = StyleSheet.create<NoteStyles>({

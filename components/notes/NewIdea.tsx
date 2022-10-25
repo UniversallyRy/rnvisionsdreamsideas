@@ -3,11 +3,11 @@ import { StyleSheet } from 'react-native';
 import { Formik } from 'formik';
 import * as yup from 'yup';
 import { Layout, Input, Text } from '@ui-kitten/components';
-import { NewIdeaStyles } from './Styles';
-import { CloseButton, FormButton } from '../../shared/buttons';
+import { CloseButton, FormButton } from '../../shared/Buttons';
 import { useAppDispatch } from '../../utils/hooks';
 import { addIdea, IdeaType } from '../../redux/reducers/ideas';
 import { windowHeight, windowWidth } from '../../utils/constants';
+import { NewIdeaStyles } from './styles';
 
 type ModalProps = {
   closeModal: (() => void);
@@ -17,7 +17,7 @@ const listSchema = yup.object({
   inputValue: yup.string().required().min(4),
 });
 // red, slate blue, black, dark gray, blueish gray, teal, tan
-const IdeaModal: React.FunctionComponent<ModalProps> = ({ closeModal }): JSX.Element => {
+const IdeaModal = ({ closeModal }: ModalProps): JSX.Element => {
 
   const dispatch = useAppDispatch();
 

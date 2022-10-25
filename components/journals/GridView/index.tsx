@@ -3,16 +3,16 @@ import { StyleSheet } from 'react-native';
 import { connect, ConnectedProps } from 'react-redux';
 import { NavigationScreenProp } from 'react-navigation';
 import { Layout, Card, List, Text } from '@ui-kitten/components';
-import { GridStyles } from '../Styles';
 import { windowHeight, windowWidth } from '../../../utils/constants';
 import { JournalListType } from '../../../redux/reducers/journals';
 import { StoreProps } from '../../../redux/store';
+import { GridStyles } from '../styles';
 //todos: add draggability
 interface GridProps extends JournalListType {
   navigation: NavigationScreenProp<string, object>;
 }
 
-const GridView: React.FunctionComponent<GridProps> = ({ month, list, navigation }): JSX.Element => (
+const GridView = ({ month, list, navigation }: GridProps): JSX.Element => (
   <Layout style={styles.container}>
     <List
       scrollEnabled

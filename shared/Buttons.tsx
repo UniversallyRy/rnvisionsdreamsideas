@@ -1,11 +1,11 @@
 import React from "react";
 import { StyleProp, StyleSheet, ViewStyle } from "react-native";
-import { Layout, Button, ButtonGroup, Text, TopNavigationAction } from "@ui-kitten/components"
-import { BackIcon, CloseIcon, DayIcon, FavIcon, GridIcon, NightIcon, SaveIcon, SubmitIcon } from "./icons";
+import { Layout, Button, ButtonGroup, Text, TopNavigationAction, ButtonProps } from "@ui-kitten/components"
+import { BackIcon, CloseIcon, DayIcon, FavIcon, GridIcon, NightIcon, SaveIcon, SubmitIcon } from "./Icons";
 import { windowWidth } from "../utils/constants";
-import { ButtonStyles } from "./Styles";
+import { ButtonStyles } from "./styles";
 
-type ButtonProps = {
+type ButtonType = {
   text?: string;
   style?: StyleProp<ViewStyle>;
   accessibilityLabel?: string;
@@ -24,7 +24,7 @@ type ToggleProps = {
 }
 
 // default export kittenui styled button
-export const FormButton: React.FunctionComponent<FormProps> = ({ text, color, onPress, ...props }): JSX.Element => (
+export const FormButton = ({ text, color, onPress, ...props }: FormProps): JSX.Element => (
   <Button
     style={[styles.button, { backgroundColor: color }]}
     onPress={onPress}
@@ -34,7 +34,7 @@ export const FormButton: React.FunctionComponent<FormProps> = ({ text, color, on
   </Button>
 );
 
-export const CloseButton: React.FunctionComponent<ButtonProps> = ({ onPress, ...props }: ButtonProps): JSX.Element => (
+export const CloseButton = ({ onPress, ...props }: ButtonProps): JSX.Element => (
   <Button
     appearance='ghost'
     accessoryRight={CloseIcon}
@@ -44,7 +44,7 @@ export const CloseButton: React.FunctionComponent<ButtonProps> = ({ onPress, ...
 );
 
 // Header Buttons
-export const ToggleButton: React.FunctionComponent<ToggleProps> = ({ theme, toggleTheme, ...props }: ToggleProps): JSX.Element => (
+export const ToggleButton = ({ theme, toggleTheme, ...props }: ToggleProps): JSX.Element => (
   <Button
     style={styles.toggle}
     accessoryRight={theme == "light" ? DayIcon : NightIcon}
@@ -53,11 +53,11 @@ export const ToggleButton: React.FunctionComponent<ToggleProps> = ({ theme, togg
   />
 );
 
-export const BackAction: React.FunctionComponent<() => void> = (navigateBack): JSX.Element => (
+export const BackAction = (navigateBack: () => void): JSX.Element => (
   <TopNavigationAction icon={BackIcon} onPress={() => navigateBack()} />
 );
 // Vision Modal Buttons
-export const ImageButtons: React.FunctionComponent<{ pickImage: () => void, cameraImage: () => void }> = ({ pickImage, cameraImage, ...props }): JSX.Element => (
+export const ImageButtons = ({ pickImage, cameraImage, ...props }): JSX.Element => (
   <ButtonGroup {...props}>
     <Button
       style={styles.imgSelect}
@@ -76,7 +76,7 @@ export const ImageButtons: React.FunctionComponent<{ pickImage: () => void, came
   </ButtonGroup>
 );
 // Journal Buttons
-export const SaveButton: React.FunctionComponent<ButtonProps> = ({ onPress, ...props }): JSX.Element => (
+export const SaveButton = ({ onPress, ...props }: ButtonProps): JSX.Element => (
   <Button
     style={styles.edit}
     onPress={onPress}
@@ -87,7 +87,7 @@ export const SaveButton: React.FunctionComponent<ButtonProps> = ({ onPress, ...p
   </Button>
 );
 
-export const CancelButton: React.FunctionComponent<ButtonProps> = ({ onPress, ...props }): JSX.Element => (
+export const CancelButton = ({ onPress, ...props }: ButtonProps): JSX.Element => (
   <Button
     style={styles.delete}
     onPress={onPress}
@@ -97,7 +97,7 @@ export const CancelButton: React.FunctionComponent<ButtonProps> = ({ onPress, ..
   </Button>
 );
 
-export const EditButton: React.FunctionComponent<ButtonProps> = ({ onPress, ...props }): JSX.Element => (
+export const EditButton = ({ onPress, ...props }: ButtonProps): JSX.Element => (
   <Button
     style={styles.edit}
     onPress={onPress}
@@ -107,7 +107,7 @@ export const EditButton: React.FunctionComponent<ButtonProps> = ({ onPress, ...p
   </Button>
 );
 
-export const FavButton: React.FunctionComponent<ButtonProps> = ({ onPress, ...props }: ButtonProps): JSX.Element => (
+export const FavButton = ({ onPress, ...props }: ButtonProps): JSX.Element => (
   <Button
     accessoryRight={FavIcon}
     onPress={onPress}
@@ -115,7 +115,7 @@ export const FavButton: React.FunctionComponent<ButtonProps> = ({ onPress, ...pr
   />
 );
 
-export const DeleteButton: React.FunctionComponent<ButtonProps> = ({ onPress, ...props }): JSX.Element => (
+export const DeleteButton = ({ onPress, ...props }: ButtonProps): JSX.Element => (
   <Button
     style={styles.delete}
     onPress={onPress}
@@ -125,7 +125,7 @@ export const DeleteButton: React.FunctionComponent<ButtonProps> = ({ onPress, ..
   </Button>
 );
 // Footer Buttons
-export const SubmitButton: React.FunctionComponent<ButtonProps> = ({ onPress, ...props }: ButtonProps): JSX.Element => (
+export const SubmitButton = ({ onPress, ...props }: ButtonProps): JSX.Element => (
   <Button
     style={styles.submit}
     appearance='ghost'
@@ -135,7 +135,7 @@ export const SubmitButton: React.FunctionComponent<ButtonProps> = ({ onPress, ..
   />
 );
 
-export const GridButton: React.FunctionComponent<ButtonProps> = ({ onPress, ...props }: ButtonProps): JSX.Element => (
+export const GridButton = ({ onPress, ...props }: ButtonProps): JSX.Element => (
   <Button
     appearance='ghost'
     accessoryLeft={GridIcon}
@@ -144,7 +144,7 @@ export const GridButton: React.FunctionComponent<ButtonProps> = ({ onPress, ...p
   />
 );
 
-export const FooterButtons: React.FunctionComponent<ButtonProps> = ({ left, right }: any): JSX.Element => (
+export const FooterButtons = ({ left, right }: ButtonProps): JSX.Element => (
   <Layout style={styles.footerContainer}>
     {/*  if adjustable view, right button is a grid toggle */}
     {right.name === 'toggleView'

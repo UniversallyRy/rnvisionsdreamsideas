@@ -3,9 +3,9 @@ import { StyleSheet } from 'react-native';
 import * as yup from 'yup';
 import { Layout, List, Text } from '@ui-kitten/components';
 import Idea from './Idea';
-import { ModalStyles } from './Styles';
-import { CloseButton } from '../../../shared/buttons';
-import { FooterInput } from '../../../shared/inputs';
+import { ModalStyles } from './styles';
+import { CloseButton } from '../../../shared/Buttons';
+import { FooterInput } from '../../../shared/Inputs';
 import { IdeaType, addIdea } from '../../../redux/reducers/ideas';
 //import { useAppDispatch } from '../../../utils/hooks';
 import { windowHeight, windowWidth } from '../../../utils/constants';
@@ -19,7 +19,7 @@ const ideaSchema = yup.object({
   inputValue: yup.string().required().min(6),
 });
 
-const IdeasModal: React.FunctionComponent<ModalProps> = ({ ideas, closeModal }): JSX.Element => {
+const IdeasModal = ({ ideas, closeModal }: ModalProps): JSX.Element => {
 
   // const dispatch = useAppDispatch();
   const ideaCount = ideas.length;

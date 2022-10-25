@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { StyleSheet } from 'react-native';
 import { Layout, Select, SelectItem, IndexPath } from '@ui-kitten/components';
-import { MonthStyles } from './Styles';
-import { CloseIcon } from '../../shared/icons';
+import { CloseIcon } from '../../shared/Icons';
 import { MONTHS, windowWidth } from '../../utils/constants';
 import { useAppDispatch } from '../../utils/hooks';
 import { changeMonth } from '../../redux/reducers/journals';
+import { MonthStyles } from './styles';
 
-const MonthSelect: React.FunctionComponent = (): JSX.Element => {
+const MonthSelect = (): JSX.Element => {
 
   const dispatch = useAppDispatch();
   const [selectedIndex, setSelectedIndex] = useState(new IndexPath(0));

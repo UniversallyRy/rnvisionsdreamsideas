@@ -1,33 +1,33 @@
 import React from 'react'
 import { Keyboard, StyleSheet } from 'react-native';
-import { Formik } from 'formik';
-import * as yup from 'yup';
-import { Layout, Input, Text } from '@ui-kitten/components';
-import { InputStyles } from './Styles';
-import { SubmitButton } from '../../../shared/buttons';
-import { windowWidth } from '../../../utils/constants';
-import { useAppDispatch } from '../../../utils/hooks';
-import { addTodo, TodoType } from '../../../redux/reducers/todos';
+import { AnyAction } from 'redux';
+import { Formik, FormikHelpers } from 'formik';
+import { Input, Layout, Text } from '@ui-kitten/components';
+import { SubmitButton } from './Buttons';
+import { useAppDispatch } from '../utils/hooks';
+import { windowWidth } from '../utils/constants';
+import { IdeaType } from '../redux/reducers/ideas';
+import { TodoType } from '../redux/reducers/todos';
+import { InputStyles } from './styles';
+
+interface FooterProps extends IdeaType, TodoType { }
 
 type InputProps = {
-  listId: string;
+  inputName: string;
+  reducerFunc: (_values: FooterProps) => AnyAction;
+  inputSchema: string;
 }
 
-const todoSchema = yup.object({
-  title: yup.string().required().min(4),
-});
-
-const InputTodo: React.FunctionComponent<InputProps> = ({ listId }): JSX.Element => {
+export const FooterInput = ({ inputName, reducerFunc, inputSchema }: InputProps): JSX.Element => {
 
   const dispatch = useAppDispatch();
 
   return (
     <Formik
       initialValues={{ inputValue: '', inputId: '' }}
-      validationSchema={todoSchema}
-      onSubmit={(values: TodoType, actions): void => {
-        values.listId = listId;
-        dispatch(addTodo(values));
+      validationSchema={inputSchema}
+      onSubmit={(values: FooterProps, actions: FormikHelpers<FooterProps>): void => {
+        dispatch(reducerFunc(values));
         actions.resetForm();
         Keyboard.dismiss();
       }}
@@ -40,26 +40,26 @@ const InputTodo: React.FunctionComponent<InputProps> = ({ listId }): JSX.Element
         errors,
         handleSubmit,
       }): JSX.Element => (
-        <Layout style={styles.footer}>
+        <Layout style={styles.container}>
           <Layout style={{ flexDirection: 'column' }}>
             <Input
               textAlign='center'
               enablesReturnKeyAutomatically={true}
               autoCorrect={true}
-              style={styles.todoInput}
-              placeholder='Enter Todo . . .'
-              onChangeText={handleChange('title')}
+              style={styles.input}
+              placeholder={`Enter ${inputName} . . .`}
+              onChangeText={handleChange('inputValue')}
               value={values.inputValue}
-              onBlur={handleBlur('title')}
+              onBlur={handleBlur('inputValue')}
             />
             <Text style={styles.errorText}>
               {touched.inputValue && errors.inputValue || ''}
             </Text>
           </Layout>
           <SubmitButton
-            style={styles.button}
             onPress={handleSubmit}
-          />
+          >
+          </SubmitButton>
         </Layout>
       )}
     </Formik>
@@ -68,32 +68,26 @@ const InputTodo: React.FunctionComponent<InputProps> = ({ listId }): JSX.Element
 };
 
 const styles = StyleSheet.create<InputStyles>({
-  footer: {
+  container: {
+    position: 'absolute',
     flexDirection: 'row',
-    width: windowWidth,
-    marginTop: "auto",
     paddingHorizontal: 10,
     paddingVertical: 5,
+    bottom: 0,
   },
-  todoInput: {
+  input: {
     width: windowWidth * 0.75,
-    marginLeft: 4,
-    marginRight: 5,
     paddingLeft: 14,
+    marginLeft: 5,
+    marginRight: 5,
     elevation: 3,
   },
   errorText: {
     textAlign: 'center',
     fontSize: 10,
-    color: 'crimson',
     fontWeight: 'bold',
+    color: 'crimson',
     marginBottom: 10,
     marginTop: 6,
   },
-  button: {
-    height: 20,
-    marginLeft: 10,
-  },
 });
-
-export default InputTodo;

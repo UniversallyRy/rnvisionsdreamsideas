@@ -1,9 +1,9 @@
 import React, { memo, MemoExoticComponent, useCallback } from 'react';
 import { Image, StyleSheet } from 'react-native';
 import { Layout } from '@ui-kitten/components';
-import { ScreenImgStyles } from '../Styles';
 import { VisionType } from '../../../redux/reducers/visions';
 import { windowHeight, windowWidth } from '../../../utils/constants';
+import { ScreenImgStyles } from '../styles';
 
 type ItemProps = {
   item: VisionType;

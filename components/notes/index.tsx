@@ -5,10 +5,10 @@ import IdeaList from './IdeaList';
 import NewIdea from './NewIdea';
 import TodoLists from './TodoLists';
 import NewTodoList from './NewTodoList';
-import { HomeStyles } from './Styles';
-import { FooterButtons } from '../../shared/buttons';
+import { FooterButtons } from '../../shared/Buttons';
+import { HomeStyles } from './styles';
 
-const NotesContent: React.FunctionComponent = (): JSX.Element => {
+const NotesContent = (): JSX.Element => {
 
   const [ideaModal, setIdeaModal] = useState(false);
   const [todoModal, setTodoModal] = useState(false);

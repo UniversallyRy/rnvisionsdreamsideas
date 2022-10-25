@@ -5,10 +5,10 @@ import { NavigationScreenProp } from 'react-navigation';
 import { Layout, List } from '@ui-kitten/components';
 import { renderBgImage } from './ScreenImage';
 import renderThumbnail from './ThumbNails';
-import { ListStyles } from '../Styles';
 import { SPACING, THUMBNAIL_SIZE, windowWidth } from '../../../utils/constants';
 import { VisionType } from '../../../redux/reducers/visions';
 import { StoreProps } from '../../../redux/store';
+import { ListStyles } from '../styles';
 
 type ListProps = {
   visions: VisionType[];
@@ -20,7 +20,7 @@ export const IndexContext = createContext({
   scrollActiveIndex: (_index: number | undefined) => { },
 });
 
-const ListView: React.FunctionComponent<ListProps> = ({ visions }): JSX.Element => {
+const ListView = ({ visions }: ListProps): JSX.Element => {
 
   const [activeIndex, setActiveIndex] = useState(0);
   const topRef = useRef<List>(null);

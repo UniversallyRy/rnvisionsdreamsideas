@@ -1,16 +1,14 @@
 import React from 'react';
 import { View, StyleSheet } from 'react-native';
 import { Card, Text } from '@ui-kitten/components';
-import { IdeaStyles } from './Styles';
-import { CloseButton } from '../../../shared/buttons';
+import { CloseButton } from '../../../shared/Buttons';
 import { deleteIdea, IdeaType } from '../../../redux/reducers/ideas';
+import { IdeaStyles } from './styles';
 import { useAppDispatch } from '../../../utils/hooks';
 import { windowWidth } from '../../../utils/constants';
 
-const Idea: React.FunctionComponent<IdeaType> = ({ inputValue, inputId }): JSX.Element => {
-
+const Idea = ({ inputValue, inputId }: IdeaType): JSX.Element => {
   const dispatch = useAppDispatch();
-
   return (
     <Card style={styles.card}>
       <View style={styles.cardContent}>
@@ -22,7 +20,6 @@ const Idea: React.FunctionComponent<IdeaType> = ({ inputValue, inputId }): JSX.E
       </View>
     </Card>
   );
-
 };
 
 const styles = StyleSheet.create<IdeaStyles>({

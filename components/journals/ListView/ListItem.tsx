@@ -2,19 +2,19 @@ import React, { useState } from 'react';
 import { StyleSheet } from 'react-native';
 import { NavigationScreenProp } from 'react-navigation';
 import { ButtonGroup, Card, Divider, Input, Layout, Text } from '@ui-kitten/components';
-import { CancelButton, DeleteButton, EditButton, SaveButton } from '../../../shared/buttons';
+import { CancelButton, DeleteButton, EditButton, SaveButton } from '../../../shared/Buttons';
+import { FavIcon } from '../../../shared/Icons';
 import { useAppDispatch } from '../../../utils/hooks';
 import { windowHeight, windowWidth } from '../../../utils/constants';
 import { JournalType, deleteJournal, editJournal, editJournalToggle } from '../../../redux/reducers/journals';
-import { ListItemStyles } from '../Styles';
-import { FavIcon } from '../../../shared/icons';
+import { ListItemStyles } from '../styles';
 
 type ItemProps = {
   item: JournalType;
   navigation: NavigationScreenProp<string, object>;
 }
 
-const ListItem: React.FunctionComponent<ItemProps> = ({ item, navigation }): JSX.Element => {
+const ListItem = ({ item, navigation }: ItemProps): JSX.Element => {
   const { id, title, body, date, isEditing } = item;
   const [textTitle, setTitle] = useState(title);
   const [textBody, setBody] = useState(body);

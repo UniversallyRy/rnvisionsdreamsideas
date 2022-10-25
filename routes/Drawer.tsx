@@ -3,14 +3,15 @@ import { NavigationHelpers, ParamListBase } from '@react-navigation/native';
 import { BottomNavigation, BottomNavigationTab } from '@ui-kitten/components';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { BottomTabNavigationEventMap } from '@react-navigation/bottom-tabs/lib/typescript/src/types';
-import VisionStack from './visionStack';
-import JournalStack from './journalStack';
-import NoteStack from './noteStack';
+import VisionStack from './VisionStack';
+import JournalStack from './JournalStack';
+import NoteStack from './NoteStack';
 // import { AboutStack } from './aboutStack'
-// add settings icon with connection to about
 
+// add settings icon with connection to about
 type NavigationProp = NavigationHelpers<ParamListBase, BottomTabNavigationEventMap>;
-export interface TabProps {
+
+type TabProps = {
   navigation: NavigationProp;
   state: {
     index: number
@@ -20,7 +21,7 @@ export interface TabProps {
 
 const { Navigator, Screen } = createBottomTabNavigator();
 
-const BottomTabBar: React.FunctionComponent<TabProps> = ({ navigation, state }): JSX.Element => (
+const BottomTabBar = ({ navigation, state }: TabProps): JSX.Element => (
   <BottomNavigation
     selectedIndex={state.index}
     onSelect={index => navigation.navigate(state.routeNames[index])}>

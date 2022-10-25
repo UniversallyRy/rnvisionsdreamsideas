@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import { StyleSheet } from 'react-native';
 import { connect, ConnectedProps } from 'react-redux';
 import { Layout, Modal, Card, Text } from '@ui-kitten/components';
-import IdeasModal from './ideasModal';
-import { IdeaListStyles } from './Styles';
+import IdeasModal from './IdeasModal';
+import { IdeaListStyles } from './styles';
 import { IdeaType } from '../../redux/reducers/ideas';
 import { StoreProps } from '../../redux/store';
 
@@ -11,7 +11,7 @@ type IdeasProps = {
   ideas: IdeaType[];
 }
 
-const IdeaList: React.FunctionComponent<IdeasProps> = ({ ideas }): JSX.Element => {
+const IdeaList = ({ ideas }: IdeasProps): JSX.Element => {
 
   const [visible, setVisible] = useState(false);
   const ideaCount = Object.keys(ideas).length;

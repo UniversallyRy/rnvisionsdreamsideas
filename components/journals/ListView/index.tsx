@@ -6,13 +6,13 @@ import { List } from '@ui-kitten/components';
 import ListItem from './ListItem';
 import { JournalListType } from '../../../redux/reducers/journals';
 import { StoreProps } from '../../../redux/store';
-import { ListStyles } from '../Styles';
+import { ListStyles } from '../styles';
 //todos: add draggability
 interface ListProps extends JournalListType {
   navigation: NavigationScreenProp<string, object>;
 }
 
-const ListView: React.FunctionComponent<ListProps> = ({ month, list, navigation }): JSX.Element => (
+const ListView = ({ month, list, navigation }: ListProps): JSX.Element => (
   <List
     style={styles.container}
     data={list}
