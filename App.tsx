@@ -1,4 +1,5 @@
 import "react-native-get-random-values";
+import 'react-native-gesture-handler';
 import React, { useState } from "react";
 import { AppRegistry, StatusBar } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
@@ -64,6 +65,6 @@ const App = (): JSX.Element => {
   }
 };
 
-AppRegistry.registerComponent("App", () => App);
-
 export default App;
+
+AppRegistry.registerComponent("App", () => App);

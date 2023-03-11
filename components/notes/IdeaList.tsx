@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { StyleSheet } from 'react-native';
 import { connect, ConnectedProps } from 'react-redux';
 import { Layout, Modal, Card, Text } from '@ui-kitten/components';
-import IdeasModal from './IdeasModal';
+import IdeasModal from './ideasModal/index.tsx';
 import { IdeaListStyles } from './styles';
 import { IdeaType } from '../../redux/reducers/ideas';
 import { StoreProps } from '../../redux/store';
