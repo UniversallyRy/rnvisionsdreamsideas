@@ -2,8 +2,7 @@ import React, { useState } from 'react';
 import { StyleSheet } from 'react-native';
 import { NavigationScreenProp } from 'react-navigation';
 import { ButtonGroup, Card, Divider, Input, Layout, Text } from '@ui-kitten/components';
-import { CancelButton, DeleteButton, EditButton, SaveButton } from '../../../shared/Buttons';
-import { FavIcon } from '../../../shared/Icons';
+import { CancelButton, FavButton, DeleteButton, EditButton, SaveButton } from '../../../shared/Buttons';
 import { useAppDispatch } from '../../../utils/hooks';
 import { windowHeight, windowWidth } from '../../../utils/constants';
 import { JournalType, deleteJournal, editJournal, editJournalToggle } from '../../../redux/reducers/journals';
@@ -69,7 +68,8 @@ const ListItem = ({ item, navigation }: ItemProps): JSX.Element => {
         : <ButtonGroup>
           <EditButton onPress={() => dispatch(editJournalToggle({ id }))} />
           <DeleteButton onPress={() => dispatch(deleteJournal({ id }))} />
-          <FavIcon />
+
+          <FavButton />
         </ButtonGroup>
       }
     </Card>

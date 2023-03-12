@@ -1,5 +1,5 @@
 import "react-native-get-random-values";
-import React, { useState } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { AppRegistry, StatusBar } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { Provider } from "react-redux";
@@ -42,7 +42,6 @@ const App = (): JSX.Element => {
         console.warn(e);
       } finally {
         // Tell the application to render
-        setAppIsReady(true);
         setFontsLoaded(true);
       }
     }

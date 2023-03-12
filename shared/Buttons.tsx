@@ -1,16 +1,15 @@
 import React from "react";
-import { StyleProp, StyleSheet, ViewStyle } from "react-native";
-import { Layout, Button, ButtonGroup, Text, TopNavigationAction, ButtonProps } from "@ui-kitten/components"
-import { BackIcon, CloseIcon, DayIcon, FavIcon, GridIcon, NightIcon, SaveIcon, SubmitIcon } from "./Icons";
+import { StyleSheet } from "react-native";
+import { Layout, Icon, Button, ButtonGroup, Text, TopNavigationAction, ButtonProps } from "@ui-kitten/components"
 import { windowWidth } from "../utils/constants";
 import { ButtonStyles } from "./styles";
 
-type ButtonType = {
-  text?: string;
-  style?: StyleProp<ViewStyle>;
-  accessibilityLabel?: string;
-  onPress(): void;
-}
+//type ButtonType = {
+//  text?: string;
+//  style?: StyleProp<ViewStyle>;
+//  accessibilityLabel?: string;
+//  onPress(): void;
+//}
 
 type FormProps = {
   text?: string;
@@ -37,7 +36,7 @@ export const FormButton = ({ text, color, onPress, ...props }: FormProps): JSX.E
 export const CloseButton = ({ onPress, ...props }: ButtonProps): JSX.Element => (
   <Button
     appearance='ghost'
-    accessoryRight={CloseIcon}
+    accessoryRight={(props) => (<Icon  {...props} name="close-outline" />)}
     onPress={onPress}
     {...props}
   />
@@ -47,7 +46,7 @@ export const CloseButton = ({ onPress, ...props }: ButtonProps): JSX.Element => 
 export const ToggleButton = ({ theme, toggleTheme, ...props }: ToggleProps): JSX.Element => (
   <Button
     style={styles.toggle}
-    accessoryRight={theme == "light" ? DayIcon : NightIcon}
+    accessoryRight={theme == "light" ? (props) => (<Icon  {...props} name="sun" />) : (props) => (<Icon  {...props} name="moon" />)}
     onPress={toggleTheme}
     {...props}
   />
@@ -56,8 +55,9 @@ export const ToggleButton = ({ theme, toggleTheme, ...props }: ToggleProps): JSX
 export const BackAction = (navigateBack: () => void): JSX.Element => (
   <TopNavigationAction icon={BackIcon} onPress={() => navigateBack()} />
 );
+
 // Vision Modal Buttons
-export const ImageButtons = ({ pickImage, cameraImage, ...props }): JSX.Element => (
+export const ImageButtons = ({ pickImage, cameraImage, ...props }: any): JSX.Element => (
   <ButtonGroup {...props}>
     <Button
       style={styles.imgSelect}
@@ -80,7 +80,7 @@ export const SaveButton = ({ onPress, ...props }: ButtonProps): JSX.Element => (
   <Button
     style={styles.edit}
     onPress={onPress}
-    accessoryRight={SaveIcon}
+    accessoryRight={(props) => (<Icon  {...props} name="save-outline" />)}
     {...props}
   >
     Save
@@ -109,7 +109,7 @@ export const EditButton = ({ onPress, ...props }: ButtonProps): JSX.Element => (
 
 export const FavButton = ({ onPress, ...props }: ButtonProps): JSX.Element => (
   <Button
-    accessoryRight={FavIcon}
+    accessoryRight={(props) => (<Icon  {...props} name="heart-outline" />)}
     onPress={onPress}
     {...props}
   />
@@ -128,8 +128,7 @@ export const DeleteButton = ({ onPress, ...props }: ButtonProps): JSX.Element =>
 export const SubmitButton = ({ onPress, ...props }: ButtonProps): JSX.Element => (
   <Button
     style={styles.submit}
-    appearance='ghost'
-    accessoryLeft={SubmitIcon}
+    accessoryLeft={(props) => (<Icon  {...props} name="plus-outline" />)}
     onPress={onPress}
     {...props}
   />
@@ -137,8 +136,7 @@ export const SubmitButton = ({ onPress, ...props }: ButtonProps): JSX.Element =>
 
 export const GridButton = ({ onPress, ...props }: ButtonProps): JSX.Element => (
   <Button
-    appearance='ghost'
-    accessoryLeft={GridIcon}
+    accessoryLeft={(props) => (<Icon  {...props} name="grid" />)}
     onPress={onPress}
     {...props}
   />

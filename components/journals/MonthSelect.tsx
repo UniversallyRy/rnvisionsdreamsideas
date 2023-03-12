@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { StyleSheet } from 'react-native';
-import { Layout, Select, SelectItem, IndexPath } from '@ui-kitten/components';
-import { CloseIcon } from '../../shared/Icons';
+import { Layout, Select, SelectItem, Icon, IndexPath } from '@ui-kitten/components';
 import { MONTHS, windowWidth } from '../../utils/constants';
 import { useAppDispatch } from '../../utils/hooks';
 import { changeMonth } from '../../redux/reducers/journals';
@@ -36,7 +35,7 @@ const MonthSelect = (): JSX.Element => {
             style={styles.listItem}
             key={item}
             title={item}
-            accessoryRight={CloseIcon}
+            accessoryLeft={(props) => (<Icon  {...props} name="close-outline" />)}
             accessibilityLabel={`Dropdown text for ${item}`}
           />
         ))}
