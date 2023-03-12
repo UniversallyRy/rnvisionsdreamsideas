@@ -1,4 +1,4 @@
-import React, { memo, MemoExoticComponent, useCallback } from 'react';
+import React, { memo, MemoExoticComponent } from 'react';
 import { Image, StyleSheet } from 'react-native';
 import { Layout } from '@ui-kitten/components';
 import { VisionType } from '../../../redux/reducers/visions';
@@ -20,9 +20,9 @@ const ScreenImage: MemoExoticComponent<any> = memo(({ item }: ItemProps): JSX.El
 
 ScreenImage.displayName = "ScreenImage";
 
-export const renderBgImage = useCallback(({ item }: ItemProps): JSX.Element => (
+export const renderBgImage = ({ item }: ItemProps): JSX.Element => (
   <ScreenImage item={item} />
-), []);
+);
 
 const styles = StyleSheet.create<ScreenImgStyles>({
   bgImg: {

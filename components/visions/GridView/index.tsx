@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import React from 'react';
 import { StyleSheet } from 'react-native';
 import { connect, ConnectedProps } from 'react-redux';
 import { NavigationScreenProp } from 'react-navigation';
@@ -20,9 +20,11 @@ type ItemProps = {
 }
 
 const GridView = ({ visions, navigation }: GridProps): JSX.Element => {
-  const renderGridItem = useCallback(({ item }: ItemProps): JSX.Element => (
+
+  const renderGridItem = ({ item }: ItemProps): JSX.Element => (
     <GridItem item={item} navigation={navigation} />
-  ), [visions]);
+  );
+
   return (
     <Layout>
       <List
